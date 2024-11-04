@@ -16,6 +16,8 @@ func add_block(block: Block, pos: Vector3i):
 	coll_shape.position= pos
 	add_child(coll_shape)
 
+	mass+= block.weight
+
 
 func spawn_block(block: Block, pos: Vector3i):
 	var model: Node3D= block.get_model()

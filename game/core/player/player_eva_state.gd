@@ -24,7 +24,7 @@ func on_enter():
 
 func on_physics_process(delta: float):
 	#var yaw_input= Input.get_axis("yaw_right", "yaw_left")
-	var roll_input= Input.get_axis("roll_right", "roll_left")
+	roll_input= Input.get_axis("roll_right", "roll_left")
 	#var pitch_input= Input.get_axis("pitch_down", "pitch_up")
 
 	var input_torque: Vector3= player.to_global(Vector3(pitch_input * pitch_factor, yaw_input * yaw_factor, roll_input * roll_factor))

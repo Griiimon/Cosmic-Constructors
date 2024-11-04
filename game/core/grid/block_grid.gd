@@ -44,7 +44,10 @@ func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
 
 
 func get_block_from_global_pos(global_pos: Vector3)-> GridBlock:
-	return blocks[get_local_grid_pos(global_pos)]
+	var grid_pos: Vector3i= get_local_grid_pos(global_pos)
+	if not blocks.has(grid_pos): return null
+	return blocks[grid_pos]
+
 
 func get_local_grid_pos(global_pos: Vector3)-> Vector3i:
 	return to_local(global_pos).round()

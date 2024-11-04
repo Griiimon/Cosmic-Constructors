@@ -5,11 +5,11 @@ extends RigidBody3D
 var blocks: Array[GridBlock]
 
 
-func add_block(block: Block, pos: Vector3i, rotation: Vector3i= Vector3i.ZERO):
-	var grid_block:= GridBlock.new(block, pos, rotation)
+func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO):
+	var grid_block:= GridBlock.new(block, pos, block_rotation)
 	blocks.append(grid_block)
 	
-	spawn_block(block, pos, rotation)
+	spawn_block(block, pos, block_rotation)
 	
 	var coll_shape= CollisionShape3D.new()
 	coll_shape.shape= BoxShape3D.new()
@@ -19,14 +19,14 @@ func add_block(block: Block, pos: Vector3i, rotation: Vector3i= Vector3i.ZERO):
 	mass+= block.weight
 
 
-func spawn_block(block: Block, pos: Vector3i, rotation: Vector3i):
+func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
 	var model: Node3D= block.get_model()
 	
 	model.position= pos
 	
-	model.basis= model.basis.rotated(model.basis.x, deg_to_rad(rotation.x * 90))
-	model.basis= model.basis.rotated(model.basis.y, deg_to_rad(rotation.y * 90))
-	model.basis= model.basis.rotated(model.basis.z, deg_to_rad(rotation.z * 90))
+	model.basis= model.basis.rotated(model.basis.x, deg_to_rad(block_rotation.x * 90))
+	model.basis= model.basis.rotated(model.basis.y, deg_to_rad(block_rotation.y * 90))
+	model.basis= model.basis.rotated(model.basis.z, deg_to_rad(block_rotation.z * 90))
 
 	add_child(model)
 

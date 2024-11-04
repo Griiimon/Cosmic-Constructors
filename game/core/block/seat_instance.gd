@@ -1,4 +1,5 @@
 class_name SeatInstance
+extends BlockInstance
 
 var entity: Entity
 

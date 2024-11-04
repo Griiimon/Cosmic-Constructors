@@ -40,6 +40,9 @@ func on_physics_process(_delta: float):
 		ghost.position= global_block_pos
 		ghost.rotation= grid.global_rotation
 		ghost.show()
+	
+		if Input.is_action_just_pressed("build_block"):
+			grid.add_block(current_block, local_block_pos)
 	else:
 		ghost.hide()
 		

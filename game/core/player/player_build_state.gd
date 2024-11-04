@@ -5,6 +5,8 @@ extends PlayerStateMachineState
 @export var current_block: Block
 
 var ghost: Node3D
+var block_rotation: Vector3
+
 
 
 func on_enter():
@@ -39,10 +41,30 @@ func on_physics_process(_delta: float):
 		var global_block_pos: Vector3= grid.get_global_block_pos(local_block_pos)
 		ghost.position= global_block_pos
 		ghost.rotation= grid.global_rotation
-		ghost.show()
 	
 		if Input.is_action_just_pressed("build_block"):
-			grid.add_block(current_block, local_block_pos)
+			grid.add_block(current_block, local_block_pos, block_rotation)
+		else:
+			if Input.is_action_just_pressed("rotate_block_left"):
+				block_rotation.y-= 1
+			elif Input.is_action_just_pressed("rotate_block_right"):
+				block_rotation.y+= 1
+			if Input.is_action_just_pressed("rotate_block_up"):
+				block_rotation.x-= 1
+			elif Input.is_action_just_pressed("rotate_block_down"):
+				block_rotation.x+= 1
+			if Input.is_action_just_pressed("roll_block_left"):
+				block_rotation.z-= 1
+			elif Input.is_action_just_pressed("roll_block_right"):
+				block_rotation.z+= 1
+			
+		ghost.basis= ghost.basis.rotated(ghost.basis.x, deg_to_rad(block_rotation.x * 90))
+		ghost.basis= ghost.basis.rotated(ghost.basis.y, deg_to_rad(block_rotation.y * 90))
+		ghost.basis= ghost.basis.rotated(ghost.basis.z, deg_to_rad(block_rotation.z * 90))
+
+		ghost.show()
+		
+				
 	else:
 		ghost.hide()
 		

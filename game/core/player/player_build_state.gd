@@ -30,6 +30,10 @@ func init_ghost():
 
 
 func on_physics_process(_delta: float):
+	if Input.is_action_just_pressed("ui_cancel"):
+		finished.emit()
+		return
+	
 	var raycast: RayCast3D= player.build_raycast
 	if raycast.is_colliding():
 		var collision_pos: Vector3= raycast.get_collision_point()

@@ -1,0 +1,4 @@
+extends Node
+
+const PLAYER_COLLISION_LAYER= 1
+const GRID_COLLISION_LAYER= 2

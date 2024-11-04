@@ -47,6 +47,7 @@ mesh = SubResource("BoxMesh_ptd7a")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.611511)
+emitting = false
 amount = 50
 lifetime = 0.1
 lifetime_randomness = 0.16

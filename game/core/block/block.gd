@@ -33,3 +33,7 @@ func get_model()-> Node3D:
 
 func can_tick():
 	return false
+
+
+func can_interact()-> bool:
+	return false

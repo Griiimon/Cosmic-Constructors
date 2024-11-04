@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuwcwrs2vl3gv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmbc1"]
+albedo_color = Color(0.344076, 0.344076, 0.344076, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7k3gj"]
+material = SubResource("StandardMaterial3D_jmbc1")
+size = Vector3(1, 1, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0jkym"]
+albedo_color = Color(0.059126, 0.0591259, 0.0591259, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6uvem"]
+material = SubResource("StandardMaterial3D_0jkym")
+top_radius = 0.4
+bottom_radius = 0.1
+height = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_ptd7a"]
+
+[node name="Thruster" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
+mesh = SubResource("BoxMesh_7k3gj")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.1)
+mesh = SubResource("CylinderMesh_6uvem")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_ptd7a")

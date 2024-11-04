@@ -30,7 +30,7 @@ func on_physics_process(_delta: float):
 	var raycast: RayCast3D= player.build_raycast
 	if raycast.is_colliding():
 		var collision_pos: Vector3= raycast.get_collision_point()
-		collision_pos-= raycast.global_basis.z * 0.05
+		collision_pos+= raycast.global_basis.z * 0.05
 		
 		var grid: BlockGrid= raycast.get_collider()
 		assert(grid != null)

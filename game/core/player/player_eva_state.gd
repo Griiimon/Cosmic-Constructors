@@ -7,7 +7,7 @@ extends PlayerStateMachineState
 
 @export var acceleration: float= 10.0
 
-@export var move_damping: float= 1.0
+@export var move_damping: float= 10.0
 @export var angular_damping: float= 10.0
 
 @export var dampeners_active: bool= true 
@@ -33,9 +33,12 @@ func on_physics_process(delta: float):
 
 	player.apply_torque(input_torque * delta)
 
-	var move_input= Input.get_axis("move_back", "move_forward")
+	var forward_input= Input.get_axis("move_forward", "move_back")
+	var horizontal_input= Input.get_axis("strafe_left", "strafe_right")
+	var vertical_input= Input.get_axis("sink", "rise")
 	
-	player.apply_central_force(move_input * -player.global_basis.z * acceleration)
+	var move_vec: Vector3= (Vector3(horizontal_input, vertical_input, forward_input))
+	player.apply_central_force(move_vec * player.global_basis.inverse() * acceleration * delta)
 
 
 func on_input(event: InputEvent):

@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cs0gfdxa0ha1n"]
+[gd_scene load_steps=8 format=3 uid="uid://cs0gfdxa0ha1n"]
 
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
-[ext_resource type="Script" path="res://game/core/player/player_state_machine.gd" id="2_615c1"]
-[ext_resource type="Script" path="res://game/core/player/eva_state.gd" id="3_o2tyv"]
+[ext_resource type="Script" path="res://game/core/player/player_movement_state_machine.gd" id="2_615c1"]
+[ext_resource type="Script" path="res://game/core/player/player_eva_state.gd" id="3_o2tyv"]
+[ext_resource type="Script" path="res://game/core/player/player_action_state_machine.gd" id="4_r1eyq"]
+[ext_resource type="Script" path="res://game/core/player/player_build_state.gd" id="5_avkim"]
+[ext_resource type="Resource" uid="uid://sueib6rdbmc0" path="res://game/data/blocks/light structure/light_structure_block.tres" id="6_4cev1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e61hw"]
 
@@ -24,9 +27,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head/Pivot"]
 
-[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+[node name="Build Raycast" type="RayCast3D" parent="Head/Pivot"]
+unique_name_in_owner = true
+enabled = false
+target_position = Vector3(0, 0, 0)
+hit_back_faces = false
+
+[node name="Movement State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_615c1")
 current_state = NodePath("EVA")
 
-[node name="EVA" type="Node" parent="State Machine"]
+[node name="EVA" type="Node" parent="Movement State Machine"]
 script = ExtResource("3_o2tyv")
+
+[node name="Action State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("4_r1eyq")
+current_state = NodePath("Build")
+
+[node name="Build" type="Node" parent="Action State Machine"]
+script = ExtResource("5_avkim")
+current_block = ExtResource("6_4cev1")

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cs0gfdxa0ha1n"]
+
+[ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
+[ext_resource type="Script" path="res://game/core/player/player_state_machine.gd" id="2_615c1"]
+[ext_resource type="Script" path="res://game/core/player/eva_state.gd" id="3_o2tyv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e61hw"]
+
+[node name="Player" type="RigidBody3D"]
+can_sleep = false
+freeze_mode = 1
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 10
+script = ExtResource("1_owy5q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_e61hw")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+
+[node name="Pivot" type="Node3D" parent="Head"]
+
+[node name="Camera3D" type="Camera3D" parent="Head/Pivot"]
+
+[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("2_615c1")
+current_state = NodePath("EVA")
+
+[node name="EVA" type="Node" parent="State Machine"]
+script = ExtResource("3_o2tyv")

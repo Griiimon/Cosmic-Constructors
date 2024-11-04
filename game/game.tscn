@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpytc7ebulm55"]
+
+[ext_resource type="PackedScene" uid="uid://qr0bko2hsrbk" path="res://game/debug/space grid/debug_space_grid.tscn" id="1_ek1sn"]
+[ext_resource type="Script" path="res://game/tests.gd" id="1_o5dc5"]
+[ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="2_y64to"]
+
+[sub_resource type="Environment" id="Environment_0ayl4"]
+ambient_light_color = Color(1, 1, 0.819608, 1)
+
+[node name="Game" type="Node3D"]
+
+[node name="Tests" type="Node" parent="."]
+script = ExtResource("1_o5dc5")
+
+[node name="Debug Space Grid" parent="." instance=ExtResource("1_ek1sn")]
+size = Vector3i(10, 10, 10)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0ayl4")
+
+[node name="Player" parent="." instance=ExtResource("2_y64to")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+spot_range = 20.0

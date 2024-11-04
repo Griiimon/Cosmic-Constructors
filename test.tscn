@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxxgql4vehbp5"]
+
+[ext_resource type="Texture2D" uid="uid://dm7jhw1cb8pid" path="res://game/data/blocks/light structure/light_structure_texture.png" id="1_2a5uc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wb7oc"]
+transparency = 1
+albedo_texture = ExtResource("1_2a5uc")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_p46b2"]
+material = SubResource("StandardMaterial3D_wb7oc")
+
+[node name="Test" type="Node"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_p46b2")

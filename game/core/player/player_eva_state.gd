@@ -16,6 +16,7 @@ extends PlayerStateMachineState
 
 func on_enter():
 	player.linear_damp= move_damping
+	player.angular_damp= angular_damping
 
 
 func on_physics_process(delta: float):
@@ -23,12 +24,13 @@ func on_physics_process(delta: float):
 	var roll_input= Input.get_axis("roll_right", "roll_left")
 	var pitch_input= Input.get_axis("pitch_down", "pitch_up")
 	
-	var basis= player.transform.basis
-	basis= basis.rotated(basis.z, roll_input * roll_factor * delta)
-	basis= basis.rotated(basis.x, pitch_input * pitch_factor * delta)
-	basis= basis.rotated(basis.y, yaw_input * yaw_factor * delta)
-
-	player.transform.basis= basis
+	#var basis= player.transform.basis
+	#basis= basis.rotated(basis.z, roll_input * roll_factor * delta)
+	#basis= basis.rotated(basis.x, pitch_input * pitch_factor * delta)
+	#basis= basis.rotated(basis.y, yaw_input * yaw_factor * delta)
+#
+	#player.transform.basis= basis
+	player.apply_torque(player.to_global(Vector3(pitch_input * pitch_factor, yaw_input * yaw_factor, roll_input * roll_factor)) * delta)
 
 	var move_input= Input.get_axis("move_back", "move_forward")
 	

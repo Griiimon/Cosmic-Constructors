@@ -23,6 +23,7 @@ func on_exit():
 
 func init_ghost():
 	ghost= current_block.get_model()
+	ghost.set_script(null)
 	add_child(ghost)
 	ghost.top_level= true
 	ghost.hide()
@@ -58,10 +59,7 @@ func on_physics_process(_delta: float):
 			elif Input.is_action_just_pressed("roll_block_right"):
 				block_rotation.z+= 1
 			
-		ghost.basis= ghost.basis.rotated(ghost.basis.x, deg_to_rad(block_rotation.x * 90))
-		ghost.basis= ghost.basis.rotated(ghost.basis.y, deg_to_rad(block_rotation.y * 90))
-		ghost.basis= ghost.basis.rotated(ghost.basis.z, deg_to_rad(block_rotation.z * 90))
-
+		ghost.basis= Basis.from_euler(ghost.basis.get_euler() + block_rotation * deg_to_rad(90))
 		ghost.show()
 		
 				

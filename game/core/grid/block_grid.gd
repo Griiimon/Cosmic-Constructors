@@ -24,9 +24,7 @@ func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
 	
 	model.position= pos
 	
-	model.basis= model.basis.rotated(model.basis.x, deg_to_rad(block_rotation.x * 90))
-	model.basis= model.basis.rotated(model.basis.y, deg_to_rad(block_rotation.y * 90))
-	model.basis= model.basis.rotated(model.basis.z, deg_to_rad(block_rotation.z * 90))
+	model.basis= Basis.from_euler(block_rotation * deg_to_rad(90))
 
 	add_child(model)
 

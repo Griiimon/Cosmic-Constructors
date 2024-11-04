@@ -25,8 +25,8 @@ func spawn_block(block: Block, pos: Vector3i):
 
 
 func get_local_grid_pos(global_pos: Vector3)-> Vector3i:
-	return to_local(global_pos).floor()
+	return to_local(global_pos).round()
 
 	
 func get_global_block_pos(block_pos: Vector3i)-> Vector3:
-	return to_global(block_pos) + Vector3.ONE / 2.0
+	return to_global(block_pos)

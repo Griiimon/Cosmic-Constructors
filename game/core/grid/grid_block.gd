@@ -1,13 +1,18 @@
 class_name GridBlock
 extends Resource
 
-var block: Block
+var block_definition: Block
 var local_pos: Vector3i
 var rotation: Vector3i
+var block_instance: BlockInstance
 
 
 
 func _init(_block: Block, _local_pos: Vector3i, _rotation: Vector3i= Vector3i.ZERO):
 	local_pos= _local_pos
-	block= _block
+	block_definition= _block
 	rotation= _rotation
+
+
+func get_global_basis(grid: BlockGrid)-> Basis:
+	return Basis.from_euler(rotation) * grid.global_basis

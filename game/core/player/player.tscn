@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cs0gfdxa0ha1n"]
+[gd_scene load_steps=12 format=3 uid="uid://cs0gfdxa0ha1n"]
 
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
 [ext_resource type="Script" path="res://game/core/player/player_movement_state_machine.gd" id="2_615c1"]
@@ -9,11 +9,16 @@
 [ext_resource type="Script" path="res://game/core/player/player_action_idle_state.gd" id="6_3y3c5"]
 [ext_resource type="Resource" uid="uid://k2s38yf1cnl4" path="res://game/data/blocks/pilot seat/pilot_seat.tres" id="8_o8p36"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bbcsg"]
+friction = 0.0
+bounce = 0.5
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e61hw"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_amgwl"]
 
 [node name="Player" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_bbcsg")
 can_sleep = false
 freeze_mode = 1
 continuous_cd = true

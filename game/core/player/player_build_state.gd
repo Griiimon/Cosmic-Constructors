@@ -63,7 +63,7 @@ func on_physics_process(_delta: float):
 			elif Input.is_action_just_pressed("roll_block_right"):
 				block_rotation.z+= 1
 			
-		ghost.basis= Basis.from_euler(ghost.basis.get_euler() + block_rotation * deg_to_rad(90))
+		ghost.basis= ghost.basis * Basis.from_euler(block_rotation * deg_to_rad(90))
 		ghost.show()
 		
 				

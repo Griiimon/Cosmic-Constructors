@@ -4,6 +4,8 @@ extends Node
 
 signal state_entered
 signal state_exited
+signal finished
+
 
 
 func on_enter():

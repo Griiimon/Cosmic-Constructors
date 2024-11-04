@@ -1,7 +1,8 @@
 class_name Player
-extends RigidBody3D
+extends Entity
 
 @onready var build_raycast: RayCast3D = %"Build Raycast"
+@onready var interact_shapecast: ShapeCast3D = %"Interact Shapecast"
 
 
 

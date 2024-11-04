@@ -1,13 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://cs0gfdxa0ha1n"]
+[gd_scene load_steps=11 format=3 uid="uid://cs0gfdxa0ha1n"]
 
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
 [ext_resource type="Script" path="res://game/core/player/player_movement_state_machine.gd" id="2_615c1"]
 [ext_resource type="Script" path="res://game/core/player/player_eva_state.gd" id="3_o2tyv"]
+[ext_resource type="Script" path="res://game/core/player/player_seated_state.gd" id="4_aaxal"]
 [ext_resource type="Script" path="res://game/core/player/player_action_state_machine.gd" id="4_r1eyq"]
 [ext_resource type="Script" path="res://game/core/player/player_build_state.gd" id="5_avkim"]
-[ext_resource type="Resource" uid="uid://sueib6rdbmc0" path="res://game/data/blocks/light structure/light_structure_block.tres" id="6_4cev1"]
+[ext_resource type="Script" path="res://game/core/player/player_action_state_idle.gd" id="6_3y3c5"]
+[ext_resource type="Resource" uid="uid://bh6lk8mefhhlv" path="res://game/data/blocks/thruster/thruster.tres" id="6_5f6ab"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e61hw"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_amgwl"]
 
 [node name="Player" type="RigidBody3D"]
 can_sleep = false
@@ -31,7 +35,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 unique_name_in_owner = true
 enabled = false
 target_position = Vector3(0, 0, 0)
+collision_mask = 2
 hit_back_faces = false
+
+[node name="Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot"]
+unique_name_in_owner = true
+shape = SubResource("SphereShape3D_amgwl")
+target_position = Vector3(0, 0, -2.5)
+collision_mask = 2
 
 [node name="Movement State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_615c1")
@@ -45,10 +56,16 @@ roll_factor = 300.0
 acceleration = 500.0
 move_damping = 5.0
 
+[node name="Seated" type="Node" parent="Movement State Machine"]
+script = ExtResource("4_aaxal")
+
 [node name="Action State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_r1eyq")
 current_state = NodePath("Build")
 
+[node name="Idle" type="Node" parent="Action State Machine"]
+script = ExtResource("6_3y3c5")
+
 [node name="Build" type="Node" parent="Action State Machine"]
 script = ExtResource("5_avkim")
-current_block = ExtResource("6_4cev1")
+current_block = ExtResource("6_5f6ab")

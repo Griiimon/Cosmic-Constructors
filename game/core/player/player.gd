@@ -1,6 +1,8 @@
 class_name Player
 extends Entity
 
+@onready var collision_shape: CollisionShape3D = $CollisionShape3D
+
 @onready var build_raycast: RayCast3D = %"Build Raycast"
 @onready var interact_shapecast: ShapeCast3D = %"Interact Shapecast"
 

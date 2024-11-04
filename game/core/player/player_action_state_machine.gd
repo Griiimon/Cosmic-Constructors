@@ -1,7 +1,7 @@
 class_name PlayerActionStateMachine
 extends FiniteStateMachine
 
-@onready var idle_state: PlayerActionStateIdle = $Idle
+@onready var idle_state: PlayerActionIdleState = $Idle
 @onready var build_state: PlayerBuildState = $Build
 
 

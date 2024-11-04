@@ -1,11 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpytc7ebulm55"]
+[gd_scene load_steps=9 format=3 uid="uid://cpytc7ebulm55"]
 
 [ext_resource type="PackedScene" uid="uid://qr0bko2hsrbk" path="res://game/debug/space grid/debug_space_grid.tscn" id="1_ek1sn"]
 [ext_resource type="Script" path="res://game/tests.gd" id="1_o5dc5"]
 [ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="2_y64to"]
+[ext_resource type="Texture2D" path="res://skybox/proc_stars.dds" id="3_qa1hi"]
+[ext_resource type="PackedScene" uid="uid://cuqhcx4p5hgca" path="res://game/core/asteroid/asteroid.tscn" id="4_vqgh0"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ugat3"]
+panorama = ExtResource("3_qa1hi")
+
+[sub_resource type="Sky" id="Sky_nbk3e"]
+sky_material = SubResource("PanoramaSkyMaterial_ugat3")
 
 [sub_resource type="Environment" id="Environment_0ayl4"]
-ambient_light_color = Color(1, 1, 0.819608, 1)
+background_mode = 2
+sky = SubResource("Sky_nbk3e")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 2
 
 [node name="Game" type="Node3D"]
 
@@ -13,6 +25,7 @@ ambient_light_color = Color(1, 1, 0.819608, 1)
 script = ExtResource("1_o5dc5")
 
 [node name="Debug Space Grid" parent="." instance=ExtResource("1_ek1sn")]
+visible = false
 size = Vector3i(10, 10, 10)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -23,3 +36,11 @@ environment = SubResource("Environment_0ayl4")
 [node name="SpotLight3D" type="SpotLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 spot_range = 20.0
+
+[node name="VoxelViewer" type="VoxelViewer" parent="Player"]
+view_distance = 1024
+
+[node name="Asteroid" parent="." instance=ExtResource("4_vqgh0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -71.3603)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

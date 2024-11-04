@@ -6,8 +6,8 @@
 [ext_resource type="Script" path="res://game/core/player/player_seated_state.gd" id="4_aaxal"]
 [ext_resource type="Script" path="res://game/core/player/player_action_state_machine.gd" id="4_r1eyq"]
 [ext_resource type="Script" path="res://game/core/player/player_build_state.gd" id="5_avkim"]
-[ext_resource type="Script" path="res://game/core/player/player_action_state_idle.gd" id="6_3y3c5"]
-[ext_resource type="Resource" uid="uid://bh6lk8mefhhlv" path="res://game/data/blocks/thruster/thruster.tres" id="6_5f6ab"]
+[ext_resource type="Script" path="res://game/core/player/player_action_idle_state.gd" id="6_3y3c5"]
+[ext_resource type="Resource" uid="uid://k2s38yf1cnl4" path="res://game/data/blocks/pilot seat/pilot_seat.tres" id="8_o8p36"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e61hw"]
 
@@ -68,4 +68,4 @@ script = ExtResource("6_3y3c5")
 
 [node name="Build" type="Node" parent="Action State Machine"]
 script = ExtResource("5_avkim")
-current_block = ExtResource("6_5f6ab")
+current_block = ExtResource("8_o8p36")

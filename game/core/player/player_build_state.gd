@@ -22,6 +22,7 @@ func on_exit():
 func init_ghost():
 	ghost= current_block.get_model()
 	add_child(ghost)
+	ghost.top_level= true
 	ghost.hide()
 
 
@@ -36,7 +37,8 @@ func on_physics_process(_delta: float):
 		
 		var local_block_pos: Vector3i= grid.get_local_grid_pos(collision_pos)
 		var global_block_pos: Vector3= grid.get_global_block_pos(local_block_pos)
-		ghost.global_position= global_block_pos
+		ghost.position= global_block_pos
+		ghost.rotation= grid.global_rotation
 		ghost.show()
 	else:
 		ghost.hide()

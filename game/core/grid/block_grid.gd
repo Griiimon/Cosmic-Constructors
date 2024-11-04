@@ -10,27 +10,23 @@ func add_block(block: Block, pos: Vector3i):
 	blocks.append(grid_block)
 	
 	spawn_block(block, pos)
+	
+	var coll_shape= CollisionShape3D.new()
+	coll_shape.shape= BoxShape3D.new()
+	coll_shape.position= pos
+	add_child(coll_shape)
 
 
 func spawn_block(block: Block, pos: Vector3i):
-	var model: Node3D
-	
-	if block.scene:
-		model= block.scene.instantiate()
-	else:
-		model= MeshInstance3D.new()
-		model.mesh= BoxMesh.new()
-
-		var material: StandardMaterial3D
-		if block.material:
-			material= block.material
-		else:
-			material= StandardMaterial3D.new()
-		
-		if block.texture:
-			material.albedo_texture= block.texture
-		model.mesh.surface_set_material(0, material)
+	var model: Node3D= block.get_model()
 	
 	model.position= pos
 	add_child(model)
-		
+
+
+func get_local_grid_pos(global_pos: Vector3)-> Vector3i:
+	return to_local(global_pos).floor()
+
+	
+func get_global_block_pos(block_pos: Vector3i)-> Vector3:
+	return to_global(block_pos) + Vector3.ONE / 2.0

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SeatBlock" load_steps=3 format=3 uid="uid://k2s38yf1cnl4"]
+
+[ext_resource type="PackedScene" uid="uid://ds38tol4xc2ls" path="res://game/data/blocks/pilot seat/pilot_seat.tscn" id="1_b40p7"]
+[ext_resource type="Script" path="res://game/core/block/seat_block.gd" id="2_mjpwg"]
+
+[resource]
+script = ExtResource("2_mjpwg")
+size = Vector3i(1, 1, 1)
+weight = 10.0
+scene = ExtResource("1_b40p7")
+name = ""

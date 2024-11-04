@@ -29,3 +29,7 @@ func get_model()-> Node3D:
 		model.mesh.surface_set_material(0, model_material)
 	
 	return model
+
+
+func can_tick():
+	return false

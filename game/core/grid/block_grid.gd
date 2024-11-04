@@ -2,12 +2,13 @@ class_name BlockGrid
 extends RigidBody3D
 
 
-var blocks: Array[GridBlock]
+var blocks: Dictionary
+
 
 
 func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO):
 	var grid_block:= GridBlock.new(block, pos, block_rotation)
-	blocks.append(grid_block)
+	blocks[pos]= grid_block
 	
 	var block_instance= spawn_block(block, pos, block_rotation)
 	if block_instance is BlockInstance:
@@ -22,7 +23,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 
 func _physics_process(delta: float) -> void:
-	for block in blocks:
+	for block in blocks.values():
 		if block.block_definition.can_tick():
 			assert(block.block_instance)
 			block.block_instance.physics_tick(self, block, delta)
@@ -37,6 +38,9 @@ func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
 	add_child(model)
 	return model
 
+
+func get_block_from_global_pos(global_pos: Vector3)-> GridBlock:
+	return blocks[get_local_grid_pos(global_pos)]
 
 func get_local_grid_pos(global_pos: Vector3)-> Vector3i:
 	return to_local(global_pos).round()

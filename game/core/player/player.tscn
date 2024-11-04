@@ -39,6 +39,9 @@ current_state = NodePath("EVA")
 
 [node name="EVA" type="Node" parent="Movement State Machine"]
 script = ExtResource("3_o2tyv")
+yaw_factor = 200.0
+pitch_factor = 150.0
+roll_factor = 300.0
 
 [node name="Action State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_r1eyq")

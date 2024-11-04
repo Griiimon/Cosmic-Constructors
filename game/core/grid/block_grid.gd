@@ -6,6 +6,10 @@ var blocks: Dictionary
 
 
 
+func _ready() -> void:
+	collision_layer= Global.GRID_COLLISION_LAYER
+
+
 func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO):
 	var grid_block:= GridBlock.new(block, pos, block_rotation)
 	blocks[pos]= grid_block

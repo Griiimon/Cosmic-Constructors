@@ -5,6 +5,7 @@ extends FiniteStateMachine
 @onready var eva_state: PlayerEvaState = $EVA
 @onready var seated_state: PlayerSeatedState = $Seated
 @onready var grid_state: PlayerGridMoveState = $Grid
+@onready var terrain_state: PlayerTerrainMoveState = $Terrain
 
 var player: Player
 
@@ -24,8 +25,10 @@ func sit(seat: SeatInstance):
 
 
 func landed():
-	var collider: PhysicsBody3D= player.floor_shapecast.get_collider(0)
+	var collider: Node3D= player.floor_shapecast.get_collider(0)
 	
 	if collider is BlockGrid:
 		grid_state.grid= collider
 		change_state(grid_state)
+	else:
+		change_state(terrain_state)

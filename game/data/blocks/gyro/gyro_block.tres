@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GyroBlock" load_steps=3 format=3 uid="uid://ce7orofkp4b3r"]
+
+[ext_resource type="Script" path="res://game/core/block/gyro_block.gd" id="1_g5skc"]
+[ext_resource type="PackedScene" uid="uid://dv2v7phsvgckn" path="res://game/data/blocks/gyro/gyro.tscn" id="1_o3pbw"]
+
+[resource]
+script = ExtResource("1_g5skc")
+size = Vector3i(1, 1, 1)
+weight = 100.0
+scene = ExtResource("1_o3pbw")
+name = ""

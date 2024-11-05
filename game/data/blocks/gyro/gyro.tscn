@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dv2v7phsvgckn"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hdlyv"]
+size = Vector3(0.8, 0.1, 0.8)
+
+[sub_resource type="SphereMesh" id="SphereMesh_mvw7v"]
+radius = 0.45
+height = 0.9
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6k5ga"]
+height = 0.1
+
+[node name="Gyro" type="Node3D"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
+mesh = SubResource("BoxMesh_hdlyv")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_mvw7v")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_6k5ga")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_6k5ga")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.7494e-33, -6.12323e-17, 1, 1, 6.12323e-17, 0, -6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_6k5ga")

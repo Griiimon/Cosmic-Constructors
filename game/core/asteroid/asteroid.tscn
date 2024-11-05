@@ -63,3 +63,4 @@ graph_data = {
 generator = SubResource("VoxelGeneratorGraph_ix4e1")
 mesher = SubResource("VoxelMesherTransvoxel_0vr0v")
 material = ExtResource("1_qt4bt")
+collision_layer = 4

@@ -122,6 +122,12 @@ interact={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Player"
+3d_physics/layer_2="Grid"
+3d_physics/layer_3="Terrain"
+
 [physics]
 
 3d/default_gravity=0.0

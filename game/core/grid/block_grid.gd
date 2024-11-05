@@ -8,7 +8,7 @@ var blocks: Dictionary
 
 func _ready() -> void:
 	collision_layer= Global.GRID_COLLISION_LAYER
-	collision_mask= Global.PLAYER_COLLISION_LAYER + Global.GRID_COLLISION_LAYER
+	collision_mask= Global.PLAYER_COLLISION_LAYER + Global.GRID_COLLISION_LAYER + Global.TERRAIN_COLLISION_LAYER
 	physics_material_override= PhysicsMaterial.new()
 	physics_material_override.absorbent= true
 	physics_material_override.bounce= 1

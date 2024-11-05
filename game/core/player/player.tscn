@@ -18,7 +18,7 @@ bounce = 0.5
 [sub_resource type="SphereShape3D" id="SphereShape3D_amgwl"]
 
 [node name="Player" type="RigidBody3D"]
-collision_mask = 3
+collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_bbcsg")
 can_sleep = false
 continuous_cd = true

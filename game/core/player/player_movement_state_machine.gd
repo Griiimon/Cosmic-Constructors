@@ -7,6 +7,10 @@ extends FiniteStateMachine
 
 
 
+func _ready() -> void:
+	seated_state.finished.connect(change_state.bind(eva_state))
+	
+	
 func sit(seat: SeatInstance):
 	seated_state.seat= seat
 	change_state(seated_state)

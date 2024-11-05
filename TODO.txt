@@ -1,10 +1,15 @@
-thrusters
-seat, player state seated
+ground movement separation shape
+
+terrain movement
+
+gyro
+
+block grid movement ( inputs => thrusters, gyro )
+
+drill 
 
 delete block ( flood fill to detect if grid was split )
 
 fixed gatling, damage blocks + impact impulse
 
-voxel plugin asteroid
-
-movement on grid
+multi blocks

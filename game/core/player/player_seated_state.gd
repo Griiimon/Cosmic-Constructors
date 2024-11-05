@@ -1,5 +1,5 @@
 class_name PlayerSeatedState
-extends PlayerMovementStateMachineState
+extends PlayerStateMachineState
 
 
 var seat: SeatInstance

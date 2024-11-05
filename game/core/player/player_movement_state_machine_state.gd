@@ -2,6 +2,7 @@ class_name PlayerMovementStateMachineState
 extends PlayerStateMachineState
 
 signal jetpack_enabled
+signal left_ground
 
 @export var turn_factor: float= 1.0
 @export var pitch_factor: float= 1.0
@@ -18,7 +19,7 @@ func on_enter():
 	player.collision_shape.disabled= true
 	await get_tree().physics_frame
 	
-	player.global_transform= Utils.align_with_y(player.global_transform, get_floor_normal())
+	#player.global_transform= Utils.align_with_y(player.global_transform, get_floor_normal())
 
 
 func on_exit():
@@ -27,7 +28,10 @@ func on_exit():
 	
 
 func on_physics_process(delta: float):
-
+	if not player.floor_shapecast.is_colliding():
+		left_ground.emit()
+		return
+		
 	if Input.is_action_just_pressed("jetpack"):
 		#player.position.y+= 0.1
 		jetpack_enabled.emit()
@@ -36,7 +40,7 @@ func on_physics_process(delta: float):
 	var floor_normal: Vector3= get_floor_normal()
 	if floor_normal.is_zero_approx(): return
 	
-	player.global_transform= Utils.align_with_y(player.global_transform, floor_normal)
+	player.global_transform= player.global_transform.interpolate_with(Utils.align_with_y(player.global_transform, floor_normal), delta * 10)
 	
 	var current_run_factor: float= 1.0
 	if Input.is_action_pressed("run"):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cs0gfdxa0ha1n"]
+[gd_scene load_steps=15 format=3 uid="uid://cs0gfdxa0ha1n"]
 
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
 [ext_resource type="Script" path="res://game/core/player/player_movement_state_machine.gd" id="2_615c1"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://game/core/player/player_build_state.gd" id="5_avkim"]
 [ext_resource type="Script" path="res://game/core/player/player_grid_move_state.gd" id="5_ri51i"]
 [ext_resource type="Script" path="res://game/core/player/player_action_idle_state.gd" id="6_3y3c5"]
+[ext_resource type="Script" path="res://game/core/player/player_terrain_move_state.gd" id="6_cr6m7"]
 [ext_resource type="Resource" uid="uid://k2s38yf1cnl4" path="res://game/data/blocks/pilot seat/pilot_seat.tres" id="8_o8p36"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bbcsg"]
@@ -74,12 +75,16 @@ roll_factor = 300.0
 acceleration = 1000.0
 boost_factor = 3.0
 move_damping = 5.0
+min_land_velocity = 0.2
 
 [node name="Seated" type="Node" parent="Movement State Machine"]
 script = ExtResource("4_aaxal")
 
 [node name="Grid" type="Node" parent="Movement State Machine"]
 script = ExtResource("5_ri51i")
+
+[node name="Terrain" type="Node" parent="Movement State Machine"]
+script = ExtResource("6_cr6m7")
 
 [node name="Action State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_r1eyq")

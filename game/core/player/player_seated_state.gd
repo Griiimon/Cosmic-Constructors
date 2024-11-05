@@ -11,6 +11,8 @@ func on_enter():
 	stored_position_relative= get_grid().to_local(player.global_position)
 	seat.entity= player
 	
+	player.reset_camera()
+	
 	player.freeze_mode= RigidBody3D.FREEZE_MODE_STATIC
 	player.freeze= true
 	player.collision_shape.disabled= true

@@ -19,3 +19,7 @@ func _ready() -> void:
 
 func sit(seat: SeatInstance):
 	movement_state_machine.sit(seat)
+
+
+func reset_camera():
+	pivot.rotation= Vector3.ZERO

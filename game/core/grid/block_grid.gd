@@ -8,6 +8,9 @@ var blocks: Dictionary
 
 func _ready() -> void:
 	collision_layer= Global.GRID_COLLISION_LAYER
+	physics_material_override= PhysicsMaterial.new()
+	physics_material_override.absorbent= true
+	physics_material_override.bounce= 1
 
 
 func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO):

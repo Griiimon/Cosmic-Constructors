@@ -18,6 +18,8 @@ func _ready() -> void:
 	seated_state.finished.connect(change_state.bind(eva_state))
 	grid_state.jetpack_enabled.connect(change_state.bind(eva_state))
 	grid_state.left_ground.connect(change_state.bind(eva_state))
+	terrain_state.jetpack_enabled.connect(change_state.bind(eva_state))
+	terrain_state.left_ground.connect(change_state.bind(eva_state))
 
 	
 func sit(seat: SeatInstance):

@@ -33,8 +33,9 @@ func on_physics_process(delta: float):
 	if player.floor_shapecast.is_colliding():
 		#if player.to_local(player.linear_velocity).y < -min_land_velocity:
 		#if (player.basis * player.linear_velocity).y < -min_land_velocity:
-		land.emit()
-		return
+		if player.linear_velocity.dot(-player.global_basis.y) > min_land_velocity:
+			land.emit()
+			return
 
 
 	#var yaw_input= Input.get_axis("yaw_right", "yaw_left")

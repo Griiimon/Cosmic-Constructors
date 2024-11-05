@@ -13,3 +13,7 @@ func _ready() -> void:
 			grid.add_block(default_block, Vector3i(x, 0, z))
 
 	add_child(grid)
+	
+	await get_tree().physics_frame
+	
+	grid.apply_torque_impulse(Vector3.UP * 100000)

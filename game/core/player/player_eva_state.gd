@@ -1,5 +1,7 @@
 class_name PlayerEvaState
-extends PlayerStateMachineState
+extends PlayerMovementStateMachineState
+
+signal land
 
 @export var yaw_factor: float= 1.0
 @export var pitch_factor: float= 1.0 
@@ -13,6 +15,9 @@ extends PlayerStateMachineState
 
 @export var dampeners_active: bool= true 
 
+@export var min_land_velocity: float= 1.0
+
+
 var yaw_input: float
 var pitch_input: float
 var roll_input: float
@@ -24,6 +29,11 @@ func on_enter():
 
 
 func on_physics_process(delta: float):
+	if player.floor_shapecast.is_colliding() and player.to_local(player.linear_velocity).y < -min_land_velocity:
+		land.emit()
+		return
+
+
 	#var yaw_input= Input.get_axis("yaw_right", "yaw_left")
 	roll_input= Input.get_axis("roll_right", "roll_left")
 	#var pitch_input= Input.get_axis("pitch_down", "pitch_up")

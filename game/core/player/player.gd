@@ -5,6 +5,7 @@ extends Entity
 
 @onready var build_raycast: RayCast3D = %"Build Raycast"
 @onready var interact_shapecast: ShapeCast3D = %"Interact Shapecast"
+@onready var floor_shapecast: ShapeCast3D = $"Floor Shapecast"
 
 @onready var movement_state_machine: PlayerMovementStateMachine = $"Movement State Machine"
 @onready var action_state_machine: PlayerActionStateMachine = $"Action State Machine"

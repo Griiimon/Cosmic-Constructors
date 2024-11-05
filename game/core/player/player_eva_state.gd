@@ -1,5 +1,5 @@
 class_name PlayerEvaState
-extends PlayerMovementStateMachineState
+extends PlayerStateMachineState
 
 signal land
 

@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Global="*res://game/global/global.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
+
 [input]
 
 yaw_left={

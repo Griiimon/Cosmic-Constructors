@@ -1,6 +1,8 @@
-ground movement separation shape
+jetpack turn of dampers
 
-terrain movement
+retain correct rotation and momentum when switching to EVA
+
+grid_block.request_move/rotation
 
 gyro
 

@@ -6,6 +6,7 @@ extends PlayerStateMachineState
 @export var roll_factor: float= 1.0
 
 @export var acceleration: float= 10.0
+@export var boost_factor: float= 2.0
 
 @export var move_damping: float= 10.0
 @export var angular_damping: float= 10.0
@@ -35,7 +36,12 @@ func on_physics_process(delta: float):
 
 	player.apply_torque(input_torque * delta)
 
-	var forward_input= Input.get_axis("move_forward", "move_back")
+	var current_boost: float= 1
+	
+	if Input.is_action_pressed("boost"):
+		current_boost= boost_factor
+
+	var forward_input= Input.get_axis("move_forward", "move_back") * current_boost
 	var horizontal_input= Input.get_axis("strafe_left", "strafe_right")
 	var vertical_input= Input.get_axis("sink", "rise")
 	

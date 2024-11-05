@@ -59,6 +59,7 @@ yaw_factor = 50.0
 pitch_factor = 50.0
 roll_factor = 300.0
 acceleration = 1000.0
+boost_factor = 3.0
 move_damping = 5.0
 
 [node name="Seated" type="Node" parent="Movement State Machine"]

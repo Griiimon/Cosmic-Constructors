@@ -24,12 +24,15 @@ var roll_input: float
 
 
 func on_enter():
+	player.reset_camera()
 	player.linear_damp= move_damping
 	player.angular_damp= angular_damping
 
 
 func on_physics_process(delta: float):
-	if player.floor_shapecast.is_colliding() and player.to_local(player.linear_velocity).y < -min_land_velocity:
+	if player.floor_shapecast.is_colliding():
+		#if player.to_local(player.linear_velocity).y < -min_land_velocity:
+		#if (player.basis * player.linear_velocity).y < -min_land_velocity:
 		land.emit()
 		return
 

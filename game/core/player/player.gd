@@ -7,6 +7,7 @@ extends Entity
 @onready var interact_shapecast: ShapeCast3D = %"Interact Shapecast"
 @onready var floor_shapecast: ShapeCast3D = $"Floor Shapecast"
 
+@onready var head: Node3D = $Head
 @onready var pivot: Node3D = %Pivot
 
 @onready var movement_state_machine: PlayerMovementStateMachine = $"Movement State Machine"
@@ -22,4 +23,5 @@ func sit(seat: SeatInstance):
 
 
 func reset_camera():
+	head.rotation= Vector3.ZERO
 	pivot.rotation= Vector3.ZERO

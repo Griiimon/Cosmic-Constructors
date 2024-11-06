@@ -9,6 +9,8 @@ var requested_rotation: Vector3
 
 var inertial_dampeners: bool= false
 
+var total_gyro_strength: float= 0
+
 
 
 func _ready() -> void:
@@ -43,17 +45,23 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 func _physics_process(delta: float) -> void:
 	requested_movement= requested_movement.normalized()
+	total_gyro_strength= 0
 	
-	for block in blocks.values():
-		if block.block_definition.can_tick():
-			assert(block.block_instance)
-			var instance: BlockInstance= block.block_instance
-			instance.physics_tick(self, block, delta)
-
-	apply_torque_impulse(requested_rotation * global_basis.inverse())
+	tick_blocks(delta)
+	
+	var rot_vec: Vector3= requested_rotation * global_basis.inverse()
+	apply_torque_impulse(rot_vec * total_gyro_strength)
 
 	requested_movement= Vector3.ZERO
 	requested_rotation= Vector3.ZERO
+
+
+func tick_blocks(delta: float):
+	for block in blocks.values():
+		if block.block_definition.can_tick:
+			assert(block.block_instance)
+			var instance: BlockInstance= block.block_instance
+			instance.physics_tick(self, block, delta)
 
 
 func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):

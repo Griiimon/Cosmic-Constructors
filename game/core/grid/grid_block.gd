@@ -19,4 +19,5 @@ func get_local_basis()-> Basis:
 
 
 func get_global_basis(grid: BlockGrid)-> Basis:
+	#FIXME this is wrong!?
 	return get_local_basis() * grid.global_basis

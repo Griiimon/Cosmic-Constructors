@@ -18,9 +18,9 @@ func _ready() -> void:
 	can_sleep= false
 	continuous_cd= true
 	
-	physics_material_override= PhysicsMaterial.new()
-	physics_material_override.absorbent= true
-	physics_material_override.bounce= 1
+	#physics_material_override= PhysicsMaterial.new()
+	#physics_material_override.absorbent= true
+	#physics_material_override.bounce= 1
 
 
 func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO):

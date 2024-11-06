@@ -64,7 +64,6 @@ spot_range = 40.0
 spot_angle = 60.0
 
 [node name="Movement State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
-process_physics_priority = -10
 script = ExtResource("2_615c1")
 current_state = NodePath("EVA")
 

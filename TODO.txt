@@ -1,12 +1,20 @@
-jetpack turn of dampers
+player move collisions
+
+wrap block instance vars into BlockPropBool, BlockPropFloat
+
+meta tag for BlockInstance scene sub nodes that should be deleted in ghost ( or just delete anything not MeshInstance3D or plain Node3D ? )
+
+rotator block use grid_block rotation, dont assume y = up
+
+3rd person cam
+
+Alt fps look around while fixed
+
+jetpack turn off dampers
+
+grid angular dampeners
 
 retain correct rotation and momentum when switching to EVA
-
-grid_block.request_move/rotation
-
-gyro
-
-block grid movement ( inputs => thrusters, gyro )
 
 drill 
 
@@ -15,3 +23,5 @@ delete block ( flood fill to detect if grid was split )
 fixed gatling, damage blocks + impact impulse
 
 multi blocks
+
+asteroid ore materials

@@ -46,7 +46,7 @@ func on_physics_process(delta: float):
 	var roll_axis= Input.get_axis("roll_left", "roll_right")
 	if not is_zero_approx(roll_axis):
 		# TODO account for seat yaw, pitch, roll
-		get_grid().request_rotation(Vector3(0, 0, -roll_axis))
+		get_grid().request_rotation(Vector3(0, 0, -deg_to_rad(roll_axis)))
 
 
 func on_input(event: InputEvent) -> void:

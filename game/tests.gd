@@ -23,20 +23,23 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var switch_block: int= Input.get_axis("next_block", "previous_block")
-	if switch_block:
-		var build_state: PlayerBuildState= player.action_state_machine.build_state
-		var blocks: Array[Block]= GameData.block_library.blocks
-		var block_index= blocks.find(build_state.current_block)
-		block_index= wrapi(block_index + switch_block, 0, blocks.size())
-		build_state.current_block= blocks[block_index]
-
+	pass
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_F1:
-			var terrain: VoxelLodTerrain= $"../Asteroid".get_child(0)
-			var tool: VoxelToolLodTerrain= terrain.get_voxel_tool()
-			tool.channel= VoxelBuffer.CHANNEL_SDF
-			tool.mode= VoxelTool.MODE_REMOVE
-			tool.do_sphere(terrain.to_local($"../Player".global_position), 2)
+		if event.pressed: 
+			if event.keycode == KEY_F1:
+				var terrain: VoxelLodTerrain= $"../Asteroid".get_child(0)
+				var tool: VoxelToolLodTerrain= terrain.get_voxel_tool()
+				tool.channel= VoxelBuffer.CHANNEL_SDF
+				tool.mode= VoxelTool.MODE_REMOVE
+				tool.do_sphere(terrain.to_local($"../Player".global_position), 2)
+
+			else:
+				var switch_block: int= Input.get_axis("next_block", "previous_block")
+				if switch_block:
+					var build_state: PlayerBuildState= player.action_state_machine.build_state
+					var blocks: Array[Block]= GameData.block_library.blocks
+					var block_index= blocks.find(build_state.current_block)
+					block_index= wrapi(block_index + switch_block, 0, blocks.size())
+					build_state.current_block= blocks[block_index]

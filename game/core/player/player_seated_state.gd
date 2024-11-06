@@ -27,6 +27,11 @@ func on_physics_process(delta: float):
 		exit_seat()
 		return
 
+	get_grid().requested_movement+= Vector3(\
+		Input.get_axis("strafe_right", "strafe_left"),
+		Input.get_axis("rise", "sink"),
+		Input.get_axis("move_forward", "move_back"))
+
 
 func exit_seat():
 	player.reparent(get_tree().current_scene)

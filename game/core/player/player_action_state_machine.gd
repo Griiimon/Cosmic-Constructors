@@ -7,4 +7,5 @@ extends FiniteStateMachine
 
 
 func _ready() -> void:
+	idle_state.build.connect(change_state.bind(build_state))
 	build_state.finished.connect(change_state.bind(idle_state))

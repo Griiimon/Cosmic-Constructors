@@ -27,10 +27,18 @@ func on_physics_process(delta: float):
 		exit_seat()
 		return
 
-	get_grid().requested_movement+= Vector3(\
-		Input.get_axis("strafe_right", "strafe_left"),
-		Input.get_axis("rise", "sink"),
+	var grid_move_vec:= Vector3(\
+		Input.get_axis("strafe_left", "strafe_right"),
+		Input.get_axis("sink", "rise"),
 		Input.get_axis("move_forward", "move_back"))
+
+	DebugHud.send("Local Grid Move Vec", grid_move_vec)
+
+	grid_move_vec= grid_move_vec.rotated(seat.basis.y, -seat.global_basis.z.angle_to(get_grid().basis.z))
+
+	DebugHud.send("Grid Move Vec", grid_move_vec)
+
+	get_grid().requested_movement+= grid_move_vec
 
 
 func exit_seat():

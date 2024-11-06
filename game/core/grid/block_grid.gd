@@ -22,6 +22,8 @@ func _ready() -> void:
 	#physics_material_override.absorbent= true
 	#physics_material_override.bounce= 1
 
+	process_physics_priority= 5
+
 
 func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO):
 	var grid_block:= GridBlock.new(block, pos, block_rotation)

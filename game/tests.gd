@@ -1,5 +1,9 @@
 extends Node
 
+@onready var game: Game= get_parent()
+
+var player: Player
+
 
 
 func _ready() -> void:
@@ -13,8 +17,19 @@ func _ready() -> void:
 			grid.add_block(default_block, Vector3i(x, 0, z))
 
 	add_child(grid)
-	
-	await get_tree().physics_frame
+
+	await game.ready
+	player= game.player
+
+
+func _physics_process(delta: float) -> void:
+	var switch_block: int= Input.get_axis("next_block", "previous_block")
+	if switch_block:
+		var build_state: PlayerBuildState= player.action_state_machine.build_state
+		var blocks: Array[Block]= GameData.block_library.blocks
+		var block_index= blocks.find(build_state.current_block)
+		block_index= wrapi(block_index + switch_block, 0, blocks.size())
+		build_state.current_block= blocks[block_index]
 
 
 func _input(event: InputEvent) -> void:

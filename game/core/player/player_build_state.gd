@@ -2,7 +2,11 @@ class_name PlayerBuildState
 extends PlayerStateMachineState
 
 @export var build_range: float= 4.0
-@export var current_block: Block
+@export var current_block: Block:
+	set(b):
+		if not is_inside_tree(): return
+		current_block= b
+		init_ghost()
 
 var ghost: Node3D
 var block_rotation: Vector3
@@ -17,11 +21,15 @@ func on_enter():
 
 
 func on_exit():
-	remove_child(ghost)
-	ghost.queue_free()
-
+	remove_ghost()
+	
 
 func init_ghost():
+	if not current_block: return
+	
+	if ghost:
+		remove_ghost()
+		
 	ghost= current_block.get_model()
 	ghost.set_script(null)
 	add_child(ghost)
@@ -29,10 +37,17 @@ func init_ghost():
 	ghost.hide()
 
 
+func remove_ghost():
+	remove_child(ghost)
+	ghost.queue_free()
+	ghost= null
+
 func on_physics_process(_delta: float):
 	if Input.is_action_just_pressed("ui_cancel"):
 		finished.emit()
 		return
+	
+	if not ghost: return
 	
 	var raycast: RayCast3D= player.build_raycast
 	if raycast.is_colliding():

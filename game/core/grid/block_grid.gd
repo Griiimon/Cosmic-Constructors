@@ -50,8 +50,10 @@ func _physics_process(delta: float) -> void:
 			var instance: BlockInstance= block.block_instance
 			instance.physics_tick(self, block, delta)
 
+	apply_torque_impulse(requested_rotation * global_basis.inverse())
 
 	requested_movement= Vector3.ZERO
+	requested_rotation= Vector3.ZERO
 
 
 func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
@@ -63,14 +65,15 @@ func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
 	add_child(model)
 	return model
 
+
 # normalized
-func request_move(move_vec: Vector3):
-	requested_movement= move_vec
+func request_movement(move_vec: Vector3):
+	requested_movement+= move_vec
 
 
 # not normalized
 func request_rotation(rot_vec: Vector3):
-	requested_rotation= rot_vec
+	requested_rotation+= rot_vec
 
 
 func get_block_from_global_pos(global_pos: Vector3)-> GridBlock:

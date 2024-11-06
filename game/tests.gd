@@ -31,7 +31,7 @@ func _ready() -> void:
 	#grid.linear_damp= 1
 	grid.inertial_dampeners= true
 	
-	add_child(grid)
+	Global.game.grids.add_child(grid)
 
 	await game.ready
 	player= game.player

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Global="*res://game/global/global.gd"
 GameData="*res://game/global/game_data.tscn"
+DebugHud="*res://game/global/debug hud/debug_hud.tscn"
 
 [editor_plugins]
 

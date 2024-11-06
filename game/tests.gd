@@ -10,12 +10,26 @@ func _ready() -> void:
 	var default_block= load("res://game/data/blocks/light structure/light_structure_block.tres")
 	var grid:= BlockGrid.new()
 	grid.position.z= -2
-	grid.position.y= -2
+	grid.position.y= -3
 	
 	for x in 4:
 		for z in 4:
 			grid.add_block(default_block, Vector3i(x, 0, z))
 
+	var thruster_block= load("res://game/data/blocks/thruster/thruster_block.tres")
+	for x in 4:
+		grid.add_block(thruster_block, Vector3i(x, 1, 0), Vector3i(0, -x, 0))
+
+	var seat_block= load("res://game/data/blocks/pilot seat/pilot_seat_block.tres")
+
+	grid.add_block(seat_block, Vector3i(2, 1, 2))
+
+	var gyro_block= load("res://game/data/blocks/gyro/gyro_block.tres")
+	
+	grid.add_block(gyro_block, Vector3i(0, 1, 3))
+
+	grid.linear_damp= 1
+	
 	add_child(grid)
 
 	await game.ready
@@ -24,6 +38,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	pass
+
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:

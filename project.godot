@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://game/global/global.gd"
+GameData="*res://game/global/game_data.tscn"
 
 [editor_plugins]
 

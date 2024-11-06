@@ -4,8 +4,8 @@ extends PlayerStateMachineState
 @export var build_range: float= 4.0
 @export var current_block: Block:
 	set(b):
-		if not is_inside_tree(): return
 		current_block= b
+		if not is_inside_tree(): return
 		init_ghost()
 
 var ghost: Node3D
@@ -38,12 +38,14 @@ func init_ghost():
 
 
 func remove_ghost():
+	if not ghost: return
 	remove_child(ghost)
 	ghost.queue_free()
 	ghost= null
 
+
 func on_physics_process(_delta: float):
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_cancel") or Input.is_action_just_pressed("build"):
 		finished.emit()
 		return
 	

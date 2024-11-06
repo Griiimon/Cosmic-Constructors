@@ -1,9 +1,15 @@
 class_name PlayerActionIdleState
 extends PlayerStateMachineState
 
+signal build
+
 
 
 func on_physics_process(_delta: float):
+	if Input.is_action_just_pressed("build"):
+		build.emit()
+		return
+	
 	if Input.is_action_just_pressed("interact"):
 		var shapecast: ShapeCast3D= player.interact_shapecast
 		if shapecast.is_colliding():

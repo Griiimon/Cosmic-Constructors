@@ -77,6 +77,15 @@ func on_physics_process(_delta: float):
 			grid.rotation= ghost.rotation
 			Global.game.grids.add_child(grid)
 			
+			var query:= PhysicsShapeQueryParameters3D.new()
+			query.collision_mask= Global.TERRAIN_COLLISION_LAYER
+			query.shape= BoxShape3D.new()
+			query.transform= ghost.transform
+			
+			if player.get_world_3d().direct_space_state.intersect_shape(query):
+				grid.freeze= true
+			
+			
 		grid.add_block(current_block, local_block_pos, block_rotation)
 	else:
 		if Input.is_action_just_pressed("rotate_block_left"):

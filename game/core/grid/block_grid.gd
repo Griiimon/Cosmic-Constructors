@@ -4,6 +4,11 @@ extends RigidBody3D
 
 var blocks: Dictionary
 
+var requested_movement: Vector3
+var requested_rotation: Vector3
+
+var inertial_dampeners: bool= false
+
 
 
 func _ready() -> void:
@@ -35,10 +40,16 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 
 func _physics_process(delta: float) -> void:
+	requested_movement= requested_movement.normalized()
+	
 	for block in blocks.values():
 		if block.block_definition.can_tick():
 			assert(block.block_instance)
-			block.block_instance.physics_tick(self, block, delta)
+			var instance: BlockInstance= block.block_instance
+			instance.physics_tick(self, block, delta)
+
+
+	requested_movement= Vector3.ZERO
 
 
 func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
@@ -49,6 +60,15 @@ func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
 
 	add_child(model)
 	return model
+
+# normalized
+func request_move(move_vec: Vector3):
+	requested_movement= move_vec
+
+
+# not normalized
+func request_rotation(rot_vec: Vector3):
+	requested_rotation= rot_vec
 
 
 func get_block_from_global_pos(global_pos: Vector3)-> GridBlock:

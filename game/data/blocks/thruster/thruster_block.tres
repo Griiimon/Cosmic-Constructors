@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_j06ed")
-thrust = 1000.0
+thrust = 10000.0
 force_offset = false
 size = Vector3i(1, 1, 1)
 weight = 10.0

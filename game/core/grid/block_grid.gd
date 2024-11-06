@@ -46,12 +46,16 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 func _physics_process(delta: float) -> void:
 	requested_movement= requested_movement.normalized()
 	total_gyro_strength= 0
+	angular_damp= 0
 	
 	tick_blocks(delta)
 	
 	var rot_vec: Vector3= requested_rotation * global_basis.inverse()
-	apply_torque_impulse(rot_vec * total_gyro_strength)
-
+	if rot_vec:
+		apply_torque_impulse(rot_vec * total_gyro_strength)
+	else:
+		angular_damp= total_gyro_strength * 0.01
+	
 	requested_movement= Vector3.ZERO
 	requested_rotation= Vector3.ZERO
 

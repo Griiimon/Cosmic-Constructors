@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpytc7ebulm55"]
+[gd_scene load_steps=10 format=3 uid="uid://cpytc7ebulm55"]
 
+[ext_resource type="Script" path="res://game/game.gd" id="1_dxwo3"]
 [ext_resource type="PackedScene" uid="uid://qr0bko2hsrbk" path="res://game/debug/space grid/debug_space_grid.tscn" id="1_ek1sn"]
 [ext_resource type="Script" path="res://game/tests.gd" id="1_o5dc5"]
 [ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="2_y64to"]
@@ -20,6 +21,7 @@ ambient_light_color = Color(1, 1, 1, 1)
 reflected_light_source = 2
 
 [node name="Game" type="Node3D"]
+script = ExtResource("1_dxwo3")
 
 [node name="Tests" type="Node" parent="."]
 script = ExtResource("1_o5dc5")

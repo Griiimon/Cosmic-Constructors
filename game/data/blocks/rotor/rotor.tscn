@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://d34fumc1c8e0e"]
+
+[ext_resource type="Script" path="res://game/core/block/rotor_instance.gd" id="1_pcbeu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_upqdt"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_us0db"]
+size = Vector3(1, 0.1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1jtn4"]
+top_radius = 0.45
+bottom_radius = 0.45
+height = 1.0
+
+[node name="Rotor" type="Node3D"]
+script = ExtResource("1_pcbeu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_upqdt")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_us0db")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_1jtn4")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="."]
+exclude_nodes_from_collision = false
+angular_limit_y/enabled = false
+angular_motor_y/enabled = true
+angular_motor_y/target_velocity = 0.174533

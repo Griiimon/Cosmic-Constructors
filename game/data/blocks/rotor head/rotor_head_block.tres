@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://b7b26sso6p11j"]
+
+[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_ocwwn"]
+[ext_resource type="PackedScene" uid="uid://cxn4ub3us4trm" path="res://game/data/blocks/rotor head/rotor_head.tscn" id="1_q7067"]
+
+[resource]
+script = ExtResource("1_ocwwn")
+size = Vector3i(1, 1, 1)
+weight = 10.0
+can_tick = false
+scene = ExtResource("1_q7067")
+name = ""

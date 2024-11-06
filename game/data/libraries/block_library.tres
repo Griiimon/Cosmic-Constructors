@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BlockLibrary" load_steps=8 format=3 uid="uid://qj17gtekw1sc"]
+[gd_resource type="Resource" script_class="BlockLibrary" load_steps=10 format=3 uid="uid://qj17gtekw1sc"]
 
 [ext_resource type="Script" path="res://game/core/block/block.gd" id="1_1y7x0"]
 [ext_resource type="Script" path="res://game/libraries/block library/block_library.gd" id="1_wp3mq"]
@@ -7,7 +7,9 @@
 [ext_resource type="Resource" uid="uid://bh6lk8mefhhlv" path="res://game/data/blocks/thruster/thruster_block.tres" id="4_ex1ql"]
 [ext_resource type="Resource" uid="uid://ce7orofkp4b3r" path="res://game/data/blocks/gyro/gyro_block.tres" id="4_rwth5"]
 [ext_resource type="Resource" uid="uid://uncwu5fpxrt2" path="res://game/data/blocks/landing gear/landing_gear_block.tres" id="6_ybohw"]
+[ext_resource type="Resource" uid="uid://du3bitby5ve4s" path="res://game/data/blocks/rotor/rotor_block.tres" id="7_uxxxt"]
+[ext_resource type="Resource" uid="uid://b7b26sso6p11j" path="res://game/data/blocks/rotor head/rotor_head_block.tres" id="8_lq4sf"]
 
 [resource]
 script = ExtResource("1_wp3mq")
-blocks = Array[ExtResource("1_1y7x0")]([ExtResource("2_y3r5d"), ExtResource("3_sr2pb"), ExtResource("4_ex1ql"), ExtResource("4_rwth5"), ExtResource("6_ybohw")])
+blocks = Array[ExtResource("1_1y7x0")]([ExtResource("2_y3r5d"), ExtResource("3_sr2pb"), ExtResource("4_ex1ql"), ExtResource("4_rwth5"), ExtResource("6_ybohw"), ExtResource("7_uxxxt"), ExtResource("8_lq4sf")])

@@ -50,40 +50,49 @@ func on_physics_process(_delta: float):
 		return
 	
 	if not ghost: return
+
+	var grid: BlockGrid
+	var local_block_pos: Vector3i
 	
 	var raycast: RayCast3D= player.build_raycast
 	if raycast.is_colliding():
 		var collision_pos: Vector3= raycast.get_collision_point()
 		collision_pos+= raycast.global_basis.z * 0.05
 		
-		var grid: BlockGrid= raycast.get_collider()
+		grid= raycast.get_collider()
 		assert(grid != null)
 		
-		var local_block_pos: Vector3i= grid.get_local_grid_pos(collision_pos)
+		local_block_pos= grid.get_local_grid_pos(collision_pos)
 		var global_block_pos: Vector3= grid.get_global_block_pos(local_block_pos)
 		ghost.position= global_block_pos
 		ghost.rotation= grid.global_rotation
-	
-		if Input.is_action_just_pressed("build_block"):
-			grid.add_block(current_block, local_block_pos, block_rotation)
-		else:
-			if Input.is_action_just_pressed("rotate_block_left"):
-				block_rotation.y-= 1
-			elif Input.is_action_just_pressed("rotate_block_right"):
-				block_rotation.y+= 1
-			if Input.is_action_just_pressed("rotate_block_up"):
-				block_rotation.x-= 1
-			elif Input.is_action_just_pressed("rotate_block_down"):
-				block_rotation.x+= 1
-			if Input.is_action_just_pressed("roll_block_left"):
-				block_rotation.z-= 1
-			elif Input.is_action_just_pressed("roll_block_right"):
-				block_rotation.z+= 1
-			
-		ghost.basis= ghost.basis * Basis.from_euler(block_rotation * deg_to_rad(90))
-		ghost.show()
-		
-				
 	else:
-		ghost.hide()
+		ghost.position= player.to_global(raycast.target_position)
+		ghost.rotation= player.global_rotation
+	
+	if Input.is_action_just_pressed("build_block"):
+		if not grid:
+			grid= BlockGrid.new()
+			grid.position= ghost.position
+			grid.rotation= ghost.rotation
+			Global.game.grids.add_child(grid)
+			
+		grid.add_block(current_block, local_block_pos, block_rotation)
+	else:
+		if Input.is_action_just_pressed("rotate_block_left"):
+			block_rotation.y-= 1
+		elif Input.is_action_just_pressed("rotate_block_right"):
+			block_rotation.y+= 1
+		if Input.is_action_just_pressed("rotate_block_up"):
+			block_rotation.x-= 1
+		elif Input.is_action_just_pressed("rotate_block_down"):
+			block_rotation.x+= 1
+		if Input.is_action_just_pressed("roll_block_left"):
+			block_rotation.z-= 1
+		elif Input.is_action_just_pressed("roll_block_right"):
+			block_rotation.z+= 1
 		
+	ghost.basis= ghost.basis * Basis.from_euler(block_rotation * deg_to_rad(90))
+	ghost.show()
+	#else:
+		#ghost.hide()

@@ -46,7 +46,8 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 func _physics_process(delta: float) -> void:
 	requested_movement= requested_movement.normalized()
 
-	run_dampeners(delta)
+	if not freeze:
+		run_dampeners(delta)
 	
 	total_gyro_strength= 0
 	angular_damp= 0

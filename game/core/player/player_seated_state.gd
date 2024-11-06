@@ -32,13 +32,28 @@ func on_physics_process(delta: float):
 		Input.get_axis("sink", "rise"),
 		Input.get_axis("move_forward", "move_back"))
 
-	DebugHud.send("Local Grid Move Vec", grid_move_vec)
+	if not grid_move_vec.is_zero_approx():
+		#DebugHud.send("Local Grid Move Vec", grid_move_vec)
 
-	grid_move_vec= grid_move_vec.rotated(seat.basis.y, -seat.global_basis.z.angle_to(get_grid().basis.z))
+		# TODO account for seat yaw, pitch, roll
+		# yaw
+		grid_move_vec= grid_move_vec.rotated(seat.basis.y, -seat.global_basis.z.angle_to(get_grid().basis.z))
 
-	DebugHud.send("Grid Move Vec", grid_move_vec)
+		#DebugHud.send("Grid Move Vec", grid_move_vec)
 
-	get_grid().requested_movement+= grid_move_vec
+		get_grid().request_movement(grid_move_vec)
+
+	var roll_axis= Input.get_axis("roll_left", "roll_right")
+	if not is_zero_approx(roll_axis):
+		# TODO account for seat yaw, pitch, roll
+		get_grid().request_rotation(Vector3(0, 0, -roll_axis))
+
+
+func on_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		var rot_vec:= Vector3(-event.relative.y, -event.relative.x, 0)
+		# TODO account for seat yaw, pitch, roll
+		get_grid().request_rotation(rot_vec)
 
 
 func exit_seat():

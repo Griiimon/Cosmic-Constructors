@@ -3,6 +3,7 @@ extends NamedResource
 
 @export var size: Vector3i= Vector3i.ONE
 @export var weight: float= 10.0
+@export var can_tick: bool= false
 @export var texture: Texture2D
 @export var material: StandardMaterial3D
 @export var scene: PackedScene
@@ -29,10 +30,6 @@ func get_model()-> Node3D:
 		model.mesh.surface_set_material(0, model_material)
 	
 	return model
-
-
-func can_tick():
-	return false
 
 
 func can_interact()-> bool:

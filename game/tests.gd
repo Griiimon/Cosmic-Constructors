@@ -7,6 +7,9 @@ var player: Player
 
 
 func _ready() -> void:
+	await game.ready
+	player= game.player
+	
 	var default_block= load("res://game/data/blocks/light structure/light_structure_block.tres")
 	var grid:= BlockGrid.new()
 	grid.position.z= -2
@@ -33,8 +36,6 @@ func _ready() -> void:
 	
 	Global.game.grids.add_child(grid)
 
-	await game.ready
-	player= game.player
 
 
 func _physics_process(delta: float) -> void:

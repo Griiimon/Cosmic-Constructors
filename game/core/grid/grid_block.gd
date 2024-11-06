@@ -14,5 +14,9 @@ func _init(_block: Block, _local_pos: Vector3i, _rotation: Vector3i= Vector3i.ZE
 	rotation= _rotation
 
 
+func get_local_basis()-> Basis:
+	return Basis.from_euler(rotation)
+
+
 func get_global_basis(grid: BlockGrid)-> Basis:
-	return Basis.from_euler(rotation) * grid.global_basis
+	return get_local_basis() * grid.global_basis

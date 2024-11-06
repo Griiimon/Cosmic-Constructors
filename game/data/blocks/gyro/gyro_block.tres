@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_g5skc")
-strength = 10.0
+strength = 100.0
 size = Vector3i(1, 1, 1)
 weight = 100.0
 can_tick = true

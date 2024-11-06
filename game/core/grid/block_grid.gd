@@ -45,22 +45,8 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 func _physics_process(delta: float) -> void:
 	requested_movement= requested_movement.normalized()
-	if inertial_dampeners:
-		var local_velocity: Vector3= linear_velocity * global_basis
-		var velocity_in_requested_direction = local_velocity.dot(requested_movement) * requested_movement
-		var unwanted_velocity = local_velocity - velocity_in_requested_direction
 
-		var counter_force = -unwanted_velocity * delta#dampening_factor
-
-		counter_force= counter_force.normalized()
-		
-		DebugHud.send("Local velocity", local_velocity)
-		DebugHud.send("Requested Movement", requested_movement)
-		DebugHud.send("Counter force", counter_force)
-		
-		requested_movement+= counter_force
-		requested_movement= requested_movement.normalized()
-
+	run_dampeners(delta)
 	
 	total_gyro_strength= 0
 	angular_damp= 0
@@ -83,6 +69,24 @@ func tick_blocks(delta: float):
 			assert(block.block_instance)
 			var instance: BlockInstance= block.block_instance
 			instance.physics_tick(self, block, delta)
+
+
+func run_dampeners(delta: float):
+	if inertial_dampeners:
+		var local_velocity: Vector3= linear_velocity * global_basis
+		var velocity_in_requested_direction: Vector3 = local_velocity.dot(requested_movement) * requested_movement
+		var unwanted_velocity: Vector3 = local_velocity - velocity_in_requested_direction
+
+		var counter_force: Vector3 = -unwanted_velocity * delta # *dampening_factor
+		var threshold: float= 0.001
+		counter_force.x= counter_force.x if abs(counter_force.x) > threshold else 0
+		counter_force.y= counter_force.y if abs(counter_force.y) > threshold else 0
+		counter_force.z= counter_force.z if abs(counter_force.z) > threshold else 0
+
+		counter_force= counter_force.normalized()
+		
+		requested_movement+= counter_force
+		requested_movement= requested_movement.normalized()	
 
 
 func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):

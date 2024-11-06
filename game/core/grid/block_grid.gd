@@ -32,8 +32,6 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 	blocks[pos]= grid_block
 	
 	var block_instance= spawn_block(block, pos, block_rotation)
-	if block_instance is BlockInstance:
-		grid_block.block_instance= block_instance
 	
 	var coll_shape= CollisionShape3D.new()
 	coll_shape.shape= BoxShape3D.new()
@@ -41,6 +39,10 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 	add_child(coll_shape)
 
 	mass+= block.weight
+
+	if block_instance is BlockInstance:
+		grid_block.block_instance= block_instance
+		block_instance.on_placed(self, grid_block)
 
 
 func _physics_process(delta: float) -> void:

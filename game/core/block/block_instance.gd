@@ -6,6 +6,10 @@ var active: bool= true: set= set_active
 
 
 
+func on_placed(grid: BlockGrid, grid_block: GridBlock):
+	pass
+
+
 func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 	pass
 

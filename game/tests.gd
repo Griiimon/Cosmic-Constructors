@@ -28,7 +28,8 @@ func _ready() -> void:
 	
 	grid.add_block(gyro_block, Vector3i(0, 1, 3))
 
-	grid.linear_damp= 1
+	#grid.linear_damp= 1
+	grid.inertial_dampeners= true
 	
 	add_child(grid)
 

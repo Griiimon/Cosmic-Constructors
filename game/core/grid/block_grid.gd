@@ -45,6 +45,23 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 func _physics_process(delta: float) -> void:
 	requested_movement= requested_movement.normalized()
+	if inertial_dampeners:
+		var local_velocity: Vector3= linear_velocity * global_basis
+		var velocity_in_requested_direction = local_velocity.dot(requested_movement) * requested_movement
+		var unwanted_velocity = local_velocity - velocity_in_requested_direction
+
+		var counter_force = -unwanted_velocity * delta#dampening_factor
+
+		counter_force= counter_force.normalized()
+		
+		DebugHud.send("Local velocity", local_velocity)
+		DebugHud.send("Requested Movement", requested_movement)
+		DebugHud.send("Counter force", counter_force)
+		
+		requested_movement+= counter_force
+		requested_movement= requested_movement.normalized()
+
+	
 	total_gyro_strength= 0
 	angular_damp= 0
 	

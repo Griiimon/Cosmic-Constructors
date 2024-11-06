@@ -51,7 +51,7 @@ func on_physics_process(delta: float):
 
 func on_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		var rot_vec:= Vector3(-event.relative.y, -event.relative.x, 0)
+		var rot_vec:= Vector3(-deg_to_rad(event.relative.y), -deg_to_rad(event.relative.x), 0)
 		# TODO account for seat yaw, pitch, roll
 		get_grid().request_rotation(rot_vec)
 

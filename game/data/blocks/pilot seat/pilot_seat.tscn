@@ -9,14 +9,15 @@ albedo_color = Color(0.264395, 0.163972, 0.0339374, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_uefjg"]
 material = SubResource("StandardMaterial3D_7vrxe")
-size = Vector3(1, 0.25, 1)
+size = Vector3(0.8, 0.25, 0.8)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g55jw"]
-albedo_color = Color(0.264395, 0.163972, 0.0339374, 1)
+[sub_resource type="BoxMesh" id="BoxMesh_28jvu"]
+material = SubResource("StandardMaterial3D_7vrxe")
+size = Vector3(0.12, 0.12, 0.525)
 
-[sub_resource type="BoxMesh" id="BoxMesh_k0tfu"]
-material = SubResource("StandardMaterial3D_g55jw")
-size = Vector3(0.15, 0.9, 1)
+[sub_resource type="BoxMesh" id="BoxMesh_177x5"]
+material = SubResource("StandardMaterial3D_7vrxe")
+size = Vector3(0.8, 0.12, 0.8)
 
 [node name="Pilot Seat" type="Node3D"]
 script = ExtResource("1_qxi2j")
@@ -26,9 +27,17 @@ visible = false
 mesh = SubResource("BoxMesh_ohgao")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.00131881, 0.00192233, -0.999997, -0.00419421, 0.999989, 0.00192784, 0.99999, 0.00419674, -0.00131074, 0, -0.375, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.375, 0)
 mesh = SubResource("BoxMesh_uefjg")
 
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.375, 0, 0.0820883)
+mesh = SubResource("BoxMesh_28jvu")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0, 0.082)
+mesh = SubResource("BoxMesh_28jvu")
+
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.3214e-08, -6.57552e-09, -1, -0.149346, 0.988785, -4.79582e-11, 0.988785, 0.149346, -4.37114e-08, 0, 0.0337859, 0.343089)
-mesh = SubResource("BoxMesh_k0tfu")
+transform = Transform3D(1, 0, 0, 0, 0.232359, 0.97263, 0, -0.97263, 0.232359, 0, -0.038, 0.344)
+mesh = SubResource("BoxMesh_177x5")

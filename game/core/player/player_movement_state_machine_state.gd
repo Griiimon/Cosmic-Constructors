@@ -16,14 +16,9 @@ signal left_ground
 
 func on_enter():
 	player.freeze= true
-	player.collision_shape.disabled= true
-	await get_tree().physics_frame
-	
-	#player.global_transform= Utils.align_with_y(player.global_transform, get_floor_normal())
 
 
 func on_exit():
-	player.collision_shape.disabled= false
 	player.freeze= false
 	
 
@@ -33,7 +28,6 @@ func on_physics_process(delta: float):
 		return
 		
 	if Input.is_action_just_pressed("jetpack"):
-		#player.position.y+= 0.1
 		jetpack_enabled.emit()
 		return
 
@@ -55,21 +49,39 @@ func on_physics_process(delta: float):
 	final_move= -player.head.global_basis.z * move_vec * delta
 	final_move+= player.head.global_basis.x * strafe_vec * delta
 
-	var plane:= Plane(floor_normal)
-	final_move= plane.project(final_move)
+	move_and_slide_and_snap(final_move, floor_normal)
 
-	var orig_pos: Vector3= player.floor_shapecast.position
-	player.floor_shapecast.global_position+= final_move
-	player.floor_shapecast.force_shapecast_update()
 
-	var new_floor_normal: Vector3= -floor_normal
-	if player.floor_shapecast.is_colliding():
-		new_floor_normal= get_floor_normal()
+func move_and_slide_and_snap(motion: Vector3, floor_normal: Vector3, max_slides: int= 1):
+
+	for i in max_slides + 1:
+		var collision: KinematicCollision3D= move_and_collide(motion)
+		if not collision:
+			player.global_position+= motion
+			return
+
+		var orig_pos: Vector3= player.floor_shapecast.position
+		player.floor_shapecast.global_position= player.global_position + collision.get_travel()
+		player.floor_shapecast.force_shapecast_update()
+		player.floor_shapecast.position= orig_pos
 		
-	player.floor_shapecast.position= orig_pos
-	
-	if floor_normal.dot(new_floor_normal) > 0.5:
-		player.global_position+= final_move
+		if player.floor_shapecast.is_colliding():
+			if get_floor_normal().dot(floor_normal) < 0.5:
+				return
+
+		player.global_position+= collision.get_travel()
+		motion= collision.get_remainder()
+		motion= motion.slide(collision.get_normal(0))
+
+	#var plane:= Plane(floor_normal)
+	#final_move= plane.project(final_move)
+
+
+func move_and_collide(motion: Vector3)-> KinematicCollision3D:
+	var result: KinematicCollision3D
+	#player.test_move(player.global_transform, motion, result)
+	return player.move_and_collide(motion, true)
+	return result
 
 
 func on_input(event: InputEvent):

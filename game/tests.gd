@@ -58,5 +58,10 @@ func _input(event: InputEvent) -> void:
 					var build_state: PlayerBuildState= player.action_state_machine.build_state
 					var blocks: Array[Block]= GameData.block_library.blocks
 					var block_index= blocks.find(build_state.current_block)
+
 					block_index= wrapi(block_index + switch_block, 0, blocks.size())
 					build_state.current_block= blocks[block_index]
+
+					while not build_state.current_block.can_be_built:
+						block_index= wrapi(block_index + switch_block, 0, blocks.size())
+						build_state.current_block= blocks[block_index]

@@ -8,5 +8,6 @@ script = ExtResource("1_ocwwn")
 size = Vector3i(1, 1, 1)
 weight = 10.0
 can_tick = false
+can_be_built = false
 scene = ExtResource("1_q7067")
 name = ""

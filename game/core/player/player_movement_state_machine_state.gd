@@ -49,7 +49,9 @@ func on_physics_process(delta: float):
 	final_move= -player.head.global_basis.z * move_vec * delta
 	final_move+= player.head.global_basis.x * strafe_vec * delta
 
+	pre_move()
 	move_and_slide_and_snap(final_move, floor_normal)
+	post_move()
 
 
 func move_and_slide_and_snap(motion: Vector3, floor_normal: Vector3, max_slides: int= 1):
@@ -82,6 +84,14 @@ func move_and_collide(motion: Vector3)-> KinematicCollision3D:
 	#player.test_move(player.global_transform, motion, result)
 	return player.move_and_collide(motion, true)
 	return result
+
+
+func pre_move():
+	pass
+
+
+func post_move():
+	pass
 
 
 func on_input(event: InputEvent):

@@ -34,6 +34,11 @@ func init_ghost():
 	ghost.set_script(null)
 	add_child(ghost)
 	ghost.top_level= true
+	
+	for child in ghost.find_children("*"):
+		if child is not MeshInstance3D:
+			child.queue_free()
+
 	ghost.hide()
 
 

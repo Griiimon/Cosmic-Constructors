@@ -56,7 +56,20 @@ func on_physics_process(delta: float):
 	final_move+= player.head.global_basis.x * strafe_vec * delta
 
 	var plane:= Plane(floor_normal)
-	player.global_position+= plane.project(final_move)
+	final_move= plane.project(final_move)
+
+	var orig_pos: Vector3= player.floor_shapecast.position
+	player.floor_shapecast.global_position+= final_move
+	player.floor_shapecast.force_shapecast_update()
+
+	var new_floor_normal: Vector3= -floor_normal
+	if player.floor_shapecast.is_colliding():
+		new_floor_normal= get_floor_normal()
+		
+	player.floor_shapecast.position= orig_pos
+	
+	if floor_normal.dot(new_floor_normal) > 0.5:
+		player.global_position+= final_move
 
 
 func on_input(event: InputEvent):
@@ -67,6 +80,7 @@ func on_input(event: InputEvent):
 		#player.pivot.rotation.x= clamp(player.pivot.rotation.x, -deg_to_rad(45), deg_to_rad(45))
 
 
+# FIXME floor shapecast always returns max 1 collision, so this is unnecessary?
 func get_floor_normal()-> Vector3:
 	var result:= Vector3.ZERO
 	for idx in player.floor_shapecast.get_collision_count():

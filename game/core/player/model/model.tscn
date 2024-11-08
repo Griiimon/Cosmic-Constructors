@@ -20,13 +20,13 @@ material = SubResource("StandardMaterial3D_wxuxe")
 radius = 0.2
 height = 0.4
 
-[sub_resource type="BoxMesh" id="BoxMesh_r5gsy"]
-material = ExtResource("1_mladw")
-size = Vector3(0.24, 0.625, 0.29)
-
 [sub_resource type="BoxMesh" id="BoxMesh_me6vd"]
 material = ExtResource("1_mladw")
 size = Vector3(0.175, 0.405, 0.23)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r5gsy"]
+material = ExtResource("1_mladw")
+size = Vector3(0.24, 0.625, 0.29)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uufhi"]
 material = ExtResource("2_x1o5c")
@@ -47,10 +47,6 @@ mesh = SubResource("BoxMesh_a2i8n")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0592666, -0.0413829)
 mesh = SubResource("SphereMesh_4uad6")
 
-[node name="Right Leg" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, -1.28349, 0)
-mesh = SubResource("BoxMesh_r5gsy")
-
 [node name="Right Arm" type="MeshInstance3D" parent="."]
 transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0.474297, -0.318559, 0)
 mesh = SubResource("BoxMesh_me6vd")
@@ -59,8 +55,12 @@ mesh = SubResource("BoxMesh_me6vd")
 transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, -0.474, -0.319, 0)
 mesh = SubResource("BoxMesh_me6vd")
 
+[node name="Right Leg" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, -1.2, 0)
+mesh = SubResource("BoxMesh_r5gsy")
+
 [node name="Left Leg" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.175, -1.30549, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.175, -1.2, 0)
 mesh = SubResource("BoxMesh_r5gsy")
 
 [node name="Bottle Left" type="MeshInstance3D" parent="."]

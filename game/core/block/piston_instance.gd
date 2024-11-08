@@ -39,7 +39,7 @@ func _ready() -> void:
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	sub_grid= BlockGrid.new()
-	sub_grid.position= grid.get_global_block_pos(grid_block.local_pos + Vector3i.UP)
+	sub_grid.position= grid.get_global_block_pos(grid_block.local_pos + Vector3i(global_basis.y))
 	sub_grid.rotation= grid.rotation
 	
 	Global.game.grids.add_child(sub_grid)
@@ -48,7 +48,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	joint.node_b= joint.get_path_to(sub_grid)
 	
 	var piston_head_block: Block= load("res://game/data/blocks/piston head/piston_head_block.tres")
-	piston_head= sub_grid.add_block(piston_head_block, Vector3i.ZERO)
+	piston_head= sub_grid.add_block(piston_head_block, Vector3i.ZERO, grid_block.rotation)
 
 
 func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):

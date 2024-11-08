@@ -16,7 +16,7 @@ func _ready() -> void:
 	grid.position.y= -3
 	
 	for x in 4:
-		for z in 4:
+		for z in 7:
 			grid.add_block(default_block, Vector3i(x, 0, z))
 
 	var thruster_block= load("res://game/data/blocks/thruster/thruster_block.tres")
@@ -34,7 +34,6 @@ func _ready() -> void:
 	grid.inertial_dampeners= true
 	
 	Global.game.grids.add_child(grid)
-
 
 
 func _physics_process(delta: float) -> void:

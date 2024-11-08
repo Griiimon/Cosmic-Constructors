@@ -28,11 +28,6 @@ func on_enter():
 	player.reset_camera()
 	player.look_at(player.global_position + head_forward, player.global_basis.y)
 
-	if dampeners_active:
-		player.linear_damp= move_damping
-	else:
-		player.linear_damp= 0
-
 	player.angular_damp= angular_damping
 
 
@@ -67,6 +62,23 @@ func on_physics_process(delta: float):
 	var vertical_input= Input.get_axis("sink", "rise")
 	
 	var move_vec: Vector3= (Vector3(horizontal_input, vertical_input, forward_input))
+	
+	if dampeners_active:
+		var local_velocity: Vector3= player.linear_velocity * player.global_basis
+		var velocity_in_requested_direction: Vector3 = local_velocity.dot(move_vec) * move_vec
+		var unwanted_velocity: Vector3 = local_velocity - velocity_in_requested_direction
+
+		var dampening_factor: float= 1.0
+		
+		var counter_force: Vector3 = -unwanted_velocity * delta * dampening_factor
+		var threshold: float= 0.001
+		counter_force.x= counter_force.x if abs(counter_force.x) > threshold else 0
+		counter_force.y= counter_force.y if abs(counter_force.y) > threshold else 0
+		counter_force.z= counter_force.z if abs(counter_force.z) > threshold else 0
+		counter_force= counter_force.normalized()
+		
+		move_vec+= counter_force.normalized()
+	
 	player.apply_central_force(move_vec * player.global_basis.inverse() * acceleration * delta)
 
 

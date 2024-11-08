@@ -10,6 +10,7 @@ enum State { IDLE, MOVE }
 
 @onready var joint: Generic6DOFJoint3D = $Generic6DOFJoint3D
 
+var piston_head: Node3D
 var sub_grid: BlockGrid
 
 var state: State= State.MOVE
@@ -23,7 +24,12 @@ var max_distance: float
 
 func _ready() -> void:
 	for i in num_segments - 1:
-		segments_node.add_child(orig_segment.duplicate())
+		var next_segment: MeshInstance3D= orig_segment.duplicate()
+		segments_node.add_child(next_segment)
+		next_segment.mesh= next_segment.mesh.duplicate()
+		var mesh: CylinderMesh= next_segment.mesh
+		mesh.bottom_radius= mesh.bottom_radius - (i + 1) / 50.0
+		mesh.top_radius= mesh.bottom_radius
 	
 	segments.assign(segments_node.get_children())
 
@@ -42,14 +48,14 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	joint.node_b= joint.get_path_to(sub_grid)
 	
 	var piston_head_block: Block= load("res://game/data/blocks/piston head/piston_head_block.tres")
-	sub_grid.add_block(piston_head_block, Vector3i.ZERO)
+	piston_head= sub_grid.add_block(piston_head_block, Vector3i.ZERO)
 
 
 func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
-	#extension+= velocity * delta
-	#extension= clamp(extension, 0.0, max_distance)
-	#
-	#for i in segments.size():
-		#segments[i].position.y= extension / float(i + 1)
+	var extension: float= global_position.distance_to(piston_head.global_position) - 1
+	DebugHud.send("Extension", extension)
+	
+	for i in segments.size():
+		segments[i].position.y= lerp(0.0, float(i + 1), extension / max_distance)
 
 	joint.set_param_y(Generic6DOFJoint3D.PARAM_LINEAR_MOTOR_TARGET_VELOCITY, velocity)

@@ -31,7 +31,6 @@ func _ready() -> void:
 	
 	grid.add_block(gyro_block, Vector3i(0, 1, 3))
 
-	#grid.linear_damp= 1
 	grid.inertial_dampeners= true
 	
 	Global.game.grids.add_child(grid)
@@ -54,6 +53,7 @@ func _input(event: InputEvent) -> void:
 
 			else:
 				var switch_block: int= Input.get_axis("next_block", "previous_block")
+				
 				if switch_block:
 					var build_state: PlayerBuildState= player.action_state_machine.build_state
 					var blocks: Array[Block]= GameData.block_library.blocks

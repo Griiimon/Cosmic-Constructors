@@ -40,7 +40,6 @@ func on_physics_process(delta: float):
 	if floor_normal.is_zero_approx(): return
 	
 	continuous_align(delta)
-	#player.global_transform= player.global_transform.interpolate_with(Utils.align_with_y(player.global_transform, floor_normal), delta * 10)
 	
 	var current_run_factor: float= 1.0
 	if Input.is_action_pressed("run"):
@@ -100,7 +99,6 @@ func move_and_slide_and_snap(motion: Vector3, floor_normal: Vector3, delta: floa
 
 func move_and_collide(motion: Vector3)-> KinematicCollision3D:
 	var result: KinematicCollision3D
-	#player.test_move(player.global_transform, motion, result)
 	return player.move_and_collide(motion, true)
 	return result
 
@@ -116,9 +114,7 @@ func post_move():
 func on_input(event: InputEvent):
 	if event is InputEventMouseMotion:
 		player.head.rotate_y(deg_to_rad(-event.relative.x) * turn_factor)
-		#player.pivot.rotate_x(deg_to_rad(-event.relative.y) * pitch_factor)
 		player.pivot.rotate_x(deg_to_rad(-event.relative.y) * pitch_factor)
-		#player.pivot.rotation.x= clamp(player.pivot.rotation.x, -deg_to_rad(45), deg_to_rad(45))
 
 
 func initial_align():
@@ -129,7 +125,7 @@ func continuous_align(delta: float):
 	pass
 
 
-# FIXME floor shapecast always returns max 1 collision, so this is unnecessary?
+# FIXME floor shapecast always returns max 1 collision, so this isnt necessary?
 func get_floor_normal()-> Vector3:
 	var result:= Vector3.ZERO
 	for idx in player.floor_shapecast.get_collision_count():

@@ -81,6 +81,9 @@ func tick_blocks(delta: float):
 
 
 func run_dampeners(delta: float):
+	if Input.is_action_just_pressed("toggle_dampeners"):
+		inertial_dampeners= not inertial_dampeners
+	
 	if inertial_dampeners:
 		var local_velocity: Vector3= linear_velocity * global_basis
 		var velocity_in_requested_direction: Vector3 = local_velocity.dot(requested_movement) * requested_movement

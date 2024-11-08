@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqwiemvftbtau"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hf56f"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_vvkag"]
+size = Vector3(1, 0.2, 1)
+
+[node name="Piston Head" type="Node3D"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("CylinderMesh_hf56f")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393836, 0)
+mesh = SubResource("BoxMesh_vvkag")

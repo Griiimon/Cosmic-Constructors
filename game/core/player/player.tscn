@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cs0gfdxa0ha1n"]
+[gd_scene load_steps=16 format=3 uid="uid://cs0gfdxa0ha1n"]
 
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
 [ext_resource type="Script" path="res://game/core/player/player_movement_state_machine.gd" id="2_615c1"]
+[ext_resource type="PackedScene" uid="uid://bnhyptcsxakf2" path="res://game/core/player/model/model.tscn" id="2_qm5y7"]
 [ext_resource type="Script" path="res://game/core/player/player_eva_state.gd" id="3_o2tyv"]
 [ext_resource type="Script" path="res://game/core/player/player_seated_state.gd" id="4_aaxal"]
 [ext_resource type="Script" path="res://game/core/player/player_action_state_machine.gd" id="4_r1eyq"]
@@ -63,6 +64,8 @@ collision_mask = 2
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Pivot"]
 spot_range = 40.0
 spot_angle = 60.0
+
+[node name="Model" parent="Head" instance=ExtResource("2_qm5y7")]
 
 [node name="Movement State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_615c1")

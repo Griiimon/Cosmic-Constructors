@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://bnhyptcsxakf2"]
+
+[ext_resource type="Material" uid="uid://koo0qls452x2" path="res://game/core/player/model/suit_material.tres" id="1_mladw"]
+[ext_resource type="Material" uid="uid://t707x1seiw6m" path="res://game/core/player/model/bottle_material.tres" id="2_x1o5c"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mhret"]
+material = ExtResource("1_mladw")
+size = Vector3(0.595, 0.875, 0.405)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a2i8n"]
+material = ExtResource("1_mladw")
+size = Vector3(0.4, 0.415, 0.265)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wxuxe"]
+transparency = 1
+albedo_color = Color(0, 0.796078, 0.803922, 0.47451)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4uad6"]
+material = SubResource("StandardMaterial3D_wxuxe")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_r5gsy"]
+material = ExtResource("1_mladw")
+size = Vector3(0.24, 0.625, 0.29)
+
+[sub_resource type="BoxMesh" id="BoxMesh_me6vd"]
+material = ExtResource("1_mladw")
+size = Vector3(0.175, 0.405, 0.23)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_uufhi"]
+material = ExtResource("2_x1o5c")
+radius = 0.075
+height = 0.505
+
+[node name="Model" type="Node3D"]
+
+[node name="Torso" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.516379, 0)
+mesh = SubResource("BoxMesh_mhret")
+
+[node name="Head" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.972297, 0.233751, 0, -0.233751, 0.972297, 0, 0.0565833, 0.138101)
+mesh = SubResource("BoxMesh_a2i8n")
+
+[node name="Glass" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0592666, -0.0413829)
+mesh = SubResource("SphereMesh_4uad6")
+
+[node name="Right Leg" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, -1.28349, 0)
+mesh = SubResource("BoxMesh_r5gsy")
+
+[node name="Right Arm" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0.474297, -0.318559, 0)
+mesh = SubResource("BoxMesh_me6vd")
+
+[node name="Left Arm" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, -0.474, -0.319, 0)
+mesh = SubResource("BoxMesh_me6vd")
+
+[node name="Left Leg" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.175, -1.30549, 0)
+mesh = SubResource("BoxMesh_r5gsy")
+
+[node name="Bottle Left" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.999998, 0.000544391, 0.00191851, -0.000537358, 0.999993, -0.00366425, -0.0019205, 0.00366321, 0.999991, -0.0823519, -0.284411, 0.319864)
+mesh = SubResource("CapsuleMesh_uufhi")
+
+[node name="Bottle Right" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0860146, -0.282102, 0.320211)
+mesh = SubResource("CapsuleMesh_uufhi")

@@ -12,6 +12,11 @@ signal left_ground
 @export var run_factor: float= 3.0
 @export var move_back_factor: float= 0.5
 
+@export var snap_factor: float= 5.0
+
+@export var min_safe_snap_fraction: float= 0.65
+@export var max_safe_snap_fraction: float= 0.75
+
 
 
 func on_enter():
@@ -61,10 +66,10 @@ func move_and_slide_and_snap(motion: Vector3, floor_normal: Vector3, delta: floa
 
 	# TODO or towards collision point, not target_position?
 	var down_vec: Vector3= (player.to_global(player.floor_shapecast.target_position) - player.global_position).normalized()
-	if safe_fraction > 0.75:
-		player.global_position+= down_vec * delta
-	elif safe_fraction < 0.70:
-		player.global_position-= down_vec * delta
+	if safe_fraction > max_safe_snap_fraction:
+		player.global_position+= down_vec * delta * snap_factor
+	elif safe_fraction < min_safe_snap_fraction:
+		player.global_position-= down_vec * delta * snap_factor
 		
 
 	if not motion:

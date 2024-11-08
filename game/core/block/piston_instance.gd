@@ -39,7 +39,7 @@ func _ready() -> void:
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	sub_grid= BlockGrid.new()
-	sub_grid.position= grid.get_global_block_pos(grid_block.local_pos + Vector3i(global_basis.y))
+	sub_grid.position= grid.get_global_block_pos(grid_block.local_pos) + global_basis.y
 	sub_grid.rotation= grid.rotation
 	
 	Global.game.grids.add_child(sub_grid)

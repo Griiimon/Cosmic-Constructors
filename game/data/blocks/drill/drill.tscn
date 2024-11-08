@@ -35,7 +35,7 @@ roughness = 0.54
 material = SubResource("StandardMaterial3D_msbjy")
 size = Vector3(0.1, 0.2, 0.1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_6cj00"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_qoxiq"]
 radius = 2.0
 
 [node name="Drill" type="Node3D"]
@@ -69,13 +69,10 @@ mesh = SubResource("BoxMesh_qtaf8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.141, 0)
 mesh = SubResource("BoxMesh_qtaf8")
 
-[node name="Drill Area" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.99576)
-collision_layer = 0
+[node name="Terrain ShapeCast" type="ShapeCast3D" parent="."]
+shape = SubResource("SphereShape3D_qoxiq")
+target_position = Vector3(0, 0, -2)
 collision_mask = 4
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Drill Area"]
-shape = SubResource("SphereShape3D_6cj00")
 
 [node name="Cooldown" type="Timer" parent="."]
 one_shot = true

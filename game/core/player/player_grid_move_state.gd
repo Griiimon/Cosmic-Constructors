@@ -24,3 +24,11 @@ func pre_move():
 
 func post_move():
 	player.add_collision_exception_with(grid)
+
+
+func initial_align():
+	player.global_transform= Utils.align_with_y(player.global_transform, get_floor_normal())
+
+
+func continuous_align(delta: float):
+	pass

@@ -16,7 +16,7 @@ signal left_ground
 
 func on_enter():
 	player.freeze= true
-
+	initial_align()
 
 func on_exit():
 	player.freeze= false
@@ -34,7 +34,8 @@ func on_physics_process(delta: float):
 	var floor_normal: Vector3= get_floor_normal()
 	if floor_normal.is_zero_approx(): return
 	
-	player.global_transform= player.global_transform.interpolate_with(Utils.align_with_y(player.global_transform, floor_normal), delta * 10)
+	continuous_align(delta)
+	#player.global_transform= player.global_transform.interpolate_with(Utils.align_with_y(player.global_transform, floor_normal), delta * 10)
 	
 	var current_run_factor: float= 1.0
 	if Input.is_action_pressed("run"):
@@ -113,6 +114,14 @@ func on_input(event: InputEvent):
 		#player.pivot.rotate_x(deg_to_rad(-event.relative.y) * pitch_factor)
 		player.pivot.rotate_x(deg_to_rad(-event.relative.y) * pitch_factor)
 		#player.pivot.rotation.x= clamp(player.pivot.rotation.x, -deg_to_rad(45), deg_to_rad(45))
+
+
+func initial_align():
+	pass
+
+
+func continuous_align(delta: float):
+	pass
 
 
 # FIXME floor shapecast always returns max 1 collision, so this is unnecessary?

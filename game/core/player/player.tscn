@@ -73,9 +73,8 @@ script = ExtResource("3_o2tyv")
 yaw_factor = 50.0
 pitch_factor = 50.0
 roll_factor = 300.0
-acceleration = 1000.0
+acceleration = 300.0
 boost_factor = 3.0
-move_damping = 5.0
 min_land_velocity = 0.2
 
 [node name="Seated" type="Node" parent="Movement State Machine"]

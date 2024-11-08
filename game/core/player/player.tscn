@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cs0gfdxa0ha1n"]
+[gd_scene load_steps=15 format=3 uid="uid://cs0gfdxa0ha1n"]
 
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
 [ext_resource type="Script" path="res://game/core/player/player_movement_state_machine.gd" id="2_615c1"]
@@ -21,8 +21,6 @@ bounce = 0.5
 height = 1.0
 radius = 0.4
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_5o50l"]
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_amgwl"]
 
 [node name="Player" type="RigidBody3D"]
@@ -39,13 +37,6 @@ shape = SubResource("CapsuleShape3D_e61hw")
 
 [node name="Floor Shapecast" type="ShapeCast3D" parent="."]
 shape = SubResource("CylinderShape3D_suqug")
-collision_mask = 6
-
-[node name="Floor Shapecast old" type="ShapeCast3D" parent="."]
-visible = false
-enabled = false
-shape = SubResource("SphereShape3D_5o50l")
-target_position = Vector3(0, -0.6, 0)
 collision_mask = 6
 
 [node name="Head" type="Node3D" parent="."]

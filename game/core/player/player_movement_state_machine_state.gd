@@ -1,8 +1,8 @@
 class_name PlayerMovementStateMachineState
 extends PlayerStateMachineState
 
-signal jetpack_enabled
-signal left_ground
+signal jetpack_enabled(velocity: Vector3)
+signal left_ground(velocity: Vector3)
 
 @export var turn_factor: float= 1.0
 @export var pitch_factor: float= 1.0
@@ -17,11 +17,14 @@ signal left_ground
 @export var min_safe_snap_fraction: float= 0.65
 @export var max_safe_snap_fraction: float= 0.75
 
+var velocity: Vector3
+
 
 
 func on_enter():
 	player.freeze= true
 	initial_align()
+
 
 func on_exit():
 	player.freeze= false
@@ -29,11 +32,11 @@ func on_exit():
 
 func on_physics_process(delta: float):
 	if not player.floor_shapecast.is_colliding():
-		left_ground.emit()
+		left_ground.emit(velocity)
 		return
 		
 	if Input.is_action_just_pressed("jetpack"):
-		jetpack_enabled.emit()
+		jetpack_enabled.emit(velocity)
 		return
 
 	var floor_normal: Vector3= get_floor_normal()
@@ -54,9 +57,14 @@ func on_physics_process(delta: float):
 	final_move= -player.head.global_basis.z * move_vec * delta
 	final_move+= player.head.global_basis.x * strafe_vec * delta
 
+	var prev_position: Vector3= player.global_position
+	
 	pre_move()
 	move_and_slide_and_snap(final_move, floor_normal, delta)
 	post_move()
+
+	velocity= (player.global_position - prev_position) / delta
+	DebugHud.send("Velocity", "%.2f" % velocity.length())
 
 
 func move_and_slide_and_snap(motion: Vector3, floor_normal: Vector3, delta: float, max_slides: int= 1):

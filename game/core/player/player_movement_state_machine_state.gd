@@ -50,12 +50,25 @@ func on_physics_process(delta: float):
 	final_move+= player.head.global_basis.x * strafe_vec * delta
 
 	pre_move()
-	move_and_slide_and_snap(final_move, floor_normal)
+	move_and_slide_and_snap(final_move, floor_normal, delta)
 	post_move()
 
 
-func move_and_slide_and_snap(motion: Vector3, floor_normal: Vector3, max_slides: int= 1):
+func move_and_slide_and_snap(motion: Vector3, floor_normal: Vector3, delta: float, max_slides: int= 1):
+	var safe_fraction: float= player.floor_shapecast.get_closest_collision_safe_fraction()
+	#DebugHud.send("Safe Fraction", safe_fraction)
 
+	# TODO or towards collision point, not target_position?
+	var down_vec: Vector3= (player.to_global(player.floor_shapecast.target_position) - player.global_position).normalized()
+	if safe_fraction > 0.75:
+		player.global_position+= down_vec * delta
+	elif safe_fraction < 0.70:
+		player.global_position-= down_vec * delta
+		
+
+	if not motion:
+		return
+		
 	for i in max_slides + 1:
 		var collision: KinematicCollision3D= move_and_collide(motion)
 		if not collision:

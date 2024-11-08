@@ -1,14 +1,12 @@
-retain correct rotation and momentum when switching to EVA
-
-use different floor shape cast on terrain?
+use same damping algo for eva as in block grid 
 
 3rd person cam
 
 jetpack turn off dampers
 
-longer magnetic boots activation shapecast to avoid colliding with grid first. then snap to grid
-
 rotator block use grid_block rotation, dont assume y = up
+
+Piston
 
 asteroid ore materials
 
@@ -25,5 +23,7 @@ fixed gatling, damage blocks + impact impulse
 multi blocks
 
 FIX getting stuck in terrain when going EVA ( will intersect_shape work against terrain? because Area didnt seem to => JOLT OPT-IN )
+FIX inital grid align when sloped/diagonal initial normal
+FIX sometimes wrong ( downwards ) momentum when strafing off grid 
 
 meta tag for BlockInstance scene sub nodes that should be deleted in ghost ( or just delete anything not MeshInstance3D or plain Node3D ? )

@@ -1,9 +1,3 @@
-use same damping algo for eva as in block grid 
-
-3rd person cam
-
-jetpack turn off dampers
-
 rotator block use grid_block rotation, dont assume y = up
 
 Piston
@@ -25,5 +19,14 @@ multi blocks
 FIX getting stuck in terrain when going EVA ( will intersect_shape work against terrain? because Area didnt seem to => JOLT OPT-IN )
 FIX inital grid align when sloped/diagonal initial normal
 FIX sometimes wrong ( downwards ) momentum when strafing off grid 
+FIX shouldnt all blocks face forward by default ( piston and rotor are facing up rn )
 
 meta tag for BlockInstance scene sub nodes that should be deleted in ghost ( or just delete anything not MeshInstance3D or plain Node3D ? )
+
+
+NEW MECHANICS
+-----------------
+
+Laser Guns
+Player Equipment grid like factorio, with shields etc
+backpack vs bottles

@@ -25,7 +25,12 @@ var roll_input: float
 
 func on_enter():
 	player.reset_camera()
-	player.linear_damp= move_damping
+
+	if dampeners_active:
+		player.linear_damp= move_damping
+	else:
+		player.linear_damp= 0
+
 	player.angular_damp= angular_damping
 
 

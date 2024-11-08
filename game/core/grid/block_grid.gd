@@ -49,6 +49,8 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 	if block_instance is BlockInstance:
 		grid_block.block_instance= block_instance
 		block_instance.on_placed(self, grid_block)
+	
+	return block_instance
 
 
 func _physics_process(delta: float) -> void:

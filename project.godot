@@ -23,7 +23,7 @@ DebugHud="*res://game/global/debug hud/debug_hud.tscn"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/csgtomeshinstance/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [input]
 

@@ -119,6 +119,7 @@ func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
 
 
 func remove_block(block: GridBlock):
+	mass-= block.block_definition.weight
 	collision_shapes.erase(block.collision_shape)
 	block.collision_shape.queue_free()
 	#block.collision_shape.set_deferred("disabled", true)

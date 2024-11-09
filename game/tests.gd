@@ -81,3 +81,15 @@ func _input(event: InputEvent) -> void:
 					while not build_state.current_block.can_be_built:
 						block_index= wrapi(block_index + switch_block, 0, blocks.size())
 						build_state.current_block= blocks[block_index]
+	elif event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			var query:= PhysicsRayQueryParameters3D.create(player.head.global_position, player.build_raycast.to_global(player.build_raycast.target_position))#, Global.GRID_COLLISION_LAYER)
+			prints("Remove query", query.from, query.to)
+			query.hit_back_faces= false
+			query.hit_from_inside= false
+			var result= player.get_world_3d().direct_space_state.intersect_ray(query)
+			if result:
+				var grid: BlockGrid= result.collider
+				var collision_point: Vector3= result.position
+				collision_point+= -player.build_raycast.global_basis.z * 0.05
+				grid.remove_block(grid.get_block_from_global_pos(collision_point))

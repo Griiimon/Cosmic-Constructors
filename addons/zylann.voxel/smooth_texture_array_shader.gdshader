@@ -37,7 +37,7 @@ void fragment() {
     // Sample the 4 blending textures, all with triplanar mapping.
     // We can re-use the same triplanar blending factors for all of them so separating that part
     // of the function improves performance a little.
-    vec3 blending = get_triplanar_blend(normal, 1.0) * 10.0;
+    vec3 blending = get_triplanar_blend(normal, 1.0);
     vec3 col0 = texture_array_triplanar(u_albedo_array, wpos, blending, v_material_indices.x).rgb;
     vec3 col1 = texture_array_triplanar(u_albedo_array, wpos, blending, v_material_indices.y).rgb;
     vec3 col2 = texture_array_triplanar(u_albedo_array, wpos, blending, v_material_indices.z).rgb;

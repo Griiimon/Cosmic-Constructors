@@ -33,11 +33,11 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 	var grid_block:= GridBlock.new(block, pos, block_rotation)
 	blocks[pos]= grid_block
 	
-	var block_instance= spawn_block(block, pos, block_rotation)
+	var block_node= spawn_block(block, pos, block_rotation)
 	
 	if block.custom_collision:
 		var coll_shapes: Array[CollisionShape3D]
-		coll_shapes.assign(block_instance.find_children("*", "CollisionShape3D"))
+		coll_shapes.assign(block_node.find_children("*", "CollisionShape3D"))
 		assert(coll_shapes.size() == 1)
 		coll_shapes[0].reparent(self)
 	else:
@@ -50,11 +50,12 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 	mass+= block.weight
 
-	if block_instance is BlockInstance:
-		grid_block.block_instance= block_instance
-		block_instance.on_placed(self, grid_block)
-	
-	return block_instance
+	grid_block.block_node= block_node
+
+	if block_node is BlockInstance:
+		(block_node as BlockInstance).on_placed(self, grid_block)
+
+	return block_node
 
 
 func _physics_process(delta: float) -> void:
@@ -81,8 +82,8 @@ func _physics_process(delta: float) -> void:
 func tick_blocks(delta: float):
 	for block in blocks.values():
 		if block.block_definition.can_tick:
-			assert(block.block_instance)
-			var instance: BlockInstance= block.block_instance
+			var instance: BlockInstance= block.get_block_instance()
+			assert(instance)
 			instance.physics_tick(self, block, delta)
 
 

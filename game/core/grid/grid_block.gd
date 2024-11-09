@@ -5,7 +5,7 @@ extends Resource
 var block_definition: Block
 var local_pos: Vector3i
 var rotation: Vector3i
-var block_instance: BlockInstance
+var block_node: Node3D
 var hitpoints: int
 var collision_shape: CollisionShape3D
 
@@ -28,8 +28,15 @@ func take_damage(damage: int)-> bool:
 
 
 func destroy():
+	var block_instance: BlockInstance= get_block_instance()
 	if block_instance:
 		block_instance.on_destroy()
+	else:
+		block_node.queue_free()
+
+
+func get_block_instance()-> BlockInstance:
+	return block_node as BlockInstance
 
 
 func get_local_basis()-> Basis:

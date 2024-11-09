@@ -21,4 +21,4 @@ func on_physics_process(_delta: float):
 			var grid_block: GridBlock= grid.get_block_from_global_pos(collision_pos)
 			if grid_block:
 				if grid_block.block_definition.can_interact():
-					grid_block.block_instance.interact(grid, grid_block, player)
+					grid_block.get_block_instance().interact(grid, grid_block, player)

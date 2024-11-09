@@ -1,4 +1,16 @@
-wrap block instance vars into BlockPropBool, BlockPropFloat
+ctrl click block ( with block interaction ray/shapecast ) and execute default_prop_action of that BlockInstance
+	thats active for thrusters/gyro, rotation_speed/velocity +/- for rotor/piston
+	holding ctrl will trigger UI overlay displaying target blocks default action
+
+add BlockPropFloat
+
+add hand item viewport
+	rocket launcher
+	hand drill
+
+make build ghost half transparent
+
+save world
 
 Alt fps look around while fixed
 
@@ -13,6 +25,7 @@ multi blocks
 custom mass / center of mass calculations each time a block is added/removed
 flood fill to detect if grid was split on remove block
 
+save player only in cryo pod, otherwise use default spawn points or medbay
 
 FIX getting stuck in terrain when going EVA ( will intersect_shape work against terrain? because Area didnt seem to => JOLT OPT-IN )
 FIX inital grid align when sloped/diagonal initial normal

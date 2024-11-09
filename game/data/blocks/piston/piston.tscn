@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b5j2ykhxptyb6"]
 
-[ext_resource type="Script" path="res://game/core/block/piston_instance.gd" id="1_jtvf3"]
+[ext_resource type="Script" path="res://game/core/block/instances/piston_instance.gd" id="1_jtvf3"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_xjrup"]
 top_radius = 0.4

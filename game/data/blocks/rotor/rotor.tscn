@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d34fumc1c8e0e"]
 
-[ext_resource type="Script" path="res://game/core/block/rotor_instance.gd" id="1_pcbeu"]
+[ext_resource type="Script" path="res://game/core/block/instances/rotor_instance.gd" id="1_pcbeu"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_upqdt"]
 

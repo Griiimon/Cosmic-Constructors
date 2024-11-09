@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cb4306bwmd33y"]
 
-[ext_resource type="Script" path="res://game/core/block/landing_gear_instance.gd" id="1_oqs0f"]
+[ext_resource type="Script" path="res://game/core/block/instances/landing_gear_instance.gd" id="1_oqs0f"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_g2ie7"]
 

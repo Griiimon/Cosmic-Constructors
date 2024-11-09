@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dv2v7phsvgckn"]
 
-[ext_resource type="Script" path="res://game/core/block/gyro_instance.gd" id="1_6h7un"]
+[ext_resource type="Script" path="res://game/core/block/instances/gyro_instance.gd" id="1_6h7un"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_hdlyv"]
 size = Vector3(0.8, 0.1, 0.8)

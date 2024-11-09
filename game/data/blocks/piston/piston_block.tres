@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PistonBlock" load_steps=3 format=3 uid="uid://b76l5p4q7psh1"]
 
-[ext_resource type="Script" path="res://game/core/block/piston_block.gd" id="1_g2wmg"]
+[ext_resource type="Script" path="res://game/core/block/types/piston_block.gd" id="1_g2wmg"]
 [ext_resource type="PackedScene" uid="uid://b5j2ykhxptyb6" path="res://game/data/blocks/piston/piston.tscn" id="1_gdcla"]
 
 [resource]

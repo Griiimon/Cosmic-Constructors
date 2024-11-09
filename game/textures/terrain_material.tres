@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c4l4ukvg5rpk8"]
+
+[ext_resource type="Shader" path="res://addons/zylann.voxel/smooth_texture_array_shader.gdshader" id="1_fofdo"]
+[ext_resource type="CompressedTexture2DArray" uid="uid://dkhcdkendyg6k" path="res://game/textures/texture_array.png" id="2_g8ty2"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_fofdo")
+shader_parameter/u_transition_mask = null
+shader_parameter/u_albedo_array = ExtResource("2_g8ty2")

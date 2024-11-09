@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuqhcx4p5hgca"]
+[gd_scene load_steps=6 format=3 uid="uid://cuqhcx4p5hgca"]
 
-[ext_resource type="Material" uid="uid://drdjpe57huucf" path="res://zylann_shader_material.res" id="1_qt4bt"]
+[ext_resource type="Script" path="res://game/core/asteroid/asteroid.gd" id="1_i3wkf"]
+[ext_resource type="Material" uid="uid://c4l4ukvg5rpk8" path="res://game/textures/terrain_material.tres" id="1_i754l"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_j3p40"]
 frequency = 0.0139
@@ -56,11 +57,13 @@ graph_data = {
 }
 
 [sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_0vr0v"]
+texturing_mode = 1
 
 [node name="Asteroid" type="Node3D"]
+script = ExtResource("1_i3wkf")
 
 [node name="VoxelLodTerrain" type="VoxelLodTerrain" parent="."]
 generator = SubResource("VoxelGeneratorGraph_ix4e1")
 mesher = SubResource("VoxelMesherTransvoxel_0vr0v")
-material = ExtResource("1_qt4bt")
+material = ExtResource("1_i754l")
 collision_layer = 4

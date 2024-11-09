@@ -34,12 +34,11 @@ size = Vector3i(10, 10, 10)
 environment = SubResource("Environment_0ayl4")
 
 [node name="Player" parent="." instance=ExtResource("2_y64to")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 70)
 
 [node name="VoxelViewer" type="VoxelViewer" parent="Player"]
 view_distance = 1024
 
 [node name="Asteroid" parent="." instance=ExtResource("4_vqgh0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -71.3603)
-visible = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

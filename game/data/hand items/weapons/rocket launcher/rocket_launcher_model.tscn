@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2xjeiv2wcady"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mgf2l"]
+albedo_color = Color(0.16885, 0.309748, 0.169502, 1)
+metallic = 1.0
+roughness = 0.18
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nnjq4"]
+material = SubResource("StandardMaterial3D_mgf2l")
+top_radius = 0.15
+bottom_radius = 0.15
+height = 1.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_1nua8"]
+material = SubResource("StandardMaterial3D_mgf2l")
+size = Vector3(0.01, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pw3ey"]
+albedo_color = Color(0.0821326, 0.182318, 0.0821971, 1)
+metallic = 0.73
+roughness = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_lk61c"]
+material = SubResource("StandardMaterial3D_pw3ey")
+size = Vector3(0.1, 0.1, 1)
+
+[node name="Rocket Launcher Model" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_nnjq4")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.025, 0.656, 0.149)
+mesh = SubResource("BoxMesh_1nua8")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025, 0.656, 0.149)
+mesh = SubResource("BoxMesh_1nua8")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.102629, -0.215617)
+mesh = SubResource("BoxMesh_lk61c")

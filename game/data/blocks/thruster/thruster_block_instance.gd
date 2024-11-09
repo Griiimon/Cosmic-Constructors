@@ -1,4 +1,4 @@
-extends BlockInstance
+extends BlockInstanceOnOff
 
 @onready var particles: CPUParticles3D = $CPUParticles3D
 
@@ -12,13 +12,11 @@ func _ready() -> void:
 	particle_stop_delay.timeout.connect(func(): particles.emitting= false)
 	add_child(particle_stop_delay)
 
-	active= false
-
 
 func on_set_active():
 	if not is_inside_tree(): return
 	
-	if active:
+	if active.is_true():
 		particles.emitting= true
 		particle_stop_delay.stop()
 	else:
@@ -27,14 +25,14 @@ func on_set_active():
 
 func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 	var tmp_active:= false
-	if not active:
+	if not active.is_true():
 		if not grid.requested_movement.is_zero_approx():
 			var local_thrust: Vector3= get_local_thrust_direction(grid_block)
 			if local_thrust.dot(grid.requested_movement) > 0.1:
 				tmp_active= true
-				active= true
+				active.toggle()
 
-	if not active: return
+	if not active.is_true(): return
 	var thruster_block: ThrusterBlock= grid_block.block_definition
 
 	if not thruster_block.force_offset:
@@ -42,7 +40,7 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 		grid.apply_central_force(-global_basis.z * thruster_block.thrust * delta)
 
 	if tmp_active:
-		active= false
+		active.set_false()
 
 
 func get_local_thrust_direction(grid_block: GridBlock)-> Vector3:

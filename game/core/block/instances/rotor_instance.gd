@@ -1,5 +1,5 @@
 class_name RotorInstance
-extends BlockInstance
+extends BlockInstanceOnOff
 
 @onready var joint: Generic6DOFJoint3D = $Generic6DOFJoint3D
 

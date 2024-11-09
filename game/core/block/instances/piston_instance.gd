@@ -1,5 +1,5 @@
 class_name PistonInstance
-extends BlockInstance
+extends BlockInstanceOnOff
 
 enum State { IDLE, MOVE }
 

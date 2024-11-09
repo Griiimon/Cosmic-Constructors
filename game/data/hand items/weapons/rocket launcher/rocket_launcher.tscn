@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6o33av0wcrn6"]
+
+[ext_resource type="PackedScene" uid="uid://d2xjeiv2wcady" path="res://game/data/hand items/weapons/rocket launcher/rocket_launcher_model.tscn" id="1_w3p25"]
+
+[node name="Rocket Launcher" type="Node3D"]
+
+[node name="Rocket Launcher Model" parent="." instance=ExtResource("1_w3p25")]

@@ -164,6 +164,7 @@ toggle_camera={
 3d_physics/layer_1="Player"
 3d_physics/layer_2="Grid"
 3d_physics/layer_3="Terrain"
+3d_physics/layer_4="Projectile"
 
 [physics]
 

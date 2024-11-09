@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Global="*res://game/global/global.gd"
 GameData="*res://game/global/game_data.tscn"
 DebugHud="*res://game/global/debug hud/debug_hud.tscn"
+DebugMesh="*res://game/debug/debug mesh/debug_mesh.gd"
 
 [editor_plugins]
 

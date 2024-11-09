@@ -46,8 +46,8 @@ func _input(event: InputEvent) -> void:
 		if event.pressed: 
 			if event.keycode == KEY_F1:
 				var terrain: VoxelLodTerrain= $"../Asteroid".get_child(0)
-				#var local_pos: Vector3i= terrain.to_local($"../Player".global_position)
-				var local_pos: Vector3i= $"../Player".global_position
+				var local_pos: Vector3i= terrain.to_local($"../Player".global_position)
+				#var local_pos: Vector3i= $"../Player".global_position
 				var radius: float= 5
 				VoxelUtils.pre_mine(terrain, local_pos, radius)
 				

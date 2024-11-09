@@ -10,10 +10,9 @@ static func pre_mine(terrain: VoxelLodTerrain, local_pos: Vector3i, radius: floa
 static func mined(terrain: VoxelLodTerrain, local_pos: Vector3i, radius: float)-> Dictionary:
 	var resources: Dictionary= get_resources_in_radius(terrain, local_pos, radius)
 	
-	# FIXME without the prints it crashes ???
-	print(stored_resources)
-	print(resources)
-	print("----")
+	#print(stored_resources)
+	#print(resources)
+	#print("----")
 	
 	var result: Dictionary
 	
@@ -21,6 +20,8 @@ static func mined(terrain: VoxelLodTerrain, local_pos: Vector3i, radius: float)-
 		var old_val: float= stored_resources[key]
 		var new_val: float= resources[key] if resources.has(key) else 0.0
 		if not is_equal_approx(old_val, new_val):
+			#TODO just clamp the result
+			# but still need to investigate why assert fails
 			assert(old_val > new_val)
 			result[key]= old_val - new_val
 

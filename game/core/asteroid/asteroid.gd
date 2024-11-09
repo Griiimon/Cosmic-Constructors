@@ -12,7 +12,7 @@ func _ready() -> void:
 	voxel_tool.mode = VoxelTool.MODE_TEXTURE_PAINT
 	voxel_tool.channel = VoxelBuffer.CHANNEL_SDF
 	voxel_tool.texture_index= 1
-	for i in 15:
+	for i in 35:
 		var pos:= Vector3(randf_range(-50, 50), randf_range(-50, 50), randf_range(-50, 50))
 		voxel_tool.do_sphere(pos, randf_range(3, 7))
 	

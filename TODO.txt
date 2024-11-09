@@ -1,20 +1,18 @@
-rotator block use grid_block rotation, dont assume y = up
-
-Piston
-
-asteroid ore materials
-
 wrap block instance vars into BlockPropBool, BlockPropFloat
 
 Alt fps look around while fixed
 
 grid angular dampeners
 
-delete block ( flood fill to detect if grid was split )
+remove grid if all blocks are removed
 
 fixed gatling, damage blocks + impact impulse
 
 multi blocks
+
+custom mass / center of mass calculations each time a block is added/removed
+flood fill to detect if grid was split on remove block
+
 
 FIX getting stuck in terrain when going EVA ( will intersect_shape work against terrain? because Area didnt seem to => JOLT OPT-IN )
 FIX inital grid align when sloped/diagonal initial normal

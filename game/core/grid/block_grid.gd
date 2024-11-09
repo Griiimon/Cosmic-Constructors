@@ -4,6 +4,8 @@ extends RigidBody3D
 
 var blocks: Dictionary
 
+var collision_shapes: Array[CollisionShape3D]
+
 var requested_movement: Vector3
 var requested_rotation: Vector3
 
@@ -43,6 +45,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		coll_shape.shape= BoxShape3D.new()
 		coll_shape.position= pos
 		add_child(coll_shape)
+		collision_shapes.append(coll_shape)
 
 	mass+= block.weight
 
@@ -111,6 +114,20 @@ func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
 
 	add_child(model)
 	return model
+
+
+func remove_block(block: GridBlock):
+	collision_shapes.erase(block.collision_shape)
+	block.collision_shape.queue_free()
+	#block.collision_shape.set_deferred("disabled", true)
+	blocks.erase(block.local_pos)
+	
+
+func take_damage_at_shape(damage: int, body_shape_index: int):
+	var block: GridBlock= get_block_from_global_pos(collision_shapes[body_shape_index].global_position)
+	if block.take_damage(damage):
+		remove_block(block)
+		
 
 
 # normalized

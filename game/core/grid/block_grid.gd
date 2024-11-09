@@ -45,6 +45,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		coll_shape.shape= BoxShape3D.new()
 		coll_shape.position= pos
 		add_child(coll_shape)
+		grid_block.collision_shape= coll_shape
 		collision_shapes.append(coll_shape)
 
 	mass+= block.weight
@@ -120,6 +121,7 @@ func remove_block(block: GridBlock):
 	collision_shapes.erase(block.collision_shape)
 	block.collision_shape.queue_free()
 	#block.collision_shape.set_deferred("disabled", true)
+	block.destroy()
 	blocks.erase(block.local_pos)
 	
 

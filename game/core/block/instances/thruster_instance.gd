@@ -6,6 +6,8 @@ var particle_stop_delay: Timer
 
 
 func _ready() -> void:
+	default_interaction_property= active
+
 	particle_stop_delay= Timer.new()
 	particle_stop_delay.one_shot= true
 	particle_stop_delay.wait_time= 0.2

@@ -1,5 +1,7 @@
 extends Node
 
+@export var remove_asteroid:= false
+
 @onready var game: Game= get_parent()
 
 var player: Player
@@ -7,8 +9,12 @@ var player: Player
 var collected_resources: Dictionary
 
 
+
 func _ready() -> void:
 	await game.ready
+	if remove_asteroid:
+		game.get_node("Asteroid").queue_free()
+
 	player= game.player
 	
 	var default_block= load("res://game/data/blocks/light structure/light_structure_block.tres")

@@ -25,6 +25,7 @@ script = ExtResource("1_dxwo3")
 
 [node name="Tests" type="Node" parent="."]
 script = ExtResource("1_o5dc5")
+remove_asteroid = true
 
 [node name="Debug Space Grid" parent="." instance=ExtResource("1_ek1sn")]
 visible = false

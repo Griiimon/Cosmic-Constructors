@@ -15,6 +15,7 @@ func add_grid(pos: Vector3, rot: Vector3)-> BlockGrid:
 	var grid:= BlockGrid.new()
 	grid.position= pos
 	grid.rotation= rot
+	grid.world= self
 	grids.add_child(grid)
 	return grid
 

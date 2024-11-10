@@ -38,3 +38,6 @@ NEW MECHANICS
 Laser Guns
 Player Equipment grid like factorio, with shields etc
 backpack vs bottles
+
+
+moving celestial bodies by putting each in its own world3d

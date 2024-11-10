@@ -1,3 +1,5 @@
+BlockPlacementsConditions
+
 "F" (hold) click block 
 	holding F will trigger UI overlay displaying target blocks default action
 
@@ -19,7 +21,6 @@ fixed gatling, damage blocks + impact impulse
 
 multi blocks
 
-custom mass / center of mass calculations each time a block is added/removed
 flood fill to detect if grid was split on remove block
 
 save player only in cryo pod, otherwise use default spawn points or medbay
@@ -41,3 +42,5 @@ backpack vs bottles
 
 
 moving celestial bodies by putting each in its own world3d
+
+what about block grids inertia??

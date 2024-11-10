@@ -42,6 +42,9 @@ func _ready() -> void:
 	
 	Global.game.grids.add_child(grid)
 
+	grid.update_properties()
+
+
 
 func _physics_process(delta: float) -> void:
 	pass

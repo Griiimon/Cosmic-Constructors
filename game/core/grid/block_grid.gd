@@ -13,6 +13,8 @@ var inertial_dampeners: bool= false
 
 var total_gyro_strength: float= 0
 
+var mass_indicator: Node3D
+
 
 
 func _ready() -> void:
@@ -21,12 +23,21 @@ func _ready() -> void:
 	
 	can_sleep= false
 	continuous_cd= true
+	center_of_mass_mode= CenterOfMassMode.CENTER_OF_MASS_MODE_CUSTOM
 	
 	#physics_material_override= PhysicsMaterial.new()
 	#physics_material_override.absorbent= true
 	#physics_material_override.bounce= 1
 
 	process_physics_priority= 5
+
+	var mesh_instance:= MeshInstance3D.new()
+	mesh_instance.mesh= SphereMesh.new()
+	mesh_instance.mesh.surface_set_material(0, load("res://game/core/grid/center_of_mass_indicator_material.tres"))
+	
+	mass_indicator= mesh_instance
+	add_child(mass_indicator)
+	mass_indicator.hide()
 
 
 func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO):
@@ -65,7 +76,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		grid_block.collision_shape= coll_shape
 		collision_shapes.append(coll_shape)
 
-	mass+= block.weight
+	#mass+= block.weight
 
 	grid_block.block_node= block_node
 
@@ -86,6 +97,8 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 	if block_node is BlockInstance:
 		(block_node as BlockInstance).on_placed(self, grid_block)
+
+	update_properties()
 
 	return block_node
 
@@ -155,12 +168,35 @@ func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
 # to be called only by block.destroy()
 func remove_block(block: BaseGridBlock):
 	if not (block is VirtualGridBlock):
-		mass-= block.block_definition.weight
+		#mass-= block.block_definition.weight
 		collision_shapes.erase(block.collision_shape)
 		block.collision_shape.queue_free()
 		#block.destroy(self)
 	blocks.erase(block.local_pos)
+
+	update_properties()
+
+
+func update_properties():
+	if not is_inside_tree():
+		return
+		
+	var new_mass: int= 0
+	var new_center_of_mass:= Vector3.ZERO
 	
+	
+	for grid_block: BaseGridBlock in blocks.values():
+		if grid_block is VirtualGridBlock: continue
+		var weight: int= grid_block.get_block_definition().weight
+		new_center_of_mass= lerp(new_center_of_mass, Vector3(grid_block.local_pos), weight / float(new_mass + weight)) 
+		new_mass+= weight
+	
+	# to avoid 0 mass
+	mass= max(new_mass, 1)
+	center_of_mass= new_center_of_mass
+
+	mass_indicator.position= center_of_mass
+
 
 func take_damage_at_shape(damage: int, body_shape_index: int):
 	var block: GridBlock= get_block_from_global_pos(collision_shapes[body_shape_index].global_position)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpytc7ebulm55"]
+[gd_scene load_steps=11 format=3 uid="uid://cpytc7ebulm55"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_dxwo3"]
 [ext_resource type="PackedScene" uid="uid://qr0bko2hsrbk" path="res://game/debug/space grid/debug_space_grid.tscn" id="1_ek1sn"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="2_y64to"]
 [ext_resource type="Texture2D" path="res://skybox/proc_stars.dds" id="3_qa1hi"]
 [ext_resource type="PackedScene" uid="uid://cuqhcx4p5hgca" path="res://game/core/asteroid/asteroid.tscn" id="4_vqgh0"]
+[ext_resource type="Script" path="res://game/core/world/world.gd" id="7_gmk88"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ugat3"]
 panorama = ExtResource("3_qa1hi")
@@ -34,7 +35,11 @@ size = Vector3i(10, 10, 10)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0ayl4")
 
-[node name="Player" parent="." instance=ExtResource("2_y64to")]
+[node name="World" type="Node3D" parent="."]
+script = ExtResource("7_gmk88")
+
+[node name="Player" parent="." node_paths=PackedStringArray("world") instance=ExtResource("2_y64to")]
+world = NodePath("../World")
 
 [node name="VoxelViewer" type="VoxelViewer" parent="Player"]
 view_distance = 1024

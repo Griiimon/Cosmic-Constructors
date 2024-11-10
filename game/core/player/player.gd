@@ -1,6 +1,8 @@
 class_name Player
 extends Entity
 
+@export var world: World
+
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 
 @onready var build_raycast: RayCast3D = %"Build Raycast"

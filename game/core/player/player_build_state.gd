@@ -77,10 +77,7 @@ func on_physics_process(_delta: float):
 	
 	if Input.is_action_just_pressed("build_block"):
 		if not grid:
-			grid= BlockGrid.new()
-			grid.position= ghost.position
-			grid.rotation= ghost.rotation
-			Global.game.grids.add_child(grid)
+			grid= player.world.add_grid(ghost.position, ghost.rotation)
 			
 			var query:= PhysicsShapeQueryParameters3D.new()
 			query.collision_mask= Global.TERRAIN_COLLISION_LAYER

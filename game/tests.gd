@@ -40,7 +40,7 @@ func _ready() -> void:
 
 	grid.inertial_dampeners= true
 	
-	Global.game.grids.add_child(grid)
+	Global.game.world.grids.add_child(grid)
 
 	grid.update_properties()
 

@@ -42,8 +42,20 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		coll_shapes[0].reparent(self)
 	else:
 		var coll_shape= CollisionShape3D.new()
-		coll_shape.shape= BoxShape3D.new()
+		var shape:= BoxShape3D.new()
+		shape.size= block.size
+		coll_shape.shape= shape
+
+		var grid_block_basis: Basis= grid_block.get_local_basis()
+		coll_shape.basis= grid_block_basis
 		coll_shape.position= pos
+
+		# move the collision shape center if model doesnt have a proper center block
+		if Utils.is_even(shape.size.z):
+			coll_shape.position-= grid_block_basis.z * 0.5
+		if Utils.is_even(shape.size.y):
+			coll_shape.position+= grid_block_basis.y * 0.5
+
 		add_child(coll_shape)
 		grid_block.collision_shape= coll_shape
 		collision_shapes.append(coll_shape)

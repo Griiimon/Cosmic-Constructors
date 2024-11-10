@@ -62,6 +62,12 @@ shape = SubResource("SphereShape3D_amgwl")
 target_position = Vector3(0, 0, -2.5)
 collision_mask = 2
 
+[node name="Block Interact Raycast" type="RayCast3D" parent="Head/Pivot"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -4)
+collision_mask = 2
+hit_back_faces = false
+
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Pivot"]
 spot_range = 40.0
 spot_angle = 60.0

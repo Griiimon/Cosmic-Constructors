@@ -1,6 +1,8 @@
 class_name BlockInstance
 extends Node3D
 
+var default_interaction_property: BlockProperty
+
 
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):

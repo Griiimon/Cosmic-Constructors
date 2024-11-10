@@ -10,6 +10,7 @@ extends NamedResource
 @export var texture: Texture2D
 @export var material: StandardMaterial3D
 @export var scene: PackedScene
+@export var placement_conditions: BlockPlacementConditions
 
 
 

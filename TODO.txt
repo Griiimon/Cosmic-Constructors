@@ -1,8 +1,5 @@
-ctrl click block ( with block interaction ray/shapecast ) and execute default_prop_action of that BlockInstance
-	thats active for thrusters/gyro, rotation_speed/velocity +/- for rotor/piston
-	holding ctrl will trigger UI overlay displaying target blocks default action
-
-add BlockPropFloat
+"F" (hold) click block 
+	holding F will trigger UI overlay displaying target blocks default action
 
 add hand item viewport
 	rocket launcher

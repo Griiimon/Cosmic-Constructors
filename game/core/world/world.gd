@@ -11,7 +11,7 @@ func _ready() -> void:
 	add_child(grids)
 
 
-func add_grid(pos: Vector3, rot: Vector3)-> BlockGrid:
+func add_grid(pos: Vector3, rot: Vector3= Vector3.ZERO)-> BlockGrid:
 	var grid:= BlockGrid.new()
 	grid.position= pos
 	grid.rotation= rot

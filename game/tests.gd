@@ -98,4 +98,4 @@ func _input(event: InputEvent) -> void:
 				var grid: BlockGrid= result.collider
 				var collision_point: Vector3= result.position
 				collision_point+= -player.build_raycast.global_basis.z * 0.05
-				grid.remove_block(grid.get_block_from_global_pos(collision_point))
+				grid.get_block_from_global_pos(collision_point).destroy(grid)

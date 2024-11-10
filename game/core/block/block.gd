@@ -37,3 +37,7 @@ func get_model()-> Node3D:
 
 func can_interact()-> bool:
 	return false
+
+
+func is_multi_block()-> bool:
+	return size.x > 1 or size.y > 1 or size.z > 1

@@ -24,7 +24,7 @@ func on_physics_process(_delta: float):
 			var raycast: RayCast3D= player.block_interact_raycast
 			var grid: BlockGrid= raycast.get_collider()
 			var collision_pos: Vector3= raycast.get_collision_point() - raycast.global_basis.z * 0.05
-			var grid_block: GridBlock= grid.get_block_from_global_pos(collision_pos)
+			var grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_pos)
 			if grid_block:
 				var block_instance: BlockInstance= grid_block.get_block_instance()
 				if block_instance:
@@ -43,8 +43,8 @@ func on_physics_process(_delta: float):
 			var collision_pos: Vector3= shapecast.get_collision_point(0)
 			collision_pos-= shapecast.global_basis.z * 0.01
 			
-			var grid_block: GridBlock= grid.get_block_from_global_pos(collision_pos)
+			var grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_pos)
 			if grid_block:
-				if grid_block.block_definition.can_interact():
+				if grid_block.get_block_definition().can_interact():
 					grid_block.get_block_instance().interact(grid, grid_block, player)
 					return

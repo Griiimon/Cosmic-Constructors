@@ -30,7 +30,12 @@ func _ready() -> void:
 
 
 func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO):
-	var grid_block:= GridBlock.new(block, pos, block_rotation)
+	var grid_block: BaseGridBlock
+	if block.is_multi_block():
+		grid_block= MultiGridBlock.new(block, pos, block_rotation)
+	else:
+		grid_block= GridBlock.new(block, pos, block_rotation)
+
 	blocks[pos]= grid_block
 	
 	var block_node= spawn_block(block, pos, block_rotation)
@@ -64,6 +69,21 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 	grid_block.block_node= block_node
 
+	if block.is_multi_block():
+		prints("Spawned multi block at", pos)
+		for x in block.size.x:
+			for y in block.size.y:
+				for z in block.size.z:
+					var offset:= Vector3(x, y, z)
+					if offset:
+						# FIXME this calculation seems so wrong but it works
+						# 	is it because my multi blocks are rotated to face -z by default?
+						var child_grid_block:= VirtualGridBlock.new(pos - Vector3i(grid_block.get_local_basis() * offset))
+						prints(" Spawned child at", child_grid_block.local_pos)
+						child_grid_block.parent= grid_block
+						grid_block.children.append(child_grid_block)
+						blocks[child_grid_block.local_pos]= child_grid_block
+
 	if block_node is BlockInstance:
 		(block_node as BlockInstance).on_placed(self, grid_block)
 
@@ -93,6 +113,8 @@ func _physics_process(delta: float) -> void:
 
 func tick_blocks(delta: float):
 	for block in blocks.values():
+		if block is VirtualGridBlock: continue
+		 
 		if block.block_definition.can_tick:
 			var instance: BlockInstance= block.get_block_instance()
 			assert(instance)
@@ -130,20 +152,21 @@ func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
 	return model
 
 
-func remove_block(block: GridBlock):
-	mass-= block.block_definition.weight
-	collision_shapes.erase(block.collision_shape)
-	block.collision_shape.queue_free()
-	#block.collision_shape.set_deferred("disabled", true)
-	block.destroy()
+# to be called only by block.destroy()
+func remove_block(block: BaseGridBlock):
+	if not (block is VirtualGridBlock):
+		mass-= block.block_definition.weight
+		collision_shapes.erase(block.collision_shape)
+		block.collision_shape.queue_free()
+		#block.destroy(self)
 	blocks.erase(block.local_pos)
 	
 
 func take_damage_at_shape(damage: int, body_shape_index: int):
 	var block: GridBlock= get_block_from_global_pos(collision_shapes[body_shape_index].global_position)
-	if block.take_damage(damage):
-		remove_block(block)
-		
+	#if block.take_damage(damage, self):
+		#remove_block(block)
+	block.take_damage(damage, self)
 
 
 # normalized
@@ -156,7 +179,7 @@ func request_rotation(rot_vec: Vector3):
 	requested_rotation+= rot_vec
 
 
-func get_block_from_global_pos(global_pos: Vector3)-> GridBlock:
+func get_block_from_global_pos(global_pos: Vector3)-> BaseGridBlock:
 	var grid_pos: Vector3i= get_local_grid_pos(global_pos)
 	if not blocks.has(grid_pos): return null
 	return blocks[grid_pos]

@@ -1,7 +1,7 @@
 class_name BlockInstanceOnOff
 extends BlockInstance
 
-var active:= BlockPropBool.new(false, on_set_active)
+@onready var active:= BlockPropBool.new(false, on_set_active)
 
 
 

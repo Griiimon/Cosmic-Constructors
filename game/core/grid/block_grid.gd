@@ -216,6 +216,31 @@ func request_rotation(rot_vec: Vector3):
 	requested_rotation+= rot_vec
 
 
+func serialize()-> Dictionary:
+	var data: Dictionary
+	data["id"]= world.grids.get_children().find(self)
+	data["position"]= position
+	data["rotation"]= rotation
+	data["linear_velocity"]= linear_velocity
+	data["angular_velocity"]= angular_velocity
+	
+	data["blocks"]= []
+	
+	for block: BaseGridBlock in blocks.values():
+		if block is VirtualGridBlock: continue
+		var item: Dictionary
+		var grid_block: GridBlock= block
+		var block_definition: Block= grid_block.get_block_definition()
+		item["definition"]= block_definition.get_display_name()
+		item["position"]= grid_block.local_pos
+		item["rotation"]= grid_block.rotation
+		if grid_block.hitpoints <  block_definition.max_hitpoints:
+			item["hitpoints"]= grid_block.hitpoints
+		data["blocks"].append(item)
+	
+	return data
+
+
 func get_block_from_global_pos(global_pos: Vector3)-> BaseGridBlock:
 	var grid_pos: Vector3i= get_local_grid_pos(global_pos)
 	if not blocks.has(grid_pos): return null

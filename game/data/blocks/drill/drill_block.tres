@@ -7,7 +7,9 @@
 script = ExtResource("1_aa8wn")
 size = Vector3i(1, 1, 1)
 weight = 10.0
-can_tick = false
+max_hitpoints = 10
+custom_collision = false
+can_tick = true
 can_be_built = true
 scene = ExtResource("1_cmxl2")
 name = ""

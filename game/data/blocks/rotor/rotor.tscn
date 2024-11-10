@@ -30,5 +30,4 @@ mesh = SubResource("CylinderMesh_1jtn4")
 exclude_nodes_from_collision = false
 angular_limit_y/enabled = false
 angular_motor_y/enabled = true
-angular_motor_y/target_velocity = 1.74533
 angular_motor_y/force_limit = 100000.0

@@ -10,19 +10,22 @@ enum State { IDLE, MOVE }
 
 @onready var joint: Generic6DOFJoint3D = $Generic6DOFJoint3D
 
+@onready var velocity:= BlockPropFloat.new(5.0, change_velocity)
+
 var piston_head: Node3D
 var sub_grid: BlockGrid
 
 var state: State= State.MOVE
 var segments: Array[Node3D]
 var extension: float= 0
-var velocity: float= 1.0
 
 var max_distance: float
 
 
 
 func _ready() -> void:
+	default_interaction_property= velocity
+	
 	for i in num_segments - 1:
 		var next_segment: MeshInstance3D= orig_segment.duplicate()
 		segments_node.add_child(next_segment)
@@ -58,4 +61,6 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 	for i in segments.size():
 		segments[i].position.y= lerp(0.0, float(i + 1), extension / max_distance)
 
-	joint.set_param_y(Generic6DOFJoint3D.PARAM_LINEAR_MOTOR_TARGET_VELOCITY, velocity)
+
+func change_velocity():
+	joint.set_param_y(Generic6DOFJoint3D.PARAM_LINEAR_MOTOR_TARGET_VELOCITY, velocity.get_value_f())

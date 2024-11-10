@@ -32,7 +32,7 @@ func on_physics_process(_delta: float):
 					if default_property:
 						#if Input.is_action_just_pressed("toggle_block_property"):
 						default_property.toggle()
-		return
+						return
 	
 	
 	if Input.is_action_just_pressed("interact"):

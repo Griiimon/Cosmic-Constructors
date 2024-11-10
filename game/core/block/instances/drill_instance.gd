@@ -2,14 +2,20 @@ extends BlockInstanceOnOff
 
 @export var rotation_speed: float= 5.0
 
-@onready var cooldown: Timer = $Cooldown
 @onready var terrain_shapecast: ShapeCast3D = $"Terrain ShapeCast"
 @onready var drill_head: MeshInstance3D = $"Drill Head"
+
+var cooldown: Timer
 
 
 
 func _ready() -> void:
 	default_interaction_property= active
+
+	cooldown= Timer.new()
+	cooldown.one_shot= true
+	cooldown.wait_time= 1.0
+	add_child(cooldown)
 
 
 func _process(delta: float) -> void:

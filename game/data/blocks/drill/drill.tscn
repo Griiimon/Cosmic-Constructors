@@ -73,6 +73,3 @@ mesh = SubResource("BoxMesh_qtaf8")
 shape = SubResource("SphereShape3D_8qi1u")
 target_position = Vector3(0, 0, -1)
 collision_mask = 4
-
-[node name="Cooldown" type="Timer" parent="."]
-one_shot = true

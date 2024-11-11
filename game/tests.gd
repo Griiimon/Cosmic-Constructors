@@ -17,10 +17,12 @@ func _ready() -> void:
 
 	player= game.player
 	
-	Global.game.world.load_world()
+	#Global.game.world.load_world()
 	
 	#player.action_state_machine.idle_state.equip_hand_item(load("res://game/data/hand items/tools/hand drill/hand_drill.tres"))
-	player.action_state_machine.idle_state.equip_hand_item(load("res://game/data/hand items/weapons/rocket launcher/rocket_launcher.tres"))
+	#player.action_state_machine.idle_state.equip_hand_item(load("res://game/data/hand items/weapons/rocket launcher/rocket_launcher.tres"))
+	player.world.freeze_grids(true)
+	
 	return 
 	
 	
@@ -80,6 +82,8 @@ func _input(event: InputEvent) -> void:
 					collected_resources[key]+= new_resources[key]
 				
 				DebugHud.send("Gold", collected_resources[1] if collected_resources.has(1) else 0.0)
+			elif event.keycode == KEY_F2:
+				player.world.freeze_grids(false)
 
 			else:
 				var switch_block: int= Input.get_axis("next_block", "previous_block")

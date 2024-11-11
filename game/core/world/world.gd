@@ -4,13 +4,19 @@ extends Node3D
 const SAVE_FILE_NAME= "user://world.json"
 
 var grids: Node
-
+var projectiles: Node
 
 
 func _ready() -> void:
-	grids= Node.new()
-	grids.name= "Grids"
-	add_child(grids)
+	grids= generate_sub_node("Grids")
+	projectiles= generate_sub_node("Projectiles")
+
+
+func generate_sub_node(node_name: String)-> Node:
+	var node:= Node.new()
+	node.name= node_name
+	add_child(node)
+	return node
 
 
 func add_grid(pos: Vector3, rot: Vector3= Vector3.ZERO)-> BlockGrid:
@@ -51,3 +57,7 @@ func load_world():
 		grids.add_child(grid)
 
 		grid.update_properties()
+
+
+func add_projectile(projectile: ProjectileObject):
+	projectiles.add_child(projectile)

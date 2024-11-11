@@ -218,7 +218,7 @@ func request_rotation(rot_vec: Vector3):
 
 func serialize()-> Dictionary:
 	var data: Dictionary
-	data["id"]= world.grids.get_children().find(self)
+	#data["id"]= world.grids.get_children().find(self)
 	data["position"]= position
 	data["rotation"]= rotation
 	data["linear_velocity"]= linear_velocity
@@ -239,6 +239,24 @@ func serialize()-> Dictionary:
 		data["blocks"].append(item)
 	
 	return data
+
+
+static func deserialize(data: Dictionary)-> BlockGrid:
+	var grid:= BlockGrid.new()
+	grid.position= str_to_var("Vector3" + data["position"])
+	grid.rotation= str_to_var("Vector3" + data["rotation"])
+	grid.linear_velocity= str_to_var("Vector3" + data["linear_velocity"])
+	grid.angular_velocity= str_to_var("Vector3" + data["angular_velocity"])
+	
+	for item: Dictionary in data["blocks"]:
+		var position: Vector3= str_to_var("Vector3" + item["position"])
+		var rotation: Vector3= str_to_var("Vector3" + item["rotation"])
+		grid.add_block(GameData.get_block_definition(item["definition"]), position, rotation)
+		#var block: BaseGridBlock= grid.add_block(GameData.get_block_definition(item["definition"]), position, rotation)
+		#if item.has("hitpoints"):
+			#(block as GridBlock).hitpoints= item["hitpoints"]
+
+	return grid
 
 
 func get_block_from_global_pos(global_pos: Vector3)-> BaseGridBlock:

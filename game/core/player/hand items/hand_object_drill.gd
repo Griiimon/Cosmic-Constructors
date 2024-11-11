@@ -16,12 +16,15 @@ func _ready():
 func start_using():
 	if animation_player:
 		animation_player.play("use")
+	player.drill_shapecast.enabled= true
 	drill_interval.start()
+
 
 
 func stop_using():
 	if animation_player:
 		animation_player.play("RESET")
+	player.drill_shapecast.enabled= false
 	drill_interval.stop()
 
 

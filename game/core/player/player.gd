@@ -24,6 +24,8 @@ extends Entity
 @onready var action_state_machine: PlayerActionStateMachine = $"Action State Machine"
 
 @onready var hand_item_container: Node3D = %"Hand Item Container"
+@onready var drill_shapecast: ShapeCast3D = %"Drill Shapecast"
+
 
 var hand_object: HandObject
 

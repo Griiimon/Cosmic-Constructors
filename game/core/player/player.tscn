@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cs0gfdxa0ha1n"]
+[gd_scene load_steps=18 format=3 uid="uid://cs0gfdxa0ha1n"]
 
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
 [ext_resource type="Script" path="res://game/core/player/player_movement_state_machine.gd" id="2_615c1"]
@@ -28,6 +28,8 @@ radius = 0.4
 background_color = Color(0.982343, 0.982342, 0.982342, 1)
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lanhx"]
 
 [node name="Player" type="RigidBody3D"]
 collision_mask = 7
@@ -106,6 +108,13 @@ sky_mode = 1
 [node name="Hand Item Container" type="Node3D" parent="Head/Pivot/SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.5, -1.25)
+
+[node name="Drill Shapecast" type="ShapeCast3D" parent="Head/Pivot"]
+unique_name_in_owner = true
+enabled = false
+shape = SubResource("SphereShape3D_lanhx")
+target_position = Vector3(0, 0, -2)
+collision_mask = 4
 
 [node name="Model" parent="Head" instance=ExtResource("2_qm5y7")]
 unique_name_in_owner = true

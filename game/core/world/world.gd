@@ -57,8 +57,7 @@ func load_world():
 
 		var grid_data = json.data
 
-		var grid: BlockGrid= BlockGrid.deserialize(grid_data)
-		grids.add_child(grid)
+		var grid: BlockGrid= BlockGrid.deserialize(grid_data, self)
 
 		grid.update_properties()
 

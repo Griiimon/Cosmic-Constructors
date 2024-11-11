@@ -32,6 +32,8 @@ func _ready() -> void:
 
 	process_physics_priority= 5
 
+	add_child(load("res://game/core/components/damage component/damage_component.tscn").instantiate())
+
 	init_mass_indicator()
 
 
@@ -203,10 +205,12 @@ func update_properties():
 	mass_indicator.position= center_of_mass
 
 
+func take_damage(damage: Damage):
+	take_damage_at_shape(damage.amount, damage.shape_index)
+
+
 func take_damage_at_shape(damage: int, body_shape_index: int):
 	var block: GridBlock= get_block_from_global_pos(collision_shapes[body_shape_index].global_position)
-	#if block.take_damage(damage, self):
-		#remove_block(block)
 	block.take_damage(damage, self)
 
 

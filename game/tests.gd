@@ -13,11 +13,13 @@ var collected_resources: Dictionary
 func _ready() -> void:
 	await game.ready
 	if remove_asteroid:
-		game.get_node("Asteroid").queue_free()
+		var asteroid: Node3D= game.get_node_or_null("Asteroid")
+		if asteroid:
+			asteroid.queue_free()
 
 	player= game.player
 	
-	#Global.game.world.load_world()
+	Global.game.world.load_world()
 	
 	#player.action_state_machine.idle_state.equip_hand_item(load("res://game/data/hand items/tools/hand drill/hand_drill.tres"))
 	#player.action_state_machine.idle_state.equip_hand_item(load("res://game/data/hand items/weapons/rocket launcher/rocket_launcher.tres"))
@@ -84,6 +86,8 @@ func _input(event: InputEvent) -> void:
 				DebugHud.send("Gold", collected_resources[1] if collected_resources.has(1) else 0.0)
 			elif event.keycode == KEY_F2:
 				player.world.freeze_grids(false)
+			elif event.keycode == KEY_F5:
+				player.world.save_world()
 
 			else:
 				var switch_block: int= Input.get_axis("next_block", "previous_block")

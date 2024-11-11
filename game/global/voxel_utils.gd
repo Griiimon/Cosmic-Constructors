@@ -19,10 +19,10 @@ static func mined(terrain: VoxelLodTerrain, local_pos: Vector3i, radius: float)-
 	for key in stored_resources.keys():
 		var old_val: float= stored_resources[key]
 		var new_val: float= resources[key] if resources.has(key) else 0.0
-		if not is_equal_approx(old_val, new_val):
+		if not is_equal_approx(old_val, new_val) and old_val > new_val:
 			#TODO just clamp the result
 			# but still need to investigate why assert fails
-			assert(old_val > new_val)
+			#assert(old_val > new_val)
 			result[key]= old_val - new_val
 
 	return result

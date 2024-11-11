@@ -1,17 +1,9 @@
 sub grid loading and attaching to pistons/rotor
 
-use voxel stream
-
-account for voxelterrain scaling in mining methods and asteroid generation code 
-
 BlockPlacementsConditions
 
 "F" (hold) click block 
 	holding F will trigger UI overlay displaying target blocks default action
-
-add hand item viewport
-	rocket launcher
-	hand drill
 
 make build ghost half transparent
 
@@ -22,7 +14,13 @@ grid angular dampeners
 remove grid if all blocks are removed
 flood fill to detect if grid was split on remove block
 
-fixed gatling, damage blocks + impact impulse
+fixed gatling
+
+grid area damage with flood fill to account for armor blocks on the way to the outer radius
+
+damage impact impulse
+	applies force at the impact position
+	if explosion trigger the explosion Area detection plus explosion force deferred, so game has time to potentially split grids
 
 save player only in cryo pod, otherwise use default spawn points or medbay
 
@@ -30,6 +28,7 @@ FIX getting stuck in terrain when going EVA ( will intersect_shape work against 
 FIX inital grid align when sloped/diagonal initial normal
 FIX sometimes wrong ( downwards ) momentum when strafing off grid 
 FIX shouldnt all blocks face forward by default ( piston and rotor are facing up rn )
+FIX projectile initial position from viewport pos
 
 meta tag for BlockInstance scene sub nodes that should be deleted in ghost ( or just delete anything not MeshInstance3D or plain Node3D ? )
 
@@ -47,3 +46,5 @@ science, progression unlocking and improving block properties
 basic/intermediate/advanced/expert/master sciene levels/recipes
 
 moving celestial bodies by putting each in its own world3d
+
+cars: use roguecar components, like engine blocks, steering/brake blocks etc. maybe even do aerodynamic calculations

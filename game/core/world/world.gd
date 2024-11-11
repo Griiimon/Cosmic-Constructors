@@ -1,6 +1,8 @@
 class_name World
 extends Node3D
 
+const SAVE_FILE_NAME= "user://world.json"
+
 var grids: Node
 
 
@@ -20,9 +22,32 @@ func add_grid(pos: Vector3, rot: Vector3= Vector3.ZERO)-> BlockGrid:
 	return grid
 
 
-func save():
-	var save_file: FileAccess = FileAccess.open("user://world.save", FileAccess.WRITE)
+func save_world():
+	var save_file: FileAccess = FileAccess.open(SAVE_FILE_NAME, FileAccess.WRITE)
 	for grid: BlockGrid in grids.get_children():
 		var json_string = JSON.stringify(grid.serialize())
 		save_file.store_line(json_string)
 	save_file.close()
+
+
+func load_world():
+	if not FileAccess.file_exists(SAVE_FILE_NAME):
+		return
+
+	var save_file = FileAccess.open(SAVE_FILE_NAME, FileAccess.READ)
+	while save_file.get_position() < save_file.get_length():
+		var json_string = save_file.get_line()
+
+		var json = JSON.new()
+
+		var parse_result = json.parse(json_string)
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			continue
+
+		var grid_data = json.data
+
+		var grid: BlockGrid= BlockGrid.deserialize(grid_data)
+		grids.add_child(grid)
+
+		grid.update_properties()

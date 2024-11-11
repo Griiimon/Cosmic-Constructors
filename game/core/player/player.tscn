@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cs0gfdxa0ha1n"]
+[gd_scene load_steps=17 format=3 uid="uid://cs0gfdxa0ha1n"]
 
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
 [ext_resource type="Script" path="res://game/core/player/player_movement_state_machine.gd" id="2_615c1"]
@@ -24,6 +24,11 @@ radius = 0.4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_amgwl"]
 
+[sub_resource type="Environment" id="Environment_oeacd"]
+background_color = Color(0.982343, 0.982342, 0.982342, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
 [node name="Player" type="RigidBody3D"]
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_bbcsg")
@@ -48,6 +53,7 @@ unique_name_in_owner = true
 
 [node name="First Person Camera" type="Camera3D" parent="Head/Pivot"]
 unique_name_in_owner = true
+cull_mask = 1048573
 
 [node name="Build Raycast" type="RayCast3D" parent="Head/Pivot"]
 unique_name_in_owner = true
@@ -71,6 +77,35 @@ hit_back_faces = false
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Pivot"]
 spot_range = 40.0
 spot_angle = 60.0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Head/Pivot"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Head/Pivot/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Item Camera" type="Camera3D" parent="Head/Pivot/SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+cull_mask = 1047554
+environment = SubResource("Environment_oeacd")
+fov = 40.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Head/Pivot/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -0.712455, 0.701718, 0, -0.701718, -0.712455, 0, 0, 0)
+light_cull_mask = 4294966274
+sky_mode = 1
+
+[node name="Hand Item Container" type="Node3D" parent="Head/Pivot/SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.5, -1.25)
 
 [node name="Model" parent="Head" instance=ExtResource("2_qm5y7")]
 unique_name_in_owner = true

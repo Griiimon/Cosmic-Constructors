@@ -23,6 +23,10 @@ extends Entity
 @onready var movement_state_machine: PlayerMovementStateMachine = $"Movement State Machine"
 @onready var action_state_machine: PlayerActionStateMachine = $"Action State Machine"
 
+@onready var hand_item_container: Node3D = %"Hand Item Container"
+
+var hand_object: HandObject
+
 
 
 func _ready() -> void:
@@ -54,3 +58,13 @@ func _physics_process(delta: float) -> void:
 			third_person_camera.global_position= third_person_camera_raycast.get_collision_point()
 		else:
 			third_person_camera.position= third_person_camera_raycast.target_position
+
+
+func equip_hand_item(hand_item: HandItem):
+	action_state_machine.idle_state.equip_hand_item(hand_item)
+
+
+func get_hand_item()-> HandItem:
+	if not hand_object or not is_instance_valid(hand_object) or hand_object.is_queued_for_deletion():
+		return null
+	return hand_object.item_definition

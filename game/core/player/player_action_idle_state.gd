@@ -14,6 +14,23 @@ func on_exit():
 
 
 func on_physics_process(_delta: float):
+	var hand_item: HandItem= player.get_hand_item()
+	if hand_item:
+		var hand_object: HandObject= player.hand_object
+
+		if Input.is_action_pressed("use_item_primary"):
+			if Input.is_action_just_pressed("use_item_primary"):
+				if hand_item.primary_use_continuous:
+					hand_object.start_using()
+				else:
+					hand_object.use()
+				return
+					
+		elif Input.is_action_just_released("use_item_primary"):
+			if hand_item.primary_use_continuous:
+				hand_object.stop_using()
+				return
+
 	if Input.is_action_just_pressed("build"):
 		build.emit()
 		return
@@ -48,3 +65,17 @@ func on_physics_process(_delta: float):
 				if grid_block.get_block_definition().can_interact():
 					grid_block.get_block_instance().interact(grid, grid_block, player)
 					return
+
+
+func equip_hand_item(hand_item: HandItem):
+	force_unequip_item()
+	player.hand_object= hand_item.scene.instantiate()
+	player.hand_object.item_definition= hand_item
+	player.hand_object.player= player
+	player.hand_item_container.add_child(player.hand_object)
+
+
+func force_unequip_item():
+	if player.hand_item_container.get_child_count() > 0:
+		player.hand_item_container.get_child(0).queue_free()
+		player.hand_object= null

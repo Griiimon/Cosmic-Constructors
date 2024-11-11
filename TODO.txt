@@ -1,3 +1,9 @@
+sub grid loading and attaching to pistons/rotor
+
+use voxel stream
+
+account for voxelterrain scaling in mining methods and asteroid generation code 
+
 BlockPlacementsConditions
 
 "F" (hold) click block 
@@ -9,19 +15,14 @@ add hand item viewport
 
 make build ghost half transparent
 
-save world
-
 Alt fps look around while fixed
 
 grid angular dampeners
 
 remove grid if all blocks are removed
+flood fill to detect if grid was split on remove block
 
 fixed gatling, damage blocks + impact impulse
-
-multi blocks
-
-flood fill to detect if grid was split on remove block
 
 save player only in cryo pod, otherwise use default spawn points or medbay
 
@@ -32,6 +33,8 @@ FIX shouldnt all blocks face forward by default ( piston and rotor are facing up
 
 meta tag for BlockInstance scene sub nodes that should be deleted in ghost ( or just delete anything not MeshInstance3D or plain Node3D ? )
 
+what about block grids inertia??
+
 
 NEW MECHANICS
 -----------------
@@ -40,7 +43,7 @@ Laser Guns
 Player Equipment grid like factorio, with shields etc
 backpack vs bottles
 
+science, progression unlocking and improving block properties
+basic/intermediate/advanced/expert/master sciene levels/recipes
 
 moving celestial bodies by putting each in its own world3d
-
-what about block grids inertia??

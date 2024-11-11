@@ -5,6 +5,7 @@ const SAVE_FILE_NAME= "user://world.json"
 
 var grids: Node
 var projectiles: Node
+var grid_freeze_state:= false
 
 
 func _ready() -> void:
@@ -25,6 +26,9 @@ func add_grid(pos: Vector3, rot: Vector3= Vector3.ZERO)-> BlockGrid:
 	grid.rotation= rot
 	grid.world= self
 	grids.add_child(grid)
+	
+	grid.freeze= grid_freeze_state
+	
 	return grid
 
 
@@ -61,3 +65,9 @@ func load_world():
 
 func add_projectile(projectile: ProjectileObject):
 	projectiles.add_child(projectile)
+
+
+func freeze_grids(b: bool):
+	grid_freeze_state= b
+	for grid: BlockGrid in grids.get_children():
+		grid.freeze= b

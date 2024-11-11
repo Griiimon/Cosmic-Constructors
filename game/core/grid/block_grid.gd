@@ -41,7 +41,7 @@ func _ready() -> void:
 	mass_indicator.hide()
 
 
-func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO):
+func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO)-> BaseGridBlock:
 	var grid_block: BaseGridBlock
 	if block.is_multi_block():
 		grid_block= MultiGridBlock.new(block, pos, block_rotation)
@@ -101,7 +101,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 	update_properties()
 
-	return block_node
+	return grid_block
 
 
 func _physics_process(delta: float) -> void:
@@ -251,10 +251,9 @@ static func deserialize(data: Dictionary)-> BlockGrid:
 	for item: Dictionary in data["blocks"]:
 		var position: Vector3= str_to_var("Vector3" + item["position"])
 		var rotation: Vector3= str_to_var("Vector3" + item["rotation"])
-		grid.add_block(GameData.get_block_definition(item["definition"]), position, rotation)
-		#var block: BaseGridBlock= grid.add_block(GameData.get_block_definition(item["definition"]), position, rotation)
-		#if item.has("hitpoints"):
-			#(block as GridBlock).hitpoints= item["hitpoints"]
+		var block: BaseGridBlock= grid.add_block(GameData.get_block_definition(item["definition"]), position, rotation)
+		if item.has("hitpoints"):
+			(block as GridBlock).hitpoints= item["hitpoints"]
 
 	return grid
 

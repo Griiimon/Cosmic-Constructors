@@ -19,7 +19,8 @@ func _ready() -> void:
 	
 	Global.game.world.load_world()
 	
-	player.action_state_machine.idle_state.equip_hand_item(load("res://game/data/hand items/tools/hand drill/hand_drill.tres"))
+	#player.action_state_machine.idle_state.equip_hand_item(load("res://game/data/hand items/tools/hand drill/hand_drill.tres"))
+	player.action_state_machine.idle_state.equip_hand_item(load("res://game/data/hand items/weapons/rocket launcher/rocket_launcher.tres"))
 	return 
 	
 	

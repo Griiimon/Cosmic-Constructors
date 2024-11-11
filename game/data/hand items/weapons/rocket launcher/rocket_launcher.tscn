@@ -1,7 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6o33av0wcrn6"]
+[gd_scene load_steps=3 format=3 uid="uid://b6o33av0wcrn6"]
 
+[ext_resource type="Script" path="res://game/core/player/hand items/hand_object_projectile_weapon.gd" id="1_cpss8"]
 [ext_resource type="PackedScene" uid="uid://d2xjeiv2wcady" path="res://game/data/hand items/weapons/rocket launcher/rocket_launcher_model.tscn" id="1_w3p25"]
 
-[node name="Rocket Launcher" type="Node3D"]
+[node name="Rocket Launcher" type="Node3D" node_paths=PackedStringArray("muzzle")]
+script = ExtResource("1_cpss8")
+muzzle = NodePath("Rocket Launcher Model/Muzzle")
 
 [node name="Rocket Launcher Model" parent="." instance=ExtResource("1_w3p25")]
+
+[node name="Muzzle" type="Node3D" parent="Rocket Launcher Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.00617)

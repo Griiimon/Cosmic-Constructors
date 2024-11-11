@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwo0gup2wubsi"]
+
+[ext_resource type="Script" path="res://game/core/misc/projectile_object.gd" id="1_4x220"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ml6a1"]
+top_radius = 0.04
+bottom_radius = 0.02
+height = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lpcwu"]
+top_radius = 0.02
+bottom_radius = 0.001
+height = 0.045
+
+[sub_resource type="BoxMesh" id="BoxMesh_me7bu"]
+size = Vector3(0.01, 0.1, 0.1)
+
+[node name="Rocket Projectile" type="Node3D"]
+script = ExtResource("1_4x220")
+
+[node name="Rocket Model" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Rocket Model"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_ml6a1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Rocket Model"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, -0.121297)
+mesh = SubResource("CylinderMesh_lpcwu")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Rocket Model"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0.0428012)
+mesh = SubResource("BoxMesh_me7bu")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Rocket Model"]
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0.0428012)
+mesh = SubResource("BoxMesh_me7bu")

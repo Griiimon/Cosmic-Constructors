@@ -32,6 +32,10 @@ func _ready() -> void:
 
 	process_physics_priority= 5
 
+	init_mass_indicator()
+
+
+func init_mass_indicator():
 	var mesh_instance:= MeshInstance3D.new()
 	mesh_instance.mesh= SphereMesh.new()
 	mesh_instance.mesh.surface_set_material(0, load("res://game/core/grid/center_of_mass_indicator_material.tres"))

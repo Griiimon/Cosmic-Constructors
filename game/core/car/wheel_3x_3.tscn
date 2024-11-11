@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://d3tx7ikwat0o"]
+
+[ext_resource type="Script" path="res://game/core/car/wheel.gd" id="1_rbnuk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pp3ke"]
+radius = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qyam"]
+albedo_color = Color(0.345123, 0.445221, 0.469969, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mvtls"]
+material = SubResource("StandardMaterial3D_6qyam")
+top_radius = 2.8
+bottom_radius = 2.8
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8gjt"]
+albedo_color = Color(0.455817, 0.455817, 0.455817, 1)
+metallic = 1.0
+roughness = 0.54
+
+[sub_resource type="BoxMesh" id="BoxMesh_gpys3"]
+material = SubResource("StandardMaterial3D_l8gjt")
+size = Vector3(5.345, 1.26, 0.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qf4t"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_yfd3n"]
+material = SubResource("StandardMaterial3D_3qf4t")
+inner_radius = 2.5
+outer_radius = 3.0
+
+[node name="Wheel 3x3" type="Node3D"]
+script = ExtResource("1_rbnuk")
+shape = SubResource("SphereShape3D_pp3ke")
+mask = 6
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_mvtls")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+mesh = SubResource("BoxMesh_gpys3")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("BoxMesh_gpys3")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
+mesh = SubResource("BoxMesh_gpys3")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0, 0, 0)
+mesh = SubResource("BoxMesh_gpys3")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 3.525, 0, -1, 2.15844e-16, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("TorusMesh_yfd3n")

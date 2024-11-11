@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://game/tests.gd" id="1_o5dc5"]
 [ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="2_y64to"]
 [ext_resource type="Texture2D" path="res://skybox/proc_stars.dds" id="3_qa1hi"]
-[ext_resource type="PackedScene" uid="uid://cuqhcx4p5hgca" path="res://game/core/asteroid/asteroid.tscn" id="4_vqgh0"]
+[ext_resource type="PackedScene" uid="uid://ckytpvwhk32br" path="res://game/core/asteroid/asteroid_hi_res.tscn" id="7_612g8"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="7_gmk88"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ugat3"]
@@ -44,7 +44,7 @@ world = NodePath("../World")
 [node name="VoxelViewer" type="VoxelViewer" parent="Player"]
 view_distance = 1024
 
-[node name="Asteroid" parent="." instance=ExtResource("4_vqgh0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -70)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="Asteroid" parent="." instance=ExtResource("7_612g8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -70)

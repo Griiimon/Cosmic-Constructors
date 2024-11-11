@@ -1,0 +1,68 @@
+[gd_scene load_steps=14 format=3 uid="uid://d4blx7p2hp5bc"]
+
+[ext_resource type="Script" path="res://game/tests.gd" id="1_1tetk"]
+[ext_resource type="Script" path="res://game/game.gd" id="1_6i4dd"]
+[ext_resource type="Texture2D" path="res://skybox/proc_stars.dds" id="2_ly4gl"]
+[ext_resource type="Script" path="res://game/core/world/world.gd" id="3_n8ygw"]
+[ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="4_bnqc2"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0ujoa"]
+panorama = ExtResource("2_ly4gl")
+
+[sub_resource type="Sky" id="Sky_nbk3e"]
+sky_material = SubResource("PanoramaSkyMaterial_0ujoa")
+
+[sub_resource type="Environment" id="Environment_r8d1e"]
+background_mode = 2
+sky = SubResource("Sky_nbk3e")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jk1ou"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_21sxj"]
+noise = SubResource("FastNoiseLite_jk1ou")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kyyuw"]
+albedo_texture = SubResource("NoiseTexture2D_21sxj")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wfm8q"]
+material = SubResource("StandardMaterial3D_kyyuw")
+size = Vector2(100, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s3jxp"]
+size = Vector3(100, 0.1, 100)
+
+[node name="Vehicle Test" type="Node3D"]
+script = ExtResource("1_6i4dd")
+gravity = 10.0
+
+[node name="Tests" type="Node" parent="."]
+script = ExtResource("1_1tetk")
+remove_asteroid = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_r8d1e")
+
+[node name="World" type="Node3D" parent="."]
+script = ExtResource("3_n8ygw")
+
+[node name="Player" parent="." node_paths=PackedStringArray("world") instance=ExtResource("4_bnqc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84, 0)
+gravity_scale = 0.0
+world = NodePath("../World")
+
+[node name="VoxelViewer" type="VoxelViewer" parent="Player"]
+view_distance = 1024
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_wfm8q")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_s3jxp")

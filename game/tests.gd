@@ -17,11 +17,12 @@ func _ready() -> void:
 
 	player= game.player
 	
+	Global.game.world.load_world()
+	return 
+	
+	
 	var default_block= load("res://game/data/blocks/light structure/light_structure_block.tres")
-	#var grid:= BlockGrid.new()
 	var grid: BlockGrid= Global.game.world.add_grid(Vector3(0, -3, -2))
-	#grid.position.z= -2
-	#grid.position.y= -3
 	
 	for x in 4:
 		for z in 7:
@@ -44,7 +45,7 @@ func _ready() -> void:
 
 	grid.update_properties()
 
-	Global.game.world.save()
+	Global.game.world.save_world()
 
 
 func _physics_process(delta: float) -> void:

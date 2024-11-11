@@ -79,3 +79,7 @@ func force_unequip_item():
 	if player.hand_item_container.get_child_count() > 0:
 		player.hand_item_container.get_child(0).queue_free()
 		player.hand_object= null
+
+
+func drill():
+	pass

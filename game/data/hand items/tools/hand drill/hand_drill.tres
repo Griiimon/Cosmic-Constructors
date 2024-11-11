@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="HandItem" load_steps=3 format=3 uid="uid://y0452womu354"]
+
+[ext_resource type="Script" path="res://game/core/player/hand items/hand_item.gd" id="1_c57ok"]
+[ext_resource type="PackedScene" uid="uid://cs62b6xiexrlu" path="res://game/data/hand items/tools/hand drill/hand_drill.tscn" id="1_cec0h"]
+
+[resource]
+script = ExtResource("1_c57ok")
+scene = ExtResource("1_cec0h")
+can_use = true
+primary_use_continuous = true
+secondary_use_continuous = true
+name = ""

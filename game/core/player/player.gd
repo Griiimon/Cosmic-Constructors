@@ -64,6 +64,10 @@ func equip_hand_item(hand_item: HandItem):
 	action_state_machine.idle_state.equip_hand_item(hand_item)
 
 
+func drill():
+	action_state_machine.idle_state.drill()
+
+
 func get_hand_item()-> HandItem:
 	if not hand_object or not is_instance_valid(hand_object) or hand_object.is_queued_for_deletion():
 		return null

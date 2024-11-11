@@ -18,6 +18,8 @@ func _ready() -> void:
 	player= game.player
 	
 	Global.game.world.load_world()
+	
+	player.action_state_machine.idle_state.equip_hand_item(load("res://game/data/hand items/tools/hand drill/hand_drill.tres"))
 	return 
 	
 	

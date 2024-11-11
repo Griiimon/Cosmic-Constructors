@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4veigcf3ruh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hopi2"]
+albedo_color = Color(0.814678, 0.814679, 0.814678, 1)
+metallic = 1.0
+roughness = 0.29
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0b4rr"]
+material = SubResource("StandardMaterial3D_hopi2")
+top_radius = 0.05
+bottom_radius = 0.025
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tou5y"]
+albedo_color = Color(0.424931, 0.424931, 0.424931, 1)
+metallic = 1.0
+roughness = 0.17
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3ba76"]
+material = SubResource("StandardMaterial3D_tou5y")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gcth3"]
+albedo_color = Color(0.77738, 0.408107, 0.223458, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_evt4v"]
+material = SubResource("StandardMaterial3D_gcth3")
+size = Vector3(0.32, 0.165, 0.245)
+
+[node name="Model" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, -0.6241)
+layers = 2
+mesh = SubResource("CylinderMesh_0b4rr")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.282114, -1.72745e-17)
+layers = 2
+mesh = SubResource("CylinderMesh_3ba76")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.318352, -1.94935e-17)
+layers = 2
+mesh = SubResource("CylinderMesh_3ba76")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.358309, -2.19401e-17)
+layers = 2
+mesh = SubResource("CylinderMesh_3ba76")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.399347, -2.4453e-17)
+layers = 2
+mesh = SubResource("CylinderMesh_3ba76")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.136546)
+layers = 2
+mesh = SubResource("BoxMesh_evt4v")
+skeleton = NodePath("../..")

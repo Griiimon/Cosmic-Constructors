@@ -1,7 +1,6 @@
 extends HandObject
 
 var drill_interval: Timer
-var player: Player
 
 
 func _ready():

@@ -3,6 +3,7 @@ extends Node3D
 
 var item_definition: HandItem
 var animation_player: AnimationPlayer
+var player: Player
 
 
 

@@ -165,3 +165,6 @@ func _physics_process(delta) -> void:
 		previousHit.hit_distance = abs(castTo.y)
 		previousDistance = previousHit.hit_distance
 		instantLinearVelocity = Vector3.ZERO
+
+
+	DebugHud.send("Grounded", grounded)

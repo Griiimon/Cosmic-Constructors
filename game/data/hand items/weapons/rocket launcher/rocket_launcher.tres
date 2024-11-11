@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="ProjectileWeapon" load_steps=4 format=3 uid="uid://jxoc0g7ajehb"]
 
 [ext_resource type="Script" path="res://game/core/player/hand items/projectile_weapon.gd" id="1_jglv4"]
-[ext_resource type="Resource" uid="uid://bfkthr77jd63g" path="res://game/data/projectiles/rocket/rocket.tres" id="1_s5lih"]
+[ext_resource type="Resource" uid="uid://bfkthr77jd63g" path="res://game/data/projectiles/rocket/rocket_projectile.tres" id="1_s5lih"]
 [ext_resource type="PackedScene" uid="uid://b6o33av0wcrn6" path="res://game/data/hand items/weapons/rocket launcher/rocket_launcher.tscn" id="2_rmwls"]
 
 [resource]
 script = ExtResource("1_jglv4")
 projectile = ExtResource("1_s5lih")
-muzzle_velocity = 20.0
+muzzle_velocity = 15.0
 scene = ExtResource("2_rmwls")
 can_use = true
 primary_use_continuous = false

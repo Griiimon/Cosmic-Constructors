@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d4blx7p2hp5bc"]
+[gd_scene load_steps=15 format=3 uid="uid://d4blx7p2hp5bc"]
 
 [ext_resource type="Script" path="res://game/tests.gd" id="1_1tetk"]
 [ext_resource type="Script" path="res://game/game.gd" id="1_6i4dd"]
@@ -19,9 +19,14 @@ ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
 reflected_light_source = 2
 
+[sub_resource type="Gradient" id="Gradient_0kay1"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0.443137, 0.14902, 1)
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jk1ou"]
+frequency = 0.1914
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_21sxj"]
+color_ramp = SubResource("Gradient_0kay1")
 noise = SubResource("FastNoiseLite_jk1ou")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kyyuw"]
@@ -29,10 +34,10 @@ albedo_texture = SubResource("NoiseTexture2D_21sxj")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wfm8q"]
 material = SubResource("StandardMaterial3D_kyyuw")
-size = Vector2(100, 100)
+size = Vector2(500, 500)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s3jxp"]
-size = Vector3(100, 0.1, 100)
+size = Vector3(500, 0.1, 500)
 
 [node name="Vehicle Test" type="Node3D"]
 script = ExtResource("1_6i4dd")

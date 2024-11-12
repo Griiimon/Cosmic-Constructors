@@ -130,7 +130,7 @@ func _physics_process(delta) -> void:
 			z_force.z -= suspension_force_vec.z * parent_body.global_transform.basis.y.dot(Vector3.UP)
 		
 		# final impulse force vector to be applied
-		var final_force = suspension_force_vec + x_force# + z_force
+		var final_force = suspension_force_vec + x_force + z_force
 		
 		# draw debug lines
 		#if GameState.debugMode:

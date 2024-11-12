@@ -39,6 +39,7 @@ size = Vector3(0.1, 0.1, 4)
 script = ExtResource("1_rbnuk")
 mask = 4
 x_traction = 0.01
+z_traction = 0.0
 steering_speed = 10.0
 acceleration = 1000.0
 

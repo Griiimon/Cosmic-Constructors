@@ -35,11 +35,6 @@ outer_radius = 3.0
 script = ExtResource("1_rbnuk")
 shape = SubResource("SphereShape3D_pp3ke")
 mask = 4
-castTo = Vector3(0, -3, 0)
-springMaxForce = 3000.0
-springForce = 1800.0
-Xtraction = 0.1
-Ztraction = 0.015
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)

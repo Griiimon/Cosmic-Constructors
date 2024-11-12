@@ -14,20 +14,16 @@ extends Node3D
 @export var static_slide_threshold : float = 0.005
 @export var mass_kg : float = 100.0
 
+@onready var parent_body : BlockGrid = get_parent()
+@onready var previous_distance : float = abs(cast_to.y)
 
 var instant_linear_velocity : Vector3
-
-
-@onready var parent_body : BlockGrid = get_parent()
-
-@onready var previous_distance : float = abs(cast_to.y)
-var previous_hit : Shapecast_result = Shapecast_result.new()
+var previous_hit : HitResult = HitResult.new()
 var collision_point : Vector3 = cast_to
 var grounded : bool = false
 
 
-# shape cast result storage class
-class Shapecast_result:
+class HitResult:
 	var hit_distance : float
 	var hit_position : Vector3
 	var hit_normal : Vector3
@@ -43,7 +39,7 @@ func shape_cast(origin: Vector3, offset: Vector3):
 	var query:= PhysicsRayQueryParameters3D.create(origin, origin + offset, mask)
 	var cast_result= space.intersect_ray(query)
 
-	var result : Shapecast_result = Shapecast_result.new()
+	var result : HitResult = HitResult.new()
 	
 	result.hit_distance = origin.distance_to(cast_result.position) if cast_result else cast_to.length()
 	result.hit_position = cast_result.position if cast_result else origin + offset
@@ -148,7 +144,7 @@ func _physics_process(delta) -> void:
 	else:
 		# not grounded, set prev values to fully extended suspension
 		grounded = false
-		previous_hit = Shapecast_result.new()
+		previous_hit = HitResult.new()
 		previous_hit.hit_position = global_transform.origin + cast_to
 		previous_hit.hit_distance = abs(cast_to.y)
 		previous_distance = previous_hit.hit_distance

@@ -1,18 +1,27 @@
 class_name GameUI
 extends CanvasLayer
 
-@onready var block_prop_label: Label = %"Block Prop Label"
-@onready var block_prop_label_cooldown: Timer = %"Block Prop Label Cooldown"
+@onready var temporary_info_label: Label = %"Temporary Info Label"
+@onready var temporary_info_label_cooldown: Timer = %"Temporary Info Label Cooldown"
 
 
 
 func _ready():
-	SignalManager.block_property_changed.connect(update_block_prop_label)
-	block_prop_label_cooldown.timeout.connect(func(): block_prop_label.hide())
+	SignalManager.block_property_changed.connect(on_block_property_changed)
+	SignalManager.build_block_changed.connect(on_build_block_changed)
+	temporary_info_label_cooldown.timeout.connect(func(): temporary_info_label.hide())
 
 
-func update_block_prop_label(block_prop: BlockProperty):
-	block_prop_label.text= block_prop.get_as_text()
-	block_prop_label.show()
-	block_prop_label_cooldown.stop()
-	block_prop_label_cooldown.start()
+func on_block_property_changed(prop: BlockProperty):
+	update_temporary_info_label(prop.get_as_text())
+
+
+func on_build_block_changed(block: Block):
+	update_temporary_info_label(block.get_display_name())
+
+
+func update_temporary_info_label(s: String):
+	temporary_info_label.text= s
+	temporary_info_label.show()
+	temporary_info_label_cooldown.stop()
+	temporary_info_label_cooldown.start()

@@ -17,6 +17,8 @@ extends Node3D
 @export var max_steer_angle: float= 30
 @export var steering_speed: float= 50
 
+@export var acceleration: float= 10.0
+
 @onready var parent_body : BlockGrid = get_parent()
 @onready var previous_distance : float = abs(cast_to.y)
 
@@ -26,6 +28,7 @@ var collision_point : Vector3 = cast_to
 var grounded : bool = false
 
 var steer_input: float= 0.0
+var forward_drive: float= 0.0
 
 
 class HitResult:
@@ -127,7 +130,7 @@ func _physics_process(delta) -> void:
 			z_force.z -= suspension_force_vec.z * parent_body.global_transform.basis.y.dot(Vector3.UP)
 		
 		# final impulse force vector to be applied
-		var final_force = suspension_force_vec + x_force + z_force
+		var final_force = suspension_force_vec + x_force# + z_force
 		
 		# draw debug lines
 		#if GameState.debugMode:
@@ -146,6 +149,10 @@ func _physics_process(delta) -> void:
 		# set the previous values at the very end, after they have been used
 		previous_distance = current_distance
 		previous_hit = cast_result
+
+		# apply drive force and braking
+		parent_body.apply_force(-global_basis.z * forward_drive * acceleration, global_position - parent_body.global_position)
+
 	else:
 		# not grounded, set prev values to fully extended suspension
 		grounded = false
@@ -158,10 +165,10 @@ func _physics_process(delta) -> void:
 	#DebugHud.send("Grounded", grounded)
 
 	if steer_input:
-		rotation.y= move_toward(rotation.y, sign(steer_input) * deg_to_rad(max_steer_angle), steering_speed * delta)
+		rotation.y= move_toward(rotation.y, sign(steer_input) * deg_to_rad(max_steer_angle), deg_to_rad(steering_speed) * delta)
 	else:
-		rotation.y= move_toward(rotation.y, 0.0, steering_speed * delta)
+		rotation.y= move_toward(rotation.y, 0.0, deg_to_rad(steering_speed) * delta)
 
 
 func steer(input: float):
-	steer_input= input
+	steer_input= -input

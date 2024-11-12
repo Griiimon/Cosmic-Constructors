@@ -19,6 +19,10 @@ func toggle():
 	super()
 
 
+func set_variant(val: Variant):
+	f= val
+
+
 func is_true()-> bool:
 	return not is_zero_approx(f)
 

@@ -30,6 +30,10 @@ func decrease():
 	do_callback()
 
 
+func set_variant(val: Variant):
+	pass
+
+
 func change_step_size():
 	pass
 

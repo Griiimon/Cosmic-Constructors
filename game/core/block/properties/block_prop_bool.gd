@@ -15,6 +15,10 @@ func toggle():
 	super()
 
 
+func set_variant(val: Variant):
+	b= val
+
+
 func is_true()-> bool:
 	return b
 

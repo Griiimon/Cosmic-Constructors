@@ -1,15 +1,8 @@
+nice skybox
+
+wheel rotation and suspension travel
+
 sub grid loading and attaching to pistons/rotor
-
-BlockPlacementsConditions
-
-"F" (hold) click block 
-	holding F will trigger UI overlay displaying target blocks default action
-
-make build ghost half transparent
-
-Alt fps look around while fixed
-
-grid angular dampeners
 
 remove grid if all blocks are removed
 flood fill to detect if grid was split on remove block
@@ -21,6 +14,17 @@ grid area damage with flood fill to account for armor blocks on the way to the o
 damage impact impulse
 	applies force at the impact position
 	if explosion trigger the explosion Area detection plus explosion force deferred, so game has time to potentially split grids
+
+BlockPlacementsConditions
+
+"F" (hold) click block 
+	holding F will trigger UI overlay displaying target blocks default action
+
+build ghost half transparent shader + texture only solution
+
+Alt fps look around while fixed
+
+grid angular dampeners
 
 save player only in cryo pod, otherwise use default spawn points or medbay
 

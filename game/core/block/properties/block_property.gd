@@ -36,4 +36,7 @@ func change_step_size():
 
 func is_true()-> bool:
 	return false
-	
+
+
+func get_as_text()-> String:
+	return ""

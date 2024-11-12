@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn7c8npnm1ukd"]
+
+[ext_resource type="Script" path="res://game/ui/game_ui.gd" id="1_2qjqn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ey7n7"]
+font_size = 36
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_2qjqn")
+
+[node name="Block Prop Label" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+offset_right = 40.0
+offset_bottom = 23.0
+grow_horizontal = 2
+label_settings = SubResource("LabelSettings_ey7n7")
+horizontal_alignment = 1
+
+[node name="Block Prop Label Cooldown" type="Timer" parent="Block Prop Label"]
+unique_name_in_owner = true
+wait_time = 1.5
+one_shot = true

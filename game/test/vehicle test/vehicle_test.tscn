@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://d4blx7p2hp5bc"]
+[gd_scene load_steps=16 format=3 uid="uid://d4blx7p2hp5bc"]
 
 [ext_resource type="Script" path="res://game/tests.gd" id="1_1tetk"]
 [ext_resource type="Script" path="res://game/game.gd" id="1_6i4dd"]
 [ext_resource type="Texture2D" path="res://skybox/proc_stars.dds" id="2_ly4gl"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="3_n8ygw"]
 [ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="4_bnqc2"]
+[ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="6_jsteb"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0ujoa"]
 panorama = ExtResource("2_ly4gl")
@@ -62,6 +63,8 @@ world = NodePath("../World")
 view_distance = 1024
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="UI" parent="." instance=ExtResource("6_jsteb")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_wfm8q")

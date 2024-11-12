@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cpytc7ebulm55"]
+[gd_scene load_steps=12 format=3 uid="uid://cpytc7ebulm55"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_dxwo3"]
 [ext_resource type="PackedScene" uid="uid://qr0bko2hsrbk" path="res://game/debug/space grid/debug_space_grid.tscn" id="1_ek1sn"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" path="res://skybox/proc_stars.dds" id="3_qa1hi"]
 [ext_resource type="PackedScene" uid="uid://ckytpvwhk32br" path="res://game/core/asteroid/asteroid_hi_res.tscn" id="7_612g8"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="7_gmk88"]
+[ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="8_hutpu"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ugat3"]
 panorama = ExtResource("3_qa1hi")
@@ -48,3 +49,5 @@ view_distance = 1024
 
 [node name="Asteroid" parent="." instance=ExtResource("7_612g8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -70)
+
+[node name="UI" parent="." instance=ExtResource("8_hutpu")]

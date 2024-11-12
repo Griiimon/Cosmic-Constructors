@@ -1,7 +1,13 @@
 extends BlockInstance
 
+var can_steer:= BlockPropBool.new(true)
+
 var wheel: Wheel
 
+
+
+func _ready() -> void:
+	default_interaction_property= can_steer
 
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
@@ -12,7 +18,8 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 
 func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 	if wheel:
-		wheel.steer(grid.requested_movement.x)
+		if can_steer.is_true():
+			wheel.steer(grid.requested_movement.x)
 		wheel.forward_drive= -grid.requested_movement.z
 
 

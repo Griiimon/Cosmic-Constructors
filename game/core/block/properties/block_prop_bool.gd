@@ -27,3 +27,7 @@ func set_true():
 func set_false():
 	if b:
 		toggle()
+
+
+func get_as_text()-> String:
+	return "On" if b else "Off"

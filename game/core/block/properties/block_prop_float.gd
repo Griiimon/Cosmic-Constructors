@@ -21,3 +21,7 @@ func toggle():
 
 func is_true()-> bool:
 	return not is_zero_approx(f)
+
+
+func get_as_text()-> String:
+	return "%.3f" % f

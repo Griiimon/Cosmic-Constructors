@@ -244,6 +244,13 @@ func serialize()-> Dictionary:
 		item["rotation"]= grid_block.rotation
 		if grid_block.hitpoints <  block_definition.max_hitpoints:
 			item["hitpoints"]= grid_block.hitpoints
+		
+		var block_instance: BlockInstance= grid_block.get_block_instance()
+		if block_instance:
+			var block_data: Dictionary= block_instance.serialize()
+			if block_data:
+				item["data"]= block_data
+		
 		data["blocks"].append(item)
 	
 	return data
@@ -263,7 +270,9 @@ static func deserialize(data: Dictionary, world: World)-> BlockGrid:
 		var block: BaseGridBlock= grid.add_block(GameData.get_block_definition(item["definition"]), position, rotation)
 		if item.has("hitpoints"):
 			(block as GridBlock).hitpoints= item["hitpoints"]
-
+		if item.has("data"):
+			block.get_block_instance().deserialize(item["data"])
+		
 	return grid
 
 

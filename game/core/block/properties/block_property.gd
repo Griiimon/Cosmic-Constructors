@@ -4,7 +4,8 @@ var callback: Callable
 
 
 func _init(_callback= null) -> void:
-	callback= _callback
+	if _callback:
+		callback= _callback
 	do_callback.call_deferred()
 
 

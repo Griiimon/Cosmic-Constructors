@@ -10,7 +10,8 @@ extends Node3D
 @export var stiffness : float = 0.85
 @export var damping : float = 0.05
 @export var x_traction : float = 0.1
-@export var z_traction : float = 0.15
+#@export var z_traction : float = 0.15
+var z_traction : float = 0.0
 @export var static_slide_threshold : float = 0.005
 @export var mass_kg : float = 100.0
 
@@ -18,6 +19,7 @@ extends Node3D
 @export var steering_speed: float= 50
 
 @export var acceleration: float= 10.0
+@export var max_brake_coef: float= 100.0
 
 @onready var parent_body : BlockGrid = get_parent()
 @onready var previous_distance : float = abs(cast_to.y)
@@ -116,6 +118,8 @@ func _physics_process(delta) -> void:
 		# TODO check if translated correctly
 		var local_velocity : Vector3 = (instant_linear_velocity - cast_result.hit_point_velocity) * global_transform.basis
 		
+		#DebugHud.send("Local vel", local_velocity)
+		
 		# axis deceleration forces based on this drive elements mass and current acceleration
 		var x_accel : float = (-local_velocity.x * x_traction) / delta
 		var z_accel : float = (-local_velocity.z * z_traction) / delta
@@ -139,7 +143,7 @@ func _physics_process(delta) -> void:
 			#DrawLine3D.DrawRay(get_collision_point(),z_force/GameState.debugRayScaleFac,Color(0,0,255))
 			
 		# apply forces relative to parent body
-		DebugHud.send("Suspension force", final_force)
+		#DebugHud.send("Suspension force", final_force)
 		parent_body.apply_force(final_force, collision_point - parent_body.global_transform.origin)
 		
 		# apply forces to body affected by this drive element (action = reaction)
@@ -172,3 +176,7 @@ func _physics_process(delta) -> void:
 
 func steer(input: float):
 	steer_input= -input
+
+
+func brake(brake_force: float):
+	z_traction= max(0, brake_force * max_brake_coef)

@@ -39,9 +39,9 @@ size = Vector3(0.1, 0.1, 4)
 script = ExtResource("1_rbnuk")
 mask = 4
 x_traction = 0.01
-z_traction = 0.0
 steering_speed = 10.0
 acceleration = 1000.0
+max_brake_coef = 0.003
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)

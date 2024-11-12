@@ -1,9 +1,11 @@
 class_name BlockProperty
 
 var callback: Callable
+var display_name: String
 
 
-func _init(_callback= null) -> void:
+func _init(_name: String, _callback= null) -> void:
+	display_name= _name
 	if _callback:
 		callback= _callback
 	do_callback.call_deferred()
@@ -43,4 +45,4 @@ func is_true()-> bool:
 
 
 func get_as_text()-> String:
-	return ""
+	return display_name + ": "

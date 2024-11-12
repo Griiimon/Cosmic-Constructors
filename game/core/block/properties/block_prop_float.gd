@@ -5,8 +5,8 @@ var f: float= 0.0
 
 
 
-func _init(_f: float= 0.0, _callback= null):
-	super(_callback)
+func _init(_name: String, _f: float= 0.0, _callback= null):
+	super(_name, _callback)
 	f= _f
 
 
@@ -28,4 +28,4 @@ func is_true()-> bool:
 
 
 func get_as_text()-> String:
-	return "%.3f" % f
+	return super() + ("%.3f" % f)

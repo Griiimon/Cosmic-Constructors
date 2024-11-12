@@ -5,8 +5,8 @@ var b: bool= false
 
 
 
-func _init(_b: bool= false, _callback= null):
-	super(_callback)
+func _init(_name: String, _b: bool= false, _callback= null):
+	super(_name, _callback)
 	b= _b
 
 
@@ -34,4 +34,4 @@ func set_false():
 
 
 func get_as_text()-> String:
-	return "On" if b else "Off"
+	return super() + ("On" if b else "Off")

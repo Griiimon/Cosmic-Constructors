@@ -10,7 +10,7 @@ enum State { IDLE, MOVE }
 
 @onready var joint: Generic6DOFJoint3D = $Generic6DOFJoint3D
 
-@onready var velocity:= BlockPropFloat.new(5.0, change_velocity)
+@onready var velocity:= BlockPropFloat.new("Velocity", 5.0, change_velocity)
 
 var piston_head: Node3D
 var sub_grid: BlockGrid

@@ -1,6 +1,6 @@
 extends BlockInstance
 
-var can_steer:= BlockPropBool.new(true)
+var can_steer:= BlockPropBool.new("Steering", true)
 
 var wheel: Wheel
 

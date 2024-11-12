@@ -3,7 +3,7 @@ extends BlockInstanceOnOff
 
 @onready var joint: Generic6DOFJoint3D = $Generic6DOFJoint3D
 
-@onready var rotation_speed:= BlockPropFloat.new(1.0, change_speed)
+@onready var rotation_speed:= BlockPropFloat.new("Rotation Speed", 1.0, change_speed)
 
 var sub_grid: BlockGrid
 

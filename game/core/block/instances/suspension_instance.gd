@@ -11,7 +11,8 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 
 
 func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
-	pass
+	if wheel:
+		wheel.steer(Input.get_axis("strafe_right", "strafe_left"))
 
 
 func on_destroy():

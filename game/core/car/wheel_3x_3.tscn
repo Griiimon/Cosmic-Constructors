@@ -1,9 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3tx7ikwat0o"]
+[gd_scene load_steps=8 format=3 uid="uid://d3tx7ikwat0o"]
 
 [ext_resource type="Script" path="res://game/core/car/wheel.gd" id="1_rbnuk"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_pp3ke"]
-radius = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qyam"]
 albedo_color = Color(0.345123, 0.445221, 0.469969, 1)
@@ -33,8 +30,8 @@ outer_radius = 3.0
 
 [node name="Wheel 3x3" type="Node3D"]
 script = ExtResource("1_rbnuk")
-shape = SubResource("SphereShape3D_pp3ke")
 mask = 4
+steering_speed = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)

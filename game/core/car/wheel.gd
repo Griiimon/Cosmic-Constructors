@@ -1,7 +1,7 @@
 class_name Wheel
 extends Node3D
 
-@export var shape : Shape3D
+@export_category("Suspension")
 @export_flags_3d_physics var mask : int = 1
 @export var cast_to : Vector3 = Vector3(0,-3,0)
 
@@ -14,6 +14,9 @@ extends Node3D
 @export var static_slide_threshold : float = 0.005
 @export var mass_kg : float = 100.0
 
+@export var max_steer_angle: float= 30
+@export var steering_speed: float= 50
+
 @onready var parent_body : BlockGrid = get_parent()
 @onready var previous_distance : float = abs(cast_to.y)
 
@@ -21,6 +24,8 @@ var instant_linear_velocity : Vector3
 var previous_hit : HitResult = HitResult.new()
 var collision_point : Vector3 = cast_to
 var grounded : bool = false
+
+var steer_input: float= 0.0
 
 
 class HitResult:
@@ -151,3 +156,12 @@ func _physics_process(delta) -> void:
 		instant_linear_velocity = Vector3.ZERO
 
 	#DebugHud.send("Grounded", grounded)
+
+	if steer_input:
+		rotation.y= move_toward(rotation.y, sign(steer_input) * deg_to_rad(max_steer_angle), steering_speed * delta)
+	else:
+		rotation.y= move_toward(rotation.y, 0.0, steering_speed * delta)
+
+
+func steer(input: float):
+	steer_input= input

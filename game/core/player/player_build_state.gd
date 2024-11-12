@@ -38,6 +38,19 @@ func init_ghost():
 	for child in ghost.find_children("*"):
 		if child is not MeshInstance3D:
 			child.queue_free()
+		else:
+			# TODO use additional shader pass instead !?
+			# the  problem is that textured blocks and low-poly compositions need separate approach
+			pass
+			
+			# transparent ghost attempt
+			#var mesh_instance: MeshInstance3D= child
+			#var material: StandardMaterial3D= mesh_instance.mesh.surface_get_material(0)
+			#if not material:
+				#material= StandardMaterial3D.new()
+				#mesh_instance.mesh.surface_set_material(0, material)
+			#material.transparency= BaseMaterial3D.TRANSPARENCY_ALPHA
+			#material.albedo_color.a= 0.8
 
 	ghost.hide()
 

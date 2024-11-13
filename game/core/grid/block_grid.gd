@@ -16,6 +16,8 @@ var total_gyro_strength: float= 0
 
 var mass_indicator: Node3D
 
+var requires_integrity_check:= false
+
 
 
 func _ready() -> void:
@@ -130,6 +132,9 @@ func _physics_process(delta: float) -> void:
 	requested_movement= Vector3.ZERO
 	requested_rotation= Vector3.ZERO
 
+	if requires_integrity_check:
+		run_integrity_check()
+
 
 func tick_blocks(delta: float):
 	for block in blocks.values():
@@ -181,7 +186,21 @@ func remove_block(block: BaseGridBlock):
 		#block.destroy(self)
 	blocks.erase(block.local_pos)
 
-	update_properties()
+	requires_integrity_check= true
+	#update_properties()
+
+
+func run_integrity_check():
+	requires_integrity_check= false
+	
+	if blocks.is_empty(): 
+		queue_free()
+		return
+	
+	var ff_blocks: Array[Vector3i]= flood_fill((blocks.values()[0] as GridBlock).local_pos)
+
+	if ff_blocks.size() < blocks.size():
+		breakpoint
 
 
 func update_properties():
@@ -222,6 +241,30 @@ func request_movement(move_vec: Vector3):
 # not normalized
 func request_rotation(rot_vec: Vector3):
 	requested_rotation+= rot_vec
+
+
+func flood_fill(origin: Vector3i)-> Array[Vector3i]:
+	var result_list: Array[Vector3i]
+	var unprocessed_list: Array[Vector3i]
+	
+	result_list.append(origin)
+	unprocessed_list.append(origin)
+	
+	while true:
+		if unprocessed_list.is_empty(): break
+		
+		var current_pos: Vector3i= unprocessed_list[0]
+		var neighbors: Array[Vector3i]= get_block_neighbors(current_pos)
+		
+		for neighbor in neighbors:
+			if not neighbor in result_list:
+				result_list.append(neighbor)
+				if not neighbor in unprocessed_list:
+					unprocessed_list.append(neighbor)
+		
+		unprocessed_list.remove_at(0)
+
+	return result_list
 
 
 func serialize()-> Dictionary:
@@ -274,6 +317,20 @@ static func deserialize(data: Dictionary, world: World)-> BlockGrid:
 			block.get_block_instance().deserialize(item["data"])
 		
 	return grid
+
+
+func get_block_neighbors(pos: Vector3i)-> Array[Vector3i]:
+	var result: Array[Vector3i]
+	
+	for x in range(-1, 2):
+		for y in range(-1, 2):
+			for z in range(-1, 2):
+				if [x, y, z].count(0) == 2:
+					var neighbor_pos: Vector3i= pos + Vector3i(x, y, z)
+					if blocks.has(neighbor_pos):
+						result.append(neighbor_pos)
+	
+	return result
 
 
 func get_block_from_global_pos(global_pos: Vector3)-> BaseGridBlock:

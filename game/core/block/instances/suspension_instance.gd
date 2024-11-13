@@ -1,5 +1,7 @@
 extends BlockInstance
 
+@export var wheel_scene: PackedScene
+
 var can_steer:= BlockPropBool.new("Steering", true)
 
 var wheel: Wheel
@@ -11,7 +13,7 @@ func _ready() -> void:
 
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
-	wheel= load("res://game/core/car/wheel_3x_3.tscn").instantiate()
+	wheel= wheel_scene.instantiate()
 	wheel.position= position + basis.x
 	grid.add_child(wheel)
 

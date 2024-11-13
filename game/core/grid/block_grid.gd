@@ -223,6 +223,8 @@ func split(split_blocks: Array[Vector3i]):
 				proper_grid_block.get_block_instance().on_update()
 
 		grid_block.collision_shape.reparent(new_grid)
+		collision_shapes.erase(grid_block.collision_shape)
+		new_grid.collision_shapes.append(grid_block.collision_shape)
 
 		blocks.erase(block_pos)
 		

@@ -60,13 +60,15 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 	
 	var block_node= spawn_block(block, pos, block_rotation)
 	
+	var coll_shape= CollisionShape3D.new()
+
 	if block.custom_collision:
 		var coll_shapes: Array[CollisionShape3D]
 		coll_shapes.assign(block_node.find_children("*", "CollisionShape3D"))
 		assert(coll_shapes.size() == 1)
 		coll_shapes[0].reparent(self)
+		coll_shape= coll_shapes[0]
 	else:
-		var coll_shape= CollisionShape3D.new()
 		var shape:= BoxShape3D.new()
 		shape.size= block.size
 		coll_shape.shape= shape
@@ -82,8 +84,9 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 			coll_shape.position+= grid_block_basis.y * 0.5
 
 		add_child(coll_shape)
-		grid_block.collision_shape= coll_shape
 		collision_shapes.append(coll_shape)
+
+	grid_block.collision_shape= coll_shape
 
 	#mass+= block.weight
 

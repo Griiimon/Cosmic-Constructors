@@ -200,7 +200,22 @@ func run_integrity_check():
 	var ff_blocks: Array[Vector3i]= flood_fill((blocks.values()[0] as GridBlock).local_pos)
 
 	if ff_blocks.size() < blocks.size():
-		breakpoint
+		split(ff_blocks)
+
+	update_properties()
+
+
+func split(split_blocks: Array[Vector3i]):
+	var new_grid: BlockGrid= world.add_grid(position, rotation)
+	
+	for block_pos in split_blocks:
+		var grid_block: GridBlock= blocks[block_pos]
+		new_grid.blocks[block_pos]= grid_block
+		blocks.erase(block_pos)
+		
+		grid_block.collision_shape.reparent(new_grid)
+
+	new_grid.update_properties()
 
 
 func update_properties():

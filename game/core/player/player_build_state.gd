@@ -39,16 +39,19 @@ func init_ghost():
 		if child is not MeshInstance3D:
 			child.queue_free()
 		else:
-			# TODO use additional shader pass instead !?
-			# the  problem is that textured blocks and low-poly compositions need separate approach
-			pass
+			var mesh_instance: MeshInstance3D= child
+			var old_material: StandardMaterial3D= mesh_instance.mesh.surface_get_material(0)
+			var new_material: StandardMaterial3D
+			if not old_material:
+				new_material= StandardMaterial3D.new()
+			else:
+				new_material= old_material.duplicate()
+				new_material.albedo_color= Color.WHITE
+				new_material.albedo_texture= null
+				
+			mesh_instance.mesh= mesh_instance.mesh.duplicate()
+			mesh_instance.mesh.surface_set_material(0, new_material)
 			
-			# transparent ghost attempt
-			#var mesh_instance: MeshInstance3D= child
-			#var material: StandardMaterial3D= mesh_instance.mesh.surface_get_material(0)
-			#if not material:
-				#material= StandardMaterial3D.new()
-				#mesh_instance.mesh.surface_set_material(0, material)
 			#material.transparency= BaseMaterial3D.TRANSPARENCY_ALPHA
 			#material.albedo_color.a= 0.8
 

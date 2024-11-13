@@ -217,7 +217,10 @@ func split(split_blocks: Array[Vector3i]):
 		new_grid.blocks[block_pos]= grid_block
 
 		if not grid_block is VirtualGridBlock:
-			(grid_block as GridBlock).block_node.reparent(new_grid)
+			var proper_grid_block: GridBlock= grid_block
+			proper_grid_block.block_node.reparent(new_grid)
+			if proper_grid_block.get_block_instance():
+				proper_grid_block.get_block_instance().on_update()
 
 		grid_block.collision_shape.reparent(new_grid)
 

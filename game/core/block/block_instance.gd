@@ -13,6 +13,10 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 	pass
 
 
+func on_update():
+	pass
+
+
 func on_destroy():
 	queue_free()
 

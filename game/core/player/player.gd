@@ -26,6 +26,8 @@ extends Entity
 @onready var hand_item_container: Node3D = %"Hand Item Container"
 @onready var drill_shapecast: ShapeCast3D = %"Drill Shapecast"
 
+@onready var item_camera: Camera3D = %"Item Camera"
+
 
 var hand_object: HandObject
 

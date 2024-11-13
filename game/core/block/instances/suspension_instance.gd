@@ -1,3 +1,4 @@
+class_name SuspensionInstance
 extends BlockInstance
 
 @export var wheel_scene: PackedScene
@@ -15,6 +16,7 @@ func _ready() -> void:
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	wheel= wheel_scene.instantiate()
 	wheel.position= position + basis.x
+	wheel.suspension= self
 	grid.add_child(wheel)
 
 

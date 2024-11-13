@@ -204,6 +204,7 @@ func run_integrity_check():
 
 	if ff_blocks.size() < blocks.size():
 		split(ff_blocks)
+		run_integrity_check()
 
 	update_properties()
 

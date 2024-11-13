@@ -1,11 +1,13 @@
+splitting car doesnt work
+
+when splitting static grid recalculate for each part if still/newly static
+	run ground check for each block, or store "anchored" state in GridBlock
+
 nice skybox
 
 wheel rotation and suspension travel
 
 sub grid loading and attaching to pistons/rotor
-
-remove grid if all blocks are removed
-flood fill to detect if grid was split on remove block
 
 fixed gatling
 
@@ -20,7 +22,8 @@ BlockPlacementsConditions
 "F" (hold) click block 
 	holding F will trigger UI overlay displaying target blocks default action
 
-build ghost half transparent shader + texture only solution
+build ghost: just make all materials white, no transparency and remove any texture 
+	( half transparent shader + texture only solution )
 
 Alt fps look around while fixed
 

@@ -1,3 +1,5 @@
+add terrain class to nodes with get_gravity_vector()
+
 splitting car doesnt work
 
 when splitting static grid recalculate for each part if still/newly static

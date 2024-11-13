@@ -21,7 +21,6 @@ var z_traction : float = 0.0
 @export var acceleration: float= 10.0
 @export var max_brake_coef: float= 100.0
 
-@onready var parent_body : BlockGrid = get_parent()
 @onready var previous_distance : float = abs(cast_to.y)
 
 var instant_linear_velocity : Vector3
@@ -31,6 +30,8 @@ var grounded : bool = false
 
 var steer_input: float= 0.0
 var forward_drive: float= 0.0
+
+var suspension: SuspensionInstance
 
 
 class HitResult:
@@ -83,7 +84,7 @@ func apply_brake(amount : float = 0.0) -> void:
 # function for applying drive force to parent body (if grounded)
 func apply_force(force : Vector3) -> void:
 	if grounded:
-		parent_body.add_force(force, collision_point - parent_body.global_transform.origin)
+		get_grid().add_force(force, collision_point - get_grid().global_transform.origin)
 
 
 func _physics_process(delta) -> void:
@@ -130,8 +131,8 @@ func _physics_process(delta) -> void:
 		var v_limit : float = instant_linear_velocity.length_squared() * delta
 		if v_limit < static_slide_threshold:
 #			suspension_force_vec = Vector3.UP * suspension_force
-			x_force.x -= suspension_force_vec.x * parent_body.global_transform.basis.y.dot(Vector3.UP)
-			z_force.z -= suspension_force_vec.z * parent_body.global_transform.basis.y.dot(Vector3.UP)
+			x_force.x -= suspension_force_vec.x * get_grid().global_transform.basis.y.dot(Vector3.UP)
+			z_force.z -= suspension_force_vec.z * get_grid().global_transform.basis.y.dot(Vector3.UP)
 		
 		# final impulse force vector to be applied
 		var final_force = suspension_force_vec + x_force + z_force
@@ -144,7 +145,7 @@ func _physics_process(delta) -> void:
 			
 		# apply forces relative to parent body
 		#DebugHud.send("Suspension force", final_force)
-		parent_body.apply_force(final_force, collision_point - parent_body.global_transform.origin)
+		get_grid().apply_force(final_force, collision_point - get_grid().global_transform.origin)
 		
 		# apply forces to body affected by this drive element (action = reaction)
 		if cast_result.hit_body && cast_result.hit_body is RigidBody3D:
@@ -155,7 +156,7 @@ func _physics_process(delta) -> void:
 		previous_hit = cast_result
 
 		# apply drive force and braking
-		parent_body.apply_force(-global_basis.z * forward_drive * acceleration, global_position - parent_body.global_position)
+		get_grid().apply_force(-global_basis.z * forward_drive * acceleration, global_position - get_grid().global_position)
 
 	else:
 		# not grounded, set prev values to fully extended suspension
@@ -180,3 +181,7 @@ func steer(input: float):
 
 func brake(brake_force: float):
 	z_traction= max(0, brake_force * max_brake_coef)
+
+
+func get_grid()-> BlockGrid:
+	return suspension.get_parent()

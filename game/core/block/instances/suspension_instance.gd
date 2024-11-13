@@ -47,3 +47,8 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 func on_destroy():
 	wheel.queue_free()
 	queue_free()
+
+
+func on_update():
+	if get_parent() != wheel.get_parent():
+		wheel.reparent(get_parent())

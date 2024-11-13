@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Cosmic Constructors"
-run/main_scene="res://game/game.tscn"
+run/main_scene="res://game/test/vehicle test/vehicle_test.tscn"
 config/features=PackedStringArray("4.3", "Double Precision", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -21,6 +21,7 @@ Global="*res://game/global/global.gd"
 GameData="*res://game/global/game_data.tscn"
 DebugHud="*res://game/global/debug hud/debug_hud.tscn"
 DebugMesh="*res://game/debug/debug mesh/debug_mesh.gd"
+SignalManager="*res://game/global/signal_manager.gd"
 
 [editor_plugins]
 

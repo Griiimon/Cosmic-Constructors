@@ -212,11 +212,16 @@ func split(split_blocks: Array[Vector3i]):
 	var new_grid: BlockGrid= world.add_grid(position, rotation)
 	
 	for block_pos in split_blocks:
-		var grid_block: GridBlock= blocks[block_pos]
+		var grid_block: BaseGridBlock= blocks[block_pos]
 		new_grid.blocks[block_pos]= grid_block
+
+		if not grid_block is VirtualGridBlock:
+			(grid_block as GridBlock).block_node.reparent(new_grid)
+
+		grid_block.collision_shape.reparent(new_grid)
+
 		blocks.erase(block_pos)
 		
-		grid_block.collision_shape.reparent(new_grid)
 
 	new_grid.update_properties()
 

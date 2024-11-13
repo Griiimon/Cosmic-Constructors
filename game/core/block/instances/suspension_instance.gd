@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	wheel= load("res://game/core/car/wheel_3x_3.tscn").instantiate()
-	wheel.position= position + global_basis.x
+	wheel.position= position + basis.x
 	grid.add_child(wheel)
 
 

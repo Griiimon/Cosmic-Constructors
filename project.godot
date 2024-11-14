@@ -22,6 +22,7 @@ GameData="*res://game/global/game_data.tscn"
 DebugHud="*res://game/global/debug hud/debug_hud.tscn"
 DebugMesh="*res://game/debug/debug mesh/debug_mesh.gd"
 SignalManager="*res://game/global/signal_manager.gd"
+RaycastHelper="*res://game/global/raycast helper/raycast_helper.tscn"
 
 [editor_plugins]
 

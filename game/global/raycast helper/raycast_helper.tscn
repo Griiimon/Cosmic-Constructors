@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd6s0krskiliy"]
+
+[ext_resource type="Script" path="res://game/global/raycast helper/raycast_helper.gd" id="1_63com"]
+
+[node name="Raycast Helper" type="RayCast3D"]
+script = ExtResource("1_63com")

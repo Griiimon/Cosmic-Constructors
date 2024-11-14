@@ -9,9 +9,9 @@ func _init(_local_pos: Vector3i):
 
 
 # returns true if destroyed
-func take_damage(damage: int, grid: BlockGrid)-> bool:
+func take_damage(damage: int, grid: BlockGrid)-> int:
 	assert(false, "Abstract class")
-	return false
+	return 0
 
 
 func destroy(grid: BlockGrid):

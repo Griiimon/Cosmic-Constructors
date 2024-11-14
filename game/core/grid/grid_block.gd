@@ -16,13 +16,13 @@ func _init(_block: Block, _local_pos: Vector3i, _rotation: Vector3i= Vector3i.ZE
 	hitpoints= block_definition.max_hitpoints
 
 
-# return true if destroyed
-func take_damage(damage: int, grid: BlockGrid)-> bool:
+# returns overflow damage
+func take_damage(damage: int, grid: BlockGrid)-> int:
 	hitpoints-= damage
 	if hitpoints <= 0:
 		destroy(grid)
-		return true
-	return false
+		return abs(hitpoints)
+	return 0
 
 
 func destroy(grid: BlockGrid):

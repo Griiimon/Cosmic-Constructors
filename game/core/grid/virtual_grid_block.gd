@@ -5,7 +5,7 @@ var parent: MultiGridBlock
 
 
 
-func take_damage(damage: int, grid: BlockGrid)-> bool:
+func take_damage(damage: int, grid: BlockGrid)-> int:
 	return parent.take_damage(damage, grid)
 	
 

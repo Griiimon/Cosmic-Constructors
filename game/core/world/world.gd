@@ -64,22 +64,25 @@ func damage_object(obj: Node3D, damage: Damage):
 
 	for coll_shape in collision_shapes:
 		var result: RaycastHelper.PierceResult= RaycastHelper.pierce(coll_shape.global_position, damage.position)
-		assert(result.items[-1].object == obj)
-		result.items.reverse()
-		
-		var total_damage: int= damage.amount
-		
-		for pierce_item in result.items:
-			var collider: Node3D= pierce_item.object
-			if collider.is_in_group(DamageComponent.GROUP_NAME):
-				var damage_component: DamageComponent= DamageComponent.get_component(collider)
-				total_damage= damage_component.absorb_damage(total_damage, pierce_item.coll_shape)
-
-		if total_damage > 0:
-			var damage_component: DamageComponent= DamageComponent.get_component(coll_shape.get_parent())
-			var final_damage: Damage= damage.duplicate()
-			final_damage.amount= total_damage
-			damage_component.take_damage(final_damage, coll_shape)
+		if not result.items.is_empty():
+			assert(result.items[-1].object == obj)
+			result.items.reverse()
+			
+			var total_damage: int= damage.amount
+			
+			for pierce_item in result.items:
+				var collider: Node3D= pierce_item.object
+				if collider.is_in_group(DamageComponent.GROUP_NAME):
+					var damage_component: DamageComponent= DamageComponent.get_component(collider)
+					total_damage= damage_component.absorb_damage(total_damage, pierce_item.coll_shape)
+			
+			prints("Total damage %d after piercing through %d" %[total_damage, result.items.size()])
+			
+			if total_damage > 0:
+				var damage_component: DamageComponent= DamageComponent.get_component(coll_shape.get_parent())
+				var final_damage: Damage= damage.duplicate()
+				final_damage.amount= total_damage
+				damage_component.take_damage(final_damage, coll_shape)
 
 
 func save_world():

@@ -254,12 +254,43 @@ func update_properties():
 
 
 func take_damage(damage: Damage):
-	take_damage_at_shape(damage.amount, damage.shape_index)
-
-
-func take_damage_at_shape(damage: int, body_shape_index: int):
-	var block: GridBlock= get_block_from_global_pos(collision_shapes[body_shape_index].global_position)
-	block.take_damage(damage, self)
+	var global_pos: Vector3= collision_shapes[damage.shape_index].global_position
+	var block: BaseGridBlock= get_block_from_global_pos(global_pos)
+	var center: Vector3i= block.local_pos
+	
+	var radius: float= damage.radius
+	
+	var grid_pos_list: Array[Vector3i]
+	var processed_list: Array[Vector3i]
+	grid_pos_list.append(center)
+	
+	var damage_left: Dictionary
+	damage_left[center]= damage.amount
+	
+	while not grid_pos_list.is_empty():
+		var grid_pos: Vector3i= grid_pos_list[0]
+		var local_damage: int= damage_left[grid_pos]
+		
+		prints(grid_pos, "takes damage", local_damage)
+		
+		if local_damage > 0:
+			block= get_block_local(grid_pos)
+			var grid_dist: int= grid_pos.distance_squared_to(center)
+			
+			if block:
+				local_damage= block.take_damage(local_damage, self)
+			else:
+				local_damage= min(local_damage, lerp(damage.amount, damage.min_amount, grid_dist / (radius * radius)))
+			
+			for neighbor in get_block_neighbors(grid_pos, true, true):
+				var neighbor_dist: int= neighbor.distance_squared_to(center)
+				if neighbor_dist > grid_dist and neighbor_dist <= radius * radius:
+					if not neighbor in processed_list:
+						grid_pos_list.append(neighbor)
+						processed_list.append(neighbor)
+					damage_left[neighbor]= local_damage if not damage_left.has(neighbor) else max(local_damage, damage_left[neighbor])
+		
+		grid_pos_list.remove_at(0)
 
 
 # normalized
@@ -348,15 +379,15 @@ static func deserialize(data: Dictionary, world: World)-> BlockGrid:
 	return grid
 
 
-func get_block_neighbors(pos: Vector3i)-> Array[Vector3i]:
+func get_block_neighbors(pos: Vector3i, include_diagonals: bool= false, include_empty_blocks: bool= false)-> Array[Vector3i]:
 	var result: Array[Vector3i]
 	
 	for x in range(-1, 2):
 		for y in range(-1, 2):
 			for z in range(-1, 2):
-				if [x, y, z].count(0) == 2:
+				if [x, y, z].count(0) == (1 if include_diagonals else 2):
 					var neighbor_pos: Vector3i= pos + Vector3i(x, y, z)
-					if blocks.has(neighbor_pos):
+					if include_empty_blocks or blocks.has(neighbor_pos):
 						result.append(neighbor_pos)
 	
 	return result
@@ -374,3 +405,7 @@ func get_local_grid_pos(global_pos: Vector3)-> Vector3i:
 	
 func get_global_block_pos(block_pos: Vector3i)-> Vector3:
 	return to_global(block_pos)
+
+
+func get_block_local(grid_pos: Vector3i)-> BaseGridBlock:
+	return blocks[grid_pos] if blocks.has(grid_pos) else null

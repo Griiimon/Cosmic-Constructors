@@ -1,8 +1,7 @@
 rocket projectile thruster flicker 
 
 area damage
-	initial shapecast immediate query to get all affected COLLISION SHAPES ( indiviual grid blocks / entities )
-	then cast recursive rays beginning from outside to determine damage and armor blocking	 
+	after physics pierce raycast, if object is the same for origin and end, run a custom non physics BlockGrid raycast to get all blocks
 
 add terrain class to nodes with get_gravity_vector() + gravity area
 

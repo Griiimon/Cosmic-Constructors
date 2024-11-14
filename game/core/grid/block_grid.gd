@@ -253,44 +253,77 @@ func update_properties():
 	mass_indicator.position= center_of_mass
 
 
-func take_damage(damage: Damage):
-	var global_pos: Vector3= collision_shapes[damage.shape_index].global_position
-	var block: BaseGridBlock= get_block_from_global_pos(global_pos)
-	var center: Vector3i= block.local_pos
+#func take_damage(damage: Damage):
+	#var global_pos: Vector3= collision_shapes[damage.shape_index].global_position
+	#var block: BaseGridBlock= get_block_from_global_pos(global_pos)
+	#var center: Vector3i= block.local_pos
+	#
+	#var radius: float= damage.radius
+	#
+	#var grid_pos_list: Array[Vector3i]
+	#var processed_list: Array[Vector3i]
+	#grid_pos_list.append(center)
+	#
+	#var damage_left: Dictionary
+	#damage_left[center]= damage.amount
+	#
+	#while not grid_pos_list.is_empty():
+		#var grid_pos: Vector3i= grid_pos_list[0]
+		#var local_damage: int= damage_left[grid_pos]
+		#
+		#prints(grid_pos, "takes damage", local_damage)
+		#
+		#if local_damage > 0:
+			#block= get_block_local(grid_pos)
+			#var grid_dist: int= grid_pos.distance_squared_to(center)
+			#
+			#if block:
+				#local_damage= block.take_damage(local_damage, self)
+			#else:
+				#local_damage= min(local_damage, lerp(damage.amount, damage.min_amount, grid_dist / (radius * radius)))
+			#
+			#for neighbor in get_block_neighbors(grid_pos, true, true):
+				#var neighbor_dist: int= neighbor.distance_squared_to(center)
+				#if neighbor_dist > grid_dist and neighbor_dist <= radius * radius:
+					#if not neighbor in processed_list:
+						#grid_pos_list.append(neighbor)
+						#processed_list.append(neighbor)
+					#damage_left[neighbor]= local_damage if not damage_left.has(neighbor) else max(local_damage, damage_left[neighbor])
+		#
+		#grid_pos_list.remove_at(0)
+
+
+func take_damage(damage: Damage, coll_shape: CollisionShape3D):
+	var block: BaseGridBlock= get_block_from_global_pos(coll_shape.global_position)
+	block.take_damage(damage.amount, self)
+
+
+func absorb_damage(damage: int, coll_shape: CollisionShape3D):
+	var block: BaseGridBlock= get_block_from_global_pos(coll_shape.global_position)
+	var hitpoints: int
 	
-	var radius: float= damage.radius
-	
-	var grid_pos_list: Array[Vector3i]
-	var processed_list: Array[Vector3i]
-	grid_pos_list.append(center)
-	
-	var damage_left: Dictionary
-	damage_left[center]= damage.amount
-	
-	while not grid_pos_list.is_empty():
-		var grid_pos: Vector3i= grid_pos_list[0]
-		var local_damage: int= damage_left[grid_pos]
+	if block is GridBlock:
+		hitpoints= block.hitpoints
+	else:
+		var multi_count: int
+		if block is VirtualGridBlock:
+			hitpoints= block.parent.hitpoints
+			multi_count= block.parent.children.size()
+		elif block is MultiGridBlock:
+			hitpoints= block.hitpoints
+			multi_count= block.children.size()
+		else:
+			assert(false)
 		
-		prints(grid_pos, "takes damage", local_damage)
-		
-		if local_damage > 0:
-			block= get_block_local(grid_pos)
-			var grid_dist: int= grid_pos.distance_squared_to(center)
+		hitpoints/= multi_count
 			
-			if block:
-				local_damage= block.take_damage(local_damage, self)
-			else:
-				local_damage= min(local_damage, lerp(damage.amount, damage.min_amount, grid_dist / (radius * radius)))
-			
-			for neighbor in get_block_neighbors(grid_pos, true, true):
-				var neighbor_dist: int= neighbor.distance_squared_to(center)
-				if neighbor_dist > grid_dist and neighbor_dist <= radius * radius:
-					if not neighbor in processed_list:
-						grid_pos_list.append(neighbor)
-						processed_list.append(neighbor)
-					damage_left[neighbor]= local_damage if not damage_left.has(neighbor) else max(local_damage, damage_left[neighbor])
-		
-		grid_pos_list.remove_at(0)
+	return max(damage - hitpoints, 0)
+
+
+#func take_damage_at_shape(damage: int, shape_idx: int):
+	#var global_pos: Vector3= collision_shapes[shape_idx].global_position
+	#var block: BaseGridBlock= get_block_from_global_pos(global_pos)
+	#block.take_damage(damage, self)
 
 
 # normalized

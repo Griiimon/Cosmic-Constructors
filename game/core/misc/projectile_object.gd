@@ -3,6 +3,7 @@ extends Node3D
 
 @export var shape: Shape3D
 
+var world: World
 var projectile_definition: Projectile
 var velocity: Vector3
 var shapecast: ShapeCast3D
@@ -26,11 +27,16 @@ func _physics_process(delta: float) -> void:
 	shapecast.force_shapecast_update()
 	if shapecast.is_colliding():
 		var collider: Node3D= shapecast.get_collider(0)
-		if collider.is_in_group(DamageComponent.GROUP_NAME):
-			var damage_component: DamageComponent= DamageComponent.get_component(collider)
-
-			var dmg: Damage= Damage.create_instance(projectile_definition.damage, velocity.normalized(), Damage.SourceType.PROJECTILE)
-			dmg.shape_index= shapecast.get_collider_shape(0)
-
-			damage_component.take_damage(dmg)
+		#if collider.is_in_group(DamageComponent.GROUP_NAME):
+			#var damage_component: DamageComponent= DamageComponent.get_component(collider)
+#
+			#var dmg: Damage= Damage.create_instance(projectile_definition.damage, velocity.normalized(), Damage.SourceType.PROJECTILE)
+			#dmg.shape_index= shapecast.get_collider_shape(0)
+#
+			#damage_component.take_damage(dmg)
+	
+		var damage: Damage= Damage.create_instance(projectile_definition.damage, shapecast.get_collision_point(0), velocity.normalized(), Damage.SourceType.PROJECTILE)
+		damage.shape_index= shapecast.get_collider_shape(0)
+		world.damage_object(collider, damage)
+		
 		queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cs0gfdxa0ha1n"]
+[gd_scene load_steps=19 format=3 uid="uid://cs0gfdxa0ha1n"]
 
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
 [ext_resource type="Script" path="res://game/core/player/player_movement_state_machine.gd" id="2_615c1"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://game/core/player/player_action_idle_state.gd" id="6_3y3c5"]
 [ext_resource type="Script" path="res://game/core/player/player_terrain_move_state.gd" id="6_cr6m7"]
 [ext_resource type="Resource" uid="uid://k2s38yf1cnl4" path="res://game/data/blocks/pilot seat/pilot_seat_block.tres" id="8_o8p36"]
+[ext_resource type="PackedScene" uid="uid://djg68ac2wsojx" path="res://game/core/components/damage component/damage_component.tscn" id="12_goufb"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bbcsg"]
 friction = 0.0
@@ -163,3 +164,5 @@ script = ExtResource("6_3y3c5")
 [node name="Build" type="Node" parent="Action State Machine"]
 script = ExtResource("5_avkim")
 current_block = ExtResource("8_o8p36")
+
+[node name="Damage Component" parent="." instance=ExtResource("12_goufb")]

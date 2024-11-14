@@ -24,7 +24,7 @@ func pierce(from: Vector3, to: Vector3):
 		var collider: Node3D= get_collider()
 		var coll_shape: CollisionShape3D= collider.shape_owner_get_owner(collider.shape_find_owner(get_collider_shape()))
 		result.items.append(ObjectResult.new(collider, coll_shape))
-		add_exception(get_collider())
+		add_exception(collider)
 	
 	clear_exceptions()
 	return result

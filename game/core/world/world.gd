@@ -1,7 +1,7 @@
 class_name World
 extends Node3D
 
-const SAVE_FILE_NAME= "user://world.json"
+const SAVE_FILE_NAME= "world.json"
 
 var grids: Node
 var projectiles: Node
@@ -107,19 +107,28 @@ func deal_damage_via_collision_shape(orig_damage: Damage, coll_shape: CollisionS
 		damage_component.take_damage(final_damage, coll_shape)
 
 
-func save_world():
-	var save_file: FileAccess = FileAccess.open(SAVE_FILE_NAME, FileAccess.WRITE)
+func save_world(world_name: String= ""):
+	if world_name:
+		if not DirAccess.open("user://").dir_exists(world_name):
+			DirAccess.open("user://").make_dir(world_name)
+		world_name+= "/"
+		
+	var save_file: FileAccess = FileAccess.open("user://" + world_name + SAVE_FILE_NAME, FileAccess.WRITE)
 	for grid: BlockGrid in grids.get_children():
 		var json_string = JSON.stringify(grid.serialize())
 		save_file.store_line(json_string)
 	save_file.close()
 
 
-func load_world():
-	if not FileAccess.file_exists(SAVE_FILE_NAME):
+func load_world(world_name: String= ""):
+	var file_name:= "user://"
+	if world_name:
+		file_name+= world_name + "/"
+	file_name+= SAVE_FILE_NAME
+	if not FileAccess.file_exists(file_name):
 		return
 
-	var save_file = FileAccess.open(SAVE_FILE_NAME, FileAccess.READ)
+	var save_file = FileAccess.open(file_name, FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
 		var json_string = save_file.get_line()
 
@@ -136,6 +145,7 @@ func load_world():
 		grid.world= self
 
 		grid.update_properties()
+	save_file.close()
 
 
 func add_projectile(projectile: ProjectileObject):

@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://bws4nr4sjg6bt"]
+[gd_scene load_steps=17 format=3 uid="uid://bws4nr4sjg6bt"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_hy62o"]
 [ext_resource type="Script" path="res://game/test/damage test/damage_tests.gd" id="2_wkbyi"]
+[ext_resource type="Resource" uid="uid://jxoc0g7ajehb" path="res://game/data/hand items/weapons/rocket launcher/rocket_launcher.tres" id="3_e07li"]
 [ext_resource type="Texture2D" path="res://skybox/proc_stars.dds" id="3_o606f"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="4_8hosm"]
 [ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="5_ijfg3"]
@@ -46,7 +47,8 @@ gravity = 10.0
 
 [node name="Tests" type="Node" parent="."]
 script = ExtResource("2_wkbyi")
-remove_asteroid = true
+equip_item = ExtResource("3_e07li")
+project_folder_world = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_r8d1e")

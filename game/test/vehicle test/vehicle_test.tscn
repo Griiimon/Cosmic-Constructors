@@ -47,6 +47,7 @@ gravity = 10.0
 [node name="Tests" type="Node" parent="."]
 script = ExtResource("2_8kc7o")
 load_world = true
+freeze_grids = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_r8d1e")

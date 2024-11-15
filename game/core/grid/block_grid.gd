@@ -298,32 +298,38 @@ func take_damage(damage: Damage, coll_shape: CollisionShape3D):
 	block.take_damage(damage.amount, self)
 
 
-func absorb_damage(damage: int, coll_shape: CollisionShape3D):
+func absorb_damage(damage: int, coll_shape: CollisionShape3D)-> int:
 	var block: BaseGridBlock= get_block_from_global_pos(coll_shape.global_position)
-	var hitpoints: int
-	
-	if block is GridBlock:
-		hitpoints= block.hitpoints
-	else:
-		var multi_count: int
-		if block is VirtualGridBlock:
-			hitpoints= block.parent.hitpoints
-			multi_count= block.parent.children.size()
-		elif block is MultiGridBlock:
-			hitpoints= block.hitpoints
-			multi_count= block.children.size()
-		else:
-			assert(false)
-		
-		hitpoints/= multi_count
-			
-	return max(damage - hitpoints, 0)
+	return block.absorb_damage(damage)
 
 
 #func take_damage_at_shape(damage: int, shape_idx: int):
 	#var global_pos: Vector3= collision_shapes[shape_idx].global_position
 	#var block: BaseGridBlock= get_block_from_global_pos(global_pos)
 	#block.take_damage(damage, self)
+
+
+func raycast(from: Vector3, to: Vector3, hit_from_inside: bool= false, step_size: float= 0.05, exceptions: Array[Vector3i]= [])-> Array[Vector3i]:
+	var result: Array[Vector3i]
+	
+	if not hit_from_inside:
+		var block: GridBlock= get_block_from_global_pos(from)
+		if block:
+			exceptions.append(block.local_pos)
+
+	var dir: Vector3= from.direction_to(to)
+	var current_pos: Vector3= from
+
+	for i in from.distance_to(to) / step_size:
+		var block: GridBlock= get_block_from_global_pos(current_pos)
+		if block:
+			if not block.local_pos in exceptions:
+				if not block.local_pos in result:
+					result.append(block.local_pos)
+		
+		current_pos+= dir * step_size
+
+	return result
 
 
 # normalized

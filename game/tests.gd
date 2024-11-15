@@ -18,8 +18,16 @@ func _ready() -> void:
 			asteroid.queue_free()
 
 	player= game.player
+
+	var default_block= load("res://game/data/blocks/light structure/light_structure_block.tres")
+
+	var grid: BlockGrid= Global.game.world.add_grid(Vector3(0, 1, 0))
+
+	for x in range(-8, 9):
+		for z in range(-8, 9):
+			grid.add_block(default_block, Vector3i(x, 0, z))
 	
-	Global.game.world.load_world()
+	#Global.game.world.load_world()
 	
 	#player.action_state_machine.idle_state.equip_hand_item(load("res://game/data/hand items/tools/hand drill/hand_drill.tres"))
 	player.action_state_machine.idle_state.equip_hand_item(load("res://game/data/hand items/weapons/rocket launcher/rocket_launcher.tres"))
@@ -28,8 +36,7 @@ func _ready() -> void:
 	return 
 	
 	
-	var default_block= load("res://game/data/blocks/light structure/light_structure_block.tres")
-	var grid: BlockGrid= Global.game.world.add_grid(Vector3(0, -3, -2))
+	#var grid: BlockGrid= Global.game.world.add_grid(Vector3(0, -3, -2))
 	
 	for x in 4:
 		for z in 7:

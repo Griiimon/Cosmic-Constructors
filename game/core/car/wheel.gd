@@ -172,10 +172,12 @@ func _physics_process(delta) -> void:
 
 	model.position.y= -(cast_to.y + previous_hit.hit_distance) 
 	
-	if steer_input:
+	if not is_zero_approx(steer_input):
 		rotation.y= move_toward(rotation.y, sign(steer_input) * deg_to_rad(max_steer_angle), deg_to_rad(steering_speed) * delta)
 	else:
 		rotation.y= move_toward(rotation.y, 0.0, deg_to_rad(steering_speed) * delta)
+	
+	steer_input= 0
 
 
 func steer(input: float):

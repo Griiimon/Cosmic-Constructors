@@ -118,6 +118,8 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 func _physics_process(delta: float) -> void:
 	requested_movement= requested_movement.normalized()
 
+	DebugHud.send("Req Movement", requested_movement)
+
 	if not freeze:
 		run_dampeners(delta)
 	

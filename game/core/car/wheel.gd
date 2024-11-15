@@ -22,6 +22,7 @@ var z_traction : float = 0.0
 @export var max_brake_coef: float= 100.0
 
 @onready var previous_distance : float = abs(cast_to.y)
+@onready var model: Node3D = $Model
 
 var instant_linear_velocity : Vector3
 var previous_hit : HitResult = HitResult.new()
@@ -169,6 +170,8 @@ func _physics_process(delta) -> void:
 
 	#DebugHud.send("Grounded", grounded)
 
+	model.position.y= -(cast_to.y + previous_hit.hit_distance) 
+	
 	if steer_input:
 		rotation.y= move_toward(rotation.y, sign(steer_input) * deg_to_rad(max_steer_angle), deg_to_rad(steering_speed) * delta)
 	else:

@@ -4,6 +4,11 @@ extends GridBlock
 var children: Array[VirtualGridBlock]
 
 
+
+func absorb_damage(damage: int)-> int:
+	return hitpoints / children.size()
+
+
 func destroy(grid: BlockGrid):
 	super(grid)
 	for child in children:

@@ -25,6 +25,10 @@ func take_damage(damage: int, grid: BlockGrid)-> int:
 	return 0
 
 
+func absorb_damage(damage: int)-> int:
+	return max(damage - hitpoints, 0)
+
+
 func destroy(grid: BlockGrid):
 	var block_instance: BlockInstance= get_block_instance()
 	if block_instance:

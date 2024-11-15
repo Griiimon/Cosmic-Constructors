@@ -14,6 +14,11 @@ func take_damage(damage: int, grid: BlockGrid)-> int:
 	return 0
 
 
+func absorb_damage(damage: int)-> int:
+	assert(false, "Abstract class")
+	return 0
+
+
 func destroy(grid: BlockGrid):
 	assert(false, "Abstract class")
 	pass

@@ -50,7 +50,7 @@ func damage_object(obj: Node3D, damage: Damage):
 				var coll_shape: CollisionShape3D= item.collider.shape_owner_get_owner(item.collider.shape_find_owner(item.shape))
 				collision_shapes.append(coll_shape)
 				prints("Damage object %s impact @%s shape #%d @%s" % [str(item.collider.name), str(damage.position), item.shape, str(coll_shape.global_position)])
-				#DebugMesh.create(coll_shape.global_position + Vector3.UP, 0.3)
+				DebugMesh.create(coll_shape.global_position + Vector3.UP, 0.3)
 	
 		print("Damage %d shapes" % collision_shapes.size())
 		

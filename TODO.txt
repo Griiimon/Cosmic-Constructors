@@ -1,3 +1,5 @@
+build the eva rotation torque around the pivots global transform instead of the players?
+
 when the suspension hits the limit static body, always assume wheel is grounded
 
 rocket projectile thruster flicker 

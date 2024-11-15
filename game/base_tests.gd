@@ -83,36 +83,29 @@ func _input(event: InputEvent) -> void:
 				player.world.save_world(custom_world_name, project_folder_world)
 
 			else:
-				var switch_block: int= Input.get_axis("next_block", "previous_block")
+				var switch_block_delta: int= Input.get_axis("next_block", "previous_block")
 				
-				if switch_block:
-					var build_state: PlayerBuildState= player.action_state_machine.build_state
-					var blocks: Array[Block]= GameData.block_library.blocks
-					var block_index= blocks.find(build_state.current_block)
-
-					block_index= wrapi(block_index + switch_block, 0, blocks.size())
-					build_state.current_block= blocks[block_index]
-
-					while not build_state.current_block.can_be_built:
-						block_index= wrapi(block_index + switch_block, 0, blocks.size())
-						build_state.current_block= blocks[block_index]
-					
-					SignalManager.build_block_changed.emit(build_state.current_block)
-
+				if switch_block_delta:
+					switch_block(switch_block_delta)
 
 	elif event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-			var query:= PhysicsRayQueryParameters3D.create(player.head.global_position, player.build_raycast.to_global(player.build_raycast.target_position))#, Global.GRID_COLLISION_LAYER)
-			prints("Remove query", query.from, query.to)
-			query.hit_back_faces= false
-			query.hit_from_inside= false
-			var result= player.get_world_3d().direct_space_state.intersect_ray(query)
-			if result:
-				var grid: BlockGrid= result.collider
-				var collision_point: Vector3= result.position
-				collision_point+= -player.build_raycast.global_basis.z * 0.05
-				grid.get_block_from_global_pos(collision_point).destroy(grid)
+		if event.pressed:
+			if event.button_index == MOUSE_BUTTON_RIGHT:
+				var query:= PhysicsRayQueryParameters3D.create(player.head.global_position, player.build_raycast.to_global(player.build_raycast.target_position))#, Global.GRID_COLLISION_LAYER)
+				prints("Remove query", query.from, query.to)
+				query.hit_back_faces= false
+				query.hit_from_inside= false
+				var result= player.get_world_3d().direct_space_state.intersect_ray(query)
+				if result:
+					var grid: BlockGrid= result.collider
+					var collision_point: Vector3= result.position
+					collision_point+= -player.build_raycast.global_basis.z * 0.05
+					grid.get_block_from_global_pos(collision_point).destroy(grid)
 
+			elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				switch_block(-1)
+			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				switch_block(1)
 
 func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
 	var grid: BlockGrid= Global.game.world.add_grid(pos)
@@ -121,4 +114,20 @@ func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
 		for z in size.y:
 			grid.add_block(default_block, Vector3i(x, 0, z) - Vector3i(size.x / 2, 0, size.y / 2) / 2)
 	
+	
+func switch_block(delta: int):
+	var build_state: PlayerBuildState= player.action_state_machine.build_state
+	var blocks: Array[Block]= GameData.block_library.blocks
+	var block_index= blocks.find(build_state.current_block)
+
+	block_index= wrapi(block_index + delta, 0, blocks.size())
+	build_state.current_block= blocks[block_index]
+
+	while not build_state.current_block.can_be_built:
+		block_index= wrapi(block_index + delta, 0, blocks.size())
+		build_state.current_block= blocks[block_index]
+	
+	SignalManager.build_block_changed.emit(build_state.current_block)
+
+
 	

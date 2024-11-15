@@ -1,10 +1,17 @@
+class_name Tests
 extends Node
 
-@export var remove_asteroid:= false
+@export var remove_voxel_terrain:= false
+@export var equip_item: HandItem
+@export var load_world: bool= false
+@export var project_folder_world: bool= true
+@export var freeze_grids: bool= false
+@export var custom_world_name: String= ""
 
 @onready var game: Game= get_parent()
 
 var player: Player
+var default_block: Block
 
 var collected_resources: Dictionary
 
@@ -12,54 +19,33 @@ var collected_resources: Dictionary
 
 func _ready() -> void:
 	await game.ready
-	if remove_asteroid:
-		var asteroid: Node3D= game.get_node_or_null("Asteroid")
-		if asteroid:
-			asteroid.queue_free()
+	
+	if remove_voxel_terrain:
+		var potential_terrains= game.find_children("*", "VoxelLodTerrain")
+		var terrain: VoxelLodTerrain= potential_terrains[0]
+		
+		if terrain:
+			terrain.queue_free()
 
 	player= game.player
 
-	var default_block= load("res://game/data/blocks/light structure/light_structure_block.tres")
+	default_block= load("res://game/data/blocks/light structure/light_structure_block.tres")
 
-	var grid: BlockGrid= Global.game.world.add_grid(Vector3(0, 1, 0))
-
-	for x in range(-8, 9):
-		for z in range(-8, 9):
-			grid.add_block(default_block, Vector3i(x, 0, z))
 	
-	#Global.game.world.load_world()
-	
-	#player.action_state_machine.idle_state.equip_hand_item(load("res://game/data/hand items/tools/hand drill/hand_drill.tres"))
-	player.action_state_machine.idle_state.equip_hand_item(load("res://game/data/hand items/weapons/rocket launcher/rocket_launcher.tres"))
-	player.world.freeze_grids(true)
-	
-	return 
-	
-	
-	#var grid: BlockGrid= Global.game.world.add_grid(Vector3(0, -3, -2))
-	
-	for x in 4:
-		for z in 7:
-			grid.add_block(default_block, Vector3i(x, 0, z))
+	if equip_item:
+		player.action_state_machine.idle_state.equip_hand_item(equip_item)
 
-	var thruster_block= load("res://game/data/blocks/thruster/thruster_block.tres")
-	for x in 4:
-		grid.add_block(thruster_block, Vector3i(x, 1, 0), Vector3i(0, -x, 0))
+	if load_world:
+		Global.game.world.load_world(custom_world_name, project_folder_world)
 
-	var seat_block= load("res://game/data/blocks/pilot seat/pilot_seat_block.tres")
 
-	grid.add_block(seat_block, Vector3i(2, 1, 2))
+	player.world.freeze_grids(freeze_grids)
 
-	var gyro_block= load("res://game/data/blocks/gyro/gyro_block.tres")
-	
-	grid.add_block(gyro_block, Vector3i(0, 1, 3))
+	on_start()
 
-	grid.inertial_dampeners= true
-	
 
-	grid.update_properties()
-
-	Global.game.world.save_world()
+func on_start():
+	pass
 
 
 func _physics_process(delta: float) -> void:
@@ -94,7 +80,7 @@ func _input(event: InputEvent) -> void:
 			elif event.keycode == KEY_F2:
 				player.world.freeze_grids(false)
 			elif event.keycode == KEY_F5:
-				player.world.save_world()
+				player.world.save_world(custom_world_name, project_folder_world)
 
 			else:
 				var switch_block: int= Input.get_axis("next_block", "previous_block")
@@ -112,7 +98,8 @@ func _input(event: InputEvent) -> void:
 						build_state.current_block= blocks[block_index]
 					
 					SignalManager.build_block_changed.emit(build_state.current_block)
-					
+
+
 	elif event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			var query:= PhysicsRayQueryParameters3D.create(player.head.global_position, player.build_raycast.to_global(player.build_raycast.target_position))#, Global.GRID_COLLISION_LAYER)
@@ -125,3 +112,13 @@ func _input(event: InputEvent) -> void:
 				var collision_point: Vector3= result.position
 				collision_point+= -player.build_raycast.global_basis.z * 0.05
 				grid.get_block_from_global_pos(collision_point).destroy(grid)
+
+
+func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
+	var grid: BlockGrid= Global.game.world.add_grid(pos)
+	
+	for x in size.x:
+		for z in size.y:
+			grid.add_block(default_block, Vector3i(x, 0, z) - Vector3i(size.x / 2, 0, size.y / 2) / 2)
+	
+	

@@ -107,21 +107,30 @@ func deal_damage_via_collision_shape(orig_damage: Damage, coll_shape: CollisionS
 		damage_component.take_damage(final_damage, coll_shape)
 
 
-func save_world(world_name: String= ""):
+func save_world(world_name: String= "", project_folder: bool= false):
+	var base_path:= "user://"
+	if project_folder:
+		base_path= get_tree().current_scene.scene_file_path
+	
 	if world_name:
-		if not DirAccess.open("user://").dir_exists(world_name):
-			DirAccess.open("user://").make_dir(world_name)
+		if not DirAccess.open(base_path).dir_exists(world_name):
+			DirAccess.open(base_path).make_dir(world_name)
 		world_name+= "/"
 		
-	var save_file: FileAccess = FileAccess.open("user://" + world_name + SAVE_FILE_NAME, FileAccess.WRITE)
+	var save_file: FileAccess = FileAccess.open(base_path + world_name + SAVE_FILE_NAME, FileAccess.WRITE)
 	for grid: BlockGrid in grids.get_children():
 		var json_string = JSON.stringify(grid.serialize())
 		save_file.store_line(json_string)
 	save_file.close()
 
 
-func load_world(world_name: String= ""):
-	var file_name:= "user://"
+func load_world(world_name: String= "", project_folder: bool= false):
+	var base_path:= "user://"
+	if project_folder:
+		base_path= get_tree().current_scene.scene_file_path
+
+	var file_name: String= base_path
+	
 	if world_name:
 		file_name+= world_name + "/"
 	file_name+= SAVE_FILE_NAME

@@ -27,9 +27,7 @@ script = ExtResource("1_dxwo3")
 
 [node name="Tests" type="Node" parent="."]
 script = ExtResource("1_o5dc5")
-remove_voxel_terrain = null
 project_folder_world = false
-freeze_grids = null
 
 [node name="Debug Space Grid" parent="." instance=ExtResource("1_ek1sn")]
 visible = false

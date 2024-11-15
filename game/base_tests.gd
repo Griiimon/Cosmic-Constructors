@@ -1,4 +1,4 @@
-class_name Tests
+class_name BaseTests
 extends Node
 
 @export var remove_voxel_terrain:= false

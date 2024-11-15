@@ -110,7 +110,7 @@ func deal_damage_via_collision_shape(orig_damage: Damage, coll_shape: CollisionS
 func save_world(world_name: String= "", project_folder: bool= false):
 	var base_path:= "user://"
 	if project_folder:
-		base_path= get_tree().current_scene.scene_file_path
+		base_path= get_tree().current_scene.scene_file_path.get_base_dir() + "/"
 	
 	if world_name:
 		if not DirAccess.open(base_path).dir_exists(world_name):
@@ -127,7 +127,7 @@ func save_world(world_name: String= "", project_folder: bool= false):
 func load_world(world_name: String= "", project_folder: bool= false):
 	var base_path:= "user://"
 	if project_folder:
-		base_path= get_tree().current_scene.scene_file_path
+		base_path= get_tree().current_scene.scene_file_path.get_base_dir() + "/"
 
 	var file_name: String= base_path
 	

@@ -1,6 +1,10 @@
-build the eva rotation torque around the pivots global transform instead of the players?
+4 suspension limit game settings: 
+	- check all suspension limits and set a global var on the grid (?)
+		to cancel out local y velocity with an impulse
 
-when the suspension hits the limit static body, always assume wheel is grounded
+	- static body limiting
+	- suspension block or wheel breaks immediately
+	- high exponential counter force/impulse ( depending on grid mass )
 
 rocket projectile thruster flicker 
 
@@ -48,6 +52,7 @@ FIX inital grid align when sloped/diagonal initial normal
 FIX sometimes wrong ( downwards ) momentum when strafing off grid 
 FIX shouldnt all blocks face forward by default ( piston and rotor are facing up rn )
 FIX projectile initial position from viewport pos
+FIX removing MultiBlocks can lead to crash ( only when splitting grids? )
 
 meta tag for BlockInstance scene sub nodes that should be deleted in ghost ( or just delete anything not MeshInstance3D or plain Node3D ? )
 

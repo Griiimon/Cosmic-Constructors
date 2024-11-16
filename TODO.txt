@@ -2,6 +2,7 @@
 	- check all suspension limits and set a global var on the grid (?)
 		to cancel out local y velocity with an impulse
 
+	- no travel limit
 	- static body limiting
 	- suspension block or wheel breaks immediately
 	- high exponential counter force/impulse ( depending on grid mass )

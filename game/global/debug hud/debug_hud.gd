@@ -23,7 +23,7 @@ func _ready():
 	set_process(enabled)
 
 
-func send(key: String, value):
+func send(key: String, value, and_print: bool= false):
 	if not enabled: return
 	visible= true
 	if not dict.has(key):
@@ -47,6 +47,9 @@ func send(key: String, value):
 		return
 	
 	dict[key].value= str(value)
+
+	if and_print:
+		print(str(key, ": ", value))
 
 
 func _process(_delta):

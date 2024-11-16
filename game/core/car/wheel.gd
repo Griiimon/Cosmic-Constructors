@@ -4,6 +4,7 @@ extends Node3D
 @export_category("Suspension")
 @export_flags_3d_physics var mask : int = 1
 @export var cast_to : Vector3 = Vector3(0,-3,0)
+@export var max_travel: float= 1.5
 
 @export var spring_max_force : float = 3000.0
 @export var spring_force : float = 1800.0
@@ -191,3 +192,7 @@ func brake(brake_force: float):
 
 func get_grid()-> BlockGrid:
 	return suspension.get_parent()
+
+
+func is_at_travel_limit()-> bool:
+	return previous_distance < max_travel

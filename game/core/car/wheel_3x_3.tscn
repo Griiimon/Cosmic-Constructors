@@ -44,6 +44,8 @@ size = Vector3(0.1, 0.1, 4)
 [node name="Wheel 3x3" type="Node3D"]
 script = ExtResource("1_rbnuk")
 mask = 4
+spring_max_force = 30000.0
+spring_force = 18000.0
 x_traction = 0.01
 steering_speed = 10.0
 acceleration = 1000.0

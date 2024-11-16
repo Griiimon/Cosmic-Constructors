@@ -24,6 +24,7 @@ var z_traction : float = 0.0
 @onready var previous_distance : float = abs(cast_to.y)
 @onready var model: Node3D = $Model
 
+
 var instant_linear_velocity : Vector3
 var previous_hit : HitResult = HitResult.new()
 var collision_point : Vector3 = cast_to

@@ -43,6 +43,10 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 		wheel.forward_drive= forward_drive
 		wheel.brake(final_brake)
 
+		if wheel.is_at_travel_limit():
+			grid.add_effect(BlockGridCancelYVelocityEffect.new(pow(1 + wheel.max_travel - wheel.previous_distance, 8) - 1, wheel.previous_hit.hit_normal))
+			wheel.brake(1)
+			DebugHud.send("Over", "%.4f" % ( wheel.max_travel - wheel.previous_distance ))
 
 func on_destroy():
 	wheel.queue_free()

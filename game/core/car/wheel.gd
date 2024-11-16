@@ -49,16 +49,44 @@ class HitResult:
 # function to do sphere casting
 func shape_cast(origin: Vector3, offset: Vector3):
 	var space: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
-
-	var query:= PhysicsRayQueryParameters3D.create(origin, origin + offset, mask)
-	var cast_result= space.intersect_ray(query)
-
+# ------  raycast -----
+	#var query:= PhysicsRayQueryParameters3D.create(origin, origin + offset, mask)
+	#var cast_result= space.intersect_ray(query)
+#
+	#var result : HitResult = HitResult.new()
+	#
+	#result.hit_distance = origin.distance_to(cast_result.position) if cast_result else cast_to.length()
+	#result.hit_position = cast_result.position if cast_result else origin + offset
+	#
+	#result.hit_normal = cast_result.normal if cast_result else Vector3.ZERO
+# ------ shapecast -------
+	var query:= PhysicsShapeQueryParameters3D.new()
+	query.transform.origin= origin - cast_to
+	query.motion= cast_to
+	var shape:= SphereShape3D.new()
+	shape.radius= abs(cast_to.y)
+	query.shape= shape
+	query.collision_mask= mask
+	
+	var cast_result= space.cast_motion(query)
+	
 	var result : HitResult = HitResult.new()
 	
-	result.hit_distance = origin.distance_to(cast_result.position) if cast_result else cast_to.length()
-	result.hit_position = cast_result.position if cast_result else origin + offset
+	result.hit_distance = cast_result[0] * cast_to.length()
 	
-	result.hit_normal = cast_result.normal if cast_result else Vector3.ZERO
+	query.transform.origin+= cast_result[1] * cast_to
+	
+	var rest_result: Dictionary
+	if cast_result[0] < 1:
+		rest_result= space.get_rest_info(query)
+	
+	DebugHud.send("Rest Result", not rest_result.is_empty())
+	
+	result.hit_position = rest_result.point if rest_result else origin + offset
+	result.hit_normal = rest_result.normal if rest_result else Vector3.ZERO
+
+
+# ----------------
 	result.hit_point_velocity = Vector3.ZERO
 	result.hit_body = null
 	

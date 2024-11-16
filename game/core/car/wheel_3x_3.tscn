@@ -1,6 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3tx7ikwat0o"]
+[gd_scene load_steps=12 format=3 uid="uid://d3tx7ikwat0o"]
 
 [ext_resource type="Script" path="res://game/core/car/wheel.gd" id="1_rbnuk"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2pls0"]
+friction = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2e00m"]
+size = Vector3(5, 0.1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qyam"]
 albedo_color = Color(0.345123, 0.445221, 0.469969, 1)
@@ -44,6 +50,15 @@ acceleration = 1000.0
 max_brake_coef = 0.003
 
 [node name="Model" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Model"]
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_2pls0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.52013, 0)
+shape = SubResource("BoxShape3D_2e00m")
+disabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)

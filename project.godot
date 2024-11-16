@@ -195,6 +195,7 @@ use_item_secondary={
 3d/default_gravity=0.0
 3d/default_linear_damp=0.0
 3d/default_angular_damp=0.0
+jolt_3d/collisions/use_enhanced_internal_edge_removal=false
 
 [rendering]
 

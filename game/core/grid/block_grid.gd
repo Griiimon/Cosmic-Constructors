@@ -1,7 +1,6 @@
 class_name BlockGrid
 extends RigidBody3D
 
-
 var world: World
 var blocks: Dictionary
 
@@ -17,6 +16,8 @@ var total_gyro_strength: float= 0
 var mass_indicator: Node3D
 
 var requires_integrity_check:= false
+
+var effects: Array[BlockGridBaseEffect]
 
 
 
@@ -133,7 +134,9 @@ func _physics_process(delta: float) -> void:
 		apply_torque_impulse(rot_vec * total_gyro_strength)
 	else:
 		angular_damp= total_gyro_strength * 0.01
-	
+
+	apply_effects()
+
 	requested_movement= Vector3.ZERO
 	requested_rotation= Vector3.ZERO
 
@@ -170,6 +173,12 @@ func run_dampeners(delta: float):
 		
 		requested_movement+= counter_force
 		requested_movement= requested_movement.normalized()	
+
+
+func apply_effects():
+	for effect in effects:
+		effect.apply(self)
+	effects.clear()
 
 
 func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
@@ -366,6 +375,14 @@ func flood_fill(origin: Vector3i)-> Array[Vector3i]:
 		unprocessed_list.remove_at(0)
 
 	return result_list
+
+
+func add_effect(effect: BlockGridBaseEffect):
+	for existing_effect in effects:
+		if existing_effect.is_same(effect):
+			existing_effect.combine(effect)
+			return
+	effects.append(effect)
 
 
 func serialize()-> Dictionary:

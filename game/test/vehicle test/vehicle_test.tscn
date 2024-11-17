@@ -35,10 +35,10 @@ albedo_texture = SubResource("NoiseTexture2D_21sxj")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wfm8q"]
 material = SubResource("StandardMaterial3D_kyyuw")
-size = Vector2(500, 500)
+size = Vector2(1000, 1000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s3jxp"]
-size = Vector3(500, 0.1, 500)
+size = Vector3(1000, 0.1, 1000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uh6qw"]
 

@@ -41,15 +41,10 @@ albedo_color = Color(0.762225, 0.0875363, 1.92523e-07, 1)
 material = SubResource("StandardMaterial3D_g0t4m")
 size = Vector3(0.1, 0.1, 4)
 
-[node name="Wheel 3x3" type="Node3D"]
+[node name="Wheel 3x3" type="RayCast3D"]
+collision_mask = 4
+hit_back_faces = false
 script = ExtResource("1_rbnuk")
-mask = 4
-spring_max_force = 30000.0
-spring_force = 18000.0
-x_traction = 0.01
-steering_speed = 10.0
-acceleration = 1000.0
-max_brake_coef = 0.003
 
 [node name="Model" type="Node3D" parent="."]
 

@@ -19,6 +19,8 @@ var requires_integrity_check:= false
 
 var effects: Array[BlockGridBaseEffect]
 
+var current_gravity: Vector3
+
 
 
 func _ready() -> void:

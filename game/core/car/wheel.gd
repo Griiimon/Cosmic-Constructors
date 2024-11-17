@@ -76,7 +76,7 @@ var beam_axle := 0.0
 
 
 func _process(delta : float) -> void:
-	model.position.y = minf(0.0, -spring_current_length)
+	model.position.y = minf(0.0, -spring_current_length) + spring_length
 	#if not is_zero_approx(beam_axle):
 		#var wheel_lookat_vector := (opposite_wheel.transform * opposite_wheel.wheel_node.position) - (transform * wheel_node.position)
 		#model.rotation.z = wheel_lookat_vector.angle_to(Vector3.RIGHT * beam_axle) * signf(wheel_lookat_vector.y * beam_axle)
@@ -99,7 +99,8 @@ func initialize() -> void:
 func steer(input : float, max_steering_angle : float):
 	#input *= steering_ratio
 	DebugHud.send("Ste" + name.right(3), input)
-	rotation.y = (max_steering_angle * (input + (1 - cos(input * 0.5 * PI)) * ackermann)) + toe
+	#rotation.y = (max_steering_angle * (input + (1 - cos(input * 0.5 * PI)) * ackermann)) + toe
+	rotation.y = max_steering_angle * input
 
 
 func process_torque(drive : float, drive_inertia : float, brake_torque : float, abs : bool, delta : float) -> float:
@@ -306,14 +307,18 @@ func process_tires(braking : bool, delta : float):
 	if slip_vector.y > 0.3 and braking:
 		braking_help = (1 + (braking_grip_multiplier * clampf(absf(slip_vector.y), 0.0, 1.0)))
 	
-	var crit_length := friction * (1.0 - slip_vector.y) * contact_patch * (0.5 * deflect)
-	if crit_length >= contact_patch:
-		force_vector.y = cornering_stiffness * slip_vector.y / (1.0 - slip_vector.y)
-		force_vector.x = cornering_stiffness * slip_vector.x / (1.0 - slip_vector.y)
-	else:
-		var brushx := (1.0 - friction * (1.0 - slip_vector.y) * (0.25 * deflect)) * deflect
-		force_vector.y = friction * current_longitudinal_grip_ratio * cornering_stiffness * slip_vector.y * brushx * braking_help * z_sign
-		force_vector.x = friction * cornering_stiffness * slip_vector.x * brushx * (absf(slip_vector.x * current_lateral_grip_assist) + 1.0)
+	#var crit_length := friction * (1.0 - slip_vector.y) * contact_patch * (0.5 * deflect)
+	#if crit_length >= contact_patch:
+		#force_vector.y = cornering_stiffness * slip_vector.y / (1.0 - slip_vector.y)
+		#force_vector.x = cornering_stiffness * slip_vector.x / (1.0 - slip_vector.y)
+	#else:
+	var brushx := (1.0 - friction * (1.0 - slip_vector.y) * (0.25 * deflect)) * deflect
+	
+	#friction= 1.0
+	
+	force_vector.y = friction * current_longitudinal_grip_ratio * cornering_stiffness * slip_vector.y * brushx * braking_help * z_sign
+	force_vector.x = friction * cornering_stiffness * slip_vector.x * brushx * (absf(slip_vector.x * current_lateral_grip_assist) + 1.0)
+
 	
 	if absf(force_vector.y) > absf(max_y_force):
 		force_vector.y = max_y_force * signf(force_vector.y)
@@ -324,7 +329,7 @@ func process_tires(braking : bool, delta : float):
 	if absf(force_vector.x) > max_x_force:
 		force_vector.x = max_x_force * signf(force_vector.x)
 	
-	force_vector.y -= process_rolling_resistance() * signf(local_velocity.z)
+	#force_vector.y -= process_rolling_resistance() * signf(local_velocity.z)
 
 
 func process_rolling_resistance() -> float:

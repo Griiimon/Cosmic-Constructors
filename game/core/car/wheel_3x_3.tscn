@@ -50,6 +50,9 @@ spring_length = 1.0
 spring_rate = 50.0
 slow_bump = 1.0
 fast_bump = 1.0
+slow_rebound = 1.0
+fast_rebound = 1.0
+mass_over_wheel = 1.0
 
 [node name="Model" type="Node3D" parent="."]
 

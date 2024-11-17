@@ -356,8 +356,8 @@ func on_update():
 
 
 func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
-	var forward_drive: float= max(0, -grid.requested_movement.z)
-	var final_brake: float= max(0, grid.requested_movement.z)
+	var forward_drive: float= round(max(0, -grid.requested_movement.z))
+	var final_brake: float= round(max(0, grid.requested_movement.z))
 
 	# no braking if we are driving
 	if forward_drive > 0:
@@ -365,7 +365,7 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 
 	throttle_input= forward_drive
 	brake_input= final_brake
-	steering_input= -grid.requested_movement.x
+	steering_input= -round(grid.requested_movement.x)
 
 	# brake if movement opposite indended direction
 	#if sign(grid.get_current_speed()) != sign(forward_drive) && !is_zero_approx(grid.linear_v) && forward_drive != 0:
@@ -439,7 +439,11 @@ func process_braking(delta : float) -> void:
 	brake_force = brake_amount * max_brake_force
 	handbrake_force = handbrake_input * max_handbrake_force
 
+
 func process_steering(delta : float) -> void:
+	wheel.steer(steering_input, max_steering_angle)
+	return
+
 	var steer_assist_engaged := false
 	var steering_slip := get_max_steering_slip_angle()
 	

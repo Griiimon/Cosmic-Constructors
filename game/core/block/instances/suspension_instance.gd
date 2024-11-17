@@ -365,7 +365,7 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 
 	throttle_input= forward_drive
 	brake_input= final_brake
-	steering_input= grid.requested_movement.x
+	steering_input= -grid.requested_movement.x
 
 	# brake if movement opposite indended direction
 	#if sign(grid.get_current_speed()) != sign(forward_drive) && !is_zero_approx(grid.linear_v) && forward_drive != 0:
@@ -410,7 +410,7 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 		process_motor(delta)
 		#process_clutch(delta)
 		#process_transmission(delta)
-		#process_drive(delta)
+		process_drive(delta)
 		process_forces(grid, delta)
 		#process_stability()
 
@@ -477,23 +477,25 @@ func process_steering(delta : float) -> void:
 	## Steering exponent adjustment
 	var steering_adjust := pow(absf(steering_amount), steering_exponent) * signf(steering_amount)
 	
-	## Correct steering toward the direction of travel for countersteer assist
-	var steer_correction := (1.0 - absf(steering_adjust)) * clampf(asin(local_velocity.normalized().x), -max_steering_angle, max_steering_angle) * countersteer_assist
+	### Correct steering toward the direction of travel for countersteer assist
+	#var steer_correction := (1.0 - absf(steering_adjust)) * clampf(asin(local_velocity.normalized().x), -max_steering_angle, max_steering_angle) * countersteer_assist
 	
-	## Don't apply corrections at low velocity or reversing
-	if local_velocity.z > -0.5:
-		steer_correction = 0
-	else:
-		steer_correction = steer_correction / -max_steering_angle
+	### Don't apply corrections at low velocity or reversing
+	#if local_velocity.z > -0.5:
+		#steer_correction = 0
+	#else:
+		#steer_correction = steer_correction / -max_steering_angle
+	#
+	### Keeps steering corrections from getting stuck under certain circumstances
+	#var steer_correction_amount := 1.0
+	#if signf(steering_adjust + steer_correction) != signf(steering_input) and 1.0 - absf(steering_input) < steer_correction_amount:
+		#steer_correction_amount = clampf(steer_correction_amount - (steering_speed * delta), 0.0, 1.0)
+	#else:
+		#steer_correction_amount = clampf(steer_correction_amount + (steering_speed * delta), 0.0, 1.0)
+	#
+	#steer_correction *= steer_correction_amount
 	
-	## Keeps steering corrections from getting stuck under certain circumstances
-	var steer_correction_amount := 1.0
-	if signf(steering_adjust + steer_correction) != signf(steering_input) and 1.0 - absf(steering_input) < steer_correction_amount:
-		steer_correction_amount = clampf(steer_correction_amount - (steering_speed * delta), 0.0, 1.0)
-	else:
-		steer_correction_amount = clampf(steer_correction_amount + (steering_speed * delta), 0.0, 1.0)
-	
-	steer_correction *= steer_correction_amount
+	var steer_correction:= 0.0
 	
 	true_steering_amount = clampf(steering_adjust + steer_correction, -max_steering_angle, max_steering_angle)
 	
@@ -548,7 +550,7 @@ func process_motor(delta : float) -> void:
 		#need_clutch = false
 	#
 	#motor_rpm = maxf(motor_rpm, idle_rpm)
-	motor_rpm= throttle_amount * 5000
+	motor_rpm= throttle_amount * 500
 
 
 #func process_clutch(delta : float):
@@ -651,7 +653,7 @@ func process_motor(delta : float) -> void:
 					#if delta_time - last_shift_delta_time > shift_time:
 						#shift(1)
 
-#func process_drive(delta : float) -> void:
+func process_drive(delta : float) -> void:
 	#var current_gear_ratio := get_gear_ratio(current_gear)
 	#var drive_torque := 0.0
 	#var drive_inertia := motor_moment + pow(current_gear_ratio, 2) * gear_inertia
@@ -686,8 +688,10 @@ func process_motor(delta : float) -> void:
 	#
 	#process_axle_drive(axle_b, transfer_torque, drive_inertia, delta)
 	#process_axle_drive(axle_a, transfer_torque_2, drive_inertia, delta)
-#
-#func process_axle_drive(axle : Axle, torque : float, drive_inertia : float, delta : float) -> void:
+	process_axle_drive(motor_rpm, 0, delta)
+
+
+func process_axle_drive(torque : float, drive_inertia : float, delta : float) -> void:
 	#if not axle.is_drive_axle:
 		#torque = 0.0
 		#drive_inertia = 0.0
@@ -720,6 +724,9 @@ func process_motor(delta : float) -> void:
 	#rotation_sum += axle.wheels[0].process_torque(torque * split, drive_inertia, brake_force * 0.5 * axle.brake_bias, abs, delta)
 	#rotation_sum += axle.wheels[1].process_torque(torque * (1.0 - split), drive_inertia, brake_force * 0.5 * axle.brake_bias, abs, delta)
 	#axle.rotation_split = clampf(rotation_sum, -1.0, 1.0)
+	
+	wheel.process_torque(torque, drive_inertia, brake_force, false, delta)
+
 
 func process_forces(grid: BlockGrid, delta : float) -> void:
 	## Spring compression values are kept for antiroll bar calculations

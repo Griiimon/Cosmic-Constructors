@@ -54,7 +54,7 @@ var spring_current_length := 0.0
 var max_spring_length := 0.0
 var antiroll_force := 0.0
 var damping_force := 0.0
-var steering_ratio := 0.0
+#var steering_ratio := 0.0
 var last_collider
 var last_collision_point := Vector3.ZERO
 var last_collision_normal := Vector3.ZERO
@@ -71,7 +71,7 @@ var is_driven := false
 var opposite_wheel : Wheel
 var beam_axle := 0.0
 
-var grid: BlockGrid
+#var grid: BlockGrid
 
 
 
@@ -97,7 +97,8 @@ func initialize() -> void:
 
 
 func steer(input : float, max_steering_angle : float):
-	input *= steering_ratio
+	#input *= steering_ratio
+	DebugHud.send("Ste" + name.right(3), input)
 	rotation.y = (max_steering_angle * (input + (1 - cos(input * 0.5 * PI)) * ackermann)) + toe
 
 
@@ -173,16 +174,19 @@ func process_forces(grid: BlockGrid, opposite_compression : float, braking : boo
 	else:
 		last_collider = null
 	
-	var compression := process_suspension(opposite_compression, delta)
+	var compression := process_suspension(grid, opposite_compression, delta)
 	
 	if is_colliding() and last_collider:
 		process_tires(braking, delta)
 		var contact := last_collision_point - grid.global_position
 		if spring_force > 0.0:
+			DebugHud.send("Sus" + name.right(3), last_collision_normal * spring_force)
 			grid.apply_force(last_collision_normal * spring_force, contact)
 		else:
 			## Apply a small amount of downward force if there is no spring force
 			grid.apply_force(-global_transform.basis.y * grid.mass, global_position - grid.global_position)
+		
+		DebugHud.send("FVec" + name.right(3), force_vector)
 		
 		grid.apply_force(global_transform.basis.x * force_vector.x, contact)
 		grid.apply_force(global_transform.basis.z * force_vector.y, contact)
@@ -202,7 +206,8 @@ func process_forces(grid: BlockGrid, opposite_compression : float, braking : boo
 		spin -= signf(spin) * delta * 2.0 / wheel_moment
 		return 0.0
 
-func process_suspension(opposite_compression : float, delta : float) -> float:
+
+func process_suspension(grid: BlockGrid, opposite_compression : float, delta : float) -> float:
 	if is_colliding() and last_collider:
 		spring_current_length = last_collision_point.distance_to(global_position) - tire_radius
 	else:
@@ -321,12 +326,15 @@ func process_tires(braking : bool, delta : float):
 	
 	force_vector.y -= process_rolling_resistance() * signf(local_velocity.z)
 
+
 func process_rolling_resistance() -> float:
 	var rolling_resistance_coefficient := 0.005 + (0.5 * (0.01 + (0.0095 * pow(local_velocity.z * 0.036, 2))))
 	return rolling_resistance_coefficient * spring_force * current_rolling_resistance
 
+
 func get_reaction_torque() -> float:
 	return force_vector.y * tire_radius
+
 
 func get_friction(normal_force : float, surface : String= "Road") -> float:
 	var surface_cof := 1.0

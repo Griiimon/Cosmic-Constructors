@@ -7,17 +7,17 @@
 # https://lupine-vidya.itch.io/gdsim/devlog/677572/series-driving-simulator-workshop-mirror
 
 class_name Wheel
-extends RayCast3D
+extends ShapeCast3D
 
 @onready var model: Node3D = $Model
 
 
-@export var wheel_mass := 15.0
-@export var tire_radius := 0.3
+@export var wheel_mass := 1.0
+@export var tire_radius := 3.0
 @export var tire_width := 205.0
 @export var ackermann := 0.15
 @export var contact_patch := 0.2
-@export var braking_grip_multiplier := 1.4
+@export var braking_grip_multiplier := 0.01
 
 var surface_type := "Road"
 var tire_stiffnesses := { "Road" : 5.0, "Dirt" : 0.5, "Grass" : 0.5 }
@@ -26,18 +26,18 @@ var rolling_resistance := { "Road" : 1.0, "Dirt" : 2.0, "Grass" : 4.0 }
 var lateral_grip_assist := { "Road" : 0.05, "Dirt" : 0.0, "Grass" : 0.0}
 var longitudinal_grip_ratio := { "Road" : 0.5, "Dirt": 0.5, "Grass" : 0.5}
 
-@export var spring_length := 0.15
-@export var spring_rate := 0.0
-@export var slow_bump := 0.0
-@export var fast_bump := 0.0
-@export var slow_rebound := 0.0
-@export var fast_rebound := 0.0
-@export var fast_damp_threshold := 127.0
+@export var spring_length := 1
+@export var spring_rate := 5
+@export var slow_bump := 0.1
+@export var fast_bump := 1.0
+@export var slow_rebound := 0.1
+@export var fast_rebound := 1.0
+@export var fast_damp_threshold := 12700.0
 @export var antiroll := 0.0
 @export var toe := 0.0
 @export var bump_stop_multiplier := 1.0
 @export var wheel_to_body_torque_multiplier := 0.0
-@export var mass_over_wheel := 0.0
+@export var mass_over_wheel := 1.0
 
 var wheel_moment := 0.0
 var spin := 0.0
@@ -151,16 +151,16 @@ func process_torque(drive : float, drive_inertia : float, brake_torque : float, 
 
 
 func process_forces(grid: BlockGrid, opposite_compression : float, braking : bool, delta : float) -> float:
-	force_raycast_update()
+	force_shapecast_update()
 	previous_velocity = local_velocity
 	local_velocity = (global_position - previous_global_position) / delta * global_transform.basis
 	previous_global_position = global_position
 	
 	## Determine the surface the tire is on. Uses node groups
 	if is_colliding():
-		last_collider = get_collider()
-		last_collision_point = get_collision_point()
-		last_collision_normal = get_collision_normal()
+		last_collider = get_collider(0)
+		last_collision_point = get_collision_point(0)
+		last_collision_normal = get_collision_normal(0)
 		#var surface_groups : Array[StringName] = last_collider.get_groups()
 		#if surface_groups.size() > 0:
 			#if surface_type != surface_groups[0]:

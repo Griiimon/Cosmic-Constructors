@@ -1,6 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://d3tx7ikwat0o"]
+[gd_scene load_steps=13 format=3 uid="uid://d3tx7ikwat0o"]
 
 [ext_resource type="Script" path="res://game/core/car/wheel.gd" id="1_rbnuk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vl5fs"]
+radius = 2.0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2pls0"]
 friction = 0.0
@@ -41,21 +44,10 @@ albedo_color = Color(0.762225, 0.0875363, 1.92523e-07, 1)
 material = SubResource("StandardMaterial3D_g0t4m")
 size = Vector3(0.1, 0.1, 4)
 
-[node name="Wheel 3x3" type="RayCast3D"]
+[node name="Wheel 3x3" type="ShapeCast3D"]
+shape = SubResource("SphereShape3D_vl5fs")
 collision_mask = 4
-hit_back_faces = false
 script = ExtResource("1_rbnuk")
-wheel_mass = 1.0
-tire_radius = 3.0
-braking_grip_multiplier = 0.01
-spring_length = 1.0
-spring_rate = 5.0
-slow_bump = 0.1
-fast_bump = 1.0
-slow_rebound = 0.1
-fast_rebound = 1.0
-fast_damp_threshold = 12700.0
-mass_over_wheel = 1.0
 
 [node name="Model" type="Node3D" parent="."]
 

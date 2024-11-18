@@ -7,11 +7,12 @@
 # https://lupine-vidya.itch.io/gdsim/devlog/677572/series-driving-simulator-workshop-mirror
 
 class_name Wheel
-extends ShapeCast3D
+extends Node3D
 
 @onready var model: Node3D = $Model
 
 
+@export_flags_3d_physics var collision_mask
 @export var wheel_mass := 1.0
 @export var tire_radius := 3.0
 @export var tire_width := 205.0
@@ -71,6 +72,11 @@ var is_driven := false
 var opposite_wheel : Wheel
 var beam_axle := 0.0
 
+var query:= PhysicsShapeQueryParameters3D.new()
+var rest_query:= PhysicsShapeQueryParameters3D.new()
+
+var grounded:= false
+
 
 
 func _process(delta : float) -> void:
@@ -84,7 +90,16 @@ func _process(delta : float) -> void:
 func initialize() -> void:
 	model.rotation_order = EULER_ORDER_ZXY
 	wheel_moment = 0.5 * wheel_mass * pow(tire_radius, 2)
-	set_target_position(Vector3.DOWN * (spring_length + tire_radius))
+
+	query.collision_mask= collision_mask
+	var sphere:= SphereShape3D.new()
+	sphere.radius= tire_radius
+	query.shape= sphere
+
+	rest_query.collision_mask= collision_mask
+	rest_query.shape= sphere
+
+	#set_target_position(Vector3.DOWN * (spring_length + tire_radius))
 
 	max_spring_length = spring_length
 	current_cof = coefficient_of_friction[surface_type]
@@ -151,35 +166,48 @@ func process_torque(drive : float, drive_inertia : float, brake_torque : float, 
 
 
 func process_forces(grid: BlockGrid, opposite_compression : float, braking : bool, delta : float) -> float:
-	force_shapecast_update()
+	query.transform.origin= global_position + global_basis.y * tire_radius
+	query.motion= -global_basis.y * (spring_length + tire_radius)
+
+	#query.transform.origin= global_position
+	var cast_result: PackedFloat64Array= get_world_3d().direct_space_state.cast_motion(query)
+	
 	previous_velocity = local_velocity
 	local_velocity = (global_position - previous_global_position) / delta * global_transform.basis
 	previous_global_position = global_position
 	
-	## Determine the surface the tire is on. Uses node groups
-	if is_colliding():
-		last_collider = get_collider(0)
-		last_collision_point = get_collision_point(0)
-		last_collision_normal= Vector3.ZERO
-		for i in get_collision_count():
-			last_collision_normal= get_collision_normal(i)
-		last_collision_normal= last_collision_normal.normalized()
-		#last_collision_normal = get_collision_normal(0)
-		#var surface_groups : Array[StringName] = last_collider.get_groups()
-		#if surface_groups.size() > 0:
-			#if surface_type != surface_groups[0]:
-				#surface_type = surface_groups[0]
-				#current_cof = coefficient_of_friction[surface_type]
-				#current_rolling_resistance = rolling_resistance[surface_type]
-				#current_lateral_grip_assist = lateral_grip_assist[surface_type]
-				#current_longitudinal_grip_ratio = longitudinal_grip_ratio[surface_type]
-				#current_tire_stiffness = 1000000.0 + 8000000.0 * tire_stiffnesses[surface_type]
+	grounded= false
+	if cast_result[0] < 1.0:
+		rest_query.transform.origin= query.transform.origin + query.motion * cast_result[1]
+		
+		var rest_result: Dictionary= get_world_3d().direct_space_state.get_rest_info(rest_query)
+
+		# TODO why is it possible for rest_result to fail with valid cast_result?
+		#assert(rest_result)
+		if rest_result:
+			grounded= true
+
+			# FIXME get last collider via rest_result.rid / id
+			last_collider = get_tree().current_scene
+			last_collision_point = query.transform.origin + query.motion * cast_result[0]
+			last_collision_normal= Vector3.ZERO
+			last_collision_normal= rest_result.normal
+
+			#var surface_groups : Array[StringName] = last_collider.get_groups()
+			#if surface_groups.size() > 0:
+				#if surface_type != surface_groups[0]:
+					#surface_type = surface_groups[0]
+					#current_cof = coefficient_of_friction[surface_type]
+					#current_rolling_resistance = rolling_resistance[surface_type]
+					#current_lateral_grip_assist = lateral_grip_assist[surface_type]
+					#current_longitudinal_grip_ratio = longitudinal_grip_ratio[surface_type]
+					#current_tire_stiffness = 1000000.0 + 8000000.0 * tire_stiffnesses[surface_type]
 	else:
 		last_collider = null
 	
 	var compression := process_suspension(grid, opposite_compression, delta)
 	
-	if is_colliding() and last_collider:
+	if grounded and last_collider:
 		process_tires(braking, delta)
 		var contact := last_collision_point - grid.global_position
 		if spring_force > 0.0:
@@ -211,8 +239,9 @@ func process_forces(grid: BlockGrid, opposite_compression : float, braking : boo
 
 
 func process_suspension(grid: BlockGrid, opposite_compression : float, delta : float) -> float:
-	if is_colliding() and last_collider:
-		spring_current_length = last_collision_point.distance_to(global_position) - tire_radius
+	if grounded and last_collider:
+		#spring_current_length = last_collision_point.distance_to(global_position) - tire_radius
+		spring_current_length = last_collision_point.distance_to(query.transform.origin) - tire_radius
 	else:
 		spring_current_length = spring_length
 	

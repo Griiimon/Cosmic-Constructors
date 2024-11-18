@@ -160,7 +160,11 @@ func process_forces(grid: BlockGrid, opposite_compression : float, braking : boo
 	if is_colliding():
 		last_collider = get_collider(0)
 		last_collision_point = get_collision_point(0)
-		last_collision_normal = get_collision_normal(0)
+		last_collision_normal= Vector3.ZERO
+		for i in get_collision_count():
+			last_collision_normal= get_collision_normal(i)
+		last_collision_normal= last_collision_normal.normalized()
+		#last_collision_normal = get_collision_normal(0)
 		#var surface_groups : Array[StringName] = last_collider.get_groups()
 		#if surface_groups.size() > 0:
 			#if surface_type != surface_groups[0]:

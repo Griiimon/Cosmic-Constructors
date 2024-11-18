@@ -297,6 +297,7 @@ func process_suspension(grid: BlockGrid, opposite_compression : float, delta : f
 	
 	return compression
 
+
 func process_tires(braking : bool, delta : float):
 	## This is a modified version of the brush tire model that removes the friction falloff beyond
 	## the peak grip level.
@@ -339,15 +340,15 @@ func process_tires(braking : bool, delta : float):
 	if slip_vector.y > 0.3 and braking:
 		braking_help = (1 + (braking_grip_multiplier * clampf(absf(slip_vector.y), 0.0, 1.0)))
 	
-	#var crit_length := friction * (1.0 - slip_vector.y) * contact_patch * (0.5 * deflect)
-	#if crit_length >= contact_patch:
-		#force_vector.y = cornering_stiffness * slip_vector.y / (1.0 - slip_vector.y)
-		#force_vector.x = cornering_stiffness * slip_vector.x / (1.0 - slip_vector.y)
-	#else:
-	var brushx := (1.0 - friction * (1.0 - slip_vector.y) * (0.25 * deflect)) * deflect
+	var crit_length := friction * (1.0 - slip_vector.y) * contact_patch * (0.5 * deflect)
+	if crit_length >= contact_patch:
+		force_vector.y = cornering_stiffness * slip_vector.y / (1.0 - slip_vector.y)
+		force_vector.x = cornering_stiffness * slip_vector.x / (1.0 - slip_vector.y)
+	else:
+		var brushx := (1.0 - friction * (1.0 - slip_vector.y) * (0.25 * deflect)) * deflect
 
-	force_vector.y = friction * current_longitudinal_grip_ratio * cornering_stiffness * slip_vector.y * brushx * braking_help * z_sign
-	force_vector.x = friction * cornering_stiffness * slip_vector.x * brushx * (absf(slip_vector.x * current_lateral_grip_assist) + 1.0)
+		force_vector.y = friction * current_longitudinal_grip_ratio * cornering_stiffness * slip_vector.y * brushx * braking_help * z_sign
+		force_vector.x = friction * cornering_stiffness * slip_vector.x * brushx * (absf(slip_vector.x * current_lateral_grip_assist) + 1.0)
 
 	
 	if absf(force_vector.y) > absf(max_y_force):
@@ -356,8 +357,8 @@ func process_tires(braking : bool, delta : float):
 	else:
 		limit_spin = false
 	
-	if absf(force_vector.x) > max_x_force:
-		force_vector.x = max_x_force * signf(force_vector.x)
+	#if absf(force_vector.x) > max_x_force:
+		#force_vector.x = max_x_force * signf(force_vector.x)
 
 	# There always seems to be a counterforce applied that evens out the rolling resistance
 	# ( during the next frame? )

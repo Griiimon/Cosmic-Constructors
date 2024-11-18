@@ -53,9 +53,8 @@ var slip_vector := Vector2.ZERO
 var previous_compression := 0.0
 var spring_current_length := 0.0
 var max_spring_length := 0.0
-var antiroll_force := 0.0
 var damping_force := 0.0
-#var steering_ratio := 0.0
+
 var last_collider
 var last_collision_point := Vector3.ZERO
 var last_collision_normal := Vector3.ZERO
@@ -64,13 +63,11 @@ var current_rolling_resistance := 0.0
 var current_lateral_grip_assist := 0.0
 var current_longitudinal_grip_ratio := 0.0
 var current_tire_stiffness := 0.0
+
 var abs_enable_time := 0.0
 var abs_pulse_time := 0.3
 var abs_spin_difference_threshold := -12.0
 var limit_spin := false
-var is_driven := false
-var opposite_wheel : Wheel
-var beam_axle := 0.0
 
 var query:= PhysicsShapeQueryParameters3D.new()
 var rest_query:= PhysicsShapeQueryParameters3D.new()
@@ -81,9 +78,6 @@ var grounded:= false
 
 func _process(delta : float) -> void:
 	model.position.y = minf(0.0, -spring_current_length) + spring_length
-	#if not is_zero_approx(beam_axle):
-		#var wheel_lookat_vector := (opposite_wheel.transform * opposite_wheel.wheel_node.position) - (transform * wheel_node.position)
-		#model.rotation.z = wheel_lookat_vector.angle_to(Vector3.RIGHT * beam_axle) * signf(wheel_lookat_vector.y * beam_axle)
 	model.rotation.x -= (wrapf(spin * delta, 0, TAU))
 
 
@@ -98,8 +92,6 @@ func initialize() -> void:
 
 	rest_query.collision_mask= collision_mask
 	rest_query.shape= sphere
-
-	#set_target_position(Vector3.DOWN * (spring_length + tire_radius))
 
 	max_spring_length = spring_length
 	current_cof = coefficient_of_friction[surface_type]
@@ -116,6 +108,7 @@ func steer(input : float, max_steering_angle : float):
 	rotation.y = max_steering_angle * input
 
 
+# TODO what in here currently has any impact?
 func process_torque(drive : float, drive_inertia : float, brake_torque : float, abs : bool, delta : float) -> float:
 	## Add the torque the wheel produced last frame from surface friction
 	var net_torque := force_vector.y * tire_radius
@@ -193,6 +186,8 @@ func process_forces(grid: BlockGrid, opposite_compression : float, braking : boo
 			last_collision_normal= Vector3.ZERO
 			last_collision_normal= rest_result.normal
 
+			# TODO implement surface types
+			
 			#var surface_groups : Array[StringName] = last_collider.get_groups()
 			#if surface_groups.size() > 0:
 				#if surface_type != surface_groups[0]:
@@ -240,7 +235,6 @@ func process_forces(grid: BlockGrid, opposite_compression : float, braking : boo
 
 func process_suspension(grid: BlockGrid, opposite_compression : float, delta : float) -> float:
 	if grounded and last_collider:
-		#spring_current_length = last_collision_point.distance_to(global_position) - tire_radius
 		spring_current_length = last_collision_point.distance_to(query.transform.origin) - tire_radius
 	else:
 		spring_current_length = spring_length
@@ -261,8 +255,6 @@ func process_suspension(grid: BlockGrid, opposite_compression : float, delta : f
 	previous_compression = compression
 	
 	spring_force = compression * spring_rate
-	#antiroll_force = antiroll * (compression - opposite_compression)
-	#spring_force += antiroll_force
 	
 	## If the suspension is bottomed out, apply some additional forces to help keep the vehicle body
 	## from colliding with the surface.
@@ -357,8 +349,8 @@ func process_tires(braking : bool, delta : float):
 	else:
 		limit_spin = false
 	
-	#if absf(force_vector.x) > max_x_force:
-		#force_vector.x = max_x_force * signf(force_vector.x)
+	if absf(force_vector.x) > max_x_force:
+		force_vector.x = max_x_force * signf(force_vector.x)
 
 	# There always seems to be a counterforce applied that evens out the rolling resistance
 	# ( during the next frame? )

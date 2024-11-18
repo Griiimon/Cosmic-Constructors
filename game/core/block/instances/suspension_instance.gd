@@ -312,7 +312,6 @@ var torque_output := 0.0
 #var current_torque_split := 0.0
 #var true_torque_split := 0.0
 var brake_force := 0.0
-var max_brake_force := 0.0
 var handbrake_force := 0.0
 var max_handbrake_force := 0.0
 var is_braking := false
@@ -365,6 +364,7 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 
 	throttle_input= forward_drive
 	brake_input= final_brake
+#	is_braking= not is_zero_approx(final_brake)
 	steering_input= -round(grid.requested_movement.x)
 
 	# brake if movement opposite indended direction
@@ -403,7 +403,7 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 		speed = local_velocity.length()
 		
 		#process_drag()
-		process_braking(delta)
+		process_braking(grid, wheel, delta)
 		if can_steer.is_true():
 			process_steering(delta)
 		process_throttle(delta)
@@ -420,7 +420,7 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 	#if drag > 0.0:
 		#apply_central_force(-local_velocity.normalized() * drag)
 
-func process_braking(delta : float) -> void:
+func process_braking(grid: BlockGrid, wheel: Wheel, delta : float) -> void:
 	if (brake_input < brake_amount):
 		brake_amount -= braking_speed * delta
 		if (brake_input > brake_amount):
@@ -436,7 +436,14 @@ func process_braking(delta : float) -> void:
 	else:
 		is_braking = false
 	
+	#var friction := calculate_average_tire_friction(vehicle_mass * 9.8, "Road")
+	var friction := calculate_average_tire_friction(grid.mass * grid.current_gravity.dot(-global_basis.y), "Road")
+	#max_brake_force = ((friction * braking_grip_multiplier) * average_drive_wheel_radius) / wheel_array.size()
+	var max_brake_force: float = ((friction * wheel.braking_grip_multiplier) * wheel.tire_radius)
+	#max_handbrake_force = ((friction * braking_grip_multiplier * 0.05) / average_drive_wheel_radius)
+
 	brake_force = brake_amount * max_brake_force
+	DebugHud.send("Brake", brake_force)
 	handbrake_force = handbrake_input * max_handbrake_force
 
 
@@ -786,12 +793,12 @@ func calculate_average_tire_friction(weight : float, surface : String) -> float:
 	# TODO divide by number of wheels having ground contact ( previous tick )
 	return wheel.get_friction(weight)
 
-func calculate_brake_force(grid: BlockGrid) -> void:
-	#var friction := calculate_average_tire_friction(vehicle_mass * 9.8, "Road")
-	var friction := calculate_average_tire_friction(grid.mass * grid.current_gravity.dot(-global_basis.y), "Road")
-	#max_brake_force = ((friction * braking_grip_multiplier) * average_drive_wheel_radius) / wheel_array.size()
-	max_brake_force = ((friction * braking_grip_multiplier) * wheel.tire_radius)
-	#max_handbrake_force = ((friction * braking_grip_multiplier * 0.05) / average_drive_wheel_radius)
+#func calculate_brake_force(grid: BlockGrid) -> void:
+	##var friction := calculate_average_tire_friction(vehicle_mass * 9.8, "Road")
+	#var friction := calculate_average_tire_friction(grid.mass * grid.current_gravity.dot(-global_basis.y), "Road")
+	##max_brake_force = ((friction * braking_grip_multiplier) * average_drive_wheel_radius) / wheel_array.size()
+	#max_brake_force = ((friction * wheel.braking_grip_multiplier) * wheel.tire_radius)
+	##max_handbrake_force = ((friction * braking_grip_multiplier * 0.05) / average_drive_wheel_radius)
 
 #func calculate_center_of_gravity(front_distribution : float) -> Vector3:
 	#front_axle_position = front_left_wheel.position.lerp(front_right_wheel.position, 0.5)

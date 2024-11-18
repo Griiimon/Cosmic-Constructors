@@ -45,13 +45,16 @@ size = Vector3(0.1, 0.1, 4)
 collision_mask = 4
 hit_back_faces = false
 script = ExtResource("1_rbnuk")
+wheel_mass = 1.0
 tire_radius = 3.0
+braking_grip_multiplier = 0.01
 spring_length = 1.0
-spring_rate = 15.0
-slow_bump = 1.0
+spring_rate = 5.0
+slow_bump = 0.1
 fast_bump = 1.0
-slow_rebound = 1.0
+slow_rebound = 0.1
 fast_rebound = 1.0
+fast_damp_threshold = 12700.0
 mass_over_wheel = 1.0
 
 [node name="Model" type="Node3D" parent="."]

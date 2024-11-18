@@ -71,8 +71,6 @@ var is_driven := false
 var opposite_wheel : Wheel
 var beam_axle := 0.0
 
-#var grid: BlockGrid
-
 
 
 func _process(delta : float) -> void:
@@ -251,10 +249,10 @@ func process_suspension(grid: BlockGrid, opposite_compression : float, delta : f
 			damping_force = spring_speed_mm_per_seconds * (slow_bump + bottom_out_damping)
 	else :
 		if spring_speed_mm_per_seconds < -fast_damp_threshold:
-			damping_force = spring_speed_mm_per_seconds * slow_rebound
-		else:
 			damping_force = spring_speed_mm_per_seconds * fast_rebound
-	
+		else:
+			damping_force = spring_speed_mm_per_seconds * slow_rebound
+		
 	spring_force += damping_force
 	
 	spring_force = maxf(0, spring_force + bottom_out_force)
@@ -302,6 +300,7 @@ func process_tires(braking : bool, delta : float):
 	var friction := current_cof * spring_force - (spring_force / (tire_width * contact_patch * 0.2))
 	var deflect := 1.0 / (sqrt(pow(cornering_stiffness * slip_vector.y, 2.0) + pow(cornering_stiffness * slip_vector.x, 2.0)))
 	
+
 	## Adds in additional longitudinal grip when braking
 	var braking_help := 1.0
 	if slip_vector.y > 0.3 and braking:
@@ -313,9 +312,7 @@ func process_tires(braking : bool, delta : float):
 		#force_vector.x = cornering_stiffness * slip_vector.x / (1.0 - slip_vector.y)
 	#else:
 	var brushx := (1.0 - friction * (1.0 - slip_vector.y) * (0.25 * deflect)) * deflect
-	
-	#friction= 1.0
-	
+
 	force_vector.y = friction * current_longitudinal_grip_ratio * cornering_stiffness * slip_vector.y * brushx * braking_help * z_sign
 	force_vector.x = friction * cornering_stiffness * slip_vector.x * brushx * (absf(slip_vector.x * current_lateral_grip_assist) + 1.0)
 
@@ -328,8 +325,12 @@ func process_tires(braking : bool, delta : float):
 	
 	if absf(force_vector.x) > max_x_force:
 		force_vector.x = max_x_force * signf(force_vector.x)
-	
-	#force_vector.y -= process_rolling_resistance() * signf(local_velocity.z)
+
+	# There always seems to be a counterforce applied that evens out the rolling resistance
+	# ( during the next frame? )
+
+	#var resistance_force: float= process_rolling_resistance() * signf(local_velocity.z) 
+	#force_vector.y -= resistance_force
 
 
 func process_rolling_resistance() -> float:

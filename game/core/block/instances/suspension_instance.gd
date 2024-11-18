@@ -561,7 +561,7 @@ func process_motor(delta : float) -> void:
 		#need_clutch = false
 	#
 	#motor_rpm = maxf(motor_rpm, idle_rpm)
-	motor_rpm= throttle_amount * 500
+	motor_rpm= throttle_amount * 1000
 
 
 #func process_clutch(delta : float):

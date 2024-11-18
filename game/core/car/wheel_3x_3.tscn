@@ -44,6 +44,8 @@ size = Vector3(0.1, 0.1, 4)
 [node name="Wheel 3x3" type="Node3D"]
 script = ExtResource("1_rbnuk")
 collision_mask = 4
+tire_width = 500.0
+bump_stop_multiplier = 10.0
 
 [node name="Model" type="Node3D" parent="."]
 

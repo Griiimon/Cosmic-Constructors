@@ -108,6 +108,7 @@ func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
 	
 	for x in size.x:
 		for z in size.y:
+			@warning_ignore("narrowing_conversion")
 			grid.add_block(default_block, Vector3i(x, 0, z) - Vector3i(size.x / 2.0, 0, size.y / 2.0) / 2)
 	
 	

@@ -98,11 +98,23 @@ func align_ghost():
 		
 		grid= raycast.get_collider()
 		assert(grid != null)
+
+		var can_place:= false
+		
+		for i in build_range:
+			if grid.can_place_block_at_global(current_block, collision_pos, block_rotation):
+				can_place= true
+				break
+				
+			collision_pos+= raycast.global_basis.z
+
+		if not can_place: return
 		
 		local_block_pos= grid.get_local_grid_pos(collision_pos)
 		var global_block_pos: Vector3= grid.get_global_block_pos(local_block_pos)
 		ghost.position= global_block_pos
 		ghost.rotation= grid.global_rotation
+		
 	else:
 		grid= null
 		ghost.position= player.to_global(raycast.target_position)

@@ -6,6 +6,7 @@ var children: Array[VirtualGridBlock]
 
 
 func absorb_damage(_damage: int)-> int:
+	@warning_ignore("integer_division")
 	return hitpoints / children.size()
 
 

@@ -97,6 +97,7 @@ func align_ghost():
 		var collision_pos: Vector3= raycast.get_collision_point()
 		collision_pos+= raycast.global_basis.z * 0.05
 		
+		var old_grid: BlockGrid= grid
 		grid= raycast.get_collider()
 		assert(grid != null)
 
@@ -109,7 +110,9 @@ func align_ghost():
 				
 			collision_pos+= raycast.global_basis.z
 
-		if not can_place: 
+		if not can_place:
+			if old_grid != grid:
+				ghost.hide()
 			return false
 		
 		local_block_pos= grid.get_local_grid_pos(collision_pos)

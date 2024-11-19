@@ -25,6 +25,7 @@ func add_grid(pos: Vector3, rot: Vector3= Vector3.ZERO)-> BlockGrid:
 	grid.position= pos
 	grid.rotation= rot
 	grid.world= self
+	grid.current_gravity= PhysicsServer3D.area_get_param(get_world_3d().space, PhysicsServer3D.AREA_PARAM_GRAVITY_VECTOR) * PhysicsServer3D.area_get_param(get_world_3d().space, PhysicsServer3D.AREA_PARAM_GRAVITY)
 	grids.add_child(grid)
 	
 	grid.freeze= grid_freeze_state

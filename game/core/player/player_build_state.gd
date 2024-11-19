@@ -10,6 +10,8 @@ extends PlayerStateMachineState
 		init_ghost()
 
 var ghost: Node3D
+var grid: BlockGrid
+var local_block_pos: Vector3i
 var block_rotation: Vector3
 
 
@@ -73,11 +75,22 @@ func on_physics_process(delta: float):
 	
 	if not ghost: return
 
-	var grid: BlockGrid
-	var local_block_pos: Vector3i
-	
+	align_ghost()
+
+	if Input.is_action_just_pressed("build_block"):
+		build_block()
+		return
+	elif Input.is_action_just_pressed("pick_block"):
+		pick_block()
+		return
+
+	rotate_ghost(delta)
+
+	ghost.show()
+
+
+func align_ghost():
 	var raycast: RayCast3D= player.build_raycast
-	var new_grid: bool= not raycast.is_colliding()
 
 	if raycast.is_colliding():
 		var collision_pos: Vector3= raycast.get_collision_point()
@@ -91,59 +104,66 @@ func on_physics_process(delta: float):
 		ghost.position= global_block_pos
 		ghost.rotation= grid.global_rotation
 	else:
+		grid= null
 		ghost.position= player.to_global(raycast.target_position)
-	
-	if Input.is_action_just_pressed("build_block"):
-		if not grid:
-			grid= player.world.add_grid(ghost.position, ghost.global_rotation)
-			
-			var query:= PhysicsShapeQueryParameters3D.new()
-			query.collision_mask= Global.TERRAIN_COLLISION_LAYER
-			query.shape= BoxShape3D.new()
-			query.transform= ghost.transform
-			
-			if player.get_world_3d().direct_space_state.intersect_shape(query):
-				grid.freeze= true
-			
-		grid.add_block(current_block, local_block_pos, block_rotation)
-	elif Input.is_action_just_pressed("pick_block"):
-		if raycast.is_colliding():
-			var collision_pos: Vector3= raycast.get_collision_point()
-			collision_pos-= raycast.global_basis.z * 0.05
-			
-			grid= raycast.get_collider()
-			assert(grid != null)
-			
-			var picked_grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_pos)
-			if picked_grid_block:
-				current_block= picked_grid_block.get_block_definition()
-	else:
-		if rotation_input("rotate_block_left", new_grid):
-			block_rotation.y-= 1
-		elif rotation_input("rotate_block_right", new_grid):
-			block_rotation.y+= 1
-		if rotation_input("rotate_block_up", new_grid):
-			block_rotation.x-= 1
-		elif rotation_input("rotate_block_down", new_grid):
-			block_rotation.x+= 1
-		if rotation_input("roll_block_left", new_grid):
-			block_rotation.z-= 1
-		elif rotation_input("roll_block_right", new_grid):
-			block_rotation.z+= 1
+
+
+func build_block():
+	if not grid:
+		grid= player.world.add_grid(ghost.position, ghost.global_rotation)
 		
-	if new_grid:
+		var query:= PhysicsShapeQueryParameters3D.new()
+		query.collision_mask= Global.TERRAIN_COLLISION_LAYER
+		query.shape= BoxShape3D.new()
+		query.transform= ghost.transform
+		
+		if player.get_world_3d().direct_space_state.intersect_shape(query):
+			grid.freeze= true
+		
+	grid.add_block(current_block, local_block_pos, block_rotation)
+
+
+func pick_block():
+	var raycast: RayCast3D= player.build_raycast
+	var grid: BlockGrid
+	
+	if raycast.is_colliding():
+		var collision_pos: Vector3= raycast.get_collision_point()
+		collision_pos-= raycast.global_basis.z * 0.05
+		
+		grid= raycast.get_collider()
+		assert(grid != null)
+		
+		var picked_grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_pos)
+		if picked_grid_block:
+			current_block= picked_grid_block.get_block_definition()
+
+
+func rotate_ghost(delta: float):
+	var no_grid: bool= grid == null
+	
+	if rotation_input("rotate_block_left", no_grid):
+		block_rotation.y-= 1
+	elif rotation_input("rotate_block_right", no_grid):
+		block_rotation.y+= 1
+	if rotation_input("rotate_block_up", no_grid):
+		block_rotation.x-= 1
+	elif rotation_input("rotate_block_down", no_grid):
+		block_rotation.x+= 1
+	if rotation_input("roll_block_left", no_grid):
+		block_rotation.z-= 1
+	elif rotation_input("roll_block_right", no_grid):
+		block_rotation.z+= 1
+		
+	if no_grid:
 		ghost.rotation= player.global_rotation
 		ghost.basis= ghost.basis * Basis.from_euler(block_rotation * delta * smooth_rotation_speed)
 	else:
 		ghost.basis= ghost.basis * Basis.from_euler(block_rotation * deg_to_rad(90))
 
-	ghost.show()
-	#else:
-		#ghost.hide()
 
-
-func rotation_input(action_name: String, new_grid: bool)-> bool:
-	if new_grid:
+func rotation_input(action_name: String, no_grid: bool)-> bool:
+	if no_grid:
 		return Input.is_action_pressed(action_name)
 	else:
 		return Input.is_action_just_pressed(action_name)

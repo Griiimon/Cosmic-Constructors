@@ -162,6 +162,8 @@ func pick_block():
 func rotate_ghost(delta: float):
 	var no_grid: bool= grid == null
 	
+	var old_rotation: Vector3i= block_rotation
+	
 	if rotation_input("rotate_block_left", no_grid):
 		block_rotation.y-= 1
 	elif rotation_input("rotate_block_right", no_grid):
@@ -179,6 +181,9 @@ func rotate_ghost(delta: float):
 		ghost.rotation= player.global_rotation
 		ghost.basis= ghost.basis * Basis.from_euler(block_rotation * delta * smooth_rotation_speed)
 	else:
+		if current_block.is_multi_block():
+			if not grid.can_place_block_at_global(current_block, ghost.position, block_rotation):
+				block_rotation= old_rotation
 		ghost.basis= ghost.basis * Basis.from_euler(block_rotation * deg_to_rad(90))
 
 

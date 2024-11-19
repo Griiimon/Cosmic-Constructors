@@ -105,6 +105,17 @@ func on_physics_process(_delta: float):
 			
 			
 		grid.add_block(current_block, local_block_pos, block_rotation)
+	elif Input.is_action_just_pressed("pick_block"):
+		if raycast.is_colliding():
+			var collision_pos: Vector3= raycast.get_collision_point()
+			collision_pos-= raycast.global_basis.z * 0.05
+			
+			grid= raycast.get_collider()
+			assert(grid != null)
+			
+			var picked_grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_pos)
+			if picked_grid_block:
+				current_block= picked_grid_block.get_block_definition()
 	else:
 		if Input.is_action_just_pressed("rotate_block_left"):
 			block_rotation.y-= 1

@@ -22,7 +22,7 @@ func on_enter():
 	player.transform= Transform3D.IDENTITY
 
 
-func on_physics_process(delta: float):
+func on_physics_process(_delta: float):
 	if Input.is_action_just_pressed("ui_cancel") or Input.is_action_just_pressed("interact"):
 		exit_seat()
 		return

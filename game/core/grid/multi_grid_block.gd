@@ -5,7 +5,7 @@ var children: Array[VirtualGridBlock]
 
 
 
-func absorb_damage(damage: int)-> int:
+func absorb_damage(_damage: int)-> int:
 	return hitpoints / children.size()
 
 

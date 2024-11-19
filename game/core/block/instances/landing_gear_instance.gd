@@ -5,6 +5,6 @@ extends BlockInstance
 
 
 
-func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
+func physics_tick(grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 	if area.has_overlapping_bodies():
 		grid.freeze= true

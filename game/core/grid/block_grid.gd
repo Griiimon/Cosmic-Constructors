@@ -81,9 +81,9 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		coll_shape.position= pos
 
 		# move the collision shape center if model doesnt have a proper center block
-		if Utils.is_even(shape.size.z):
+		if Utils.is_even(int(shape.size.z)):
 			coll_shape.position-= grid_block_basis.z * 0.5
-		if Utils.is_even(shape.size.y):
+		if Utils.is_even(int(shape.size.y)):
 			coll_shape.position+= grid_block_basis.y * 0.5
 
 		add_child(coll_shape)
@@ -167,9 +167,9 @@ func run_dampeners(delta: float):
 
 		var counter_force: Vector3 = -unwanted_velocity * delta # *dampening_factor
 		var threshold: float= 0.001
-		counter_force.x= counter_force.x if abs(counter_force.x) > threshold else 0
-		counter_force.y= counter_force.y if abs(counter_force.y) > threshold else 0
-		counter_force.z= counter_force.z if abs(counter_force.z) > threshold else 0
+		counter_force.x= counter_force.x if abs(counter_force.x) > threshold else 0.0
+		counter_force.y= counter_force.y if abs(counter_force.y) > threshold else 0.0
+		counter_force.z= counter_force.z if abs(counter_force.z) > threshold else 0.0
 
 		counter_force= counter_force.normalized()
 		
@@ -255,7 +255,7 @@ func update_properties():
 	
 	for grid_block: BaseGridBlock in blocks.values():
 		if grid_block is VirtualGridBlock: continue
-		var weight: int= grid_block.get_block_definition().weight
+		var weight: int= int(grid_block.get_block_definition().weight)
 		new_center_of_mass= lerp(new_center_of_mass, Vector3(grid_block.local_pos), weight / float(new_mass + weight)) 
 		new_mass+= weight
 	
@@ -419,13 +419,13 @@ func serialize()-> Dictionary:
 	return data
 
 
-static func deserialize(data: Dictionary, world: World)-> BlockGrid:
+static func deserialize(data: Dictionary, new_world: World)-> BlockGrid:
 	var grid:= BlockGrid.new()
 	grid.position= str_to_var("Vector3" + data["position"])
 	grid.rotation= str_to_var("Vector3" + data["rotation"])
 	grid.linear_velocity= str_to_var("Vector3" + data["linear_velocity"])
 	grid.angular_velocity= str_to_var("Vector3" + data["angular_velocity"])
-	world.grids.add_child(grid)
+	new_world.grids.add_child(grid)
 
 	for item: Dictionary in data["blocks"]:
 		var position: Vector3= str_to_var("Vector3" + item["position"])

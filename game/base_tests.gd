@@ -48,10 +48,6 @@ func on_start():
 	pass
 
 
-func _physics_process(delta: float) -> void:
-	pass
-
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed: 
@@ -83,7 +79,7 @@ func _input(event: InputEvent) -> void:
 				player.world.save_world(custom_world_name, project_folder_world)
 
 			else:
-				var switch_block_delta: int= Input.get_axis("next_block", "previous_block")
+				var switch_block_delta: int= int(Input.get_axis("next_block", "previous_block"))
 				
 				if switch_block_delta:
 					switch_block(switch_block_delta)
@@ -112,7 +108,7 @@ func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
 	
 	for x in size.x:
 		for z in size.y:
-			grid.add_block(default_block, Vector3i(x, 0, z) - Vector3i(size.x / 2, 0, size.y / 2) / 2)
+			grid.add_block(default_block, Vector3i(x, 0, z) - Vector3i(size.x / 2.0, 0, size.y / 2.0) / 2)
 	
 	
 func switch_block(delta: int):

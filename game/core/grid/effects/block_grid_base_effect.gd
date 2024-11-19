@@ -2,7 +2,7 @@ class_name BlockGridBaseEffect
 
 
 
-func apply(grid: BlockGrid):
+func apply(_grid: BlockGrid):
 	pass
 
 
@@ -11,5 +11,5 @@ func is_same(other_effect: BlockGridBaseEffect):
 	return get_script() == other_effect.get_script()
 
 
-func combine(other_effect: BlockGridBaseEffect):
+func combine(_other_effect: BlockGridBaseEffect):
 	pass

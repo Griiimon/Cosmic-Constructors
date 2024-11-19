@@ -146,7 +146,7 @@ func _ready() -> void:
 	default_interaction_property= can_steer
 
 
-func on_placed(grid: BlockGrid, grid_block: GridBlock):
+func on_placed(grid: BlockGrid, _grid_block: GridBlock):
 	wheel= wheel_scene.instantiate()
 	wheel.position= position + basis.x
 	grid.add_child(wheel)
@@ -163,7 +163,7 @@ func on_update():
 		wheel.reparent(get_parent())
 
 
-func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
+func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 	var forward_drive: float= round(max(0, -grid.requested_movement.z))
 	var final_brake: float= round(max(0, grid.requested_movement.z))
 
@@ -257,7 +257,7 @@ func process_throttle(delta : float) -> void:
 			throttle_amount = throttle_input
 
 
-func process_motor(delta : float) -> void:
+func process_motor(_delta : float) -> void:
 	#var drag_torque := motor_rpm * motor_drag
 	#torque_output = get_torque_at_rpm(motor_rpm) * throttle_amount
 	### Adjust torque based on throttle input, clutch input, and motor drag

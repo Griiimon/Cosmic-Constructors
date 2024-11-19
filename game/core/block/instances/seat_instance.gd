@@ -5,6 +5,6 @@ var entity: Entity
 
 
 
-func interact(grid: BlockGrid, grid_block: GridBlock, player: Player):
+func interact(_grid: BlockGrid, _grid_block: GridBlock, player: Player):
 	if not entity:
 		player.sit(self)

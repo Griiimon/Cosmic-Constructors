@@ -32,7 +32,7 @@ func decrease():
 	do_callback()
 
 
-func set_variant(val: Variant):
+func set_variant(_val: Variant):
 	pass
 
 

@@ -46,7 +46,7 @@ func reset_camera():
 	pivot.rotation= Vector3.ZERO
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_camera"):
 		if first_person_camera.current:
 			third_person_camera.make_current()

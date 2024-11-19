@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 		drill_head.rotate_z(rotation_speed * delta)
 
 
-func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
+func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 	if active.is_true():
 		if cooldown.is_stopped():
 			if terrain_shapecast.is_colliding():

@@ -5,11 +5,11 @@ var default_interaction_property: BlockProperty
 
 
 
-func on_placed(grid: BlockGrid, grid_block: GridBlock):
+func on_placed(_grid: BlockGrid, _grid_block: GridBlock):
 	pass
 
 
-func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
+func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 	pass
 
 

@@ -9,17 +9,17 @@ func _init(_local_pos: Vector3i):
 
 
 # returns true if destroyed
-func take_damage(damage: int, grid: BlockGrid)-> int:
+func take_damage(_damage: int, _grid: BlockGrid)-> int:
 	assert(false, "Abstract class")
 	return 0
 
 
-func absorb_damage(damage: int)-> int:
+func absorb_damage(_damage: int)-> int:
 	assert(false, "Abstract class")
 	return 0
 
 
-func destroy(grid: BlockGrid):
+func destroy(_grid: BlockGrid):
 	assert(false, "Abstract class")
 	pass
 
@@ -38,6 +38,6 @@ func get_local_basis()-> Basis:
 	return Basis.IDENTITY
 
 
-func get_global_basis(grid: BlockGrid)-> Basis:
+func get_global_basis(_grid: BlockGrid)-> Basis:
 	assert(false, "Abstract class")
 	return Basis.IDENTITY

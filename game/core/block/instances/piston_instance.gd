@@ -51,7 +51,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	piston_head= piston_head_grid_block.block_node 
 
 
-func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
+func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 	var extension: float= global_position.distance_to(piston_head.global_position) - 1
 	DebugHud.send("Extension", extension)
 	

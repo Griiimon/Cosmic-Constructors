@@ -71,14 +71,12 @@ func on_physics_process(delta: float):
 		var velocity_in_requested_direction: Vector3 = local_velocity.dot(move_vec) * move_vec
 		var unwanted_velocity: Vector3 = local_velocity - velocity_in_requested_direction
 
-		var dampening_factor: float= 1.0
-		
 		var counter_force: Vector3 = -unwanted_velocity * delta * damping_factor
 		
 		var threshold: float= 0.001
-		counter_force.x= counter_force.x if abs(counter_force.x) > threshold else 0
-		counter_force.y= counter_force.y if abs(counter_force.y) > threshold else 0
-		counter_force.z= counter_force.z if abs(counter_force.z) > threshold else 0
+		counter_force.x= counter_force.x if abs(counter_force.x) > threshold else 0.0
+		counter_force.y= counter_force.y if abs(counter_force.y) > threshold else 0.0
+		counter_force.z= counter_force.z if abs(counter_force.z) > threshold else 0.0
 		counter_force= counter_force.normalized()
 		
 		move_vec+= counter_force.normalized()

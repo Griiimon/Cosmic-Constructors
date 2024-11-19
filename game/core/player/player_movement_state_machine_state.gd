@@ -129,7 +129,7 @@ func initial_align():
 	pass
 
 
-func continuous_align(delta: float):
+func continuous_align(_delta: float):
 	pass
 
 

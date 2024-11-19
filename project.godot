@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Cosmic Constructors"
-run/main_scene="res://game/game.tscn"
+run/main_scene="res://game/test/planet test/planet_test.tscn"
 config/features=PackedStringArray("4.3", "Double Precision", "GL Compatibility")
 config/icon="res://icon.svg"
 

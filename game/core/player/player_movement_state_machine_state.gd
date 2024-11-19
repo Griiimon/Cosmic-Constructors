@@ -106,9 +106,7 @@ func move_and_slide_and_snap(motion: Vector3, floor_normal: Vector3, delta: floa
 
 
 func move_and_collide(motion: Vector3)-> KinematicCollision3D:
-	var result: KinematicCollision3D
 	return player.move_and_collide(motion, true)
-	return result
 
 
 func pre_move():

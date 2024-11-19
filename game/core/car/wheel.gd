@@ -158,7 +158,7 @@ func process_torque(drive : float, drive_inertia : float, brake_torque : float, 
 		return (spin - previous_spin) * (wheel_moment + drive_inertia) / (drive * delta)
 
 
-func process_forces(grid: BlockGrid, opposite_compression : float, braking : bool, delta : float) -> float:
+func process_forces(grid: BlockGrid, braking : bool, delta : float) -> float:
 	query.transform.origin= global_position + global_basis.y * tire_radius
 	query.motion= -global_basis.y * (spring_length + tire_radius)
 

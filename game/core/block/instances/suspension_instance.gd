@@ -293,7 +293,7 @@ func process_axle_drive(torque : float, drive_inertia : float, delta : float) ->
 
 
 func process_forces(grid: BlockGrid, delta : float) -> void:
-	wheel.process_forces(grid, 0, is_braking, delta)
+	wheel.process_forces(grid, is_braking, delta)
 
 
 func get_max_steering_slip_angle() -> float:

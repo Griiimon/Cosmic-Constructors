@@ -2,6 +2,7 @@ class_name PlayerBuildState
 extends PlayerStateMachineState
 
 @export var build_range: float= 4.0
+@export var smooth_rotation_speed: float= 2.0
 @export var current_block: Block:
 	set(b):
 		current_block= b
@@ -65,7 +66,7 @@ func remove_ghost():
 	ghost= null
 
 
-func on_physics_process(_delta: float):
+func on_physics_process(delta: float):
 	if Input.is_action_just_pressed("ui_cancel") or Input.is_action_just_pressed("build"):
 		finished.emit()
 		return
@@ -76,6 +77,8 @@ func on_physics_process(_delta: float):
 	var local_block_pos: Vector3i
 	
 	var raycast: RayCast3D= player.build_raycast
+	var new_grid: bool= not raycast.is_colliding()
+
 	if raycast.is_colliding():
 		var collision_pos: Vector3= raycast.get_collision_point()
 		collision_pos+= raycast.global_basis.z * 0.05
@@ -89,11 +92,10 @@ func on_physics_process(_delta: float):
 		ghost.rotation= grid.global_rotation
 	else:
 		ghost.position= player.to_global(raycast.target_position)
-		ghost.rotation= player.global_rotation
 	
 	if Input.is_action_just_pressed("build_block"):
 		if not grid:
-			grid= player.world.add_grid(ghost.position, ghost.rotation)
+			grid= player.world.add_grid(ghost.position, ghost.global_rotation)
 			
 			var query:= PhysicsShapeQueryParameters3D.new()
 			query.collision_mask= Global.TERRAIN_COLLISION_LAYER
@@ -102,7 +104,6 @@ func on_physics_process(_delta: float):
 			
 			if player.get_world_3d().direct_space_state.intersect_shape(query):
 				grid.freeze= true
-			
 			
 		grid.add_block(current_block, local_block_pos, block_rotation)
 	elif Input.is_action_just_pressed("pick_block"):
@@ -117,20 +118,32 @@ func on_physics_process(_delta: float):
 			if picked_grid_block:
 				current_block= picked_grid_block.get_block_definition()
 	else:
-		if Input.is_action_just_pressed("rotate_block_left"):
+		if rotation_input("rotate_block_left", new_grid):
 			block_rotation.y-= 1
-		elif Input.is_action_just_pressed("rotate_block_right"):
+		elif rotation_input("rotate_block_right", new_grid):
 			block_rotation.y+= 1
-		if Input.is_action_just_pressed("rotate_block_up"):
+		if rotation_input("rotate_block_up", new_grid):
 			block_rotation.x-= 1
-		elif Input.is_action_just_pressed("rotate_block_down"):
+		elif rotation_input("rotate_block_down", new_grid):
 			block_rotation.x+= 1
-		if Input.is_action_just_pressed("roll_block_left"):
+		if rotation_input("roll_block_left", new_grid):
 			block_rotation.z-= 1
-		elif Input.is_action_just_pressed("roll_block_right"):
+		elif rotation_input("roll_block_right", new_grid):
 			block_rotation.z+= 1
 		
-	ghost.basis= ghost.basis * Basis.from_euler(block_rotation * deg_to_rad(90))
+	if new_grid:
+		ghost.rotation= player.global_rotation
+		ghost.basis= ghost.basis * Basis.from_euler(block_rotation * delta * smooth_rotation_speed)
+	else:
+		ghost.basis= ghost.basis * Basis.from_euler(block_rotation * deg_to_rad(90))
+
 	ghost.show()
 	#else:
 		#ghost.hide()
+
+
+func rotation_input(action_name: String, new_grid: bool)-> bool:
+	if new_grid:
+		return Input.is_action_pressed(action_name)
+	else:
+		return Input.is_action_just_pressed(action_name)

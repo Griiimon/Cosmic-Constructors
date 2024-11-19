@@ -433,6 +433,9 @@ static func deserialize(data: Dictionary, new_world: World)-> BlockGrid:
 
 func can_place_block_at_global(block: Block, global_pos: Vector3, block_rotation: Vector3i= Vector3i.ZERO)-> bool:
 	var local_pos: Vector3i= get_local_grid_pos(global_pos)
+
+	if get_block_neighbors(local_pos).is_empty():
+		return false
 	
 	if block.is_multi_block():
 		for child_block_pos in get_multi_block_positions(block, local_pos, GridBlock.rotation_to_basis(block_rotation)):

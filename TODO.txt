@@ -1,14 +1,18 @@
+test world with small 1m chunk planet, real gravity and asteroid
+	=> skybox transition?
+
+player carry ore chunks, add collision shape but keep center of mass
+
+BlockInventory component
+drill stops drilling when full
+
 use G, in addition to F, to trigger alternative default action on block.. pistons and rotors: active toggle
 
 rocket projectile thruster flicker 
 
-add terrain class to nodes with get_gravity_vector() + gravity area
-
 when splitting static grid recalculate for each part if still/newly static
 	run ground check for each block, or store "anchored" state in GridBlock
 	..or even better in grid via dictionary so GridBlock doesnt get bloated
-
-nice skybox
 
 sub grid loading and attaching to pistons/rotor
 
@@ -17,10 +21,11 @@ fixed gatling
 debug hitpoint bars for each block
 
 damage impact impulse
-	applies force at the impact position
+	applies force at the impact position => BlockGrid.apply_kinetic_impulse()
 	if explosion trigger the explosion Area detection plus explosion force deferred, so game has time to potentially split grids
+	=> World.apply_explosion_force()
 
-BlockPlacementsConditions
+BlockPlacementsConditions? => pistons, rotor cant have anything above
 
 BlockInstance on_update() for rotor/piston !?
 
@@ -39,13 +44,17 @@ save player only in cryo pod, otherwise use default spawn points or medbay
 FIX getting stuck in terrain when going EVA ( will intersect_shape work against terrain? because Area didnt seem to => JOLT OPT-IN )
 FIX inital grid align when sloped/diagonal initial normal
 FIX sometimes wrong ( downwards ) momentum when strafing off grid 
-FIX shouldnt all blocks face forward by default ( piston and rotor are facing up rn )
-FIX projectile initial position from viewport pos
 FIX removing MultiBlocks can lead to crash ( only when splitting grids? )
 
 meta tag for BlockInstance scene sub nodes that should be deleted in ghost ( or just delete anything not MeshInstance3D or plain Node3D ? )
 
-what about block grids inertia??
+
+
+DESIGN QUESTIONS
+-----------------
+
+what about block grids inertia, automatically re-calculated when center of mass or mass changes?
+shouldnt all block models face -z? piston and rotor face up
 
 
 NEW MECHANICS

@@ -1,16 +1,6 @@
-4 suspension limit game settings: 
-	- check all suspension limits and set a global var on the grid (?)
-		to cancel out local y velocity with an impulse
-
-	- no travel limit
-	- static body limiting
-	- suspension block or wheel breaks immediately
-	- high exponential counter force/impulse ( depending on grid mass )
+use G, in addition to F, to trigger alternative default action on block.. pistons and rotors: active toggle
 
 rocket projectile thruster flicker 
-
-area damage
-	after physics pierce raycast, if object is the same for origin and end, run a custom non physics BlockGrid raycast to get all blocks
 
 add terrain class to nodes with get_gravity_vector() + gravity area
 
@@ -20,13 +10,11 @@ when splitting static grid recalculate for each part if still/newly static
 
 nice skybox
 
-wheel rotation and suspension travel
-
 sub grid loading and attaching to pistons/rotor
 
 fixed gatling
 
-grid area damage with flood fill to account for armor blocks on the way to the outer radius
+debug hitpoint bars for each block
 
 damage impact impulse
 	applies force at the impact position
@@ -73,3 +61,12 @@ basic/intermediate/advanced/expert/master sciene levels/recipes
 moving celestial bodies by putting each in its own world3d
 
 cars: use roguecar components, like engine blocks, steering/brake blocks etc. maybe even do aerodynamic calculations
+
+4 suspension limit game settings: 
+	- check all suspension limits and set a global var on the grid (?)
+		to cancel out local y velocity with an impulse
+
+	- no travel limit
+	- static body limiting
+	- suspension block or wheel breaks immediately
+	- high exponential counter force/impulse ( depending on grid mass )

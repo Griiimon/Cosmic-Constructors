@@ -200,7 +200,7 @@ func process_forces(grid: BlockGrid, opposite_compression : float, braking : boo
 	else:
 		last_collider = null
 	
-	var compression := process_suspension(grid, opposite_compression, delta)
+	var compression := process_suspension(grid, delta)
 	
 	if grounded and last_collider:
 		process_tires(braking, delta)
@@ -233,7 +233,7 @@ func process_forces(grid: BlockGrid, opposite_compression : float, braking : boo
 		return 0.0
 
 
-func process_suspension(grid: BlockGrid, opposite_compression : float, delta : float) -> float:
+func process_suspension(grid: BlockGrid, delta : float) -> float:
 	if grounded and last_collider:
 		spring_current_length = last_collision_point.distance_to(query.transform.origin) - tire_radius
 	else:

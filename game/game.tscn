@@ -4,13 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://qr0bko2hsrbk" path="res://game/debug/space grid/debug_space_grid.tscn" id="1_ek1sn"]
 [ext_resource type="Script" path="res://game/base_tests.gd" id="1_o5dc5"]
 [ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="2_y64to"]
-[ext_resource type="Texture2D" path="res://skybox/proc_stars.dds" id="3_qa1hi"]
+[ext_resource type="Texture2D" uid="uid://bdgmuy3skgsdv" path="res://game/textures/NightSkyHDRI013_1K-HDR.exr" id="4_mgdge"]
 [ext_resource type="PackedScene" uid="uid://ckytpvwhk32br" path="res://game/core/asteroid/asteroid_hi_res.tscn" id="7_612g8"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="7_gmk88"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="8_hutpu"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ugat3"]
-panorama = ExtResource("3_qa1hi")
+panorama = ExtResource("4_mgdge")
+energy_multiplier = 0.4
 
 [sub_resource type="Sky" id="Sky_bdor6"]
 sky_material = SubResource("PanoramaSkyMaterial_ugat3")

@@ -228,7 +228,7 @@ func process_braking(grid: BlockGrid, delta : float) -> void:
 		is_braking = false
 	
 	#var friction := calculate_average_tire_friction(vehicle_mass * 9.8, "Road")
-	var friction := calculate_average_tire_friction(grid.mass * grid.current_gravity.dot(-global_basis.y), "Road")
+	var friction := calculate_average_tire_friction(grid.mass * grid.get_gravity().dot(-global_basis.y), "Road")
 	#max_brake_force = ((friction * braking_grip_multiplier) * average_drive_wheel_radius) / wheel_array.size()
 	var max_brake_force: float = ((friction * wheel.braking_grip_multiplier) * wheel.tire_radius)
 	#max_handbrake_force = ((friction * braking_grip_multiplier * 0.05) / average_drive_wheel_radius)

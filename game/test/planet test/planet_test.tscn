@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://buqb4b7dp5dty"]
+[gd_scene load_steps=16 format=3 uid="uid://buqb4b7dp5dty"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_wte7t"]
 [ext_resource type="Script" path="res://game/test/planet test/planet_tests.gd" id="2_8smgd"]
@@ -12,6 +12,9 @@
 [ext_resource type="Shader" path="res://addons/zylann.atmosphere/shaders/planet_atmosphere_v1_clouds.gdshader" id="9_kahju"]
 [ext_resource type="NoiseTexture3D" uid="uid://cudqtkcf6wrj2" path="res://game/solar system/atmosphere/noise_texture_3d.res" id="10_v6dm4"]
 [ext_resource type="Cubemap" uid="uid://ghi3h7wjp2ep" path="res://game/solar system/atmosphere/cloud_coverage_mars.tres" id="11_jdaoa"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_63ws0"]
+radius = 10000.0
 
 [sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_7ata4"]
 
@@ -28,12 +31,21 @@ script = ExtResource("1_wte7t")
 script = ExtResource("2_8smgd")
 equip_item = ExtResource("3_41ocs")
 
+[node name="Gravity Area" type="Area3D" parent="."]
+collision_mask = 3
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity Area"]
+shape = SubResource("SphereShape3D_63ws0")
+
 [node name="World" type="Node3D" parent="."]
 script = ExtResource("2_dpsqk")
 
 [node name="Player" parent="." node_paths=PackedStringArray("world") instance=ExtResource("3_rb6lq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1627.68, 617.076)
-gravity_scale = 0.0
 world = NodePath("../World")
 
 [node name="VoxelViewer" type="VoxelViewer" parent="Player"]

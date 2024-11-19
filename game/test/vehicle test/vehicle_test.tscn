@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d4blx7p2hp5bc"]
+[gd_scene load_steps=21 format=3 uid="uid://d4blx7p2hp5bc"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_6i4dd"]
 [ext_resource type="Script" path="res://game/test/vehicle test/vehicle_tests.gd" id="2_8kc7o"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="3_n8ygw"]
 [ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="4_bnqc2"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="6_jsteb"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fbd3y"]
+radius = 10000.0
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0ujoa"]
 panorama = ExtResource("2_ly4gl")
@@ -50,12 +53,18 @@ size = Vector3(1000, 0.1, 1000)
 
 [node name="Vehicle Test" type="Node3D"]
 script = ExtResource("1_6i4dd")
-gravity = 10.0
 
 [node name="Tests" type="Node" parent="."]
 script = ExtResource("2_8kc7o")
 load_world = true
 freeze_grids = true
+
+[node name="Gravity Area" type="Area3D" parent="."]
+collision_mask = 3
+gravity_space_override = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity Area"]
+shape = SubResource("SphereShape3D_fbd3y")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_r8d1e")

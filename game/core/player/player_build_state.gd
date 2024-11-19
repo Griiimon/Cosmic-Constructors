@@ -12,7 +12,7 @@ extends PlayerStateMachineState
 var ghost: Node3D
 var grid: BlockGrid
 var local_block_pos: Vector3i
-var block_rotation: Vector3
+var block_rotation: Vector3i
 
 
 
@@ -75,7 +75,8 @@ func on_physics_process(delta: float):
 	
 	if not ghost: return
 
-	align_ghost()
+	if not align_ghost():
+		return
 
 	if Input.is_action_just_pressed("build_block"):
 		build_block()
@@ -108,7 +109,8 @@ func align_ghost():
 				
 			collision_pos+= raycast.global_basis.z
 
-		if not can_place: return
+		if not can_place: 
+			return false
 		
 		local_block_pos= grid.get_local_grid_pos(collision_pos)
 		var global_block_pos: Vector3= grid.get_global_block_pos(local_block_pos)
@@ -118,6 +120,8 @@ func align_ghost():
 	else:
 		grid= null
 		ghost.position= player.to_global(raycast.target_position)
+
+	return true
 
 
 func build_block():

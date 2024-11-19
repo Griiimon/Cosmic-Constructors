@@ -428,9 +428,9 @@ static func deserialize(data: Dictionary, new_world: World)-> BlockGrid:
 	new_world.grids.add_child(grid)
 
 	for item: Dictionary in data["blocks"]:
-		var position: Vector3= str_to_var("Vector3" + item["position"])
-		var rotation: Vector3= str_to_var("Vector3" + item["rotation"])
-		var block: BaseGridBlock= grid.add_block(GameData.get_block_definition(item["definition"]), position, rotation)
+		var block_position: Vector3= str_to_var("Vector3" + item["position"])
+		var block_rotation: Vector3= str_to_var("Vector3" + item["rotation"])
+		var block: BaseGridBlock= grid.add_block(GameData.get_block_definition(item["definition"]), block_position, block_rotation)
 		if item.has("hitpoints"):
 			(block as GridBlock).hitpoints= item["hitpoints"]
 		if item.has("data"):

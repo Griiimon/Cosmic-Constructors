@@ -14,7 +14,7 @@ func _ready() -> void:
 
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
-	var sub_grid: BlockGrid= grid.world.add_grid(grid.get_global_block_pos(grid_block.local_pos) + global_basis.y, grid.rotation)
+	sub_grid= grid.world.add_grid(grid.get_global_block_pos(grid_block.local_pos) + global_basis.y, grid.rotation)
 	
 	joint.node_a= joint.get_path_to(grid)
 	joint.node_b= joint.get_path_to(sub_grid)

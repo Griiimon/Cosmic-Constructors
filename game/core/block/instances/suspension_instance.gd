@@ -196,7 +196,7 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 		speed = local_velocity.length()
 		
 		#process_drag()
-		process_braking(grid, wheel, delta)
+		process_braking(grid, delta)
 		if can_steer.is_true():
 			process_steering(delta)
 		process_throttle(delta)
@@ -211,7 +211,7 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 		#apply_central_force(-local_velocity.normalized() * drag)
 
 
-func process_braking(grid: BlockGrid, wheel: Wheel, delta : float) -> void:
+func process_braking(grid: BlockGrid, delta : float) -> void:
 	if (brake_input < brake_amount):
 		brake_amount -= braking_speed * delta
 		if (brake_input > brake_amount):

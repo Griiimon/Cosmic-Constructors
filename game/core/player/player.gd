@@ -34,6 +34,7 @@ var hand_object: HandObject
 
 
 func _ready() -> void:
+	assert(world)
 	Input.mouse_mode= Input.MOUSE_MODE_CAPTURED
 
 

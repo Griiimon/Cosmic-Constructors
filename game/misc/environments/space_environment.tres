@@ -1,0 +1,17 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://g0ausvm6rdth"]
+
+[ext_resource type="Texture2D" uid="uid://bdgmuy3skgsdv" path="res://game/textures/NightSkyHDRI013_1K-HDR.exr" id="1_5ytjh"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ugat3"]
+panorama = ExtResource("1_5ytjh")
+energy_multiplier = 0.4
+
+[sub_resource type="Sky" id="Sky_bdor6"]
+sky_material = SubResource("PanoramaSkyMaterial_ugat3")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_bdor6")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 2

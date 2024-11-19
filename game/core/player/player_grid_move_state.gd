@@ -30,5 +30,5 @@ func initial_align():
 	player.global_transform= Utils.align_with_y(player.global_transform, get_floor_normal())
 
 
-func continuous_align(delta: float):
+func continuous_align(_delta: float):
 	pass

@@ -145,7 +145,6 @@ func build_block():
 
 func pick_block():
 	var raycast: RayCast3D= player.build_raycast
-	var grid: BlockGrid
 	
 	if raycast.is_colliding():
 		var collision_pos: Vector3= raycast.get_collision_point()

@@ -24,6 +24,10 @@ DebugMesh="*res://game/debug/debug mesh/debug_mesh.gd"
 SignalManager="*res://game/global/signal_manager.gd"
 RaycastHelper="*res://game/global/raycast helper/raycast_helper.tscn"
 
+[debug]
+
+gdscript/warnings/unused_signal=0
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/csgtomeshinstance/plugin.cfg", "res://addons/script-ide/plugin.cfg")

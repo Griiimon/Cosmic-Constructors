@@ -47,9 +47,13 @@ func get_block_definition()-> Block:
 
 
 func get_local_basis()-> Basis:
-	return Basis.from_euler(rotation * deg_to_rad(90))
+	return rotation_to_basis(rotation)
 
 
 func get_global_basis(grid: BlockGrid)-> Basis:
 	#FIXME this is wrong!?
 	return get_local_basis() * grid.global_basis
+
+
+static func rotation_to_basis(block_rotation: Vector3i)-> Basis:
+	return Basis.from_euler(block_rotation * deg_to_rad(90))	

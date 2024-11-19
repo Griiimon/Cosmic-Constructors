@@ -43,13 +43,9 @@ size = Vector3(0.1, 0.1, 4)
 
 [node name="Wheel 3x3" type="Node3D"]
 script = ExtResource("1_rbnuk")
-mask = 4
-spring_max_force = 30000.0
-spring_force = 18000.0
-x_traction = 0.01
-steering_speed = 10.0
-acceleration = 1000.0
-max_brake_coef = 0.003
+collision_mask = 4
+tire_width = 500.0
+mass_over_wheel = 100.0
 
 [node name="Model" type="Node3D" parent="."]
 
@@ -87,7 +83,6 @@ transform = Transform3D(6.12323e-17, 3.525, 0, -1, 2.15844e-16, 0, 0, 0, 1, 0, 0
 mesh = SubResource("TorusMesh_yfd3n")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.093, -2)
 mesh = SubResource("BoxMesh_kxmuy")
-skeleton = NodePath("../..")

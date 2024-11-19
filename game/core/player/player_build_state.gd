@@ -130,6 +130,7 @@ func align_ghost():
 func build_block():
 	if not grid:
 		grid= player.world.add_grid(ghost.position, ghost.global_rotation)
+		local_block_pos= Vector3i.ZERO
 		
 		var query:= PhysicsShapeQueryParameters3D.new()
 		query.collision_mask= Global.TERRAIN_COLLISION_LAYER

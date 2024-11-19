@@ -7,30 +7,10 @@ var can_steer:= BlockPropBool.new("Steering", true)
 
 var wheel: Wheel
 
-
-
 @export_group("Steering")
-## The rate the steering input changes to smooth input.
-## Steering input is between -1 and 1. Speed is in units per second.
-@export var steering_speed := 4.25
-## The rate the steering input changes when steering back to center.
-## Speed is in units per second.
-@export var countersteer_speed := 11.0
-## Reduces steering input based on the cars velocity.
-## Steering speed is divided by the velocity at this magnitude.
-## The larger the number, the slower the steering at speed.
-@export var steering_speed_decay := 0.20
-## Further steering input is prevented if the wheels lateral slip is greater than this number.
-@export var steering_slip_assist := 0.15
-## The magnitude to adjust steering toward the direction of travel based on the cars lateral velocity.
-@export var countersteer_assist := 0.9
-## Steering input is raised to the power of this number.
-## This has the effect of slowing steering input near the limits.
-@export var steering_exponent := 1.5
-## The maximum steering angle in radians.
-@export var max_steering_angle := 0.7
 
-
+@export var steering_speed: float= 1.0
+@export var max_steering_angle: float= 0.7
 
 @export_group("Throttle and Braking")
 ## The rate the throttle input changes to smooth input.
@@ -147,8 +127,6 @@ var speed := 0.0
 var motor_rpm := 0.0
 
 var steering_amount := 0.0
-var steering_exponent_amount := 0.0
-var true_steering_amount := 0.0
 var throttle_amount := 0.0
 var brake_amount := 0.0
 var torque_output := 0.0
@@ -261,70 +239,8 @@ func process_braking(grid: BlockGrid, wheel: Wheel, delta : float) -> void:
 
 
 func process_steering(delta : float) -> void:
-	wheel.steer(steering_input, max_steering_angle)
-	return
-
-	var steer_assist_engaged := false
-	var steering_slip := get_max_steering_slip_angle()
-	
-	## Adjust steering speed based on vehicle speed and max steering angle
-	var steer_speed_correction := steering_speed / (speed * steering_speed_decay) / max_steering_angle
-	
-	## If the steering input is opposite the current steering, apply countersteering speed instead
-	if signf(steering_input) != signf(steering_amount):
-		steer_speed_correction = countersteer_speed / (speed * steering_speed_decay)
-	
-	## Check steering slip threshold and reduce steering amount if crossed.
-	if absf(steering_slip) > steering_slip_assist:
-		steer_assist_engaged = true
-	
-	if (steering_input < steering_amount):
-		if not steer_assist_engaged or steering_slip < 0.0:
-			steering_amount -= steer_speed_correction * delta
-			if (steering_input > steering_amount):
-				steering_amount = steering_input
-		else:
-			steering_amount += steer_speed_correction * delta
-			if (steering_amount > 0.0):
-				steering_amount = 0.0
-	
-	elif (steering_input > steering_amount):
-		if not steer_assist_engaged or steering_slip > 0.0:
-			steering_amount += steer_speed_correction * delta
-			if (steering_input < steering_amount):
-				steering_amount = steering_input
-		else:
-			steering_amount -= steer_speed_correction * delta
-			if (steering_amount < 0.0):
-				steering_amount = 0.0
-	
-	## Steering exponent adjustment
-	var steering_adjust := pow(absf(steering_amount), steering_exponent) * signf(steering_amount)
-	
-	### Correct steering toward the direction of travel for countersteer assist
-	#var steer_correction := (1.0 - absf(steering_adjust)) * clampf(asin(local_velocity.normalized().x), -max_steering_angle, max_steering_angle) * countersteer_assist
-	
-	### Don't apply corrections at low velocity or reversing
-	#if local_velocity.z > -0.5:
-		#steer_correction = 0
-	#else:
-		#steer_correction = steer_correction / -max_steering_angle
-	#
-	### Keeps steering corrections from getting stuck under certain circumstances
-	#var steer_correction_amount := 1.0
-	#if signf(steering_adjust + steer_correction) != signf(steering_input) and 1.0 - absf(steering_input) < steer_correction_amount:
-		#steer_correction_amount = clampf(steer_correction_amount - (steering_speed * delta), 0.0, 1.0)
-	#else:
-		#steer_correction_amount = clampf(steer_correction_amount + (steering_speed * delta), 0.0, 1.0)
-	#
-	#steer_correction *= steer_correction_amount
-	
-	var steer_correction:= 0.0
-	
-	true_steering_amount = clampf(steering_adjust + steer_correction, -max_steering_angle, max_steering_angle)
-	
-	#for wheel in wheel_array:
-	wheel.steer(steering_adjust + steer_correction, max_steering_angle)
+	steering_amount= lerp(steering_amount, steering_input, delta * steering_speed)
+	wheel.steer(steering_amount, max_steering_angle)
 
 
 func process_throttle(delta : float) -> void:

@@ -1,0 +1,84 @@
+[gd_scene load_steps=15 format=3 uid="uid://buqb4b7dp5dty"]
+
+[ext_resource type="Script" path="res://game/game.gd" id="1_wte7t"]
+[ext_resource type="Script" path="res://game/test/planet test/planet_tests.gd" id="2_8smgd"]
+[ext_resource type="Script" path="res://game/core/world/world.gd" id="2_dpsqk"]
+[ext_resource type="Resource" uid="uid://y0452womu354" path="res://game/data/hand items/tools/hand drill/hand_drill.tres" id="3_41ocs"]
+[ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="3_rb6lq"]
+[ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="4_yc2d7"]
+[ext_resource type="VoxelGeneratorGraph" uid="uid://b4umpxnew5cgx" path="res://game/solar system/voxel_graph_planet_v4.tres" id="6_jkjsa"]
+[ext_resource type="Material" uid="uid://cp754ky7maqj2" path="res://game/solar system/materials/planet_material_grassy.tres" id="7_cvnod"]
+[ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="8_fm8fi"]
+[ext_resource type="Shader" path="res://addons/zylann.atmosphere/shaders/planet_atmosphere_v1_clouds.gdshader" id="9_kahju"]
+[ext_resource type="NoiseTexture3D" uid="uid://cudqtkcf6wrj2" path="res://game/solar system/atmosphere/noise_texture_3d.res" id="10_v6dm4"]
+[ext_resource type="Cubemap" uid="uid://ghi3h7wjp2ep" path="res://game/solar system/atmosphere/cloud_coverage_mars.tres" id="11_jdaoa"]
+
+[sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_7ata4"]
+
+[sub_resource type="Environment" id="Environment_vbmq3"]
+background_mode = 1
+background_color = Color(0.129412, 0.14902, 0.211765, 1)
+ambient_light_color = Color(0.176471, 0.176471, 0.176471, 1)
+ambient_light_sky_contribution = 0.99
+
+[node name="Planet Test" type="Node3D"]
+script = ExtResource("1_wte7t")
+
+[node name="Tests" type="Node" parent="."]
+script = ExtResource("2_8smgd")
+equip_item = ExtResource("3_41ocs")
+
+[node name="World" type="Node3D" parent="."]
+script = ExtResource("2_dpsqk")
+
+[node name="Player" parent="." node_paths=PackedStringArray("world") instance=ExtResource("3_rb6lq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1627.68, 617.076)
+gravity_scale = 0.0
+world = NodePath("../World")
+
+[node name="VoxelViewer" type="VoxelViewer" parent="Player"]
+view_distance = 1024
+
+[node name="UI" parent="." instance=ExtResource("4_yc2d7")]
+
+[node name="Planet" type="VoxelLodTerrain" parent="."]
+generator = ExtResource("6_jkjsa")
+mesher = SubResource("VoxelMesherTransvoxel_7ata4")
+view_distance = 2048
+voxel_bounds = AABB(-2048, -2048, -2048, 4096, 4096, 4096)
+lod_count = 7
+material = ExtResource("7_cvnod")
+collision_layer = 4
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.170038, -0.0201907, 0.985231, 0, 0.99979, 0.020489, -0.985438, -0.0034839, 0.170002, 3502.13, 538.943, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 2000.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vbmq3")
+
+[node name="Spatial" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1024, 31.31, 0)
+
+[node name="PlanetAthmosphere" parent="." instance=ExtResource("8_fm8fi")]
+planet_radius = 1600.0
+atmosphere_height = 320.0
+sun_path = NodePath("../DirectionalLight")
+custom_shader = ExtResource("9_kahju")
+shader_params/u_density = 0.001
+shader_params/u_day_color0 = Color(0.5, 0.8, 1, 1)
+shader_params/u_day_color1 = Color(0.5, 0.8, 1, 1)
+shader_params/u_night_color0 = Color(0.2, 0.4, 0.8, 1)
+shader_params/u_night_color1 = Color(0.2, 0.4, 0.8, 1)
+shader_params/u_day_night_transition_scale = 2.0
+shader_params/u_cloud_density_scale = 0.005
+shader_params/u_cloud_bottom = 0.2
+shader_params/u_cloud_top = 0.5
+shader_params/u_cloud_blend = 0.5
+shader_params/u_cloud_shape_invert = 1.0
+shader_params/u_cloud_coverage_bias = 0.05
+shader_params/u_cloud_shape_factor = 0.4
+shader_params/u_cloud_shape_scale = 0.002
+shader_params/u_cloud_shape_texture = ExtResource("10_v6dm4")
+shader_params/u_cloud_coverage_cubemap = ExtResource("11_jdaoa")

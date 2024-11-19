@@ -96,19 +96,11 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 	grid_block.block_node= block_node
 
 	if block.is_multi_block():
-		prints("Spawned multi block at", pos)
-		for x in block.size.x:
-			for y in block.size.y:
-				for z in block.size.z:
-					var offset:= Vector3(x, y, z)
-					if offset:
-						# FIXME this calculation seems so wrong but it works
-						# 	is it because my multi blocks are rotated to face -z by default?
-						var child_grid_block:= VirtualGridBlock.new(pos - Vector3i(grid_block.get_local_basis() * offset))
-						prints(" Spawned child at", child_grid_block.local_pos)
-						child_grid_block.parent= grid_block
-						grid_block.children.append(child_grid_block)
-						blocks[child_grid_block.local_pos]= child_grid_block
+		for child_block_pos in get_multi_block_positions(block, pos, grid_block.get_local_basis()):
+			var child_grid_block:= VirtualGridBlock.new(child_block_pos)
+			child_grid_block.parent= grid_block
+			grid_block.children.append(child_grid_block)
+			blocks[child_grid_block.local_pos]= child_grid_block
 
 	if block_node is BlockInstance:
 		(block_node as BlockInstance).on_placed(self, grid_block)
@@ -439,6 +431,30 @@ static func deserialize(data: Dictionary, new_world: World)-> BlockGrid:
 	return grid
 
 
+func can_place_block_at_global(block: Block, global_pos: Vector3, block_rotation: Vector3i= Vector3i.ZERO)-> bool:
+	var local_pos: Vector3i= get_local_grid_pos(global_pos)
+	
+	if block.is_multi_block():
+		for child_block_pos in get_multi_block_positions(block, local_pos, GridBlock.rotation_to_basis(block_rotation)):
+			if is_occupied(child_block_pos):
+				return false
+
+	return true
+
+
+func get_multi_block_positions(block: Block, pos: Vector3i, basis: Basis)-> Array[Vector3i]:
+	var result: Array[Vector3i]= []
+	for x in block.size.x:
+		for y in block.size.y:
+			for z in block.size.z:
+				var offset:= Vector3(x, y, z)
+				if offset:
+					# FIXME this calculation seems so wrong but it works
+					# 	is it because my multi blocks are rotated to face -z by default?
+					result.append(pos - Vector3i(basis * offset))
+	return result
+
+
 func get_block_neighbors(pos: Vector3i, include_diagonals: bool= false, include_empty_blocks: bool= false)-> Array[Vector3i]:
 	var result: Array[Vector3i]
 	
@@ -468,4 +484,8 @@ func get_global_block_pos(block_pos: Vector3i)-> Vector3:
 
 
 func get_block_local(grid_pos: Vector3i)-> BaseGridBlock:
-	return blocks[grid_pos] if blocks.has(grid_pos) else null
+	return blocks[grid_pos] if is_occupied(grid_pos) else null
+
+
+func is_occupied(grid_pos: Vector3i)-> bool:
+	return blocks.has(grid_pos)

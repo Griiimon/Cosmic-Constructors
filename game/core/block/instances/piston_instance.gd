@@ -17,9 +17,15 @@ var sub_grid: BlockGrid
 
 var state: State= State.MOVE
 var segments: Array[Node3D]
-var extension: float= 0
+var extension: float= 0:
+	set(f):
+		if not is_equal_approx(f, extension):
+			extension= f
+			update_actual_velocity()
 
 var max_distance: float
+
+var actual_velocity: float
 
 
 
@@ -61,4 +67,22 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 
 
 func change_velocity():
-	joint.set_param_y(Generic6DOFJoint3D.PARAM_LINEAR_MOTOR_TARGET_VELOCITY, velocity.get_value_f())
+	#joint.set_param_y(Generic6DOFJoint3D.PARAM_LINEAR_MOTOR_TARGET_VELOCITY, velocity.get_value_f())
+	update_actual_velocity()
+
+func on_set_active():
+	update_actual_velocity()
+#	joint.set_flag_y(Generic6DOFJoint3D.FLAG_ENABLE_LINEAR_MOTOR, active.is_true())
+
+
+func update_actual_velocity():
+	if not active.is_true():
+		actual_velocity= 0
+	else:
+		var vel_f: float= velocity.get_value_f()
+		if (extension <= 0 and vel_f <= 0) or (extension >= max_distance and vel_f >= 0):
+			actual_velocity= 0
+		else:
+			actual_velocity= vel_f
+
+	joint.set_param_y(Generic6DOFJoint3D.PARAM_LINEAR_MOTOR_TARGET_VELOCITY, actual_velocity)

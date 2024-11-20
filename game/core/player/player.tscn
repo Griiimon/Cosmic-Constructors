@@ -153,6 +153,7 @@ script = ExtResource("5_ri51i")
 
 [node name="Terrain" type="Node" parent="Movement State Machine"]
 script = ExtResource("6_cr6m7")
+snap_factor = 1.0
 
 [node name="Action State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_r1eyq")

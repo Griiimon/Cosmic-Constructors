@@ -2,8 +2,6 @@ gravity jetpack ( equipment slot )
 
 avoid overlap with other grid while building
 
-toggle debug panels ( F4 )
-
 limit camera rotation
 
 re-center origin of split grids ( to its center of mass? )
@@ -15,8 +13,6 @@ player carry ore chunks, add collision shape but keep center of mass
 
 BlockInventory component
 drill stops drilling when full
-
-use G, in addition to F, to trigger alternative default action on block.. pistons and rotors: active toggle
 
 rocket projectile thruster flicker 
 
@@ -57,6 +53,24 @@ FIX sometimes wrong ( downwards ) momentum when strafing off grid
 FIX removing MultiBlocks can lead to crash ( only when splitting grids? )
 
 meta tag for BlockInstance scene sub nodes that should be deleted in ghost ( or just delete anything not MeshInstance3D or plain Node3D ? )
+
+
+DEMO VIDEO
+---------------
+
+distance adjust 3rd person cam
+model arms low when not eva (forward) / jump(side)
+
+build car on planet
+	atmospheric jetpack
+shoot car with rocket
+	explosion effect visually + force
+build space ship on planet
+	release landing gear
+fly towards asteroid
+	skybox transition
+drill into asteroid
+
 
 
 MULTIPLAYER

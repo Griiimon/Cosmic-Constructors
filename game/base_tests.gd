@@ -75,6 +75,8 @@ func _input(event: InputEvent) -> void:
 				DebugHud.send("Gold", collected_resources[1] if collected_resources.has(1) else 0.0)
 			elif event.keycode == KEY_F2:
 				player.world.freeze_grids(false)
+			elif event.keycode == KEY_F4:
+				DebugPanel.toggle()
 			elif event.keycode == KEY_F5:
 				player.world.save_world(custom_world_name, project_folder_world)
 

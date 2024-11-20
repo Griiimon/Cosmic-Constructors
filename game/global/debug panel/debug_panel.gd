@@ -2,6 +2,7 @@ extends Node
 
 const DEBUG_PANEL_SCENE= preload("res://game/global/debug panel/single_debug_panel.tscn")
 
+var enabled:= false
 var panels: Dictionary
 
 
@@ -12,6 +13,7 @@ func send(object: Node3D, key: String, value):
 		panel= DEBUG_PANEL_SCENE.instantiate()
 		add_child(panel)
 		panels[object]= panel
+		panel.visible= enabled
 	else:
 		panel= panels[object]
 	
@@ -19,6 +21,8 @@ func send(object: Node3D, key: String, value):
 
 
 func _process(_delta: float):
+	if not enabled: return
+	
 	var camera: Camera3D= get_viewport().get_camera_3d()
 
 	for obj in panels.keys().duplicate():
@@ -30,3 +34,9 @@ func _process(_delta: float):
 		var panel: SingleDebugPanel= panels[obj]
 		if not camera.is_position_behind(obj.global_position):
 			panel.position= camera.unproject_position(obj.global_position)
+
+
+func toggle():
+	enabled= not enabled
+	for panel: SingleDebugPanel in panels.values():
+		panel.visible= enabled

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnhyptcsxakf2"]
+[gd_scene load_steps=20 format=3 uid="uid://bnhyptcsxakf2"]
 
 [ext_resource type="Material" uid="uid://koo0qls452x2" path="res://game/core/player/model/suit_material.tres" id="1_mladw"]
 [ext_resource type="Material" uid="uid://t707x1seiw6m" path="res://game/core/player/model/bottle_material.tres" id="2_x1o5c"]
@@ -11,6 +11,26 @@ size = Vector3(0.595, 0.875, 0.405)
 material = ExtResource("1_mladw")
 size = Vector3(0.4, 0.415, 0.265)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w7my8"]
+albedo_color = Color(0.882271, 0.44331, 0.494134, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ql2cl"]
+material = SubResource("StandardMaterial3D_w7my8")
+radius = 0.16
+height = 0.355
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a88mj"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ucplg"]
+material = SubResource("StandardMaterial3D_a88mj")
+radius = 0.02
+height = 0.055
+
+[sub_resource type="SphereMesh" id="SphereMesh_6wi4g"]
+material = SubResource("StandardMaterial3D_w7my8")
+radius = 0.06
+height = 0.115
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wxuxe"]
 transparency = 1
 albedo_color = Color(0, 0.796078, 0.803922, 0.47451)
@@ -22,7 +42,7 @@ height = 0.4
 
 [sub_resource type="BoxMesh" id="BoxMesh_me6vd"]
 material = ExtResource("1_mladw")
-size = Vector3(0.175, 0.405, 0.23)
+size = Vector3(0.16, 0.51, 0.195)
 
 [sub_resource type="BoxMesh" id="BoxMesh_r5gsy"]
 material = ExtResource("1_mladw")
@@ -32,6 +52,114 @@ size = Vector3(0.24, 0.625, 0.29)
 material = ExtResource("2_x1o5c")
 radius = 0.075
 height = 0.505
+
+[sub_resource type="Animation" id="Animation_35h6h"]
+resource_name = "jump"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Right Shoulder:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.5),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -1.0472), Vector3(0, 0, 0.523599)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Left Shoulder:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 0.5),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 1.0472), Vector3(0, 0, -0.523599)]
+}
+
+[sub_resource type="Animation" id="Animation_uxfsy"]
+resource_name = "steer"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Right Shoulder:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 1),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -1.0472), Vector3(0, 1.5708, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Left Shoulder:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 1),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 1.0472), Vector3(0, -1.5708, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_y6cye"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Right Shoulder:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -1.0472)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Left Shoulder:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 1.0472)]
+}
+
+[sub_resource type="Animation" id="Animation_vn6ep"]
+resource_name = "wave"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Right Shoulder:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.5, 0.7, 0.9, 1.1, 1.3, 1.5, 2),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -1.0472), Vector3(0, 0, 0.698132), Vector3(0, 0, 1.0472), Vector3(0, 0, 0.698132), Vector3(0, 0, 1.0472), Vector3(0, 0, 0.698132), Vector3(0, 0, 1.0472), Vector3(0, 0, -1.0472)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5lb0e"]
+_data = {
+"RESET": SubResource("Animation_y6cye"),
+"jump": SubResource("Animation_35h6h"),
+"steer": SubResource("Animation_uxfsy"),
+"wave": SubResource("Animation_vn6ep")
+}
 
 [node name="Model" type="Node3D"]
 
@@ -43,17 +171,44 @@ mesh = SubResource("BoxMesh_mhret")
 transform = Transform3D(1, 0, 0, 0, 0.972297, 0.233751, 0, -0.233751, 0.972297, 0, 0.0565833, 0.138101)
 mesh = SubResource("BoxMesh_a2i8n")
 
+[node name="Face" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 8.32667e-17, 0, -8.32667e-17, 1, 0, 0.0296684, -0.123407)
+mesh = SubResource("SphereMesh_ql2cl")
+
+[node name="Eye" type="MeshInstance3D" parent="Head/Face"]
+transform = Transform3D(1, 0, 0, 0, 1, 5.55112e-17, 0, -5.55112e-17, 1, 0.0525146, 0.107374, -0.10782)
+mesh = SubResource("SphereMesh_ucplg")
+skeleton = NodePath("../..")
+
+[node name="Eye2" type="MeshInstance3D" parent="Head/Face"]
+transform = Transform3D(1, 0, 0, 0, 1, 5.55112e-17, 0, -5.55112e-17, 1, -0.053, 0.107108, -0.107345)
+mesh = SubResource("SphereMesh_ucplg")
+skeleton = NodePath("../..")
+
+[node name="Nose" type="MeshInstance3D" parent="Head/Face"]
+transform = Transform3D(1, 0, 0, 0, 1, 5.55112e-17, 0, -5.55112e-17, 1, 0, 0.0350253, -0.145689)
+mesh = SubResource("SphereMesh_6wi4g")
+skeleton = NodePath("../..")
+
 [node name="Glass" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0592666, -0.0413829)
 mesh = SubResource("SphereMesh_4uad6")
 
-[node name="Right Arm" type="MeshInstance3D" parent="."]
-transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0.474297, -0.318559, 0)
-mesh = SubResource("BoxMesh_me6vd")
+[node name="Right Shoulder" type="Node3D" parent="."]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, 0.25, -0.265, 0)
 
-[node name="Left Arm" type="MeshInstance3D" parent="."]
-transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, -0.474, -0.319, 0)
+[node name="Right Arm" type="MeshInstance3D" parent="Right Shoulder"]
+transform = Transform3D(0.0599684, 0.9982, 0, -0.9982, 0.0599684, 0, 0, 0, 1, 0.274297, 0.000441, 0)
 mesh = SubResource("BoxMesh_me6vd")
+skeleton = NodePath("../..")
+
+[node name="Left Shoulder" type="Node3D" parent="."]
+transform = Transform3D(0.5, -0.866025, 0, 0.866025, 0.5, 0, 0, 0, 1, -0.25, -0.265, 0)
+
+[node name="Left Arm" type="MeshInstance3D" parent="Left Shoulder"]
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, -0.274, 3.14321e-12, 0)
+mesh = SubResource("BoxMesh_me6vd")
+skeleton = NodePath("../..")
 
 [node name="Right Leg" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, -1.2, 0)
@@ -70,3 +225,8 @@ mesh = SubResource("CapsuleMesh_uufhi")
 [node name="Bottle Right" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0860146, -0.282102, 0.320211)
 mesh = SubResource("CapsuleMesh_uufhi")
+
+[node name="AnimationPlayer Arms" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5lb0e")
+}

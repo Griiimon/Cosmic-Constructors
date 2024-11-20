@@ -20,10 +20,13 @@ func _ready() -> void:
 	
 	grid_state.jetpack_enabled.connect(init_eva)
 	grid_state.jumped.connect(init_eva)
+	
 	terrain_state.jetpack_enabled.connect(init_eva)
 	terrain_state.jumped.connect(jump)
+	
 	jump_state.landed.connect(landed)
-
+	jump_state.jetpack_enabled.connect(init_eva)
+	
 	
 func sit(seat: SeatInstance):
 	seated_state.seat= seat

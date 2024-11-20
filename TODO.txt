@@ -1,3 +1,5 @@
+gravity jetpack ( equipment slot )
+
 test world with small 1m chunk planet, real gravity and asteroid
 	=> skybox transition?
 
@@ -48,6 +50,11 @@ FIX removing MultiBlocks can lead to crash ( only when splitting grids? )
 
 meta tag for BlockInstance scene sub nodes that should be deleted in ghost ( or just delete anything not MeshInstance3D or plain Node3D ? )
 
+
+MULTIPLAYER
+---------------
+
+walk animation
 
 
 DESIGN QUESTIONS

@@ -61,8 +61,9 @@ DEMO VIDEO
 distance adjust 3rd person cam
 model arms low when not eva (forward) / jump(side)
 
-build car on planet
+build car on planet with piston+rotor+drills
 	atmospheric jetpack
+	planet size * 4
 shoot car with rocket
 	explosion effect visually + force
 build space ship on planet

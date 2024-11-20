@@ -26,3 +26,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 
 func change_speed():
 	joint.set_param_y(Generic6DOFJoint3D.PARAM_ANGULAR_MOTOR_TARGET_VELOCITY, rotation_speed.get_value_f())
+
+
+func on_set_active():
+	joint.set_flag_y(Generic6DOFJoint3D.FLAG_ENABLE_MOTOR, active.is_true())

@@ -87,6 +87,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 			coll_shape.position+= grid_block_basis.y * 0.5
 
 		add_child(coll_shape)
+		# FIXME shouldnt the following line be unindented
 		collision_shapes.append(coll_shape)
 
 	grid_block.collision_shape= coll_shape
@@ -113,7 +114,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 func _physics_process(delta: float) -> void:
 	requested_movement= requested_movement.normalized()
 
-	DebugHud.send("Req Movement", requested_movement)
+	DebugPanel.send("Req Movement", requested_movement)
 
 	if not freeze:
 		run_dampeners(delta)
@@ -208,13 +209,17 @@ func run_integrity_check():
 	var ff_blocks: Array[Vector3i]= flood_fill((blocks.values()[0] as GridBlock).local_pos)
 
 	if ff_blocks.size() < blocks.size():
-		split(ff_blocks)
+		split(ff_blocks, self)
 		run_integrity_check()
 
-	update_properties()
+	if freeze:
+		unfreeze_check()
+	else:
+		update_properties()
 
 
-func split(split_blocks: Array[Vector3i]):
+func split(split_blocks: Array[Vector3i], orig_grid: BlockGrid):
+	print("Splitting of %d Blocks" % split_blocks.size())
 	var new_grid: BlockGrid= world.add_grid(position, rotation)
 	
 	for block_pos in split_blocks:
@@ -233,7 +238,9 @@ func split(split_blocks: Array[Vector3i]):
 
 		blocks.erase(block_pos)
 		
-
+	new_grid.freeze= orig_grid.freeze
+	if new_grid.freeze:
+		unfreeze_check()
 	new_grid.update_properties()
 
 
@@ -258,44 +265,23 @@ func update_properties():
 	mass_indicator.position= center_of_mass
 
 
-#func take_damage(damage: Damage):
-	#var global_pos: Vector3= collision_shapes[damage.shape_index].global_position
-	#var block: BaseGridBlock= get_block_from_global_pos(global_pos)
-	#var center: Vector3i= block.local_pos
-	#
-	#var radius: float= damage.radius
-	#
-	#var grid_pos_list: Array[Vector3i]
-	#var processed_list: Array[Vector3i]
-	#grid_pos_list.append(center)
-	#
-	#var damage_left: Dictionary
-	#damage_left[center]= damage.amount
-	#
-	#while not grid_pos_list.is_empty():
-		#var grid_pos: Vector3i= grid_pos_list[0]
-		#var local_damage: int= damage_left[grid_pos]
-		#
-		#prints(grid_pos, "takes damage", local_damage)
-		#
-		#if local_damage > 0:
-			#block= get_block_local(grid_pos)
-			#var grid_dist: int= grid_pos.distance_squared_to(center)
-			#
-			#if block:
-				#local_damage= block.take_damage(local_damage, self)
-			#else:
-				#local_damage= min(local_damage, lerp(damage.amount, damage.min_amount, grid_dist / (radius * radius)))
-			#
-			#for neighbor in get_block_neighbors(grid_pos, true, true):
-				#var neighbor_dist: int= neighbor.distance_squared_to(center)
-				#if neighbor_dist > grid_dist and neighbor_dist <= radius * radius:
-					#if not neighbor in processed_list:
-						#grid_pos_list.append(neighbor)
-						#processed_list.append(neighbor)
-					#damage_left[neighbor]= local_damage if not damage_left.has(neighbor) else max(local_damage, damage_left[neighbor])
-		#
-		#grid_pos_list.remove_at(0)
+func unfreeze_check():
+	var space_state: PhysicsDirectSpaceState3D= get_world_3d().direct_space_state
+	
+	var query:= PhysicsShapeQueryParameters3D.new()
+	query.collision_mask= Global.TERRAIN_COLLISION_LAYER
+	
+	prints("Run unfreeze check for %s with %d shapes" % [str(name), collision_shapes.size()])
+	
+	for coll_shape: CollisionShape3D in collision_shapes:
+		query.transform= coll_shape.global_transform
+		query.shape= coll_shape.shape
+		if space_state.intersect_shape(query, 1):
+			return
+	
+	print(" Success")
+	freeze= false
+
 
 
 func take_damage(damage: Damage, coll_shape: CollisionShape3D):

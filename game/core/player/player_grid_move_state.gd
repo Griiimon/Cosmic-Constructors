@@ -32,3 +32,7 @@ func initial_align():
 
 func continuous_align(_delta: float):
 	pass
+
+
+func on_left_ground():
+	jetpack_enabled.emit(velocity)

@@ -136,9 +136,6 @@ transform = Transform3D(1, 0, 0, 0, 0.979649, 0.200719, 0, -0.200719, 0.979649, 
 [node name="Movement State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_615c1")
 current_state = NodePath("EVA")
-allow_no_state = null
-debug = null
-paused = null
 
 [node name="EVA" type="Node" parent="Movement State Machine"]
 script = ExtResource("3_o2tyv")
@@ -154,10 +151,12 @@ script = ExtResource("4_aaxal")
 
 [node name="Grid" type="Node" parent="Movement State Machine"]
 script = ExtResource("5_ri51i")
+jump_impulse = 3.0
 
 [node name="Terrain" type="Node" parent="Movement State Machine"]
 script = ExtResource("6_cr6m7")
 strafe_speed = 3.0
+jump_impulse = 5.0
 snap_factor = 1.0
 
 [node name="Jump" type="Node" parent="Movement State Machine"]

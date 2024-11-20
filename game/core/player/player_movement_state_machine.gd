@@ -50,6 +50,6 @@ func jump(velocity: Vector3, impulse: float):
 	player.linear_velocity= velocity
 
 	if impulse > 0:
-		player.apply_central_impulse(player.global_basis.y * jump_impulse)
+		player.apply_central_impulse(player.global_basis.y * impulse)
 		jump_state.land_cooldown.start()
 		

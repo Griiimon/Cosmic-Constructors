@@ -57,6 +57,12 @@ func on_physics_process(delta: float):
 	final_move= -player.head.global_basis.z * move_vec * delta
 	final_move+= player.head.global_basis.x * strafe_vec * delta
 
+	if strafe_vec:
+		final_move= final_move.limit_length(strafe_speed * delta)
+
+	if move_vec:
+		final_move= final_move.limit_length(abs(move_vec * delta))
+
 	var prev_position: Vector3= player.global_position
 	
 	pre_move()

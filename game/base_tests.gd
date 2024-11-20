@@ -52,27 +52,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed: 
 			if event.keycode == KEY_F1:
-				var terrain: VoxelLodTerrain= $"../Asteroid".get_child(0)
-				var local_pos: Vector3i= terrain.to_local($"../Player".global_position)
-				#var local_pos: Vector3i= $"../Player".global_position
-				var radius: float= 5
-				VoxelUtils.pre_mine(terrain, local_pos, radius)
-				
-				var tool: VoxelToolLodTerrain= terrain.get_voxel_tool()
-				tool.channel= VoxelBuffer.CHANNEL_SDF
-				tool.mode= VoxelTool.MODE_REMOVE
-				tool.do_sphere(local_pos, radius)
-				
-				#await get_tree().create_timer(1).timeout
-
-				var new_resources: Dictionary= VoxelUtils.mined(terrain, local_pos, radius)
-
-				for key in new_resources.keys():
-					if not collected_resources.has(key):
-						collected_resources[key]= 0.0
-					collected_resources[key]+= new_resources[key]
-				
-				DebugHud.send("Gold", collected_resources[1] if collected_resources.has(1) else 0.0)
+				mine_gold()
 			elif event.keycode == KEY_F2:
 				player.world.freeze_grids(false)
 			elif event.keycode == KEY_F4:
@@ -89,21 +69,12 @@ func _input(event: InputEvent) -> void:
 	elif event is InputEventMouseButton:
 		if event.pressed:
 			if event.button_index == MOUSE_BUTTON_RIGHT:
-				var query:= PhysicsRayQueryParameters3D.create(player.head.global_position, player.build_raycast.to_global(player.build_raycast.target_position))#, Global.GRID_COLLISION_LAYER)
-				prints("Remove query", query.from, query.to)
-				query.hit_back_faces= false
-				query.hit_from_inside= false
-				var result= player.get_world_3d().direct_space_state.intersect_ray(query)
-				if result:
-					var grid: BlockGrid= result.collider
-					var collision_point: Vector3= result.position
-					collision_point+= -player.build_raycast.global_basis.z * 0.05
-					grid.get_block_from_global_pos(collision_point).destroy(grid)
-
+				remove_block()
 			elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 				switch_block(-1)
 			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				switch_block(1)
+
 
 func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
 	var grid: BlockGrid= Global.game.world.add_grid(pos)
@@ -112,7 +83,31 @@ func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
 		for z in size.y:
 			@warning_ignore("narrowing_conversion")
 			grid.add_block(default_block, Vector3i(x, 0, z) - Vector3i(size.x / 2.0, 0, size.y / 2.0) / 2)
+
+
+func mine_gold():
+	var terrain: VoxelLodTerrain= $"../Asteroid".get_child(0)
+	var local_pos: Vector3i= terrain.to_local($"../Player".global_position)
+	#var local_pos: Vector3i= $"../Player".global_position
+	var radius: float= 5
+	VoxelUtils.pre_mine(terrain, local_pos, radius)
 	
+	var tool: VoxelToolLodTerrain= terrain.get_voxel_tool()
+	tool.channel= VoxelBuffer.CHANNEL_SDF
+	tool.mode= VoxelTool.MODE_REMOVE
+	tool.do_sphere(local_pos, radius)
+	
+	#await get_tree().create_timer(1).timeout
+
+	var new_resources: Dictionary= VoxelUtils.mined(terrain, local_pos, radius)
+
+	for key in new_resources.keys():
+		if not collected_resources.has(key):
+			collected_resources[key]= 0.0
+		collected_resources[key]+= new_resources[key]
+	
+	DebugHud.send("Gold", collected_resources[1] if collected_resources.has(1) else 0.0)	
+
 	
 func switch_block(delta: int):
 	var build_state: PlayerBuildState= player.action_state_machine.build_state
@@ -128,5 +123,18 @@ func switch_block(delta: int):
 	
 	SignalManager.build_block_changed.emit(build_state.current_block)
 
+
+func remove_block():
+	var query:= PhysicsRayQueryParameters3D.create(player.head.global_position, player.build_raycast.to_global(player.build_raycast.target_position))#, Global.GRID_COLLISION_LAYER)
+	#prints("Remove query", query.from, query.to)
+	query.hit_back_faces= false
+	query.hit_from_inside= false
+	var result= player.get_world_3d().direct_space_state.intersect_ray(query)
+	if result:
+		var grid: BlockGrid= result.collider
+		var collision_point: Vector3= result.position
+		collision_point+= -player.build_raycast.global_basis.z * 0.05
+		grid.get_block_from_global_pos(collision_point).destroy(grid)
+	
 
 	

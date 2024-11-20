@@ -9,4 +9,7 @@ func initial_align():
 
 
 func continuous_align(delta: float):
-	player.global_transform= player.global_transform.interpolate_with(Utils.align_with_y(player.global_transform, get_floor_normal()), delta * 10)
+	if player.get_gravity().length():
+		player.global_transform= player.global_transform.interpolate_with(Utils.align_with_y(player.global_transform, -player.get_gravity().normalized()), delta * 10)
+	else:
+		player.global_transform= player.global_transform.interpolate_with(Utils.align_with_y(player.global_transform, get_floor_normal()), delta * 10)

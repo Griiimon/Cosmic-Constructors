@@ -3,9 +3,18 @@ extends PlayerMovementStateMachineState
 
 signal landed
 
+@onready var land_cooldown: Timer = $"Land Cooldown"
+
+
+
+func on_enter():
+	assert(not player.freeze)
 
 
 func on_physics_process(delta: float):
-	if player.floor_shapecast.is_colliding():
-		if player.linear_velocity.dot(-player.global_basis.y) > 0:
-			landed.emit()
+	if player.floor_shapecast.is_colliding() and can_land():
+		landed.emit()
+
+
+func can_land()-> bool:
+	return land_cooldown.is_stopped()

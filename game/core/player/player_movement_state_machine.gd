@@ -21,7 +21,7 @@ func _ready() -> void:
 	grid_state.jetpack_enabled.connect(init_eva)
 	grid_state.jumped.connect(init_eva)
 	terrain_state.jetpack_enabled.connect(init_eva)
-	terrain_state.jumped.connect(change_state.bind(jump_state))
+	terrain_state.jumped.connect(jump)
 	jump_state.landed.connect(landed)
 
 	
@@ -43,3 +43,13 @@ func landed():
 func init_eva(velocity: Vector3= Vector3.ZERO):
 	change_state(eva_state)
 	player.linear_velocity= velocity
+
+
+func jump(velocity: Vector3, impulse: float):
+	change_state(jump_state)
+	player.linear_velocity= velocity
+
+	if impulse > 0:
+		player.apply_central_impulse(player.global_basis.y * jump_impulse)
+		jump_state.land_cooldown.start()
+		

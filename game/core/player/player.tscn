@@ -136,6 +136,9 @@ transform = Transform3D(1, 0, 0, 0, 0.979649, 0.200719, 0, -0.200719, 0.979649, 
 [node name="Movement State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_615c1")
 current_state = NodePath("EVA")
+allow_no_state = null
+debug = null
+paused = null
 
 [node name="EVA" type="Node" parent="Movement State Machine"]
 script = ExtResource("3_o2tyv")
@@ -159,6 +162,10 @@ snap_factor = 1.0
 
 [node name="Jump" type="Node" parent="Movement State Machine"]
 script = ExtResource("8_s2hhl")
+
+[node name="Land Cooldown" type="Timer" parent="Movement State Machine/Jump"]
+wait_time = 0.1
+one_shot = true
 
 [node name="Action State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_r1eyq")

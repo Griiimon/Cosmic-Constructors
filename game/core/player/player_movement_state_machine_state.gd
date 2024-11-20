@@ -12,6 +12,8 @@ signal jumped(velocity: Vector3)
 @export var run_factor: float= 3.0
 @export var move_back_factor: float= 0.5
 
+@export var jump_impulse: float= 10.0
+
 @export var snap_factor: float= 5.0
 
 @export var min_safe_snap_fraction: float= 0.65
@@ -34,7 +36,11 @@ func on_physics_process(delta: float):
 	if not player.floor_shapecast.is_colliding():
 		on_left_ground()
 		return
-		
+
+	if Input.is_action_just_pressed("jump"):
+		jumped.emit(velocity, jump_impulse)
+		return
+
 	if Input.is_action_just_pressed("jetpack"):
 		jetpack_enabled.emit(velocity)
 		return

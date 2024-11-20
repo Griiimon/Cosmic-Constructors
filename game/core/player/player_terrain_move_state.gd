@@ -3,7 +3,6 @@ extends PlayerMovementStateMachineState
 
 
 
-
 func initial_align():
 	pass
 

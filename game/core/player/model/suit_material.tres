@@ -9,13 +9,13 @@ colors = PackedColorArray(0.419813, 0.419813, 0.419813, 1, 1, 1, 1, 1)
 width = 64
 height = 256
 as_normal_map = true
-bump_strength = 10.4
+bump_strength = 6.0
 color_ramp = SubResource("Gradient_brylp")
 noise = SubResource("FastNoiseLite_kwoim")
 
 [resource]
 albedo_color = Color(0.603923, 0.603923, 0.603923, 1)
-metallic = 0.25
+metallic = 0.16
 roughness = 0.38
 normal_enabled = true
 normal_texture = SubResource("NoiseTexture2D_iqg15")

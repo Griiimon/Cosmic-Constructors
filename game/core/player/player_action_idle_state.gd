@@ -36,7 +36,7 @@ func on_physics_process(_delta: float):
 		return
 	
 	#if Input.is_action_pressed("block_interact"):
-	if Input.is_action_just_pressed("toggle_block_property"):
+	if Input.is_action_just_pressed("toggle_block_property") or Input.is_action_just_pressed("toggle_block_alt_property"):
 		if player.block_interact_raycast.is_colliding():
 			var raycast: RayCast3D= player.block_interact_raycast
 			var grid: BlockGrid= raycast.get_collider()
@@ -45,11 +45,12 @@ func on_physics_process(_delta: float):
 			if grid_block:
 				var block_instance: BlockInstance= grid_block.get_block_instance()
 				if block_instance:
-					var default_property: BlockProperty= block_instance.default_interaction_property
-					if default_property:
-						#if Input.is_action_just_pressed("toggle_block_property"):
-						default_property.toggle()
-						SignalManager.block_property_changed.emit(default_property)
+					var property: BlockProperty= block_instance.default_interaction_property if Input.is_action_just_pressed("toggle_block_property")\
+												 else block_instance.alternative_interaction_property
+
+					if property:
+						property.toggle()
+						SignalManager.block_property_changed.emit(property)
 						return
 	
 	

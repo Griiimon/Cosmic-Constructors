@@ -25,6 +25,7 @@ var max_distance: float
 
 func _ready() -> void:
 	default_interaction_property= velocity
+	alternative_interaction_property= active
 	
 	for i in num_segments - 1:
 		var next_segment: MeshInstance3D= orig_segment.duplicate()

@@ -11,6 +11,7 @@ var sub_grid: BlockGrid
 
 func _ready() -> void:
 	default_interaction_property= rotation_speed
+	alternative_interaction_property= active
 
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):

@@ -2,6 +2,7 @@ class_name BlockInstance
 extends Node3D
 
 var default_interaction_property: BlockProperty
+var alternative_interaction_property: BlockProperty
 
 
 

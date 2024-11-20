@@ -6,6 +6,7 @@ extends FiniteStateMachine
 @onready var seated_state: PlayerSeatedState = $Seated
 @onready var grid_state: PlayerGridMoveState = $Grid
 @onready var terrain_state: PlayerTerrainMoveState = $Terrain
+@onready var jump_state: PlayerJumpMoveState = $Jump
 
 var player: Player
 
@@ -14,13 +15,14 @@ var player: Player
 func _ready() -> void:
 	player= get_parent()
 	
-	eva_state.land.connect(landed)
+	eva_state.landed.connect(landed)
 	seated_state.finished.connect(change_state.bind(eva_state))
 	
 	grid_state.jetpack_enabled.connect(init_eva)
-	grid_state.left_ground.connect(init_eva)
+	grid_state.jumped.connect(init_eva)
 	terrain_state.jetpack_enabled.connect(init_eva)
-	terrain_state.left_ground.connect(init_eva)
+	terrain_state.jumped.connect(change_state.bind(jump_state))
+	jump_state.landed.connect(landed)
 
 	
 func sit(seat: SeatInstance):

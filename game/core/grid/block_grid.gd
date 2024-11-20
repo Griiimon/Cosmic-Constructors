@@ -114,7 +114,13 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 func _physics_process(delta: float) -> void:
 	requested_movement= requested_movement.normalized()
 
-	DebugPanel.send("Req Movement", requested_movement)
+	DebugPanel.send(self, "Req Movement", requested_movement)
+	#DebugPanel.send(self, "Req Rotation", requested_movement)
+	DebugPanel.send(self, "Velocity", linear_velocity.round())
+	DebugPanel.send(self, "Ang Velocity", angular_velocity.round())
+	DebugPanel.send(self, "Mass", mass)
+	DebugPanel.send(self, "Blocks", blocks.size())
+	DebugPanel.send(self, "Freeze", freeze)
 
 	if not freeze:
 		run_dampeners(delta)

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Cosmic Constructors"
-run/main_scene="res://game/test/planet test/planet_test.tscn"
+run/main_scene="res://game/test/damage test/damage_test.tscn"
 config/features=PackedStringArray("4.3", "Double Precision", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -21,6 +21,7 @@ Global="*res://game/global/global.gd"
 GameData="*res://game/global/game_data.tscn"
 DebugHud="*res://game/global/debug hud/debug_hud.tscn"
 DebugMesh="*res://game/debug/debug mesh/debug_mesh.gd"
+DebugPanel="*res://game/global/debug panel/debug_panel.gd"
 SignalManager="*res://game/global/signal_manager.gd"
 RaycastHelper="*res://game/global/raycast helper/raycast_helper.tscn"
 
@@ -194,6 +195,11 @@ pick_block={
 jump={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"location":0,"echo":false,"script":null)
+]
+}
+toggle_block_alt_property={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":71,"key_label":0,"unicode":103,"location":0,"echo":false,"script":null)
 ]
 }
 

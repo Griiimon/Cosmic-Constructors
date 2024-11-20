@@ -1,5 +1,13 @@
 gravity jetpack ( equipment slot )
 
+avoid overlap with other grid while building
+
+toggle debug panels ( F4 )
+
+limit camera rotation
+
+re-center origin of split grids ( to its center of mass? )
+
 test world with small 1m chunk planet, real gravity and asteroid
 	=> skybox transition?
 

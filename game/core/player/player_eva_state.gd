@@ -1,7 +1,7 @@
 class_name PlayerEvaState
 extends PlayerStateMachineState
 
-signal land
+signal landed
 
 @export var yaw_factor: float= 1.0
 @export var pitch_factor: float= 1.0 
@@ -36,7 +36,7 @@ func on_physics_process(delta: float):
 		#if player.to_local(player.linear_velocity).y < -min_land_velocity:
 		#if (player.basis * player.linear_velocity).y < -min_land_velocity:
 		if player.linear_velocity.dot(-player.global_basis.y) > min_land_velocity:
-			land.emit()
+			landed.emit()
 			return
 
 

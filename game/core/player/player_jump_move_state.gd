@@ -14,6 +14,11 @@ func on_enter():
 func on_physics_process(delta: float):
 	if player.floor_shapecast.is_colliding() and can_land():
 		landed.emit()
+		return
+
+	if Input.is_action_just_pressed("jetpack"):
+		jetpack_enabled.emit(velocity)
+		return
 
 
 func can_land()-> bool:

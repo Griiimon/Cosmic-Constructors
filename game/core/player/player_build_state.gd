@@ -122,7 +122,8 @@ func align_ghost():
 		
 	else:
 		grid= null
-		ghost.position= player.to_global(raycast.target_position)
+		#ghost.position= player.to_global(raycast.target_position)
+		ghost.position= player.pivot.to_global(raycast.target_position)
 
 	return true
 
@@ -177,7 +178,7 @@ func rotate_ghost(delta: float):
 		block_rotation.z+= 1
 		
 	if no_grid:
-		ghost.rotation= player.global_rotation
+		ghost.rotation= player.pivot.global_rotation
 		ghost.basis= ghost.basis * Basis.from_euler(block_rotation * delta * smooth_rotation_speed)
 	else:
 		if current_block.is_multi_block():

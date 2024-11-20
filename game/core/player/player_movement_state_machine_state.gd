@@ -2,7 +2,7 @@ class_name PlayerMovementStateMachineState
 extends PlayerStateMachineState
 
 signal jetpack_enabled(velocity: Vector3)
-signal left_ground(velocity: Vector3)
+signal jumped(velocity: Vector3)
 
 @export var turn_factor: float= 1.0
 @export var pitch_factor: float= 1.0
@@ -32,7 +32,7 @@ func on_exit():
 
 func on_physics_process(delta: float):
 	if not player.floor_shapecast.is_colliding():
-		left_ground.emit(velocity)
+		on_left_ground()
 		return
 		
 	if Input.is_action_just_pressed("jetpack"):
@@ -120,6 +120,10 @@ func pre_move():
 
 
 func post_move():
+	pass
+
+
+func on_left_ground():
 	pass
 
 

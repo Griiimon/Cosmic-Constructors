@@ -70,6 +70,7 @@ func set_current_state(next_state: StateMachineState):
 			print(get_parent().name + " State Machine changing state to " + current_state.name)
 
 		state_changed.emit(current_state)
+		on_pre_enter_state()
 		current_state.on_enter()
 		current_state.state_entered.emit()
 
@@ -77,3 +78,7 @@ func set_current_state(next_state: StateMachineState):
 func cancel_state():
 	assert(allow_no_state)
 	change_state(null)
+
+
+func on_pre_enter_state():
+	pass

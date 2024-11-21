@@ -55,4 +55,7 @@ func jump(velocity: Vector3, impulse: float):
 	if impulse > 0:
 		player.apply_central_impulse(player.global_basis.y * impulse)
 		jump_state.land_cooldown.start()
-		
+
+
+func on_pre_enter_state():
+	player.play_animation("RESET")

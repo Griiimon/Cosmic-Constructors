@@ -43,7 +43,7 @@ func landed():
 		change_state(terrain_state)
 
 
-func init_eva(velocity: Vector3= Vector3.ZERO):
+func init_eva(velocity: Vector3= Vector3.ZERO, impulse: float= 0.0):
 	change_state(eva_state)
 	player.linear_velocity= velocity
 

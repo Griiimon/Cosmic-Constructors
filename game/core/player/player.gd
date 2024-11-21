@@ -24,6 +24,7 @@ extends Entity
 @onready var movement_state_machine: PlayerMovementStateMachine = $"Movement State Machine"
 @onready var action_state_machine: PlayerActionStateMachine = $"Action State Machine"
 
+@onready var item_viewport_container: SubViewportContainer = %"Item Viewport Container"
 @onready var hand_item_container: Node3D = %"Hand Item Container"
 @onready var drill_shapecast: ShapeCast3D = %"Drill Shapecast"
 
@@ -57,10 +58,12 @@ func _physics_process(_delta: float) -> void:
 		if first_person_camera.current:
 			third_person_camera.make_current()
 			model.show()
+			item_viewport_container.hide()
 		else:
 			first_person_camera.make_current()
 			model.hide()
-			
+			item_viewport_container.show()
+
 	if third_person_camera.current:
 		if third_person_camera_raycast.is_colliding():
 			third_person_camera.global_position= third_person_camera_raycast.get_collision_point()

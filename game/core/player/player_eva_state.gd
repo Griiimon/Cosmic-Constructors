@@ -24,6 +24,8 @@ var roll_input: float
 
 
 func on_enter():
+	player.play_animation("steer")
+
 	var head_forward: Vector3= -player.head.global_basis.z
 	player.reset_camera()
 	player.look_at(player.global_position + head_forward, player.global_basis.y)

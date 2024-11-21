@@ -8,6 +8,7 @@ signal landed
 
 
 func on_enter():
+	player.play_animation("jump")
 	assert(not player.freeze)
 
 

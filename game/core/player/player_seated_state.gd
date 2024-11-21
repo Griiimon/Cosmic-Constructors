@@ -8,6 +8,8 @@ var stored_position_relative: Vector3
 
 
 func on_enter():
+	player.play_animation("steer")
+
 	stored_position_relative= get_grid().to_local(player.global_position)
 	seat.entity= player
 	

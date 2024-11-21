@@ -25,12 +25,13 @@ var is_walking: bool:
 		if b != is_walking:
 			is_walking= b
 			if is_walking:
-				player.play_animation("walk")
+				player.play_animation("walk", velocity.length() / walk_speed)
 			else:
 				player.play_animation("RESET")
 
 
 func on_enter():
+	is_walking= false
 	player.freeze= true
 	initial_align()
 

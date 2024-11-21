@@ -122,15 +122,17 @@ collision_mask = 4
 unique_name_in_owner = true
 visible = false
 
-[node name="Third Person Camera Pivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.851977, 0)
+[node name="Third Person Camera Pivot" type="Node3D" parent="Head"]
+unique_name_in_owner = true
 
-[node name="Third Person Camera RayCast" type="RayCast3D" parent="Third Person Camera Pivot"]
+[node name="Third Person Camera RayCast" type="RayCast3D" parent="Head/Third Person Camera Pivot"]
+unique_name_in_owner = true
 target_position = Vector3(0, 1, 5)
 collision_mask = 6
 hit_back_faces = false
 
-[node name="Third Person Camera" type="Camera3D" parent="Third Person Camera Pivot"]
+[node name="Third Person Camera" type="Camera3D" parent="Head/Third Person Camera Pivot"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.979649, 0.200719, 0, -0.200719, 0.979649, 0, 1, 5)
 
 [node name="Movement State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]

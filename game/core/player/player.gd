@@ -17,9 +17,9 @@ extends Entity
 
 @onready var model: PlayerModel = %Model
 
-@onready var third_person_camera_pivot: Node3D = $"Third Person Camera Pivot"
-@onready var third_person_camera_raycast: RayCast3D = $"Third Person Camera Pivot/Third Person Camera RayCast"
-@onready var third_person_camera: Camera3D = $"Third Person Camera Pivot/Third Person Camera"
+@onready var third_person_camera_pivot: Node3D = %"Third Person Camera Pivot"
+@onready var third_person_camera_raycast: RayCast3D = %"Third Person Camera RayCast"
+@onready var third_person_camera: Camera3D = %"Third Person Camera"
 
 @onready var movement_state_machine: PlayerMovementStateMachine = $"Movement State Machine"
 @onready var action_state_machine: PlayerActionStateMachine = $"Action State Machine"
@@ -56,11 +56,9 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_camera"):
 		if first_person_camera.current:
 			third_person_camera.make_current()
-			third_person_camera_pivot.reparent(head)
 			model.show()
 		else:
 			first_person_camera.make_current()
-			third_person_camera_pivot.reparent(self)
 			model.hide()
 			
 	if third_person_camera.current:

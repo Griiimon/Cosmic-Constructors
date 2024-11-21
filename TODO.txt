@@ -1,8 +1,5 @@
-gravity jetpack ( equipment slot )
 
 avoid overlap with other grid while building
-
-limit camera rotation
 
 re-center origin of split grids ( to its center of mass? )
 
@@ -14,11 +11,7 @@ player carry ore chunks, add collision shape but keep center of mass
 BlockInventory component
 drill stops drilling when full
 
-rocket projectile thruster flicker 
-
-when splitting static grid recalculate for each part if still/newly static
-	run ground check for each block, or store "anchored" state in GridBlock
-	..or even better in grid via dictionary so GridBlock doesnt get bloated
+put tool in players hand in 3rd person
 
 sub grid loading and attaching to pistons/rotor
 

@@ -147,7 +147,8 @@ func on_input(event: InputEvent):
 	if event is InputEventMouseMotion:
 		player.head.rotate_y(deg_to_rad(-event.relative.x) * turn_factor)
 		player.pivot.rotate_x(deg_to_rad(-event.relative.y) * pitch_factor)
-
+		player.pivot.rotation_degrees.x= clamp(player.pivot.rotation_degrees.x, -70, 70)
+		DebugHud.send("Pivot x", int(player.pivot.rotation_degrees.x))
 
 func initial_align():
 	pass

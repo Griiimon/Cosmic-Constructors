@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwo0gup2wubsi"]
+[gd_scene load_steps=7 format=3 uid="uid://cwo0gup2wubsi"]
 
 [ext_resource type="Script" path="res://game/core/misc/projectile_object.gd" id="1_4x220"]
 [ext_resource type="PackedScene" uid="uid://dsun3ooab4dfq" path="res://game/data/projectiles/rocket/rocket_projectile_model.tscn" id="2_tu6b2"]
@@ -6,8 +6,41 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_ndrlb"]
 radius = 0.05
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jktq2"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.803922, 0.803922, 0.803922, 0.509804)
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_be8np"]
+material = SubResource("StandardMaterial3D_jktq2")
+size = Vector2(0.05, 0.05)
+
+[sub_resource type="Gradient" id="Gradient_l2yyw"]
+colors = PackedColorArray(0.241156, 0.241156, 0.241156, 1, 1, 1, 1, 0)
+
 [node name="Rocket Projectile" type="Node3D"]
 script = ExtResource("1_4x220")
 shape = SubResource("SphereShape3D_ndrlb")
 
 [node name="Rocket Projectile Model" parent="." instance=ExtResource("2_tu6b2")]
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.171508)
+amount = 50
+mesh = SubResource("QuadMesh_be8np")
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+damping_min = 1.111
+damping_max = 7.778
+color_ramp = SubResource("Gradient_l2yyw")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.200558)
+light_color = Color(0.66679, 0.301096, 0.156364, 1)
+omni_range = 0.2

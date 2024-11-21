@@ -7,7 +7,7 @@ signal landed
 @export var pitch_factor: float= 1.0 
 @export var roll_factor: float= 1.0
 
-@export var acceleration: float= 10.0
+#@export var acceleration: float= 10.0
 @export var boost_factor: float= 2.0
 
 @export var damping_factor: float= 1.0
@@ -83,7 +83,7 @@ func on_physics_process(delta: float):
 		
 		move_vec+= counter_force.normalized()
 	
-	player.apply_central_force(move_vec * player.global_basis.inverse() * acceleration * delta)
+	player.apply_central_force(move_vec * player.global_basis.inverse() * player.equipment.get_jetpack_thrust() * delta)
 
 
 func on_input(event: InputEvent):

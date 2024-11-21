@@ -14,7 +14,7 @@ extends Entity
 @onready var first_person_camera: Camera3D = %"First Person Camera"
 @onready var pivot: Node3D = %Pivot
 
-@onready var model: Node3D = %Model
+@onready var model: PlayerModel = %Model
 
 @onready var third_person_camera_pivot: Node3D = $"Third Person Camera Pivot"
 @onready var third_person_camera_raycast: RayCast3D = $"Third Person Camera Pivot/Third Person Camera RayCast"
@@ -77,3 +77,11 @@ func get_hand_item()-> HandItem:
 	if not hand_object or not is_instance_valid(hand_object) or hand_object.is_queued_for_deletion():
 		return null
 	return hand_object.item_definition
+
+
+func play_animation(anim_name: String, speed: float= 1.0):
+	model.play_animation(anim_name, speed)
+
+
+func reset_animation():
+	model.reset_animation()

@@ -20,7 +20,14 @@ signal jumped(velocity: Vector3)
 @export var max_safe_snap_fraction: float= 0.75
 
 var velocity: Vector3
-
+var is_walking: bool:
+	set(b):
+		if b != is_walking:
+			is_walking= b
+			if is_walking:
+				player.play_animation("walk")
+			else:
+				player.play_animation("RESET")
 
 
 func on_enter():
@@ -77,6 +84,8 @@ func on_physics_process(delta: float):
 
 	velocity= (player.global_position - prev_position) / delta
 	DebugHud.send("Velocity", "%.2f" % velocity.length())
+
+	is_walking= velocity.length() > 0
 
 
 func move_and_slide_and_snap(motion: Vector3, floor_normal: Vector3, delta: float, max_slides: int= 1):

@@ -120,6 +120,7 @@ collision_mask = 4
 
 [node name="Model" parent="Head" instance=ExtResource("2_qm5y7")]
 unique_name_in_owner = true
+visible = false
 
 [node name="Third Person Camera Pivot" type="Node3D" parent="Head"]
 unique_name_in_owner = true

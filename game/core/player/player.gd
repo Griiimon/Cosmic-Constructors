@@ -2,6 +2,7 @@ class_name Player
 extends Entity
 
 @export var world: World
+@export var equipment: PlayerEquipment
 
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 

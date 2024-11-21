@@ -6,7 +6,7 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_mhret"]
 material = ExtResource("1_mladw")
-size = Vector3(0.595, 0.875, 0.405)
+size = Vector3(0.595, 1.015, 0.405)
 
 [sub_resource type="BoxMesh" id="BoxMesh_a2i8n"]
 material = ExtResource("1_mladw")
@@ -43,7 +43,7 @@ height = 0.4
 
 [sub_resource type="BoxMesh" id="BoxMesh_me6vd"]
 material = ExtResource("1_mladw")
-size = Vector3(0.16, 0.51, 0.195)
+size = Vector3(0.185, 0.655, 0.25)
 
 [sub_resource type="BoxMesh" id="BoxMesh_r5gsy"]
 material = ExtResource("1_mladw")
@@ -162,6 +162,33 @@ _data = {
 "wave": SubResource("Animation_vn6ep")
 }
 
+[sub_resource type="Animation" id="Animation_llaqv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Left Hip:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Right Hip:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_wjj32"]
 resource_name = "walk"
 loop_mode = 1
@@ -191,33 +218,6 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0.523599, 0, 0), Vector3(-0.523599, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_llaqv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Left Hip:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0),
-"transitions": PackedFloat64Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Right Hip:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat64Array(0),
-"transitions": PackedFloat64Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g5m2i"]
 _data = {
 "RESET": SubResource("Animation_llaqv"),
@@ -228,7 +228,7 @@ _data = {
 script = ExtResource("1_pnfv0")
 
 [node name="Torso" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.516379, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.614659, 0)
 mesh = SubResource("BoxMesh_mhret")
 
 [node name="Head" type="MeshInstance3D" parent="."]
@@ -275,7 +275,7 @@ mesh = SubResource("BoxMesh_me6vd")
 skeleton = NodePath("../..")
 
 [node name="Right Hip" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, -0.900915, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, -1.07979, 0)
 
 [node name="Right Leg" type="MeshInstance3D" parent="Right Hip"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.299085, 0)
@@ -283,7 +283,7 @@ mesh = SubResource("BoxMesh_r5gsy")
 skeleton = NodePath("../..")
 
 [node name="Left Hip" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, -0.901, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, -1.07987, 0)
 
 [node name="Left Leg" type="MeshInstance3D" parent="Left Hip"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.025, -0.299, 0)

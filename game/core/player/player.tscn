@@ -21,7 +21,7 @@ bounce = 0.5
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e61hw"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_suqug"]
-height = 1.0
+height = 0.5
 radius = 0.4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_amgwl"]
@@ -120,7 +120,6 @@ collision_mask = 4
 
 [node name="Model" parent="Head" instance=ExtResource("2_qm5y7")]
 unique_name_in_owner = true
-visible = false
 
 [node name="Third Person Camera Pivot" type="Node3D" parent="Head"]
 unique_name_in_owner = true

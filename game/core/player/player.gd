@@ -36,6 +36,10 @@ var hand_object: HandObject
 
 func _ready() -> void:
 	assert(world)
+	
+	if not equipment:
+		equipment= PlayerEquipment.new()
+	
 	Input.mouse_mode= Input.MOUSE_MODE_CAPTURED
 
 

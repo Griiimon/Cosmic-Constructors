@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bws4nr4sjg6bt"]
+[gd_scene load_steps=20 format=3 uid="uid://bws4nr4sjg6bt"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_hy62o"]
 [ext_resource type="Script" path="res://game/test/damage test/damage_tests.gd" id="2_wkbyi"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="4_8hosm"]
 [ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="5_ijfg3"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="6_pnchb"]
+[ext_resource type="Resource" uid="uid://6jymoqkdm6kr" path="res://game/data/equipment/back/space_jetpack.tres" id="7_eq7l4"]
+[ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="8_fpw3d"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0ujoa"]
 panorama = ExtResource("3_o606f")
@@ -20,6 +22,10 @@ sky = SubResource("Sky_nbk3e")
 ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
 reflected_light_source = 2
+
+[sub_resource type="Resource" id="Resource_8mf5b"]
+script = ExtResource("8_fpw3d")
+back_item = ExtResource("7_eq7l4")
 
 [sub_resource type="Gradient" id="Gradient_0kay1"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0.443137, 0.14902, 1)
@@ -43,7 +49,6 @@ size = Vector3(500, 0.1, 500)
 
 [node name="Damage Test" type="Node3D"]
 script = ExtResource("1_hy62o")
-gravity = 10.0
 
 [node name="Tests" type="Node" parent="."]
 script = ExtResource("2_wkbyi")
@@ -60,6 +65,7 @@ script = ExtResource("4_8hosm")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84, 0)
 gravity_scale = 0.0
 world = NodePath("../World")
+equipment = SubResource("Resource_8mf5b")
 
 [node name="VoxelViewer" type="VoxelViewer" parent="Player"]
 view_distance = 1024

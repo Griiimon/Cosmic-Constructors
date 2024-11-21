@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Jetpack" load_steps=2 format=3 uid="uid://6jymoqkdm6kr"]
+
+[ext_resource type="Script" path="res://game/core/player/equipment/back/jetpack.gd" id="1_4r0wv"]
+
+[resource]
+script = ExtResource("1_4r0wv")
+thrust = 100.0

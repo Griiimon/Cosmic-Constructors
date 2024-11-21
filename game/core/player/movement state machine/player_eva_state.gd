@@ -76,9 +76,9 @@ func on_physics_process(delta: float):
 		var counter_force: Vector3 = -unwanted_velocity * delta * damping_factor
 		
 		var threshold: float= 0.001
-		counter_force.x= counter_force.x if abs(counter_force.x) > threshold else 0.0
-		counter_force.y= counter_force.y if abs(counter_force.y) > threshold else 0.0
-		counter_force.z= counter_force.z if abs(counter_force.z) > threshold else 0.0
+		counter_force.x= smoothen_counter_force(counter_force.x, threshold)
+		counter_force.y= smoothen_counter_force(counter_force.y, threshold)
+		counter_force.z= smoothen_counter_force(counter_force.z, threshold)
 		counter_force= counter_force.normalized()
 		
 		move_vec+= counter_force.normalized()
@@ -90,3 +90,9 @@ func on_input(event: InputEvent):
 	if event is InputEventMouseMotion:
 		yaw_input= -event.relative.x
 		pitch_input= -event.relative.y
+
+
+func smoothen_counter_force(orig_force: float, threshold: float)-> float:
+	if abs(orig_force) < threshold:
+		return lerp(orig_force, 0.0, abs(orig_force) / threshold)
+	return orig_force

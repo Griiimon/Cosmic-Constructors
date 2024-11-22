@@ -1,10 +1,10 @@
 [gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://cp754ky7maqj2"]
 
 [ext_resource type="Shader" path="res://game/solar system/materials/planet_ground.gdshader" id="1"]
-[ext_resource type="Texture2D" uid="uid://dq0s3scgs2ncg" path="res://game/textures/grass_albedo.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://jfywo4xd75ku" path="res://game/textures/Rocks07_col.webp" id="2_ylcsf"]
-[ext_resource type="Texture2D" uid="uid://dvpf64ui03kn5" path="res://game/textures/Rocks07_nrm.webp" id="3_780vy"]
-[ext_resource type="Texture2D" uid="uid://ksj4nnvstubh" path="res://game/textures/grass_normal.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://cdga3d64rgt8e" path="res://game/textures/grass_albedo.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://myq0vhmv3kjp" path="res://game/textures/Rocks07_col.webp" id="2_ylcsf"]
+[ext_resource type="Texture2D" uid="uid://igu5bkxtjxmy" path="res://game/textures/Rocks07_nrm.webp" id="3_780vy"]
+[ext_resource type="Texture2D" uid="uid://d0ejh4bbyd4uy" path="res://game/textures/grass_normal.png" id="4"]
 
 [resource]
 render_priority = 0

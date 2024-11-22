@@ -5,6 +5,9 @@ damage impact impulse
 
 jetpack counterforce against gravity
 
+3rd person jetpack raise legs and tween shoulders for joystick input motions
+	also mini thrusters? entire jetpack scene
+
 put tool in players hand in 3rd person
 
 distance adjust 3rd person cam

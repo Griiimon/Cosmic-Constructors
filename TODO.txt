@@ -1,3 +1,14 @@
+damage impact impulse
+	applies force at the impact position => BlockGrid.apply_kinetic_impulse()
+	if explosion trigger the explosion Area detection plus explosion force deferred, so game has time to potentially split grids
+	=> World.apply_explosion_force()
+
+put tool in players hand in 3rd person
+
+distance adjust 3rd person cam
+
+landing gear toggle
+
 
 avoid overlap with other grid while building
 
@@ -11,7 +22,6 @@ player carry ore chunks, add collision shape but keep center of mass
 BlockInventory component
 drill stops drilling when full
 
-put tool in players hand in 3rd person
 
 sub grid loading and attaching to pistons/rotor
 
@@ -19,10 +29,6 @@ fixed gatling
 
 debug hitpoint bars for each block
 
-damage impact impulse
-	applies force at the impact position => BlockGrid.apply_kinetic_impulse()
-	if explosion trigger the explosion Area detection plus explosion force deferred, so game has time to potentially split grids
-	=> World.apply_explosion_force()
 
 BlockPlacementsConditions? => pistons, rotor cant have anything above
 
@@ -51,11 +57,8 @@ meta tag for BlockInstance scene sub nodes that should be deleted in ghost ( or 
 DEMO VIDEO
 ---------------
 
-distance adjust 3rd person cam
-model arms low when not eva (forward) / jump(side)
 
 build car on planet with piston+rotor+drills
-	atmospheric jetpack
 	planet size * 4
 shoot car with rocket
 	explosion effect visually + force

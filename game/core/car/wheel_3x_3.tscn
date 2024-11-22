@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d3tx7ikwat0o"]
+[gd_scene load_steps=9 format=3 uid="uid://d3tx7ikwat0o"]
 
 [ext_resource type="Script" path="res://game/core/car/wheel.gd" id="1_rbnuk"]
 
@@ -8,23 +8,20 @@ friction = 0.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_2e00m"]
 size = Vector3(5, 0.1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qyam"]
-albedo_color = Color(0.345123, 0.445221, 0.469969, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_mvtls"]
-material = SubResource("StandardMaterial3D_6qyam")
-top_radius = 2.8
-bottom_radius = 2.8
-height = 1.0
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8gjt"]
 albedo_color = Color(0.455817, 0.455817, 0.455817, 1)
 metallic = 1.0
 roughness = 0.54
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_mvtls"]
+material = SubResource("StandardMaterial3D_l8gjt")
+top_radius = 2.8
+bottom_radius = 2.8
+height = 1.0
+
 [sub_resource type="BoxMesh" id="BoxMesh_gpys3"]
 material = SubResource("StandardMaterial3D_l8gjt")
-size = Vector3(5.345, 1.26, 0.35)
+size = Vector3(5.345, 1.26, 0.665)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qf4t"]
 albedo_color = Color(0, 0, 0, 1)
@@ -33,13 +30,6 @@ albedo_color = Color(0, 0, 0, 1)
 material = SubResource("StandardMaterial3D_3qf4t")
 inner_radius = 2.5
 outer_radius = 3.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g0t4m"]
-albedo_color = Color(0.762225, 0.0875363, 1.92523e-07, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_kxmuy"]
-material = SubResource("StandardMaterial3D_g0t4m")
-size = Vector3(0.1, 0.1, 4)
 
 [node name="Wheel 3x3" type="Node3D"]
 script = ExtResource("1_rbnuk")
@@ -82,7 +72,3 @@ mesh = SubResource("BoxMesh_gpys3")
 transform = Transform3D(6.12323e-17, 3.525, 0, -1, 2.15844e-16, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("TorusMesh_yfd3n")
 skeleton = NodePath("../..")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.093, -2)
-mesh = SubResource("BoxMesh_kxmuy")

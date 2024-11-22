@@ -3,6 +3,8 @@ damage impact impulse
 	if explosion trigger the explosion Area detection plus explosion force deferred, so game has time to potentially split grids
 	=> World.apply_explosion_force()
 
+jetpack counterforce against gravity
+
 put tool in players hand in 3rd person
 
 distance adjust 3rd person cam

@@ -17,7 +17,7 @@
 //#define CLOUDS_ENABLED
 //#endif
 //#define ATMOSPHERE_LITE
-//#define REVERSE_Z
+#define REVERSE_Z
 
 #ifdef ATMOSPHERE_LITE
 #include "atmosphere_funcs_v1.gdshaderinc"
@@ -181,4 +181,3 @@ void atmosphere_fragment(
 		out_discard = true;
 	}
 }
-

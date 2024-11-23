@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="Jetpack" load_steps=2 format=3 uid="uid://6jymoqkdm6kr"]
+[gd_resource type="Resource" script_class="JetpackEquipmentItem" load_steps=3 format=3 uid="uid://6jymoqkdm6kr"]
 
 [ext_resource type="Script" path="res://game/core/player/equipment/back/jetpack_equipment_item.gd" id="1_4r0wv"]
+[ext_resource type="PackedScene" uid="uid://cq0q4gaujs7r4" path="res://game/data/equipment/back/jetpack/jetpack.tscn" id="1_l0xob"]
 
 [resource]
 script = ExtResource("1_4r0wv")
 thrust = 7500.0
+scene = ExtResource("1_l0xob")

@@ -1,5 +1,4 @@
 damage impact impulse
-	applies force at the impact position => BlockGrid.apply_kinetic_impulse()
 	if explosion trigger the explosion Area detection plus explosion force deferred, so game has time to potentially split grids
 	=> World.apply_explosion_force()
 

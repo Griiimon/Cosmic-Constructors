@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://y0452womu354" path="res://game/data/hand items/tools/hand drill/hand_drill.tres" id="3_4hmgi"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="4_48to3"]
 [ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="5_uh2so"]
-[ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/atmospheric_jetpack.tres" id="6_5c42j"]
+[ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="6_5c42j"]
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="7_kepf3"]
 [ext_resource type="Shader" path="res://game/solar system/materials/planet_ground.gdshader" id="8_2papa"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="8_ic02p"]

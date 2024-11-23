@@ -1,2 +1,2 @@
 class_name PlayerEquipmentItemBack
-extends Resource
+extends PlayerEquipmentItem

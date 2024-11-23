@@ -363,6 +363,10 @@ func flood_fill(origin: Vector3i)-> Array[Vector3i]:
 	return result_list
 
 
+func apply_impact_force(impact_velocity: Vector3, impact_mass: float, impact_point: Vector3):
+	apply_impulse(impact_velocity * impact_mass, impact_point - global_position)
+
+
 func add_effect(effect: BlockGridBaseEffect):
 	for existing_effect in effects:
 		if existing_effect.is_same(effect):

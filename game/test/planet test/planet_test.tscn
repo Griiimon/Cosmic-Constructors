@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="3_rb6lq"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="4_yc2d7"]
 [ext_resource type="VoxelGeneratorGraph" uid="uid://b4umpxnew5cgx" path="res://game/solar system/voxel_graph_planet_v4.tres" id="6_jkjsa"]
-[ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/atmospheric_jetpack.tres" id="6_tarnc"]
+[ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="6_tarnc"]
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="7_2utxn"]
 [ext_resource type="Material" uid="uid://cp754ky7maqj2" path="res://game/solar system/materials/planet_material_grassy.tres" id="7_cvnod"]
 [ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="8_fm8fi"]

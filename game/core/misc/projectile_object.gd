@@ -37,6 +37,7 @@ func _physics_process(delta: float) -> void:
 	
 		var damage: Damage= Damage.create_instance(projectile_definition.damage, shapecast.get_collision_point(0), velocity.normalized(), Damage.SourceType.PROJECTILE)
 		damage.shape_index= shapecast.get_collider_shape(0)
-		world.damage_object(collider, damage)
+		#world.damage_object(collider, damage)
+		world.damage_point(damage, collider)
 		
 		queue_free()

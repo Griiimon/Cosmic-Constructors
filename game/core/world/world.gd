@@ -205,7 +205,7 @@ func explosion(damage: Damage, obj: CollisionObject3D):
 			if rid_map.has(rest_result.rid):
 				var collider: CollisionObject3D= rid_map[rest_result.rid]
 				var point: Vector3= rest_result.point
-				prints(" Explosion contact point", point)
+				#prints(" Explosion contact point", point)
 				
 				var damage_at_point: float= lerp(float(damage.amount), float(damage.min_amount), damage.position.distance_to(point) / damage.radius)
 				# TODO investigate how point could be farther away from damage.position
@@ -214,10 +214,6 @@ func explosion(damage: Damage, obj: CollisionObject3D):
 				
 				if damage_at_point > 0:
 					if collider is RigidBody3D:
-						#(collider as RigidBody3D).apply_impulse(damage_at_point * damage.position.direction_to(point), point - collider.global_position)
-						var impulse_dir: Vector3= damage.position.direction_to(point)
-						prints(" Impulse dir", impulse_dir)
-
-						(collider as RigidBody3D).apply_central_impulse(damage_at_point * impulse_dir)
+						(collider as RigidBody3D).apply_impulse(damage_at_point * 50 * damage.position.direction_to(point), point - collider.global_position)
 				
 				query.exclude= query.exclude + [rest_result.rid]

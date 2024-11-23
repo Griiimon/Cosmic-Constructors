@@ -1,0 +1,2 @@
+class_name PlayerEquipmentObject
+extends Node3D

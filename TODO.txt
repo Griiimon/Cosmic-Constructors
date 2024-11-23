@@ -1,8 +1,3 @@
-damage impact impulse * 10
-aber player muss auch schwerer sein ( 60 + inventory ), und dann aber jetpack thrust und jump angepasst
-
-jetpack counterforce against gravity
-
 3rd person jetpack raise legs and tween shoulders for joystick input motions
 	also mini thrusters? entire jetpack scene
 
@@ -12,6 +7,7 @@ distance adjust 3rd person cam
 
 landing gear toggle
 
+jetpack counterforce against gravity
 
 avoid overlap with other grid while building
 

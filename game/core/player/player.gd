@@ -57,10 +57,12 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_camera"):
 		if first_person_camera.current:
 			third_person_camera.make_current()
+			third_person_camera_raycast.set_process_input(true)
 			model.show()
 			item_viewport_container.hide()
 		else:
 			first_person_camera.make_current()
+			third_person_camera_raycast.set_process_input(false)
 			model.hide()
 			item_viewport_container.show()
 

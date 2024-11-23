@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://cs0gfdxa0ha1n"]
+[gd_scene load_steps=21 format=3 uid="uid://cs0gfdxa0ha1n"]
 
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
 [ext_resource type="Script" path="res://game/core/player/movement state machine/player_movement_state_machine.gd" id="2_615c1"]
 [ext_resource type="PackedScene" uid="uid://bnhyptcsxakf2" path="res://game/core/player/model/model.tscn" id="2_qm5y7"]
+[ext_resource type="Script" path="res://game/core/player/third_person_camera_ray_cast.gd" id="3_cbb81"]
 [ext_resource type="Script" path="res://game/core/player/movement state machine/player_eva_state.gd" id="3_o2tyv"]
 [ext_resource type="Script" path="res://game/core/player/movement state machine/player_seated_state.gd" id="4_aaxal"]
 [ext_resource type="Script" path="res://game/core/player/action state machine/player_action_state_machine.gd" id="4_r1eyq"]
@@ -132,6 +133,8 @@ unique_name_in_owner = true
 target_position = Vector3(0, 1, 5)
 collision_mask = 6
 hit_back_faces = false
+script = ExtResource("3_cbb81")
+scroll_steps = 0.25
 
 [node name="Third Person Camera" type="Camera3D" parent="Head/Third Person Camera Pivot"]
 unique_name_in_owner = true

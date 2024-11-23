@@ -110,6 +110,9 @@ func mine_gold():
 
 	
 func switch_block(delta: int):
+	if not player.action_state_machine.build_state.is_current_state():
+		return
+		
 	var build_state: PlayerBuildState= player.action_state_machine.build_state
 	var blocks: Array[Block]= GameData.block_library.blocks
 	var block_index= blocks.find(build_state.current_block)

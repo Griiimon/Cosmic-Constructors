@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://cq0q4gaujs7r4"]
+
+[ext_resource type="PackedScene" uid="uid://dcpr43xo3hndp" path="res://game/data/equipment/back/jetpack/jetpack_thruster.tscn" id="1_11c17"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8f5p6"]
+metallic = 0.44
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_44c5x"]
+material = SubResource("StandardMaterial3D_8f5p6")
+size = Vector3(0.795, 0.43, 0.51)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5xevw"]
+material = SubResource("StandardMaterial3D_8f5p6")
+size = Vector3(0.235, 0.145, 0.51)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6wdux"]
+material = SubResource("StandardMaterial3D_8f5p6")
+size = Vector3(0.31, 0.43, 0.205)
+
+[node name="Jetpack" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.689801, 0.058458)
+mesh = SubResource("BoxMesh_44c5x")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.952858, 0.303418, 0, -0.303418, 0.952858, -0.260029, -0.702186, -0.218473)
+mesh = SubResource("BoxMesh_5xevw")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.952858, 0.303418, 0, -0.303418, 0.952858, 0.26, -0.702258, -0.217977)
+mesh = SubResource("BoxMesh_5xevw")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.263857, -0.298191, 0.262617)
+mesh = SubResource("BoxMesh_6wdux")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.264, -0.298, 0.263)
+mesh = SubResource("BoxMesh_6wdux")
+
+[node name="Thrusters" type="Node3D" parent="."]
+
+[node name="Thruster" parent="Thrusters" instance=ExtResource("1_11c17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.540068, 0.349166)
+
+[node name="Thruster2" parent="Thrusters" instance=ExtResource("1_11c17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.54, 0.349)
+
+[node name="Thruster5" parent="Thrusters" instance=ExtResource("1_11c17")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, -0.4, -0.408, 0.389)
+
+[node name="Thruster6" parent="Thrusters" instance=ExtResource("1_11c17")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0.4, -0.408, 0.388)
+
+[node name="Thruster3" parent="Thrusters" instance=ExtResource("1_11c17")]
+transform = Transform3D(1, 0, 0, 0, -1, -1.22465e-16, 0, 1.22465e-16, -1, -0.4, -0.0532873, 0.348998)
+
+[node name="Thruster4" parent="Thrusters" instance=ExtResource("1_11c17")]
+transform = Transform3D(1, 0, 0, 0, -1, -1.22465e-16, 0, 1.22465e-16, -1, 0.4, -0.0533473, 0.349168)
+
+[node name="Thruster7" parent="Thrusters" instance=ExtResource("1_11c17")]
+transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, -0.44934, -0.280168, 0.305852)
+
+[node name="Thruster8" parent="Thrusters" instance=ExtResource("1_11c17")]
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0.449, -0.28, 0.306)

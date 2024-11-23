@@ -22,6 +22,9 @@ var yaw_input: float
 var pitch_input: float
 var roll_input: float
 
+var move_vec: Vector3
+
+
 
 func on_enter():
 	player.play_animation("steer")
@@ -63,7 +66,7 @@ func on_physics_process(delta: float):
 	var horizontal_input= Input.get_axis("strafe_left", "strafe_right")
 	var vertical_input= Input.get_axis("sink", "rise")
 	
-	var move_vec: Vector3= (Vector3(horizontal_input, vertical_input, forward_input))
+	move_vec= (Vector3(horizontal_input, vertical_input, forward_input))
 	
 	if Input.is_action_just_pressed("toggle_dampeners"):
 		dampeners_active= not dampeners_active

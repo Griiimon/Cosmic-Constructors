@@ -35,6 +35,7 @@ ambient_light_color = Color(1, 1, 1, 1)
 
 [node name="Player" type="RigidBody3D"]
 collision_mask = 7
+mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_bbcsg")
 can_sleep = false
 continuous_cd = true
@@ -142,9 +143,9 @@ current_state = NodePath("EVA")
 
 [node name="EVA" type="Node" parent="Movement State Machine"]
 script = ExtResource("3_o2tyv")
-yaw_factor = 50.0
-pitch_factor = 50.0
-roll_factor = 300.0
+yaw_factor = 2000.0
+pitch_factor = 2000.0
+roll_factor = 15000.0
 boost_factor = 3.0
 min_land_velocity = 0.2
 
@@ -153,12 +154,12 @@ script = ExtResource("4_aaxal")
 
 [node name="Grid" type="Node" parent="Movement State Machine"]
 script = ExtResource("5_ri51i")
-jump_impulse = 3.0
+jump_impulse = 150.0
 
 [node name="Terrain" type="Node" parent="Movement State Machine"]
 script = ExtResource("6_cr6m7")
 strafe_speed = 3.0
-jump_impulse = 5.0
+jump_impulse = 250.0
 snap_factor = 1.0
 
 [node name="Jump" type="Node" parent="Movement State Machine"]

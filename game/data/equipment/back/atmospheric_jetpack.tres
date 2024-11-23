@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_rpwx5")
-thrust = 1500.0
+thrust = 75000.0

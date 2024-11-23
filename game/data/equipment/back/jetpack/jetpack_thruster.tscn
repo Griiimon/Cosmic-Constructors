@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcpr43xo3hndp"]
+
+[ext_resource type="Script" path="res://game/data/equipment/back/jetpack/jetpack_thruster.gd" id="1_vvp2s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_44cva"]
+albedo_color = Color(0.306923, 0.306923, 0.306923, 1)
+metallic = 0.25
+roughness = 0.22
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yt5c8"]
+material = SubResource("StandardMaterial3D_44cva")
+top_radius = 0.01
+bottom_radius = 0.02
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2oiv1"]
+shading_mode = 0
+albedo_color = Color(0.768627, 0.564706, 0.0980392, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_erpfl"]
+material = SubResource("StandardMaterial3D_2oiv1")
+top_radius = 0.015
+bottom_radius = 0.005
+height = 0.05
+
+[node name="Thruster" type="Node3D"]
+script = ExtResource("1_vvp2s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_yt5c8")
+
+[node name="Flame" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0813996, 0)
+visible = false
+mesh = SubResource("CylinderMesh_erpfl")

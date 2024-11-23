@@ -33,3 +33,9 @@ mesh = SubResource("CylinderMesh_yt5c8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0813996, 0)
 visible = false
 mesh = SubResource("CylinderMesh_erpfl")
+
+[node name="Activation Cooldown" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="Activation Cooldown" to="." method="_on_activation_cooldown_timeout"]

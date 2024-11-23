@@ -32,6 +32,7 @@ extends Entity
 
 
 var hand_object: HandObject
+var active_equipment: Array[PlayerEquipmentObject]
 
 
 
@@ -40,6 +41,9 @@ func _ready() -> void:
 	
 	if not equipment:
 		equipment= PlayerEquipment.new()
+	
+	if equipment.back_item:
+		wear_equipment(equipment.back_item)
 	
 	Input.mouse_mode= Input.MOUSE_MODE_CAPTURED
 
@@ -53,7 +57,14 @@ func reset_camera():
 	pivot.rotation= Vector3.ZERO
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	camera_logic()
+
+	for equipment_object in active_equipment:
+		equipment_object.tick(self, delta)
+
+
+func camera_logic():
 	if Input.is_action_just_pressed("toggle_camera"):
 		if first_person_camera.current:
 			third_person_camera.make_current()
@@ -71,7 +82,7 @@ func _physics_process(_delta: float) -> void:
 			third_person_camera.global_position= third_person_camera_raycast.get_collision_point()
 		else:
 			third_person_camera.position= third_person_camera_raycast.target_position
-
+	
 
 func equip_hand_item(hand_item: HandItem):
 	action_state_machine.idle_state.equip_hand_item(hand_item)
@@ -93,3 +104,10 @@ func play_animation(anim_name: String, speed: float= 1.0):
 
 func reset_animation():
 	model.reset_animation()
+
+
+func wear_equipment(item: PlayerEquipmentItem):
+	if item.scene:
+		var obj: PlayerEquipmentObject= item.scene.instantiate()
+		model.add_child(obj)
+		active_equipment.append(obj)

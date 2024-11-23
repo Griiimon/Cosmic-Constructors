@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="4_8hosm"]
 [ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="5_ijfg3"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="6_pnchb"]
-[ext_resource type="Resource" uid="uid://6jymoqkdm6kr" path="res://game/data/equipment/back/space_jetpack.tres" id="7_eq7l4"]
+[ext_resource type="Resource" uid="uid://6jymoqkdm6kr" path="res://game/data/equipment/back/jetpack/space_jetpack.tres" id="7_eq7l4"]
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="8_fpw3d"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0ujoa"]

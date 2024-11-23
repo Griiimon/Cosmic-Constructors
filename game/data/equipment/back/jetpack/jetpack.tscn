@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cq0q4gaujs7r4"]
+[gd_scene load_steps=7 format=3 uid="uid://cq0q4gaujs7r4"]
 
+[ext_resource type="Script" path="res://game/data/equipment/back/jetpack/jetpack.gd" id="1_8m8xx"]
 [ext_resource type="PackedScene" uid="uid://dcpr43xo3hndp" path="res://game/data/equipment/back/jetpack/jetpack_thruster.tscn" id="1_11c17"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8f5p6"]
@@ -19,6 +20,7 @@ material = SubResource("StandardMaterial3D_8f5p6")
 size = Vector3(0.31, 0.43, 0.205)
 
 [node name="Jetpack" type="Node3D"]
+script = ExtResource("1_8m8xx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.689801, 0.058458)
@@ -44,24 +46,32 @@ mesh = SubResource("BoxMesh_6wdux")
 
 [node name="Thruster" parent="Thrusters" instance=ExtResource("1_11c17")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.540068, 0.349166)
+thrust_vector = Vector3(0, 1, 0)
 
 [node name="Thruster2" parent="Thrusters" instance=ExtResource("1_11c17")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.54, 0.349)
+thrust_vector = Vector3(0, 1, 0)
 
 [node name="Thruster5" parent="Thrusters" instance=ExtResource("1_11c17")]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, -0.4, -0.408, 0.389)
+thrust_vector = Vector3(0, 0, -1)
 
 [node name="Thruster6" parent="Thrusters" instance=ExtResource("1_11c17")]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0.4, -0.408, 0.388)
+thrust_vector = Vector3(0, 0, -1)
 
 [node name="Thruster3" parent="Thrusters" instance=ExtResource("1_11c17")]
 transform = Transform3D(1, 0, 0, 0, -1, -1.22465e-16, 0, 1.22465e-16, -1, -0.4, -0.0532873, 0.348998)
+thrust_vector = Vector3(0, -1, 0)
 
 [node name="Thruster4" parent="Thrusters" instance=ExtResource("1_11c17")]
 transform = Transform3D(1, 0, 0, 0, -1, -1.22465e-16, 0, 1.22465e-16, -1, 0.4, -0.0533473, 0.349168)
+thrust_vector = Vector3(0, -1, 0)
 
 [node name="Thruster7" parent="Thrusters" instance=ExtResource("1_11c17")]
 transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, -0.44934, -0.280168, 0.305852)
+thrust_vector = Vector3(1, 0, 0)
 
 [node name="Thruster8" parent="Thrusters" instance=ExtResource("1_11c17")]
 transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0.449, -0.28, 0.306)
+thrust_vector = Vector3(-1, 0, 0)

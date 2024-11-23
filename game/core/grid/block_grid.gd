@@ -292,7 +292,10 @@ func unfreeze_check():
 
 func take_damage(damage: Damage, coll_shape: CollisionShape3D):
 	var block: BaseGridBlock= get_block_from_global_pos(coll_shape.global_position)
-	block.take_damage(damage.amount, self)
+	# TODO investigate how block == null could happen
+	#assert(block)
+	if block:
+		block.take_damage(damage.amount, self)
 
 
 func absorb_damage(damage: int, coll_shape: CollisionShape3D)-> int:

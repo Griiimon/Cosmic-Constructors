@@ -33,11 +33,14 @@ func add_grid(pos: Vector3, rot: Vector3= Vector3.ZERO)-> BlockGrid:
 	return grid
 
 
-func damage_object(obj: Node3D, damage: Damage):
-	#if obj.is_in_group(DamageComponent.GROUP_NAME):
-		#var damage_component: DamageComponent= DamageComponent.get_component(obj)
-		#damage_component.take_damage(dmg)
+func damage_point(damage: Damage, obj: CollisionObject3D= null):
+	if damage.is_explosion():
+		explosion(damage, obj)
+	else:
+		damage_object(obj, damage)
 
+
+func damage_object(obj: CollisionObject3D, damage: Damage):
 	var collision_shapes: Array[CollisionShape3D]
 	if not is_zero_approx(damage.radius):
 		var query:= PhysicsShapeQueryParameters3D.new()
@@ -48,12 +51,13 @@ func damage_object(obj: Node3D, damage: Damage):
 		var shape_result: Array[Dictionary]= get_world_3d().direct_space_state.intersect_shape(query, 100)
 		if shape_result:
 			for item in shape_result:
+				if item.collider != obj: continue
 				var coll_shape: CollisionShape3D= item.collider.shape_owner_get_owner(item.collider.shape_find_owner(item.shape))
 				collision_shapes.append(coll_shape)
-				prints("Damage object %s impact @%s shape #%d @%s" % [str(item.collider.name), str(damage.position), item.shape, str(coll_shape.global_position)])
-				DebugMesh.create(coll_shape.global_position + Vector3.UP, 0.3)
+				#prints("Damage object %s impact @%s shape #%d @%s" % [str(item.collider.name), str(damage.position), item.shape, str(coll_shape.global_position)])
+				#DebugMesh.create(coll_shape.global_position + Vector3.UP, 0.3)
 	
-		print("Damage %d shapes" % collision_shapes.size())
+		#print("Damage %d shapes" % collision_shapes.size())
 		
 		collision_shapes.sort_custom(func(a: CollisionShape3D, b: CollisionShape3D):\
 		 	return a.global_position.distance_squared_to(damage.position) >\
@@ -68,7 +72,6 @@ func damage_object(obj: Node3D, damage: Damage):
 			var ray_target: Vector3= damage.position
 			var result: RaycastHelper.PierceResult= RaycastHelper.pierce(ray_origin, ray_target)
 			if not result.items.is_empty():
-				#assert(result.items[-1].object == obj)
 				result.items.reverse()
 				
 				var total_damage: int= damage.amount
@@ -84,19 +87,20 @@ func damage_object(obj: Node3D, damage: Damage):
 								var block: GridBlock= grid.get_block_local(block_pos)
 								total_damage= block.absorb_damage(total_damage)
 				
-							prints(" Total damage %d after piercing through %d blocks" %[total_damage, pierced_blocks.size()])
+							#prints(" Total damage %d after piercing through %d blocks" %[total_damage, pierced_blocks.size()])
 
 						else:
 							var damage_component: DamageComponent= DamageComponent.get_component(collider)
 							total_damage= damage_component.absorb_damage(total_damage, pierce_item.coll_shape)
 				
-				prints("Total damage %d @%s after piercing through %d colliders" %[total_damage, str(coll_shape.global_position), result.items.size()])
+				#prints("Total damage %d @%s after piercing through %d colliders" %[total_damage, str(coll_shape.global_position), result.items.size()])
 				
 				if total_damage > 0:
 					deal_damage_via_collision_shape(damage, coll_shape, total_damage)
 
-	var center_coll_shape: CollisionShape3D= obj.shape_owner_get_owner(obj.shape_find_owner(damage.shape_index))
-	deal_damage_via_collision_shape(damage, center_coll_shape)
+	var shape_index: int= damage.shape_index if damage.shape_index > -1 else 0
+	var impact_coll_shape: CollisionShape3D= obj.shape_owner_get_owner(obj.shape_find_owner(shape_index))
+	deal_damage_via_collision_shape(damage, impact_coll_shape)
 
 
 func deal_damage_via_collision_shape(orig_damage: Damage, coll_shape: CollisionShape3D, custom_amount: int = -1):
@@ -167,3 +171,52 @@ func freeze_grids(b: bool):
 	grid_freeze_state= b
 	for grid: BlockGrid in grids.get_children():
 		grid.freeze= b
+
+
+func explosion(damage: Damage, obj: CollisionObject3D):
+	var query:= PhysicsShapeQueryParameters3D.new()
+	query.transform.origin= damage.position
+	query.collision_mask= Global.PLAYER_COLLISION_LAYER + Global.GRID_COLLISION_LAYER
+	var shape:= SphereShape3D.new()
+	shape.radius= damage.radius
+	query.shape= shape
+	
+	if obj:
+		damage_object(obj, damage)
+		damage= damage.duplicate()
+		damage.shape_index= -1
+		query.exclude= [obj.get_rid()]
+	
+	var result: Array[Dictionary]= get_world_3d().direct_space_state.intersect_shape(query)
+	if result:
+		#prints("Explosion @%s with %d bodies" % [str(damage.position), result.size()])
+		var rid_map: Dictionary
+		for item: Dictionary in result:
+			var collider: CollisionObject3D= item.collider
+			if not rid_map.has(collider.get_rid()):
+				rid_map[collider.get_rid()]= collider
+				damage_object(collider, damage)
+		
+		var rest_result: Dictionary
+		while true:
+			rest_result= get_world_3d().direct_space_state.get_rest_info(query)
+			if not rest_result: break
+			assert(rid_map.has(rest_result.rid))
+			var collider: CollisionObject3D= rid_map[rest_result.rid]
+			var point: Vector3= rest_result.point
+			prints(" Explosion contact point", point)
+			
+			var damage_at_point: float= lerp(float(damage.amount), float(damage.min_amount), damage.position.distance_to(point) / damage.radius)
+			# TODO investigate how point could be farther away from damage.position
+			#  than damgae.radius
+			assert(damage_at_point >= 0, "radius %f vs distance %f" % [damage.radius, damage.position.distance_to(point)])
+			
+			if damage_at_point > 0:
+				if collider is RigidBody3D:
+					#(collider as RigidBody3D).apply_impulse(damage_at_point * damage.position.direction_to(point), point - collider.global_position)
+					var impulse_dir: Vector3= damage.position.direction_to(point)
+					prints(" Impulse dir", impulse_dir)
+
+					(collider as RigidBody3D).apply_central_impulse(damage_at_point * impulse_dir)
+			
+			query.exclude= query.exclude + [rest_result.rid]

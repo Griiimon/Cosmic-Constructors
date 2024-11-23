@@ -7,10 +7,12 @@ enum SourceType { PROJECTILE, LASER, MELEE, BLOCKTOOL }
 @export var radius: float= 0.0
 @export var min_amount: int= 0
 
-var position: Vector3
-var source_type: SourceType
-var direction: Vector3
-var shape_index: int
+# need to be exported so duplication still works
+# but don't need them in the inspector
+@export_storage var position: Vector3
+@export_storage var source_type: SourceType
+@export_storage var direction: Vector3
+@export_storage var shape_index: int= -1
 
 
 

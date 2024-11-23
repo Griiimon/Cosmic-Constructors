@@ -14,6 +14,10 @@ var shape_index: int
 
 
 
+func is_explosion()-> bool:
+	return radius > 0
+
+
 static func create_instance(orig_damage: Damage, _position: Vector3, _direction: Vector3, _source_type: SourceType)-> Damage:
 	var new_damage: Damage= orig_damage.duplicate()
 	new_damage.position= _position

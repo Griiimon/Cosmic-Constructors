@@ -216,4 +216,4 @@ func explosion(damage: Damage, obj: CollisionObject3D):
 					if collider is RigidBody3D:
 						(collider as RigidBody3D).apply_impulse(damage_at_point * 50 * damage.position.direction_to(point), point - collider.global_position)
 				
-				query.exclude= query.exclude + [rest_result.rid]
+			query.exclude= query.exclude + [rest_result.rid]

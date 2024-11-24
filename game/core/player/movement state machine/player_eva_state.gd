@@ -28,6 +28,7 @@ var move_vec: Vector3
 
 func on_enter():
 	player.play_animation("steer")
+	player.play_animation("sit")
 
 	var head_forward: Vector3= -player.head.global_basis.z
 	player.reset_camera()

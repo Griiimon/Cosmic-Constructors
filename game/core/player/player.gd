@@ -111,3 +111,4 @@ func wear_equipment(item: PlayerEquipmentItem):
 		var obj: PlayerEquipmentObject= item.scene.instantiate()
 		model.add_child(obj)
 		active_equipment.append(obj)
+		obj.init(self)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bnhyptcsxakf2"]
+[gd_scene load_steps=26 format=3 uid="uid://bnhyptcsxakf2"]
 
 [ext_resource type="Material" uid="uid://koo0qls452x2" path="res://game/core/player/model/suit_material.tres" id="1_mladw"]
 [ext_resource type="Script" path="res://game/core/player/model/player_model.gd" id="1_pnfv0"]
@@ -48,6 +48,13 @@ size = Vector3(0.185, 0.655, 0.25)
 [sub_resource type="BoxMesh" id="BoxMesh_r5gsy"]
 material = ExtResource("1_mladw")
 size = Vector3(0.24, 0.625, 0.29)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3h3p6"]
+albedo_color = Color(0.0807833, 0.0807833, 0.0807833, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6i52k"]
+material = SubResource("StandardMaterial3D_3h3p6")
+size = Vector3(0.275, 0.145, 0.385)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uufhi"]
 material = ExtResource("2_x1o5c")
@@ -282,6 +289,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.299085, 0)
 mesh = SubResource("BoxMesh_r5gsy")
 skeleton = NodePath("../..")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Right Hip/Right Leg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.27644, -0.0442606)
+mesh = SubResource("BoxMesh_6i52k")
+
 [node name="Left Hip" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, -1.07987, 0)
 
@@ -289,6 +300,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, -1.07987, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.025, -0.299, 0)
 mesh = SubResource("BoxMesh_r5gsy")
 skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Left Hip/Left Leg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.27644, -0.0442606)
+mesh = SubResource("BoxMesh_6i52k")
 
 [node name="Bottle Left" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.999998, 0.000544391, 0.00191851, -0.000537358, 0.999993, -0.00366425, -0.0019205, 0.00366321, 0.999991, -0.0823519, -0.284411, 0.319864)

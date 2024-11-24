@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cq0q4gaujs7r4"]
+[gd_scene load_steps=8 format=3 uid="uid://cq0q4gaujs7r4"]
 
 [ext_resource type="Script" path="res://game/data/equipment/back/jetpack/jetpack.gd" id="1_8m8xx"]
 [ext_resource type="PackedScene" uid="uid://dcpr43xo3hndp" path="res://game/data/equipment/back/jetpack/jetpack_thruster.tscn" id="1_11c17"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8f5p6"]
+albedo_color = Color(0.420856, 0.32643, 0.18574, 1)
 metallic = 0.44
 roughness = 0.7
 
@@ -18,6 +19,11 @@ size = Vector3(0.235, 0.145, 0.51)
 [sub_resource type="BoxMesh" id="BoxMesh_6wdux"]
 material = SubResource("StandardMaterial3D_8f5p6")
 size = Vector3(0.31, 0.43, 0.205)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2lm05"]
+material = SubResource("StandardMaterial3D_8f5p6")
+radius = 0.12
+height = 0.68
 
 [node name="Jetpack" type="Node3D"]
 script = ExtResource("1_8m8xx")
@@ -41,6 +47,14 @@ mesh = SubResource("BoxMesh_6wdux")
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.264, -0.298, 0.263)
 mesh = SubResource("BoxMesh_6wdux")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24341, -0.452632, 0.305374)
+mesh = SubResource("CapsuleMesh_2lm05")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.243, -0.453, 0.305)
+mesh = SubResource("CapsuleMesh_2lm05")
 
 [node name="Thrusters" type="Node3D" parent="."]
 

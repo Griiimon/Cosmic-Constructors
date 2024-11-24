@@ -3,14 +3,14 @@
 [ext_resource type="Script" path="res://game/data/equipment/back/jetpack/jetpack_thruster.gd" id="1_vvp2s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_44cva"]
-albedo_color = Color(0.306923, 0.306923, 0.306923, 1)
+albedo_color = Color(0.197937, 0.197937, 0.197937, 1)
 metallic = 0.25
 roughness = 0.22
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_yt5c8"]
 material = SubResource("StandardMaterial3D_44cva")
-top_radius = 0.01
-bottom_radius = 0.02
+top_radius = 0.015
+bottom_radius = 0.025
 height = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2oiv1"]
@@ -19,7 +19,7 @@ albedo_color = Color(0.768627, 0.564706, 0.0980392, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_erpfl"]
 material = SubResource("StandardMaterial3D_2oiv1")
-top_radius = 0.015
+top_radius = 0.02
 bottom_radius = 0.005
 height = 0.05
 

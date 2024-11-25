@@ -1,10 +1,17 @@
-spawn explosion effect
+Video: large flat noise 3d terrain with vehicle
+small planet (atmosphere) with asteroid and drill ship
 
-landing gear toggle
+walk animation speed live update
+
+make BasePlayer scene ( only containing model and frozen rb) and inherit player from it
+ + BasePlayer script for multiplayer spawn
+dedicated server
+
+network player sync
+
+custom planet generator
 
 put tool in players hand in 3rd person
-
-distance adjust 3rd person cam
 
 explosion force apply after splitting=> use delayed impulse class in block grid that waits 2-3 physics ticks to trigger
 
@@ -13,9 +20,6 @@ jetpack counterforce against gravity
 avoid overlap with other grid while building
 
 re-center origin of split grids ( to its center of mass? )
-
-test world with small 1m chunk planet, real gravity and asteroid
-	=> skybox transition?
 
 player carry ore chunks, add collision shape but keep center of mass
 

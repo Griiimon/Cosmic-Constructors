@@ -38,7 +38,11 @@ func init_ghost():
 	add_child(ghost)
 	ghost.top_level= true
 	
-	for child in ghost.find_children("*"):
+	var mesh_instances: Array= ghost.find_children("*")
+	if ghost is MeshInstance3D:
+		mesh_instances.append(ghost)
+	
+	for child in mesh_instances:
 		if child is not MeshInstance3D:
 			child.queue_free()
 		else:
@@ -49,8 +53,9 @@ func init_ghost():
 				new_material= StandardMaterial3D.new()
 			else:
 				new_material= old_material.duplicate()
-				new_material.albedo_color= Color.WHITE
-				new_material.albedo_texture= null
+			
+			new_material.albedo_color= Color.SKY_BLUE
+			new_material.albedo_color.a= 0.7
 				
 			mesh_instance.mesh= mesh_instance.mesh.duplicate()
 			mesh_instance.mesh.surface_set_material(0, new_material)

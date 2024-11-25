@@ -88,6 +88,8 @@ func on_physics_process(delta: float):
 
 	is_walking= velocity.length() > 0
 
+	player.set_leg_animation_speed(sqrt(velocity.length()))
+
 
 func move_and_slide_and_snap(motion: Vector3, floor_normal: Vector3, delta: float, max_slides: int= 1):
 	var safe_fraction: float= player.floor_shapecast.get_closest_collision_safe_fraction()

@@ -3,8 +3,8 @@ extends Node
 signal player_connected(id: int)
 signal player_disconnected(id: int)
 
-var single_player:= true
-var server:= false
+var is_single_player:= true
+var is_server:= false
 
 const DEFAULT_SERVER_IP= "127.0.0.1"
 
@@ -16,11 +16,11 @@ var peer_id: int= -1
 func run():
 	enet_peer = ENetMultiplayerPeer.new()
 	
-	if single_player:
+	if is_single_player:
 		get_tree().change_scene_to_file("res://game/game.tscn")
 		return
 	
-	if server:
+	if is_server:
 		print(" Hosting")
 		do_host()
 	else:

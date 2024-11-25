@@ -9,7 +9,7 @@ extends Node
 
 
 func _ready() -> void:
-	NetworkManager.dedicated= dedicated_server
+	NetworkManager.server= dedicated_server
 	NetworkManager.single_player= not dedicated_server and not multiplayer_client
 	
 	if NetworkManager.single_player:

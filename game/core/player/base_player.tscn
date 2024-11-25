@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://slyw4y7qi46y"]
+
+[ext_resource type="Script" path="res://game/core/player/base_player.gd" id="1_77i27"]
+[ext_resource type="PackedScene" uid="uid://bnhyptcsxakf2" path="res://game/core/player/model/model.tscn" id="2_d3djl"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bbcsg"]
+friction = 0.0
+bounce = 0.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e61hw"]
+
+[node name="Base Player" type="RigidBody3D"]
+collision_mask = 7
+mass = 50.0
+physics_material_override = SubResource("PhysicsMaterial_bbcsg")
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 10
+script = ExtResource("1_77i27")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_e61hw")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+
+[node name="Pivot" type="Node3D" parent="Head"]
+unique_name_in_owner = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Head/Pivot"]
+spot_range = 40.0
+spot_angle = 60.0
+
+[node name="Model" parent="Head" instance=ExtResource("2_d3djl")]
+unique_name_in_owner = true

@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://game/test/planet test/planet_tests.gd" id="2_8smgd"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="2_dpsqk"]
 [ext_resource type="Resource" uid="uid://y0452womu354" path="res://game/data/hand items/tools/hand drill/hand_drill.tres" id="3_41ocs"]
-[ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="3_rb6lq"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="4_yc2d7"]
+[ext_resource type="PackedScene" uid="uid://xgkn2mkwvwmq" path="res://game/core/player/player.tscn" id="5_a1po5"]
 [ext_resource type="VoxelGeneratorGraph" uid="uid://b4umpxnew5cgx" path="res://game/solar system/voxel_graph_planet_v4.tres" id="6_jkjsa"]
 [ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="6_tarnc"]
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="7_2utxn"]
@@ -17,7 +17,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_63ws0"]
 radius = 10000.0
 
-[sub_resource type="Resource" id="Resource_16pen"]
+[sub_resource type="Resource" id="Resource_agfh7"]
 script = ExtResource("7_2utxn")
 back_item = ExtResource("6_tarnc")
 
@@ -62,12 +62,13 @@ shape = SubResource("SphereShape3D_63ws0")
 [node name="World" type="Node3D" parent="."]
 script = ExtResource("2_dpsqk")
 
-[node name="Player" parent="." node_paths=PackedStringArray("world") instance=ExtResource("3_rb6lq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1946.51, 640.588)
+[node name="Player" parent="." node_paths=PackedStringArray("world") instance=ExtResource("5_a1po5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2000, 650)
 world = NodePath("../World")
-equipment = SubResource("Resource_16pen")
+equipment = SubResource("Resource_agfh7")
 
 [node name="VoxelViewer" type="VoxelViewer" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84, 0)
 view_distance = 1024
 
 [node name="UI" parent="." instance=ExtResource("4_yc2d7")]

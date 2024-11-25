@@ -1,13 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpytc7ebulm55"]
+[gd_scene load_steps=12 format=3 uid="uid://cpytc7ebulm55"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_dxwo3"]
 [ext_resource type="PackedScene" uid="uid://qr0bko2hsrbk" path="res://game/debug/space grid/debug_space_grid.tscn" id="1_ek1sn"]
 [ext_resource type="Script" path="res://game/base_tests.gd" id="1_o5dc5"]
-[ext_resource type="PackedScene" uid="uid://cs0gfdxa0ha1n" path="res://game/core/player/player.tscn" id="2_y64to"]
+[ext_resource type="PackedScene" uid="uid://xgkn2mkwvwmq" path="res://game/core/player/player.tscn" id="2_y64to"]
 [ext_resource type="Environment" uid="uid://g0ausvm6rdth" path="res://game/misc/environments/space_environment.tres" id="4_pa37y"]
+[ext_resource type="Resource" uid="uid://6jymoqkdm6kr" path="res://game/data/equipment/back/jetpack/space_jetpack.tres" id="6_qh7kv"]
+[ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="7_8lulh"]
 [ext_resource type="PackedScene" uid="uid://ckytpvwhk32br" path="res://game/core/asteroid/asteroid_hi_res.tscn" id="7_612g8"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="7_gmk88"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="8_hutpu"]
+
+[sub_resource type="Resource" id="Resource_wndb7"]
+script = ExtResource("7_8lulh")
+back_item = ExtResource("6_qh7kv")
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_dxwo3")
@@ -24,14 +30,17 @@ size = Vector3i(10, 10, 10)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_pa37y")
 
-[node name="World" type="Node3D" parent="."]
-script = ExtResource("7_gmk88")
-
 [node name="Player" parent="." node_paths=PackedStringArray("world") instance=ExtResource("2_y64to")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 world = NodePath("../World")
+equipment = SubResource("Resource_wndb7")
 
 [node name="VoxelViewer" type="VoxelViewer" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84, 0)
 view_distance = 1024
+
+[node name="World" type="Node3D" parent="."]
+script = ExtResource("7_gmk88")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 

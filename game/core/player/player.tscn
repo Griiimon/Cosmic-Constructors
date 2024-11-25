@@ -1,8 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://cs0gfdxa0ha1n"]
+[gd_scene load_steps=19 format=3 uid="uid://xgkn2mkwvwmq"]
 
+[ext_resource type="PackedScene" uid="uid://slyw4y7qi46y" path="res://game/core/player/base_player.tscn" id="1_kthjw"]
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
 [ext_resource type="Script" path="res://game/core/player/movement state machine/player_movement_state_machine.gd" id="2_615c1"]
-[ext_resource type="PackedScene" uid="uid://bnhyptcsxakf2" path="res://game/core/player/model/model.tscn" id="2_qm5y7"]
 [ext_resource type="Script" path="res://game/core/player/third_person_camera_ray_cast.gd" id="3_cbb81"]
 [ext_resource type="Script" path="res://game/core/player/movement state machine/player_eva_state.gd" id="3_o2tyv"]
 [ext_resource type="Script" path="res://game/core/player/movement state machine/player_seated_state.gd" id="4_aaxal"]
@@ -15,76 +15,51 @@
 [ext_resource type="Resource" uid="uid://sueib6rdbmc0" path="res://game/data/blocks/light structure/light_structure_block.tres" id="11_2od4b"]
 [ext_resource type="PackedScene" uid="uid://djg68ac2wsojx" path="res://game/core/components/damage component/damage_component.tscn" id="12_goufb"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bbcsg"]
-friction = 0.0
-bounce = 0.5
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e61hw"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_suqug"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7yawy"]
 height = 0.5
 radius = 0.4
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_amgwl"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_ly8po"]
 
-[sub_resource type="Environment" id="Environment_oeacd"]
+[sub_resource type="Environment" id="Environment_lyipp"]
 background_color = Color(0.982343, 0.982342, 0.982342, 1)
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_lanhx"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_iybuy"]
 
-[node name="Player" type="RigidBody3D"]
-collision_mask = 7
-mass = 50.0
-physics_material_override = SubResource("PhysicsMaterial_bbcsg")
-can_sleep = false
-continuous_cd = true
-contact_monitor = true
-max_contacts_reported = 10
+[node name="Player" instance=ExtResource("1_kthjw")]
 script = ExtResource("1_owy5q")
+equipment = null
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_e61hw")
-
-[node name="Floor Shapecast" type="ShapeCast3D" parent="."]
-shape = SubResource("CylinderShape3D_suqug")
+[node name="Floor Shapecast" type="ShapeCast3D" parent="." index="1"]
+shape = SubResource("CylinderShape3D_7yawy")
 collision_mask = 6
 
-[node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
-
-[node name="Pivot" type="Node3D" parent="Head"]
-unique_name_in_owner = true
-
-[node name="First Person Camera" type="Camera3D" parent="Head/Pivot"]
+[node name="First Person Camera" type="Camera3D" parent="Head/Pivot" index="0"]
 unique_name_in_owner = true
 cull_mask = 1048573
 
-[node name="Build Raycast" type="RayCast3D" parent="Head/Pivot"]
+[node name="Build Raycast" type="RayCast3D" parent="Head/Pivot" index="1"]
 unique_name_in_owner = true
 enabled = false
 target_position = Vector3(0, 0, 0)
 collision_mask = 2
 hit_back_faces = false
 
-[node name="Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot"]
+[node name="Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="2"]
 unique_name_in_owner = true
-shape = SubResource("SphereShape3D_amgwl")
+shape = SubResource("SphereShape3D_ly8po")
 target_position = Vector3(0, 0, -2.5)
 collision_mask = 2
 
-[node name="Block Interact Raycast" type="RayCast3D" parent="Head/Pivot"]
+[node name="Block Interact Raycast" type="RayCast3D" parent="Head/Pivot" index="3"]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -4)
 collision_mask = 2
 hit_back_faces = false
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Head/Pivot"]
-spot_range = 40.0
-spot_angle = 60.0
-
-[node name="Item Viewport Container" type="SubViewportContainer" parent="Head/Pivot"]
+[node name="Item Viewport Container" type="SubViewportContainer" parent="Head/Pivot" index="4"]
 unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
@@ -93,42 +68,41 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="Head/Pivot/Item Viewport Container"]
+[node name="SubViewport" type="SubViewport" parent="Head/Pivot/Item Viewport Container" index="0"]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Item Camera" type="Camera3D" parent="Head/Pivot/Item Viewport Container/SubViewport"]
+[node name="Item Camera" type="Camera3D" parent="Head/Pivot/Item Viewport Container/SubViewport" index="0"]
 unique_name_in_owner = true
 cull_mask = 1047554
-environment = SubResource("Environment_oeacd")
+environment = SubResource("Environment_lyipp")
 fov = 40.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Head/Pivot/Item Viewport Container/SubViewport"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Head/Pivot/Item Viewport Container/SubViewport" index="1"]
 transform = Transform3D(1, 0, 0, 0, -0.712455, 0.701718, 0, -0.701718, -0.712455, 0, 0, 0)
 light_cull_mask = 4294966274
 sky_mode = 1
 
-[node name="Hand Item Container" type="Node3D" parent="Head/Pivot/Item Viewport Container/SubViewport"]
+[node name="Hand Item Container" type="Node3D" parent="Head/Pivot/Item Viewport Container/SubViewport" index="2"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.5, -1.25)
 
-[node name="Drill Shapecast" type="ShapeCast3D" parent="Head/Pivot"]
+[node name="Drill Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="5"]
 unique_name_in_owner = true
 enabled = false
-shape = SubResource("SphereShape3D_lanhx")
+shape = SubResource("SphereShape3D_iybuy")
 target_position = Vector3(0, 0, -2)
 collision_mask = 4
 
-[node name="Model" parent="Head" instance=ExtResource("2_qm5y7")]
-unique_name_in_owner = true
+[node name="Model" parent="Head" index="1"]
 visible = false
 
-[node name="Third Person Camera Pivot" type="Node3D" parent="Head"]
+[node name="Third Person Camera Pivot" type="Node3D" parent="Head" index="2"]
 unique_name_in_owner = true
 
-[node name="Third Person Camera RayCast" type="RayCast3D" parent="Head/Third Person Camera Pivot"]
+[node name="Third Person Camera RayCast" type="RayCast3D" parent="Head/Third Person Camera Pivot" index="0"]
 unique_name_in_owner = true
 target_position = Vector3(0, 1, 5)
 collision_mask = 6
@@ -136,15 +110,15 @@ hit_back_faces = false
 script = ExtResource("3_cbb81")
 scroll_steps = 0.25
 
-[node name="Third Person Camera" type="Camera3D" parent="Head/Third Person Camera Pivot"]
+[node name="Third Person Camera" type="Camera3D" parent="Head/Third Person Camera Pivot" index="1"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.979649, 0.200719, 0, -0.200719, 0.979649, 0, 1, 5)
 
-[node name="Movement State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+[node name="Movement State Machine" type="Node" parent="." index="3" node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_615c1")
 current_state = NodePath("EVA")
 
-[node name="EVA" type="Node" parent="Movement State Machine"]
+[node name="EVA" type="Node" parent="Movement State Machine" index="0"]
 script = ExtResource("3_o2tyv")
 yaw_factor = 2000.0
 pitch_factor = 2000.0
@@ -152,35 +126,35 @@ roll_factor = 15000.0
 boost_factor = 3.0
 min_land_velocity = 0.2
 
-[node name="Seated" type="Node" parent="Movement State Machine"]
+[node name="Seated" type="Node" parent="Movement State Machine" index="1"]
 script = ExtResource("4_aaxal")
 
-[node name="Grid" type="Node" parent="Movement State Machine"]
+[node name="Grid" type="Node" parent="Movement State Machine" index="2"]
 script = ExtResource("5_ri51i")
 jump_impulse = 150.0
 
-[node name="Terrain" type="Node" parent="Movement State Machine"]
+[node name="Terrain" type="Node" parent="Movement State Machine" index="3"]
 script = ExtResource("6_cr6m7")
 strafe_speed = 3.0
 jump_impulse = 250.0
 snap_factor = 1.0
 
-[node name="Jump" type="Node" parent="Movement State Machine"]
+[node name="Jump" type="Node" parent="Movement State Machine" index="4"]
 script = ExtResource("8_s2hhl")
 
-[node name="Land Cooldown" type="Timer" parent="Movement State Machine/Jump"]
+[node name="Land Cooldown" type="Timer" parent="Movement State Machine/Jump" index="0"]
 wait_time = 0.1
 one_shot = true
 
-[node name="Action State Machine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+[node name="Action State Machine" type="Node" parent="." index="4" node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_r1eyq")
 current_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="Action State Machine"]
+[node name="Idle" type="Node" parent="Action State Machine" index="0"]
 script = ExtResource("6_3y3c5")
 
-[node name="Build" type="Node" parent="Action State Machine"]
+[node name="Build" type="Node" parent="Action State Machine" index="1"]
 script = ExtResource("5_avkim")
 current_block = ExtResource("11_2od4b")
 
-[node name="Damage Component" parent="." instance=ExtResource("12_goufb")]
+[node name="Damage Component" parent="." index="5" instance=ExtResource("12_goufb")]

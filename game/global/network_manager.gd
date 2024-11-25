@@ -4,7 +4,7 @@ signal player_connected(id: int)
 signal player_disconnected(id: int)
 
 var single_player:= true
-var dedicated:= false
+var server:= false
 
 const DEFAULT_SERVER_IP= "127.0.0.1"
 
@@ -20,7 +20,7 @@ func run():
 		get_tree().change_scene_to_file("res://game/game.tscn")
 		return
 	
-	if dedicated:
+	if server:
 		print(" Hosting")
 		do_host()
 	else:

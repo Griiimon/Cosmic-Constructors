@@ -36,6 +36,7 @@ func add_grid(pos: Vector3, rot: Vector3= Vector3.ZERO)-> BlockGrid:
 func damage_point(damage: Damage, obj: CollisionObject3D= null):
 	if damage.is_explosion():
 		explosion(damage, obj)
+		Effects.spawn_explosion(damage.position, damage.radius)
 	else:
 		damage_object(obj, damage)
 

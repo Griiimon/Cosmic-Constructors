@@ -1,20 +1,40 @@
-[gd_scene load_steps=6 format=3 uid="uid://cb4306bwmd33y"]
+[gd_scene load_steps=11 format=3 uid="uid://cb4306bwmd33y"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/landing_gear_instance.gd" id="1_oqs0f"]
+[ext_resource type="Material" uid="uid://cio235mg3ey1p" path="res://game/data/blocks/landing gear/landing_gear_enabled_material.tres" id="2_8ofst"]
+[ext_resource type="Material" uid="uid://crtxmgn2lergo" path="res://game/data/blocks/landing gear/landing_gear_disabled_material.tres" id="3_ijmug"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_g2ie7"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1krq"]
+albedo_color = Color(0.255659, 0.255659, 0.255659, 1)
+metallic = 1.0
+roughness = 0.8
+
 [sub_resource type="BoxMesh" id="BoxMesh_33b20"]
+material = SubResource("StandardMaterial3D_b1krq")
 size = Vector3(0.725, 0.1, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7y52u"]
+albedo_color = Color(0.255659, 0.255659, 0.255659, 1)
+metallic = 1.0
+roughness = 0.8
+
 [sub_resource type="BoxMesh" id="BoxMesh_cc1ke"]
+material = SubResource("StandardMaterial3D_7y52u")
 size = Vector3(0.2, 0.8, 0.3)
 
+[sub_resource type="BoxMesh" id="BoxMesh_8bu3p"]
+material = ExtResource("2_8ofst")
+size = Vector3(0.275, 0.035, 0.52)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_aixub"]
-size = Vector3(0.79, 0.105, 1)
+size = Vector3(0.395, 0.105, 0.845)
 
 [node name="Landing Gear" type="Node3D"]
 script = ExtResource("1_oqs0f")
+enabled_material = ExtResource("2_8ofst")
+disabled_material = ExtResource("3_ijmug")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
@@ -31,6 +51,10 @@ mesh = SubResource("BoxMesh_cc1ke")
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.999986, -0.00530578, 0, 0.00530578, 0.999986, 0, 0.091644, 0.108329)
 mesh = SubResource("BoxMesh_cc1ke")
+
+[node name="Light" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.169146, 0.0252266)
+mesh = SubResource("BoxMesh_8bu3p")
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.565647, 0)

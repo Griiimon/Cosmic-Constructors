@@ -27,6 +27,16 @@ func run():
 		join(DEFAULT_SERVER_IP, DEFAULT_PORT)
 
 
+func _physics_process(delta: float) -> void:
+	if is_server:
+		var world_state: Dictionary
+		receive_world_state.rpc(world_state)
+		
+	elif not is_single_player:
+		if Global.player:
+			receive_player_state.rpc_id(1, Global.player.build_sync_state())
+
+
 func do_start():
 	peer_id= multiplayer.get_unique_id()
 
@@ -58,6 +68,16 @@ func join(address: String, port: int):
 
 	multiplayer.connected_to_server.connect(do_start)
 	multiplayer.connection_failed.connect(connection_failed.bind("Connection failed"))
+
+
+@rpc("any_peer")
+func receive_player_state(data: Dictionary):
+	pass
+
+
+@rpc("any_peer")
+func receive_world_state(data: Dictionary):
+	pass
 
 
 func add_player(id: int):

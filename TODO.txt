@@ -6,7 +6,7 @@ put tool in players hand in 3rd person
 
 distance adjust 3rd person cam
 
-explosion force apply after splitting
+explosion force apply after splitting=> use delayed impulse class in block grid that waits 2-3 physics ticks to trigger
 
 jetpack counterforce against gravity
 

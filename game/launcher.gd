@@ -9,10 +9,10 @@ extends Node
 
 
 func _ready() -> void:
-	NetworkManager.server= dedicated_server
-	NetworkManager.single_player= not dedicated_server and not multiplayer_client
+	NetworkManager.is_server= dedicated_server
+	NetworkManager.is_single_player= not dedicated_server and not multiplayer_client
 	
-	if NetworkManager.single_player:
+	if NetworkManager.is_single_player:
 		if run_test_scene:
 			get_tree().change_scene_to_packed(run_test_scene)
 			return

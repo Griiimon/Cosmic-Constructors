@@ -24,6 +24,7 @@ DebugMesh="*res://game/debug/debug mesh/debug_mesh.gd"
 DebugPanel="*res://game/global/debug panel/debug_panel.gd"
 SignalManager="*res://game/global/signal_manager.gd"
 RaycastHelper="*res://game/global/raycast helper/raycast_helper.tscn"
+Effects="*res://game/global/effects/effects.tscn"
 
 [debug]
 

@@ -4,7 +4,7 @@ signal player_connected(id: int)
 signal player_disconnected(id: int)
 
 var single_player:= true
-var is_dedicated:= false
+var dedicated:= false
 
 const DEFAULT_SERVER_IP= "127.0.0.1"
 
@@ -14,13 +14,13 @@ var peer_id: int= -1
 
 
 func run():
-	if single_player:
-		print(" Start Singleplayer")
-		return
-	
 	enet_peer = ENetMultiplayerPeer.new()
 	
-	if is_dedicated:
+	if single_player:
+		get_tree().change_scene_to_file("res://game/game.tscn")
+		return
+	
+	if dedicated:
 		print(" Hosting")
 		do_host()
 	else:

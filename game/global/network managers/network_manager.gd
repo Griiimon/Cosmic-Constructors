@@ -17,7 +17,6 @@ func run(game_scene: PackedScene):
 	enet_peer = ENetMultiplayerPeer.new()
 	
 	if is_server:
-		print(" Hosting")
 		ServerManager.host(DEFAULT_PORT, game_scene)
 	else:
 		ClientManager.join(DEFAULT_SERVER_IP, DEFAULT_PORT)

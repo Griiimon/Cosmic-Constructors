@@ -13,6 +13,7 @@ func join(address: String, port: int):
 	if error != OK:
 		prints(" Joining failed:", error)
 		return
+	print(" Client created")
 	
 	multiplayer.multiplayer_peer = NetworkManager.enet_peer
 
@@ -27,6 +28,7 @@ func _physics_process(delta: float) -> void:
 
 
 func start_game():
+	print("Connection successful")
 	NetworkManager.peer_id= multiplayer.get_unique_id()
 	request_game_scene.rpc_id(1)
 
@@ -37,12 +39,14 @@ func connection_failed(s: String):
 
 @rpc("any_peer", "reliable")
 func request_game_scene():
+	print("Requesting game scene")
 	receive_game_scene.rpc_id(get_sender_id(), get_tree().current_scene.scene_file_path)
 
 
 @rpc("any_peer", "reliable")
 func receive_game_scene(scene_path: String):
-	get_tree().change_scene_to_file(scene_path)
+	prints("Running game scene", scene_path)
+	get_tree().change_scene_to_file.call_deferred(scene_path)
 
 
 @rpc("any_peer")

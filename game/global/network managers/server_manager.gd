@@ -19,10 +19,10 @@ func host(port: int, game_scene: PackedScene):
 		return
 	
 	multiplayer.multiplayer_peer = NetworkManager.enet_peer
-	#multiplayer.peer_connected.connect(dummy)
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
 
+	prints("Hosting scene", game_scene.resource_path)
 	get_tree().change_scene_to_packed.call_deferred(game_scene)
 
 
@@ -32,15 +32,16 @@ func _physics_process(delta: float) -> void:
 
 
 func add_player(id: int):
+	print("Peer %d connected to server" % id)
 	var player: BasePlayer= BASE_PLAYER_SCENE.instantiate()
 	player.name= str(id)
 	Global.game.peers.add_child(player, true)
 	player_connected.emit(id)
 	set_physics_process(true)
 
-	
 
 func remove_player(id: int):
+	prints("Removing peer", id)
 	player_disconnected.emit(id)
 
 

@@ -38,6 +38,7 @@ var active_equipment: Array[PlayerEquipmentObject]
 
 func _ready() -> void:
 	assert(world)
+	Global.player= self
 	
 	if not equipment:
 		equipment= PlayerEquipment.new()

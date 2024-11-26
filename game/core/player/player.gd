@@ -118,11 +118,3 @@ func wear_equipment(item: PlayerEquipmentItem):
 		model.add_child(obj)
 		active_equipment.append(obj)
 		obj.init(self)
-
-
-func build_sync_state()-> Dictionary:
-	var data: Dictionary
-	data["id"]= NetworkManager.peer_id
-	data["position"]= global_position
-	data["rotation"]= global_rotation
-	return data

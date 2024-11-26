@@ -2,6 +2,8 @@ class_name Game
 extends Node3D
 
 const PLAYER_SCENE= preload("res://game/core/player/player.tscn")
+const BASE_PLAYER_SCENE= preload("res://game/core/player/base_player.tscn")
+
 @onready var world: World = $World
 
 var player: Player
@@ -35,3 +37,13 @@ func spawn_player():
 	player.world= $World
 	player.equipment= player_spawn.equipment
 	add_child(player)
+
+
+func add_peer(player_state: Dictionary):
+	var player: BasePlayer= BASE_PLAYER_SCENE.instantiate()
+	PlayerSyncState.parse_sync_state(player, player_state)
+	peers.add_child(player)
+
+
+func get_peer(peer_id: int)-> BasePlayer:
+	return peers.get_node_or_null(str(peer_id))

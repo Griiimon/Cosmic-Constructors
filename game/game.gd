@@ -5,6 +5,7 @@ const PLAYER_SCENE= preload("res://game/core/player/player.tscn")
 @onready var world: World = $World
 
 var player: Player
+var peers: Node
 
 
 
@@ -13,6 +14,10 @@ func _init():
 
 
 func _ready() -> void:
+	peers= Node.new()
+	peers.name= "Peers"
+	add_child(peers)
+	
 	player= get_node_or_null("Player")
 	if not player and NetworkManager.is_single_player:
 		spawn_player()

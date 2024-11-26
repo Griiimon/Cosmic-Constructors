@@ -30,7 +30,6 @@ func host(port: int, game_scene: PackedScene):
 
 
 func _physics_process(delta: float) -> void:
-
 	if ticks % 3 == 0:
 		var world_state: Dictionary
 		WorldSyncState.add_player_states(world_state, player_states)

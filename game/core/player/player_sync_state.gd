@@ -1,6 +1,5 @@
 class_name PlayerSyncState
 
-const KEY_PEER_ID = "id"
 const KEY_POSITION = "pos"
 const KEY_ROTATION = "rot"
 const KEY_TIMESTAMP = "time"
@@ -9,7 +8,6 @@ const KEY_TIMESTAMP = "time"
 
 static func build_sync_state(player: Player)-> Dictionary:
 	var data: Dictionary
-	data[KEY_PEER_ID]= NetworkManager.peer_id
 	data[KEY_POSITION]= player.global_position
 	data[KEY_ROTATION]= player.global_rotation
 	data[KEY_TIMESTAMP]= ServerManager.ticks

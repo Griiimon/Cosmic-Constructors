@@ -54,7 +54,7 @@ func request_spawn():
 	
 @rpc("any_peer")
 func receive_player_state(data: Dictionary):
-	var peer_id: int= PlayerSyncState.get_peer_id(data)
+	var peer_id: int= NetworkManager.get_sender_id()
 	var timestamp: int= PlayerSyncState.get_timestamp(data)
 
 	if not player_states.has(peer_id) or PlayerSyncState.get_timestamp(player_states[peer_id]) < timestamp:

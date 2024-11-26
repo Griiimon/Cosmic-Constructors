@@ -29,6 +29,8 @@ func _ready() -> void:
 
 	player= game.player
 
+	if not player: return
+
 	default_block= load("res://game/data/blocks/light structure/light_structure_block.tres")
 
 	

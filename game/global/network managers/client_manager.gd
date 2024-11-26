@@ -28,9 +28,13 @@ func join(address: String, port: int):
 
 
 func _physics_process(delta: float) -> void:
-	if Global.player:
-		ServerManager.receive_player_state.rpc_id(1, PlayerSyncState.build_sync_state(Global.player))
-
+	if Global.game:
+		if Global.player:
+			ServerManager.receive_player_state.rpc_id(1, PlayerSyncState.build_sync_state(Global.player))
+			
+			for peer: BasePlayer in Global.game.peers.get_children():
+				update_peer_node(peer)
+		
 	ticks+= 1
 
 
@@ -49,7 +53,7 @@ func store_peer_state(peer_state: Dictionary):
 	if not peer_states.has(peer_id):
 		peer_states[peer_id]= [peer_state]
 	else:
-		var arr: Array[Dictionary]= peer_states[peer_id]
+		var arr: Array= peer_states[peer_id]
 		var this_timestamp: int= PlayerSyncState.get_timestamp(peer_state)
 		var last_timestamp: int= PlayerSyncState.get_timestamp(arr[-1])
 		
@@ -58,7 +62,7 @@ func store_peer_state(peer_state: Dictionary):
 
 
 func update_peer_node(player: BasePlayer):
-	var peer_id: int= int(player.name)
+	var peer_id: int= int(str(player.name))
 	assert(peer_states.has(peer_id))
 	var arr: Array= peer_states[peer_id]
 	if arr.size() == 1:
@@ -88,6 +92,9 @@ func receive_game_scene(scene_path: String, server_ticks: int):
 
 @rpc("any_peer")
 func receive_world_state(data: Dictionary):
+	if not Global.game: return
+	if not Global.player: return
+	
 	#prints("Client receive world state", data)
 	
 	var player_states: Array= WorldSyncState.parse_player_states(data)

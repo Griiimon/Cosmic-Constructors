@@ -5,10 +5,14 @@
 [ext_resource type="Resource" uid="uid://jxoc0g7ajehb" path="res://game/data/hand items/weapons/rocket launcher/rocket_launcher.tres" id="3_e07li"]
 [ext_resource type="Texture2D" path="res://skybox/proc_stars.dds" id="3_o606f"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="4_8hosm"]
-[ext_resource type="PackedScene" uid="uid://xgkn2mkwvwmq" path="res://game/core/player/player.tscn" id="5_ijfg3"]
+[ext_resource type="Script" path="res://game/player_spawn.gd" id="4_ocvhk"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="6_pnchb"]
 [ext_resource type="Resource" uid="uid://6jymoqkdm6kr" path="res://game/data/equipment/back/jetpack/space_jetpack.tres" id="7_eq7l4"]
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="8_fpw3d"]
+
+[sub_resource type="Resource" id="Resource_rlnpc"]
+script = ExtResource("8_fpw3d")
+back_item = ExtResource("7_eq7l4")
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0ujoa"]
 panorama = ExtResource("3_o606f")
@@ -22,10 +26,6 @@ sky = SubResource("Sky_nbk3e")
 ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
 reflected_light_source = 2
-
-[sub_resource type="Resource" id="Resource_rlnpc"]
-script = ExtResource("8_fpw3d")
-back_item = ExtResource("7_eq7l4")
 
 [sub_resource type="Gradient" id="Gradient_0kay1"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0.443137, 0.14902, 1)
@@ -55,17 +55,13 @@ script = ExtResource("2_wkbyi")
 equip_item = ExtResource("3_e07li")
 project_folder_world = false
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_r8d1e")
-
-[node name="Player" parent="." node_paths=PackedStringArray("world") instance=ExtResource("5_ijfg3")]
+[node name="Player Spawn" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-world = NodePath("../World")
+script = ExtResource("4_ocvhk")
 equipment = SubResource("Resource_rlnpc")
 
-[node name="VoxelViewer" type="VoxelViewer" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84, 0)
-view_distance = 1024
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_r8d1e")
 
 [node name="World" type="Node3D" parent="."]
 script = ExtResource("4_8hosm")

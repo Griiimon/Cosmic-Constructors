@@ -1,5 +1,6 @@
 extends Node
 
+@export var use_interface: bool= false
 
 @export var dedicated_server: bool= false
 @export var multiplayer_client: bool= false
@@ -10,6 +11,9 @@ extends Node
 
 
 func _ready() -> void:
+	$CanvasLayer.visible= use_interface
+	if use_interface: return
+
 	NetworkManager.is_server= dedicated_server
 	NetworkManager.is_single_player= not dedicated_server and not multiplayer_client
 	
@@ -18,4 +22,14 @@ func _ready() -> void:
 			get_tree().change_scene_to_packed.call_deferred(run_test_scene)
 			return
 			
+	NetworkManager.run(game_scene)
+
+
+func _on_server_button_pressed() -> void:
+	NetworkManager.is_server= true
+	NetworkManager.run(game_scene)
+
+
+func _on_client_button_pressed() -> void:
+	NetworkManager.is_single_player= false
 	NetworkManager.run(game_scene)

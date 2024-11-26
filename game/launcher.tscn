@@ -5,5 +5,34 @@
 
 [node name="Launcher" type="Node"]
 script = ExtResource("1_rwhuf")
+use_interface = true
 run_test_scene = ExtResource("2_5w3hj")
 game_scene = ExtResource("2_5w3hj")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Server Button" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Server"
+
+[node name="Client Button" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Client"
+
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Server Button" to="." method="_on_server_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Client Button" to="." method="_on_client_button_pressed"]

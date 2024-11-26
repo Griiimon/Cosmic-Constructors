@@ -45,6 +45,15 @@ func remove_player(id: int):
 	player_disconnected.emit(id)
 
 
+@rpc("any_peer", "reliable")
+func request_spawn():
+	ClientManager.spawn.rpc_id(get_sender_id())
+	
+	
 @rpc("any_peer")
 func receive_player_state(data: Dictionary):
 	pass
+
+
+func get_sender_id()-> int:
+	return NetworkManager.get_sender_id()

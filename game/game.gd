@@ -19,8 +19,11 @@ func _ready() -> void:
 	add_child(peers)
 	
 	player= get_node_or_null("Player")
-	if not player and NetworkManager.is_single_player:
-		spawn_player()
+	if not player: 
+		if NetworkManager.is_single_player:
+			spawn_player()
+		elif not NetworkManager.is_server:
+			ServerManager.request_spawn.rpc_id(1)
 
 
 func spawn_player():

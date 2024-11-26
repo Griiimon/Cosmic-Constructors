@@ -54,5 +54,10 @@ func receive_world_state(data: Dictionary):
 	pass
 
 
+@rpc("any_peer", "reliable")
+func spawn():
+	Global.game.spawn_player()
+
+
 func get_sender_id()-> int:
 	return NetworkManager.get_sender_id()

@@ -32,7 +32,11 @@ ambient_light_color = Color(1, 1, 1, 1)
 script = ExtResource("1_owy5q")
 equipment = null
 
-[node name="Floor Shapecast" type="ShapeCast3D" parent="." index="1"]
+[node name="VoxelViewer" type="VoxelViewer" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84, 0)
+view_distance = 1024
+
+[node name="Floor Shapecast" type="ShapeCast3D" parent="." index="2"]
 shape = SubResource("CylinderShape3D_7yawy")
 collision_mask = 6
 
@@ -114,7 +118,7 @@ scroll_steps = 0.25
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.979649, 0.200719, 0, -0.200719, 0.979649, 0, 1, 5)
 
-[node name="Movement State Machine" type="Node" parent="." index="3" node_paths=PackedStringArray("current_state")]
+[node name="Movement State Machine" type="Node" parent="." index="4" node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_615c1")
 current_state = NodePath("EVA")
 
@@ -146,7 +150,7 @@ script = ExtResource("8_s2hhl")
 wait_time = 0.1
 one_shot = true
 
-[node name="Action State Machine" type="Node" parent="." index="4" node_paths=PackedStringArray("current_state")]
+[node name="Action State Machine" type="Node" parent="." index="5" node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_r1eyq")
 current_state = NodePath("Idle")
 
@@ -157,4 +161,4 @@ script = ExtResource("6_3y3c5")
 script = ExtResource("5_avkim")
 current_block = ExtResource("11_2od4b")
 
-[node name="Damage Component" parent="." index="5" instance=ExtResource("12_goufb")]
+[node name="Damage Component" parent="." index="6" instance=ExtResource("12_goufb")]

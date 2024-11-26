@@ -5,6 +5,8 @@ signal player_disconnected(id: int)
 
 const BASE_PLAYER_SCENE= preload("res://game/core/player/base_player.tscn")
 
+var player_states: Dictionary
+
 
 
 func _ready() -> void:
@@ -52,7 +54,11 @@ func request_spawn():
 	
 @rpc("any_peer")
 func receive_player_state(data: Dictionary):
-	pass
+	var peer_id: int= PlayerSyncState.get_peer_id(data)
+	var timestamp: int= PlayerSyncState.get_timestamp(data)
+
+	if not player_states.has(peer_id) or PlayerSyncState.get_timestamp(player_states[peer_id]) < timestamp:
+		player_states[peer_id]= data
 
 
 func get_sender_id()-> int:

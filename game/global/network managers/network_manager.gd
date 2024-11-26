@@ -12,6 +12,8 @@ var peer_id: int= -1
 
 
 func run(game_scene: PackedScene):
+	assert(not is_single_player or not is_server)
+	
 	enet_peer = ENetMultiplayerPeer.new()
 	
 	if is_server:

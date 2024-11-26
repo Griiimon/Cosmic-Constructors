@@ -32,13 +32,15 @@ func host(port: int, game_scene: PackedScene):
 func _physics_process(delta: float) -> void:
 	if ticks % 3 == 0:
 		var world_state: Dictionary
-		WorldSyncState.add_player_states(world_state, player_states)
+		WorldSyncState.add_player_states(world_state, player_states.values())
 		ClientManager.receive_world_state.rpc(world_state)
 
 	ticks+= 1
 
 
 func add_player(id: int):
+	# TODO does the server even need these nodes or will
+	# a simple peer_id => position dictionary suffice?
 	print("Peer %d connected to server" % id)
 	var player: BasePlayer= BASE_PLAYER_SCENE.instantiate()
 	player.name= str(id)
@@ -65,11 +67,13 @@ func request_spawn():
 	
 @rpc("any_peer")
 func receive_player_state(data: Dictionary):
+	#prints("Server receive player state", data)
 	var peer_id: int= NetworkManager.get_sender_id()
 	var timestamp: int= PlayerSyncState.get_timestamp(data)
 
 	if not player_states.has(peer_id) or PlayerSyncState.get_timestamp(player_states[peer_id]) < timestamp:
 		player_states[peer_id]= data
+	PlayerSyncState.add_peer_id(player_states[peer_id], peer_id)
 
 
 func get_sender_id()-> int:

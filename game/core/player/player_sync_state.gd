@@ -10,7 +10,7 @@ static func build_sync_state(player: Player)-> Dictionary:
 	var data: Dictionary
 	data[KEY_POSITION]= player.global_position
 	data[KEY_ROTATION]= player.global_rotation
-	data[KEY_TIMESTAMP]= ServerManager.ticks
+	data[KEY_TIMESTAMP]= ClientManager.ticks
 	return data
 
 

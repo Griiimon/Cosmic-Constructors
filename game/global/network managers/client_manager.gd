@@ -1,5 +1,7 @@
 extends Node
 
+var ticks: int
+
 
 
 func _ready() -> void:
@@ -26,11 +28,13 @@ func _physics_process(delta: float) -> void:
 	if Global.player:
 		ServerManager.receive_player_state.rpc_id(1, Global.player.build_sync_state())
 
+	ticks+= 1
+
 
 func start_game():
 	print("Connection successful")
 	NetworkManager.peer_id= multiplayer.get_unique_id()
-	request_game_scene.rpc_id(1)
+	ServerManager.request_game_scene.rpc_id(1)
 
 
 func connection_failed(s: String):
@@ -38,13 +42,8 @@ func connection_failed(s: String):
 
 
 @rpc("any_peer", "reliable")
-func request_game_scene():
-	print("Requesting game scene")
-	receive_game_scene.rpc_id(get_sender_id(), get_tree().current_scene.scene_file_path)
-
-
-@rpc("any_peer", "reliable")
-func receive_game_scene(scene_path: String):
+func receive_game_scene(scene_path: String, server_ticks: int):
+	ticks= server_ticks
 	prints("Running game scene", scene_path)
 	get_tree().change_scene_to_file.call_deferred(scene_path)
 

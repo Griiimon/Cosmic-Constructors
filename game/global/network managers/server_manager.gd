@@ -6,6 +6,7 @@ signal player_disconnected(id: int)
 const BASE_PLAYER_SCENE= preload("res://game/core/player/base_player.tscn")
 
 var player_states: Dictionary
+var ticks: int
 
 
 
@@ -32,6 +33,8 @@ func _physics_process(delta: float) -> void:
 	var world_state: Dictionary
 	ClientManager.receive_world_state.rpc(world_state)
 
+	ticks+= 1
+
 
 func add_player(id: int):
 	print("Peer %d connected to server" % id)
@@ -45,6 +48,12 @@ func add_player(id: int):
 func remove_player(id: int):
 	prints("Removing peer", id)
 	player_disconnected.emit(id)
+
+
+@rpc("any_peer", "reliable")
+func request_game_scene():
+	print("Requesting game scene")
+	ClientManager.receive_game_scene.rpc_id(get_sender_id(), get_tree().current_scene.scene_file_path, ticks)
 
 
 @rpc("any_peer", "reliable")

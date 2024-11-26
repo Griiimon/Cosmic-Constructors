@@ -3,6 +3,8 @@ extends Node
 signal player_connected(id: int)
 signal player_disconnected(id: int)
 
+const BASE_PLAYER_SCENE= preload("res://game/core/player/base_player.tscn")
+
 
 
 func _ready() -> void:
@@ -30,9 +32,13 @@ func _physics_process(delta: float) -> void:
 
 
 func add_player(id: int):
+	var player: BasePlayer= BASE_PLAYER_SCENE.instantiate()
+	player.name= str(id)
+	Global.game.peers.add_child(player, true)
 	player_connected.emit(id)
 	set_physics_process(true)
 
+	
 
 func remove_player(id: int):
 	player_disconnected.emit(id)

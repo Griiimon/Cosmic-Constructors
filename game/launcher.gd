@@ -5,6 +5,7 @@ extends Node
 @export var multiplayer_client: bool= false
 
 @export var run_test_scene: PackedScene
+@export var game_scene: PackedScene
 
 
 
@@ -14,7 +15,7 @@ func _ready() -> void:
 	
 	if NetworkManager.is_single_player:
 		if run_test_scene:
-			get_tree().change_scene_to_packed(run_test_scene)
+			get_tree().change_scene_to_packed.call_deferred(run_test_scene)
 			return
 			
-	NetworkManager.run()
+	NetworkManager.run(game_scene)

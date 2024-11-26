@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4sn7mi6fgdo2"]
+[gd_scene load_steps=3 format=3 uid="uid://c4sn7mi6fgdo2"]
 
 [ext_resource type="Script" path="res://game/launcher.gd" id="1_rwhuf"]
+[ext_resource type="PackedScene" uid="uid://bws4nr4sjg6bt" path="res://game/test/damage test/damage_test.tscn" id="2_5w3hj"]
 
 [node name="Launcher" type="Node"]
 script = ExtResource("1_rwhuf")
+run_test_scene = ExtResource("2_5w3hj")
+game_scene = ExtResource("2_5w3hj")

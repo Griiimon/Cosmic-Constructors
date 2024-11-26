@@ -1,0 +1,54 @@
+extends Node
+
+
+
+func _ready() -> void:
+	set_physics_process(false)
+
+
+func join(address: String, port: int):
+	prints("Joining Server", address, " on port ", port, " ...")
+	
+	var error= NetworkManager.enet_peer.create_client(address, port)
+	if error != OK:
+		prints(" Joining failed:", error)
+		return
+	
+	multiplayer.multiplayer_peer = NetworkManager.enet_peer
+
+	multiplayer.connected_to_server.connect(start_game)
+	multiplayer.connection_failed.connect(connection_failed.bind("Connection failed"))
+	ClientManager.set_physics_process(true)
+
+
+func _physics_process(delta: float) -> void:
+	if Global.player:
+		ServerManager.receive_player_state.rpc_id(1, Global.player.build_sync_state())
+
+
+func start_game():
+	NetworkManager.peer_id= multiplayer.get_unique_id()
+	request_game_scene.rpc_id(1)
+
+
+func connection_failed(s: String):
+	prints("Connection failed:", s)
+
+
+@rpc("any_peer", "reliable")
+func request_game_scene():
+	receive_game_scene.rpc_id(get_sender_id(), get_tree().current_scene.scene_file_path)
+
+
+@rpc("any_peer", "reliable")
+func receive_game_scene(scene_path: String):
+	get_tree().change_scene_to_file(scene_path)
+
+
+@rpc("any_peer")
+func receive_world_state(data: Dictionary):
+	pass
+
+
+func get_sender_id()-> int:
+	return NetworkManager.get_sender_id()

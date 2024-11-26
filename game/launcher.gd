@@ -8,10 +8,12 @@ extends Node
 @export var run_test_scene: PackedScene
 @export var game_scene: PackedScene
 
+@onready var interface_ui: CanvasLayer = $UI
+
 
 
 func _ready() -> void:
-	$CanvasLayer.visible= use_interface
+	interface_ui.visible= use_interface
 	if use_interface: return
 
 	NetworkManager.is_server= dedicated_server
@@ -26,10 +28,12 @@ func _ready() -> void:
 
 
 func _on_server_button_pressed() -> void:
+	interface_ui.hide()
 	NetworkManager.is_server= true
 	NetworkManager.run(game_scene)
 
 
 func _on_client_button_pressed() -> void:
+	interface_ui.hide()
 	NetworkManager.is_single_player= false
 	NetworkManager.run(game_scene)

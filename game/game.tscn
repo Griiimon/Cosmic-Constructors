@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cpytc7ebulm55"]
+[gd_scene load_steps=22 format=3 uid="uid://cpytc7ebulm55"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_dxwo3"]
 [ext_resource type="PackedScene" uid="uid://qr0bko2hsrbk" path="res://game/debug/space grid/debug_space_grid.tscn" id="1_ek1sn"]
@@ -14,6 +14,7 @@
 [ext_resource type="Material" uid="uid://cp754ky7maqj2" path="res://game/solar system/materials/planet_material_grassy.tres" id="10_a0khk"]
 [ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="11_avb6o"]
 [ext_resource type="Shader" path="res://addons/zylann.atmosphere/shaders/planet_atmosphere_clouds.gdshader" id="12_5sqjb"]
+[ext_resource type="Material" uid="uid://c4l4ukvg5rpk8" path="res://game/textures/terrain_material.tres" id="12_m5q1e"]
 
 [sub_resource type="Resource" id="Resource_wndb7"]
 script = ExtResource("7_8lulh")
@@ -22,7 +23,63 @@ back_item = ExtResource("4_jpp4l")
 [sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_0ig6r"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6uqhq"]
-radius = 10000.0
+radius = 4000.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_j3p40"]
+frequency = 0.0139
+
+[sub_resource type="VoxelGeneratorGraph" id="VoxelGeneratorGraph_r7ijg"]
+graph_data = {
+"connections": [[1, 0, 9, 0], [1, 0, 13, 0], [10, 0, 11, 0], [2, 0, 9, 1], [2, 0, 13, 1], [11, 0, 12, 0], [3, 0, 9, 2], [3, 0, 13, 2], [12, 0, 4, 0], [13, 0, 12, 1], [9, 0, 10, 0]],
+"nodes": {
+"1": {
+"gui_position": Vector2(440, 50),
+"type": "InputX"
+},
+"10": {
+"gui_position": Vector2(773.333, 0),
+"type": "Abs"
+},
+"11": {
+"b": 40.0,
+"gui_position": Vector2(933.333, 0),
+"type": "Multiply"
+},
+"12": {
+"gui_position": Vector2(1040, 133.333),
+"type": "Add"
+},
+"13": {
+"auto_connect": true,
+"gui_position": Vector2(640, 240),
+"radius": 400.0,
+"type": "SdfSphere"
+},
+"2": {
+"gui_position": Vector2(440, 150),
+"type": "InputY"
+},
+"3": {
+"gui_position": Vector2(440, 250),
+"type": "InputZ"
+},
+"4": {
+"auto_connect": true,
+"gui_position": Vector2(1200, 160),
+"type": "OutputSDF"
+},
+"9": {
+"auto_connect": true,
+"gui_position": Vector2(586.667, 0),
+"noise": SubResource("FastNoiseLite_j3p40"),
+"type": "Noise3D"
+}
+},
+"version": 2
+}
+
+[sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_oh42y"]
+texturing_mode = 1
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_dxwo3")
@@ -50,7 +107,7 @@ script = ExtResource("7_gmk88")
 [node name="Planet" type="VoxelLodTerrain" parent="."]
 generator = ExtResource("9_81qsx")
 mesher = SubResource("VoxelMesherTransvoxel_0ig6r")
-view_distance = 2048
+view_distance = 16384
 voxel_bounds = AABB(-2048, -2048, -2048, 4096, 4096, 4096)
 lod_count = 7
 material = ExtResource("10_a0khk")
@@ -60,17 +117,26 @@ collision_layer = 4
 collision_mask = 3
 gravity_space_override = 3
 gravity_point = true
+gravity_point_unit_distance = 1600.0
 gravity_point_center = Vector3(0, 0, 0)
 gravity_direction = Vector3(0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity Area"]
 shape = SubResource("SphereShape3D_6uqhq")
 
+[node name="Asteroid" type="VoxelLodTerrain" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 4102.33, 0)
+generator = SubResource("VoxelGeneratorGraph_r7ijg")
+mesher = SubResource("VoxelMesherTransvoxel_oh42y")
+view_distance = 8192
+voxel_bounds = AABB(-4096, -4096, -4096, 8192, 8192, 8192)
+material = ExtResource("12_m5q1e")
+collision_layer = 4
+
 [node name="UI" parent="." instance=ExtResource("8_hutpu")]
 
 [node name="PlanetAthmosphere" parent="." instance=ExtResource("11_avb6o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-planet_radius = 1200.0
+planet_radius = 1100.0
 atmosphere_height = 1000.0
 sun_path = NodePath("../DirectionalLight")
 custom_shader = ExtResource("12_5sqjb")
@@ -90,6 +156,6 @@ shader_params/u_cloud_shape_texture = null
 shader_params/u_cloud_coverage_cubemap = null
 
 [node name="DirectionalLight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.478692, -0.53691, 0.694681, 0, 0.791224, 0.611527, -0.877983, 0.292733, -0.378752, 3947.4, 538.943, 0)
+transform = Transform3D(-0.404486, -0.0305363, 0.914034, 0.256002, 0.955707, 0.145217, -0.877983, 0.292733, -0.378753, 3913.78, 538.943, 16.9227)
 shadow_enabled = true
 directional_shadow_max_distance = 2000.0

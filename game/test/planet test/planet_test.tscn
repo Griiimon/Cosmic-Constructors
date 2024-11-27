@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://buqb4b7dp5dty"]
+[gd_scene load_steps=17 format=3 uid="uid://buqb4b7dp5dty"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_wte7t"]
 [ext_resource type="Script" path="res://game/test/planet test/planet_tests.gd" id="2_8smgd"]
@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="7_2utxn"]
 [ext_resource type="Material" uid="uid://cp754ky7maqj2" path="res://game/solar system/materials/planet_material_grassy.tres" id="7_cvnod"]
 [ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="8_fm8fi"]
-[ext_resource type="Texture2D" uid="uid://dtlptku1k7pm1" path="res://addons/zylann.atmosphere/demo/space_background.webp" id="11_ld577"]
+[ext_resource type="Environment" uid="uid://bpv3denmg1fpo" path="res://game/test/planet test/planet_test_environment_2.tres" id="11_bgsgq"]
 [ext_resource type="Shader" path="res://addons/zylann.atmosphere/shaders/planet_atmosphere_clouds.gdshader" id="13_uc5er"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_63ws0"]
@@ -22,25 +22,6 @@ script = ExtResource("7_2utxn")
 back_item = ExtResource("6_tarnc")
 
 [sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_7ata4"]
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vdqjr"]
-panorama = ExtResource("11_ld577")
-
-[sub_resource type="Sky" id="Sky_mx20v"]
-sky_material = SubResource("PanoramaSkyMaterial_vdqjr")
-
-[sub_resource type="Environment" id="Environment_bvqag"]
-background_mode = 2
-sky = SubResource("Sky_mx20v")
-glow_enabled = true
-glow_levels/3 = 0.0
-glow_levels/4 = 1.0
-glow_levels/6 = 1.0
-glow_intensity = 4.0
-glow_strength = 0.8
-glow_blend_mode = 0
-glow_hdr_scale = 1.0
-volumetric_fog_density = 0.0
 
 [node name="Planet Test" type="Node3D"]
 script = ExtResource("1_wte7t")
@@ -84,16 +65,18 @@ shadow_enabled = true
 directional_shadow_max_distance = 2000.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_bvqag")
+environment = ExtResource("11_bgsgq")
 
 [node name="Spatial" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1024, 31.31, 0)
 
 [node name="PlanetAthmosphere" parent="." instance=ExtResource("8_fm8fi")]
-planet_radius = 1000.0
+planet_radius = 1200.0
 atmosphere_height = 1000.0
 sun_path = NodePath("../DirectionalLight")
 custom_shader = ExtResource("13_uc5er")
+shader_params/u_density = 0.11
+shader_params/u_scattering_strength = 0.525
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 shader_params/u_cloud_density_scale = 50.0
 shader_params/u_cloud_bottom = 0.2

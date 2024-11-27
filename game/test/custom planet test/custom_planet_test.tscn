@@ -7,10 +7,11 @@
 [ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="5_bbgji"]
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="6_yyq31"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="7_w4pu6"]
-[ext_resource type="Material" uid="uid://cp754ky7maqj2" path="res://game/solar system/materials/planet_material_grassy.tres" id="9_3jtc5"]
+[ext_resource type="VoxelGeneratorScript" uid="uid://b26ajmch67psy" path="res://game/test/custom planet test/custom_voxel_generator.tres" id="8_27ipv"]
+[ext_resource type="Shader" path="res://game/test/custom planet test/infinite_transvoxel_terrain.gdshader" id="9_fgx8c"]
+[ext_resource type="Texture2D" uid="uid://myq0vhmv3kjp" path="res://game/textures/Rocks07_col.webp" id="10_bm7bq"]
 [ext_resource type="Texture2D" uid="uid://dtlptku1k7pm1" path="res://addons/zylann.atmosphere/demo/space_background.webp" id="10_fxdwa"]
-[ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="11_u47x8"]
-[ext_resource type="Shader" path="res://addons/zylann.atmosphere/shaders/planet_atmosphere_clouds.gdshader" id="12_wo84n"]
+[ext_resource type="Texture2D" uid="uid://cdga3d64rgt8e" path="res://game/textures/grass_albedo.png" id="12_05coi"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_63ws0"]
 radius = 10000.0
@@ -19,13 +20,20 @@ radius = 10000.0
 script = ExtResource("6_yyq31")
 back_item = ExtResource("5_bbgji")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_elxq0"]
-frequency = 0.0023
+[sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_oycf3"]
 
-[sub_resource type="VoxelGeneratorNoise" id="VoxelGeneratorNoise_c3ipq"]
-noise = SubResource("FastNoiseLite_elxq0")
-
-[sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_7ata4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j1u7i"]
+render_priority = 0
+shader = ExtResource("9_fgx8c")
+shader_parameter/u_transition_mask = null
+shader_parameter/u_voxel_virtual_texture_tile_size = null
+shader_parameter/u_voxel_virtual_texture_fade = null
+shader_parameter/u_voxel_cell_size = null
+shader_parameter/u_voxel_block_size = null
+shader_parameter/u_voxel_virtual_texture_offset_scale = null
+shader_parameter/u_lod_fade = null
+shader_parameter/u_texture_top = ExtResource("12_05coi")
+shader_parameter/u_texture_sides = ExtResource("10_bm7bq")
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vdqjr"]
 panorama = ExtResource("10_fxdwa")
@@ -55,9 +63,6 @@ script = ExtResource("2_d2xmp")
 [node name="Gravity Area" type="Area3D" parent="."]
 collision_mask = 3
 gravity_space_override = 3
-gravity_point = true
-gravity_point_center = Vector3(0, 0, 0)
-gravity_direction = Vector3(0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity Area"]
 shape = SubResource("SphereShape3D_63ws0")
@@ -66,38 +71,26 @@ shape = SubResource("SphereShape3D_63ws0")
 script = ExtResource("3_cfpqv")
 
 [node name="Player" parent="." node_paths=PackedStringArray("world") instance=ExtResource("4_45jsc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2000, 650)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 75.8921, 0)
 world = NodePath("../World")
 equipment = SubResource("Resource_y4pjv")
-
-[node name="VoxelViewer" type="VoxelViewer" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84, 0)
-view_distance = 1024
 
 [node name="UI" parent="." instance=ExtResource("7_w4pu6")]
 
 [node name="Planet" type="VoxelLodTerrain" parent="."]
-generator = SubResource("VoxelGeneratorNoise_c3ipq")
-mesher = SubResource("VoxelMesherTransvoxel_7ata4")
-view_distance = 2048
-voxel_bounds = AABB(-2048, -2048, -2048, 4096, 4096, 4096)
+generator = ExtResource("8_27ipv")
+mesher = SubResource("VoxelMesherTransvoxel_oycf3")
+view_distance = 4096
+voxel_bounds = AABB(-65536, -65536, -65536, 131072, 131072, 131072)
 lod_count = 7
-material = ExtResource("9_3jtc5")
+material = SubResource("ShaderMaterial_j1u7i")
 collision_layer = 4
+run_stream_in_editor = false
 
 [node name="DirectionalLight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.170038, -0.0201907, 0.985231, 0, 0.99979, 0.020489, -0.985438, -0.0034839, 0.170002, 3502.13, 538.943, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 275.302, 0)
 shadow_enabled = true
 directional_shadow_max_distance = 2000.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bvqag")
-
-[node name="Spatial" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1024, 31.31, 0)
-
-[node name="PlanetAthmosphere" parent="." instance=ExtResource("11_u47x8")]
-planet_radius = 1000.0
-atmosphere_height = 1000.0
-sun_path = NodePath("../DirectionalLight")
-custom_shader = ExtResource("12_wo84n")

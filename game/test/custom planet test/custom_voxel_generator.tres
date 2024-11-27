@@ -1,0 +1,12 @@
+[gd_resource type="VoxelGeneratorScript" script_class="CustomVoxelGenerator" load_steps=3 format=3 uid="uid://b26ajmch67psy"]
+
+[ext_resource type="Script" path="res://game/test/custom planet test/custom_generator.gd" id="1_6qigk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xkm8b"]
+frequency = 0.0006
+fractal_lacunarity = 1.215
+fractal_gain = 0.23
+
+[resource]
+script = ExtResource("1_6qigk")
+height_noise = SubResource("FastNoiseLite_xkm8b")

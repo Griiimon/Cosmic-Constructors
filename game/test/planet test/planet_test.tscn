@@ -67,10 +67,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2000, 650)
 world = NodePath("../World")
 equipment = SubResource("Resource_agfh7")
 
-[node name="VoxelViewer" type="VoxelViewer" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84, 0)
-view_distance = 1024
-
 [node name="UI" parent="." instance=ExtResource("4_yc2d7")]
 
 [node name="Planet" type="VoxelLodTerrain" parent="."]
@@ -98,3 +94,14 @@ planet_radius = 1000.0
 atmosphere_height = 1000.0
 sun_path = NodePath("../DirectionalLight")
 custom_shader = ExtResource("13_uc5er")
+shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
+shader_params/u_cloud_density_scale = 50.0
+shader_params/u_cloud_bottom = 0.2
+shader_params/u_cloud_top = 0.5
+shader_params/u_cloud_blend = 0.5
+shader_params/u_cloud_shape_invert = 0.0
+shader_params/u_cloud_coverage_bias = 0.0
+shader_params/u_cloud_shape_factor = 0.8
+shader_params/u_cloud_shape_scale = 1.0
+shader_params/u_cloud_shape_texture = null
+shader_params/u_cloud_coverage_cubemap = null

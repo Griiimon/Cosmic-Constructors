@@ -5,6 +5,11 @@ extends Entity
 
 
 
+func _ready() -> void:
+	await get_tree().process_frame
+	ClientManager.request_full_peer_sync.rpc_id(get_peer_id())
+
+
 func play_animation(anim_name: String, speed: float= 1.0):
 	model.play_animation(anim_name, speed)
 
@@ -24,3 +29,7 @@ func wear_equipment(item: PlayerEquipmentItem)-> PlayerEquipmentObject:
 		model.add_child(obj)
 		return obj
 	return null
+
+
+func get_peer_id()-> int:
+	return int(str(name))

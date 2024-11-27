@@ -87,6 +87,14 @@ func send_sync_event(type: int, args: Array= []):
 	ServerManager.receive_sync_event.rpc(type, args)
 
 
+func send_all_sync_events(receiver: int):
+	var player: Player= Global.player
+	if not player: return
+	
+	for equipment_object in player.active_equipment:
+		receive_sync_event.rpc_id(receiver, EventSyncState.Type.WEAR_EQUIPMENT, [equipment_object.item.resource_path], NetworkManager.peer_id)
+
+
 @rpc("any_peer", "reliable")
 func receive_sync_event(type: int, args: Array, peer_id: int):
 	if peer_id == NetworkManager.peer_id: return
@@ -123,6 +131,11 @@ func receive_world_state(data: Dictionary):
 @rpc("any_peer", "reliable")
 func spawn():
 	Global.game.spawn_player()
+
+
+@rpc("any_peer", "reliable")
+func request_full_peer_sync():
+	send_all_sync_events(get_sender_id())
 
 
 func get_sender_id()-> int:

@@ -81,7 +81,17 @@ func camera_logic():
 			third_person_camera.global_position= third_person_camera_raycast.get_collision_point()
 		else:
 			third_person_camera.position= third_person_camera_raycast.target_position
-	
+
+
+func play_animation(anim_name: String, speed: float= 1.0):
+	super(anim_name, speed)
+	ClientManager.send_sync_event(EventSyncState.Type.START_PLAYER_ANIMATION, [anim_name])
+
+
+func reset_animation():
+	super()
+	ClientManager.send_sync_event(EventSyncState.Type.RESET_PLAYER_ANIMATION)
+
 
 func equip_hand_item(hand_item: HandItem):
 	action_state_machine.idle_state.equip_hand_item(hand_item)
@@ -97,9 +107,10 @@ func get_hand_item()-> HandItem:
 	return hand_object.item_definition
 
 
-func wear_equipment(item: PlayerEquipmentItem):
-	if item.scene:
-		var obj: PlayerEquipmentObject= item.scene.instantiate()
-		model.add_child(obj)
-		active_equipment.append(obj)
-		obj.init(self)
+func wear_equipment(item: PlayerEquipmentItem)-> PlayerEquipmentObject:
+	var obj: PlayerEquipmentObject= super(item)
+	if not obj: return null
+	active_equipment.append(obj)
+	obj.init(self)
+	ClientManager.send_sync_event(EventSyncState.Type.WEAR_EQUIPMENT, [item.resource_path])
+	return obj

@@ -34,7 +34,7 @@ equipment = null
 
 [node name="VoxelViewer" type="VoxelViewer" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84, 0)
-view_distance = 1024
+view_distance = 16384
 
 [node name="Floor Shapecast" type="ShapeCast3D" parent="." index="2"]
 shape = SubResource("CylinderShape3D_7yawy")
@@ -43,6 +43,7 @@ collision_mask = 6
 [node name="First Person Camera" type="Camera3D" parent="Head/Pivot" index="0"]
 unique_name_in_owner = true
 cull_mask = 1048573
+far = 160000.0
 
 [node name="Build Raycast" type="RayCast3D" parent="Head/Pivot" index="1"]
 unique_name_in_owner = true

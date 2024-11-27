@@ -62,7 +62,8 @@ func _input(event: InputEvent) -> void:
 				player.world.freeze_grids(false)
 			elif event.keycode == KEY_F3:
 				if player:
-					player.wear_equipment(load("res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres"))
+					#player.wear_equipment(load("res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres"))
+					player.play_animation("wave")
 			elif event.keycode == KEY_F4:
 				DebugPanel.toggle()
 			elif event.keycode == KEY_F5:

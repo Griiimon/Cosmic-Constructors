@@ -1,7 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6o33av0wcrn6"]
+[gd_scene load_steps=6 format=3 uid="uid://b6o33av0wcrn6"]
 
 [ext_resource type="Script" path="res://game/core/player/hand items/hand_object_projectile_weapon.gd" id="1_cpss8"]
 [ext_resource type="PackedScene" uid="uid://d2xjeiv2wcady" path="res://game/data/hand items/weapons/rocket launcher/rocket_launcher_model.tscn" id="1_w3p25"]
+
+[sub_resource type="Animation" id="Animation_lnxtu"]
+resource_name = "use"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rocket Launcher Model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.1, 0.5),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.118766), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ouc7j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rocket Launcher Model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0hhob"]
+_data = {
+"RESET": SubResource("Animation_ouc7j"),
+"use": SubResource("Animation_lnxtu")
+}
 
 [node name="Rocket Launcher" type="Node3D" node_paths=PackedStringArray("muzzle")]
 script = ExtResource("1_cpss8")
@@ -11,3 +49,8 @@ muzzle = NodePath("Rocket Launcher Model/Muzzle")
 
 [node name="Muzzle" type="Node3D" parent="Rocket Launcher Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.00617)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0hhob")
+}

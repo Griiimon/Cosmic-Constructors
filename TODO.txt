@@ -1,3 +1,7 @@
+hide equipment in 3rd person view when sitting down
+
+rocket launcher recoil
+
 Video: large flat noise 3d terrain with vehicle
 small planet (atmosphere) with asteroid and drill ship and fading gravity
 

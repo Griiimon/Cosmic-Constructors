@@ -1,5 +1,5 @@
 class_name Player
-extends Entity
+extends BasePlayer
 
 @export var world: World
 @export var equipment: PlayerEquipment
@@ -14,8 +14,6 @@ extends Entity
 @onready var head: Node3D = $Head
 @onready var first_person_camera: Camera3D = %"First Person Camera"
 @onready var pivot: Node3D = %Pivot
-
-@onready var model: PlayerModel = %Model
 
 @onready var third_person_camera_pivot: Node3D = %"Third Person Camera Pivot"
 @onready var third_person_camera_raycast: RayCast3D = %"Third Person Camera RayCast"
@@ -97,19 +95,6 @@ func get_hand_item()-> HandItem:
 	if not hand_object or not is_instance_valid(hand_object) or hand_object.is_queued_for_deletion():
 		return null
 	return hand_object.item_definition
-
-
-func play_animation(anim_name: String, speed: float= 1.0):
-	model.play_animation(anim_name, speed)
-
-
-func reset_animation():
-	model.reset_animation()
-	set_leg_animation_speed(1.0)
-
-
-func set_leg_animation_speed(speed: float):
-	model.animation_player_legs.speed_scale= speed
 
 
 func wear_equipment(item: PlayerEquipmentItem):

@@ -84,7 +84,7 @@ func on_physics_process(delta: float):
 	post_move()
 
 	velocity= (player.global_position - prev_position) / delta
-	DebugHud.send("Velocity", "%.2f" % velocity.length())
+	DebugHud.send("Walk Velocity", "%.2f" % velocity.length())
 
 	is_walking= velocity.length() > 0
 

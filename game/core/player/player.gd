@@ -46,6 +46,8 @@ func _ready() -> void:
 	
 	Input.mouse_mode= Input.MOUSE_MODE_CAPTURED
 
+	SignalManager.player_spawned.emit()
+
 
 func sit(seat: SeatInstance):
 	movement_state_machine.sit(seat)

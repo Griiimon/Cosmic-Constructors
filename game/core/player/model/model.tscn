@@ -196,6 +196,34 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_8rtpl"]
+resource_name = "sit"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Right Hip:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 1),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.872665, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Left Hip:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 1),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.872665, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_wjj32"]
 resource_name = "walk"
 loop_mode = 1
@@ -225,34 +253,6 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0.523599, 0, 0), Vector3(-0.523599, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_8rtpl"]
-resource_name = "sit"
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Right Hip:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0, 1),
-"transitions": PackedFloat64Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.872665, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Left Hip:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat64Array(0, 1),
-"transitions": PackedFloat64Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.872665, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g5m2i"]
 _data = {
 "RESET": SubResource("Animation_llaqv"),
@@ -262,6 +262,8 @@ _data = {
 
 [node name="Model" type="Node3D"]
 script = ExtResource("1_pnfv0")
+
+[node name="Equipment" type="Node3D" parent="."]
 
 [node name="Torso" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.614659, 0)

@@ -4,6 +4,7 @@ extends Node3D
 
 @onready var animation_player_arms: AnimationPlayer = $"AnimationPlayer Arms"
 @onready var animation_player_legs: AnimationPlayer = $"AnimationPlayer Legs"
+@onready var equipment: Node3D = $Equipment
 
 
 

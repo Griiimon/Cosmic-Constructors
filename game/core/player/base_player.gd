@@ -26,7 +26,7 @@ func set_leg_animation_speed(speed: float):
 func wear_equipment(item: PlayerEquipmentItem)-> PlayerEquipmentObject:
 	if item.scene:
 		var obj: PlayerEquipmentObject= item.scene.instantiate()
-		model.add_child(obj)
+		model.equipment.add_child(obj)
 		return obj
 	return null
 

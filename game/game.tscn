@@ -1,30 +1,39 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpytc7ebulm55"]
+[gd_scene load_steps=18 format=3 uid="uid://cpytc7ebulm55"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_dxwo3"]
 [ext_resource type="PackedScene" uid="uid://qr0bko2hsrbk" path="res://game/debug/space grid/debug_space_grid.tscn" id="1_ek1sn"]
 [ext_resource type="Script" path="res://game/base_tests.gd" id="1_o5dc5"]
+[ext_resource type="Resource" uid="uid://y0452womu354" path="res://game/data/hand items/tools/hand drill/hand_drill.tres" id="3_l58sr"]
 [ext_resource type="Script" path="res://game/player_spawn.gd" id="3_qnlsh"]
-[ext_resource type="Environment" uid="uid://g0ausvm6rdth" path="res://game/misc/environments/space_environment.tres" id="4_pa37y"]
-[ext_resource type="Resource" uid="uid://6jymoqkdm6kr" path="res://game/data/equipment/back/jetpack/space_jetpack.tres" id="6_qh7kv"]
+[ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="4_jpp4l"]
+[ext_resource type="Environment" uid="uid://bpv3denmg1fpo" path="res://game/test/planet test/planet_test_environment_2.tres" id="7_6sqh0"]
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="7_8lulh"]
-[ext_resource type="PackedScene" uid="uid://ckytpvwhk32br" path="res://game/core/asteroid/asteroid_hi_res.tscn" id="7_612g8"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="7_gmk88"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="8_hutpu"]
+[ext_resource type="VoxelGeneratorGraph" uid="uid://b4umpxnew5cgx" path="res://game/solar system/voxel_graph_planet_v4.tres" id="9_81qsx"]
+[ext_resource type="Material" uid="uid://cp754ky7maqj2" path="res://game/solar system/materials/planet_material_grassy.tres" id="10_a0khk"]
+[ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="11_avb6o"]
+[ext_resource type="Shader" path="res://addons/zylann.atmosphere/shaders/planet_atmosphere_clouds.gdshader" id="12_5sqjb"]
 
 [sub_resource type="Resource" id="Resource_wndb7"]
 script = ExtResource("7_8lulh")
-back_item = ExtResource("6_qh7kv")
+back_item = ExtResource("4_jpp4l")
+
+[sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_0ig6r"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6uqhq"]
+radius = 10000.0
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_dxwo3")
 
 [node name="Tests" type="Node" parent="."]
 script = ExtResource("1_o5dc5")
-remove_voxel_terrain = true
+equip_item = ExtResource("3_l58sr")
 project_folder_world = false
 
 [node name="Player Spawn" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1744.51, 0)
 script = ExtResource("3_qnlsh")
 equipment = SubResource("Resource_wndb7")
 
@@ -33,14 +42,54 @@ visible = false
 size = Vector3i(10, 10, 10)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("4_pa37y")
+environment = ExtResource("7_6sqh0")
 
 [node name="World" type="Node3D" parent="."]
 script = ExtResource("7_gmk88")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="Planet" type="VoxelLodTerrain" parent="."]
+generator = ExtResource("9_81qsx")
+mesher = SubResource("VoxelMesherTransvoxel_0ig6r")
+view_distance = 2048
+voxel_bounds = AABB(-2048, -2048, -2048, 4096, 4096, 4096)
+lod_count = 7
+material = ExtResource("10_a0khk")
+collision_layer = 4
 
-[node name="Asteroid" parent="." instance=ExtResource("7_612g8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -70)
+[node name="Gravity Area" type="Area3D" parent="."]
+collision_mask = 3
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity Area"]
+shape = SubResource("SphereShape3D_6uqhq")
 
 [node name="UI" parent="." instance=ExtResource("8_hutpu")]
+
+[node name="PlanetAthmosphere" parent="." instance=ExtResource("11_avb6o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+planet_radius = 1200.0
+atmosphere_height = 1000.0
+sun_path = NodePath("../DirectionalLight")
+custom_shader = ExtResource("12_5sqjb")
+force_fullscreen = true
+shader_params/u_density = 0.11
+shader_params/u_scattering_strength = 0.525
+shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
+shader_params/u_cloud_density_scale = 50.0
+shader_params/u_cloud_bottom = 0.2
+shader_params/u_cloud_top = 0.5
+shader_params/u_cloud_blend = 0.5
+shader_params/u_cloud_shape_invert = 0.0
+shader_params/u_cloud_coverage_bias = 0.0
+shader_params/u_cloud_shape_factor = 0.8
+shader_params/u_cloud_shape_scale = 1.0
+shader_params/u_cloud_shape_texture = null
+shader_params/u_cloud_coverage_cubemap = null
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.478692, -0.53691, 0.694681, 0, 0.791224, 0.611527, -0.877983, 0.292733, -0.378752, 3947.4, 538.943, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 2000.0

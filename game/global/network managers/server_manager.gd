@@ -76,5 +76,10 @@ func receive_player_state(data: Dictionary):
 	PlayerSyncState.add_peer_id(player_states[peer_id], peer_id)
 
 
+@rpc("any_peer", "reliable")
+func receive_sync_event(type: int, args: Array):
+	ClientManager.receive_sync_event.rpc(type, args, get_sender_id())
+	
+
 func get_sender_id()-> int:
 	return NetworkManager.get_sender_id()

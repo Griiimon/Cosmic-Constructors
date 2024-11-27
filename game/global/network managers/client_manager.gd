@@ -83,6 +83,16 @@ func update_peer_node(player: BasePlayer):
 	player.global_rotation= lerp(PlayerSyncState.get_rotation(past_state), PlayerSyncState.get_rotation(future_state), interpolation_factor)
 
 
+func send_sync_event(type: int, args: Array= []):
+	ServerManager.receive_sync_event.rpc(type, args)
+
+
+@rpc("any_peer", "reliable")
+func receive_sync_event(type: int, args: Array, peer_id: int):
+	if peer_id == NetworkManager.peer_id: return
+	EventSyncState.process_event(type, args, peer_id)
+
+
 @rpc("any_peer", "reliable")
 func receive_game_scene(scene_path: String, server_ticks: int):
 	ticks= server_ticks

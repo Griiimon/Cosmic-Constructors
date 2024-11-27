@@ -1,13 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://d34fumc1c8e0e"]
+[gd_scene load_steps=7 format=3 uid="uid://d34fumc1c8e0e"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/rotor_instance.gd" id="1_pcbeu"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_upqdt"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p5d3a"]
+albedo_color = Color(0.349065, 0.349065, 0.349065, 1)
+metallic = 1.0
+roughness = 0.4
+
 [sub_resource type="BoxMesh" id="BoxMesh_us0db"]
+material = SubResource("StandardMaterial3D_p5d3a")
 size = Vector3(1, 0.1, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_enu0b"]
+albedo_color = Color(0.349065, 0.349065, 0.349065, 1)
+metallic = 1.0
+roughness = 0.4
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_1jtn4"]
+material = SubResource("StandardMaterial3D_enu0b")
 top_radius = 0.45
 bottom_radius = 0.45
 height = 1.0

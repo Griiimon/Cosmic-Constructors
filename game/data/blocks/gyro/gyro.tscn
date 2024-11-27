@@ -1,15 +1,45 @@
-[gd_scene load_steps=5 format=3 uid="uid://dv2v7phsvgckn"]
+[gd_scene load_steps=12 format=3 uid="uid://dv2v7phsvgckn"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/gyro_instance.gd" id="1_6h7un"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g1t1l"]
+albedo_color = Color(0.212305, 0.212305, 0.212305, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_hdlyv"]
+material = SubResource("StandardMaterial3D_g1t1l")
 size = Vector3(0.8, 0.1, 0.8)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qtbcb"]
+albedo_color = Color(0.212305, 0.212305, 0.212305, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_mvw7v"]
+material = SubResource("StandardMaterial3D_qtbcb")
 radius = 0.45
 height = 0.9
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uxpfo"]
+albedo_color = Color(6.73831e-07, 0.739401, 0.74659, 1)
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_6k5ga"]
+material = SubResource("StandardMaterial3D_uxpfo")
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6jfa"]
+albedo_color = Color(1, 0.270588, 0.243137, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6lwr0"]
+material = SubResource("StandardMaterial3D_q6jfa")
+top_radius = 0.52
+bottom_radius = 0.52
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eugk6"]
+albedo_color = Color(0.403922, 0.556863, 0.247059, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4ibu8"]
+material = SubResource("StandardMaterial3D_eugk6")
+top_radius = 0.54
+bottom_radius = 0.54
 height = 0.1
 
 [node name="Gyro" type="Node3D"]
@@ -27,8 +57,8 @@ mesh = SubResource("CylinderMesh_6k5ga")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
 transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_6k5ga")
+mesh = SubResource("CylinderMesh_6lwr0")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
 transform = Transform3D(3.7494e-33, -6.12323e-17, 1, 1, 6.12323e-17, 0, -6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
-mesh = SubResource("CylinderMesh_6k5ga")
+mesh = SubResource("CylinderMesh_4ibu8")

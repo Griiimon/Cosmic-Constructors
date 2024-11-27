@@ -53,6 +53,11 @@ func on_start():
 	pass
 
 
+func _physics_process(delta):
+	if player:
+		DebugHud.send("Gravity", "%.3f" % player.get_gravity().length())
+
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed: 

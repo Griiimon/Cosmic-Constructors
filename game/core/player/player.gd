@@ -112,6 +112,7 @@ func get_hand_item()-> HandItem:
 func wear_equipment(item: PlayerEquipmentItem)-> PlayerEquipmentObject:
 	var obj: PlayerEquipmentObject= super(item)
 	if not obj: return null
+	obj.item= item
 	active_equipment.append(obj)
 	obj.init(self)
 	ClientManager.send_sync_event(EventSyncState.Type.WEAR_EQUIPMENT, [item.resource_path])

@@ -1,6 +1,8 @@
 class_name PlayerEquipmentObject
 extends Node3D
 
+var item: PlayerEquipmentItem
+
 
 
 func init(player: Player):

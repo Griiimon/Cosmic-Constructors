@@ -1,10 +1,5 @@
 Video: large flat noise 3d terrain with vehicle
-small planet (atmosphere) with asteroid and drill ship
-
-BasePlayer script for multiplayer spawn
-dedicated server
-
-network player sync
+small planet (atmosphere) with asteroid and drill ship and fading gravity
 
 custom planet generator
 
@@ -16,13 +11,12 @@ jetpack counterforce against gravity
 
 avoid overlap with other grid while building
 
-re-center origin of split grids ( to its center of mass? )
+re-center origin of split grids ( to its center of mass? ), needs to snape to Vector3i block pos
 
 player carry ore chunks, add collision shape but keep center of mass
 
 BlockInventory component
 drill stops drilling when full
-
 
 sub grid loading and attaching to pistons/rotor
 

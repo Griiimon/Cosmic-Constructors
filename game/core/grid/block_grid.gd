@@ -1,6 +1,7 @@
 class_name BlockGrid
 extends RigidBody3D
 
+
 var world: World
 var blocks: Dictionary
 

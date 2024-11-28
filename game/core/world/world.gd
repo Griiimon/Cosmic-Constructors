@@ -3,14 +3,68 @@ extends Node3D
 
 const SAVE_FILE_NAME= "world.json"
 
+class DelayedExplosiveForce:
+	var damage: Damage
+	var countdown: int
+	
+	func _init(_damage: Damage):
+		damage= _damage.duplicate()
+		countdown= 2
+
+
 var grids: Node
 var projectiles: Node
 var grid_freeze_state:= false
+
+var delayed_forces: Array[DelayedExplosiveForce]
+
 
 
 func _ready() -> void:
 	grids= generate_sub_node("Grids")
 	projectiles= generate_sub_node("Projectiles")
+
+
+func _physics_process(delta: float) -> void:
+	for force in delayed_forces.duplicate():
+		force.countdown-= 1
+		if force.countdown == 0:
+			delayed_forces.erase(force)
+			#apply_impulse(impulse.impulse, impulse.point - global_position)
+
+			var center: Vector3= force.damage.position
+
+			var query:= PhysicsShapeQueryParameters3D.new()
+			query.transform.origin= center
+			query.collision_mask= Global.PLAYER_COLLISION_LAYER + Global.GRID_COLLISION_LAYER
+			var shape:= SphereShape3D.new()
+			shape.radius= force.damage.radius
+			query.shape= shape
+			
+			var result: Array[Dictionary]= get_world_3d().direct_space_state.intersect_shape(query)
+			if result:
+				var rid_map: Dictionary
+				var rid_closes_point: Dictionary
+				for item: Dictionary in result:
+					var collider: CollisionObject3D= item.collider
+					if collider is not BlockGrid: continue
+					
+					var rid: RID= collider.get_rid() 
+				
+					if not rid_map.has(rid):
+						rid_map[rid]= collider
+						rid_closes_point[rid]= null
+					
+					var coll_shape: CollisionShape3D= collider.shape_owner_get_owner(collider.shape_find_owner(item.shape))
+					var point: Vector3= coll_shape.global_position
+					
+					if rid_closes_point[rid] == null or center.distance_to(point) < center.distance_to(rid_closes_point[rid]):
+						rid_closes_point[rid]= point
+
+				for rid: RID in rid_map.keys():
+					var rigidbody: RigidBody3D= rid_map[rid]
+					var point: Vector3= rid_closes_point[rid]
+					rigidbody.apply_impulse(force.damage.get_explosion_impulse_at(point), point - rigidbody.global_position)
 
 
 func generate_sub_node(node_name: String)-> Node:
@@ -214,7 +268,11 @@ func explosion(damage: Damage, obj: CollisionObject3D):
 				assert(damage_at_point >= 0, "radius %f vs distance %f" % [damage.radius, damage.position.distance_to(point)])
 				
 				if damage_at_point > 0:
-					if collider is RigidBody3D:
+					if collider is BlockGrid:
+						pass
+					elif collider is RigidBody3D:
 						(collider as RigidBody3D).apply_impulse(damage_at_point * 50 * damage.position.direction_to(point), point - collider.global_position)
 				
 			query.exclude= query.exclude + [rest_result.rid]
+
+	delayed_forces.append(DelayedExplosiveForce.new(damage))

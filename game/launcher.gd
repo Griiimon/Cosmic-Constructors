@@ -8,11 +8,16 @@ extends Node
 @export var run_test_scene: PackedScene
 @export var game_scene: PackedScene
 
+@export var maximize_window: bool= false
+
 @onready var interface_ui: CanvasLayer = $UI
 
 
 
 func _ready() -> void:
+	if maximize_window:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
+		
 	interface_ui.visible= use_interface
 	if use_interface: return
 

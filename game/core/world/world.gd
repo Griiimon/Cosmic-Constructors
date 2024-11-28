@@ -30,41 +30,7 @@ func _physics_process(delta: float) -> void:
 		force.countdown-= 1
 		if force.countdown == 0:
 			delayed_forces.erase(force)
-			#apply_impulse(impulse.impulse, impulse.point - global_position)
-
-			var center: Vector3= force.damage.position
-
-			var query:= PhysicsShapeQueryParameters3D.new()
-			query.transform.origin= center
-			query.collision_mask= Global.PLAYER_COLLISION_LAYER + Global.GRID_COLLISION_LAYER
-			var shape:= SphereShape3D.new()
-			shape.radius= force.damage.radius
-			query.shape= shape
-			
-			var result: Array[Dictionary]= get_world_3d().direct_space_state.intersect_shape(query)
-			if result:
-				var rid_map: Dictionary
-				var rid_closes_point: Dictionary
-				for item: Dictionary in result:
-					var collider: CollisionObject3D= item.collider
-					if collider is not BlockGrid: continue
-					
-					var rid: RID= collider.get_rid() 
-				
-					if not rid_map.has(rid):
-						rid_map[rid]= collider
-						rid_closes_point[rid]= null
-					
-					var coll_shape: CollisionShape3D= collider.shape_owner_get_owner(collider.shape_find_owner(item.shape))
-					var point: Vector3= coll_shape.global_position
-					
-					if rid_closes_point[rid] == null or center.distance_to(point) < center.distance_to(rid_closes_point[rid]):
-						rid_closes_point[rid]= point
-
-				for rid: RID in rid_map.keys():
-					var rigidbody: RigidBody3D= rid_map[rid]
-					var point: Vector3= rid_closes_point[rid]
-					rigidbody.apply_impulse(force.damage.get_explosion_impulse_at(point), point - rigidbody.global_position)
+			apply_delayed_explosive_force(force)
 
 
 func generate_sub_node(node_name: String)-> Node:
@@ -165,6 +131,42 @@ func deal_damage_via_collision_shape(orig_damage: Damage, coll_shape: CollisionS
 		if custom_amount > -1:
 			final_damage.amount= custom_amount
 		damage_component.take_damage(final_damage, coll_shape)
+
+
+func apply_delayed_explosive_force(force: DelayedExplosiveForce):
+	var center: Vector3= force.damage.position
+
+	var query:= PhysicsShapeQueryParameters3D.new()
+	query.transform.origin= center
+	query.collision_mask= Global.PLAYER_COLLISION_LAYER + Global.GRID_COLLISION_LAYER
+	var shape:= SphereShape3D.new()
+	shape.radius= force.damage.radius
+	query.shape= shape
+	
+	var result: Array[Dictionary]= get_world_3d().direct_space_state.intersect_shape(query)
+	if result:
+		var rid_map: Dictionary
+		var rid_closes_point: Dictionary
+		for item: Dictionary in result:
+			var collider: CollisionObject3D= item.collider
+			if collider is not BlockGrid: continue
+			
+			var rid: RID= collider.get_rid() 
+		
+			if not rid_map.has(rid):
+				rid_map[rid]= collider
+				rid_closes_point[rid]= null
+			
+			var coll_shape: CollisionShape3D= collider.shape_owner_get_owner(collider.shape_find_owner(item.shape))
+			var point: Vector3= coll_shape.global_position
+			
+			if rid_closes_point[rid] == null or center.distance_to(point) < center.distance_to(rid_closes_point[rid]):
+				rid_closes_point[rid]= point
+
+		for rid: RID in rid_map.keys():
+			var rigidbody: RigidBody3D= rid_map[rid]
+			var point: Vector3= rid_closes_point[rid]
+			rigidbody.apply_impulse(force.damage.get_explosion_impulse_at(point), point - rigidbody.global_position)
 
 
 func save_world(world_name: String= "", project_folder: bool= false):

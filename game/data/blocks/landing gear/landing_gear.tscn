@@ -1,8 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://cb4306bwmd33y"]
+[gd_scene load_steps=12 format=3 uid="uid://cb4306bwmd33y"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/landing_gear_instance.gd" id="1_oqs0f"]
-[ext_resource type="Material" uid="uid://cio235mg3ey1p" path="res://game/data/blocks/landing gear/landing_gear_enabled_material.tres" id="2_8ofst"]
+[ext_resource type="Material" uid="uid://fu4wa3ud33iy" path="res://game/data/blocks/landing gear/landing_gear_locked_material.tres" id="2_uslcb"]
 [ext_resource type="Material" uid="uid://crtxmgn2lergo" path="res://game/data/blocks/landing gear/landing_gear_disabled_material.tres" id="3_ijmug"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xxuts"]
+shading_mode = 0
+specular_mode = 2
+albedo_color = Color(0.109133, 0.6913, 0.749904, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_g2ie7"]
 
@@ -25,7 +30,7 @@ material = SubResource("StandardMaterial3D_7y52u")
 size = Vector3(0.2, 0.8, 0.3)
 
 [sub_resource type="BoxMesh" id="BoxMesh_8bu3p"]
-material = ExtResource("2_8ofst")
+material = ExtResource("2_uslcb")
 size = Vector3(0.275, 0.035, 0.52)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_aixub"]
@@ -33,7 +38,8 @@ size = Vector3(0.395, 0.105, 0.845)
 
 [node name="Landing Gear" type="Node3D"]
 script = ExtResource("1_oqs0f")
-enabled_material = ExtResource("2_8ofst")
+enabled_material = SubResource("StandardMaterial3D_xxuts")
+locked_material = ExtResource("2_uslcb")
 disabled_material = ExtResource("3_ijmug")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

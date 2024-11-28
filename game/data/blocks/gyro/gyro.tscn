@@ -9,11 +9,12 @@ albedo_color = Color(0.212305, 0.212305, 0.212305, 1)
 material = SubResource("StandardMaterial3D_g1t1l")
 size = Vector3(0.8, 0.1, 0.8)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qtbcb"]
-albedo_color = Color(0.212305, 0.212305, 0.212305, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cyfs0"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.533333)
 
 [sub_resource type="SphereMesh" id="SphereMesh_mvw7v"]
-material = SubResource("StandardMaterial3D_qtbcb")
+material = SubResource("StandardMaterial3D_cyfs0")
 radius = 0.45
 height = 0.9
 

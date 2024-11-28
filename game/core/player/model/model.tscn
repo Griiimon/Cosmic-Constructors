@@ -304,6 +304,10 @@ transform = Transform3D(0.0599684, 0.9982, 0, -0.9982, 0.0599684, 0, 0, 0, 1, 0.
 mesh = SubResource("BoxMesh_me6vd")
 skeleton = NodePath("../..")
 
+[node name="Item Holder" type="Node3D" parent="Right Shoulder/Right Arm"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+
 [node name="Left Shoulder" type="Node3D" parent="."]
 transform = Transform3D(0.499998, -0.866026, 0, 0.866026, 0.499998, 0, 0, 0, 1, -0.25, -0.265, 0)
 

@@ -97,6 +97,7 @@ func reset_animation():
 
 func equip_hand_item(hand_item: HandItem):
 	action_state_machine.idle_state.equip_hand_item(hand_item)
+	model.equip_hand_item(hand_item)
 
 
 func drill():

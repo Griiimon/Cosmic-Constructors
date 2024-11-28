@@ -39,7 +39,7 @@ func on_player_spawned():
 	default_block= load("res://game/data/blocks/light structure/light_structure_block.tres")
 	
 	if equip_item:
-		player.action_state_machine.idle_state.equip_hand_item(equip_item)
+		player.equip_hand_item(equip_item)
 
 	if load_world and NetworkManager.is_single_player:
 		Global.game.world.load_world(custom_world_name, project_folder_world)

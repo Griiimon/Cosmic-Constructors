@@ -1,14 +1,13 @@
-thruster particles are off when rotated
-gyro is ugly
-hand tool is not aligned
-3rd person model hand tool must be hidden
 2x1 large thruster
 pick block should copy rotation
 
 Video: large flat noise 3d terrain with vehicle
 small planet (atmosphere) with asteroid and drill ship and fading gravity
 
-FIX legs dont go into steer animation when jetpacking from walking anim
+hand tool is not aligned
+3rd person model hand tool must be hidden
+
+
 
 multiplayer grid syncing
 
@@ -52,6 +51,9 @@ FIX getting stuck in terrain when going EVA ( will intersect_shape work against 
 FIX inital grid align when sloped/diagonal initial normal
 FIX sometimes wrong ( downwards ) momentum when strafing off grid 
 FIX removing MultiBlocks can lead to crash ( only when splitting grids? )
+FIX when player stands on Grid that gets split at any pos he sometimes gets thrown off
+FIX thruster particles are off when rotated=> cant reproduce
+
 
 meta tag for BlockInstance scene sub nodes that should be deleted in ghost ( or just delete anything not MeshInstance3D or plain Node3D ? )
 

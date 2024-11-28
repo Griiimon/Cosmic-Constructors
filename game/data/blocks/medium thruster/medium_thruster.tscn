@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://cs424ivnm8bso"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/thruster_instance.gd" id="1_idgei"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmbc1"]
+albedo_color = Color(0.344076, 0.344076, 0.344076, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a4w5p"]
+material = SubResource("StandardMaterial3D_jmbc1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0jkym"]
+albedo_color = Color(0.059126, 0.0591259, 0.0591259, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_favli"]
+material = SubResource("StandardMaterial3D_0jkym")
+bottom_radius = 0.1
+height = 1.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_ptd7a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46pc5"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_7eurb"]
+material = SubResource("StandardMaterial3D_46pc5")
+size = Vector3(0.025, 0.025, 0.2)
+
+[sub_resource type="Gradient" id="Gradient_6xldf"]
+colors = PackedColorArray(0.676492, 0.667585, 0.101887, 1, 0.739234, 0.196967, 0.0293132, 1)
+
+[node name="Medium Thruster" type="Node3D"]
+script = ExtResource("1_idgei")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+mesh = SubResource("BoxMesh_a4w5p")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.4)
+mesh = SubResource("CylinderMesh_favli")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_ptd7a")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.111511)
+emitting = false
+amount = 50
+lifetime = 0.1
+lifetime_randomness = 0.16
+local_coords = true
+mesh = SubResource("BoxMesh_7eurb")
+emission_shape = 1
+emission_sphere_radius = 0.4
+direction = Vector3(0, 0, 1)
+spread = 10.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+linear_accel_min = -100.0
+linear_accel_max = -100.0
+damping_min = 33.784
+damping_max = 64.865
+color_ramp = SubResource("Gradient_6xldf")

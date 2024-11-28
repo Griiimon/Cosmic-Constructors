@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ThrusterBlock" load_steps=3 format=3 uid="uid://b5seogb8nvaqk"]
+
+[ext_resource type="PackedScene" uid="uid://cs424ivnm8bso" path="res://game/data/blocks/medium thruster/medium_thruster.tscn" id="1_tdtm4"]
+[ext_resource type="Script" path="res://game/core/block/types/thruster_block.gd" id="2_qjk6j"]
+
+[resource]
+script = ExtResource("2_qjk6j")
+thrust = 100000.0
+force_offset = false
+size = Vector3i(1, 1, 2)
+weight = 10.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = true
+can_be_built = true
+scene = ExtResource("1_tdtm4")
+name = ""

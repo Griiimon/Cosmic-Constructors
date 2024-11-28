@@ -56,7 +56,10 @@ func init_ghost():
 			
 			new_material.albedo_color= Color.SKY_BLUE
 			new_material.albedo_color.a= 0.7
-				
+			
+			new_material.metallic= 0
+			new_material.roughness= 1
+			
 			mesh_instance.mesh= mesh_instance.mesh.duplicate()
 			mesh_instance.mesh.surface_set_material(0, new_material)
 			

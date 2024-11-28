@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://mjcxll012iw5"]
+[gd_scene load_steps=8 format=3 uid="uid://mjcxll012iw5"]
 
 [ext_resource type="Script" path="res://game/core/effects/explosion/explosion_effect.gd" id="1_udkyl"]
 [ext_resource type="Script" path="res://game/core/effects/particle_component.gd" id="1_xie8f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8uj3f"]
+transparency = 1
 shading_mode = 0
 specular_mode = 2
 disable_ambient_light = true
@@ -21,6 +22,14 @@ size = Vector2(0.1, 0.1)
 [sub_resource type="Gradient" id="Gradient_a0npt"]
 offsets = PackedFloat32Array(0, 0.165354)
 colors = PackedColorArray(0.601322, 0.571035, 0.12313, 1, 0.513126, 0.0865589, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_dhs44"]
+material = SubResource("StandardMaterial3D_8uj3f")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_ba06g"]
+offsets = PackedFloat32Array(0, 0.815385)
+colors = PackedColorArray(0.6, 0.572549, 0.121569, 0.627451, 0.513726, 0.0862745, 0, 0)
 
 [node name="Explosion" type="Node3D"]
 script = ExtResource("1_udkyl")
@@ -42,4 +51,28 @@ initial_velocity_min = 2.79
 initial_velocity_max = 31.67
 color_ramp = SubResource("Gradient_a0npt")
 script = ExtResource("1_xie8f")
+wait_for_parent = true
+
+[node name="Particles2" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 20
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+randomness = 0.12
+lifetime_randomness = 0.16
+mesh = SubResource("QuadMesh_dhs44")
+emission_shape = 1
+emission_sphere_radius = 0.1
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 2.79
+initial_velocity_max = 3.22
+damping_min = 3.571
+damping_max = 8.333
+angle_min = -720.0
+angle_max = 669.9
+color_ramp = SubResource("Gradient_ba06g")
+script = ExtResource("1_xie8f")
+free_on_finished = false
 wait_for_parent = true

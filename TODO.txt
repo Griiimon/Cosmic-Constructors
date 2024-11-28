@@ -1,4 +1,3 @@
-2x1 large thruster
 pick block should copy rotation
 
 Video: large flat noise 3d terrain with vehicle

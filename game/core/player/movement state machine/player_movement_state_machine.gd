@@ -58,4 +58,4 @@ func jump(velocity: Vector3, impulse: float):
 
 
 func on_pre_enter_state():
-	player.play_animation("RESET")
+	player.reset_animation()

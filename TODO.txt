@@ -1,17 +1,17 @@
 Video: large flat noise 3d terrain with vehicle
 small planet (atmosphere) with asteroid and drill ship and fading gravity
 
-custom planet generator
+FIX legs dont go into steer animation when jetpacking from walking anim
+
+multiplayer grid syncing
 
 put tool in players hand in 3rd person
 
-explosion force apply after splitting=> use delayed impulse class in block grid that waits 2-3 physics ticks to trigger
+custom planet generator
 
 jetpack counterforce against gravity
 
 avoid overlap with other grid while building
-
-re-center origin of split grids ( to its center of mass? ), needs to snape to Vector3i block pos
 
 player carry ore chunks, add collision shape but keep center of mass
 
@@ -68,14 +68,21 @@ drill into asteroid
 MULTIPLAYER
 ---------------
 
-walk animation
+walk speed sync
 
 
 DESIGN QUESTIONS
 -----------------
 
 what about block grids inertia, automatically re-calculated when center of mass or mass changes?
+
 shouldnt all block models face -z? piston and rotor face up
+
+re-center origin of split grids ( to its center of mass )?? needs to snape to Vector3i block pos
+
+how to avoid jetpack collisions causing player to rotate?
+	locking axis not really an option since torque is used for turning
+	=> use angular_velocity to turn/yaw in integrate_forces and set to 0 for no input
 
 
 NEW MECHANICS

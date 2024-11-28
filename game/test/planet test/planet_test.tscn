@@ -71,7 +71,7 @@ environment = ExtResource("11_bgsgq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1024, 31.31, 0)
 
 [node name="PlanetAthmosphere" parent="." instance=ExtResource("8_fm8fi")]
-planet_radius = 1200.0
+planet_radius = 1100.0
 atmosphere_height = 1000.0
 sun_path = NodePath("../DirectionalLight")
 custom_shader = ExtResource("13_uc5er")

@@ -262,16 +262,16 @@ func explosion(damage: Damage, obj: CollisionObject3D):
 				var point: Vector3= rest_result.point
 				#prints(" Explosion contact point", point)
 				
-				var damage_at_point: float= lerp(float(damage.amount), float(damage.min_amount), damage.position.distance_to(point) / damage.radius)
+				var damage_at_point: float= damage.get_explosion_damage_at(point)
 				# TODO investigate how point could be farther away from damage.position
-				#  than damgae.radius
+				#  than damage.radius
 				assert(damage_at_point >= 0, "radius %f vs distance %f" % [damage.radius, damage.position.distance_to(point)])
 				
 				if damage_at_point > 0:
 					if collider is BlockGrid:
 						pass
 					elif collider is RigidBody3D:
-						(collider as RigidBody3D).apply_impulse(damage_at_point * 50 * damage.position.direction_to(point), point - collider.global_position)
+						(collider as RigidBody3D).apply_impulse(damage.get_explosion_impulse_at(point), point - collider.global_position)
 				
 			query.exclude= query.exclude + [rest_result.rid]
 

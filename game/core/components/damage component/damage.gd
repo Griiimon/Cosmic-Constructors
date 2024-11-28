@@ -16,6 +16,14 @@ enum SourceType { PROJECTILE, LASER, MELEE, BLOCKTOOL }
 
 
 
+func get_explosion_damage_at(point: Vector3)-> float:
+	return lerp(float(amount), float(min_amount), position.distance_to(point) / radius)
+
+
+func get_explosion_impulse_at(point: Vector3)-> Vector3:
+	return get_explosion_damage_at(point) * 50 * position.direction_to(point)	
+
+
 func is_explosion()-> bool:
 	return radius > 0
 

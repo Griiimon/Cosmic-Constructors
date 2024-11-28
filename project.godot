@@ -222,6 +222,7 @@ toggle_block_alt_property={
 3d/default_linear_damp=0.0
 3d/default_angular_damp=0.0
 jolt_3d/collisions/use_enhanced_internal_edge_removal=false
+jolt_3d/collisions/areas_detect_static_bodies=true
 
 [rendering]
 

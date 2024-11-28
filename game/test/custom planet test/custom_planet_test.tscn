@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://18lknojownsw"]
+[gd_scene load_steps=17 format=3 uid="uid://18lknojownsw"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_7fydp"]
 [ext_resource type="Script" path="res://game/test/custom planet test/custom_planet_tests.gd" id="2_d2xmp"]
@@ -8,10 +8,8 @@
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="6_yyq31"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="7_w4pu6"]
 [ext_resource type="VoxelGeneratorScript" uid="uid://b26ajmch67psy" path="res://game/test/custom planet test/custom_voxel_generator.tres" id="8_27ipv"]
-[ext_resource type="Shader" path="res://game/test/custom planet test/infinite_transvoxel_terrain.gdshader" id="9_fgx8c"]
-[ext_resource type="Texture2D" uid="uid://myq0vhmv3kjp" path="res://game/textures/Rocks07_col.webp" id="10_bm7bq"]
+[ext_resource type="Material" uid="uid://duf303o0ryv61" path="res://game/test/custom planet test/custom_planet_material.tres" id="9_l2jpv"]
 [ext_resource type="Texture2D" uid="uid://dtlptku1k7pm1" path="res://addons/zylann.atmosphere/demo/space_background.webp" id="10_fxdwa"]
-[ext_resource type="Texture2D" uid="uid://cdga3d64rgt8e" path="res://game/textures/grass_albedo.png" id="12_05coi"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_63ws0"]
 radius = 10000.0
@@ -21,19 +19,6 @@ script = ExtResource("6_yyq31")
 back_item = ExtResource("5_bbgji")
 
 [sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_oycf3"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j1u7i"]
-render_priority = 0
-shader = ExtResource("9_fgx8c")
-shader_parameter/u_transition_mask = null
-shader_parameter/u_voxel_virtual_texture_tile_size = null
-shader_parameter/u_voxel_virtual_texture_fade = null
-shader_parameter/u_voxel_cell_size = null
-shader_parameter/u_voxel_block_size = null
-shader_parameter/u_voxel_virtual_texture_offset_scale = null
-shader_parameter/u_lod_fade = null
-shader_parameter/u_texture_top = ExtResource("12_05coi")
-shader_parameter/u_texture_sides = ExtResource("10_bm7bq")
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vdqjr"]
 panorama = ExtResource("10_fxdwa")
@@ -83,12 +68,12 @@ mesher = SubResource("VoxelMesherTransvoxel_oycf3")
 view_distance = 4096
 voxel_bounds = AABB(-65536, -65536, -65536, 131072, 131072, 131072)
 lod_count = 7
-material = SubResource("ShaderMaterial_j1u7i")
+material = ExtResource("9_l2jpv")
 collision_layer = 4
 run_stream_in_editor = false
 
 [node name="DirectionalLight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 275.302, 0)
+transform = Transform3D(-0.996084, 0.0146873, 0.087179, 0.0884075, 0.165481, 0.982242, 1.06741e-18, 0.986104, -0.166132, 0, 275.302, 0)
 shadow_enabled = true
 directional_shadow_max_distance = 2000.0
 

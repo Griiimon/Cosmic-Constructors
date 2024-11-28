@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://duf303o0ryv61"]
+
+[ext_resource type="Shader" path="res://game/test/custom planet test/infinite_transvoxel_terrain_modified.gdshader" id="1_h8blc"]
+[ext_resource type="Texture2D" uid="uid://myq0vhmv3kjp" path="res://game/textures/Rocks07_col.webp" id="2_b2aes"]
+[ext_resource type="Texture2D" uid="uid://cdga3d64rgt8e" path="res://game/textures/grass_albedo.png" id="3_a70mg"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_h8blc")
+shader_parameter/u_transition_mask = null
+shader_parameter/u_voxel_virtual_texture_tile_size = null
+shader_parameter/u_voxel_virtual_texture_fade = null
+shader_parameter/u_voxel_cell_size = null
+shader_parameter/u_voxel_block_size = null
+shader_parameter/u_voxel_virtual_texture_offset_scale = null
+shader_parameter/u_lod_fade = null
+shader_parameter/u_texture_top = ExtResource("3_a70mg")
+shader_parameter/u_texture_sides = ExtResource("2_b2aes")

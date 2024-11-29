@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://cspra5gn43obb"]
+
+[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_8oprq"]
+[ext_resource type="PackedScene" uid="uid://paxcew8y4vyx" path="res://game/data/blocks/aero wing/aero_wing.tscn" id="1_canlk"]
+
+[resource]
+script = ExtResource("1_8oprq")
+size = Vector3i(1, 1, 1)
+weight = 10.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = true
+can_be_built = true
+scene = ExtResource("1_canlk")
+name = ""

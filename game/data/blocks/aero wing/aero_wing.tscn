@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://paxcew8y4vyx"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/aero_wing_instance.gd" id="1_auvud"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8m01p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_shiu1"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dovhp"]
+material = SubResource("StandardMaterial3D_shiu1")
+size = Vector3(0.8, 0.1, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pr3a2"]
+albedo_color = Color(0.688513, 0.175763, 0.237729, 1)
+metallic = 0.5
+roughness = 0.49
+
+[sub_resource type="BoxMesh" id="BoxMesh_pd0qm"]
+material = SubResource("StandardMaterial3D_pr3a2")
+size = Vector3(1, 0.05, 0.7)
+
+[node name="Aero Wing" type="Node3D"]
+script = ExtResource("1_auvud")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_8m01p")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.443008, 0)
+mesh = SubResource("BoxMesh_dovhp")
+
+[node name="Wing Joint" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.451545, -0.260462)
+
+[node name="Wing" type="MeshInstance3D" parent="Wing Joint"]
+transform = Transform3D(1, 0, 0, 0, 0.975423, 0.22034, 0, -0.22034, 0.975423, 0, 0.156509, 0.260462)
+mesh = SubResource("BoxMesh_pd0qm")
+skeleton = NodePath("../..")

@@ -83,10 +83,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 world = NodePath("../World")
 equipment = SubResource("Resource_mtknu")
 
-[node name="VoxelViewer" type="VoxelViewer" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84, 0)
-view_distance = 1024
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 
 [node name="UI" parent="." instance=ExtResource("6_jsteb")]

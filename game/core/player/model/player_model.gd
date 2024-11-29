@@ -26,4 +26,7 @@ func equip_hand_item(item: HandItem):
 		child.queue_free()
 	
 	item_holder.add_child(item.model.instantiate())
-	
+
+
+func set_item_holder_visibility(b: bool):
+	item_holder.visible= b

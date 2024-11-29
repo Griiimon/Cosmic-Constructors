@@ -30,3 +30,7 @@ func equip_hand_item(item: HandItem):
 
 func set_item_holder_visibility(b: bool):
 	item_holder.visible= b
+
+
+func set_equipment_visibility(b: bool):
+	equipment.visible= b

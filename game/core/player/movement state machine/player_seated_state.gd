@@ -9,7 +9,8 @@ var stored_position_relative: Vector3
 
 func on_enter():
 	player.play_animation("steer")
-	player.model.equipment.hide()
+	player.model.set_equipment_visibility(false)
+	player.model.set_item_holder_visibility(false)
 
 	stored_position_relative= get_grid().to_local(player.global_position)
 	seat.entity= player
@@ -26,7 +27,8 @@ func on_enter():
 
 
 func on_exit():
-	player.model.equipment.show()
+	player.model.set_equipment_visibility(true)
+	player.model.set_item_holder_visibility(true)
 
 
 func on_physics_process(_delta: float):

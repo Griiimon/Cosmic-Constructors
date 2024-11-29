@@ -1,16 +1,10 @@
 pick block should copy rotation
 
-Video: large flat noise 3d terrain with vehicle
-small planet (atmosphere) with asteroid and drill ship and fading gravity
-
 hand tool is not aligned
+
 3rd person model hand tool must be hidden
 
-
-
 multiplayer grid syncing
-
-put tool in players hand in 3rd person
 
 custom planet generator
 
@@ -56,20 +50,6 @@ FIX thruster particles are off when rotated=> cant reproduce
 
 meta tag for BlockInstance scene sub nodes that should be deleted in ghost ( or just delete anything not MeshInstance3D or plain Node3D ? )
 
-
-DEMO VIDEO
----------------
-
-
-build car on planet with piston+rotor+drills
-	planet size * 4
-shoot car with rocket
-	explosion effect visually + force
-build space ship on planet
-	release landing gear
-fly towards asteroid
-	skybox transition
-drill into asteroid
 
 
 

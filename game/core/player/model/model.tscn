@@ -306,8 +306,7 @@ skeleton = NodePath("../..")
 
 [node name="Item Holder" type="Node3D" parent="Right Shoulder/Right Arm"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
-visible = false
+transform = Transform3D(6.12323e-17, -1, 6.12323e-17, 7.4988e-33, -6.12323e-17, -1, 1, 6.12323e-17, 3.7494e-33, 5.55112e-17, 0.35, 0)
 
 [node name="Left Shoulder" type="Node3D" parent="."]
 transform = Transform3D(0.499998, -0.866026, 0, 0.866026, 0.499998, 0, 0, 0, 1, -0.25, -0.265, 0)

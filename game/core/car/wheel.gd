@@ -73,6 +73,7 @@ var query:= PhysicsShapeQueryParameters3D.new()
 var rest_query:= PhysicsShapeQueryParameters3D.new()
 
 var grounded:= false
+var bottom_out := false
 
 
 
@@ -244,8 +245,10 @@ func process_suspension(grid: BlockGrid, delta : float) -> float:
 		spring_current_length = max_spring_length
 		no_contact = true
 	
-	var bottom_out := false
+	bottom_out= false
+	var bottom_out_length: float= 0.0
 	if spring_current_length < 0.0:
+		bottom_out_length= abs(spring_current_length)
 		spring_current_length = 0.0
 		bottom_out = true
 	
@@ -264,6 +267,10 @@ func process_suspension(grid: BlockGrid, delta : float) -> float:
 	if bottom_out:
 		var gravity_on_spring := clampf(global_transform.basis.y.dot(-grid.get_gravity().normalized()), 0.0, 1.0)
 		bottom_out_force = (((mass_over_wheel * clampf(spring_speed_mm_per_seconds * 0.001, 0.0, 5.0)) / delta) + (mass_over_wheel * grid.get_gravity().length() * gravity_on_spring)) * bump_stop_multiplier
+		var bottom_out_force_multiplier: float= pow(1 + bottom_out_length, 8)
+		DebugStats.log_max("bottom_out_force_multiplier", bottom_out_force_multiplier)
+		DebugHud.send("Bottom out max", "%.2f" % DebugStats.get_val("bottom_out_force_multiplier"))
+		bottom_out_force*= bottom_out_force_multiplier
 		bottom_out_damping = -slow_bump
 		bottom_out_damping_fast = -fast_bump
 	
@@ -342,8 +349,10 @@ func process_tires(braking : bool, delta : float):
 		force_vector.y = friction * current_longitudinal_grip_ratio * cornering_stiffness * slip_vector.y * brushx * braking_help * z_sign
 		force_vector.x = friction * cornering_stiffness * slip_vector.x * brushx * (absf(slip_vector.x * current_lateral_grip_assist) + 1.0)
 
-	
-	if absf(force_vector.y) > absf(max_y_force):
+	if bottom_out:
+		# HACK simulate wheel locking from bottoming out
+		force_vector.y= signf(-local_velocity.z) * 1
+	elif absf(force_vector.y) > absf(max_y_force):
 		force_vector.y = max_y_force * signf(force_vector.y)
 		limit_spin = true
 	else:

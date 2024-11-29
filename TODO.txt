@@ -1,8 +1,18 @@
 pick block should copy rotation
 
-hand tool is not aligned
+add friction to block grids
 
-3rd person model hand tool must be hidden
+over extended suspension should lock wheel/cancel all acceleration
+
+braking unsettles suspension too much ( even at low speeds ), maybe its accurate with low damping?
+
+locked handbrake
+
+implement rolling resistance
+
+implement per axis linear damping calculated from air resistance profile
+
+air plane
 
 multiplayer grid syncing
 

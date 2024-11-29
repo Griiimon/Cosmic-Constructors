@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
-	var downforce: float= pow(grid.linear_velocity.length(), 2) * wing_angle.get_value_f() * 0.1
+	var downforce: float= pow(max(-grid.get_local_velocity().z, 0.0), 2) * wing_angle.get_value_f() * 0.1
 	DebugHud.send("Downforce", "%.1f" % downforce)
 	grid.apply_force(-grid.global_basis.y * downforce, grid.get_global_block_pos(grid_block.local_pos) - grid.global_position)
 

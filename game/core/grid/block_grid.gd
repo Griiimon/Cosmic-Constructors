@@ -161,7 +161,7 @@ func run_dampeners(delta: float):
 		inertial_dampeners= not inertial_dampeners
 	
 	if inertial_dampeners:
-		var local_velocity: Vector3= linear_velocity * global_basis
+		var local_velocity: Vector3= get_local_velocity()
 		var velocity_in_requested_direction: Vector3 = local_velocity.dot(requested_movement) * requested_movement
 		var unwanted_velocity: Vector3 = local_velocity - velocity_in_requested_direction
 
@@ -487,6 +487,10 @@ func get_global_block_pos(block_pos: Vector3i)-> Vector3:
 
 func get_block_local(grid_pos: Vector3i)-> BaseGridBlock:
 	return blocks[grid_pos] if is_occupied(grid_pos) else null
+
+
+func get_local_velocity()-> Vector3:
+	return linear_velocity * global_basis
 
 
 func is_occupied(grid_pos: Vector3i)-> bool:

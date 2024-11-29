@@ -1,6 +1,6 @@
 extends Node
 
-const INTERPOLATION_OFFSET_TICKS= 10
+const INTERPOLATION_OFFSET_TICKS= 30
 
 var ticks: int
 var peer_states: Dictionary
@@ -79,8 +79,13 @@ func update_peer_node(player: BasePlayer):
 	
 	var interpolation_factor: float= (render_tick - PlayerSyncState.get_timestamp(past_state)) / float(PlayerSyncState.get_timestamp(future_state) - PlayerSyncState.get_timestamp(past_state))
 
-	player.global_position= lerp(PlayerSyncState.get_position(past_state), PlayerSyncState.get_position(future_state), interpolation_factor)
-	player.global_rotation= lerp(PlayerSyncState.get_rotation(past_state), PlayerSyncState.get_rotation(future_state), interpolation_factor)
+	var smooth: float= 0.9
+	
+	var new_pos: Vector3= lerp(PlayerSyncState.get_position(past_state), PlayerSyncState.get_position(future_state), interpolation_factor)
+	player.global_position= lerp(player.global_position, new_pos, 1 - smooth)
+
+	var new_basis: Basis= Basis.from_euler(PlayerSyncState.get_rotation(past_state)).slerp(Basis.from_euler(PlayerSyncState.get_rotation(future_state)), interpolation_factor)
+	player.global_basis= player.global_basis.slerp(new_basis, 1 - smooth)
 
 
 func send_sync_event(type: int, args: Array= []):

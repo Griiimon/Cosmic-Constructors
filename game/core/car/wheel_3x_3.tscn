@@ -41,6 +41,7 @@ outer_radius = 3.0
 script = ExtResource("1_rbnuk")
 collision_mask = 4
 tire_width = 500.0
+braking_grip_multiplier = 0.1
 mass_over_wheel = 100.0
 
 [node name="Model" type="Node3D" parent="."]

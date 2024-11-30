@@ -76,7 +76,8 @@ size = Vector3(2000, 0.1, 2000)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vkcx0"]
 transparency = 1
-albedo_color = Color(0.810276, 0.219271, 0.213393, 0.462745)
+shading_mode = 0
+albedo_color = Color(0.811765, 0.219608, 0.211765, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_hjjcg"]
 material = SubResource("StandardMaterial3D_vkcx0")

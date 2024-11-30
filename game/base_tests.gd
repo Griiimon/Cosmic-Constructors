@@ -152,7 +152,9 @@ func remove_block():
 		var grid: BlockGrid= result.collider
 		var collision_point: Vector3= result.position
 		collision_point+= -player.build_raycast.global_basis.z * 0.05
-		grid.get_block_from_global_pos(collision_point).destroy(grid)
+		var grid_block: GridBlock= grid.get_block_from_global_pos(collision_point) 
+		if not grid_block: return
+		grid_block.destroy(grid)
 	
 
 	

@@ -47,6 +47,10 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
 
 	var lift: float= velocity_impact * angle_impact * lift_factor
 	DebugHud.send("Lift", "%.1f" % lift)
-	grid.apply_force(grid.global_basis.y * lift, grid.get_global_block_pos(grid_block.local_pos) - grid.global_position)
+	var wing_offset: Vector3= grid.get_global_block_pos(grid_block.local_pos) - grid.global_position
+	grid.apply_force(grid.global_basis.y * lift, wing_offset)
 
-	# TODO drag force
+	#var drag_factor: float= clampf(abs(angle_degrees) * 0.5, 0.0, 0.5)
+	var drag_factor: float= abs(angle_degrees) * 100.0
+	DebugHud.send("Drag factor", "%.5f" % drag_factor)
+	grid.apply_force(-grid.linear_velocity * drag_factor, wing_offset)

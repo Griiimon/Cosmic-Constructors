@@ -59,6 +59,7 @@ func reset_camera():
 
 
 func _physics_process(delta: float) -> void:
+	super(delta)
 	camera_logic()
 
 	for equipment_object in active_equipment:

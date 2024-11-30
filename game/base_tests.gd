@@ -69,7 +69,8 @@ func _input(event: InputEvent) -> void:
 			elif event.keycode == KEY_F3:
 				if player:
 					#player.wear_equipment(load("res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres"))
-					player.play_animation("wave")
+					#player.play_animation("wave")
+					sit_in_nearest_seat()
 			elif event.keycode == KEY_F4:
 				DebugPanel.toggle()
 			elif event.keycode == KEY_F5:
@@ -156,6 +157,11 @@ func remove_block():
 		var grid_block: GridBlock= grid.get_block_from_global_pos(collision_point) 
 		if not grid_block: return
 		grid_block.destroy(grid)
-	
 
-	
+
+func sit_in_nearest_seat():
+	for grid: BlockGrid in player.world.grids.get_children():
+		for block: BaseGridBlock in grid.get_blocks():
+			if block.get_block_definition() is SeatBlock:
+				player.sit(block.get_block_instance())
+				return

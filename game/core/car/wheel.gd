@@ -104,7 +104,6 @@ func initialize() -> void:
 
 func steer(input : float, max_steering_angle : float):
 	#input *= steering_ratio
-	DebugHud.send("Ste" + name.right(3), input)
 	#rotation.y = (max_steering_angle * (input + (1 - cos(input * 0.5 * PI)) * ackermann)) + toe
 	rotation.y = max_steering_angle * input
 
@@ -207,13 +206,13 @@ func process_forces(grid: BlockGrid, braking : bool, delta : float) -> float:
 		process_tires(braking, delta)
 		var contact := last_collision_point - grid.global_position
 		if spring_force > 0.0:
-			DebugHud.send("Sus" + name.right(3), last_collision_normal * spring_force)
+			#DebugHud.send("Sus" + name.right(3), last_collision_normal * spring_force)
 			grid.apply_force(last_collision_normal * spring_force, contact)
 		else:
 			## Apply a small amount of downward force if there is no spring force
 			grid.apply_force(-global_transform.basis.y * grid.mass, global_position - grid.global_position)
 		
-		DebugHud.send("FVec" + name.right(3), force_vector)
+		#DebugHud.send("FVec" + name.right(3), force_vector)
 		
 		grid.apply_force(global_transform.basis.x * force_vector.x, contact)
 		grid.apply_force(global_transform.basis.z * force_vector.y, contact)
@@ -267,7 +266,7 @@ func process_suspension(grid: BlockGrid, delta : float) -> float:
 	if bottom_out:
 		var gravity_on_spring := clampf(global_transform.basis.y.dot(-grid.get_gravity().normalized()), 0.0, 1.0)
 		bottom_out_force = (((mass_over_wheel * clampf(spring_speed_mm_per_seconds * 0.001, 0.0, 5.0)) / delta) + (mass_over_wheel * grid.get_gravity().length() * gravity_on_spring)) * bump_stop_multiplier
-		var bottom_out_force_multiplier: float= clamp(pow(1 + bottom_out_length, 8), 0, 100)
+		var bottom_out_force_multiplier: float= clampf(pow(1 + bottom_out_length, 8), 0, 100)
 		DebugStats.log_max("bottom_out_force_multiplier", bottom_out_force_multiplier)
 		DebugHud.send("Bottom out max", "%.2f" % DebugStats.get_value("bottom_out_force_multiplier"))
 		bottom_out_force*= bottom_out_force_multiplier

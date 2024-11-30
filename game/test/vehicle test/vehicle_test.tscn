@@ -119,6 +119,7 @@ world = NodePath("../World")
 equipment = SubResource("Resource_mtknu")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0998581, 0.995002, 0, -0.995002, -0.0998581, 0, 2.22161, 0)
 
 [node name="UI" parent="." instance=ExtResource("6_jsteb")]
 

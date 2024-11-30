@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d4blx7p2hp5bc"]
+[gd_scene load_steps=26 format=3 uid="uid://d4blx7p2hp5bc"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_6i4dd"]
 [ext_resource type="Script" path="res://game/test/vehicle test/vehicle_tests.gd" id="2_8kc7o"]
@@ -56,6 +56,16 @@ size = Vector3(1000, 0.1, 1000)
 [sub_resource type="CylinderMesh" id="CylinderMesh_nug3n"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_m08nx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vkcx0"]
+transparency = 1
+albedo_color = Color(0.810276, 0.219271, 0.213393, 0.462745)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hjjcg"]
+material = SubResource("StandardMaterial3D_vkcx0")
+top_radius = 2.0
+bottom_radius = 2.0
+height = 50.0
 
 [node name="Vehicle Test" type="Node3D"]
 script = ExtResource("1_6i4dd")
@@ -208,3 +218,25 @@ mesh = SubResource("CylinderMesh_nug3n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D8"]
 shape = SubResource("CylinderShape3D_m08nx")
+
+[node name="Obstacle Course" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 206.401, 0, -93.3645)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle Course"]
+mesh = SubResource("CylinderMesh_hjjcg")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Obstacle Course"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
+mesh = SubResource("CylinderMesh_hjjcg")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Obstacle Course"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
+mesh = SubResource("CylinderMesh_hjjcg")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Obstacle Course"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -150)
+mesh = SubResource("CylinderMesh_hjjcg")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Obstacle Course"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -200)
+mesh = SubResource("CylinderMesh_hjjcg")

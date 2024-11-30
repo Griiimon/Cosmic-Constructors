@@ -1,6 +1,8 @@
 class_name PlayerBuildState
 extends PlayerStateMachineState
 
+const KEEP_GHOST_GROUP= "Keep Ghost"
+
 @export var build_range: float= 4.0
 @export var smooth_rotation_speed: float= 2.0
 @export var current_block: Block:
@@ -43,9 +45,11 @@ func init_ghost():
 		mesh_instances.append(ghost)
 	
 	for child in mesh_instances:
-		if child is not MeshInstance3D:
+		if child is not MeshInstance3D and not child.is_in_group(KEEP_GHOST_GROUP):
 			child.queue_free()
 		else:
+			if child is not MeshInstance3D: continue
+			
 			var mesh_instance: MeshInstance3D= child
 			var old_material: StandardMaterial3D= mesh_instance.mesh.surface_get_material(0)
 			var new_material: StandardMaterial3D

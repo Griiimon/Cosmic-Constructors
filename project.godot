@@ -38,6 +38,10 @@ gdscript/warnings/unused_signal=0
 
 enabled=PackedStringArray("res://addons/csgtomeshinstance/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
+[global_group]
+
+"Keep Ghost"="Don't delete this node when creating a ghost for this scene in building mode"
+
 [input]
 
 pitch_up={

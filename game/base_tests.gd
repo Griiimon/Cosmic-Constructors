@@ -101,6 +101,7 @@ func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
 
 
 func mine_gold():
+	return
 	var terrain: VoxelLodTerrain= $"../Asteroid".get_child(0)
 	var local_pos: Vector3i= terrain.to_local($"../Player".global_position)
 	#var local_pos: Vector3i= $"../Player".global_position

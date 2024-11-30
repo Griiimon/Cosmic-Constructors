@@ -493,5 +493,10 @@ func get_local_velocity()-> Vector3:
 	return linear_velocity * global_basis
 
 
+# TODO could assign and return as Array[GridBlock], but performance cost?
+func get_blocks()-> Array:
+	return blocks.values()
+
+
 func is_occupied(grid_pos: Vector3i)-> bool:
 	return blocks.has(grid_pos)

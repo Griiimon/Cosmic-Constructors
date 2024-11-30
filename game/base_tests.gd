@@ -75,7 +75,9 @@ func _input(event: InputEvent) -> void:
 				DebugPanel.toggle()
 			elif event.keycode == KEY_F5:
 				player.world.save_world(custom_world_name, project_folder_world)
-			
+			elif event.keycode == KEY_F9:
+				get_tree().reload_current_scene.call_deferred()
+				return
 			else:
 				var switch_block_delta: int= int(Input.get_axis("next_block", "previous_block"))
 				

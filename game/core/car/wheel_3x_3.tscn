@@ -40,23 +40,8 @@ outer_radius = 3.0
 [node name="Wheel 3x3" type="Node3D"]
 script = ExtResource("1_rbnuk")
 collision_mask = 4
-wheel_mass = null
-tire_radius = null
 tire_width = 500.0
-ackermann = null
-contact_patch = null
 braking_grip_multiplier = 0.1
-spring_length = null
-spring_rate = null
-slow_bump = null
-fast_bump = null
-slow_rebound = null
-fast_rebound = null
-fast_damp_threshold = null
-antiroll = null
-toe = null
-bump_stop_multiplier = null
-wheel_to_body_torque_multiplier = null
 mass_over_wheel = 100.0
 
 [node name="Model" type="Node3D" parent="."]

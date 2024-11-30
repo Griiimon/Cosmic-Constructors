@@ -1,7 +1,10 @@
 extends BlockInstance
 
-@export var lift_factor: float= 2.0
 @export var right: bool= true
+
+var lift_factor: float= 2.0
+var roll_factor: float= 0.1
+var elevator_sensitivity: float= 0.1
 
 @onready var elevator_joint = %"Elevator Joint"
 
@@ -10,13 +13,13 @@ var elevator: float= 0.0
 
 
 func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
-	elevator+= grid.requested_rotation.x * 0.1
+	elevator+= grid.requested_rotation.x * elevator_sensitivity
 	var roll: float= grid.requested_rotation.z
 	
 	elevator_joint.rotation.x= clampf(elevator, -1.0, 1.0)
 	
 	if not is_zero_approx(roll):
-		var roll_factor: float= 0.1
+		
 		if roll > 0:
 			elevator_joint.rotation.x= -roll_factor
 		else:
@@ -45,3 +48,5 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
 	var lift: float= velocity_impact * angle_impact * lift_factor
 	DebugHud.send("Lift", "%.1f" % lift)
 	grid.apply_force(grid.global_basis.y * lift, grid.get_global_block_pos(grid_block.local_pos) - grid.global_position)
+
+	# TODO drag force

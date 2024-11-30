@@ -8,6 +8,10 @@
 script = ExtResource("1_g2c86")
 size = Vector3i(1, 1, 1)
 weight = 10.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = false
+can_be_built = true
 texture = ExtResource("2_82sg4")
 material = ExtResource("1_spn0b")
 name = ""

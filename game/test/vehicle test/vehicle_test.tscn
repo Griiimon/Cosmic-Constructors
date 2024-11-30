@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://d4blx7p2hp5bc"]
+[gd_scene load_steps=28 format=3 uid="uid://d4blx7p2hp5bc"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_6i4dd"]
 [ext_resource type="Script" path="res://game/test/vehicle test/vehicle_tests.gd" id="2_8kc7o"]
@@ -46,6 +46,13 @@ albedo_texture = SubResource("NoiseTexture2D_21sxj")
 material = SubResource("StandardMaterial3D_kyyuw")
 size = Vector2(1000, 1000)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljbpt"]
+albedo_color = Color(0.653264, 0.346538, 0.156339, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wu0sy"]
+material = SubResource("StandardMaterial3D_ljbpt")
+size = Vector2(50000, 50000)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_s3jxp"]
 size = Vector3(1000, 0.1, 1000)
 
@@ -75,6 +82,14 @@ script = ExtResource("2_8kc7o")
 load_world = true
 freeze_grids = true
 
+[node name="Damping Area" type="Area3D" parent="."]
+linear_damp_space_override = 3
+angular_damp_space_override = 3
+angular_damp = 0.2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Damping Area"]
+shape = SubResource("SphereShape3D_fbd3y")
+
 [node name="Gravity Area" type="Area3D" parent="."]
 collision_mask = 3
 gravity_space_override = 3
@@ -102,6 +117,11 @@ collision_layer = 4
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("PlaneMesh_wfm8q")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+mesh = SubResource("PlaneMesh_wu0sy")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]

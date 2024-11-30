@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://bmjgpm6ppgrgi"]
+
+[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_dd7uj"]
+[ext_resource type="PackedScene" uid="uid://dlqfopapxt0b7" path="res://game/data/blocks/lift wing/lift_wing.tscn" id="1_ewk16"]
+
+[resource]
+script = ExtResource("1_dd7uj")
+size = Vector3i(2, 1, 1)
+weight = 10.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = true
+can_be_built = true
+scene = ExtResource("1_ewk16")
+name = ""

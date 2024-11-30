@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://d4blx7p2hp5bc"]
+[gd_scene load_steps=31 format=3 uid="uid://d4blx7p2hp5bc"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_6i4dd"]
 [ext_resource type="Script" path="res://game/test/vehicle test/vehicle_tests.gd" id="2_8kc7o"]
@@ -44,17 +44,28 @@ albedo_texture = SubResource("NoiseTexture2D_21sxj")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wfm8q"]
 material = SubResource("StandardMaterial3D_kyyuw")
-size = Vector2(1000, 1000)
+size = Vector2(2000, 2000)
+
+[sub_resource type="Gradient" id="Gradient_hy0dr"]
+colors = PackedColorArray(0.253679, 0.530542, 0.988763, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6q5th"]
+frequency = 0.0072
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_grcks"]
+color_ramp = SubResource("Gradient_hy0dr")
+noise = SubResource("FastNoiseLite_6q5th")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljbpt"]
 albedo_color = Color(0.653264, 0.346538, 0.156339, 1)
+albedo_texture = SubResource("NoiseTexture2D_grcks")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wu0sy"]
 material = SubResource("StandardMaterial3D_ljbpt")
 size = Vector2(50000, 50000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s3jxp"]
-size = Vector3(1000, 0.1, 1000)
+size = Vector3(2000, 0.1, 2000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uh6qw"]
 

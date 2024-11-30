@@ -2,8 +2,6 @@ pick block should copy rotation
 
 add friction to block grids
 
-over extended suspension should lock wheel/cancel all acceleration
-
 braking unsettles suspension too much ( even at low speeds ), maybe its accurate with low damping?
 
 locked handbrake
@@ -12,7 +10,7 @@ implement rolling resistance
 
 implement per axis linear damping calculated from air resistance profile
 
-air plane
+airplane
 
 multiplayer grid syncing
 
@@ -56,7 +54,8 @@ FIX sometimes wrong ( downwards ) momentum when strafing off grid
 FIX removing MultiBlocks can lead to crash ( only when splitting grids? )
 FIX when player stands on Grid that gets split at any pos he sometimes gets thrown off
 FIX thruster particles are off when rotated=> cant reproduce
-
+FIX ghost sometimes getting left behind on moving grid
+FIX bottom out wheel reverse speed hack => dont show wheel rotation
 
 meta tag for BlockInstance scene sub nodes that should be deleted in ghost ( or just delete anything not MeshInstance3D or plain Node3D ? )
 

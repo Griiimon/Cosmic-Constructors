@@ -1,4 +1,4 @@
-extends Node3D
+extends BlockInstance
 
 @export var lift_factor: float= 10.0
 

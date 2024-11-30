@@ -1,0 +1,65 @@
+[gd_scene load_steps=11 format=3 uid="uid://dwn143y4fs1j7"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/lift_wing_instance.gd" id="1_wy7kn"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_asiml"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ta5m2"]
+albedo_color = Color(0.414704, 0.414704, 0.414704, 1)
+metallic = 1.0
+roughness = 0.23
+
+[sub_resource type="BoxMesh" id="BoxMesh_eaqji"]
+material = SubResource("StandardMaterial3D_ta5m2")
+size = Vector3(1.775, 0.1, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nj5pt"]
+albedo_color = Color(0.414704, 0.414704, 0.414704, 1)
+metallic = 1.0
+roughness = 0.23
+
+[sub_resource type="BoxMesh" id="BoxMesh_cs6w8"]
+material = SubResource("StandardMaterial3D_nj5pt")
+size = Vector3(0.31, 0.1, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgvmj"]
+albedo_color = Color(0.414704, 0.414704, 0.414704, 1)
+metallic = 1.0
+roughness = 0.23
+
+[sub_resource type="BoxMesh" id="BoxMesh_uqt7a"]
+material = SubResource("StandardMaterial3D_tgvmj")
+size = Vector3(0.31, 0.1, 0.665)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nwss7"]
+albedo_color = Color(0.414704, 0.414704, 0.414704, 1)
+metallic = 1.0
+roughness = 0.23
+
+[sub_resource type="BoxMesh" id="BoxMesh_2h1p3"]
+material = SubResource("StandardMaterial3D_nwss7")
+size = Vector3(0.05, 0.3, 0.7)
+
+[node name="Lift Wing Mirrored" type="Node3D"]
+script = ExtResource("1_wy7kn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_asiml")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -1, 0, 0)
+mesh = SubResource("BoxMesh_eaqji")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.107, 0, -0.23)
+mesh = SubResource("BoxMesh_cs6w8")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.805, 0, 0.24)
+mesh = SubResource("BoxMesh_uqt7a")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.128, 0.165, 0.003)
+mesh = SubResource("BoxMesh_2h1p3")
+skeleton = NodePath("../..")

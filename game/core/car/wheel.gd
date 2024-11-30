@@ -267,9 +267,9 @@ func process_suspension(grid: BlockGrid, delta : float) -> float:
 	if bottom_out:
 		var gravity_on_spring := clampf(global_transform.basis.y.dot(-grid.get_gravity().normalized()), 0.0, 1.0)
 		bottom_out_force = (((mass_over_wheel * clampf(spring_speed_mm_per_seconds * 0.001, 0.0, 5.0)) / delta) + (mass_over_wheel * grid.get_gravity().length() * gravity_on_spring)) * bump_stop_multiplier
-		var bottom_out_force_multiplier: float= pow(1 + bottom_out_length, 8)
+		var bottom_out_force_multiplier: float= clamp(pow(1 + bottom_out_length, 8), 0, 100)
 		DebugStats.log_max("bottom_out_force_multiplier", bottom_out_force_multiplier)
-		DebugHud.send("Bottom out max", "%.2f" % DebugStats.get_val("bottom_out_force_multiplier"))
+		DebugHud.send("Bottom out max", "%.2f" % DebugStats.get_value("bottom_out_force_multiplier"))
 		bottom_out_force*= bottom_out_force_multiplier
 		bottom_out_damping = -slow_bump
 		bottom_out_damping_fast = -fast_bump

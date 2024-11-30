@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwn143y4fs1j7"]
+[gd_scene load_steps=12 format=3 uid="uid://dwn143y4fs1j7"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/lift_wing_instance.gd" id="1_wy7kn"]
 
@@ -40,8 +40,12 @@ roughness = 0.23
 material = SubResource("StandardMaterial3D_nwss7")
 size = Vector3(0.05, 0.3, 0.7)
 
+[sub_resource type="PrismMesh" id="PrismMesh_6sdxd"]
+size = Vector3(0.17, 0.23, 1.005)
+
 [node name="Lift Wing Mirrored" type="Node3D"]
 script = ExtResource("1_wy7kn")
+right = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
@@ -63,3 +67,11 @@ mesh = SubResource("BoxMesh_uqt7a")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.128, 0.165, 0.003)
 mesh = SubResource("BoxMesh_2h1p3")
 skeleton = NodePath("../..")
+
+[node name="Elevator Joint" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.451, 0, 0.605)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Elevator Joint"]
+transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323e-17, 1, 6.12323e-17, 0, 0, 0.1)
+mesh = SubResource("PrismMesh_6sdxd")

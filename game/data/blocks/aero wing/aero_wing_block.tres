@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_8oprq")
-size = Vector3i(1, 1, 1)
+size = Vector3i(3, 1, 1)
 weight = 10.0
 max_hitpoints = 10
 custom_collision = false

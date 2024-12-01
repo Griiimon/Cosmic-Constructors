@@ -83,9 +83,12 @@ func on_physics_process(delta: float):
 		player.gravity_scale= 0 if dampeners_active else 1
 	
 	if dampeners_active:
+		
 		var local_velocity: Vector3= player.linear_velocity * player.global_basis
 		var velocity_in_requested_direction: Vector3 = local_velocity.dot(move_vec) * move_vec
 		var unwanted_velocity: Vector3 = local_velocity - velocity_in_requested_direction
+
+		#unwanted_velocity+= player.get_gravity() * delta * player.global_basis
 
 		var counter_force: Vector3 = -unwanted_velocity * delta * damping_factor
 		
@@ -94,12 +97,9 @@ func on_physics_process(delta: float):
 		counter_force.y= smoothen_counter_force(counter_force.y, threshold)
 		counter_force.z= smoothen_counter_force(counter_force.z, threshold)
 		
-
 		counter_force= counter_force.limit_length(1.0)
 		player.apply_central_force(counter_force * player.global_basis.inverse() * player.equipment.get_jetpack_thrust() * delta)
 
-		#move_vec+= counter_force
-		
 	move_vec= move_vec * player.global_basis.inverse() * player.equipment.get_jetpack_thrust() * delta
 	
 		#player.apply_central_force(-player.get_gravity() * player.mass)

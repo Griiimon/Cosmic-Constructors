@@ -35,6 +35,15 @@ func on_enter():
 	player.look_at(player.global_position + head_forward, player.global_basis.y)
 
 	player.angular_damp= angular_damping
+	
+	# FIXME having trouble with inertial dampeners + gravity calculations
+	# so better to disable gravity while in jetpack for now 
+	if dampeners_active:
+		player.gravity_scale= 0
+
+
+func on_exit():
+	player.gravity_scale= 1
 
 
 func on_physics_process(delta: float):
@@ -71,6 +80,7 @@ func on_physics_process(delta: float):
 	
 	if Input.is_action_just_pressed("toggle_dampeners"):
 		dampeners_active= not dampeners_active
+		player.gravity_scale= 0 if dampeners_active else 1
 	
 	if dampeners_active:
 		var local_velocity: Vector3= player.linear_velocity * player.global_basis
@@ -79,15 +89,22 @@ func on_physics_process(delta: float):
 
 		var counter_force: Vector3 = -unwanted_velocity * delta * damping_factor
 		
-		var threshold: float= 0.001
+		var threshold: float= 0.01
 		counter_force.x= smoothen_counter_force(counter_force.x, threshold)
 		counter_force.y= smoothen_counter_force(counter_force.y, threshold)
 		counter_force.z= smoothen_counter_force(counter_force.z, threshold)
-		counter_force= counter_force.normalized()
 		
-		move_vec+= counter_force.normalized()
+
+		counter_force= counter_force.limit_length(1.0)
+		player.apply_central_force(counter_force * player.global_basis.inverse() * player.equipment.get_jetpack_thrust() * delta)
+
+		#move_vec+= counter_force
+		
+	move_vec= move_vec * player.global_basis.inverse() * player.equipment.get_jetpack_thrust() * delta
 	
-	player.apply_central_force(move_vec * player.global_basis.inverse() * player.equipment.get_jetpack_thrust() * delta)
+		#player.apply_central_force(-player.get_gravity() * player.mass)
+	
+	player.apply_central_force(move_vec)
 
 
 func on_input(event: InputEvent):

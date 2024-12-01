@@ -13,7 +13,12 @@ signal landed
 @export var damping_factor: float= 1.0
 @export var angular_damping: float= 10.0
 
-@export var dampeners_active: bool= true 
+@export var dampeners_active: bool= true:
+	set(b):
+		dampeners_active= b
+		# FIXME having trouble with inertial dampeners + gravity counter force
+		#  calculations, so better to disable gravity while in jetpack for now 
+		update_gravity()
 
 @export var min_land_velocity: float= 1.0
 
@@ -35,11 +40,7 @@ func on_enter():
 	player.look_at(player.global_position + head_forward, player.global_basis.y)
 
 	player.angular_damp= angular_damping
-	
-	# FIXME having trouble with inertial dampeners + gravity calculations
-	# so better to disable gravity while in jetpack for now 
-	if dampeners_active:
-		player.gravity_scale= 0
+	update_gravity()
 
 
 func on_exit():
@@ -80,7 +81,6 @@ func on_physics_process(delta: float):
 	
 	if Input.is_action_just_pressed("toggle_dampeners"):
 		dampeners_active= not dampeners_active
-		player.gravity_scale= 0 if dampeners_active else 1
 	
 	if dampeners_active:
 		
@@ -113,7 +113,14 @@ func on_input(event: InputEvent):
 		pitch_input= -event.relative.y
 
 
+func update_gravity():
+	player.gravity_scale= 0 if dampeners_active else 1
+
+
 func smoothen_counter_force(orig_force: float, threshold: float)-> float:
 	if abs(orig_force) < threshold:
 		return lerp(orig_force, 0.0, abs(orig_force) / threshold)
 	return orig_force
+
+
+	

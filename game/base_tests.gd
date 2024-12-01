@@ -56,7 +56,8 @@ func on_start():
 func _physics_process(delta):
 	if player:
 		DebugHud.send("Gravity", "%.3f" % player.get_gravity().length())
-		DebugHud.send("Velocity", "%.1f" % player.get_velocity().length())
+		DebugHud.send("Velocity", "%.2f" % player.get_velocity().length())
+		#DebugHud.send("Vel Vector", player.get_velocity())
 
 
 func _input(event: InputEvent) -> void:

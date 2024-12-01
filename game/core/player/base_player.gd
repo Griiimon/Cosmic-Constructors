@@ -46,3 +46,8 @@ func get_peer_id()-> int:
 
 func get_velocity()-> Vector3:
 	return last_velocity
+
+
+func in_gravity()-> bool:
+	# FIXME making too many assumptions here
+	return is_zero_approx(gravity_scale) or get_gravity().length() > 0

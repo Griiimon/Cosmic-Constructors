@@ -16,6 +16,6 @@ func continuous_align(delta: float):
 
 func on_left_ground():
 	if player.get_gravity().length():
-		jumped.emit(velocity, 0)
+		jumped.emit()
 	else:
-		jetpack_enabled.emit(velocity)
+		jetpack_enabled.emit()

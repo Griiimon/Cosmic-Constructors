@@ -1,8 +1,8 @@
 class_name PlayerMovementStateMachineState
 extends PlayerStateMachineState
 
-signal jetpack_enabled(velocity: Vector3)
-signal jumped(velocity: Vector3)
+signal jetpack_enabled
+signal jumped
 
 @export var turn_factor: float= 1.0
 @export var pitch_factor: float= 1.0
@@ -46,11 +46,11 @@ func on_physics_process(delta: float):
 		return
 
 	if Input.is_action_just_pressed("jump"):
-		jumped.emit(velocity, jump_impulse)
+		jumped.emit(Vector3.ZERO, jump_impulse)
 		return
 
 	if Input.is_action_just_pressed("jetpack"):
-		jetpack_enabled.emit(velocity)
+		jetpack_enabled.emit()
 		return
 
 	var floor_normal: Vector3= get_floor_normal()

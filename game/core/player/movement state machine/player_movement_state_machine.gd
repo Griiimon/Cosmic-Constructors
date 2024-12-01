@@ -45,12 +45,12 @@ func landed():
 
 func init_eva(velocity: Vector3= Vector3.ZERO, impulse: float= 0.0):
 	change_state(eva_state)
-	player.linear_velocity= velocity
+	player.linear_velocity= player.get_velocity() + velocity
 
 
-func jump(velocity: Vector3, impulse: float):
+func jump(velocity: Vector3= Vector3.ZERO, impulse: float= 0):
 	change_state(jump_state)
-	player.linear_velocity= velocity
+	player.linear_velocity= player.get_velocity() + velocity
 
 	if impulse > 0:
 		player.apply_central_impulse(player.global_basis.y * impulse)

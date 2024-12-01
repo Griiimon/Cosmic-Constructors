@@ -48,7 +48,7 @@ func on_exit():
 
 
 func on_physics_process(delta: float):
-	if player.floor_shapecast.is_colliding():
+	if not player.in_gravity() and player.floor_shapecast.is_colliding():
 		#if player.to_local(player.linear_velocity).y < -min_land_velocity:
 		#if (player.basis * player.linear_velocity).y < -min_land_velocity:
 		if player.linear_velocity.dot(-player.global_basis.y) > min_land_velocity:

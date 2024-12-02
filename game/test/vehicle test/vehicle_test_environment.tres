@@ -1,0 +1,19 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://dpnscmd0s8lh5"]
+
+[ext_resource type="Texture2D" path="res://skybox/proc_stars.dds" id="1_70ull"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0ujoa"]
+panorama = ExtResource("1_70ull")
+
+[sub_resource type="Sky" id="Sky_nbk3e"]
+sky_material = SubResource("PanoramaSkyMaterial_0ujoa")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_nbk3e")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.5
+ambient_light_energy = 2.95
+reflected_light_source = 2
+adjustment_brightness = 1.5

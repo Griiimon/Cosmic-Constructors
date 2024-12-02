@@ -28,7 +28,10 @@ background_mode = 2
 sky = SubResource("Sky_nbk3e")
 ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.5
+ambient_light_energy = 2.95
 reflected_light_source = 2
+adjustment_brightness = 1.5
 
 [sub_resource type="Gradient" id="Gradient_0kay1"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0.443137, 0.14902, 1)

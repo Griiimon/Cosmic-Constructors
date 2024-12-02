@@ -213,7 +213,6 @@ func load_world(world_name: String= "", project_folder: bool= false):
 		var grid_data = json.data
 
 		var grid: BlockGrid= BlockGrid.deserialize(grid_data, self)
-		grid.world= self
 
 		grid.update_properties()
 	save_file.close()

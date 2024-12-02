@@ -150,6 +150,8 @@ func on_left_ground():
 
 func on_input(event: InputEvent):
 	if event is InputEventMouseMotion:
+		if event.alt_pressed: return
+		
 		player.head.rotate_y(deg_to_rad(-event.relative.x) * turn_factor)
 		player.pivot.rotate_x(deg_to_rad(-event.relative.y) * pitch_factor)
 		player.pivot.rotation_degrees.x= clamp(player.pivot.rotation_degrees.x, -70, 70)

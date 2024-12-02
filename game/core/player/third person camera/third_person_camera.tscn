@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctdtmf0rnptdc"]
+
+[ext_resource type="Script" path="res://game/core/player/third person camera/third_person_camera.gd" id="1_fmph5"]
+
+[node name="Third Person Camera" type="Node3D"]
+script = ExtResource("1_fmph5")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Third Person Camera RayCast" type="RayCast3D" parent="Pivot"]
+target_position = Vector3(0, 1, 5)
+collision_mask = 6
+hit_back_faces = false
+
+[node name="Third Person Camera" type="Camera3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.979649, 0.200719, 0, -0.200719, 0.979649, 0, 1, 5)

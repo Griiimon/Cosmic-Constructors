@@ -1,3 +1,5 @@
+PeripheralGridEntity
+
 control right-click in tests to remove entire grid
 
 add non solid, frozen rigidbody to player as gravity gauge?

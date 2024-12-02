@@ -6,12 +6,16 @@ signal landed
 @export var jetpack_active: bool= true:
 	set(b):
 		jetpack_active= b
+		if not player:
+			await SignalManager.player_spawned
 		SignalManager.toggle_jetpack.emit(jetpack_active)
 		update_gravity()
 		
 @export var dampeners_active: bool= true:
 	set(b):
 		dampeners_active= b
+		if not player:
+			await SignalManager.player_spawned
 		SignalManager.toggle_dampeners.emit(dampeners_active)
 		update_gravity()
 
@@ -124,8 +128,8 @@ func on_input(event: InputEvent):
 		pitch_input= -event.relative.y
 
 
-	# FIXME having trouble with inertial dampeners + gravity counter force
-	#  calculations, so better to disable gravity while in jetpack for now 
+# FIXME having trouble with inertial dampeners + gravity counter force
+#  calculations, so better to disable gravity while in jetpack for now 
 func update_gravity():
 	if jetpack_active:
 		player.gravity_scale= 0 if dampeners_active else 1

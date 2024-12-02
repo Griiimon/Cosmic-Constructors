@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwv7mbohgftby"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2pls0"]
+friction = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2e00m"]
+size = Vector3(5, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e3ks4"]
+shading_mode = 2
+albedo_color = Color(0.577008, 0.577008, 0.577008, 1)
+metallic = 1.0
+roughness = 0.54
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mvtls"]
+material = SubResource("StandardMaterial3D_e3ks4")
+top_radius = 2.8
+bottom_radius = 2.8
+height = 0.26
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8gjt"]
+albedo_color = Color(0.455817, 0.455817, 0.455817, 1)
+metallic = 1.0
+roughness = 0.54
+
+[sub_resource type="BoxMesh" id="BoxMesh_gpys3"]
+material = SubResource("StandardMaterial3D_l8gjt")
+size = Vector3(5.04, 0.57, 0.625)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qf4t"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_yfd3n"]
+material = SubResource("StandardMaterial3D_3qf4t")
+inner_radius = 0.712
+
+[node name="Model" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_2pls0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.52013, 0)
+shape = SubResource("BoxShape3D_2e00m")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.03904e-17, 0.333, 0, -0.333, 2.03904e-17, 0, 0, 0, 0.333, 0, 0, 0)
+mesh = SubResource("CylinderMesh_mvtls")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+cast_shadow = 0
+mesh = SubResource("BoxMesh_gpys3")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_gpys3")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_gpys3")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_gpys3")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("TorusMesh_yfd3n")
+skeleton = NodePath("../..")

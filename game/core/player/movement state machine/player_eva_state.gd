@@ -6,11 +6,13 @@ signal landed
 @export var jetpack_active: bool= true:
 	set(b):
 		jetpack_active= b
+		SignalManager.toggle_jetpack.emit(jetpack_active)
 		update_gravity()
 		
 @export var dampeners_active: bool= true:
 	set(b):
 		dampeners_active= b
+		SignalManager.toggle_dampeners.emit(dampeners_active)
 		update_gravity()
 
 @export var yaw_factor: float= 1.0

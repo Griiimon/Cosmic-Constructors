@@ -78,3 +78,4 @@ transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0.3, 
 mesh = SubResource("BoxMesh_canb3")
 
 [connection signal="area_entered" from="Detection Area" to="." method="_on_detection_area_area_entered"]
+[connection signal="area_exited" from="Detection Area" to="." method="_on_detection_area_area_exited"]

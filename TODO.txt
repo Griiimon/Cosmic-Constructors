@@ -1,22 +1,21 @@
-jetpack angular lock
+control right-click in tests to remove entire grid
 
-grid jumping
+add non solid, frozen rigidbody to player as gravity gauge?
 
-car reverse gear + check all calculations (clamp z velocities for wings etc)
+parking brake + ui display
 
 pick block should copy rotation
 
-add friction to block grids
-
 braking unsettles suspension too much ( even at low speeds ), maybe its accurate with low damping?
 
-locked handbrake
+upside down wheels should skip any calculations ( shapecast normal != wheel basis down )
 
 implement rolling resistance
 
 implement per axis linear damping calculated from air resistance profile
 
 fixed airplane wheels ( fixed staticbody low friction colliders with steering logic and impact break chance )
+	or wait until rigidbody wheels are implemented
 
 multiplayer grid syncing
 
@@ -89,6 +88,35 @@ re-center origin of split grids ( to its center of mass )?? needs to snape to Ve
 how to avoid jetpack collisions causing player to rotate?
 	locking axis not really an option since torque is used for turning
 	=> use angular_velocity to turn/yaw in integrate_forces and set to 0 for no input
+
+make vehicle wheels rigidbodies with no friction, still use all the calculations but use slider joint for max suspension travel
+
+is there suspension resistance in up direction? if car gets weighed down in the rear shouldnt the front suspension move up?
+
+
+SCENARIOS
+----------------
+
+Excavator:
+	Hinge and Special Connector for Bucket
+	Bucket non BlockGrid entity
+	bucket has BucketShaped collision for picking up rigidbodies ( ore balls )
+	but smaller terrain collision shape so it can move through terrain slightly
+
+	REQUIRES: hinge, 2x2 wheels, non block entities with block connections
+
+Racing:
+	track with waypoint lap time detection
+	build cars next to track and try to go for fastest lap
+
+
+Survival (and PVP):
+	planet or infinite terrain
+	trees rocks etc
+	wait for item drops ( at campfire, beacon, random )
+	search loot
+	enemy drones and robots
+
 
 
 NEW MECHANICS

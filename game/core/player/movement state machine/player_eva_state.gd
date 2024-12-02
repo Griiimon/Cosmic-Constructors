@@ -19,6 +19,7 @@ signal landed
 		SignalManager.toggle_dampeners.emit(dampeners_active)
 		update_gravity()
 
+@export var rotation_speed: float= 0.02
 @export var yaw_factor: float= 1.0
 @export var pitch_factor: float= 1.0 
 @export var roll_factor: float= 1.0
@@ -78,7 +79,8 @@ func on_physics_process(delta: float):
 	yaw_input= 0
 	roll_input= 0
 
-	player.apply_torque(input_torque * delta)
+	#player.apply_torque(input_torque * delta)
+	player.angular_velocity= input_torque * delta * rotation_speed
 
 	if jetpack_active:
 		

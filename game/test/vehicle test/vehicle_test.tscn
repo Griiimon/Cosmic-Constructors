@@ -1,11 +1,11 @@
-[gd_scene load_steps=32 format=3 uid="uid://d4blx7p2hp5bc"]
+[gd_scene load_steps=29 format=3 uid="uid://d4blx7p2hp5bc"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_6i4dd"]
 [ext_resource type="Script" path="res://game/test/vehicle test/vehicle_tests.gd" id="2_8kc7o"]
-[ext_resource type="Texture2D" path="res://skybox/proc_stars.dds" id="2_ly4gl"]
 [ext_resource type="Script" path="res://game/player_spawn.gd" id="3_8bwff"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="3_n8ygw"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="6_jsteb"]
+[ext_resource type="Environment" uid="uid://dpnscmd0s8lh5" path="res://game/test/vehicle test/vehicle_test_environment.tres" id="6_s4mlb"]
 [ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="6_s17hf"]
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="7_hpj7a"]
 [ext_resource type="PackedScene" uid="uid://w6iv7medt6r7" path="res://game/data/peripheral entities/excavator bucket/excavator_bucket.tscn" id="9_cnwvp"]
@@ -16,22 +16,6 @@ back_item = ExtResource("6_s17hf")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fbd3y"]
 radius = 10000.0
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0ujoa"]
-panorama = ExtResource("2_ly4gl")
-
-[sub_resource type="Sky" id="Sky_nbk3e"]
-sky_material = SubResource("PanoramaSkyMaterial_0ujoa")
-
-[sub_resource type="Environment" id="Environment_r8d1e"]
-background_mode = 2
-sky = SubResource("Sky_nbk3e")
-ambient_light_source = 3
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_sky_contribution = 0.5
-ambient_light_energy = 2.95
-reflected_light_source = 2
-adjustment_brightness = 1.5
 
 [sub_resource type="Gradient" id="Gradient_0kay1"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0.443137, 0.14902, 1)
@@ -103,7 +87,7 @@ script = ExtResource("3_8bwff")
 equipment = SubResource("Resource_ic37o")
 
 [node name="Damping Area" type="Area3D" parent="."]
-collision_mask = 19
+collision_mask = 51
 linear_damp_space_override = 3
 angular_damp_space_override = 3
 angular_damp = 0.2
@@ -112,14 +96,15 @@ angular_damp = 0.2
 shape = SubResource("SphereShape3D_fbd3y")
 
 [node name="Gravity Area" type="Area3D" parent="."]
-collision_mask = 19
+collision_layer = 0
+collision_mask = 51
 gravity_space_override = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity Area"]
 shape = SubResource("SphereShape3D_fbd3y")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_r8d1e")
+environment = ExtResource("6_s4mlb")
 
 [node name="World" type="Node3D" parent="."]
 script = ExtResource("3_n8ygw")

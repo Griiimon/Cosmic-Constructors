@@ -23,7 +23,7 @@ func _ready() -> void:
 	player= get_node_or_null("Player")
 	if not player: 
 		if NetworkManager.is_single_player:
-			spawn_player()
+			spawn_player.call_deferred()
 		elif not NetworkManager.is_server:
 			ServerManager.request_spawn.rpc_id(1)
 

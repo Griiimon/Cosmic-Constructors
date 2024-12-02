@@ -18,7 +18,7 @@ func on_physics_process(delta: float):
 		return
 
 	if Input.is_action_just_pressed("jetpack"):
-		jetpack_enabled.emit(velocity)
+		jetpack_enabled.emit()
 		return
 
 

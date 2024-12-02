@@ -70,7 +70,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 	if block.custom_collision:
 		var coll_shapes: Array[CollisionShape3D]
-		coll_shapes.assign(block_node.find_children("*", "CollisionShape3D"))
+		coll_shapes.assign(block_node.find_children("*", "CollisionShape3D", false))
 		assert(coll_shapes.size() == 1)
 		coll_shapes[0].reparent(self)
 		coll_shape= coll_shapes[0]

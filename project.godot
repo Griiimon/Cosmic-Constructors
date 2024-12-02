@@ -218,6 +218,8 @@ toggle_block_alt_property={
 3d_physics/layer_2="Grid"
 3d_physics/layer_3="Terrain"
 3d_physics/layer_4="Projectile"
+3d_physics/layer_5="Physical Objects"
+3d_physics/layer_6="Peripheral Grid Entities"
 3d_physics/layer_9="Peripheral Connector"
 
 [physics]

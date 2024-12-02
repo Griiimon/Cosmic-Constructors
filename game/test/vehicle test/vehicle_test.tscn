@@ -139,6 +139,7 @@ mesh = SubResource("PlaneMesh_wu0sy")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 shape = SubResource("BoxShape3D_s3jxp")
 
 [node name="Ramp" type="StaticBody3D" parent="."]

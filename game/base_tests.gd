@@ -27,7 +27,7 @@ func _ready() -> void:
 		if terrain:
 			terrain.queue_free()
 
-	if Global.player:
+	if game.player:
 		on_player_spawned()
 	else:
 		SignalManager.player_spawned.connect(on_player_spawned)

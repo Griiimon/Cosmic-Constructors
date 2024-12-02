@@ -121,6 +121,7 @@ transform = Transform3D(1, 0, 0, 0, 0.979649, 0.200719, 0, -0.200719, 0.979649, 
 
 [node name="Movement State Machine" type="Node" parent="." index="4" node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_615c1")
+jump_impulse = 250.0
 current_state = NodePath("EVA")
 
 [node name="EVA" type="Node" parent="Movement State Machine" index="0"]

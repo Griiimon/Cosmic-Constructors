@@ -46,7 +46,7 @@ func on_physics_process(delta: float):
 		return
 
 	if Input.is_action_just_pressed("jump"):
-		jumped.emit(Vector3.ZERO, jump_impulse)
+		jumped.emit()
 		return
 
 	if Input.is_action_just_pressed("jetpack"):
@@ -142,7 +142,10 @@ func post_move():
 
 
 func on_left_ground():
-	pass
+	if player.in_gravity():
+		jumped.emit(false)
+	else:
+		jetpack_enabled.emit()
 
 
 func on_input(event: InputEvent):

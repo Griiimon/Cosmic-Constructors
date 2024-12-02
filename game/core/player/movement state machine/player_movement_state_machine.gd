@@ -1,6 +1,7 @@
 class_name PlayerMovementStateMachine
 extends FiniteStateMachine
 
+@export var jump_impulse: float= 5.0
 
 @onready var eva_state: PlayerEvaState = $EVA
 @onready var seated_state: PlayerSeatedState = $Seated
@@ -19,7 +20,7 @@ func _ready() -> void:
 	seated_state.finished.connect(change_state.bind(eva_state))
 	
 	grid_state.jetpack_enabled.connect(init_eva)
-	grid_state.jumped.connect(init_eva)
+	grid_state.jumped.connect(jump)
 	
 	terrain_state.jetpack_enabled.connect(init_eva)
 	terrain_state.jumped.connect(jump)
@@ -43,17 +44,19 @@ func landed():
 		change_state(terrain_state)
 
 
-func init_eva(velocity: Vector3= Vector3.ZERO, impulse: float= 0.0):
+func init_eva(force_jetpack: bool= true):
 	change_state(eva_state)
-	player.linear_velocity= player.get_velocity() + velocity
+	if force_jetpack:
+		eva_state.jetpack_active= true
+	player.linear_velocity= player.get_velocity()
 
 
-func jump(velocity: Vector3= Vector3.ZERO, impulse: float= 0):
+func jump(impulse: bool= true):
 	change_state(jump_state)
-	player.linear_velocity= player.get_velocity() + velocity
+	player.linear_velocity= player.get_velocity()
 
-	if impulse > 0:
-		player.apply_central_impulse(player.global_basis.y * impulse)
+	if impulse:
+		player.apply_central_impulse(player.global_basis.y * jump_impulse)
 		jump_state.land_cooldown.start()
 
 

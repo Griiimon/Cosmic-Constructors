@@ -1,4 +1,8 @@
-x to turn jetpack off ( and shapecast collision check to snap to floor )
+jetpack angular lock
+
+grid jumping
+
+car reverse gear + check all calculations (clamp z velocities for wings etc)
 
 pick block should copy rotation
 
@@ -48,6 +52,7 @@ grid angular dampeners
 
 save player only in cryo pod, otherwise use default spawn points or medbay
 
+FIX landing walking on grid triggers left_ground continuously!?
 FIX wing collision shapes
 FIX getting stuck in terrain when going EVA ( will intersect_shape work against terrain? because Area didnt seem to => JOLT OPT-IN )
 FIX removing MultiBlocks can lead to crash ( only when splitting grids? )

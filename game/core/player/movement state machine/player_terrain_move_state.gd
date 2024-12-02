@@ -14,8 +14,8 @@ func continuous_align(delta: float):
 		player.global_transform= player.global_transform.interpolate_with(Utils.align_with_y(player.global_transform, get_floor_normal()), delta * 10)
 
 
-func on_left_ground():
-	if player.get_gravity().length():
-		jumped.emit()
-	else:
-		jetpack_enabled.emit()
+#func on_left_ground():
+	#if player.get_gravity().length():
+		#jumped.emit()
+	#else:
+		#jetpack_enabled.emit()

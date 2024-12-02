@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://0e4n38fliap8"]
+[gd_scene load_steps=12 format=3 uid="uid://0e4n38fliap8"]
 
+[ext_resource type="Material" uid="uid://b824lkgishwsd" path="res://game/data/blocks/peripheral connector/peripheral_connector_connected_material.tres" id="1_5rgwc"]
 [ext_resource type="Script" path="res://game/core/block/instances/peripheral_connector_instance.gd" id="1_bu7fi"]
 [ext_resource type="Material" uid="uid://cob7u37hdm61" path="res://game/data/blocks/peripheral connector/peripheral_connector_disabled_material.tres" id="2_80du7"]
+[ext_resource type="Material" uid="uid://b4uo20ehto5wu" path="res://game/data/blocks/peripheral connector/peripheral_connector_ready_material.tres" id="3_4jqfr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mbwpn"]
 size = Vector3(0.7, 0.5, 0.7)
@@ -23,12 +25,20 @@ roughness = 0.68
 material = SubResource("StandardMaterial3D_34nf0")
 size = Vector3(1, 0.6, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryx1f"]
+albedo_color = Color(0.980124, 0.593086, 0.320194, 1)
+metallic = 1.0
+roughness = 0.68
+
 [sub_resource type="BoxMesh" id="BoxMesh_canb3"]
-material = SubResource("StandardMaterial3D_34nf0")
+material = SubResource("StandardMaterial3D_ryx1f")
 size = Vector3(0.07, 0.4, 0.465)
 
 [node name="Peripheral Connector" type="Node3D"]
 script = ExtResource("1_bu7fi")
+light_material_disabled = ExtResource("2_80du7")
+light_material_ready = ExtResource("3_4jqfr")
+light_material_connected = ExtResource("1_5rgwc")
 
 [node name="Fixed Joint" type="JoltHingeJoint3D" parent="."]
 limit_enabled = true

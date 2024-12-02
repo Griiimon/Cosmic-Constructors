@@ -1,5 +1,5 @@
 class_name PeripheralConnectorInstance
-extends BlockInstanceOnOff
+extends BlockInstance
 
 enum State { IDLE, READY, CONNECTED }
 
@@ -7,12 +7,22 @@ enum State { IDLE, READY, CONNECTED }
 @export var light_material_ready: StandardMaterial3D
 @export var light_material_connected: StandardMaterial3D
 
+@onready var locked:= BlockPropBool.new("Locked", false, on_set_locked)
+
 @onready var joint: JoltHingeJoint3D = $"Fixed Joint"
 @onready var detection_area: Area3D = $"Detection Area"
 @onready var light: MeshInstance3D = $Light
 
 var state: State= State.IDLE: set= set_state
 
+
+
+func _ready() -> void:
+	default_interaction_property= locked
+
+
+func on_placed(grid: BlockGrid, grid_block: GridBlock):
+	joint.node_a= joint.get_path_to(grid)
 
 
 func set_state(s: State):
@@ -41,5 +51,17 @@ func set_state(s: State):
 			_on_detection_area_area_entered(detection_area.get_overlapping_areas()[0])
 
 
+func on_set_locked():
+	if locked.is_true(): 
+		if state == State.READY:
+			set_state(State.CONNECTED)
+		else:
+			locked.set_false()
+	else:
+		if state == State.CONNECTED:
+			set_state(State.IDLE)
+
+
 func _on_detection_area_area_entered(area: Area3D) -> void:
+	if state == State.CONNECTED: return
 	set_state.call_deferred(State.READY)

@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="PeripheralConnectorBlock" load_steps=2 format=3 uid="uid://dexmvkvccd1eh"]
+[gd_resource type="Resource" script_class="PeripheralConnectorBlock" load_steps=3 format=3 uid="uid://dexmvkvccd1eh"]
 
+[ext_resource type="PackedScene" uid="uid://0e4n38fliap8" path="res://game/data/blocks/peripheral connector/peripheral_connector.tscn" id="1_86asb"]
 [ext_resource type="Script" path="res://game/core/block/types/peripheral_connector_block.gd" id="1_l6jcf"]
 
 [resource]
@@ -10,4 +11,5 @@ max_hitpoints = 10
 custom_collision = false
 can_tick = false
 can_be_built = true
+scene = ExtResource("1_86asb")
 name = ""

@@ -140,6 +140,8 @@ var delta_time := 0.0
 
 var vehicle_inertia : Vector3
 
+var reverse: bool= false
+
 
 
 func _ready() -> void:
@@ -172,7 +174,28 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 		final_brake = 0
 
 	throttle_input= forward_drive
+	
+	if grid.linear_velocity.length() < 0.1:
+		if final_brake:
+			reverse= true
+		else:
+			reverse= false
+
+	if reverse:
+		if throttle_input:
+			final_brake= throttle_input
+			throttle_input= 0
+		else:
+			throttle_input= final_brake
+			final_brake= 0
+
+
+	DebugHud.send("Reverse", reverse)
+	DebugHud.send("Throttle", round(throttle_input))
+	
+
 	brake_input= final_brake
+	
 	steering_input= -round(grid.requested_movement.x)
 
 	# brake if movement opposite indended direction
@@ -201,7 +224,7 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 			process_steering(delta)
 		process_throttle(delta)
 		process_motor(delta)
-		process_drive(delta)
+		process_drive(reverse, delta)
 		process_forces(grid, delta)
 
 
@@ -284,12 +307,12 @@ func process_motor(_delta : float) -> void:
 	motor_rpm= throttle_amount * 1000
 
 
-func process_drive(delta : float) -> void:
-	process_axle_drive(motor_rpm, 0, delta)
+func process_drive(reverse: bool, delta : float) -> void:
+	process_axle_drive(motor_rpm, reverse, 0, delta)
 
 
-func process_axle_drive(torque : float, drive_inertia : float, delta : float) -> void:
-	wheel.process_torque(torque, drive_inertia, brake_force, false, delta)
+func process_axle_drive(torque : float, reverse, drive_inertia : float, delta : float) -> void:
+	wheel.process_torque(torque, reverse, drive_inertia, brake_force, false, delta)
 
 
 func process_forces(grid: BlockGrid, delta : float) -> void:

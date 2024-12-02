@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cn7c8npnm1ukd"]
+[gd_scene load_steps=4 format=3 uid="uid://cn7c8npnm1ukd"]
 
 [ext_resource type="Script" path="res://game/ui/game_ui.gd" id="1_2qjqn"]
 
@@ -6,6 +6,9 @@
 font_size = 36
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nsb8r"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_2qjqn")
@@ -27,3 +30,64 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 wait_time = 1.5
 one_shot = true
+
+[node name="Global MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="Global MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_nsb8r")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Global MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Jetpack Button" type="Button" parent="Global MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+button_mask = 0
+text = "Jetpack"
+
+[node name="Dampeners Button" type="Button" parent="Global MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+button_mask = 0
+text = "Dampeners"
+
+[node name="PanelContainer2" type="PanelContainer" parent="Global MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Global MarginContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Global MarginContainer/PanelContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="Velocity Label" type="Label" parent="Global MarginContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0 ms/s"
+horizontal_alignment = 2
+
+[node name="Gravity Label" type="Label" parent="Global MarginContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1 g"
+horizontal_alignment = 2

@@ -4,13 +4,29 @@ extends CanvasLayer
 @onready var temporary_info_label: Label = %"Temporary Info Label"
 @onready var temporary_info_label_cooldown: Timer = %"Temporary Info Label Cooldown"
 
+@onready var jetpack_button: Button = %"Jetpack Button"
+@onready var dampeners_button: Button = %"Dampeners Button"
+
+@onready var velocity_label: Label = %"Velocity Label"
+@onready var gravity_label: Label = %"Gravity Label"
+
+
 
 
 func _ready():
 	SignalManager.block_property_changed.connect(on_block_property_changed)
 	SignalManager.build_block_changed.connect(on_build_block_changed)
+	
+	SignalManager.toggle_jetpack.connect(func(b: bool): jetpack_button.disabled= not b)
+	SignalManager.toggle_dampeners.connect(func(b: bool): dampeners_button.disabled= not b)
+	
 	temporary_info_label_cooldown.timeout.connect(func(): temporary_info_label.hide())
 
+
+func _physics_process(delta: float) -> void:
+	var player: Player= Global.player
+	if player:
+		velocity_label.text= "%.1f m/s" % player.get_velocity().length()
 
 func on_block_property_changed(prop: BlockProperty):
 	update_temporary_info_label(prop.get_as_text())

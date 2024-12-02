@@ -126,12 +126,15 @@ current_state = NodePath("EVA")
 
 [node name="EVA" type="Node" parent="Movement State Machine" index="0"]
 script = ExtResource("3_o2tyv")
+jetpack_active = true
+dampeners_active = true
 yaw_factor = 2000.0
 pitch_factor = 2000.0
 roll_factor = 15000.0
 boost_factor = 3.0
 damping_factor = 10.0
 min_land_velocity = 0.2
+metadata/_edit_pinned_properties_ = [&"jetpack_active", &"dampeners_active"]
 
 [node name="Seated" type="Node" parent="Movement State Machine" index="1"]
 script = ExtResource("4_aaxal")

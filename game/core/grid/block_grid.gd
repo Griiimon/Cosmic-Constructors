@@ -414,6 +414,7 @@ func serialize()-> Dictionary:
 
 static func deserialize(data: Dictionary, new_world: World)-> BlockGrid:
 	var grid:= BlockGrid.new()
+	grid.world= new_world
 	grid.position= str_to_var("Vector3" + data["position"])
 	grid.rotation= str_to_var("Vector3" + data["rotation"])
 	grid.linear_velocity= str_to_var("Vector3" + data["linear_velocity"])

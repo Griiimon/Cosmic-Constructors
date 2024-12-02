@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://mlr7bkamt0ux"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/hinge_instance.gd" id="1_5coxj"]
+[ext_resource type="Resource" uid="uid://b678we7hljnwt" path="res://game/data/blocks/hinge head/hinge_head_block.tres" id="2_h4ws0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_eb3b1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_abi0j"]
+albedo_color = Color(0.440336, 0.440336, 0.440336, 1)
+metallic = 1.0
+roughness = 0.69
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_j0glr"]
+material = SubResource("StandardMaterial3D_abi0j")
+height = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_uw3vi"]
+material = SubResource("StandardMaterial3D_abi0j")
+height = 0.5
+is_hemisphere = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1pmkn"]
+albedo_color = Color(0, 0, 0, 1)
+metallic = 0.75
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dpk3c"]
+material = SubResource("StandardMaterial3D_1pmkn")
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.1
+
+[node name="Hinge" type="Node3D"]
+script = ExtResource("1_5coxj")
+hinge_head_block = ExtResource("2_h4ws0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_eb3b1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.242529, 0)
+mesh = SubResource("CylinderMesh_j0glr")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.162491, 0)
+mesh = SubResource("SphereMesh_uw3vi")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1.465, 0, 0.0964232, 0)
+mesh = SubResource("CylinderMesh_dpk3c")
+
+[node name="JoltHingeJoint3D" type="JoltHingeJoint3D" parent="."]
+limit_enabled = true
+limit_upper = 1.5708
+limit_lower = -1.5708
+motor_enabled = true
+motor_max_torque = 10000.0
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, 0)

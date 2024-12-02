@@ -32,10 +32,12 @@ func _ready() -> void:
 	continuous_cd= true
 	center_of_mass_mode= CenterOfMassMode.CENTER_OF_MASS_MODE_CUSTOM
 	
-	#physics_material_override= PhysicsMaterial.new()
+	physics_material_override= PhysicsMaterial.new()
 	#physics_material_override.absorbent= true
 	#physics_material_override.bounce= 1
+	physics_material_override.friction= 0.5
 
+	# Processed last to catch all potential control inputs
 	process_physics_priority= 5
 
 	add_child(load("res://game/core/components/damage component/damage_component.tscn").instantiate())

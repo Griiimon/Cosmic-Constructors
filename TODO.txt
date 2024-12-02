@@ -1,3 +1,9 @@
+parking brake + ui display
+
+Alt fps look around while fixed
+
+Excavator inner ( terrain collision ) and outer ( grid + object collision ) need both be rigidbodies and connected by fixed joint
+
 PeripheralGridEntity
 
 air ship
@@ -6,7 +12,6 @@ control right-click in tests to remove entire grid
 
 add non solid, frozen rigidbody to player as gravity gauge?
 
-parking brake + ui display
 
 pick block should copy rotation
 
@@ -49,7 +54,6 @@ BlockInstance on_update() for rotor/piston !?
 build ghost: just make all materials white, no transparency and remove any texture 
 	( half transparent shader + texture only solution )
 
-Alt fps look around while fixed
 
 grid angular dampeners
 
@@ -64,6 +68,7 @@ FIX thruster particles are off when rotated=> cant reproduce ( double precision 
 FIX ghost sometimes getting left behind on moving grid
 FIX bottom out wheel reverse speed hack => dont show wheel rotation
 FIX jetpack counterforce against gravity
+FIX smooth block rotation starts to fail at a certain point ( euler lock? )
 
 IS FIXED?
 	FIX sometimes wrong ( downwards ) momentum when strafing off grid 

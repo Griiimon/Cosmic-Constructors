@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cthorbl78mho6"]
+
+[ext_resource type="Script" path="res://game/core/misc/peripheral connector counterpart/peripheral_connector_counterpart.gd" id="1_lu3q6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cyvci"]
+radius = 0.1
+
+[node name="Peripheral Connector Counterpart" type="Area3D"]
+collision_layer = 256
+monitoring = false
+script = ExtResource("1_lu3q6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_cyvci")

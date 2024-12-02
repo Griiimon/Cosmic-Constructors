@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PeripheralConnectorBlock" load_steps=2 format=3 uid="uid://dexmvkvccd1eh"]
+
+[ext_resource type="Script" path="res://game/core/block/types/peripheral_connector_block.gd" id="1_l6jcf"]
+
+[resource]
+script = ExtResource("1_l6jcf")
+size = Vector3i(1, 1, 1)
+weight = 10.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = false
+can_be_built = true
+name = ""

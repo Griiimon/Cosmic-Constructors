@@ -1,0 +1,2 @@
+class_name PeripheralConnectorCounterpart
+extends Area3D

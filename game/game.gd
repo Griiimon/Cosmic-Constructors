@@ -26,6 +26,8 @@ func _ready() -> void:
 			spawn_player.call_deferred()
 		elif not NetworkManager.is_server:
 			ServerManager.request_spawn.rpc_id(1)
+	else:
+		assert(false, "Player should be spawned through spawner")
 
 
 func spawn_player():

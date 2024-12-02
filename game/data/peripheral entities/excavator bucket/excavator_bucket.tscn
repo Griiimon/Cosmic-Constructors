@@ -139,3 +139,4 @@ shape = SubResource("BoxShape3D_o4pt8")
 [node name="CollisionShape3D11" type="CollisionShape3D" parent="Inner Rigidbody"]
 transform = Transform3D(1, 0, 0, 0, -0.649302, -0.760531, 0, 0.760531, -0.649302, 0, 1.10108, 0.472655)
 shape = SubResource("BoxShape3D_6o6sn")
+disabled = true

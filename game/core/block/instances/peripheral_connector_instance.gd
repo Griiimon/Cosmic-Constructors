@@ -23,6 +23,7 @@ func _ready() -> void:
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	joint.node_a= joint.get_path_to(grid)
+	joint.enabled= false
 
 
 func set_state(s: State):
@@ -35,14 +36,15 @@ func set_state(s: State):
 	match state:
 		State.IDLE:
 			joint.node_b= ""
+			joint.enabled= false
 			light.mesh.surface_set_material(0,light_material_disabled)
 		State.READY:
-			joint.node_b= ""
 			light.mesh.surface_set_material(0,light_material_ready)
 		State.CONNECTED:
 			assert(detection_area.has_overlapping_areas())
 			var target_area: PeripheralConnectorCounterpart= detection_area.get_overlapping_areas()[0]
 			assert(target_area)
+			joint.enabled= true
 			joint.node_b= joint.get_path_to(target_area.body)
 			light.mesh.surface_set_material(0,light_material_connected)
 	
@@ -65,3 +67,8 @@ func on_set_locked():
 func _on_detection_area_area_entered(area: Area3D) -> void:
 	if state == State.CONNECTED: return
 	set_state.call_deferred(State.READY)
+
+
+func _on_detection_area_area_exited(area: Area3D) -> void:
+	if state == State.CONNECTED: return
+	set_state.call_deferred(State.IDLE)

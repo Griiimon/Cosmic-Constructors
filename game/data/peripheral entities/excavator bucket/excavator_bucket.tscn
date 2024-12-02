@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://w6iv7medt6r7"]
+[gd_scene load_steps=13 format=3 uid="uid://w6iv7medt6r7"]
 
+[ext_resource type="Script" path="res://game/data/peripheral entities/excavator bucket/excavator_bucket.gd" id="1_f3mok"]
 [ext_resource type="PackedScene" uid="uid://cthorbl78mho6" path="res://game/core/misc/peripheral connector counterpart/peripheral_connector_counterpart.tscn" id="1_uq3ae"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y08qp"]
@@ -15,17 +16,34 @@ size = Vector3(2.5, 0.7, 0.05)
 material = SubResource("StandardMaterial3D_y08qp")
 size = Vector3(1.2, 0.7, 0.05)
 
+[sub_resource type="BoxMesh" id="BoxMesh_djevy"]
+material = SubResource("StandardMaterial3D_y08qp")
+size = Vector3(1.42, 1.09, 0.155)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_fjihu"]
 size = Vector3(2.5, 0.05, 0.69)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0vldo"]
+size = Vector3(2.5, 0.05, 0.69)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hcep3"]
+size = Vector3(2.5, 0.05, 0.69)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xfrcn"]
+size = Vector3(0.1, 0.87, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o4pt8"]
 size = Vector3(0.1, 1, 1)
 
-[node name="RigidBody3D" type="RigidBody3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_6o6sn"]
+size = Vector3(1, 1, 0.15)
+
+[node name="Excavator Bucket" type="RigidBody3D"]
 collision_layer = 32
 collision_mask = 4
 mass = 50.0
 continuous_cd = true
+script = ExtResource("1_f3mok")
 
 [node name="Model" type="Node3D" parent="."]
 
@@ -59,32 +77,65 @@ transform = Transform3D(6.12323e-17, 0, -1, 0.376402, 0.926456, 2.3048e-17, 0.92
 mesh = SubResource("BoxMesh_wyujp")
 skeleton = NodePath("../..")
 
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -0.649302, -0.760531, 0, 0.760531, -0.649302, 0, 1.2179, 0.62057)
+mesh = SubResource("BoxMesh_djevy")
+skeleton = NodePath("../..")
+
+[node name="Peripheral Connector Counterpart" parent="." instance=ExtResource("1_uq3ae")]
+transform = Transform3D(1, 0, 0, 0, 0.790219, -0.612824, 0, 0.612824, 0.790219, 0, 1.26853, 0.682296)
+
+[node name="JoltSliderJoint3D" type="JoltSliderJoint3D" parent="."]
+limit_enabled = true
+node_a = NodePath("..")
+node_b = NodePath("../Inner Rigidbody")
+
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.194855, 0)
 shape = SubResource("BoxShape3D_fjihu")
 
-[node name="Peripheral Connector Counterpart" parent="." instance=ExtResource("1_uq3ae")]
-transform = Transform3D(1, 0, 0, 0, 0.790219, -0.612824, 0, 0.612824, 0.790219, 0, 1.213, 0.645831)
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.848695, 0.528883, 0, -0.528883, 0.848695, 0, 0.221752, 0.587534)
+shape = SubResource("BoxShape3D_0vldo")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-collision_layer = 16
-collision_mask = 0
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0416315, 0.999133, 0, -0.999133, -0.0416315, 0, 0.699082, 0.840474)
+shape = SubResource("BoxShape3D_hcep3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.207, 0.6, 0.16)
+shape = SubResource("BoxShape3D_xfrcn")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.207, 0.6, 0.16)
+shape = SubResource("BoxShape3D_xfrcn")
+
+[node name="Inner Rigidbody" type="RigidBody3D" parent="."]
+collision_layer = 32
+collision_mask = 51
+gravity_scale = 0.0
+center_of_mass_mode = 1
+continuous_cd = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Inner Rigidbody"]
 shape = SubResource("BoxShape3D_fjihu")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Inner Rigidbody"]
 transform = Transform3D(1, 0, 0, 0, 0.848695, 0.528883, 0, -0.528883, 0.848695, 0, 0.221752, 0.587534)
 shape = SubResource("BoxShape3D_fjihu")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Inner Rigidbody"]
 transform = Transform3D(1, 0, 0, 0, -0.0416315, 0.999133, 0, -0.999133, -0.0416315, 0, 0.699082, 0.840474)
 shape = SubResource("BoxShape3D_fjihu")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Inner Rigidbody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.20661, 0.545123, 0.16015)
 shape = SubResource("BoxShape3D_o4pt8")
 
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="Inner Rigidbody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.207, 0.545, 0.16)
 shape = SubResource("BoxShape3D_o4pt8")
+
+[node name="CollisionShape3D11" type="CollisionShape3D" parent="Inner Rigidbody"]
+transform = Transform3D(1, 0, 0, 0, -0.649302, -0.760531, 0, 0.760531, -0.649302, 0, 1.10108, 0.472655)
+shape = SubResource("BoxShape3D_6o6sn")

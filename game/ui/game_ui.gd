@@ -29,6 +29,8 @@ func _ready():
 	property_viewer_panel.hide()
 	add_child(property_viewer_panel)
 
+	SignalManager.interact_with_block.connect(interact_with_block)
+
 
 func _physics_process(delta: float) -> void:
 	var player: Player= Global.player
@@ -48,3 +50,7 @@ func update_temporary_info_label(s: String):
 	temporary_info_label.show()
 	temporary_info_label_cooldown.stop()
 	temporary_info_label_cooldown.start()
+
+
+func interact_with_block(grid_block: GridBlock, grid: BlockGrid, player: Player):
+	property_viewer_panel.update(grid_block, grid)

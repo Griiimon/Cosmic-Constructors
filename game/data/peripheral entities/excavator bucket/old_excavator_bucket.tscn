@@ -1,0 +1,142 @@
+[gd_scene load_steps=13 format=3 uid="uid://boecl5oume758"]
+
+[ext_resource type="Script" path="res://game/data/peripheral entities/excavator bucket/excavator_bucket.gd" id="1_jt2o1"]
+[ext_resource type="PackedScene" uid="uid://cthorbl78mho6" path="res://game/core/misc/peripheral connector counterpart/peripheral_connector_counterpart.tscn" id="2_3ywjm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y08qp"]
+albedo_color = Color(1, 0.72549, 0.0431373, 1)
+metallic = 1.0
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_c7rxy"]
+material = SubResource("StandardMaterial3D_y08qp")
+size = Vector3(2.5, 0.7, 0.05)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wyujp"]
+material = SubResource("StandardMaterial3D_y08qp")
+size = Vector3(1.2, 0.7, 0.05)
+
+[sub_resource type="BoxMesh" id="BoxMesh_djevy"]
+material = SubResource("StandardMaterial3D_y08qp")
+size = Vector3(1.42, 1.09, 0.155)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fjihu"]
+size = Vector3(2.5, 0.05, 0.69)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0vldo"]
+size = Vector3(2.5, 0.05, 0.69)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hcep3"]
+size = Vector3(2.5, 0.05, 0.69)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xfrcn"]
+size = Vector3(0.1, 0.87, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o4pt8"]
+size = Vector3(0.1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6o6sn"]
+size = Vector3(1, 1, 0.15)
+
+[node name="Excavator Bucket" type="RigidBody3D"]
+collision_layer = 32
+collision_mask = 4
+mass = 50.0
+continuous_cd = true
+script = ExtResource("1_jt2o1")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.0491287, 0.998792, 0, -0.998792, 0.0491287, 0, 0, 0)
+mesh = SubResource("BoxMesh_c7rxy")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -0.516817, 0.856096, 0, -0.856096, -0.516817, 0, 0.178131, 0.607795)
+mesh = SubResource("BoxMesh_c7rxy")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -0.999682, -0.0251999, 0, 0.0251999, -0.999682, 0, 0.69889, 0.864007)
+mesh = SubResource("BoxMesh_c7rxy")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -0.649302, -0.760531, 0, 0.760531, -0.649302, 0, 1.21586, 0.553666)
+mesh = SubResource("BoxMesh_c7rxy")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(6.12323e-17, 0, -1, 0.376402, 0.926456, 2.3048e-17, 0.926456, -0.376402, 5.67291e-17, 1.20104, 0.553597, 0.205511)
+mesh = SubResource("BoxMesh_wyujp")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(6.12323e-17, 0, -1, 0.376402, 0.926456, 2.3048e-17, 0.926456, -0.376402, 5.67291e-17, -1.201, 0.554, 0.206)
+mesh = SubResource("BoxMesh_wyujp")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -0.649302, -0.760531, 0, 0.760531, -0.649302, 0, 1.2179, 0.62057)
+mesh = SubResource("BoxMesh_djevy")
+skeleton = NodePath("../..")
+
+[node name="Peripheral Connector Counterpart" parent="." instance=ExtResource("2_3ywjm")]
+transform = Transform3D(1, 0, 0, 0, 0.790219, -0.612824, 0, 0.612824, 0.790219, 0, 1.26853, 0.682296)
+
+[node name="JoltSliderJoint3D" type="JoltSliderJoint3D" parent="."]
+limit_enabled = true
+node_a = NodePath("..")
+node_b = NodePath("../Inner Rigidbody")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.194855, 0)
+shape = SubResource("BoxShape3D_fjihu")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.848695, 0.528883, 0, -0.528883, 0.848695, 0, 0.221752, 0.587534)
+shape = SubResource("BoxShape3D_0vldo")
+
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0416315, 0.999133, 0, -0.999133, -0.0416315, 0, 0.699082, 0.840474)
+shape = SubResource("BoxShape3D_hcep3")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.207, 0.6, 0.16)
+shape = SubResource("BoxShape3D_xfrcn")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.207, 0.6, 0.16)
+shape = SubResource("BoxShape3D_xfrcn")
+
+[node name="Inner Rigidbody" type="RigidBody3D" parent="."]
+collision_layer = 32
+collision_mask = 51
+gravity_scale = 0.0
+center_of_mass_mode = 1
+continuous_cd = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Inner Rigidbody"]
+shape = SubResource("BoxShape3D_fjihu")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Inner Rigidbody"]
+transform = Transform3D(1, 0, 0, 0, 0.848695, 0.528883, 0, -0.528883, 0.848695, 0, 0.221752, 0.587534)
+shape = SubResource("BoxShape3D_fjihu")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Inner Rigidbody"]
+transform = Transform3D(1, 0, 0, 0, -0.0416315, 0.999133, 0, -0.999133, -0.0416315, 0, 0.699082, 0.840474)
+shape = SubResource("BoxShape3D_fjihu")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Inner Rigidbody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.20661, 0.545123, 0.16015)
+shape = SubResource("BoxShape3D_o4pt8")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="Inner Rigidbody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.207, 0.545, 0.16)
+shape = SubResource("BoxShape3D_o4pt8")
+
+[node name="CollisionShape3D11" type="CollisionShape3D" parent="Inner Rigidbody"]
+transform = Transform3D(1, 0, 0, 0, -0.649302, -0.760531, 0, 0.760531, -0.649302, 0, 1.10108, 0.472655)
+shape = SubResource("BoxShape3D_6o6sn")
+disabled = true

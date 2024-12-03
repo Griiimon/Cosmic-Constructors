@@ -41,7 +41,7 @@ func on_physics_process(_delta: float):
 		var collision_pos: Vector3= raycast.get_collision_point() - raycast.global_basis.z * 0.05
 		var grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_pos)
 		if grid_block and grid_block.get_block_instance():
-			if Input.is_action_pressed("block_interact"):
+			if Input.is_action_pressed("open_block_property_panel"):
 				SignalManager.interact_with_block.emit(grid_block, grid, player)
 				return
 

@@ -422,7 +422,7 @@ static func deserialize(data: Dictionary, new_world: World)-> BlockGrid:
 	grid.rotation= str_to_var("Vector3" + data["rotation"])
 	grid.linear_velocity= str_to_var("Vector3" + data["linear_velocity"])
 	grid.angular_velocity= str_to_var("Vector3" + data["angular_velocity"])
-	grid.parking_brake= data["parking_brake"]
+	grid.parking_brake= Utils.get_key_or_default(data, "parking_brake", false)
 	
 	new_world.grids.add_child(grid)
 

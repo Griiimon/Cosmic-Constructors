@@ -17,3 +17,9 @@ static func free_children(node: Node):
 	for child in node.get_children():
 		node.remove_child(child)
 		child.queue_free()
+
+
+static func get_key_or_default(dict: Dictionary, key: String, default: Variant)-> Variant:
+	if not dict.has(key):
+		return default
+	return dict[key]

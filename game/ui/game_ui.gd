@@ -53,4 +53,4 @@ func update_temporary_info_label(s: String):
 
 
 func interact_with_block(grid_block: GridBlock, grid: BlockGrid, player: Player):
-	property_viewer_panel.update(grid_block, grid)
+	property_viewer_panel.update(grid_block, grid, player)

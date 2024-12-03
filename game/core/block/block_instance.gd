@@ -37,3 +37,14 @@ func serialize()-> Dictionary:
 func deserialize(data: Dictionary):
 	for prop_name in data.keys():
 		(get(prop_name) as BlockProperty).set_variant(data[prop_name])
+
+
+func get_properties()-> Array[BlockProperty]:
+	var result: Array[BlockProperty]
+	
+	for prop in get_property_list():
+		match prop.class_name:
+			"BlockPropBool", "BlockPropFloat", "BlockPropInt":
+				result.append(get(prop.name))
+	
+	return result

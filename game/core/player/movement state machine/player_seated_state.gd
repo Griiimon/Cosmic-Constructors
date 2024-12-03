@@ -57,6 +57,10 @@ func on_physics_process(_delta: float):
 		# TODO account for seat yaw, pitch, roll
 		get_grid().request_rotation(Vector3(0, 0, -deg_to_rad(roll_axis)))
 
+	if Input.is_action_just_pressed("parking_brake"):
+		get_grid().parking_brake= not get_grid().parking_brake
+		SignalManager.toggle_parking_brake.emit(get_grid().parking_brake)
+
 
 func on_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

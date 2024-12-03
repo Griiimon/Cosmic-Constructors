@@ -11,6 +11,7 @@ var requested_movement: Vector3
 var requested_rotation: Vector3
 
 var inertial_dampeners: bool= false
+var parking_brake: bool= false
 
 var total_gyro_strength: float= 0
 
@@ -20,6 +21,7 @@ var requires_integrity_check:= false
 
 var effects: Array[BlockGridBaseEffect]
 
+# TODO obsolete?
 var current_gravity: Vector3
 
 
@@ -387,6 +389,7 @@ func serialize()-> Dictionary:
 	data["rotation"]= rotation
 	data["linear_velocity"]= linear_velocity
 	data["angular_velocity"]= angular_velocity
+	data["parking_brake"]= parking_brake
 	
 	data["blocks"]= []
 	
@@ -419,6 +422,8 @@ static func deserialize(data: Dictionary, new_world: World)-> BlockGrid:
 	grid.rotation= str_to_var("Vector3" + data["rotation"])
 	grid.linear_velocity= str_to_var("Vector3" + data["linear_velocity"])
 	grid.angular_velocity= str_to_var("Vector3" + data["angular_velocity"])
+	grid.parking_brake= data["parking_brake"]
+	
 	new_world.grids.add_child(grid)
 
 	for item: Dictionary in data["blocks"]:

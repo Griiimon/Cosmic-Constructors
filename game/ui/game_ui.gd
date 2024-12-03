@@ -8,6 +8,7 @@ extends CanvasLayer
 
 @onready var jetpack_button: Button = %"Jetpack Button"
 @onready var dampeners_button: Button = %"Dampeners Button"
+@onready var parking_brake_button: Button = %"Parking Brake Button"
 
 @onready var velocity_label: Label = %"Velocity Label"
 @onready var gravity_label: Label = %"Gravity Label"
@@ -22,7 +23,8 @@ func _ready():
 	
 	SignalManager.toggle_jetpack.connect(func(b: bool): jetpack_button.disabled= not b)
 	SignalManager.toggle_dampeners.connect(func(b: bool): dampeners_button.disabled= not b)
-	
+	SignalManager.toggle_parking_brake.connect(func(b: bool): parking_brake_button.disabled= not b)
+		
 	temporary_info_label_cooldown.timeout.connect(func(): temporary_info_label.hide())
 
 	property_viewer_panel= PROPERTY_VIEWER_SCENE.instantiate()

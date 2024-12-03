@@ -174,6 +174,10 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 		final_brake = 0
 
 	throttle_input= forward_drive
+
+	if grid.parking_brake:
+		final_brake= 1
+		throttle_input= 0
 	
 	if grid.linear_velocity.length() < 0.1:
 		if final_brake:

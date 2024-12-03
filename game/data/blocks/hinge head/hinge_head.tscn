@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ceeyi3dwtmdfv"]
+[gd_scene load_steps=8 format=3 uid="uid://ceeyi3dwtmdfv"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_0j1js"]
 
@@ -20,6 +20,16 @@ material = SubResource("StandardMaterial3D_31ojv")
 height = 0.5
 is_hemisphere = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ugw6"]
+albedo_color = Color(0.188371, 0.188372, 0.188371, 1)
+metallic = 0.75
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_isyjc"]
+material = SubResource("StandardMaterial3D_2ugw6")
+top_radius = 0.55
+bottom_radius = 0.55
+height = 0.2
+
 [node name="Hinge Head" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -33,3 +43,7 @@ mesh = SubResource("BoxMesh_idk8x")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, -1.22465e-16, 0, 1.22465e-16, -1, 0, 0, 0, 1, 0, 0.00462979, 0)
 mesh = SubResource("SphereMesh_l7rsm")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0194417, 0.999811, 0, -0.999811, -0.0194417, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_isyjc")

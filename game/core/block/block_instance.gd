@@ -40,6 +40,7 @@ func serialize()-> Dictionary:
 
 func deserialize(data: Dictionary):
 	for prop_name in data.keys():
+		#TODO make BlockProperty key/array
 		(get(prop_name) as BlockProperty).set_variant(data[prop_name])
 
 

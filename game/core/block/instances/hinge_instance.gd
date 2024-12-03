@@ -31,7 +31,7 @@ func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionar
 	
 	
 func restore_grid_connection(grid: BlockGrid, grid_block: GridBlock, sub_grid_id: int):
-	var sub_grid: BlockGrid
+	var sub_grid: BlockGrid= grid.world.get_grid(sub_grid_id)
 	
 	joint.node_a= joint.get_path_to(grid)
 	joint.node_b= joint.get_path_to(sub_grid)
@@ -50,6 +50,3 @@ func serialize()-> Dictionary:
 	var data: Dictionary= super()
 	data["sub_grid_id"]= sub_grid.get_id()
 	return data
-
-
-#func deserialize(data: Dictionary):

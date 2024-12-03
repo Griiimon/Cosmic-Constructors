@@ -1,3 +1,5 @@
+BlockInstance.on_restore() is called from load grid, defaults to on_placed() but can be rerouted for blocks that spawn sub grids
+
 parking brake + ui display
 
 Alt fps look around while fixed

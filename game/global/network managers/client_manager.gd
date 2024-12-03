@@ -27,7 +27,7 @@ func join(address: String, port: int):
 	ClientManager.set_physics_process(true)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Global.game:
 		if Global.player:
 			ServerManager.receive_player_state.rpc_id(1, PlayerSyncState.build_sync_state(Global.player))

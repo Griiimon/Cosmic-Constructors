@@ -12,7 +12,7 @@ func on_enter():
 	assert(not player.freeze)
 
 
-func on_physics_process(delta: float):
+func on_physics_process(_delta: float):
 	if player.floor_shapecast.is_colliding() and can_land():
 		landed.emit()
 		return

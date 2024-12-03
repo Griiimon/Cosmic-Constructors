@@ -42,10 +42,10 @@ func spawn_player():
 
 
 func add_peer(player_state: Dictionary):
-	var player: BasePlayer= BASE_PLAYER_SCENE.instantiate()
-	player.name= str(PlayerSyncState.get_peer_id(player_state))
-	peers.add_child(player, true)
-	PlayerSyncState.parse_sync_state(player, player_state)
+	var base_player: BasePlayer= BASE_PLAYER_SCENE.instantiate()
+	base_player.name= str(PlayerSyncState.get_peer_id(player_state))
+	peers.add_child(base_player, true)
+	PlayerSyncState.parse_sync_state(base_player, player_state)
 
 
 func get_peer(peer_id: int)-> BasePlayer:

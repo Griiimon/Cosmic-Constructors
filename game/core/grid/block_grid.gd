@@ -447,7 +447,7 @@ func can_place_block_at_global(block: Block, global_pos: Vector3, block_rotation
 	return true
 
 
-func get_multi_block_positions(block: Block, pos: Vector3i, basis: Basis)-> Array[Vector3i]:
+func get_multi_block_positions(block: Block, pos: Vector3i, block_basis: Basis)-> Array[Vector3i]:
 	var result: Array[Vector3i]= []
 	for x in block.size.x:
 		for y in block.size.y:
@@ -456,7 +456,7 @@ func get_multi_block_positions(block: Block, pos: Vector3i, basis: Basis)-> Arra
 				if offset:
 					# FIXME this calculation seems so wrong but it works
 					# 	is it because my multi blocks are rotated to face -z by default?
-					result.append(pos - Vector3i(basis * offset))
+					result.append(pos - Vector3i(block_basis * offset))
 	return result
 
 

@@ -30,7 +30,7 @@ var is_value_selected: bool= false:
 
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not visible: return
 	
 	var global_block_pos: Vector3= grid.get_global_block_pos(block.local_pos)

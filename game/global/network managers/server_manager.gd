@@ -29,7 +29,7 @@ func host(port: int, game_scene: PackedScene):
 	get_tree().change_scene_to_packed.call_deferred(game_scene)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if ticks % 3 == 0:
 		var world_state: Dictionary
 		WorldSyncState.add_player_states(world_state, player_states.values())

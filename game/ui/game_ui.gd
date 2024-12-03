@@ -32,7 +32,7 @@ func _ready():
 	SignalManager.interact_with_block.connect(interact_with_block)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var player: Player= Global.player
 	if player:
 		velocity_label.text= "%.1f m/s" % player.get_velocity().length()

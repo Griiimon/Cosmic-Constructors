@@ -15,15 +15,15 @@ func toggle():
 	super()
 
 
-func increase(modifier: int):
+func increase(_modifier: int):
 	toggle()
 
 
-func decrease(modifier: int):
+func decrease(_modifier: int):
 	toggle()
 
 
-func change_value(modifier: int, delta: int):
+func change_value(_modifier: int, _delta: int):
 	toggle()
 	
 

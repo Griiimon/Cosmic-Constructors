@@ -9,7 +9,7 @@ func init(player: Player):
 	player.movement_state_machine.eva_state.state_exited.connect(deactivate_thrusters)
 
 
-func tick(player: Player, delta: float):
+func tick(player: Player, _delta: float):
 	if not player.movement_state_machine.eva_state.is_current_state(): return
 	var move_vec: Vector3= player.movement_state_machine.eva_state.move_vec
 	

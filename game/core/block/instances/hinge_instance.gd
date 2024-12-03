@@ -32,4 +32,4 @@ func change_speed():
 
 
 func on_set_active():
-	joint.motor_target_velocity= rotation_speed.get_value_f() if active.is_true() else 0
+	joint.motor_target_velocity= rotation_speed.get_value_f() if active.is_true() else 0.0

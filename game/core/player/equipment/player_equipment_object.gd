@@ -5,9 +5,9 @@ var item: PlayerEquipmentItem
 
 
 
-func init(player: Player):
+func init(_player: Player):
 	pass
 
 
-func tick(player: Player, delta: float):
+func tick(_player: Player, _delta: float):
 	pass

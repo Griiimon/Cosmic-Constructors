@@ -21,7 +21,7 @@ func _ready() -> void:
 	default_interaction_property= locked
 
 
-func on_placed(grid: BlockGrid, grid_block: GridBlock):
+func on_placed(grid: BlockGrid, _grid_block: GridBlock):
 	joint.node_a= joint.get_path_to(grid)
 	joint.enabled= false
 
@@ -64,11 +64,11 @@ func on_set_locked():
 			set_state(State.IDLE)
 
 
-func _on_detection_area_area_entered(area: Area3D) -> void:
+func _on_detection_area_area_entered(_area: Area3D) -> void:
 	if state == State.CONNECTED: return
 	set_state.call_deferred(State.READY)
 
 
-func _on_detection_area_area_exited(area: Area3D) -> void:
+func _on_detection_area_area_exited(_area: Area3D) -> void:
 	if state == State.CONNECTED: return
 	set_state.call_deferred(State.IDLE)

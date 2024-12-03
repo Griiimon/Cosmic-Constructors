@@ -185,7 +185,7 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 		else:
 			reverse= false
 
-	if reverse:
+	if reverse and not grid.parking_brake:
 		if throttle_input:
 			final_brake= throttle_input
 			throttle_input= 0

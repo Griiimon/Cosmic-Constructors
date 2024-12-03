@@ -511,3 +511,7 @@ func get_blocks()-> Array:
 
 func is_occupied(grid_pos: Vector3i)-> bool:
 	return blocks.has(grid_pos)
+
+
+func get_id()-> int:
+	return world.get_grid_id(self)

@@ -10,7 +10,7 @@ func on_placed(_grid: BlockGrid, _grid_block: GridBlock):
 	pass
 
 
-func on_restored(grid: BlockGrid, grid_block: GridBlock):
+func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
 	on_placed(grid, grid_block)
 
 

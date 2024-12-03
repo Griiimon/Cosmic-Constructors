@@ -57,7 +57,7 @@ func init_mass_indicator():
 	mass_indicator.hide()
 
 
-func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO, restore: bool= false)-> BaseGridBlock:
+func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO, restore_data: Dictionary= {})-> BaseGridBlock:
 	var grid_block: BaseGridBlock
 	if block.is_multi_block():
 		grid_block= MultiGridBlock.new(block, pos, block_rotation)
@@ -109,8 +109,8 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 			blocks[child_grid_block.local_pos]= child_grid_block
 
 	if block_node is BlockInstance:
-		if restore:
-			(block_node as BlockInstance).on_restored(self, grid_block)
+		if not restore_data.is_empty():
+			(block_node as BlockInstance).on_restored(self, grid_block, restore_data)
 		else:
 			(block_node as BlockInstance).on_placed(self, grid_block)
 
@@ -432,7 +432,7 @@ static func deserialize(data: Dictionary, new_world: World)-> BlockGrid:
 	for item: Dictionary in data["blocks"]:
 		var block_position: Vector3= str_to_var("Vector3" + item["position"])
 		var block_rotation: Vector3= str_to_var("Vector3" + item["rotation"])
-		var block: BaseGridBlock= grid.add_block(GameData.get_block_definition(item["definition"]), block_position, block_rotation, true)
+		var block: BaseGridBlock= grid.add_block(GameData.get_block_definition(item["definition"]), block_position, block_rotation, item)
 		if item.has("hitpoints"):
 			(block as GridBlock).hitpoints= item["hitpoints"]
 		if item.has("data"):

@@ -34,23 +34,24 @@ func on_physics_process(_delta: float):
 	if Input.is_action_just_pressed("build"):
 		build.emit()
 		return
+
+	var raycast: RayCast3D= player.block_interact_raycast
+	var grid: BlockGrid
+	var collision_pos: Vector3
+	var grid_block: BaseGridBlock
 	
-	if player.block_interact_raycast.is_colliding():
-		var raycast: RayCast3D= player.block_interact_raycast
-		var grid: BlockGrid= raycast.get_collider()
-		var collision_pos: Vector3= raycast.get_collision_point() - raycast.global_basis.z * 0.05
-		var grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_pos)
+	if raycast.is_colliding():
+		grid= raycast.get_collider()
+		collision_pos= raycast.get_collision_point() - raycast.global_basis.z * 0.05
+		grid_block= grid.get_block_from_global_pos(collision_pos)
+		
 		if grid_block and grid_block.get_block_instance():
 			if Input.is_action_pressed("open_block_property_panel"):
 				SignalManager.interact_with_block.emit(grid_block, grid, player)
 				return
 
 	if Input.is_action_just_pressed("toggle_block_property") or Input.is_action_just_pressed("toggle_block_alt_property"):
-		if player.block_interact_raycast.is_colliding():
-			var raycast: RayCast3D= player.block_interact_raycast
-			var grid: BlockGrid= raycast.get_collider()
-			var collision_pos: Vector3= raycast.get_collision_point() - raycast.global_basis.z * 0.05
-			var grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_pos)
+		if raycast.is_colliding():
 			if grid_block:
 				var block_instance: BlockInstance= grid_block.get_block_instance()
 				if block_instance:
@@ -66,12 +67,12 @@ func on_physics_process(_delta: float):
 	if Input.is_action_just_pressed("interact"):
 		var shapecast: ShapeCast3D= player.interact_shapecast
 		if shapecast.is_colliding():
-			var grid: BlockGrid= shapecast.get_collider(0)
+			grid= shapecast.get_collider(0)
 			assert(grid)
-			var collision_pos: Vector3= shapecast.get_collision_point(0)
+			collision_pos= shapecast.get_collision_point(0)
 			collision_pos-= shapecast.global_basis.z * 0.01
 			
-			var grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_pos)
+			grid_block= grid.get_block_from_global_pos(collision_pos)
 			if grid_block:
 				if grid_block.get_block_definition().can_interact():
 					grid_block.get_block_instance().interact(grid, grid_block, player)

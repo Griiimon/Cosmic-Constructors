@@ -45,4 +45,8 @@ func is_true()-> bool:
 
 
 func get_as_text()-> String:
-	return display_name + ": "
+	return display_name + ": " + get_value_as_text()
+
+
+func get_value_as_text()-> String:
+	return ""

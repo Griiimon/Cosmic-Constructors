@@ -57,5 +57,5 @@ func set_range(min_range: float, max_range: float):
 	return self
 
 
-func get_as_text()-> String:
-	return super() + ("%.3f" % f)
+func get_value_as_text()-> String:
+	return "%.4f" % f

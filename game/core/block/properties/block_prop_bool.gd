@@ -33,5 +33,5 @@ func set_false():
 		toggle()
 
 
-func get_as_text()-> String:
-	return super() + ("On" if b else "Off")
+func get_value_as_text()-> String:
+	return "On" if b else "Off"

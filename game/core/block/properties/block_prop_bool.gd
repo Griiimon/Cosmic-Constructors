@@ -15,8 +15,21 @@ func toggle():
 	super()
 
 
+func increase(modifier: int):
+	toggle()
+
+
+func decrease(modifier: int):
+	toggle()
+
+
+func change_value(modifier: int, delta: int):
+	toggle()
+	
+
 func set_variant(val: Variant):
 	b= val
+	super(val)
 
 
 func is_true()-> bool:

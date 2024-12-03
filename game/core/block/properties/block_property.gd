@@ -24,11 +24,15 @@ func toggle():
 	do_callback()
 
 
-func increase():
+func increase(modifier: int):
 	do_callback()
 
 
-func decrease():
+func decrease(modifier: int):
+	do_callback()
+
+
+func change_value(modifier: int, delta: int):
 	do_callback()
 
 

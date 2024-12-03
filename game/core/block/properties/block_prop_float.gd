@@ -23,19 +23,33 @@ func toggle():
 	match toggle_behavior:
 		ToggleBehavior.FLIP:
 			f= -f
+			super()
+			return
 		ToggleBehavior.INCREASE:
-			f+= step_size
+			increase(1)
 		ToggleBehavior.DECREASE:
-			f-= step_size
+			decrease(1)
 	
 	if range:
 		f= clamp(f, (range as Vector2).x, (range as Vector2).y)
-	
-	super()
 
 
 func set_variant(val: Variant):
 	f= val
+	super(val)
+
+
+func increase(modifier: int):
+	change_value(modifier, 1)
+
+
+func decrease(modifier: int):
+	change_value(modifier, -1)
+
+
+func change_value(modifier: int, delta: int):
+	f+= step_size * modifier * delta
+	super(modifier, delta)
 
 
 func is_true()-> bool:

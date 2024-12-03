@@ -45,5 +45,5 @@ transform = Transform3D(-1, -1.22465e-16, 0, 1.22465e-16, -1, 0, 0, 0, 1, 0, 0.0
 mesh = SubResource("SphereMesh_l7rsm")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.0194417, 0.999811, 0, -0.999811, -0.0194417, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(-0.0194417, 0.999811, 0, -0.999811, -0.0194417, 0, 0, 0, 1, 0, -0.0547084, 0)
 mesh = SubResource("CylinderMesh_isyjc")

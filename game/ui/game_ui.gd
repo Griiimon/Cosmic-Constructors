@@ -1,6 +1,8 @@
 class_name GameUI
 extends CanvasLayer
 
+@export var PROPERTY_VIEWER_SCENE: PackedScene
+
 @onready var temporary_info_label: Label = %"Temporary Info Label"
 @onready var temporary_info_label_cooldown: Timer = %"Temporary Info Label Cooldown"
 
@@ -10,6 +12,7 @@ extends CanvasLayer
 @onready var velocity_label: Label = %"Velocity Label"
 @onready var gravity_label: Label = %"Gravity Label"
 
+var property_viewer_panel: PropertyViewerPanel
 
 
 
@@ -21,6 +24,10 @@ func _ready():
 	SignalManager.toggle_dampeners.connect(func(b: bool): dampeners_button.disabled= not b)
 	
 	temporary_info_label_cooldown.timeout.connect(func(): temporary_info_label.hide())
+
+	property_viewer_panel= PROPERTY_VIEWER_SCENE.instantiate()
+	property_viewer_panel.hide()
+	add_child(property_viewer_panel)
 
 
 func _physics_process(delta: float) -> void:

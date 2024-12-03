@@ -14,17 +14,18 @@ var rows: Array[PanelViewerRow]
 var selected_row: int= -1:
 	set(i):
 		if selected_row > -1:
-			rows[selected_row].deselect()
+			get_current_row().deselect()
 		selected_row= i
-		rows[selected_row].select_type() 
+		if selected_row == -1: return
+		get_current_row().select_type() 
 
 var is_value_selected: bool= false:
 	set(b):
 		if is_value_selected and not b:
-			rows[selected_row].deselect_value()
+			get_current_row().deselect_value()
 		is_value_selected= b
 		if is_value_selected:
-			rows[selected_row].select_value()
+			get_current_row().select_value()
 
 
 
@@ -36,8 +37,9 @@ func populate():
 	
 	for property in block_instance.get_properties():
 		var row: PanelViewerRow= ROW_SCENE.instantiate()
+		content_container.add_child(row)
+		rows.append(row)
 		row.property= property
-		add_child(row)
 		if selected_row == -1:
 			selected_row= 0
 
@@ -50,6 +52,7 @@ func open(_block: GridBlock, _grid: BlockGrid):
 	if not block_instance: return
 	
 	populate()
+	show()
 
 
 func close():
@@ -60,6 +63,7 @@ func update(_block: GridBlock, _grid: BlockGrid= null):
 	if not _block: 
 		hide()
 		return
+		
 	assert(_grid != null)
 	
 	if _block != block:
@@ -80,12 +84,30 @@ func update(_block: GridBlock, _grid: BlockGrid= null):
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	assert(visible)
+	if not visible: return
 	
 	if event is InputEventMouseButton:
 		if event.pressed:
-			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-				selected_row= wrapi(selected_row - 1, 0, rows.size())
-			elif event.button == MOUSE_BUTTON_WHEEL_DOWN:
-				selected_row= wrapi(selected_row + 1, 0, rows.size())
-	
+			if is_value_selected:
+				match event.button_index:
+					MOUSE_BUTTON_RIGHT:
+						is_value_selected= false
+					MOUSE_BUTTON_WHEEL_UP:
+						get_current_row().change_value(-1)
+					MOUSE_BUTTON_WHEEL_DOWN:
+						get_current_row().change_value(1)
+			else:
+				match event.button_index:
+					MOUSE_BUTTON_LEFT:
+						is_value_selected= true
+					MOUSE_BUTTON_RIGHT:
+						close()
+					MOUSE_BUTTON_WHEEL_UP:
+						selected_row= wrapi(selected_row - 1, 0, rows.size())
+					MOUSE_BUTTON_WHEEL_DOWN:
+						selected_row= wrapi(selected_row + 1, 0, rows.size())
+
+
+func get_current_row()-> PanelViewerRow:
+	assert(selected_row < rows.size(), "row %d vs size %d" % [selected_row, rows.size()])
+	return rows[selected_row]

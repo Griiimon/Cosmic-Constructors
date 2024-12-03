@@ -6,7 +6,11 @@ extends PanelContainer
 @onready var label_type: Label = %"Label Type"
 @onready var label_value: Label = %"Label Value"
 
-var property: BlockProperty
+var property: BlockProperty:
+	set(p):
+		property= p
+		if not property: return
+		update()
 
 
 
@@ -29,6 +33,11 @@ func select_value():
 
 func deselect_value():
 	label_value.remove_theme_stylebox_override("normal")
+
+
+func deselect():
+	deselect_type()
+	deselect_value()
 
 
 func change_value(delta: int, modifier: int= 1):

@@ -113,3 +113,7 @@ func wear_equipment(item: PlayerEquipmentItem)-> PlayerEquipmentObject:
 	obj.init(self)
 	ClientManager.send_sync_event(EventSyncState.Type.WEAR_EQUIPMENT, [item.resource_path])
 	return obj
+
+
+func get_look_vec()-> Vector3:
+	return -first_person_camera.global_basis.z

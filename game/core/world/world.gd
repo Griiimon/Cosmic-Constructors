@@ -277,3 +277,11 @@ func explosion(damage: Damage, obj: CollisionObject3D):
 			query.exclude= query.exclude + [rest_result.rid]
 
 	delayed_forces.append(DelayedExplosiveForce.new(damage))
+
+
+func get_grid(id: int)-> BlockGrid:
+	return grids.get_child(id)
+
+
+func get_grid_id(grid: BlockGrid)-> int:
+	return grids.get_children().find(grid)

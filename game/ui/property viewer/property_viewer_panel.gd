@@ -8,6 +8,7 @@ extends PanelContainer
 var grid: BlockGrid
 var block: GridBlock
 var block_instance: BlockInstance
+var initial_player_look: Vector3
 
 var rows: Array[PanelViewerRow]
 
@@ -29,6 +30,20 @@ var is_value_selected: bool= false:
 
 
 
+func _process(delta: float) -> void:
+	if not visible: return
+	
+	var global_block_pos: Vector3= grid.get_global_block_pos(block.local_pos)
+	if get_viewport().get_camera_3d().is_position_behind(global_block_pos):
+		close()
+		return
+	
+	if Global.player:
+		if Global.player.get_look_vec().dot(initial_player_look) < 0.7:
+			close()
+			return
+
+	
 func populate():
 	Utils.free_children(content_container)
 	selected_row= -1
@@ -59,7 +74,7 @@ func close():
 	hide()
 
 
-func update(_block: GridBlock, _grid: BlockGrid= null):
+func update(_block: GridBlock, _grid: BlockGrid, player: Player):
 	if not _block: 
 		hide()
 		return
@@ -81,7 +96,9 @@ func update(_block: GridBlock, _grid: BlockGrid= null):
 	else:
 		position= camera.unproject_position(global_block_pos)
 		show()
-
+		initial_player_look= player.get_look_vec()
+		
+		
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible: return

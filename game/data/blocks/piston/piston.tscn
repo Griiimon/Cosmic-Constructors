@@ -53,6 +53,6 @@ mesh = SubResource("CylinderMesh_er0tb")
 [node name="Segment" type="MeshInstance3D" parent="Segments"]
 mesh = SubResource("CylinderMesh_nv7gb")
 
-[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="."]
+[node name="JoltGeneric6DOFJoint3D" type="JoltGeneric6DOFJoint3D" parent="."]
 linear_motor_y/enabled = true
-linear_motor_y/force_limit = 100000.0
+linear_motor_y/max_force = 100000.0

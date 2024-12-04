@@ -8,7 +8,7 @@
 [ext_resource type="Environment" uid="uid://dpnscmd0s8lh5" path="res://game/test/vehicle test/vehicle_test_environment.tres" id="6_s4mlb"]
 [ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="6_s17hf"]
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="7_hpj7a"]
-[ext_resource type="PackedScene" uid="uid://w6iv7medt6r7" path="res://game/data/peripheral entities/excavator bucket/excavator_bucket.tscn" id="9_cnwvp"]
+[ext_resource type="PackedScene" uid="uid://w6iv7medt6r7" path="res://game/data/peripheral entities/excavator bucket/simple_excavator_bucket.tscn" id="9_cnwvp"]
 
 [sub_resource type="Resource" id="Resource_ic37o"]
 script = ExtResource("7_hpj7a")
@@ -264,5 +264,5 @@ mesh = SubResource("CylinderMesh_hjjcg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -200)
 mesh = SubResource("CylinderMesh_hjjcg")
 
-[node name="RigidBody3D" parent="." instance=ExtResource("9_cnwvp")]
-transform = Transform3D(0.18215, 0, -0.983271, 0, 1, 0, 0.983271, 0, 0.18215, 4.19572, 0.211451, -4.51573)
+[node name="Excavator Bucket" parent="." instance=ExtResource("9_cnwvp")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 4.19572, 0.211451, -4.51573)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5j2ykhxptyb6"]
+[gd_scene load_steps=10 format=3 uid="uid://b5j2ykhxptyb6"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/piston_instance.gd" id="1_jtvf3"]
+[ext_resource type="Resource" uid="uid://b16qov36da0gj" path="res://game/data/blocks/piston head/piston_head_block.tres" id="2_68rko"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_frrn6"]
 size = Vector3(1, 0.5, 1)
@@ -42,6 +43,7 @@ height = 1.0
 
 [node name="Piston" type="Node3D"]
 script = ExtResource("1_jtvf3")
+piston_head_block = ExtResource("2_68rko")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)

@@ -4,6 +4,7 @@ extends BlockInstanceOnOff
 enum State { IDLE, MOVE }
 
 @export var num_segments: int= 5
+@export var piston_head_block: Block
 
 @onready var segments_node: Node3D = $Segments
 @onready var orig_segment: MeshInstance3D = $Segments/Segment
@@ -12,7 +13,6 @@ enum State { IDLE, MOVE }
 
 @onready var velocity:= BlockPropFloat.new("Velocity", 1.0, change_velocity)
 
-var piston_head: Node3D
 var sub_grid: BlockGrid
 
 var state: State= State.MOVE
@@ -50,9 +50,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	joint.node_a= joint.get_path_to(grid)
 	joint.node_b= joint.get_path_to(sub_grid)
 	
-	var piston_head_block: Block= load("res://game/data/blocks/piston head/piston_head_block.tres")
 	var piston_head_grid_block: GridBlock= sub_grid.add_block(piston_head_block, Vector3i.ZERO, grid_block.rotation)
-	piston_head= piston_head_grid_block.block_node 
 
 
 func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):

@@ -1,6 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b5j2ykhxptyb6"]
+[gd_scene load_steps=9 format=3 uid="uid://b5j2ykhxptyb6"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/piston_instance.gd" id="1_jtvf3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_frrn6"]
+size = Vector3(1, 0.5, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckk81"]
 albedo_color = Color(0.349065, 0.349065, 0.349065, 1)
@@ -40,6 +43,10 @@ height = 1.0
 [node name="Piston" type="Node3D"]
 script = ExtResource("1_jtvf3")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_frrn6")
+
 [node name="Base" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 mesh = SubResource("CylinderMesh_xjrup")
@@ -56,3 +63,4 @@ mesh = SubResource("CylinderMesh_nv7gb")
 [node name="JoltGeneric6DOFJoint3D" type="JoltGeneric6DOFJoint3D" parent="."]
 linear_motor_y/enabled = true
 linear_motor_y/max_force = 100000.0
+exclude_nodes_from_collision = false

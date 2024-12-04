@@ -74,7 +74,6 @@ func restore_grid_connection(grid: BlockGrid, grid_block: GridBlock, sub_grid_id
 	joint.node_b= joint.get_path_to(sub_grid)
 
 	initial_distance= get_joint_distance()
-	#DebugHud.send("Init Hinge angle", int(rad_to_deg(initial_angle)))
 
 	on_set_active()
 

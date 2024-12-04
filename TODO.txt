@@ -1,4 +1,4 @@
-test old excavator bucket again
+try more joint solver iterations
 
 update hud display on enter/leave seat
 

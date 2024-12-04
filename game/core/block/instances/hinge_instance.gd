@@ -51,8 +51,8 @@ func on_set_active():
 			await get_tree().physics_frame
 		joint.motor_enabled= false
 		var grid: BlockGrid= joint.get_node(joint.node_a)
-		var angle: float= grid.global_basis.get_rotation_quaternion().angle_to(sub_grid.global_basis.get_rotation_quaternion())
-		#DebugHud.send("Hinge angle", int(rad_to_deg(angle)))
+		var angle: float= -grid.global_basis.z.signed_angle_to(sub_grid.global_basis.z, grid.global_basis.x)
+		DebugHud.send("Hinge angle", int(rad_to_deg(angle)))
 		joint.limit_lower= angle
 		joint.limit_upper= angle
 

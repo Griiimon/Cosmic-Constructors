@@ -31,19 +31,30 @@ func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionar
 	
 	
 func restore_grid_connection(grid: BlockGrid, grid_block: GridBlock, sub_grid_id: int):
-	var sub_grid: BlockGrid= grid.world.get_grid(sub_grid_id)
+	sub_grid= grid.world.get_grid(sub_grid_id)
 	
 	joint.node_a= joint.get_path_to(grid)
 	joint.node_b= joint.get_path_to(sub_grid)
 
 
 func change_speed():
-	if active.is_true():
-		joint.motor_target_velocity= rotation_speed.get_value_f()
+	joint.motor_target_velocity= rotation_speed.get_value_f()
 
 
 func on_set_active():
-	joint.motor_target_velocity= rotation_speed.get_value_f() if active.is_true() else 0.0
+	if active.is_true():
+		joint.motor_enabled= true
+		joint.limit_lower= deg_to_rad(-90)
+		joint.limit_upper= deg_to_rad(90)
+	else:
+		while not joint.node_a:
+			await get_tree().physics_frame
+		joint.motor_enabled= false
+		var grid: BlockGrid= joint.get_node(joint.node_a)
+		var angle: float= grid.global_basis.get_rotation_quaternion().angle_to(sub_grid.global_basis.get_rotation_quaternion())
+		#DebugHud.send("Hinge angle", int(rad_to_deg(angle)))
+		joint.limit_lower= angle
+		joint.limit_upper= angle
 
 
 func serialize()-> Dictionary:

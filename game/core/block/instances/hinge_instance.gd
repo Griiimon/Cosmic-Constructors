@@ -39,7 +39,7 @@ func restore_grid_connection(grid: BlockGrid, grid_block: GridBlock, sub_grid_id
 	joint.node_b= joint.get_path_to(sub_grid)
 
 	initial_angle= get_joint_angle()
-	DebugHud.send("Init Hinge angle", int(rad_to_deg(initial_angle)))
+	#DebugHud.send("Init Hinge angle", int(rad_to_deg(initial_angle)))
 
 	on_set_active()
 
@@ -58,7 +58,7 @@ func on_set_active():
 			await get_tree().physics_frame
 		joint.motor_enabled= false
 		var angle: float= get_joint_angle()
-		DebugHud.send("Hinge angle", int(rad_to_deg(angle)))
+		#DebugHud.send("Hinge angle", int(rad_to_deg(angle)))
 		joint.limit_lower= angle - initial_angle
 		joint.limit_upper= angle - initial_angle
 

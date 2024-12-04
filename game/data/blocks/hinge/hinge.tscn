@@ -58,6 +58,7 @@ limit_upper = 1.5708
 limit_lower = -1.5708
 motor_enabled = true
 motor_max_torque = 100000.0
+exclude_nodes_from_collision = false
 transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

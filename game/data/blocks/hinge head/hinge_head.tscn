@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ceeyi3dwtmdfv"]
+[gd_scene load_steps=9 format=3 uid="uid://ceeyi3dwtmdfv"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_0j1js"]
 
@@ -30,6 +30,9 @@ top_radius = 0.55
 bottom_radius = 0.55
 height = 0.2
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_152rd"]
+size = Vector3(1, 0.5, 1)
+
 [node name="Hinge Head" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -47,3 +50,7 @@ mesh = SubResource("SphereMesh_l7rsm")
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.0194417, 0.999811, 0, -0.999811, -0.0194417, 0, 0, 0, 1, 0, -0.0547084, 0)
 mesh = SubResource("CylinderMesh_isyjc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("BoxShape3D_152rd")

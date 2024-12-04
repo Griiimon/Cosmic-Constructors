@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://mlr7bkamt0ux"]
+[gd_scene load_steps=10 format=3 uid="uid://mlr7bkamt0ux"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/hinge_instance.gd" id="1_5coxj"]
 [ext_resource type="Resource" uid="uid://b678we7hljnwt" path="res://game/data/blocks/hinge head/hinge_head_block.tres" id="2_h4ws0"]
@@ -29,6 +29,9 @@ top_radius = 0.3
 bottom_radius = 0.3
 height = 0.1
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_v3mxd"]
+size = Vector3(1, 0.5, 1)
+
 [node name="Hinge" type="Node3D"]
 script = ExtResource("1_5coxj")
 hinge_head_block = ExtResource("2_h4ws0")
@@ -56,3 +59,7 @@ limit_lower = -1.5708
 motor_enabled = true
 motor_max_torque = 100000.0
 transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_v3mxd")

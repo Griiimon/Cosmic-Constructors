@@ -9,6 +9,8 @@ extends BlockInstanceOnOff
 
 var sub_grid: BlockGrid
 
+var initial_angle: float
+
 
 
 func _ready() -> void:
@@ -36,6 +38,11 @@ func restore_grid_connection(grid: BlockGrid, grid_block: GridBlock, sub_grid_id
 	joint.node_a= joint.get_path_to(grid)
 	joint.node_b= joint.get_path_to(sub_grid)
 
+	initial_angle= get_joint_angle()
+	DebugHud.send("Init Hinge angle", int(rad_to_deg(initial_angle)))
+
+	on_set_active()
+
 
 func change_speed():
 	joint.motor_target_velocity= rotation_speed.get_value_f()
@@ -44,20 +51,24 @@ func change_speed():
 func on_set_active():
 	if active.is_true():
 		joint.motor_enabled= true
-		joint.limit_lower= deg_to_rad(-90)
-		joint.limit_upper= deg_to_rad(90)
+		joint.limit_lower= deg_to_rad(-90) - initial_angle
+		joint.limit_upper= deg_to_rad(90) - initial_angle
 	else:
 		while not joint.node_a:
 			await get_tree().physics_frame
 		joint.motor_enabled= false
-		var grid: BlockGrid= joint.get_node(joint.node_a)
-		var angle: float= -grid.global_basis.z.signed_angle_to(sub_grid.global_basis.z, grid.global_basis.x)
+		var angle: float= get_joint_angle()
 		DebugHud.send("Hinge angle", int(rad_to_deg(angle)))
-		joint.limit_lower= angle
-		joint.limit_upper= angle
+		joint.limit_lower= angle - initial_angle
+		joint.limit_upper= angle - initial_angle
 
 
 func serialize()-> Dictionary:
 	var data: Dictionary= super()
 	data["sub_grid_id"]= sub_grid.get_id()
 	return data
+
+
+func get_joint_angle():
+	var grid: BlockGrid= joint.get_node(joint.node_a)
+	return -grid.global_basis.z.signed_angle_to(sub_grid.global_basis.z, grid.global_basis.x)

@@ -29,19 +29,21 @@ func on_destroy():
 func serialize()-> Dictionary:
 	var data: Dictionary
 	for prop in get_property_list():
+		if not data.has("properties"):
+			data["properties"]= {}
 		match prop.class_name:
 			"BlockPropBool":
-				data[prop.name]= (get(prop.name) as BlockPropBool).is_true()
+				data["properties"][prop.name]= (get(prop.name) as BlockPropBool).is_true()
 			"BlockPropFloat":
-				data[prop.name]= (get(prop.name) as BlockPropFloat).get_value_f()
+				data["properties"][prop.name]= (get(prop.name) as BlockPropFloat).get_value_f()
 
 	return data
 
 
 func deserialize(data: Dictionary):
-	for prop_name in data.keys():
-		#TODO make BlockProperty key/array
-		(get(prop_name) as BlockProperty).set_variant(data[prop_name])
+	if data.has("properties"):
+		for prop_name in data["properties"].keys():
+			(get(prop_name) as BlockProperty).set_variant(data["properties"][prop_name])
 
 
 func get_properties()-> Array[BlockProperty]:

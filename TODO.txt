@@ -1,12 +1,16 @@
-BlockInstance.on_restore() is called from load grid, defaults to on_placed() but can be rerouted for blocks that spawn sub grids
+test old excavator bucket again
 
-parking brake + ui display
+update hud display on enter/leave seat
 
-Alt fps look around while fixed
+implement joint changes in piston and rotor
 
-Excavator inner ( terrain collision ) and outer ( grid + object collision ) need both be rigidbodies and connected by fixed joint
+save PeripheralGridEntities ( + connections )
 
-PeripheralGridEntity
+FIX empty grids cause save game corruption?
+
+PanelViewer edit mode: unique, all (same type), mirrored ( which axis? axis aren't even consistent ) => choose&connect mirror block
+
+"thick" wireframe shader for unfinished blocks?
 
 air ship
 
@@ -109,6 +113,10 @@ how to avoid jetpack collisions causing player to rotate?
 make vehicle wheels rigidbodies with no friction, still use all the calculations but use slider joint for max suspension travel
 
 is there suspension resistance in up direction? if car gets weighed down in the rear shouldnt the front suspension move up?
+
+build mode for periperal entities?
+	can be build like block grids
+	auto-snap to empty peripheral connectors
 
 
 SCENARIOS

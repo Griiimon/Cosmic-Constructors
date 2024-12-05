@@ -9,7 +9,7 @@ extends BasePlayer
 @onready var build_raycast: RayCast3D = %"Build Raycast"
 @onready var interact_shapecast: ShapeCast3D = %"Interact Shapecast"
 @onready var floor_shapecast: ShapeCast3D = $"Floor Shapecast"
-@onready var block_interact_raycast: RayCast3D = %"Block Interact Raycast"
+@onready var block_interact_shapecast: ShapeCast3D = %"Block Interact Shapecast"
 
 @onready var head: Node3D = $Head
 @onready var first_person_camera: Camera3D = %"First Person Camera"

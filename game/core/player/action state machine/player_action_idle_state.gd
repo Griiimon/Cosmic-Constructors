@@ -6,11 +6,11 @@ signal build
 
 
 func on_enter():
-	player.block_interact_raycast.enabled= true
+	player.block_interact_shapecast.enabled= true
 
 
 func on_exit():
-	player.block_interact_raycast.enabled= false
+	player.block_interact_shapecast.enabled= false
 
 
 func on_physics_process(_delta: float):
@@ -35,23 +35,21 @@ func on_physics_process(_delta: float):
 		build.emit()
 		return
 
-	var raycast: RayCast3D= player.block_interact_raycast
-	var grid: BlockGrid
-	var collision_pos: Vector3
-	var grid_block: BaseGridBlock
+	var block_interact_shapecast: ShapeCast3D= player.block_interact_shapecast
 	
-	if raycast.is_colliding():
-		grid= raycast.get_collider()
-		collision_pos= raycast.get_collision_point() - raycast.global_basis.z * 0.05
-		grid_block= grid.get_block_from_global_pos(collision_pos)
-		
+	CustomShapeCast.pierce(block_interact_shapecast, interactive_block_shapecast_filter)
+
+	var grid: BlockGrid= CustomShapeCast.grid
+	var grid_block: BaseGridBlock= CustomShapeCast.grid_block
+	
+	if block_interact_shapecast.is_colliding():
 		if grid_block and grid_block.get_block_instance():
 			if Input.is_action_pressed("open_block_property_panel"):
 				SignalManager.interact_with_block.emit(grid_block, grid, player)
 				return
 
 	if Input.is_action_just_pressed("toggle_block_property") or Input.is_action_just_pressed("toggle_block_alt_property"):
-		if raycast.is_colliding():
+		if block_interact_shapecast.is_colliding():
 			if grid_block:
 				var block_instance: BlockInstance= grid_block.get_block_instance()
 				if block_instance:
@@ -69,7 +67,7 @@ func on_physics_process(_delta: float):
 		if shapecast.is_colliding():
 			grid= shapecast.get_collider(0)
 			assert(grid)
-			collision_pos= shapecast.get_collision_point(0)
+			var collision_pos: Vector3= shapecast.get_collision_point(0)
 			collision_pos-= shapecast.global_basis.z * 0.01
 			
 			grid_block= grid.get_block_from_global_pos(collision_pos)
@@ -103,3 +101,14 @@ func drill():
 		tool.channel= VoxelBuffer.CHANNEL_SDF
 		tool.mode= VoxelTool.MODE_REMOVE
 		tool.do_sphere(local_pos, radius)
+
+
+func interactive_block_shapecast_filter(shapecast: ShapeCast3D)-> bool:
+	CustomShapeCast.grid= shapecast.get_collider(0)
+	var collision_pos: Vector3= shapecast.get_collision_point(0) - shapecast.global_basis.z * 0.05
+	CustomShapeCast.grid_block= CustomShapeCast.grid.get_block_from_global_pos(collision_pos)
+
+	#DebugHud.send("Grid", CustomShapeCast.grid.name if CustomShapeCast.grid else "null")
+	#DebugHud.send("Grid Block", CustomShapeCast.grid_block.local_pos if CustomShapeCast.grid_block else "null")
+
+	return CustomShapeCast.grid_block and not CustomShapeCast.grid_block.get_block_instance()

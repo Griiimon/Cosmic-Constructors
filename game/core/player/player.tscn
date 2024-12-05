@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://xgkn2mkwvwmq"]
+[gd_scene load_steps=20 format=3 uid="uid://xgkn2mkwvwmq"]
 
 [ext_resource type="PackedScene" uid="uid://slyw4y7qi46y" path="res://game/core/player/base_player.tscn" id="1_kthjw"]
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
@@ -20,6 +20,9 @@ height = 0.5
 radius = 0.4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ly8po"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4pkix"]
+radius = 1.5
 
 [sub_resource type="Environment" id="Environment_lyipp"]
 background_color = Color(0.982343, 0.982342, 0.982342, 1)
@@ -58,11 +61,12 @@ shape = SubResource("SphereShape3D_ly8po")
 target_position = Vector3(0, 0, -2.5)
 collision_mask = 2
 
-[node name="Block Interact Raycast" type="RayCast3D" parent="Head/Pivot" index="3"]
+[node name="Block Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="3"]
 unique_name_in_owner = true
+shape = SubResource("SphereShape3D_4pkix")
 target_position = Vector3(0, 0, -4)
+max_results = 1
 collision_mask = 2
-hit_back_faces = false
 
 [node name="Item Viewport Container" type="SubViewportContainer" parent="Head/Pivot" index="4"]
 unique_name_in_owner = true

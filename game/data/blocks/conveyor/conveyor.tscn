@@ -1,8 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://clfksjpvg60v8"]
+[gd_scene load_steps=13 format=3 uid="uid://clfksjpvg60v8"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/conveyor_instance.gd" id="1_2cr6b"]
 [ext_resource type="PackedScene" uid="uid://d1yd7cvio7mxv" path="res://game/core/misc/conveyor target/conveyor_target.tscn" id="2_43hh3"]
 [ext_resource type="PackedScene" uid="uid://4lrcbiiff8n2" path="res://game/core/components/item catcher/item_catcher.tscn" id="3_ow3od"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sln4j"]
+size = Vector3(1, 0.1, 1)
 
 [sub_resource type="Shader" id="Shader_m03vn"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
@@ -98,6 +101,9 @@ size = Vector3(0.1, 0.2, 1)
 [node name="Conveyor" type="Node3D"]
 script = ExtResource("1_2cr6b")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_sln4j")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_uo32g")
 
@@ -112,3 +118,5 @@ mesh = SubResource("BoxMesh_m6uo5")
 [node name="Conveyor Target" parent="." instance=ExtResource("2_43hh3")]
 
 [node name="Item Catcher" parent="." instance=ExtResource("3_ow3od")]
+
+[connection signal="caught_item" from="Item Catcher" to="." method="_on_item_catcher_caught_item"]

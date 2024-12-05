@@ -51,9 +51,9 @@ func init_ghost():
 			if child is not MeshInstance3D: continue
 			
 			var mesh_instance: MeshInstance3D= child
-			var old_material: StandardMaterial3D= mesh_instance.mesh.surface_get_material(0)
+			var old_material: Material= mesh_instance.mesh.surface_get_material(0)
 			var new_material: StandardMaterial3D
-			if not old_material:
+			if not old_material or old_material is ShaderMaterial:
 				new_material= StandardMaterial3D.new()
 			else:
 				new_material= old_material.duplicate()

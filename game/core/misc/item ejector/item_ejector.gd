@@ -34,5 +34,5 @@ func get_item_catcher()-> ItemCatcher:
 	return null
 
 
-func can_eject(item: WorldItem)-> bool:
+func can_eject()-> bool:
 	return not only_with_valid_target or get_item_catcher() != null

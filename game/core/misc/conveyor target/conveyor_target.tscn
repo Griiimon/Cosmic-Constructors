@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1yd7cvio7mxv"]
+
+[ext_resource type="Script" path="res://game/core/misc/conveyor target/conveyor_target.gd" id="1_vo8u2"]
+
+[node name="Conveyor Target" type="Node"]
+script = ExtResource("1_vo8u2")

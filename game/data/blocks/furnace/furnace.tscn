@@ -1,7 +1,13 @@
-[gd_scene load_steps=9 format=4 uid="uid://cgg6tb8y1qi3m"]
+[gd_scene load_steps=12 format=4 uid="uid://cgg6tb8y1qi3m"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/furnace_instance.gd" id="1_ixfdn"]
+[ext_resource type="Resource" uid="uid://b5j26qxxk25de" path="res://game/data/world items/products/steel ingot/steel_ingot.tres" id="2_0woud"]
 [ext_resource type="PackedScene" uid="uid://iixyhw4jvjeq" path="res://game/core/misc/item ejector/item_ejector.tscn" id="2_d85vm"]
+[ext_resource type="Script" path="res://game/core/recipes/furnace_recipe.gd" id="3_63usp"]
+
+[sub_resource type="Resource" id="Resource_i3vvf"]
+script = ExtResource("3_63usp")
+product = ExtResource("2_0woud")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y6say"]
 albedo_color = Color(0.294641, 0.294641, 0.294641, 1)
@@ -37,6 +43,7 @@ colors = PackedColorArray(0.937255, 0.101961, 0, 1, 0.878431, 0.380392, 0, 1, 0,
 
 [node name="Furnace" type="Node3D"]
 script = ExtResource("1_ixfdn")
+recipe = SubResource("Resource_i3vvf")
 
 [node name="CSGBox3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -60,3 +67,4 @@ color_ramp = SubResource("Gradient_igkyk")
 
 [node name="Item Ejector" parent="." instance=ExtResource("2_d85vm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+only_with_valid_target = true

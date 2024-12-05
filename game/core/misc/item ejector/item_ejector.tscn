@@ -4,7 +4,6 @@
 
 [node name="Item Ejector" type="Node3D"]
 script = ExtResource("1_8jy0q")
-only_with_valid_target = null
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 enabled = false

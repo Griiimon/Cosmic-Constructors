@@ -1,6 +1,5 @@
-block interaction SHAPEcast piercing non functional blocks
-
-try more joint solver iterations
+PanelViewer assign hotkeys by pressing 1-9 while selected, 0 to remove
+	store in grid
 
 update hud display on enter/leave seat
 

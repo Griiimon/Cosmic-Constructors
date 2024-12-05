@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://d34fumc1c8e0e"]
+[gd_scene load_steps=9 format=3 uid="uid://d34fumc1c8e0e"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/rotor_instance.gd" id="1_pcbeu"]
+[ext_resource type="Resource" uid="uid://b7b26sso6p11j" path="res://game/data/blocks/rotor head/rotor_head_block.tres" id="2_p46ke"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_opg02"]
 size = Vector3(1, 0.5, 1)
@@ -29,6 +30,7 @@ height = 1.0
 
 [node name="Rotor" type="Node3D"]
 script = ExtResource("1_pcbeu")
+rotor_head_block = ExtResource("2_p46ke")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
@@ -45,8 +47,7 @@ mesh = SubResource("BoxMesh_us0db")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_1jtn4")
 
-[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="."]
-exclude_nodes_from_collision = false
+[node name="JoltGeneric6DOFJoint3D" type="JoltGeneric6DOFJoint3D" parent="."]
 angular_limit_y/enabled = false
 angular_motor_y/enabled = true
-angular_motor_y/force_limit = 100000.0
+angular_motor_y/max_torque = 100000.0

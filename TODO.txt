@@ -1,8 +1,8 @@
+block interaction SHAPEcast piercing non functional blocks
+
 try more joint solver iterations
 
 update hud display on enter/leave seat
-
-implement joint changes in piston and rotor
 
 save PeripheralGridEntities ( + connections )
 
@@ -13,6 +13,8 @@ PanelViewer edit mode: unique, all (same type), mirrored ( which axis? axis aren
 "thick" wireframe shader for unfinished blocks?
 
 air ship
+
+add custom lower, upper limit and torque to joint blocks
 
 spring
 

@@ -14,6 +14,14 @@ func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionar
 	on_placed(grid, grid_block)
 
 
+func on_neighbor_placed(_grid: BlockGrid, _grid_block: GridBlock, _neighbor_block_pos: Vector3i):
+	pass
+
+
+func on_neighbor_removed(_grid: BlockGrid, _grid_block: GridBlock, _neighbor_block_pos: Vector3i):
+	pass
+
+
 func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 	pass
 

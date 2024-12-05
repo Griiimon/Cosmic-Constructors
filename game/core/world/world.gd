@@ -284,7 +284,12 @@ func explosion(damage: Damage, obj: CollisionObject3D):
 
 func spawn_item(item: WorldItem, pos: Vector3, frozen: bool= false)-> WorldItemInstance:
 	var item_instance: WorldItemInstance= WORLD_ITEM_SCENE.instantiate()
+	item_instance.item= item
+	item_instance.freeze= frozen
+	item_instance.add_child(item.model.instantiate())
 	items.add_child(item_instance)
+	return item_instance
+
 
 func get_grid(id: int)-> BlockGrid:
 	return grids.get_child(id)

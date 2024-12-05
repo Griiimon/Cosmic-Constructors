@@ -2,6 +2,7 @@ class_name World
 extends Node3D
 
 const SAVE_FILE_NAME= "world.json"
+const WORLD_ITEM_SCENE= preload("res://game/core/world/world item/world_item_instance.tscn")
 
 class DelayedExplosiveForce:
 	var damage: Damage
@@ -14,6 +15,7 @@ class DelayedExplosiveForce:
 
 var grids: Node
 var projectiles: Node
+var items: Node
 var grid_freeze_state:= false
 
 var delayed_forces: Array[DelayedExplosiveForce]
@@ -23,6 +25,7 @@ var delayed_forces: Array[DelayedExplosiveForce]
 func _ready() -> void:
 	grids= generate_sub_node("Grids")
 	projectiles= generate_sub_node("Projectiles")
+	items= generate_sub_node("Items")
 
 
 func _physics_process(_delta: float) -> void:
@@ -278,6 +281,10 @@ func explosion(damage: Damage, obj: CollisionObject3D):
 
 	delayed_forces.append(DelayedExplosiveForce.new(damage))
 
+
+func spawn_item(item: WorldItem, pos: Vector3, frozen: bool= false)-> WorldItemInstance:
+	var item_instance: WorldItemInstance= WORLD_ITEM_SCENE.instantiate()
+	items.add_child(item_instance)
 
 func get_grid(id: int)-> BlockGrid:
 	return grids.get_child(id)

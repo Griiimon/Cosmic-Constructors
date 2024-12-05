@@ -4,3 +4,10 @@
 
 [node name="Item Ejector" type="Node3D"]
 script = ExtResource("1_8jy0q")
+only_with_valid_target = null
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+enabled = false
+target_position = Vector3(0, -10, 0)
+collision_mask = 2
+hit_back_faces = false

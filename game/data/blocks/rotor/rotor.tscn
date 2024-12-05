@@ -1,6 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://d34fumc1c8e0e"]
+[gd_scene load_steps=8 format=3 uid="uid://d34fumc1c8e0e"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/rotor_instance.gd" id="1_pcbeu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_opg02"]
+size = Vector3(1, 0.5, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_upqdt"]
 
@@ -26,6 +29,10 @@ height = 1.0
 
 [node name="Rotor" type="Node3D"]
 script = ExtResource("1_pcbeu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_opg02")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false

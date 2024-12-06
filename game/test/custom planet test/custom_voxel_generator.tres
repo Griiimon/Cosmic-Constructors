@@ -1,4 +1,4 @@
-[gd_resource type="VoxelGeneratorScript" script_class="CustomVoxelGenerator" load_steps=4 format=3 uid="uid://b26ajmch67psy"]
+[gd_resource type="VoxelGeneratorScript" script_class="CustomVoxelGenerator" load_steps=6 format=3 uid="uid://b26ajmch67psy"]
 
 [ext_resource type="Script" path="res://game/test/custom planet test/custom_generator.gd" id="1_6qigk"]
 
@@ -6,6 +6,14 @@
 frequency = 0.0006
 fractal_lacunarity = 1.215
 fractal_gain = 0.23
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s2078"]
+frequency = 0.001
+fractal_type = 3
+fractal_octaves = 4
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_i2aar"]
+frequency = 0.001
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_erd3y"]
 frequency = 0.0003
@@ -22,3 +30,7 @@ height_factor = 100.0
 mountains_noise = SubResource("FastNoiseLite_erd3y")
 mountains_threshold = 0.3
 mountains_multiplier = 5.0
+iron_noise1 = SubResource("FastNoiseLite_s2078")
+iron_noise2 = SubResource("FastNoiseLite_i2aar")
+iron_noise_weight = 0.5
+iron_threshold = 0.7

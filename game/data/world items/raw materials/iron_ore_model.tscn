@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://hbk45m8ysb3i"]
+
+[sub_resource type="Gradient" id="Gradient_4onl1"]
+colors = PackedColorArray(1, 0.561242, 0.498258, 1, 0.786044, 0.436246, 0.316116, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wbd5n"]
+frequency = 0.0455
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1ulev"]
+width = 256
+height = 256
+color_ramp = SubResource("Gradient_4onl1")
+noise = SubResource("FastNoiseLite_wbd5n")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ad4g7"]
+width = 256
+height = 256
+generate_mipmaps = false
+seamless = true
+as_normal_map = true
+color_ramp = SubResource("Gradient_4onl1")
+noise = SubResource("FastNoiseLite_wbd5n")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qykiq"]
+albedo_texture = SubResource("NoiseTexture2D_1ulev")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_ad4g7")
+
+[sub_resource type="SphereMesh" id="SphereMesh_nbwst"]
+material = SubResource("StandardMaterial3D_qykiq")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5hje8"]
+radius = 0.1
+
+[node name="IronOreModel" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_nbwst")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_5hje8")

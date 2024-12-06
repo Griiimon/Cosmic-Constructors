@@ -114,6 +114,12 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		else:
 			(block_node as BlockInstance).on_placed(self, grid_block)
 
+	for neighbor_pos in get_block_neighbors(pos):
+		var neighbor_block: BaseGridBlock= get_block_local(neighbor_pos)
+		var neighbor_instance: BlockInstance= neighbor_block.get_block_instance()
+		if neighbor_instance:
+			neighbor_instance.on_neighbor_placed(self, neighbor_block, grid_block.local_pos)
+
 	update_properties()
 
 	return grid_block

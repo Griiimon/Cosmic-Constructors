@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://18lknojownsw"]
+[gd_scene load_steps=18 format=3 uid="uid://18lknojownsw"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_7fydp"]
 [ext_resource type="Script" path="res://game/test/custom planet test/custom_planet_tests.gd" id="2_d2xmp"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="3_cfpqv"]
-[ext_resource type="PackedScene" uid="uid://xgkn2mkwvwmq" path="res://game/core/player/player.tscn" id="4_45jsc"]
+[ext_resource type="Script" path="res://game/player_spawn.gd" id="3_lwgcw"]
+[ext_resource type="Resource" uid="uid://y0452womu354" path="res://game/data/hand items/tools/hand drill/hand_drill.tres" id="3_xpo15"]
 [ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="5_bbgji"]
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="6_yyq31"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="7_w4pu6"]
@@ -11,14 +12,15 @@
 [ext_resource type="Material" uid="uid://duf303o0ryv61" path="res://game/test/custom planet test/custom_planet_material.tres" id="9_l2jpv"]
 [ext_resource type="Texture2D" uid="uid://dtlptku1k7pm1" path="res://addons/zylann.atmosphere/demo/space_background.webp" id="10_fxdwa"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_63ws0"]
-radius = 10000.0
-
-[sub_resource type="Resource" id="Resource_y4pjv"]
+[sub_resource type="Resource" id="Resource_4uqcy"]
 script = ExtResource("6_yyq31")
 back_item = ExtResource("5_bbgji")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_63ws0"]
+radius = 10000.0
+
 [sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_oycf3"]
+texturing_mode = 1
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vdqjr"]
 panorama = ExtResource("10_fxdwa")
@@ -26,7 +28,7 @@ panorama = ExtResource("10_fxdwa")
 [sub_resource type="Sky" id="Sky_mx20v"]
 sky_material = SubResource("PanoramaSkyMaterial_vdqjr")
 
-[sub_resource type="Environment" id="Environment_bvqag"]
+[sub_resource type="Environment" id="Environment_wyx6a"]
 background_mode = 2
 sky = SubResource("Sky_mx20v")
 glow_enabled = true
@@ -44,6 +46,12 @@ script = ExtResource("1_7fydp")
 
 [node name="Tests" type="Node" parent="."]
 script = ExtResource("2_d2xmp")
+equip_item = ExtResource("3_xpo15")
+
+[node name="Player Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 70, 0)
+script = ExtResource("3_lwgcw")
+equipment = SubResource("Resource_4uqcy")
 
 [node name="Gravity Area" type="Area3D" parent="."]
 collision_mask = 3
@@ -55,17 +63,12 @@ shape = SubResource("SphereShape3D_63ws0")
 [node name="World" type="Node3D" parent="."]
 script = ExtResource("3_cfpqv")
 
-[node name="Player" parent="." node_paths=PackedStringArray("world") instance=ExtResource("4_45jsc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 75.8921, 0)
-world = NodePath("../World")
-equipment = SubResource("Resource_y4pjv")
-
 [node name="UI" parent="." instance=ExtResource("7_w4pu6")]
 
 [node name="Planet" type="VoxelLodTerrain" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 generator = ExtResource("8_27ipv")
 mesher = SubResource("VoxelMesherTransvoxel_oycf3")
-view_distance = 4096
 voxel_bounds = AABB(-65536, -65536, -65536, 131072, 131072, 131072)
 lod_count = 7
 material = ExtResource("9_l2jpv")
@@ -74,8 +77,9 @@ run_stream_in_editor = false
 
 [node name="DirectionalLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.996084, 0.0146873, 0.087179, 0.0884075, 0.165481, 0.982242, 1.06741e-18, 0.986104, -0.166132, 0, 275.302, 0)
+visible = false
 shadow_enabled = true
 directional_shadow_max_distance = 2000.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_bvqag")
+environment = SubResource("Environment_wyx6a")

@@ -56,14 +56,16 @@ void fragment() {
 "
 
 [sub_resource type="Gradient" id="Gradient_r8eml"]
-colors = PackedColorArray(0, 0, 0, 1, 0.221902, 0.221902, 0.221902, 1)
+offsets = PackedFloat32Array(0.786325, 1)
+colors = PackedColorArray(0.107081, 0.0500937, 0, 1, 0.0962048, 0.0962047, 0.0962047, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_nhyqp"]
 frequency = 0.0664
+fractal_octaves = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0u76f"]
 width = 128
-height = 128
+height = 32
 seamless = true
 color_ramp = SubResource("Gradient_r8eml")
 noise = SubResource("FastNoiseLite_nhyqp")
@@ -72,10 +74,10 @@ noise = SubResource("FastNoiseLite_nhyqp")
 render_priority = 0
 shader = SubResource("Shader_m03vn")
 shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 1.0
+shader_parameter/point_size = 0.1
+shader_parameter/roughness = 0.797
 shader_parameter/metallic_texture_channel = null
-shader_parameter/specular = 0.5
+shader_parameter/specular = 0.46
 shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
@@ -109,6 +111,7 @@ script = ExtResource("1_2cr6b")
 shape = SubResource("BoxShape3D_sln4j")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00360684, -0.00390415, 0.000388505)
 mesh = SubResource("PlaneMesh_uo32g")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
@@ -126,6 +129,12 @@ mesh = SubResource("BoxMesh_m6uo5")
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.984174, 0.177205, 0, -0.177205, 0.984174, 0, -0.145901, 0)
 mesh = SubResource("BoxMesh_gouso")
+
+[node name="Item Start Pos" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.5)
+
+[node name="Item End Pos" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.5)
 
 [connection signal="took_item" from="Conveyor Target" to="." method="_on_conveyor_target_took_item"]
 [connection signal="caught_item" from="Item Catcher" to="." method="_on_item_catcher_caught_item"]

@@ -1,14 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cr5xheqrbf6gc"]
+[gd_scene load_steps=2 format=3 uid="uid://cr5xheqrbf6gc"]
 
 [ext_resource type="Script" path="res://game/core/world/world item/world_item_instance.gd" id="1_tp043"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_g0udt"]
-size = Vector3(0.5, 0.1, 0.5)
 
 [node name="WorldItemInstance" type="RigidBody3D"]
 collision_layer = 64
 collision_mask = 118
 script = ExtResource("1_tp043")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_g0udt")

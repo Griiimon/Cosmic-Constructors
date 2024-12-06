@@ -36,16 +36,11 @@ func _generate_block(out_buffer : VoxelBuffer, origin_in_voxels : Vector3i, lod 
 
 				out_buffer.set_voxel_f(signed_distance, rx, ry, rz, channel)
 
-				prints("Indices", VoxelTool.u16_indices_to_vec4i(out_buffer.get_voxel_f(rx, ry, rz, VoxelBuffer.CHANNEL_INDICES)))
-				prints("Weights", VoxelTool.u16_weights_to_color(out_buffer.get_voxel_f(rx, ry, rz, VoxelBuffer.CHANNEL_WEIGHTS)))
+				#prints("Indices", VoxelTool.u16_indices_to_vec4i(out_buffer.get_voxel(rx, ry, rz, VoxelBuffer.CHANNEL_INDICES)))
+				#prints("Weights", VoxelTool.u16_weights_to_color(out_buffer.get_voxel(rx, ry, rz, VoxelBuffer.CHANNEL_WEIGHTS)))
 
 				out_buffer.set_voxel(VoxelTool.vec4i_to_u16_indices(Vector4i(0, 1, 2, 3)), rx, ry, rz, VoxelBuffer.CHANNEL_INDICES)
-				out_buffer.set_voxel(VoxelTool.color_to_u16_weights(Color(0, 1, 0, 0)), rx, ry, rz, VoxelBuffer.CHANNEL_WEIGHTS)
-
-
-				#out_buffer.set_voxel_f(VoxelTool.vec4i_to_u16_indices(Vector4i(3, 12, 0, 0)), rx, ry, rz, VoxelBuffer.CHANNEL_INDICES)
-				#out_buffer.set_voxel_f(VoxelTool.color_to_u16_weights(Color(0, 0, 0, 0)), rx, ry, rz, VoxelBuffer.CHANNEL_WEIGHTS)
-
-				#out_buffer.set_voxel_f(VoxelTool.vec4i_to_u16_indices(Vector4i.ZERO), rx, ry, rz, VoxelBuffer.CHANNEL_INDICES)
-				#out_buffer.set_voxel_f(VoxelTool.vec4i_to_u16_indices(Vector4i(0, 0, 0, 0)), rx, ry, rz, VoxelBuffer.CHANNEL_WEIGHTS)
-				#out_buffer.set_voxel_f(VoxelTool.vec4i_to_u16_indices(Vector4i(100 if pos_world.y >= height - 2 else 0, 0, 0, 0)), rx, ry, rz, VoxelBuffer.CHANNEL_WEIGHTS)
+				var weights:= Color(1, 0, 0, 0)
+				if abs(mountains) > mountains_threshold:
+					weights= Color(0, 1, 0, 0)
+				out_buffer.set_voxel(VoxelTool.color_to_u16_weights(weights), rx, ry, rz, VoxelBuffer.CHANNEL_WEIGHTS)

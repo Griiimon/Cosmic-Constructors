@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Cosmic Constructors"
-run/main_scene="res://game/launcher.tscn"
+run/main_scene="res://game/test/custom planet test/custom_planet_test.tscn"
 config/features=PackedStringArray("4.3", "Double Precision", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -235,6 +235,7 @@ parking_brake={
 3d_physics/layer_4="Projectile"
 3d_physics/layer_5="Physical Objects"
 3d_physics/layer_6="Peripheral Grid Entities"
+3d_physics/layer_7="World Item"
 3d_physics/layer_9="Peripheral Connector"
 
 [physics]

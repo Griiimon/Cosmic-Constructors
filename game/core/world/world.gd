@@ -293,11 +293,12 @@ func spawn_item(item: WorldItem, pos: Vector3, rot: Vector3= Vector3.ZERO, froze
 	
 	item_instance.add_child(model)
 
+	items.add_child(item_instance)
+
 	for collision_shape in model.find_children("*", "CollisionShape3D"):
+		#collision_shape.owner= null
 		collision_shape.reparent(item_instance)
 
-
-	items.add_child(item_instance)
 	return item_instance
 
 

@@ -110,7 +110,7 @@ environment = ExtResource("6_s4mlb")
 script = ExtResource("3_n8ygw")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.0998581, 0.995002, 0, -0.995002, -0.0998581, 0, 2.22161, 0)
+transform = Transform3D(1, 0, 0, 0, -0.767602, 0.640927, 0, -0.640927, -0.767602, 0, 2.22161, 0)
 
 [node name="UI" parent="." instance=ExtResource("6_jsteb")]
 

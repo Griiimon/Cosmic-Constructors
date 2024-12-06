@@ -1,4 +1,4 @@
-class_name WorldItemResource
+class_name WorldItemRaw
 extends WorldItem
 
 

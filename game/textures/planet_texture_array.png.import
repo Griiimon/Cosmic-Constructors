@@ -1,0 +1,26 @@
+[remap]
+
+importer="2d_array_texture"
+type="CompressedTexture2DArray"
+uid="uid://4c4f57hhn4yw"
+path="res://.godot/imported/planet_texture_array.png-7029bbe31330a73dcd939b85d47b66a3.ctexarray"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://game/textures/planet_texture_array.png"
+dest_files=["res://.godot/imported/planet_texture_array.png-7029bbe31330a73dcd939b85d47b66a3.ctexarray"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=4
+slices/vertical=4

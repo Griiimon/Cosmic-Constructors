@@ -2,6 +2,9 @@ extends BlockInstance
 
 @export var speed: float= 0.5
 
+@onready var item_start_pos: Marker3D = $"Item Start Pos"
+@onready var item_end_pos: Marker3D = $"Item End Pos"
+
 var item_instance: WorldItemInstance
 var target: ConveyorTarget
 var world: World
@@ -30,10 +33,12 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, delta: float):
 				item_instance= null
 
 
-func on_neighbor_placed(grid: BlockGrid, grid_block: GridBlock, neighbor_block_pos: Vector3i):
-	if neighbor_block_pos.z == grid_block.local_pos.z - 1:
+func on_neighbor_placed(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
+	if neighbor_block_pos == Vector3i((Vector3(grid_block.local_pos) - grid_block.get_local_basis().z).floor()):
+		assert(neighbor_block_pos != grid_block.local_pos)
 		var conveyor_target: ConveyorTarget= ConveyorTarget.get_target_from_block_pos(grid, neighbor_block_pos)
 		if conveyor_target:
+			assert(conveyor_target != $"Conveyor Target")
 			target= conveyor_target
 
 
@@ -52,9 +57,9 @@ func can_conveyor_target_take_item(item: WorldItem)-> bool:
 
 
 func get_item_start_pos()-> Vector3:
-	return to_global(Vector3(0, 0, 0.5))
+	return to_global(item_start_pos.position)
 
 
 func get_item_pos(progress: float)-> Vector3:
 	progress= clampf(progress, 0, 1)
-	return get_item_start_pos() - Vector3(0, 0, progress)
+	return to_global(lerp(item_start_pos.position, item_end_pos.position, progress))

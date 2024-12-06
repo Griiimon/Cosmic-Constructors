@@ -94,13 +94,18 @@ func force_unequip_item():
 func drill():
 	var shapecast: ShapeCast3D= player.drill_shapecast
 	if shapecast.is_colliding():
-		var terrain: VoxelLodTerrain= shapecast.get_collider(0)
+		var terrain: MyTerrain= shapecast.get_collider(0)
 		var local_pos: Vector3i= terrain.to_local(shapecast.get_collision_point(0))
 		var radius: float= 2.0
+		
+		VoxelUtils.pre_mine(terrain, local_pos, radius)
+			
 		var tool: VoxelToolLodTerrain= terrain.get_voxel_tool()
 		tool.channel= VoxelBuffer.CHANNEL_SDF
 		tool.mode= VoxelTool.MODE_REMOVE
 		tool.do_sphere(local_pos, radius)
+
+		terrain.mine(local_pos, radius, shapecast.get_collision_point(0) + shapecast.global_basis.z * 0.5, shapecast.global_basis.z)
 
 
 func interactive_block_shapecast_filter(shapecast: ShapeCast3D)-> bool:

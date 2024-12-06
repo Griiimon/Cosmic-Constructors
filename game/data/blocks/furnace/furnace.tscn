@@ -67,4 +67,3 @@ color_ramp = SubResource("Gradient_igkyk")
 
 [node name="Item Ejector" parent="." instance=ExtResource("2_d85vm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
-only_with_valid_target = true

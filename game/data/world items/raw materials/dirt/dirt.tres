@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="WorldItemRaw" load_steps=3 format=3 uid="uid://b4vqkgbwnwt0n"]
+
+[ext_resource type="PackedScene" uid="uid://1kbcvka36lou" path="res://game/data/world items/raw materials/dirt/dirt_model.tscn" id="1_3brmx"]
+[ext_resource type="Script" path="res://game/core/world/world item/world_item_raw.gd" id="2_2ndst"]
+
+[resource]
+script = ExtResource("2_2ndst")
+model = ExtResource("1_3brmx")

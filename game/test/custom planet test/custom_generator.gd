@@ -1,4 +1,4 @@
-@tool
+#@tool
 class_name CustomVoxelGenerator
 extends VoxelGeneratorScript
 
@@ -8,8 +8,15 @@ extends VoxelGeneratorScript
 @export var mountains_threshold: float= 0.3
 @export var mountains_multiplier: float= 5.0
 
+@export var iron_noise1: FastNoiseLite
+@export var iron_noise2: FastNoiseLite
+@export var iron_noise_weight: float= 0.5
+@export var iron_threshold: float= 0.75
+
 # Change channel to SDF
 const channel : int = VoxelBuffer.CHANNEL_SDF
+
+
 
 func _get_used_channels_mask( ):
 	return (1 << VoxelBuffer.CHANNEL_SDF) | (1 << VoxelBuffer.CHANNEL_INDICES) | (1 << VoxelBuffer.CHANNEL_WEIGHTS)
@@ -40,5 +47,8 @@ func _generate_block(out_buffer : VoxelBuffer, origin_in_voxels : Vector3i, lod 
 				var weights:= Color(1, 0, 0, 0)
 				if abs(mountains) > mountains_threshold or pos_world.y < height - 5 * (lod + 1):
 					weights= Color(0, 1, 0, 0)
+				
+				if lerp(iron_noise1.get_noise_3dv(pos_world), iron_noise2.get_noise_3dv(pos_world), iron_noise_weight) > iron_threshold:
+					weights= Color(0, 0, 1, 0)
 		
 				out_buffer.set_voxel(VoxelTool.color_to_u16_weights(weights), rx, ry, rz, VoxelBuffer.CHANNEL_WEIGHTS)

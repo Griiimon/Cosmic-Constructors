@@ -1,7 +1,8 @@
 class_name PlayerActionIdleState
-extends PlayerStateMachineState
+extends PlayerActionStateMachineState
 
-signal build
+signal build_block
+signal build_peripheral_entity
 
 
 
@@ -32,7 +33,10 @@ func on_physics_process(_delta: float):
 				return
 
 	if Input.is_action_just_pressed("build"):
-		build.emit()
+		if Input.is_action_pressed("peripheral_entity_modifier"):
+			build_peripheral_entity.emit()
+		else:
+			build_block.emit()
 		return
 
 	var block_interact_shapecast: ShapeCast3D= player.block_interact_shapecast

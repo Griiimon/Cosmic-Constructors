@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="PeripheralEntity" load_steps=3 format=3 uid="uid://dk6e5h7yn0nay"]
+[gd_resource type="Resource" script_class="PeripheralEntity" load_steps=4 format=3 uid="uid://dk6e5h7yn0nay"]
 
 [ext_resource type="Script" path="res://game/core/peripheral entity/peripheral_entity.gd" id="1_0ifps"]
 [ext_resource type="PackedScene" uid="uid://w6iv7medt6r7" path="res://game/data/peripheral entities/excavator bucket/simple_excavator_bucket.tscn" id="1_6i6gl"]
+[ext_resource type="PackedScene" uid="uid://c3ey6ccw7jiim" path="res://game/data/peripheral entities/excavator bucket/excavator_bucket_model.tscn" id="1_ndveq"]
 
 [resource]
 script = ExtResource("1_0ifps")
 scene = ExtResource("1_6i6gl")
+model = ExtResource("1_ndveq")
 name = ""

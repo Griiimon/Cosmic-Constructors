@@ -11,6 +11,7 @@ extends PlayerActionStateMachineState
 			init_ghost(model)
 
 var model: PeripheralEntityModel
+var aabb: CollisionShape3D
 
 
 
@@ -58,7 +59,7 @@ func on_physics_process(delta: float):
 
 
 func build_entity():
-	player.world.spawn_peripheral_entity(current_entity, ghost.global_position + model.aabb.position * ghost.global_basis, ghost.rotation)
+	player.world.spawn_peripheral_entity(current_entity, ghost.global_position + aabb.position * ghost.global_basis, ghost.rotation)
 
 
 func rotate_ghost(delta):
@@ -67,5 +68,6 @@ func rotate_ghost(delta):
 
 func update_model():
 	model= current_entity.get_model()
-	player.build_peripheral_entity_shapecast.shape= model.aabb.shape
+	aabb= model.find_child("AABB")
+	player.build_peripheral_entity_shapecast.shape= aabb.shape
 	

@@ -302,6 +302,10 @@ func spawn_item(item: WorldItem, pos: Vector3, rot: Vector3= Vector3.ZERO, froze
 	return item_instance
 
 
+func spawn_peripheral_entity(entity: PeripheralEntity, pos: Vector3, rot: Vector3):
+	breakpoint
+
+
 func get_grid(id: int)-> BlockGrid:
 	return grids.get_child(id)
 

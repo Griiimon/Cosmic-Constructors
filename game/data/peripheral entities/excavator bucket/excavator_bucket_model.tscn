@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3ey6ccw7jiim"]
+
+[ext_resource type="Script" path="res://game/core/peripheral entity/peripheral_entity_model.gd" id="1_mt8oh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_87yam"]
+size = Vector3(3, 1.7, 1.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y08qp"]
+albedo_color = Color(1, 0.72549, 0.0431373, 1)
+metallic = 1.0
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_c7rxy"]
+material = SubResource("StandardMaterial3D_y08qp")
+size = Vector3(2.5, 0.7, 0.05)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wyujp"]
+material = SubResource("StandardMaterial3D_y08qp")
+size = Vector3(1.2, 0.7, 0.05)
+
+[sub_resource type="BoxMesh" id="BoxMesh_djevy"]
+material = SubResource("StandardMaterial3D_y08qp")
+size = Vector3(1.42, 1.09, 0.155)
+
+[node name="Model" type="Node3D"]
+script = ExtResource("1_mt8oh")
+
+[node name="AABB" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.775, 0.26)
+shape = SubResource("BoxShape3D_87yam")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0491287, 0.998792, 0, -0.998792, 0.0491287, 0, 0, 0)
+mesh = SubResource("BoxMesh_c7rxy")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.516817, 0.856096, 0, -0.856096, -0.516817, 0, 0.178131, 0.607795)
+mesh = SubResource("BoxMesh_c7rxy")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.999682, -0.0251999, 0, 0.0251999, -0.999682, 0, 0.69889, 0.864007)
+mesh = SubResource("BoxMesh_c7rxy")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.649302, -0.760531, 0, 0.760531, -0.649302, 0, 1.21586, 0.553666)
+mesh = SubResource("BoxMesh_c7rxy")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, -1, 0.376402, 0.926456, 2.3048e-17, 0.926456, -0.376402, 5.67291e-17, 1.20104, 0.553597, 0.205511)
+mesh = SubResource("BoxMesh_wyujp")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, -1, 0.376402, 0.926456, 2.3048e-17, 0.926456, -0.376402, 5.67291e-17, -1.201, 0.554, 0.206)
+mesh = SubResource("BoxMesh_wyujp")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.649302, -0.760531, 0, 0.760531, -0.649302, 0, 1.2179, 0.62057)
+mesh = SubResource("BoxMesh_djevy")
+skeleton = NodePath("../..")

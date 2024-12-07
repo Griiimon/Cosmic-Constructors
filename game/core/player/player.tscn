@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://xgkn2mkwvwmq"]
+[gd_scene load_steps=22 format=3 uid="uid://xgkn2mkwvwmq"]
 
 [ext_resource type="PackedScene" uid="uid://slyw4y7qi46y" path="res://game/core/player/base_player.tscn" id="1_kthjw"]
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
@@ -14,6 +14,8 @@
 [ext_resource type="Script" path="res://game/core/player/movement state machine/player_jump_move_state.gd" id="8_s2hhl"]
 [ext_resource type="Resource" uid="uid://sueib6rdbmc0" path="res://game/data/blocks/light structure/light_structure_block.tres" id="11_2od4b"]
 [ext_resource type="PackedScene" uid="uid://djg68ac2wsojx" path="res://game/core/components/damage component/damage_component.tscn" id="12_goufb"]
+[ext_resource type="Script" path="res://game/core/player/action state machine/player_build_peripheral_entity_state.gd" id="14_06130"]
+[ext_resource type="Resource" uid="uid://dk6e5h7yn0nay" path="res://game/data/peripheral entities/excavator bucket/excavator_bucket.tres" id="15_wnbc8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7yawy"]
 height = 0.5
@@ -55,20 +57,27 @@ target_position = Vector3(0, 0, 0)
 collision_mask = 2
 hit_back_faces = false
 
-[node name="Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="2"]
+[node name="Build Peripheral Entity Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="2"]
+unique_name_in_owner = true
+enabled = false
+target_position = Vector3(0, 0, -5)
+max_results = 1
+collision_mask = 118
+
+[node name="Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="3"]
 unique_name_in_owner = true
 shape = SubResource("SphereShape3D_ly8po")
 target_position = Vector3(0, 0, -2.5)
 collision_mask = 2
 
-[node name="Block Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="3"]
+[node name="Block Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="4"]
 unique_name_in_owner = true
 shape = SubResource("SphereShape3D_4pkix")
 target_position = Vector3(0, 0, -4)
 max_results = 1
 collision_mask = 2
 
-[node name="Item Viewport Container" type="SubViewportContainer" parent="Head/Pivot" index="4"]
+[node name="Item Viewport Container" type="SubViewportContainer" parent="Head/Pivot" index="5"]
 unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
@@ -98,7 +107,7 @@ sky_mode = 1
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.5, -1.25)
 
-[node name="Drill Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="5"]
+[node name="Drill Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="6"]
 unique_name_in_owner = true
 enabled = false
 shape = SubResource("SphereShape3D_iybuy")
@@ -157,6 +166,12 @@ script = ExtResource("6_3y3c5")
 
 [node name="Build" type="Node" parent="Action State Machine" index="1"]
 script = ExtResource("5_avkim")
+build_range = null
+smooth_rotation_speed = null
 current_block = ExtResource("11_2od4b")
+
+[node name="Build Peripheral Entity" type="Node" parent="Action State Machine" index="2"]
+script = ExtResource("14_06130")
+current_entity = ExtResource("15_wnbc8")
 
 [node name="Damage Component" parent="." index="6" instance=ExtResource("12_goufb")]

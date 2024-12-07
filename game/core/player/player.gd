@@ -7,6 +7,8 @@ extends BasePlayer
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 
 @onready var build_raycast: RayCast3D = %"Build Raycast"
+@onready var build_peripheral_entity_shapecast: ShapeCast3D = %"Build Peripheral Entity Shapecast"
+
 @onready var interact_shapecast: ShapeCast3D = %"Interact Shapecast"
 @onready var floor_shapecast: ShapeCast3D = $"Floor Shapecast"
 @onready var block_interact_shapecast: ShapeCast3D = %"Block Interact Shapecast"

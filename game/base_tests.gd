@@ -110,6 +110,7 @@ func mine_gold():
 	var local_pos: Vector3i= terrain.to_local($"../Player".global_position)
 	#var local_pos: Vector3i= $"../Player".global_position
 	var radius: float= 5
+	
 	VoxelUtils.pre_mine(terrain, local_pos, radius)
 	
 	var tool: VoxelToolLodTerrain= terrain.get_voxel_tool()

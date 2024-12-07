@@ -1,0 +1,2 @@
+class_name PeripheralEntityInstance
+extends RigidBody3D

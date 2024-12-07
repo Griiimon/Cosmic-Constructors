@@ -1,6 +1,8 @@
 PanelViewer assign hotkeys by pressing 1-9 while selected, 0 to remove
 	store in grid
 
+FIX ghost overlays custom shape blocks
+
 update hud display on enter/leave seat
 
 save PeripheralGridEntities ( + connections )

@@ -6,5 +6,5 @@ extends NamedResource
 
 
 
-func get_model()-> Node3D:
+func get_model()-> PeripheralEntityModel:
 	return model.instantiate()

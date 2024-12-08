@@ -1,3 +1,5 @@
+ConnectiveBlockInstance for tubes, conveyors etc with multiple block types depending on neighbor connections
+
 PanelViewer assign hotkeys by pressing 1-9 while selected, 0 to remove
 	store in grid
 

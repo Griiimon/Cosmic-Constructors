@@ -11,7 +11,7 @@ const NODE_NAME= "Item Ejector"
 
 
 
-func eject_item(item: WorldItem, world: World):
+func eject_item(item: Item, world: World):
 	if only_with_valid_target:
 		var catcher: ItemCatcher= get_item_catcher()
 		assert(catcher)

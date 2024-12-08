@@ -1,13 +1,13 @@
 class_name ItemCatcher
 extends Node
 
-signal caught_item(item: WorldItem)
+signal caught_item(item: Item)
 
 const NODE_NAME= "Item Catcher"
 
 
 
-func catch(item: WorldItem):
+func catch(item: Item):
 	caught_item.emit(item)
 
 

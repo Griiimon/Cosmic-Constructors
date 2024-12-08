@@ -1,5 +1,5 @@
-class_name WorldItemProduct
-extends WorldItem
+class_name IntermediateItem
+extends Item
 
 
 

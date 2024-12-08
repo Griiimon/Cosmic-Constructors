@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="WorldItemRaw" load_steps=3 format=3 uid="uid://bvo12g5be7j4u"]
+
+[ext_resource type="Script" path="res://game/core/item/item_raw.gd" id="1_gsjhb"]
+[ext_resource type="PackedScene" uid="uid://hbk45m8ysb3i" path="res://game/data/items/raw materials/iron ore/iron_ore_model.tscn" id="1_p8l41"]
+
+[resource]
+script = ExtResource("1_gsjhb")
+model = ExtResource("1_p8l41")

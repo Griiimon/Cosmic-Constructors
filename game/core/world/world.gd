@@ -285,7 +285,7 @@ func explosion(damage: Damage, obj: CollisionObject3D):
 	delayed_forces.append(DelayedExplosiveForce.new(damage))
 
 
-func spawn_item(item: WorldItem, pos: Vector3, rot: Vector3= Vector3.ZERO, frozen: bool= false)-> WorldItemInstance:
+func spawn_item(item: Item, pos: Vector3, rot: Vector3= Vector3.ZERO, frozen: bool= false)-> WorldItemInstance:
 	var item_instance: WorldItemInstance= WORLD_ITEM_SCENE.instantiate()
 	item_instance.position= pos
 	item_instance.rotation= rot

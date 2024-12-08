@@ -1,5 +1,5 @@
-class_name WorldItemRaw
-extends WorldItem
+class_name ProductItem
+extends Item
 
 
 

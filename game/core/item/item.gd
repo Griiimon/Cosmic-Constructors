@@ -1,4 +1,4 @@
-class_name WorldItem
+class_name Item
 extends Resource
 
 @export var model: PackedScene

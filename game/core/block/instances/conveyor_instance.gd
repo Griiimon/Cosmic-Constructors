@@ -42,7 +42,7 @@ func on_neighbor_placed(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_blo
 			target= conveyor_target
 
 
-func _on_item_catcher_caught_item(item: WorldItem) -> void:
+func _on_item_catcher_caught_item(item: Item) -> void:
 	item_instance= world.spawn_item(item, get_item_start_pos(), global_rotation, true)
 
 
@@ -52,7 +52,7 @@ func _on_conveyor_target_took_item(_item_instance: WorldItemInstance) -> void:
 	item_instance.global_position= get_item_start_pos()
 
 
-func can_conveyor_target_take_item(item: WorldItem)-> bool:
+func can_conveyor_target_take_item(item: Item)-> bool:
 	return item_instance == null
 
 

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="TerrainTypeProperties" load_steps=3 format=3 uid="uid://dthyojrp18xoy"]
 
-[ext_resource type="Resource" uid="uid://b4vqkgbwnwt0n" path="res://game/data/world items/raw materials/dirt/dirt.tres" id="1_4otts"]
+[ext_resource type="Resource" uid="uid://b4vqkgbwnwt0n" path="res://game/data/items/raw materials/dirt/dirt.tres" id="1_4otts"]
 [ext_resource type="Script" path="res://game/core/world/terrain/terrain_type_properties.gd" id="1_ssi88"]
 
 [resource]

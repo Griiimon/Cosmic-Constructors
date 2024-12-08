@@ -23,7 +23,7 @@ func mine(local_pos: Vector3i, radius: float, material_spawn_pos: Vector3, item_
 		if not collected_resources.has(key):
 			collected_resources[key]= 0.0
 		collected_resources[key]+= new_resources[key]
-		var raw_item: WorldItemRaw= terrain_properties.types[key].raw_material
+		var raw_item: RawItem= terrain_properties.types[key].raw_material
 		var item_instance: WorldItemInstance= world.spawn_item(raw_item, material_spawn_pos)
 		item_instance.linear_velocity= item_impulse
 	#DebugHud.send("Gold", collected_resources[1] if collected_resources.has(1) else 0.0)	

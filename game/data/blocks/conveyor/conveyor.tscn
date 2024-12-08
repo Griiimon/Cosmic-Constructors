@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://clfksjpvg60v8"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/conveyor_instance.gd" id="1_2cr6b"]
-[ext_resource type="PackedScene" uid="uid://d1yd7cvio7mxv" path="res://game/core/misc/conveyor target/conveyor_target.tscn" id="2_43hh3"]
+[ext_resource type="PackedScene" uid="uid://d1yd7cvio7mxv" path="res://game/core/components/conveyor target/conveyor_target.tscn" id="2_43hh3"]
 [ext_resource type="PackedScene" uid="uid://4lrcbiiff8n2" path="res://game/core/components/item catcher/item_catcher.tscn" id="3_ow3od"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sln4j"]

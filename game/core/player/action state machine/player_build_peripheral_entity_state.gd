@@ -59,15 +59,26 @@ func on_physics_process(delta: float):
 
 
 func build_entity():
-	player.world.spawn_peripheral_entity(current_entity, ghost.global_position + aabb.position * ghost.global_basis, ghost.rotation)
+	player.world.spawn_peripheral_entity(current_entity, ghost.global_position + aabb.position * ghost.global_basis.inverse(), ghost.rotation)
 
 
 func rotate_ghost(delta):
-	pass
+	if Input.is_action_pressed("rotate_block_left"):
+		ghost.rotate_y(-rotation_speed * delta)
+	elif Input.is_action_pressed("rotate_block_right"):
+		ghost.rotate_y(rotation_speed * delta)
+	if Input.is_action_pressed("rotate_block_up"):
+		ghost.rotate_x(-rotation_speed * delta)
+	elif Input.is_action_pressed("rotate_block_down"):
+		ghost.rotate_x(rotation_speed * delta)
+	if Input.is_action_pressed("roll_block_left"):
+		ghost.rotate_z(-rotation_speed * delta)
+	elif Input.is_action_pressed("roll_block_right"):
+		ghost.rotate_z(rotation_speed * delta)
 
 
 func update_model():
 	model= current_entity.get_model()
-	aabb= model.find_child("AABB")
+	aabb= model.find_child("AABB").duplicate()
 	player.build_peripheral_entity_shapecast.shape= aabb.shape
 	

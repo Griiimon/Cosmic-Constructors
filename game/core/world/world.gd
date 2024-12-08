@@ -16,6 +16,8 @@ class DelayedExplosiveForce:
 var grids: Node
 var projectiles: Node
 var items: Node
+var peripheral_entities: Node
+
 var grid_freeze_state:= false
 
 var delayed_forces: Array[DelayedExplosiveForce]
@@ -26,6 +28,7 @@ func _ready() -> void:
 	grids= generate_sub_node("Grids")
 	projectiles= generate_sub_node("Projectiles")
 	items= generate_sub_node("Items")
+	peripheral_entities= generate_sub_node("Peripheral Entities")
 
 
 func _physics_process(_delta: float) -> void:
@@ -303,7 +306,10 @@ func spawn_item(item: WorldItem, pos: Vector3, rot: Vector3= Vector3.ZERO, froze
 
 
 func spawn_peripheral_entity(entity: PeripheralEntity, pos: Vector3, rot: Vector3):
-	breakpoint
+	var entity_instance: PeripheralEntityInstance= entity.scene.instantiate()
+	entity_instance.position= pos
+	entity_instance.rotation= rot
+	peripheral_entities.add_child(entity_instance)
 
 
 func get_grid(id: int)-> BlockGrid:

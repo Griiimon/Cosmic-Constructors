@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://game/core/block/instances/furnace_instance.gd" id="1_ixfdn"]
 [ext_resource type="Resource" uid="uid://b5j26qxxk25de" path="res://game/data/world items/intermediates/steel ingot/steel_ingot.tres" id="2_0woud"]
-[ext_resource type="PackedScene" uid="uid://iixyhw4jvjeq" path="res://game/core/misc/item ejector/item_ejector.tscn" id="2_d85vm"]
+[ext_resource type="PackedScene" uid="uid://iixyhw4jvjeq" path="res://game/core/components/item ejector/item_ejector.tscn" id="2_d85vm"]
 [ext_resource type="Script" path="res://game/core/recipes/furnace_recipe.gd" id="3_63usp"]
 
 [sub_resource type="Resource" id="Resource_i3vvf"]

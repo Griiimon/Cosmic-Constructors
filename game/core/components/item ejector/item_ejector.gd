@@ -31,7 +31,7 @@ func get_item_catcher()-> ItemCatcher:
 		var collision_pos: Vector3= raycast.get_collision_point() - raycast.global_basis.z * 0.05
 		var grid_block: GridBlock= grid.get_block_from_global_pos(collision_pos)
 		assert(grid_block)
-		return ItemCatcher.get_catcher_from_block(grid_block)
+		return ItemCatcher.get_from_block(grid_block)
 	
 	return null
 

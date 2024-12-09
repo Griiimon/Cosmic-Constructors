@@ -506,6 +506,10 @@ func get_block_local(grid_pos: Vector3i)-> BaseGridBlock:
 	return blocks[grid_pos] if is_occupied(grid_pos) else null
 
 
+func get_block_local_direction(grid_pos: Vector3i, direction: Vector3)-> BaseGridBlock:
+	return get_block_local(Vector3i((Vector3(grid_pos) + direction).floor()))
+
+
 func get_local_velocity()-> Vector3:
 	return linear_velocity * global_basis
 

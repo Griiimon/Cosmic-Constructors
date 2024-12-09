@@ -4,6 +4,7 @@ extends BlockInstanceOnOff
 
 @onready var terrain_shapecast: ShapeCast3D = $"Terrain ShapeCast"
 @onready var drill_head: MeshInstance3D = $"Drill Head"
+@onready var item_container: ItemContainer = $"Item Container"
 
 var cooldown: Timer
 
@@ -27,11 +28,18 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 	if active.is_true():
 		if cooldown.is_stopped():
 			if terrain_shapecast.is_colliding():
-				var terrain: VoxelLodTerrain= terrain_shapecast.get_collider(0)
-				var tool: VoxelToolLodTerrain= terrain.get_voxel_tool()
-				tool.channel= VoxelBuffer.CHANNEL_SDF
-				tool.mode= VoxelTool.MODE_REMOVE
+				#var terrain: VoxelLodTerrain= terrain_shapecast.get_collider(0)
+				#var tool: VoxelToolLodTerrain= terrain.get_voxel_tool()
+				#tool.channel= VoxelBuffer.CHANNEL_SDF
+				#tool.mode= VoxelTool.MODE_REMOVE
+				#var radius: float= (terrain_shapecast.shape as SphereShape3D).radius
+				#tool.do_sphere(terrain.to_local(terrain_shapecast.get_collision_point(0)), radius)
+
+				var terrain: MyTerrain= terrain_shapecast.get_collider(0)
+				var local_pos: Vector3i= terrain.to_local(terrain_shapecast.get_collision_point(0))
 				var radius: float= (terrain_shapecast.shape as SphereShape3D).radius
-				tool.do_sphere(terrain.to_local(terrain_shapecast.get_collision_point(0)), radius)
-		
+				var resources: Dictionary= terrain.mine(local_pos, radius)
+				
+				item_container.inventory.add_from_dict(resources)
+				
 			cooldown.start()

@@ -18,7 +18,7 @@ func eject_item(item: Item, world: World, count: int= 1):
 		assert(catcher)
 		catcher.catch(item)
 	else:
-		world.spawn_item(item, item_spawn_position.global_position, item_spawn_position.global_rotation, COUNTERCLOCKWISE)
+		world.spawn_item(item, item_spawn_position.global_position, item_spawn_position.global_rotation, count)
 	cooldown.start()
 
 

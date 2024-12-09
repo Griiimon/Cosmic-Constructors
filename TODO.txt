@@ -1,3 +1,10 @@
+WorldItemInstance needs to disable collision shape when on connector or else it will take collision layer of grid and react to raycasts
+
+excert forces/torque ( configurable in block and counterpart? ) on connector counterpart to align parent object
+
+build crane to lift container
+	block groups and hotkeys
+
 run damage test with multi blocks in grid
 
 ConnectiveBlockInstance for tubes, conveyors etc with multiple block types depending on neighbor connections
@@ -89,6 +96,7 @@ FIX ghost sometimes getting left behind on moving grid
 FIX bottom out wheel reverse speed hack => dont show wheel rotation
 FIX jetpack counterforce against gravity
 FIX smooth block rotation starts to fail at a certain point ( euler lock? )
+FIX static grids connected to terrain jitter ( only when terrain gets edited, lod changes? ) 
 
 IS FIXED?
 	FIX sometimes wrong ( downwards ) momentum when strafing off grid 
@@ -174,3 +182,5 @@ cars: use roguecar components, like engine blocks, steering/brake blocks etc. ma
 	- static body limiting
 	- suspension block or wheel breaks immediately
 	- high exponential counter force/impulse ( depending on grid mass )
+
+only allowed to build peripheral entities ( and even blocks? ) next to 3d printer

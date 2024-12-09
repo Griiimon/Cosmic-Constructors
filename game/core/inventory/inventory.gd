@@ -118,6 +118,10 @@ func clear_item(inv_item: InventoryItem):
 	update()
 
 
+func is_empty()-> bool:
+	return slots.is_empty()
+
+
 func update():
 	if not block_update_callback:
 		updated.emit()

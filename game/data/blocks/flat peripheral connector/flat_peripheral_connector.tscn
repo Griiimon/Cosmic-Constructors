@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://dtn7a4333r12s"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/peripheral_connector_instance.gd" id="1_w6me4"]
+[ext_resource type="Material" uid="uid://cob7u37hdm61" path="res://game/data/blocks/peripheral connector/peripheral_connector_disabled_material.tres" id="2_m727b"]
+[ext_resource type="Material" uid="uid://b4uo20ehto5wu" path="res://game/data/blocks/peripheral connector/peripheral_connector_ready_material.tres" id="3_4mapo"]
+[ext_resource type="Material" uid="uid://b824lkgishwsd" path="res://game/data/blocks/peripheral connector/peripheral_connector_connected_material.tres" id="4_hrhj0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u03i4"]
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jr2j2"]
+size = Vector3(0.7, 0.25, 0.7)
+
+[sub_resource type="SphereMesh" id="SphereMesh_fmr1o"]
+material = ExtResource("2_m727b")
+radius = 0.48
+height = 0.36
+is_hemisphere = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_1trek"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_34nf0"]
+albedo_color = Color(0.980124, 0.593086, 0.320194, 1)
+metallic = 1.0
+roughness = 0.68
+
+[sub_resource type="BoxMesh" id="BoxMesh_jpx3i"]
+material = SubResource("StandardMaterial3D_34nf0")
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryx1f"]
+albedo_color = Color(0.980124, 0.593086, 0.320194, 1)
+metallic = 1.0
+roughness = 0.68
+
+[sub_resource type="BoxMesh" id="BoxMesh_canb3"]
+material = SubResource("StandardMaterial3D_ryx1f")
+size = Vector3(0.07, 0.4, 0.465)
+
+[node name="Flat Peripheral Connector" type="Node3D"]
+script = ExtResource("1_w6me4")
+light_material_disabled = ExtResource("2_m727b")
+light_material_ready = ExtResource("3_4mapo")
+light_material_connected = ExtResource("4_hrhj0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.402877, 0)
+shape = SubResource("BoxShape3D_u03i4")
+
+[node name="Fixed Joint" type="JoltHingeJoint3D" parent="."]
+limit_enabled = true
+
+[node name="Detection Area" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.369171, 0)
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detection Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.181236, 0)
+shape = SubResource("BoxShape3D_jr2j2")
+
+[node name="Light" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.501344, 0)
+mesh = SubResource("SphereMesh_fmr1o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_1trek")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+mesh = SubResource("BoxMesh_jpx3i")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, -0.285092, 0)
+mesh = SubResource("BoxMesh_canb3")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, -0.285092, 0)
+mesh = SubResource("BoxMesh_canb3")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, -0.285092, -0.449992)
+mesh = SubResource("BoxMesh_canb3")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, -0.285092, 0.449992)
+mesh = SubResource("BoxMesh_canb3")
+
+[connection signal="area_entered" from="Detection Area" to="." method="_on_detection_area_area_entered"]
+[connection signal="area_exited" from="Detection Area" to="." method="_on_detection_area_area_exited"]

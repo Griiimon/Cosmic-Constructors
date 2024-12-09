@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PeripheralConnectorBlock" load_steps=3 format=3 uid="uid://bkd8kmflv8uol"]
+
+[ext_resource type="PackedScene" uid="uid://dtn7a4333r12s" path="res://game/data/blocks/flat peripheral connector/flat_peripheral_connector.tscn" id="1_qvd8g"]
+[ext_resource type="Script" path="res://game/core/block/types/peripheral_connector_block.gd" id="2_hhw48"]
+
+[resource]
+script = ExtResource("2_hhw48")
+size = Vector3i(1, 1, 1)
+weight = 10.0
+max_hitpoints = 10
+custom_collision = true
+can_tick = false
+can_be_built = true
+scene = ExtResource("1_qvd8g")
+name = ""

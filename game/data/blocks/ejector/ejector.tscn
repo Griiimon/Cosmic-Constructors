@@ -35,35 +35,36 @@ size = Vector3(0.7, 0.05, 0.7)
 script = ExtResource("1_878b2")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, -0.0303339, -0.0303339)
 visible = false
 mesh = SubResource("BoxMesh_4wxlk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, -0.0303339, 0.219666)
 mesh = SubResource("BoxMesh_4ahov")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0.35)
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0.319666, -0.0303339)
 mesh = SubResource("BoxMesh_vc18y")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, -0.35)
+transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 0, -0.380334, -0.0303339)
 mesh = SubResource("BoxMesh_vc18y")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
-transform = Transform3D(6.12323e-17, -0.5, -0.866025, 0, 0.866025, -0.5, 1, 3.06162e-17, 5.30288e-17, -0.35, 0, 0)
+transform = Transform3D(6.12323e-17, -0.5, -0.866025, 1, 8.36449e-17, 2.24126e-17, 6.12323e-17, -0.866025, 0.5, -0.35, -0.0303339, -0.0303339)
 mesh = SubResource("BoxMesh_vc18y")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
-transform = Transform3D(6.12323e-17, 0.5, -0.866025, 0, 0.866025, 0.5, 1, -3.06162e-17, 5.30288e-17, 0.35, 0, 0)
+transform = Transform3D(6.12323e-17, 0.5, -0.866025, 1, 2.24125e-17, 8.3645e-17, 6.12323e-17, -0.866025, -0.5, 0.35, -0.0303339, -0.0303339)
 mesh = SubResource("BoxMesh_vc18y")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00732862, 0)
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, -0.0303339, -0.0376625)
 mesh = SubResource("BoxMesh_4xl51")
 
 [node name="Item Ejector" parent="." instance=ExtResource("2_ms6yb")]
-transform = Transform3D(1, 0, 0, 0, -1, -1.22465e-16, 0, 1.22465e-16, -1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 6.12327e-17, -1, 0, 1, 6.12327e-17, 0, -0.0303339, -0.0303339)
 only_with_valid_target = false
 
 [node name="Conveyor Target" parent="." instance=ExtResource("3_5g5wk")]

@@ -3,8 +3,12 @@ extends Node
 
 const NODE_NAME= "Item Container"
 
-var inventory: Inventory
+var inventory:= Inventory.new()
 
+
+
+func is_empty()-> bool:
+	return inventory.is_empty()
 
 
 static func get_from_block_pos(grid: BlockGrid, block_pos: Vector3i)-> ItemContainer:

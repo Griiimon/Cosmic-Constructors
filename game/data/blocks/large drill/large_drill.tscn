@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://ftbpt5gvktva"]
+[gd_scene load_steps=12 format=3 uid="uid://ftbpt5gvktva"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/drill_instance.gd" id="1_womo2"]
+[ext_resource type="PackedScene" uid="uid://bl2yt8bveog0i" path="res://game/core/components/item container/item_container.tscn" id="2_beph7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tpmsl"]
 albedo_color = Color(0.12103, 0.12103, 0.12103, 1)
@@ -71,3 +72,5 @@ mesh = SubResource("BoxMesh_a24l2")
 shape = SubResource("SphereShape3D_qjy8t")
 target_position = Vector3(0, 0, -2)
 collision_mask = 4
+
+[node name="Item Container" parent="." instance=ExtResource("2_beph7")]

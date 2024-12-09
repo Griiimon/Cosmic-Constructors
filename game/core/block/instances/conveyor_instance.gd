@@ -27,7 +27,7 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, delta: float):
 			item_instance.global_position= get_item_pos(progress)
 		
 		if progress >= 1:
-			if target and target.can_take_item(item_instance.item):
+			if target and target.can_take_item(item_instance.item.item):
 				target.take_item(item_instance)
 				progress= 0
 				item_instance= null
@@ -55,6 +55,10 @@ func _on_conveyor_target_took_item(_item_instance: WorldItemInstance) -> void:
 func can_conveyor_target_take_item(item: Item)-> bool:
 	return item_instance == null
 
+
+func can_item_catcher_catch_item(item: Item)-> bool:
+	return can_conveyor_target_take_item(item)
+		
 
 func get_item_start_pos()-> Vector3:
 	return to_global(item_start_pos.position)

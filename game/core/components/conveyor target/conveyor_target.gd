@@ -18,7 +18,7 @@ func take_item(item_instance: WorldItemInstance):
 
 
 static func get_from_block_pos(grid: BlockGrid, block_pos: Vector3i)-> ConveyorTarget:
-	var block: GridBlock= grid.get_block_local(block_pos)
+	var block: BaseGridBlock= grid.get_block_local(block_pos)
 	if block:
 		var block_instance: BlockInstance= block.get_block_instance()
 		if block_instance:

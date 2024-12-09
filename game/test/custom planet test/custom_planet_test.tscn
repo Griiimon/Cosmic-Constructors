@@ -57,6 +57,7 @@ script = ExtResource("1_7fydp")
 [node name="Tests" type="Node" parent="."]
 script = ExtResource("2_d2xmp")
 equip_item = ExtResource("3_xpo15")
+load_world = true
 
 [node name="Player Spawn" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 70, 0)
@@ -81,6 +82,8 @@ generator = ExtResource("8_27ipv")
 mesher = SubResource("VoxelMesherTransvoxel_oycf3")
 voxel_bounds = AABB(-65536, -65536, -65536, 131072, 131072, 131072)
 lod_count = 7
+lod_distance = 24.0
+secondary_lod_distance = 24.0
 material = ExtResource("9_l2jpv")
 collision_layer = 4
 run_stream_in_editor = false

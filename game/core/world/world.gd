@@ -111,7 +111,7 @@ func damage_object(obj: CollisionObject3D, damage: Damage):
 							var pierced_blocks: Array[Vector3i]= grid.raycast(ray_origin, ray_target)
 							pierced_blocks.reverse()
 							for block_pos in pierced_blocks:
-								var block: GridBlock= grid.get_block_local(block_pos)
+								var block: BaseGridBlock= grid.get_block_local(block_pos)
 								total_damage= block.absorb_damage(total_damage)
 				
 							#prints(" Total damage %d after piercing through %d blocks" %[total_damage, pierced_blocks.size()])

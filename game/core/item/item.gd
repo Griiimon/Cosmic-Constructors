@@ -11,3 +11,7 @@ func can_be_conveyored()-> bool:
 
 func get_max_unit_size()-> int:
 	return 1
+
+
+func can_stack()-> bool:
+	return true

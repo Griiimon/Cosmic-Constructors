@@ -12,6 +12,7 @@ extends Node3D
 
 var yaw_input: float
 var pitch_input: float
+var roll_input: float
 
 
 
@@ -31,13 +32,19 @@ func _input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var force_factor= 100.0
-	rb.apply_force(pitch_input * force_factor * rb.global_basis.z, rb.global_basis.y)
-	rb.apply_force(pitch_input * force_factor * -rb.global_basis.z, -rb.global_basis.y)
+	#var input:= Vector3(pitch_input, yaw_input, roll_input)
+	var pitch_quat:= Quaternion(Vector3.RIGHT, pitch_input)
+	var yaw_quat:= Quaternion(Vector3.UP, yaw_input)
+	var roll_quat:= Quaternion(Vector3.FORWARD, roll_input)
+	
+	var input: Vector3= (pitch_quat * yaw_quat * roll_quat).get_axis()
 
-	rb.apply_force(yaw_input * force_factor * rb.global_basis.z, rb.global_basis.x)
-	rb.apply_force(yaw_input * force_factor * -rb.global_basis.z, -rb.global_basis.x)
+	prints("Euler", Vector3(pitch_input, yaw_input, roll_input).normalized())
+	prints("Quat", input)
+	
+	rb.angular_velocity= input * SENSITIVITY * rb.global_basis.inverse()
+	rb.angular_velocity*= Vector3(pitch_input, yaw_input, roll_input).length()
 	
 	yaw_input= 0
 	pitch_input= 0
-	
+	roll_input= 0

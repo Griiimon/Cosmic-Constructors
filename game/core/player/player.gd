@@ -28,6 +28,8 @@ extends BasePlayer
 
 @onready var item_camera: Camera3D = %"Item Camera"
 
+@onready var six_dof_controller: Player6DOFController = $"6DOF Controller"
+
 
 var hand_object: HandObject
 var active_equipment: Array[PlayerEquipmentObject]

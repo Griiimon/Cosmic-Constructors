@@ -75,12 +75,26 @@ func on_physics_process(delta: float):
 
 	var input_torque: Vector3= Vector3(pitch_input * pitch_factor, yaw_input * yaw_factor, roll_input * roll_factor) * player.global_basis.inverse()
 
+	#var quat_pitch:= Quaternion(player.global_basis.x, deg_to_rad(pitch_input))
+	#var quat_yaw:= Quaternion(player.global_basis.y, deg_to_rad(yaw_input))
+	#var quat_roll:= Quaternion(player.global_basis.z, deg_to_rad(roll_input))
+
 	pitch_input= 0
 	yaw_input= 0
 	roll_input= 0
 
 	#player.apply_torque(input_torque * delta)
-	player.angular_velocity= input_torque * delta * rotation_speed
+	
+	#player.angular_velocity= input_torque * delta * rotation_speed
+	player.six_dof_controller.set_angular_velocity(input_torque * delta * rotation_speed)
+	
+	#var local_angular_velocity: Vector3= player.angular_velocity * player.global_basis
+	#local_angular_velocity.z= 0
+	#player.angular_velocity= local_angular_velocity * player.global_basis.inverse()
+	
+	#var target_basis:= Basis(quat_pitch * quat_yaw) * player.global_basis.inverse()
+	#player.angular_velocity= (quat_pitch * quat_yaw * quat_roll).get_euler() * rotation_speed * delta
+	#player.angular_velocity= player.angular_velocity - player.angular_velocity.project(player.global_basis.z)
 
 	if jetpack_active:
 		

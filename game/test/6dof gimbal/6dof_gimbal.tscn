@@ -1,0 +1,104 @@
+[gd_scene load_steps=15 format=3 uid="uid://c5ftudo0t5pke"]
+
+[ext_resource type="Script" path="res://game/test/6dof gimbal/6_dof_gimbal.gd" id="1_asdsq"]
+[ext_resource type="Script" path="res://game/test/6dof gimbal/local_axis_locked_rigidbody.gd" id="2_csan7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dn7iw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wgdjk"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0xw1g"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wx6lq"]
+radius = 0.23
+height = 0.35
+
+[sub_resource type="BoxMesh" id="BoxMesh_8mdsh"]
+size = Vector3(1, 0.325, 1)
+
+[sub_resource type="Environment" id="Environment_btupc"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_mrfjy"]
+colors = PackedColorArray(0, 0.964706, 0, 1, 0.453987, 0.319088, 0.248314, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_c15bs"]
+frequency = 0.0794
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vhwtl"]
+color_ramp = SubResource("Gradient_mrfjy")
+noise = SubResource("FastNoiseLite_c15bs")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x10om"]
+albedo_texture = SubResource("NoiseTexture2D_vhwtl")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g00p0"]
+material = SubResource("StandardMaterial3D_x10om")
+size = Vector2(50, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ay21g"]
+
+[node name="6DofGimbal" type="Node3D"]
+script = ExtResource("1_asdsq")
+first_person_view = true
+SENSITIVITY = 100.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.278086, 0.960556, 0, -0.960556, 0.278086, 0, 4.99281, 1.38046)
+
+[node name="First Body" type="RigidBody3D" parent="." node_paths=PackedStringArray("orientation_node")]
+gravity_scale = 0.0
+script = ExtResource("2_csan7")
+orientation_node = NodePath(".")
+
+[node name="JoltGeneric6DOFJoint3D" type="JoltGeneric6DOFJoint3D" parent="First Body"]
+angular_limit_x/enabled = false
+node_a = NodePath("..")
+node_b = NodePath("../../Last Body")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="First Body"]
+shape = SubResource("SphereShape3D_dn7iw")
+
+[node name="Last Body" type="RigidBody3D" parent="." node_paths=PackedStringArray("orientation_node")]
+gravity_scale = 0.0
+script = ExtResource("2_csan7")
+orientation_node = NodePath(".")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Last Body"]
+shape = SubResource("CapsuleShape3D_wgdjk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Last Body"]
+mesh = SubResource("CapsuleMesh_0xw1g")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Last Body/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.420231, -0.403152)
+mesh = SubResource("SphereMesh_wx6lq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Last Body/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.920125, 0)
+mesh = SubResource("BoxMesh_8mdsh")
+
+[node name="FPS Camera3D" type="Camera3D" parent="Last Body"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43734, -0.710351)
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_btupc")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.980206, 0.197982, 0, -0.197982, 0.980206, 0, 1.3135, 4.07873)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.71694, 0)
+mesh = SubResource("PlaneMesh_g00p0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17591, -4.09381)
+mesh = SubResource("BoxMesh_ay21g")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.88543, 1.17591, -5.43485)
+mesh = SubResource("BoxMesh_ay21g")

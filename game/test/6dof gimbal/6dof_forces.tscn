@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://u2kwa4nevanw"]
+
+[ext_resource type="Script" path="res://game/test/6dof gimbal/6_dof_forces.gd" id="1_23tyv"]
+[ext_resource type="Script" path="res://game/test/6dof gimbal/local_axis_unlocked_rigidbody.gd" id="2_rp2bv"]
+
+[sub_resource type="Environment" id="Environment_y4kqx"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nxk86"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mkut8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gnj5a"]
+size = Vector3(0.8, 0.23, 0.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pkf7g"]
+size = Vector3(0.215, 0.23, 0.29)
+
+[node name="6DofForces" type="Node3D"]
+script = ExtResource("1_23tyv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.278086, 0.960556, 0, -0.960556, 0.278086, 0, 4.99281, 1.38046)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_y4kqx")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.980206, 0.197982, 0, -0.197982, 0.980206, 0, 1.3135, 4.07873)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." node_paths=PackedStringArray("orientation_node")]
+gravity_scale = 0.0
+can_sleep = false
+angular_damp_mode = 1
+angular_damp = 10.0
+script = ExtResource("2_rp2bv")
+axis = 2
+orientation_node = NodePath(".")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("CapsuleShape3D_nxk86")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("CapsuleMesh_mkut8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.907577, 0)
+mesh = SubResource("BoxMesh_gnj5a")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="RigidBody3D/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.367178, -0.556014)
+mesh = SubResource("BoxMesh_pkf7g")
+
+[node name="FPS Camera3D" type="Camera3D" parent="RigidBody3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.538225, -0.688657)

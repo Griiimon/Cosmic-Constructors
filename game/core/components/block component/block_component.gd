@@ -1,3 +1,8 @@
+# try:
+#		static func get_from_node(node: Node)-> :
+#			return node.get_node_or_null(get("NODE_NAME"))
+# and define const NODE_NAME in each child
+
 #extends Node
 #
 #const NODE_NAME= ""

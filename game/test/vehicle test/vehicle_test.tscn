@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://d4blx7p2hp5bc"]
+[gd_scene load_steps=30 format=3 uid="uid://d4blx7p2hp5bc"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_6i4dd"]
 [ext_resource type="Script" path="res://game/test/vehicle test/vehicle_tests.gd" id="2_8kc7o"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="6_s17hf"]
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="7_hpj7a"]
 [ext_resource type="PackedScene" uid="uid://w6iv7medt6r7" path="res://game/data/peripheral entities/excavator bucket/simple_excavator_bucket.tscn" id="9_cnwvp"]
+[ext_resource type="PackedScene" uid="uid://ced1k5g1mhrng" path="res://game/data/object entities/wooden_pallet.tscn" id="10_e437v"]
 
 [sub_resource type="Resource" id="Resource_ic37o"]
 script = ExtResource("7_hpj7a")
@@ -266,3 +267,6 @@ mesh = SubResource("CylinderMesh_hjjcg")
 
 [node name="Excavator Bucket" parent="." instance=ExtResource("9_cnwvp")]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 4.19572, 0.211451, -4.51573)
+
+[node name="Wooden Pallet" parent="." instance=ExtResource("10_e437v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6817, 0.885055, 12.846)

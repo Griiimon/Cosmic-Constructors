@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://0e4n38fliap8"]
+[gd_scene load_steps=15 format=3 uid="uid://0e4n38fliap8"]
 
 [ext_resource type="Material" uid="uid://b824lkgishwsd" path="res://game/data/blocks/peripheral connector/peripheral_connector_connected_material.tres" id="1_5rgwc"]
 [ext_resource type="Script" path="res://game/core/block/instances/peripheral_connector_instance.gd" id="1_bu7fi"]
@@ -10,6 +10,10 @@ size = Vector3(1, 0.5, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mbwpn"]
 size = Vector3(0.7, 0.5, 0.7)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ptwn3"]
+height = 1.0
+radius = 1.25
 
 [sub_resource type="SphereMesh" id="SphereMesh_ljcw5"]
 material = ExtResource("2_80du7")
@@ -37,6 +41,10 @@ roughness = 0.68
 material = SubResource("StandardMaterial3D_ryx1f")
 size = Vector3(0.07, 0.4, 0.465)
 
+[sub_resource type="BoxMesh" id="BoxMesh_kw14b"]
+material = SubResource("StandardMaterial3D_ryx1f")
+size = Vector3(0.12, 0.355, 0.255)
+
 [node name="Peripheral Connector" type="Node3D"]
 script = ExtResource("1_bu7fi")
 light_material_disabled = ExtResource("2_80du7")
@@ -57,6 +65,15 @@ collision_mask = 256
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Detection Area"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39682, 0)
 shape = SubResource("BoxShape3D_mbwpn")
+
+[node name="Pull Area" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.156727, 0)
+collision_mask = 256
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pull Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_ptwn3")
 
 [node name="Light" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.501344, 0)
@@ -83,8 +100,8 @@ transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, -0.20
 mesh = SubResource("BoxMesh_canb3")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
-transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, -0.201344, 0.449992)
-mesh = SubResource("BoxMesh_canb3")
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, -0.201344, 0.416126)
+mesh = SubResource("BoxMesh_kw14b")
 
 [connection signal="area_entered" from="Detection Area" to="." method="_on_detection_area_area_entered"]
 [connection signal="area_exited" from="Detection Area" to="." method="_on_detection_area_area_exited"]

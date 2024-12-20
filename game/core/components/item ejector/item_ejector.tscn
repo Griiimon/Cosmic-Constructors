@@ -8,7 +8,7 @@ script = ExtResource("1_8jy0q")
 [node name="RayCast3D" type="RayCast3D" parent="."]
 enabled = false
 target_position = Vector3(0, -10, 0)
-collision_mask = 2
+collision_mask = 18
 hit_back_faces = false
 
 [node name="Item Spawn Position" type="Marker3D" parent="."]

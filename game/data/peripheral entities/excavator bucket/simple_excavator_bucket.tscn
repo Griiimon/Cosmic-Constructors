@@ -27,7 +27,7 @@ script = ExtResource("1_f3mok")
 [node name="Model" parent="." instance=ExtResource("2_k2trx")]
 
 [node name="Peripheral Connector Counterpart" parent="." instance=ExtResource("1_uq3ae")]
-transform = Transform3D(1, 0, 0, 0, 0.790219, -0.612824, 0, 0.612824, 0.790219, 0, 1.26853, 0.682296)
+transform = Transform3D(1, -9.11406e-17, -2.18809e-17, -5.70595e-17, -0.777146, 0.62932, -7.43613e-17, -0.62932, -0.777146, 0, 1.26853, 0.682296)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_fjihu")

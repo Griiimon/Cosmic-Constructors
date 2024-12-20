@@ -170,7 +170,7 @@ backpack vs bottles
 science, progression unlocking and improving block properties
 basic/intermediate/advanced/expert/master sciene levels/recipes
 
-moving celestial bodies by putting each in its own world3d
+moving celestial bodies by putting each in its own world3d ( not possible in multiplayer currently cuz Voxel plugin will build collision for all voxel terrains at local coords? )
 
 cars: use roguecar components, like engine blocks, steering/brake blocks etc. maybe even do aerodynamic calculations
 
@@ -184,3 +184,5 @@ cars: use roguecar components, like engine blocks, steering/brake blocks etc. ma
 	- high exponential counter force/impulse ( depending on grid mass )
 
 only allowed to build peripheral entities ( and even blocks? ) next to 3d printer
+
+special blocks like rails, where you can attach machine entities to like crane or elevator platform, can send signals ( A, B, C ) to those machines to facilitate control from main grid 

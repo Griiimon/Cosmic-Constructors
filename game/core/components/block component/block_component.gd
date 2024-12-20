@@ -1,7 +1,13 @@
 # try:
-#		static func get_from_node(node: Node)-> :
-#			return node.get_node_or_null(get("NODE_NAME"))
+#		static func get_from_node(node: Node, node_name: String)-> :
+#			return node.get_node_or_null(node_name)
 # and define const NODE_NAME in each child
+#	Usage:
+#	var cmp= BaseComponent.get_from_node(node, ItemCatcherComponent.NODE_NAME)
+# 
+#
+#		
+
 
 #extends Node
 #

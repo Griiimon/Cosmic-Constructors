@@ -13,6 +13,9 @@ enum State { IDLE, READY, CONNECTED }
 @onready var detection_area: Area3D = $"Detection Area"
 @onready var light: MeshInstance3D = $Light
 
+@onready var pull_area: Area3D = $"Pull Area"
+
+
 var state: State= State.IDLE: set= set_state
 
 
@@ -24,6 +27,20 @@ func _ready() -> void:
 func on_placed(grid: BlockGrid, _grid_block: GridBlock):
 	joint.node_a= joint.get_path_to(grid)
 	joint.enabled= false
+
+
+func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
+	if state != State.CONNECTED:
+		if pull_area.has_overlapping_areas():
+			var counter_part: PeripheralConnectorCounterpart= pull_area.get_overlapping_areas()[0]
+			var pull_entity: RigidBody3D= counter_part.body
+			
+			pull_entity.apply_force((pull_area.global_position - counter_part.global_position) * 1000, counter_part.global_position - pull_entity.global_position)
+			
+			var quat: Quaternion= pull_area.global_basis.get_rotation_quaternion().inverse() * counter_part.global_basis.get_rotation_quaternion()
+			#DebugHud.send("Align Axis", quat.get_axis())
+			#DebugHud.send("Align Angle", rad_to_deg(quat.get_angle()))
+			pull_entity.apply_torque(quat.get_axis() * quat.get_angle() * 500)
 
 
 func set_state(s: State):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dtn7a4333r12s"]
+[gd_scene load_steps=14 format=3 uid="uid://dtn7a4333r12s"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/peripheral_connector_instance.gd" id="1_w6me4"]
 [ext_resource type="Material" uid="uid://cob7u37hdm61" path="res://game/data/blocks/peripheral connector/peripheral_connector_disabled_material.tres" id="2_m727b"]
@@ -10,6 +10,10 @@ size = Vector3(1, 0.2, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jr2j2"]
 size = Vector3(0.7, 0.25, 0.7)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8pdld"]
+height = 1.0
+radius = 1.25
 
 [sub_resource type="SphereMesh" id="SphereMesh_fmr1o"]
 material = ExtResource("2_m727b")
@@ -57,6 +61,15 @@ collision_mask = 256
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Detection Area"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.181236, 0)
 shape = SubResource("BoxShape3D_jr2j2")
+
+[node name="Pull Area" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212383, 0)
+collision_mask = 256
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pull Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_8pdld")
 
 [node name="Light" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.501344, 0)

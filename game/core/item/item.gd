@@ -1,8 +1,10 @@
 class_name Item
 extends Resource
 
-@export var model: PackedScene
+enum StorageSize { TINY, SMALL, LARGE, HUGE}
 
+@export var model: PackedScene
+@export var storage_size: StorageSize= StorageSize.SMALL
 
 
 func can_be_conveyored()-> bool:

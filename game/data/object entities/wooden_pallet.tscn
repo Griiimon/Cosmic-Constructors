@@ -1,0 +1,168 @@
+[gd_scene load_steps=8 format=3 uid="uid://ced1k5g1mhrng"]
+
+[ext_resource type="Script" path="res://game/core/object entity/instances/pallet.gd" id="1_u58sg"]
+[ext_resource type="PackedScene" uid="uid://4lrcbiiff8n2" path="res://game/core/components/item catcher/item_catcher.tscn" id="2_gp6o0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ssc62"]
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k4p7n"]
+albedo_color = Color(0.422363, 0.249276, 0.0721424, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m8tu3"]
+material = SubResource("StandardMaterial3D_k4p7n")
+size = Vector3(0.4, 0.4, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j5od3"]
+albedo_color = Color(0.595406, 0.360547, 0.121292, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0smv5"]
+material = SubResource("StandardMaterial3D_j5od3")
+size = Vector3(2, 0.1, 0.3)
+
+[node name="Wooden Pallet" type="RigidBody3D"]
+mass = 20.0
+linear_damp = 1.0
+angular_damp = 1.0
+script = ExtResource("1_u58sg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ssc62")
+
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0583283, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+mesh = SubResource("BoxMesh_m8tu3")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0)
+mesh = SubResource("BoxMesh_m8tu3")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 0)
+mesh = SubResource("BoxMesh_m8tu3")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, -0.85)
+mesh = SubResource("BoxMesh_0smv5")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, 0.85)
+mesh = SubResource("BoxMesh_0smv5")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, 0.425)
+mesh = SubResource("BoxMesh_0smv5")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, -0.425)
+mesh = SubResource("BoxMesh_0smv5")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, 0)
+mesh = SubResource("BoxMesh_0smv5")
+
+[node name="Item Catcher" parent="." instance=ExtResource("2_gp6o0")]
+
+[node name="Large Grid" type="Marker3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Small Item Grid" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Tile 1" type="Marker3D" parent="Small Item Grid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.283489, -0.5)
+
+[node name="Tile 2" type="Marker3D" parent="Small Item Grid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.283489, -0.5)
+
+[node name="Tile 3" type="Marker3D" parent="Small Item Grid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.283489, 0.5)
+
+[node name="Tile 4" type="Marker3D" parent="Small Item Grid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.283489, 0.5)
+
+[node name="Tiny Item Grid" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Grid 1" type="Node3D" parent="Tiny Item Grid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.283489, -0.5)
+
+[node name="Tile 1" type="Marker3D" parent="Tiny Item Grid/Grid 1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, -0.25)
+gizmo_extents = 0.1
+
+[node name="Tile 2" type="Marker3D" parent="Tiny Item Grid/Grid 1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, -0.25)
+gizmo_extents = 0.1
+
+[node name="Tile 3" type="Marker3D" parent="Tiny Item Grid/Grid 1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.25)
+gizmo_extents = 0.1
+
+[node name="Tile 4" type="Marker3D" parent="Tiny Item Grid/Grid 1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0.25)
+gizmo_extents = 0.1
+
+[node name="Grid 2" type="Node3D" parent="Tiny Item Grid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.283489, -0.5)
+
+[node name="Tile 1" type="Marker3D" parent="Tiny Item Grid/Grid 2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, -0.25)
+gizmo_extents = 0.1
+
+[node name="Tile 2" type="Marker3D" parent="Tiny Item Grid/Grid 2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, -0.25)
+gizmo_extents = 0.1
+
+[node name="Tile 3" type="Marker3D" parent="Tiny Item Grid/Grid 2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.25)
+gizmo_extents = 0.1
+
+[node name="Tile 4" type="Marker3D" parent="Tiny Item Grid/Grid 2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0.25)
+gizmo_extents = 0.1
+
+[node name="Grid 3" type="Node3D" parent="Tiny Item Grid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.283489, 0.5)
+
+[node name="Tile 1" type="Marker3D" parent="Tiny Item Grid/Grid 3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, -0.25)
+gizmo_extents = 0.1
+
+[node name="Tile 2" type="Marker3D" parent="Tiny Item Grid/Grid 3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, -0.25)
+gizmo_extents = 0.1
+
+[node name="Tile 3" type="Marker3D" parent="Tiny Item Grid/Grid 3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.25)
+gizmo_extents = 0.1
+
+[node name="Tile 4" type="Marker3D" parent="Tiny Item Grid/Grid 3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0.25)
+gizmo_extents = 0.1
+
+[node name="Grid 4" type="Node3D" parent="Tiny Item Grid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.283489, 0.5)
+
+[node name="Tile 1" type="Marker3D" parent="Tiny Item Grid/Grid 4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, -0.25)
+gizmo_extents = 0.1
+
+[node name="Tile 2" type="Marker3D" parent="Tiny Item Grid/Grid 4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, -0.25)
+gizmo_extents = 0.1
+
+[node name="Tile 3" type="Marker3D" parent="Tiny Item Grid/Grid 4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.25)
+gizmo_extents = 0.1
+
+[node name="Tile 4" type="Marker3D" parent="Tiny Item Grid/Grid 4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0.25)
+gizmo_extents = 0.1
+
+[connection signal="caught_item" from="Item Catcher" to="." method="_on_item_catcher_caught_item"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldItemIntermediate" load_steps=3 format=3 uid="uid://b5j26qxxk25de"]
+[gd_resource type="Resource" script_class="IntermediateItem" load_steps=3 format=3 uid="uid://b5j26qxxk25de"]
 
 [ext_resource type="PackedScene" uid="uid://dpxoeyfsdx2o0" path="res://game/data/items/intermediates/steel ingot/steel_ingot_model.tscn" id="1_x7o3k"]
 [ext_resource type="Script" path="res://game/core/item/item_intermediate.gd" id="2_mwikf"]
@@ -6,3 +6,4 @@
 [resource]
 script = ExtResource("2_mwikf")
 model = ExtResource("1_x7o3k")
+storage_size = 0

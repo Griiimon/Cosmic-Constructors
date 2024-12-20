@@ -85,8 +85,8 @@ func on_physics_process(delta: float):
 
 	#player.apply_torque(input_torque * delta)
 	
-	#player.angular_velocity= input_torque * delta * rotation_speed
-	player.six_dof_controller.set_angular_velocity(input_torque * delta * rotation_speed)
+	player.angular_velocity= input_torque * delta * rotation_speed
+	#player.six_dof_controller.set_angular_velocity(input_torque * delta * rotation_speed)
 	
 	#var local_angular_velocity: Vector3= player.angular_velocity * player.global_basis
 	#local_angular_velocity.z= 0

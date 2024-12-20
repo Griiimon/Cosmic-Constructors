@@ -4,6 +4,7 @@ extends Node
 signal caught_item(item: Item)
 
 const NODE_NAME= "Item Catcher"
+# TODO ..or let the parent register a function?
 const CAN_CATCH_FUNCTION_NAME= "can_item_catcher_catch_item"
 
 

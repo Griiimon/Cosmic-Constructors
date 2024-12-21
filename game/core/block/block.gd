@@ -6,6 +6,7 @@ extends NamedResource
 @export var max_hitpoints: int= 10
 @export var custom_collision: bool= false
 @export var can_tick: bool= false
+@export var tick_priority: int= 0
 @export var can_be_built: bool= true
 @export var texture: Texture2D
 @export var material: StandardMaterial3D

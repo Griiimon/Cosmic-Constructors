@@ -160,10 +160,28 @@ func _physics_process(delta: float) -> void:
 
 
 func tick_blocks(delta: float):
+	var deferred_ticks: Dictionary
+	
 	for block in blocks.values():
 		if block is VirtualGridBlock: continue
-		 
-		if block.block_definition.can_tick:
+		
+		var definition: Block= block.block_definition
+		if definition.can_tick:
+			var instance: BlockInstance= block.get_block_instance()
+			assert(instance)
+			if definition.tick_priority > 0:
+				if not deferred_ticks.has(definition.tick_priority):
+					deferred_ticks[definition.tick_priority]= []
+				deferred_ticks[definition.tick_priority].append(block)
+			else:
+				instance.physics_tick(self, block, delta)
+
+	var key_arr: Array[int]= []
+	key_arr.assign(deferred_ticks.keys())
+	key_arr.sort()
+	
+	for priority_key: int in key_arr:
+		for block: BaseGridBlock in deferred_ticks[priority_key]:
 			var instance: BlockInstance= block.get_block_instance()
 			assert(instance)
 			instance.physics_tick(self, block, delta)
@@ -459,6 +477,11 @@ func can_place_block_at_global(block: Block, global_pos: Vector3, block_rotation
 				return false
 
 	return true
+
+
+func get_throttle_input()-> float:
+	var forward_drive: float= max(0, -requested_movement.z)
+	return forward_drive
 
 
 func get_multi_block_positions(block: Block, pos: Vector3i, block_basis: Basis)-> Array[Vector3i]:

@@ -506,6 +506,12 @@ func get_block_local(grid_pos: Vector3i)-> BaseGridBlock:
 	return blocks[grid_pos] if is_occupied(grid_pos) else null
 
 
+func get_block_instance_at(block_pos: Vector3i)-> BlockInstance:
+	var block: GridBlock= get_block_local(block_pos)
+	if not block: return null
+	return block.get_block_instance()
+
+
 func get_block_local_direction(grid_pos: Vector3i, direction: Vector3)-> BaseGridBlock:
 	return get_block_local(Vector3i((Vector3(grid_pos) + direction).floor()))
 

@@ -48,6 +48,19 @@ func serialize()-> Dictionary:
 	return data
 
 
+func find_or_make_linked_block_group(grid: BlockGrid, block_pos: Vector3i)-> LinkedBlockGroup:
+	var neighbors: Array[BlockInstance]= get_same_neighbors(grid, block_pos)
+	var group: LinkedBlockGroup
+	for neighbor in neighbors:
+		var neighbor_group: LinkedBlockGroup= neighbor.get_linked_block_group()
+		assert(neighbor_group)
+		if group and group != neighbor_group:
+			assert(false, "Supposed to happen when connecting 2 groups. group mergin not implemented")
+			return null
+		group= neighbor_group
+	return group
+
+
 func deserialize(data: Dictionary):
 	if data.has("properties"):
 		for prop_name in data["properties"].keys():
@@ -65,13 +78,17 @@ func get_properties()-> Array[BlockProperty]:
 	return result
 
 
-func get_same_neighbors(pos: Vector3i, grid: BlockGrid)-> Array[BlockInstance]:
+func get_same_neighbors(grid: BlockGrid, block_pos: Vector3i)-> Array[BlockInstance]:
 	var result: Array[BlockInstance]= []
 	
-	var neighbors: Array[Vector3i]= grid.get_block_neighbors(pos)
+	var neighbors: Array[Vector3i]= grid.get_block_neighbors(block_pos)
 	for neighbor_pos in neighbors:
 		var block_instance: BlockInstance= grid.get_block_instance_at(neighbor_pos)
 		if block_instance.get_script() == self.get_script():
 			result.append(block_instance)
 	
 	return result
+
+
+func get_linked_block_group()-> LinkedBlockGroup:
+	return null

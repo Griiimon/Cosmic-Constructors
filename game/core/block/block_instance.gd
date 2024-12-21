@@ -63,3 +63,15 @@ func get_properties()-> Array[BlockProperty]:
 				result.append(get(prop.name))
 	
 	return result
+
+
+func get_same_neighbors(pos: Vector3i, grid: BlockGrid)-> Array[BlockInstance]:
+	var result: Array[BlockInstance]= []
+	
+	var neighbors: Array[Vector3i]= grid.get_block_neighbors(pos)
+	for neighbor_pos in neighbors:
+		var block_instance: BlockInstance= grid.get_block_instance_at(neighbor_pos)
+		if block_instance.get_script() == self.get_script():
+			result.append(block_instance)
+	
+	return result

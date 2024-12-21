@@ -48,7 +48,7 @@ func serialize()-> Dictionary:
 	return data
 
 
-func find_or_make_linked_block_group(grid: BlockGrid, block_pos: Vector3i)-> LinkedBlockGroup:
+func find_or_make_linked_block_group(grid: BlockGrid, block_pos: Vector3i, persistent: bool= true)-> LinkedBlockGroup:
 	var neighbors: Array[BlockInstance]= get_same_neighbors(grid, block_pos)
 	var group: LinkedBlockGroup
 	for neighbor in neighbors:
@@ -58,6 +58,10 @@ func find_or_make_linked_block_group(grid: BlockGrid, block_pos: Vector3i)-> Lin
 			assert(false, "Supposed to happen when connecting 2 groups. group mergin not implemented")
 			return null
 		group= neighbor_group
+
+	if not group:
+		group= LinkedBlockGroup.new(persistent)
+
 	return group
 
 

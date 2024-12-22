@@ -1,22 +1,22 @@
 [gd_scene load_steps=5 format=3 uid="uid://dxobr26jfvcqg"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lirsl"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ooraa"]
 albedo_color = Color(0.544974, 0.544974, 0.544974, 1)
 metallic = 1.0
 roughness = 0.15
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_otltb"]
-material = SubResource("StandardMaterial3D_lirsl")
+material = SubResource("StandardMaterial3D_ooraa")
 top_radius = 0.15
 bottom_radius = 0.15
 height = 0.1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8l0d"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o1gs6"]
 albedo_color = Color(0, 0, 0, 1)
 metallic_specular = 0.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_d88rf"]
-material = SubResource("StandardMaterial3D_w8l0d")
+material = SubResource("StandardMaterial3D_o1gs6")
 top_radius = 0.12
 bottom_radius = 0.12
 height = 0.11

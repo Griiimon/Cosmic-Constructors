@@ -30,4 +30,4 @@ func set_block(grid_block: GridBlock, value: Variant):
 
 
 func has_blocks()-> bool:
-	return data.has(BLOCKS_KEY) and data[BLOCKS_KEY].keys() > 0
+	return data.has(BLOCKS_KEY) and data[BLOCKS_KEY].keys().size() > 0

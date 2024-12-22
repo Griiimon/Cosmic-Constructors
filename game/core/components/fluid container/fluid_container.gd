@@ -44,3 +44,10 @@ func is_full()-> bool:
 
 func is_emtpy()-> bool:
 	return is_zero_approx(content)
+
+
+func can_connect_from_to(from: GridBlock, to: GridBlock)-> bool:
+	for connector in connectors:
+		if from.to_global(from.local_pos, connector.block_pos + connector.direction) == to.local_pos:
+			return true
+	return false

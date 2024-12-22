@@ -10,7 +10,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	#var linked_block: GridBlock= grid.get_block_local(Vector3i((Vector3(grid_block.local_pos) + grid_block.get_local_basis().z).floor()))
 	var linked_block: BaseGridBlock= grid.get_block_local_direction(grid_block.local_pos, grid_block.get_local_basis().z)
 	if linked_block:
-		var container: ItemContainer= ItemContainer.get_from_block(linked_block)
+		var container: ItemContainer= BaseBlockComponent.get_from_block(linked_block, ItemContainer.NODE_NAME)
 		if container:
 			linked_container= container
 

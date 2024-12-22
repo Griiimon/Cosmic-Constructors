@@ -55,5 +55,9 @@ func get_global_basis(grid: BlockGrid)-> Basis:
 	return get_local_basis() * grid.global_basis
 
 
+func to_global(local_pos: Vector3i, offset: Vector3i)-> Vector3i:
+	return (Vector3(offset) * get_local_basis() + Vector3(local_pos)).round()
+
+
 static func rotation_to_basis(block_rotation: Vector3i)-> Basis:
 	return Basis.from_euler(block_rotation * deg_to_rad(90))	

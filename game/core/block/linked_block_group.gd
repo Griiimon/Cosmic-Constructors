@@ -27,3 +27,7 @@ func register_block(grid_block: GridBlock, value: Variant= 0):
 
 func set_block(grid_block: GridBlock, value: Variant):
 	data[BLOCKS_KEY][grid_block.local_pos]= value
+
+
+func has_blocks()-> bool:
+	return data.has(BLOCKS_KEY) and data[BLOCKS_KEY].keys() > 0

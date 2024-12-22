@@ -88,7 +88,7 @@ func get_same_neighbors(grid: BlockGrid, block_pos: Vector3i)-> Array[BlockInsta
 	var neighbors: Array[Vector3i]= grid.get_block_neighbors(block_pos)
 	for neighbor_pos in neighbors:
 		var block_instance: BlockInstance= grid.get_block_instance_at(neighbor_pos)
-		if block_instance.get_script() == self.get_script():
+		if block_instance and block_instance.get_script() == self.get_script():
 			result.append(block_instance)
 	
 	return result

@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://br6liai788ug6"]
+
+[ext_resource type="PackedScene" uid="uid://dxobr26jfvcqg" path="res://game/core/components/fluid container/fluid_connector_model.tscn" id="1_5rj0m"]
+[ext_resource type="PackedScene" uid="uid://s5pod3jqq31o" path="res://game/core/components/fluid container/fluid_container.tscn" id="1_pmcxv"]
+[ext_resource type="Script" path="res://game/core/components/fluid container/fluid_connector.gd" id="2_tssye"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywuix"]
+albedo_color = Color(0.835488, 0.393991, 0.136015, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_l1118"]
+material = SubResource("StandardMaterial3D_ywuix")
+top_radius = 0.45
+bottom_radius = 0.45
+height = 0.95
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ry56"]
+albedo_color = Color(0.607843, 0.113725, 0.113725, 1)
+metallic = 1.0
+roughness = 0.27
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_biind"]
+material = SubResource("StandardMaterial3D_8ry56")
+height = 0.1
+
+[sub_resource type="Resource" id="Resource_vxejx"]
+script = ExtResource("2_tssye")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, 1, 0)
+
+[sub_resource type="Resource" id="Resource_lwxbe"]
+script = ExtResource("2_tssye")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, -1, 0)
+
+[node name="Small Fuel Tank" type="Node3D"]
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+mesh = SubResource("CylinderMesh_l1118")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
+mesh = SubResource("CylinderMesh_biind")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+mesh = SubResource("CylinderMesh_biind")
+skeleton = NodePath("../..")
+
+[node name="Fluid Connector 1" parent="Model" instance=ExtResource("1_5rj0m")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0.5, 0)
+
+[node name="Fluid Connector 2" parent="Model" instance=ExtResource("1_5rj0m")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, -0.5, 0)
+
+[node name="Fluid Container" parent="." node_paths=PackedStringArray("model_node") instance=ExtResource("1_pmcxv")]
+connectors = Array[ExtResource("2_tssye")]([SubResource("Resource_vxejx"), SubResource("Resource_lwxbe")])
+model_node = NodePath("../Model")

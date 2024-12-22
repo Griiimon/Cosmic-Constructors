@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="TankBlock" load_steps=3 format=3 uid="uid://c4mm3rkr7ekcw"]
+
+[ext_resource type="PackedScene" uid="uid://br6liai788ug6" path="res://game/data/blocks/small fuel tank/small_fuel_tank.tscn" id="1_6l12e"]
+[ext_resource type="Script" path="res://game/core/block/types/tank_block.gd" id="1_cs4ek"]
+
+[resource]
+script = ExtResource("1_cs4ek")
+capacity = 1000.0
+size = Vector3i(1, 1, 1)
+weight = 10.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = false
+tick_priority = 0
+can_be_built = true
+scene = ExtResource("1_6l12e")
+name = ""

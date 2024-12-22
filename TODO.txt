@@ -1,19 +1,17 @@
+extend LinkBlockGroup ( GasFluidSystem, .. ) but serialize/deserialize from data dictionary
+	duplicate_from(orig): blocks= blocks.duplicate() , so i can create a base linked group and then "cast" to specific inherited
+ 
 check if recent atmospheric shader change has any negative effects in Forward+
 
 WorldItemInstance needs to disable collision shape when on connector or else it will take collision layer of grid and react to raycasts
-
-excert forces/torque ( configurable in block and counterpart? ) on connector counterpart to align parent object
 
 build crane to lift container
 	block groups and hotkeys
 
 run damage test with multi blocks in grid
 
-ConnectiveBlockInstance for tubes, conveyors etc with multiple block types depending on neighbor connections
-	thats not even a thing!
-
 PanelViewer assign hotkeys by pressing 1-9 while selected, 0 to remove
-	store in grid
+	store in main cockpit
 
 FIX ghost overlays custom shape blocks
 

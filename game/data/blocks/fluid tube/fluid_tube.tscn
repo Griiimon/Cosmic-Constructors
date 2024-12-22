@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpf1ecmswenqr"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/fluid_tube_instance.gd" id="1_tcxf1"]
+[ext_resource type="Material" uid="uid://b0wauk64fcqnl" path="res://game/data/blocks/fluid tube/tube_green_light.tres" id="2_aqv2q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lirsl"]
+albedo_color = Color(0.544974, 0.544974, 0.544974, 1)
+metallic = 1.0
+roughness = 0.15
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_h05mn"]
+material = SubResource("StandardMaterial3D_lirsl")
+top_radius = 0.15
+bottom_radius = 0.15
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8l0d"]
+albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 0.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_f68td"]
+material = SubResource("StandardMaterial3D_w8l0d")
+top_radius = 0.12
+bottom_radius = 0.12
+height = 1.02
+
+[sub_resource type="BoxMesh" id="BoxMesh_g8x1j"]
+material = ExtResource("2_aqv2q")
+size = Vector3(0.25, 0.25, 0.2)
+
+[node name="Fluid Tube" type="Node3D"]
+script = ExtResource("1_tcxf1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_h05mn")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_f68td")
+
+[node name="Light" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_g8x1j")

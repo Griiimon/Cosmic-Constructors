@@ -1,0 +1,37 @@
+[gd_scene load_steps=10 format=3 uid="uid://cd45r4ydi70p"]
+
+[ext_resource type="Script" path="res://game/base_tests.gd" id="1_fd624"]
+[ext_resource type="Script" path="res://game/game.gd" id="1_o413o"]
+[ext_resource type="Script" path="res://game/player_spawn.gd" id="4_okbv6"]
+[ext_resource type="Resource" uid="uid://6jymoqkdm6kr" path="res://game/data/equipment/back/jetpack/space_jetpack.tres" id="5_lx1rr"]
+[ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="6_p41q0"]
+[ext_resource type="Environment" uid="uid://g0ausvm6rdth" path="res://game/misc/environments/space_environment.tres" id="7_tc6bj"]
+[ext_resource type="Script" path="res://game/core/world/world.gd" id="8_04hle"]
+[ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="9_wxb1d"]
+
+[sub_resource type="Resource" id="Resource_rlnpc"]
+script = ExtResource("6_p41q0")
+back_item = ExtResource("5_lx1rr")
+
+[node name="Empty Test" type="Node3D"]
+script = ExtResource("1_o413o")
+
+[node name="Tests" type="Node" parent="."]
+script = ExtResource("1_fd624")
+project_folder_world = false
+freeze_grids = true
+
+[node name="Player Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+script = ExtResource("4_okbv6")
+equipment = SubResource("Resource_rlnpc")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("7_tc6bj")
+
+[node name="World" type="Node3D" parent="."]
+script = ExtResource("8_04hle")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="UI" parent="." instance=ExtResource("9_wxb1d")]

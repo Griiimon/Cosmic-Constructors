@@ -1,3 +1,5 @@
+check if recent atmospheric shader change has any negative effects in Forward+
+
 WorldItemInstance needs to disable collision shape when on connector or else it will take collision layer of grid and react to raycasts
 
 excert forces/torque ( configurable in block and counterpart? ) on connector counterpart to align parent object

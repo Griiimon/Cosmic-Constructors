@@ -69,32 +69,19 @@ func on_physics_process(delta: float):
 		jetpack_active= not jetpack_active
 		return
 
-	#var yaw_input= Input.get_axis("yaw_right", "yaw_left")
 	roll_input= Input.get_axis("roll_right", "roll_left")
-	#var pitch_input= Input.get_axis("pitch_down", "pitch_up")
 
-	var input_torque: Vector3= Vector3(pitch_input * pitch_factor, yaw_input * yaw_factor, roll_input * roll_factor) * player.global_basis.inverse()
-
-	#var quat_pitch:= Quaternion(player.global_basis.x, deg_to_rad(pitch_input))
-	#var quat_yaw:= Quaternion(player.global_basis.y, deg_to_rad(yaw_input))
-	#var quat_roll:= Quaternion(player.global_basis.z, deg_to_rad(roll_input))
+	var quat_pitch:= Quaternion(player.global_basis.x, deg_to_rad(pitch_input) * pitch_factor)
+	var quat_yaw:= Quaternion(player.global_basis.y, deg_to_rad(yaw_input) * yaw_factor)
+	var quat_roll:= Quaternion(player.global_basis.z, deg_to_rad(roll_input) * roll_factor)
 
 	pitch_input= 0
 	yaw_input= 0
 	roll_input= 0
 
-	#player.apply_torque(input_torque * delta)
+	var rot_quat: Quaternion= quat_yaw * quat_pitch * quat_roll
 	
-	player.angular_velocity= input_torque * delta * rotation_speed
-	#player.six_dof_controller.set_angular_velocity(input_torque * delta * rotation_speed)
-	
-	#var local_angular_velocity: Vector3= player.angular_velocity * player.global_basis
-	#local_angular_velocity.z= 0
-	#player.angular_velocity= local_angular_velocity * player.global_basis.inverse()
-	
-	#var target_basis:= Basis(quat_pitch * quat_yaw) * player.global_basis.inverse()
-	#player.angular_velocity= (quat_pitch * quat_yaw * quat_roll).get_euler() * rotation_speed * delta
-	#player.angular_velocity= player.angular_velocity - player.angular_velocity.project(player.global_basis.z)
+	player.angular_velocity= rot_quat.get_axis() * rot_quat.get_euler().length() * rotation_speed * delta
 
 	if jetpack_active:
 		

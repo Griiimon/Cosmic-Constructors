@@ -1,33 +1,37 @@
 class_name LinkedBlockGroup
 
-const FLUID_CONTENT_KEY= "fluid"
-const GAS_CONTENT_KEY= "gas"
-const SUB_GRID_ID_KEY= "sub_grid"
-const BLOCKS_KEY= "blocks"
-
 static var NEXT_ID: int= 0
 
 var id: int
-var data: Dictionary
-var persistent: bool
+var blocks: Dictionary
 
 
 
-func _init(_persistent: bool):
-	persistent= _persistent
+func _init():
 	id= NEXT_ID
 	NEXT_ID+= 1
 
 
+func copy(from: LinkedBlockGroup):
+	id= from.id
+	blocks= blocks.duplicate(true)
+
+
 func register_block(grid_block: GridBlock, value: Variant= 0):
-	if not data.has(BLOCKS_KEY):
-		data[BLOCKS_KEY]= {}
 	set_block(grid_block, value)
 
 
 func set_block(grid_block: GridBlock, value: Variant):
-	data[BLOCKS_KEY][grid_block.local_pos]= value
+	blocks[grid_block.local_pos]= value
 
 
 func has_blocks()-> bool:
-	return data.has(BLOCKS_KEY) and data[BLOCKS_KEY].keys().size() > 0
+	return not blocks.is_empty() 
+
+
+func get_block_count()-> int:
+	return blocks.size()
+
+
+func is_persistent()-> bool:
+	return false

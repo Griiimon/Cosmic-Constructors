@@ -6,6 +6,11 @@ var engine_block_group: LinkedBlockGroup
 
 
 
+func _ready() -> void:
+	default_interaction_property= active
+	active.set_true()
+
+
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	engine_block_group= find_or_make_linked_block_group(grid, grid_block.local_pos, false)
 	engine_block_group.register_block(grid_block)

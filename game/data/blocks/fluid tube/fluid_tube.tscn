@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpf1ecmswenqr"]
+[gd_scene load_steps=10 format=3 uid="uid://bpf1ecmswenqr"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/fluid_tube_instance.gd" id="1_tcxf1"]
 [ext_resource type="Material" uid="uid://b0wauk64fcqnl" path="res://game/data/blocks/fluid tube/tube_green_light.tres" id="2_aqv2q"]
+[ext_resource type="Material" uid="uid://cew26p031we7e" path="res://game/data/blocks/fluid tube/tube_yellow_light.tres" id="2_mx144"]
+[ext_resource type="Material" uid="uid://cbqqd1p83l7s5" path="res://game/data/blocks/fluid tube/tube_red_light.tres" id="4_gs2x5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lirsl"]
 albedo_color = Color(0.544974, 0.544974, 0.544974, 1)
@@ -25,11 +27,17 @@ bottom_radius = 0.12
 height = 1.02
 
 [sub_resource type="BoxMesh" id="BoxMesh_g8x1j"]
+resource_local_to_scene = true
 material = ExtResource("2_aqv2q")
 size = Vector3(0.25, 0.25, 0.2)
 
-[node name="Fluid Tube" type="Node3D"]
+[node name="Fluid Tube" type="Node3D" node_paths=PackedStringArray("lights")]
 script = ExtResource("1_tcxf1")
+connections = Array[Vector3i]([Vector3i(0, 0, -1), Vector3i(0, 0, 1)])
+green_light = ExtResource("2_aqv2q")
+yellow_light = ExtResource("2_mx144")
+red_light = ExtResource("4_gs2x5")
+lights = [NodePath("Light")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0)

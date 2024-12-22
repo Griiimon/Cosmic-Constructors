@@ -7,20 +7,36 @@ extends BlockInstance
 @export var red_light: StandardMaterial3D
 @export var lights: Array[MeshInstance3D]
 
-var linked_system: LinkedBlockGroup
+var linked_system: LinkedTubeGroup
 
 
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
-	linked_system= find_or_make_linked_block_group(grid, grid_block.local_pos, false, group_filter)
+	var group: LinkedBlockGroup= find_or_make_linked_block_group(grid, grid_block.local_pos, group_filter)
+
+	if not group.has_blocks():
+		linked_system= LinkedTubeGroup.new()
+		linked_system.copy(group)
+	else:
+		linked_system= group
 	
-	var light_material: StandardMaterial3D= green_light if linked_system.has_blocks() else red_light
+	assert(linked_system is LinkedTubeGroup and linked_system != null)
+
+	linked_system.register_block(grid_block)
+
+	update_light()
+
+
+func on_neighbor_placed(_grid: BlockGrid, _grid_block: BaseGridBlock, _neighbor_block_pos: Vector3i):
+	update_light()
+
+
+func update_light():
+	var light_material: StandardMaterial3D= green_light if linked_system.get_block_count() > 1 else red_light
 	for light in lights:
 		light.mesh.surface_set_material(0, light_material)
 
-	linked_system.register_block(grid_block)
-	
-	
+
 func group_filter(grid: BlockGrid, tube1_pos: Vector3i, tube2_pos: Vector3i)-> bool:
 	var tube1_block: GridBlock= grid.get_block_local(tube1_pos)
 	var tube2_block: GridBlock= grid.get_block_local(tube2_pos)

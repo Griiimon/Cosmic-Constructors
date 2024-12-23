@@ -110,7 +110,7 @@ func interactive_block_shapecast_filter(shapecast: ShapeCast3D)-> bool:
 	var collision_pos: Vector3= shapecast.get_collision_point(0) - shapecast.global_basis.z * 0.05
 	CustomShapeCast.grid_block= CustomShapeCast.grid.get_block_from_global_pos(collision_pos)
 
-	#DebugHud.send("Grid", CustomShapeCast.grid.name if CustomShapeCast.grid else "null")
-	#DebugHud.send("Grid Block", CustomShapeCast.grid_block.local_pos if CustomShapeCast.grid_block else "null")
+	DebugHud.send("Grid", CustomShapeCast.grid.name if CustomShapeCast.grid else "null")
+	DebugHud.send("Grid Block", CustomShapeCast.grid_block.local_pos if CustomShapeCast.grid_block else "null")
 
 	return CustomShapeCast.grid_block and (not CustomShapeCast.grid_block.get_block_instance() or not CustomShapeCast.grid_block.get_block_instance().has_property_viewer())

@@ -21,7 +21,7 @@ func on_amount_changed(amount: float):
 	if amount > 0:
 		fluid_cylinder.show()
 		var ratio: float= fluid_container.get_fill_ratio()
-		var height: float= lerp(0, abs(fluid_cylinder_y_offset * 2), ratio)
+		var height: float= lerp(0.0, abs(fluid_cylinder_y_offset * 2), ratio)
 		(fluid_cylinder.mesh as CylinderMesh).height= height
 		fluid_cylinder.position.y= fluid_cylinder_y_offset + height / 2.0
 	else:

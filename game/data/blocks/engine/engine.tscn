@@ -86,6 +86,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0.5)
 
 [node name="Fluid Consumer" parent="." node_paths=PackedStringArray("model_node") instance=ExtResource("2_w41ml")]
-constant_consumption = null
 connectors = Array[ExtResource("3_54fld")]([SubResource("Resource_jtfyu"), SubResource("Resource_fkufj")])
 model_node = NodePath("../Model/Base Block")

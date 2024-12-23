@@ -26,9 +26,33 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 
 	update_light()
 
+	check_for_inputs_and_outputs(grid, grid_block)
 
-func on_neighbor_placed(_grid: BlockGrid, _grid_block: BaseGridBlock, _neighbor_block_pos: Vector3i):
+
+func on_neighbor_placed(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
 	update_light()
+	check_for_inputs_and_outputs(grid, grid_block, true, neighbor_block_pos)
+
+
+func check_for_inputs_and_outputs(grid: BlockGrid, grid_block: BaseGridBlock, specific_neighbor: bool= false, specific_neighbor_pos: Vector3i= Vector3i.ZERO):
+	if specific_neighbor:
+		try_connect_input_output(grid_block, grid.get_block_local(specific_neighbor_pos))
+	else:
+		for neighbor_pos in grid.get_block_neighbors(grid_block.local_pos):
+			try_connect_input_output(grid_block, grid.get_block_local(neighbor_pos))
+
+
+func try_connect_input_output(grid_block: GridBlock, neighbor_block: GridBlock):
+	if not can_connect_to(grid_block, neighbor_block): return
+	
+	var input: FluidContainer= BaseBlockComponent3D.get_from_block(neighbor_block, FluidContainer.NODE_NAME)
+	if input and input.can_connect_from_to(neighbor_block, grid_block):
+		linked_system.add_input(input)
+		return
+
+	var output: FluidConsumer= BaseBlockComponent3D.get_from_block(neighbor_block, FluidConsumer.NODE_NAME)
+	if output and output.can_connect_from_to(neighbor_block, grid_block):
+		linked_system.add_output(output)
 
 
 func update_light():
@@ -59,7 +83,12 @@ func group_filter(grid: BlockGrid, tube1_pos: Vector3i, tube2_pos: Vector3i)-> b
 	return false
 
 
+func can_connect_to(block: GridBlock, target_block: GridBlock)-> bool:
+	for connection in connections:
+		if block.to_global(block.local_pos, connection) == target_block.local_pos:
+			return true
+	return false
+
+
 func get_linked_block_group()-> LinkedBlockGroup:
 	return linked_system
-
-	

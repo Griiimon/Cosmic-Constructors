@@ -1,6 +1,7 @@
 extends Node
 
 @export var explosion_scene: PackedScene
+@export var fluid_splash_scene: PackedScene
 
 
 
@@ -9,3 +10,15 @@ func spawn_explosion(pos: Vector3, radius: float):
 	explosion.position= pos
 	explosion.set_radius(radius)
 	add_child(explosion)
+
+
+func spawn_fluid_splash(pos: Vector3, vec: Vector3, fluid: Fluid):
+	if not GameData.game_settings.video_settings.enable_fluid_particles:
+		return
+
+	var splash: FluidSplashEffect= fluid_splash_scene.instantiate()
+	splash.position= pos
+	add_child(splash)
+	splash.eject_vector= -vec
+	splash.fluid= fluid
+	splash.start()

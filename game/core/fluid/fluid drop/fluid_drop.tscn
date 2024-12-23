@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjixfd2upo2t8"]
+
+[ext_resource type="Script" path="res://game/core/fluid/fluid_drop.gd" id="1_3gbg4"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7mn2x"]
+radius = 0.05
+height = 0.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gevpc"]
+size = Vector3(0.1, 0.2, 0.1)
+
+[node name="Fluid Drop" type="RigidBody3D"]
+collision_layer = 128
+collision_mask = 55
+can_sleep = false
+lock_rotation = true
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
+linear_damp_mode = 1
+linear_damp = 5.0
+script = ExtResource("1_3gbg4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_7mn2x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_gevpc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

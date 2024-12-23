@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxy43ubiu5xkd"]
+
+[ext_resource type="Script" path="res://game/core/effects/fluid splash/fluid_splash_particle.gd" id="1_xp8bm"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_78jry"]
+friction = 0.0
+bounce = 0.7
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5jf0v"]
+radius = 0.03
+height = 0.15
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3alux"]
+radius = 0.1
+
+[node name="Fluid Splash Particle" type="RigidBody3D"]
+collision_layer = 128
+collision_mask = 55
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_78jry")
+can_sleep = false
+lock_rotation = true
+linear_damp_mode = 1
+linear_damp = 0.5
+script = ExtResource("1_xp8bm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.120778, 0.99268, 0, -0.99268, 0.120778, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_5jf0v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_3alux")

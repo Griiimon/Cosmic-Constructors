@@ -14,7 +14,7 @@ func _init(_grid: BlockGrid):
 	NEXT_ID+= 1
 
 
-func tick(delta: float):
+func tick(_delta: float):
 	pass
 
 

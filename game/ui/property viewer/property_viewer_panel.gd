@@ -1,6 +1,18 @@
 class_name PropertyViewerPanel
 extends PanelContainer
 
+class ExtraProperty:
+	var text: String
+	var value: Variant
+
+	func _init(_text: String, _value):
+		text= _text
+		value= _value
+
+	func get_value_as_text()-> String:
+		return ("%.4f" % value) if value is float else value
+
+
 @export var ROW_SCENE: PackedScene
 
 @onready var content_container: VBoxContainer = %"VBoxContainer Content"
@@ -29,7 +41,6 @@ var is_value_selected: bool= false:
 			get_current_row().select_value()
 
 
-
 func _process(_delta: float) -> void:
 	if not visible: return
 	
@@ -50,13 +61,24 @@ func populate():
 	is_value_selected= false
 	rows.clear()
 	
+	for property: ExtraProperty in block_instance.get_extra_properties():
+		var row: PanelViewerRow= add_row()
+		row.label_type.text= property.text
+		row.label_type.value= property.get_value_as_text()
+
+
 	for property in block_instance.get_properties():
-		var row: PanelViewerRow= ROW_SCENE.instantiate()
-		content_container.add_child(row)
-		rows.append(row)
+		var row: PanelViewerRow= add_row()
 		row.property= property
 		if selected_row == -1:
-			selected_row= 0
+			selected_row= rows.size()
+
+
+func add_row()-> PanelViewerRow:
+	var row: PanelViewerRow= ROW_SCENE.instantiate()
+	content_container.add_child(row)
+	rows.append(row)
+	return row
 
 
 func open(_block: GridBlock, _grid: BlockGrid):
@@ -97,8 +119,7 @@ func update(_block: GridBlock, _grid: BlockGrid, player: Player):
 		position= camera.unproject_position(global_block_pos)
 		show()
 		initial_player_look= player.get_look_vec()
-		
-		
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible: return
@@ -122,10 +143,17 @@ func _unhandled_input(event: InputEvent) -> void:
 					MOUSE_BUTTON_RIGHT:
 						close()
 					MOUSE_BUTTON_WHEEL_UP:
-						selected_row= wrapi(selected_row - 1, 0, rows.size())
+						change_row(-1)
 					MOUSE_BUTTON_WHEEL_DOWN:
-						selected_row= wrapi(selected_row + 1, 0, rows.size())
+						change_row(1)
 
+
+func change_row(delta: int):
+	selected_row= wrapi(selected_row + delta, 0, rows.size())
+	if not get_current_row().property:
+		#TODO guard against infinte loop
+		change_row(delta)
+	
 
 func get_current_row()-> PanelViewerRow:
 	assert(selected_row < rows.size(), "row %d vs size %d" % [selected_row, rows.size()])

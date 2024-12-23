@@ -3,6 +3,7 @@ extends Node3D
 
 var default_interaction_property: BlockProperty
 var alternative_interaction_property: BlockProperty
+var extra_property_callbacks: Array[Callable]
 
 
 
@@ -32,6 +33,10 @@ func on_update():
 
 func on_destroy():
 	queue_free()
+
+
+func register_extra_property_callback(func_ptr: Callable):
+	extra_property_callbacks.append(func_ptr)
 
 
 func serialize()-> Dictionary:
@@ -101,6 +106,14 @@ func get_same_neighbors_positions(grid: BlockGrid, block_pos: Vector3i)-> Array[
 			result.append(neighbor_pos)
 	
 	return result
+
+
+func get_extra_properties()-> Array[PropertyViewerPanel.ExtraProperty]:
+	var result: Array[PropertyViewerPanel.ExtraProperty]= []
+	for func_ptr in extra_property_callbacks:
+		result.append_array(func_ptr.call())
+	return result
+
 
 func get_linked_block_group()-> LinkedBlockGroup:
 	return null

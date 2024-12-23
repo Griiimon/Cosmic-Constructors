@@ -34,3 +34,7 @@ func can_connect_from_to(from: GridBlock, to: GridBlock)-> bool:
 		if from.to_global(connector.block_pos + connector.direction) == to.local_pos:
 			return true
 	return false
+
+
+func get_extra_properties()-> Array[PropertyViewerPanel.ExtraProperty]:
+	return [ PropertyViewerPanel.ExtraProperty.new("Filled", "%d/%d" % [ int(content), int(max_storage)]) ]

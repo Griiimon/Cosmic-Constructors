@@ -29,6 +29,7 @@ func fill(val: float):
 	if prev_content != content:
 		amount_changed.emit(content)
 
+
 func drain(val: float):
 	var prev_content: float= content
 	content= max(content - val, 0)

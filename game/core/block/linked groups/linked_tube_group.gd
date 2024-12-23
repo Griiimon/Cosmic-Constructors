@@ -26,7 +26,6 @@ func process_input():
 		
 		if input.keep_empty: 
 			fill_containers= true
-			continue
 		
 		var max_output: float= min(input.throughput, input.content)
 		can_currently_provide+= max_output
@@ -82,7 +81,7 @@ func process_output():
 				for input in fill_ratios.keys():
 					fill_ratios[input]= 1.0
 			else:
-				for input in fill_ratios.keys():
+				for input in fill_capacities.keys():
 					fill_ratios[input]= fill_capacities[input] / total_fill_capacity
 			
 			total_requested= min(total_requested, total_fill_capacity)

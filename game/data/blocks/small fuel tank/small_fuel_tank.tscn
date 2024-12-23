@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://br6liai788ug6"]
+[gd_scene load_steps=14 format=3 uid="uid://br6liai788ug6"]
 
 [ext_resource type="PackedScene" uid="uid://dxobr26jfvcqg" path="res://game/core/components/fluid container/fluid_connector_model.tscn" id="1_5rj0m"]
 [ext_resource type="Script" path="res://game/core/block/instances/tank_instance.gd" id="1_l75wk"]
@@ -16,6 +16,19 @@ top_radius = 0.45
 bottom_radius = 0.45
 height = 0.95
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qiua0"]
+transparency = 1
+albedo_color = Color(0.694118, 0.733333, 0.796078, 0.364706)
+metallic = 0.6
+roughness = 0.1
+rim_enabled = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4p6f5"]
+material = SubResource("StandardMaterial3D_qiua0")
+top_radius = 0.45
+bottom_radius = 0.45
+height = 0.95
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ry56"]
 albedo_color = Color(0.607843, 0.113725, 0.113725, 1)
 metallic = 1.0
@@ -24,6 +37,11 @@ roughness = 0.27
 [sub_resource type="CylinderMesh" id="CylinderMesh_biind"]
 material = SubResource("StandardMaterial3D_8ry56")
 height = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jj33w"]
+top_radius = 0.43
+bottom_radius = 0.43
+height = 0.001
 
 [sub_resource type="Resource" id="Resource_vxejx"]
 script = ExtResource("2_tssye")
@@ -41,7 +59,12 @@ script = ExtResource("1_l75wk")
 [node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+visible = false
 mesh = SubResource("CylinderMesh_l1118")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
+mesh = SubResource("CylinderMesh_4p6f5")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
@@ -59,6 +82,11 @@ transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0.5, 
 
 [node name="Fluid Connector 2" parent="Model" instance=ExtResource("1_5rj0m")]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, -0.5, 0)
+
+[node name="Fluid Cylinder" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+visible = false
+mesh = SubResource("CylinderMesh_jj33w")
 
 [node name="Fluid Container" parent="." node_paths=PackedStringArray("model_node") instance=ExtResource("1_pmcxv")]
 connectors = Array[ExtResource("2_tssye")]([SubResource("Resource_vxejx"), SubResource("Resource_lwxbe")])

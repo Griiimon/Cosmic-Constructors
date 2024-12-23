@@ -30,7 +30,7 @@ text_overrun_behavior = 1
 
 [node name="Label Value" type="Label" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(70, 0)
+custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 horizontal_alignment = 2
 vertical_alignment = 1

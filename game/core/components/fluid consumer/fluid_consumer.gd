@@ -11,8 +11,12 @@ var variable_consumption: Callable
 
 
 
-func supply_ratio(ratio: float):
-	supplied_ratio= ratio
+func supply(amount: float):
+	supplied_ratio= amount / get_consumption()
+
+
+#func supply_ratio(ratio: float):
+	#supplied_ratio= ratio
 
 
 func get_consumption()-> float:

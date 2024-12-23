@@ -117,3 +117,7 @@ func get_extra_properties()-> Array[PropertyViewerPanel.ExtraProperty]:
 
 func get_linked_block_group()-> LinkedBlockGroup:
 	return null
+
+
+func has_property_viewer()-> bool:
+	return true

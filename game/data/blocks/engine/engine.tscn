@@ -1,6 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://drn8bh8lij6yd"]
+[gd_scene load_steps=14 format=3 uid="uid://drn8bh8lij6yd"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/engine_instance.gd" id="1_v5cg6"]
+[ext_resource type="PackedScene" uid="uid://k7fxvysvmall" path="res://game/core/components/fluid consumer/fluid_consumer.tscn" id="2_w41ml"]
+[ext_resource type="Script" path="res://game/core/components/fluid container/fluid_connector.gd" id="3_54fld"]
+[ext_resource type="PackedScene" uid="uid://dxobr26jfvcqg" path="res://game/core/components/fluid container/fluid_connector_model.tscn" id="4_qprth"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_tr2k0"]
 
@@ -21,16 +24,26 @@ size = Vector3(0.685, 0.405, 0.95)
 material = SubResource("StandardMaterial3D_v2hap")
 size = Vector3(0.25, 0.39, 0.75)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uobfh"]
-albedo_color = Color(0.585062, 0.585062, 0.585062, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r5vw6"]
+albedo_color = Color(0.351935, 0.290596, 9.62615e-08, 1)
 metallic = 0.6
 roughness = 0.2
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_tgmwc"]
-material = SubResource("StandardMaterial3D_uobfh")
-top_radius = 0.15
-bottom_radius = 0.15
+material = SubResource("StandardMaterial3D_r5vw6")
+top_radius = 0.05
+bottom_radius = 0.05
 height = 1.0
+
+[sub_resource type="Resource" id="Resource_jtfyu"]
+script = ExtResource("3_54fld")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, 0, -1)
+
+[sub_resource type="Resource" id="Resource_fkufj"]
+script = ExtResource("3_54fld")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, 0, 1)
 
 [node name="Engine" type="Node3D"]
 script = ExtResource("1_v5cg6")
@@ -39,23 +52,39 @@ script = ExtResource("1_v5cg6")
 visible = false
 mesh = SubResource("BoxMesh_tr2k0")
 
-[node name="Model" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
+
+[node name="Base Block" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 mesh = SubResource("BoxMesh_g0qs7")
+skeleton = NodePath("../..")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.214789, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.035211, 0)
 mesh = SubResource("BoxMesh_f5mvd")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(0.848048, -0.529919, 0, 0.529919, 0.848048, 0, 0, 0, 1, -0.217978, 0.402591, 0)
-mesh = SubResource("BoxMesh_d2ymb")
-
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(0.848048, 0.529919, 0, -0.529919, 0.848048, 0, 0, 0, 1, 0.218, 0.403, 0)
+transform = Transform3D(0.848048, -0.529919, 0, 0.529919, 0.848048, 0, 0, 0, 1, -0.217978, 0.152591, 0)
 mesh = SubResource("BoxMesh_d2ymb")
+skeleton = NodePath("../Base Block")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+transform = Transform3D(0.848048, 0.529919, 0, -0.529919, 0.848048, 0, 0, 0, 1, 0.218, 0.153, 0)
+mesh = SubResource("BoxMesh_d2ymb")
+skeleton = NodePath("../Base Block")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, -0.25, 0)
 mesh = SubResource("CylinderMesh_tgmwc")
+skeleton = NodePath("../Base Block")
+
+[node name="Fluid Connector 1" type="Node3D" parent="Model" instance=ExtResource("4_qprth")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+
+[node name="Fluid Connector 2" type="Node3D" parent="Model" instance=ExtResource("4_qprth")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0.5)
+
+[node name="Fluid Consumer" parent="." node_paths=PackedStringArray("model_node") instance=ExtResource("2_w41ml")]
+connectors = Array[ExtResource("3_54fld")]([SubResource("Resource_jtfyu"), SubResource("Resource_fkufj")])
+model_node = NodePath("../Model/Base Block")

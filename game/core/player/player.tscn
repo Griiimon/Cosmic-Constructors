@@ -24,7 +24,7 @@ radius = 0.4
 [sub_resource type="SphereShape3D" id="SphereShape3D_ly8po"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4pkix"]
-radius = 1.5
+radius = 1.0
 
 [sub_resource type="Environment" id="Environment_lyipp"]
 background_color = Color(0.982343, 0.982342, 0.982342, 1)

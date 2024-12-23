@@ -1,5 +1,6 @@
 extends Node3D
 
+@export var enabled: bool= true
 @export var fluid: Fluid
 @export var drop_scene: PackedScene
 
@@ -12,7 +13,8 @@ extends Node3D
 
 func _ready() -> void:
 	timer.wait_time= interval
-	timer.start()
+	if enabled:
+		timer.start()
 
 
 func _on_timer_timeout() -> void:

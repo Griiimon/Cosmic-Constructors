@@ -3,7 +3,7 @@ extends NamedResource
 
 @export var density: float= 1.0
 @export var viscosity: float= 1.0
-@export var texture: Texture2D
+@export var material: StandardMaterial3D
 
 
 

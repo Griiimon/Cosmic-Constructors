@@ -1,8 +1,7 @@
-FIX fluid splash particles on terrain get stuck
+FIX fluid splash particles on terrain get stuck, splash position is off
 
 small tank from glass to see content
 
-game_settings (resource).video_settings disable splash particles
 
 check if recent atmospheric shader change has any negative effects in Forward+
 

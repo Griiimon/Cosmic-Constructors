@@ -132,7 +132,7 @@ dampeners_active = true
 rotation_speed = 1000.0
 roll_factor = 5.0
 boost_factor = 3.0
-damping_factor = 10.0
+damping_factor = 100.0
 min_land_velocity = 0.2
 metadata/_edit_pinned_properties_ = [&"jetpack_active", &"dampeners_active"]
 

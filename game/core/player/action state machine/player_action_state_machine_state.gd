@@ -14,14 +14,13 @@ func init_ghost(model: Node3D):
 
 	ghost= model
 	ghost.set_script(null)
-	add_child(ghost)
-	ghost.top_level= true
 	
 	var mesh_instances: Array= ghost.find_children("*")
 	if ghost is MeshInstance3D:
 		mesh_instances.append(ghost)
 	
 	for child in mesh_instances:
+		child.set_script(null)
 		if child is not MeshInstance3D and not child.is_in_group(KEEP_GHOST_GROUP):
 			child.queue_free()
 		else:
@@ -46,6 +45,9 @@ func init_ghost(model: Node3D):
 			
 			#material.transparency= BaseMaterial3D.TRANSPARENCY_ALPHA
 			#material.albedo_color.a= 0.8
+
+	add_child(ghost)
+	ghost.top_level= true
 
 	ghost.hide()
 

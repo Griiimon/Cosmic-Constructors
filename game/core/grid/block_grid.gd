@@ -24,6 +24,8 @@ var effects: Array[BlockGridBaseEffect]
 # TODO obsolete?
 var current_gravity: Vector3
 
+var linked_block_groups: Array[LinkedBlockGroup]
+
 
 
 func _ready() -> void:
@@ -160,6 +162,9 @@ func _physics_process(delta: float) -> void:
 
 
 func tick_blocks(delta: float):
+	for group: LinkedBlockGroup in linked_block_groups:
+		group.tick(delta)
+	
 	var deferred_ticks: Dictionary
 	
 	for block in blocks.values():
@@ -407,6 +412,10 @@ func add_effect(effect: BlockGridBaseEffect):
 			existing_effect.combine(effect)
 			return
 	effects.append(effect)
+
+
+func register_linked_block_groups(group: LinkedBlockGroup):
+	linked_block_groups.append(group)
 
 
 func serialize()-> Dictionary:

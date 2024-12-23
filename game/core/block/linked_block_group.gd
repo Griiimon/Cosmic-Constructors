@@ -13,6 +13,8 @@ func _init(_grid: BlockGrid):
 	id= NEXT_ID
 	NEXT_ID+= 1
 
+	grid.register_linked_block_group(self)
+
 
 func tick(_delta: float):
 	pass

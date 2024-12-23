@@ -21,15 +21,7 @@ func process_input():
 	fill_containers= false
 
 
-	for i in inputs.size():
-		var input: FluidContainer= inputs[i]
-		
-		if input.keep_empty: 
-			fill_containers= true
-		
-		var max_output: float= min(input.throughput, input.content)
-		can_currently_provide+= max_output
-		cached_input_ratio[i]= max_output
+	precalculate_input_ratios()
 
 	if is_zero_approx(can_currently_provide): return
 
@@ -89,7 +81,26 @@ func process_output():
 			for input: FluidContainer in fill_ratios.keys():
 				input.fill(fill_ratios[input] * total_requested)
 			
+			precalculate_input_ratios(true)
+
+			for key in cached_input_ratio.keys():
+				cached_input_ratio[key]/= can_currently_provide
+			
 			drain(total_requested, true)
+
+
+func precalculate_input_ratios(forced: bool= false):
+	for i in inputs.size():
+		var input: FluidContainer= inputs[i]
+		
+		if input.keep_empty: 
+			fill_containers= true
+		else:
+			if forced: continue
+			
+		var max_output: float= min(input.throughput, input.content)
+		can_currently_provide+= max_output
+		cached_input_ratio[i]= max_output
 
 
 func drain(amount: float, forced: bool= false):

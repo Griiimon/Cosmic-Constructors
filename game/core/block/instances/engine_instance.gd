@@ -1,6 +1,6 @@
 extends BlockInstanceOnOff
 
-@onready var model: MeshInstance3D = $Model
+@onready var model: Node3D = $Model
 
 var engine_block_group: LinkedBlockGroup
 

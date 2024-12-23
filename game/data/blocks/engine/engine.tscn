@@ -79,10 +79,10 @@ transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, -0.25
 mesh = SubResource("CylinderMesh_tgmwc")
 skeleton = NodePath("../Base Block")
 
-[node name="Fluid Connector 1" type="Node3D" parent="Model" instance=ExtResource("4_qprth")]
+[node name="Fluid Connector 1" parent="Model" instance=ExtResource("4_qprth")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 
-[node name="Fluid Connector 2" type="Node3D" parent="Model" instance=ExtResource("4_qprth")]
+[node name="Fluid Connector 2" parent="Model" instance=ExtResource("4_qprth")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0.5)
 
 [node name="Fluid Consumer" parent="." node_paths=PackedStringArray("model_node") instance=ExtResource("2_w41ml")]

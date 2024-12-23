@@ -44,6 +44,6 @@ func get_global_basis(_grid: BlockGrid)-> Basis:
 	return Basis.IDENTITY
 
 
-func to_global(local_pos: Vector3i, offset: Vector3i)-> Vector3i:
+func to_global(offset: Vector3i)-> Vector3i:
 	assert(false, "Abstract class")
 	return Vector3i.ZERO

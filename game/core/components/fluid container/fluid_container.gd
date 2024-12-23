@@ -31,6 +31,6 @@ func is_emtpy()-> bool:
 
 func can_connect_from_to(from: GridBlock, to: GridBlock)-> bool:
 	for connector in connectors:
-		if from.to_global(from.local_pos, connector.block_pos + connector.direction) == to.local_pos:
+		if from.to_global(connector.block_pos + connector.direction) == to.local_pos:
 			return true
 	return false

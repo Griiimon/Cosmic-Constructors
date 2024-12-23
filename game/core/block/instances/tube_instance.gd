@@ -15,7 +15,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	var group: LinkedBlockGroup= find_or_make_linked_block_group(grid, grid_block.local_pos, group_filter)
 
 	if not group.has_blocks():
-		linked_system= LinkedTubeGroup.new()
+		linked_system= LinkedTubeGroup.new(grid)
 		linked_system.copy(group)
 	else:
 		linked_system= group
@@ -69,7 +69,7 @@ func group_filter(grid: BlockGrid, tube1_pos: Vector3i, tube2_pos: Vector3i)-> b
 
 	var valid:= false
 	for connection in tube1_instance.connections:
-		if tube1_block.to_global(tube1_pos, connection) == tube2_pos:
+		if tube1_block.to_global(connection) == tube2_pos:
 			valid= true
 			break
 
@@ -77,7 +77,7 @@ func group_filter(grid: BlockGrid, tube1_pos: Vector3i, tube2_pos: Vector3i)-> b
 
 	valid= false
 	for connection in tube2_instance.connections:
-		if tube2_block.to_global(tube2_pos, connection) == tube1_pos:
+		if tube2_block.to_global(connection) == tube1_pos:
 			return true
 
 	return false
@@ -85,7 +85,7 @@ func group_filter(grid: BlockGrid, tube1_pos: Vector3i, tube2_pos: Vector3i)-> b
 
 func can_connect_to(block: GridBlock, target_block: GridBlock)-> bool:
 	for connection in connections:
-		if block.to_global(block.local_pos, connection) == target_block.local_pos:
+		if block.to_global(connection) == target_block.local_pos:
 			return true
 	return false
 

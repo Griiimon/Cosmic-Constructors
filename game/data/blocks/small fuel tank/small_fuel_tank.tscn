@@ -89,5 +89,8 @@ visible = false
 mesh = SubResource("CylinderMesh_jj33w")
 
 [node name="Fluid Container" parent="." node_paths=PackedStringArray("model_node") instance=ExtResource("1_pmcxv")]
+keep_empty = null
+throughput = null
+override_capacity = null
 connectors = Array[ExtResource("2_tssye")]([SubResource("Resource_vxejx"), SubResource("Resource_lwxbe")])
 model_node = NodePath("../Model")

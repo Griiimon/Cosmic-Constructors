@@ -1,6 +1,9 @@
-extend LinkBlockGroup ( GasFluidSystem, .. ) but serialize/deserialize from data dictionary
-	duplicate_from(orig): blocks= blocks.duplicate() , so i can create a base linked group and then "cast" to specific inherited
- 
+FIX fluid splash particles on terrain get stuck
+
+small tank from glass to see content
+
+game_settings (resource).video_settings disable splash particles
+
 check if recent atmospheric shader change has any negative effects in Forward+
 
 WorldItemInstance needs to disable collision shape when on connector or else it will take collision layer of grid and react to raycasts
@@ -25,13 +28,13 @@ PanelViewer edit mode: unique, all (same type), mirrored ( which axis? axis aren
 
 "thick" wireframe shader for unfinished blocks?
 
+add motion blur ( sphynx addon ) to fluid drops
+
 air ship
 
 add custom lower, upper limit and torque to joint blocks
 
 spring
-
-conveyor
 
 elevator 
 

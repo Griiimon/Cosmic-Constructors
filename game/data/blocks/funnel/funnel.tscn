@@ -32,7 +32,7 @@ direction = Vector3i(0, -1, 0)
 [node name="Funnel" type="Node3D"]
 script = ExtResource("1_kp7s0")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 
 [node name="Fluid Connector 1" parent="Model" instance=ExtResource("2_t0fo6")]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, -0.5, 0)

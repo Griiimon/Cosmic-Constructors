@@ -20,9 +20,7 @@ func process_input():
 	cached_input_ratio= {}
 	fill_containers= false
 
-
 	precalculate_input_ratios()
-
 	if is_zero_approx(can_currently_provide): return
 
 	for key in cached_input_ratio.keys():
@@ -33,11 +31,10 @@ func process_output():
 	var total_requested: float= 0
 	var output_ratios: Dictionary
 	
-	for i in outputs.size():
-		var output: FluidConsumer= outputs[i]
+	for output: FluidConsumer in outputs:
 		var consumption: float= output.get_consumption()
 		total_requested+= consumption
-		output_ratios[i]= consumption
+		output_ratios[output]= consumption
 	
 	if total_requested > 0:
 	
@@ -50,9 +47,8 @@ func process_output():
 		
 		total_requested= max(total_requested, can_currently_provide)
 		
-		for i in outputs.size():
-			var output: FluidConsumer= outputs[i]
-			output.supply(output_ratios[i] * total_requested)
+		for output: FluidConsumer in outputs:
+			output.supply(output_ratios[output] * total_requested)
 		
 		drain(total_requested)
 
@@ -70,29 +66,34 @@ func process_output():
 		var fill_ratios: Dictionary
 		if total_fill_capacity > 0:
 			if total_fill_capacity < total_requested:
-				for input in fill_ratios.keys():
+				for input in fill_capacities.keys():
 					fill_ratios[input]= 1.0
 			else:
 				for input in fill_capacities.keys():
 					fill_ratios[input]= fill_capacities[input] / total_fill_capacity
 			
 			total_requested= min(total_requested, total_fill_capacity)
-			
-			for input: FluidContainer in fill_ratios.keys():
-				input.fill(fill_ratios[input] * total_requested)
+
+			if is_zero_approx(total_requested): return
 			
 			precalculate_input_ratios(true)
+			if is_zero_approx(can_currently_provide): return
 
 			for key in cached_input_ratio.keys():
 				cached_input_ratio[key]/= can_currently_provide
+
+
+			for input: FluidContainer in fill_ratios.keys():
+				input.fill(fill_ratios[input] * total_requested)
 			
 			drain(total_requested, true)
 
 
 func precalculate_input_ratios(forced: bool= false):
-	for i in inputs.size():
-		var input: FluidContainer= inputs[i]
-		
+	can_currently_provide= 0
+	cached_input_ratio= {}
+
+	for input: FluidContainer in inputs:
 		if input.keep_empty: 
 			fill_containers= true
 		else:
@@ -100,17 +101,15 @@ func precalculate_input_ratios(forced: bool= false):
 			
 		var max_output: float= min(input.throughput, input.content)
 		can_currently_provide+= max_output
-		cached_input_ratio[i]= max_output
+		cached_input_ratio[input]= max_output
 
 
 func drain(amount: float, forced: bool= false):
-	for i in inputs.size():
-		var input: FluidContainer= inputs[i]
-		
+	for input in inputs:
 		if forced and not input.keep_empty: continue
 		
 		# TODO check if all requested was actually available to be drained
-		input.drain(amount * cached_input_ratio[i])
+		input.drain(amount * cached_input_ratio[input])
 
 
 func add_input(input: FluidContainer):

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://k7fxvysvmall"]
+
+[ext_resource type="Script" path="res://game/core/components/fluid consumer/fluid_consumer.gd" id="1_ifkcn"]
+[ext_resource type="PackedScene" uid="uid://dxobr26jfvcqg" path="res://game/core/components/fluid container/fluid_connector_model.tscn" id="3_xui3h"]
+
+[node name="Fluid Consumer" type="Node3D"]
+script = ExtResource("1_ifkcn")
+connector_model = ExtResource("3_xui3h")

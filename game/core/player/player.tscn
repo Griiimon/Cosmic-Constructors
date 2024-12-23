@@ -165,8 +165,6 @@ script = ExtResource("6_3y3c5")
 
 [node name="Build" type="Node" parent="Action State Machine" index="1"]
 script = ExtResource("5_avkim")
-build_range = null
-smooth_rotation_speed = null
 current_block = ExtResource("11_2od4b")
 
 [node name="Build Peripheral Entity" type="Node" parent="Action State Machine" index="2"]

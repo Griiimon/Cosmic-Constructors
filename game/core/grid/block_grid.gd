@@ -414,7 +414,7 @@ func add_effect(effect: BlockGridBaseEffect):
 	effects.append(effect)
 
 
-func register_linked_block_groups(group: LinkedBlockGroup):
+func register_linked_block_group(group: LinkedBlockGroup):
 	linked_block_groups.append(group)
 
 

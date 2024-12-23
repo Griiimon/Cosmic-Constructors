@@ -92,3 +92,7 @@ func can_connect_to(block: GridBlock, target_block: GridBlock)-> bool:
 
 func get_linked_block_group()-> LinkedBlockGroup:
 	return linked_system
+
+
+func has_property_viewer()-> bool:
+	return false

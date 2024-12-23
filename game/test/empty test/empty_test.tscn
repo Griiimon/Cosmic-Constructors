@@ -18,7 +18,7 @@ script = ExtResource("1_o413o")
 
 [node name="Tests" type="Node" parent="."]
 script = ExtResource("1_fd624")
-project_folder_world = false
+load_world = true
 freeze_grids = true
 
 [node name="Player Spawn" type="Marker3D" parent="."]

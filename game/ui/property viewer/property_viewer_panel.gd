@@ -64,7 +64,7 @@ func populate():
 	for property: ExtraProperty in block_instance.get_extra_properties():
 		var row: PanelViewerRow= add_row()
 		row.label_type.text= property.text
-		row.label_type.value= property.get_value_as_text()
+		row.label_value.text= property.get_value_as_text()
 
 
 	for property in block_instance.get_properties():

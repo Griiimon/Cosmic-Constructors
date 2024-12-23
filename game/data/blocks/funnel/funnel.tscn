@@ -34,7 +34,7 @@ script = ExtResource("1_kp7s0")
 
 [node name="Model" type="Node3D" parent="."]
 
-[node name="Fluid Connector 1" type="Node3D" parent="Model" instance=ExtResource("2_t0fo6")]
+[node name="Fluid Connector 1" parent="Model" instance=ExtResource("2_t0fo6")]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, -0.5, 0)
 
 [node name="Funnel" type="MeshInstance3D" parent="Model"]
@@ -43,11 +43,17 @@ mesh = SubResource("ArrayMesh_sgur7")
 
 [node name="Gather Area" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_mask = 128
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Gather Area"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0767463, 0)
 shape = SubResource("CylinderShape3D_hvgh4")
 
 [node name="Fluid Container" parent="." node_paths=PackedStringArray("model_node") instance=ExtResource("3_vlnbn")]
+keep_empty = true
+override_capacity = 100.0
 connectors = Array[ExtResource("4_l814p")]([SubResource("Resource_ikit7")])
 model_node = NodePath("../Model")
+
+[connection signal="body_entered" from="Gather Area" to="." method="_on_gather_area_body_entered"]

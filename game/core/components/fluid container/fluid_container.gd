@@ -9,6 +9,11 @@ var max_storage: float
 
 
 
+func _ready() -> void:
+	await get_parent().ready
+	(get_parent() as BlockInstance).register_extra_property_callback(get_extra_properties)
+
+
 func fill(val: float):
 	content= min(content + val, max_storage)
 

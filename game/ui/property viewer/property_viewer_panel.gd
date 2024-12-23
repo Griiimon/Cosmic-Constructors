@@ -65,7 +65,8 @@ func populate():
 		var row: PanelViewerRow= add_row()
 		row.label_type.text= property.text
 		row.label_value.text= property.get_value_as_text()
-
+		row.label_type.modulate= Color.WHITE_SMOKE
+		row.label_value.modulate= Color.WHITE_SMOKE
 
 	for property in block_instance.get_properties():
 		var row: PanelViewerRow= add_row()
@@ -139,7 +140,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			else:
 				match event.button_index:
 					MOUSE_BUTTON_LEFT:
-						is_value_selected= true
+						if selected_row > -1:
+							is_value_selected= true
 					MOUSE_BUTTON_RIGHT:
 						close()
 					MOUSE_BUTTON_WHEEL_UP:

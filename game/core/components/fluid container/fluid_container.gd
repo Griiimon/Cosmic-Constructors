@@ -6,12 +6,19 @@ signal amount_changed(amount: float)
 
 const NODE_NAME= "Fluid Container"
 
+@export var keep_empty: bool= false
+@export var throughput: float= 10.0
+@export var override_capacity: float= 0.0
+
 var content: float
 var max_storage: float
 
 
 
 func _ready() -> void:
+	if override_capacity > 0:
+		max_storage= override_capacity
+		
 	await get_parent().ready
 	(get_parent() as BlockInstance).register_extra_property_callback(get_extra_properties)
 
@@ -55,3 +62,7 @@ func get_extra_properties()-> Array[PropertyViewerPanel.ExtraProperty]:
 func get_fill_ratio()-> float:
 	if is_zero_approx(max_storage): return 0
 	return content / max_storage
+
+
+func get_empty_capacity()-> float:
+	return max_storage - content

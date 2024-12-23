@@ -3,13 +3,19 @@ class_name LinkedBlockGroup
 static var NEXT_ID: int= 0
 
 var id: int
+var grid: BlockGrid
 var blocks: Dictionary
 
 
 
-func _init():
+func _init(_grid: BlockGrid):
+	grid= _grid
 	id= NEXT_ID
 	NEXT_ID+= 1
+
+
+func tick(delta: float):
+	pass
 
 
 func copy(from: LinkedBlockGroup):

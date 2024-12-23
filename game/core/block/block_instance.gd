@@ -65,7 +65,7 @@ func find_or_make_linked_block_group(grid: BlockGrid, block_pos: Vector3i, filte
 		group= neighbor_group
 
 	if not group:
-		group= LinkedBlockGroup.new()
+		group= LinkedBlockGroup.new(grid)
 
 	return group
 

@@ -55,9 +55,9 @@ func get_global_basis(grid: BlockGrid)-> Basis:
 	return get_local_basis() * grid.global_basis
 
 
-# FIXME remove local_pos
 func to_global(offset: Vector3i)-> Vector3i:
-	return (Vector3(offset) * get_local_basis() + Vector3(local_pos)).round()
+	var vec: Vector3= Vector3(offset) * get_local_basis().inverse() + Vector3(local_pos)
+	return vec.round()
 
 
 static func rotation_to_basis(block_rotation: Vector3i)-> Basis:

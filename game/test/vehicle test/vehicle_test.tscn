@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://d4blx7p2hp5bc"]
+[gd_scene load_steps=31 format=3 uid="uid://d4blx7p2hp5bc"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_6i4dd"]
 [ext_resource type="Script" path="res://game/test/vehicle test/vehicle_tests.gd" id="2_8kc7o"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="7_hpj7a"]
 [ext_resource type="PackedScene" uid="uid://w6iv7medt6r7" path="res://game/data/peripheral entities/excavator bucket/simple_excavator_bucket.tscn" id="9_cnwvp"]
 [ext_resource type="PackedScene" uid="uid://ced1k5g1mhrng" path="res://game/data/object entities/wooden_pallet.tscn" id="10_e437v"]
+[ext_resource type="PackedScene" uid="uid://cwjpaeql42esi" path="res://game/core/fluid/fluid spawner/fluid_spawner.tscn" id="11_sebgl"]
 
 [sub_resource type="Resource" id="Resource_ic37o"]
 script = ExtResource("7_hpj7a")
@@ -82,6 +83,9 @@ script = ExtResource("2_8kc7o")
 load_world = true
 freeze_grids = true
 
+[node name="Fluid Spawner" parent="." instance=ExtResource("11_sebgl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
 [node name="Player Spawn" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 script = ExtResource("3_8bwff")
@@ -98,7 +102,7 @@ shape = SubResource("SphereShape3D_fbd3y")
 
 [node name="Gravity Area" type="Area3D" parent="."]
 collision_layer = 0
-collision_mask = 51
+collision_mask = 179
 gravity_space_override = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity Area"]

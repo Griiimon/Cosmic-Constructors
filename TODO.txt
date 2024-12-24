@@ -98,7 +98,6 @@ FIX thruster particles are off when rotated=> cant reproduce ( double precision 
 FIX ghost sometimes getting left behind on moving grid
 FIX bottom out wheel reverse speed hack => dont show wheel rotation
 FIX jetpack counterforce against gravity
-FIX smooth block rotation starts to fail at a certain point ( euler lock? )
 FIX static grids connected to terrain jitter ( only when terrain gets edited, lod changes? ) 
 
 IS FIXED?

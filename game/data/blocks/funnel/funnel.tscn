@@ -52,7 +52,7 @@ shape = SubResource("CylinderShape3D_hvgh4")
 
 [node name="Fluid Container" parent="." node_paths=PackedStringArray("model_node") instance=ExtResource("3_vlnbn")]
 keep_empty = true
-override_capacity = 100.0
+override_capacity = 10.0
 connectors = Array[ExtResource("4_l814p")]([SubResource("Resource_ikit7")])
 model_node = NodePath("../Model")
 

@@ -154,7 +154,7 @@ func remove_block():
 	query.hit_back_faces= false
 	query.hit_from_inside= false
 	var result= player.get_world_3d().direct_space_state.intersect_ray(query)
-	if result:
+	if result and (result.collider as CollisionObject3D).collision_layer == Global.GRID_COLLISION_LAYER:
 		var grid: BlockGrid= result.collider
 		var collision_point: Vector3= result.position
 		collision_point+= -player.build_raycast.global_basis.z * 0.05

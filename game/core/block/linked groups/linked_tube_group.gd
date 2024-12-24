@@ -45,14 +45,18 @@ func process_output():
 			for key in output_ratios.keys():
 				output_ratios[key]/= total_requested
 		
-		total_requested= max(total_requested, can_currently_provide)
+		total_requested= min(total_requested, can_currently_provide)
 		
 		for output: FluidConsumer in outputs:
 			output.supply(output_ratios[output] * total_requested)
 		
 		drain(total_requested)
 
+
 	if fill_containers and total_requested < can_currently_provide:
+		precalculate_input_ratios(true)
+		if is_zero_approx(can_currently_provide): return
+
 		total_requested= can_currently_provide - total_requested
 		var fill_capacities: Dictionary
 		var total_fill_capacity: float
@@ -75,9 +79,6 @@ func process_output():
 			total_requested= min(total_requested, total_fill_capacity)
 
 			if is_zero_approx(total_requested): return
-			
-			precalculate_input_ratios(true)
-			if is_zero_approx(can_currently_provide): return
 
 			for key in cached_input_ratio.keys():
 				cached_input_ratio[key]/= can_currently_provide

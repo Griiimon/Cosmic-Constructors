@@ -53,7 +53,7 @@ func serialize()-> Dictionary:
 	return data
 
 
-func find_or_make_linked_block_group(grid: BlockGrid, block_pos: Vector3i, filter= null)-> LinkedBlockGroup:
+func find_or_make_linked_block_group(grid: BlockGrid, block_pos: Vector3i, create_virtual: bool= false, filter= null)-> LinkedBlockGroup:
 	var neighbors: Array[Vector3i]= get_same_neighbors_positions(grid, block_pos)
 	var group: LinkedBlockGroup
 	for neighbor in neighbors:
@@ -70,7 +70,7 @@ func find_or_make_linked_block_group(grid: BlockGrid, block_pos: Vector3i, filte
 		group= neighbor_group
 
 	if not group:
-		group= LinkedBlockGroup.new(grid)
+		group= LinkedBlockGroup.new(grid, create_virtual)
 
 	return group
 

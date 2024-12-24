@@ -8,12 +8,13 @@ var blocks: Dictionary
 
 
 
-func _init(_grid: BlockGrid):
+func _init(_grid: BlockGrid, virtual: bool= false):
 	grid= _grid
 	id= NEXT_ID
 	NEXT_ID+= 1
 
-	grid.register_linked_block_group(self)
+	if not virtual:
+		grid.register_linked_block_group(self)
 
 
 func tick(_delta: float):

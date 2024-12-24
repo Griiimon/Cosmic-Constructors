@@ -12,7 +12,7 @@ var linked_system: LinkedTubeGroup
 
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
-	var group: LinkedBlockGroup= find_or_make_linked_block_group(grid, grid_block.local_pos, group_filter)
+	var group: LinkedBlockGroup= find_or_make_linked_block_group(grid, grid_block.local_pos, true, group_filter)
 
 	if not group.has_blocks():
 		linked_system= LinkedTubeGroup.new(grid)

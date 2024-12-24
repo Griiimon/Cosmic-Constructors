@@ -1,8 +1,9 @@
 FIX fluid splash particles on terrain get stuck, splash position is off
 
-small tank from glass to see content
-
-
+block interact shapecast needs to be custom BLOCK shapecast that can pick up and filter individual blocks
+	do everything manually, move a intersect_shape() in increments and check against indivual shapes
+	TRY RAYCAST FIRST? naahh
+	
 check if recent atmospheric shader change has any negative effects in Forward+
 
 WorldItemInstance needs to disable collision shape when on connector or else it will take collision layer of grid and react to raycasts

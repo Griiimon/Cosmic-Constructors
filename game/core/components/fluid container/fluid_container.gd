@@ -23,9 +23,10 @@ func _ready() -> void:
 	(get_parent() as BlockInstance).register_extra_property_callback(get_extra_properties)
 
 
-func fill(val: float, new_fluid: Fluid):
-	assert(fluid == null or fluid == new_fluid)
-	fluid= new_fluid
+func fill(val: float, new_fluid: Fluid= null):
+	assert(new_fluid == null or fluid == null or fluid == new_fluid)
+	if new_fluid != null:
+		fluid= new_fluid
 	
 	var prev_content: float= content
 	content= min(content + val, max_storage)

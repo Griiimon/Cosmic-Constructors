@@ -1,0 +1,72 @@
+[gd_scene load_steps=12 format=3 uid="uid://ccn6pur0skbbj"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/fluid_tube_instance.gd" id="1_77rli"]
+[ext_resource type="Material" uid="uid://b0wauk64fcqnl" path="res://game/data/blocks/fluid tube/tube_green_light.tres" id="2_eg1sb"]
+[ext_resource type="Material" uid="uid://cew26p031we7e" path="res://game/data/blocks/fluid tube/tube_yellow_light.tres" id="3_hegm7"]
+[ext_resource type="Material" uid="uid://cbqqd1p83l7s5" path="res://game/data/blocks/fluid tube/tube_red_light.tres" id="4_20eo6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lirsl"]
+albedo_color = Color(0.544974, 0.544974, 0.544974, 1)
+metallic = 0.5
+metallic_specular = 0.25
+roughness = 0.15
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_h05mn"]
+material = SubResource("StandardMaterial3D_lirsl")
+top_radius = 0.15
+bottom_radius = 0.15
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8l0d"]
+albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 0.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_f68td"]
+material = SubResource("StandardMaterial3D_w8l0d")
+top_radius = 0.12
+bottom_radius = 0.12
+height = 1.02
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2s3gq"]
+material = SubResource("StandardMaterial3D_lirsl")
+top_radius = 0.15
+bottom_radius = 0.15
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sukok"]
+material = SubResource("StandardMaterial3D_w8l0d")
+top_radius = 0.12
+bottom_radius = 0.12
+height = 1.02
+
+[sub_resource type="BoxMesh" id="BoxMesh_264h4"]
+resource_local_to_scene = true
+material = ExtResource("2_eg1sb")
+size = Vector3(0.3, 0.3, 0.3)
+
+[node name="Fluid 4way Tube" type="Node3D" node_paths=PackedStringArray("lights")]
+script = ExtResource("1_77rli")
+connections = Array[Vector3i]([Vector3i(0, 0, -1), Vector3i(0, 0, 1), Vector3i(0, 1, 0), Vector3i(0, -1, 0)])
+green_light = ExtResource("2_eg1sb")
+yellow_light = ExtResource("3_hegm7")
+red_light = ExtResource("4_20eo6")
+lights = [NodePath("Light")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_h05mn")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_f68td")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, -1.22465e-16, 0, 1.22465e-16, -1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_2s3gq")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, -1.22465e-16, 0, 1.22465e-16, -1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_sukok")
+
+[node name="Light" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_264h4")

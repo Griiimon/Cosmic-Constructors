@@ -80,11 +80,11 @@ script = ExtResource("1_6i4dd")
 
 [node name="Tests" type="Node" parent="."]
 script = ExtResource("2_8kc7o")
-load_world = true
 freeze_grids = true
 
 [node name="Fluid Spawner" parent="." instance=ExtResource("11_sebgl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+interval = 0.5
 
 [node name="Player Spawn" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)

@@ -39,6 +39,8 @@ func on_physics_process(delta: float):
 	if not align_ghost():
 		return
 
+	rotate_ghost(delta)
+
 	if Input.is_action_just_pressed("build_block"):
 		build_block()
 		return
@@ -46,7 +48,6 @@ func on_physics_process(delta: float):
 		pick_block()
 		return
 
-	rotate_ghost(delta)
 
 	ghost.show()
 

@@ -37,7 +37,6 @@ func process_output():
 		output_ratios[output]= consumption
 	
 	if total_requested > 0:
-	
 		if can_currently_provide >= total_requested:
 			for key in output_ratios.keys():
 				output_ratios[key]= 1.0

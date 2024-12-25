@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="TubeBlock" load_steps=3 format=3 uid="uid://mrffkc4kfnji"]
+
+[ext_resource type="PackedScene" uid="uid://d01s67l80lygi" path="res://game/data/blocks/fluid corner tube/fluid_corner_tube.tscn" id="1_bm6j3"]
+[ext_resource type="Script" path="res://game/core/block/types/tube_block.gd" id="2_5t8py"]
+
+[resource]
+script = ExtResource("2_5t8py")
+size = Vector3i(1, 1, 1)
+weight = 1.0
+max_hitpoints = 2
+custom_collision = false
+can_tick = false
+tick_priority = 0
+can_be_built = true
+scene = ExtResource("1_bm6j3")
+name = ""

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://br6liai788ug6"]
+[gd_scene load_steps=15 format=3 uid="uid://br6liai788ug6"]
 
 [ext_resource type="PackedScene" uid="uid://dxobr26jfvcqg" path="res://game/core/components/fluid container/fluid_connector_model.tscn" id="1_5rj0m"]
 [ext_resource type="Script" path="res://game/core/block/instances/tank_instance.gd" id="1_l75wk"]
@@ -38,6 +38,10 @@ roughness = 0.27
 material = SubResource("StandardMaterial3D_8ry56")
 height = 0.1
 
+[sub_resource type="BoxMesh" id="BoxMesh_dyfwk"]
+material = SubResource("StandardMaterial3D_8ry56")
+size = Vector3(0.9, 0.05, 0.9)
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_jj33w"]
 top_radius = 0.43
 bottom_radius = 0.43
@@ -72,6 +76,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
 mesh = SubResource("CylinderMesh_biind")
 skeleton = NodePath("../..")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0234331, 0)
+mesh = SubResource("BoxMesh_dyfwk")
+
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
 mesh = SubResource("CylinderMesh_biind")
@@ -89,8 +97,5 @@ visible = false
 mesh = SubResource("CylinderMesh_jj33w")
 
 [node name="Fluid Container" parent="." node_paths=PackedStringArray("model_node") instance=ExtResource("1_pmcxv")]
-keep_empty = null
-throughput = null
-override_capacity = null
 connectors = Array[ExtResource("2_tssye")]([SubResource("Resource_vxejx"), SubResource("Resource_lwxbe")])
 model_node = NodePath("../Model")

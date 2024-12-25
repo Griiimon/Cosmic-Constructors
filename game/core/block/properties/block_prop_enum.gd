@@ -15,6 +15,13 @@ func get_value_i()-> int:
 	return enum_dict[current_key]
 
 
+func set_variant(val: Variant):
+	assert(val is int)
+	var index: int= enum_dict.values().find(int(val))
+	assert(index != -1)
+	current_key= enum_dict.keys()[index]
+
+
 func toggle():
 	increase(1)
 	

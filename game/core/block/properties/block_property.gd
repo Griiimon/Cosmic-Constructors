@@ -20,6 +20,10 @@ func get_value_f()-> float:
 	return 0.0
 
 
+func get_value_i()-> int:
+	return 0
+
+
 func toggle():
 	do_callback()
 

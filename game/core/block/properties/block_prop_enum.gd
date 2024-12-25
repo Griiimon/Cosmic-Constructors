@@ -11,6 +11,10 @@ func _init(_name: String, _dict: Dictionary, _callback= null):
 	enum_dict= _dict
 
 
+func get_value_i()-> int:
+	return enum_dict[current_key]
+
+
 func toggle():
 	increase(1)
 	

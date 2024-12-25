@@ -10,6 +10,10 @@ func _init(_name: String, _b: bool= false, _callback= null):
 	b= _b
 
 
+func get_value_i()-> int:
+	return 1 if is_true() else 0
+
+
 func toggle():
 	b= not b
 	super()

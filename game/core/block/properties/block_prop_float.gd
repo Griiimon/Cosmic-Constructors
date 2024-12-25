@@ -19,6 +19,10 @@ func get_value_f()-> float:
 	return f
 
 
+func get_value_i()-> int:
+	return round(f)
+
+
 func toggle():
 	match toggle_behavior:
 		ToggleBehavior.FLIP:

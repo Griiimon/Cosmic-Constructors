@@ -49,7 +49,9 @@ func serialize()-> Dictionary:
 				data["properties"][prop.name]= (get(prop.name) as BlockPropBool).is_true()
 			"BlockPropFloat":
 				data["properties"][prop.name]= (get(prop.name) as BlockPropFloat).get_value_f()
-
+			"BlockPropEnum":
+				data["properties"][prop.name]= (get(prop.name) as BlockPropEnum).get_value_i()
+				
 	return data
 
 

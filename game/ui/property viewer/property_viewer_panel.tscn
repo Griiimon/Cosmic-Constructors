@@ -19,3 +19,8 @@ theme_override_constants/margin_bottom = 5
 [node name="VBoxContainer Content" type="VBoxContainer" parent="MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="Update Interval" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Update Interval" to="." method="_on_update_interval_timeout"]

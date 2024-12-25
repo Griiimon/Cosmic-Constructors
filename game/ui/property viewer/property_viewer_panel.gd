@@ -16,6 +16,8 @@ class ExtraProperty:
 @export var ROW_SCENE: PackedScene
 
 @onready var content_container: VBoxContainer = %"VBoxContainer Content"
+@onready var update_interval: Timer = $"Update Interval"
+
 
 var grid: BlockGrid
 var block: GridBlock
@@ -67,6 +69,8 @@ func populate():
 		row.label_value.text= property.get_value_as_text()
 		row.label_type.modulate= Color.WHITE_SMOKE
 		row.label_value.modulate= Color.WHITE_SMOKE
+		if update_interval.is_stopped():
+			update_interval.start()
 
 	for property in block_instance.get_properties():
 		var row: PanelViewerRow= add_row()
@@ -95,11 +99,12 @@ func open(_block: GridBlock, _grid: BlockGrid):
 
 func close():
 	hide()
+	update_interval.stop()
 
 
 func update(_block: GridBlock, _grid: BlockGrid, player: Player):
 	if not _block: 
-		hide()
+		close()
 		return
 		
 	assert(_grid != null)
@@ -108,14 +113,14 @@ func update(_block: GridBlock, _grid: BlockGrid, player: Player):
 		open(_block, _grid)
 
 	if not block_instance: 
-		hide()
+		close()
 		return
 
 	var global_block_pos: Vector3= grid.get_global_block_pos(block.local_pos)
 	var camera: Camera3D= get_viewport().get_camera_3d()
 
 	if camera.is_position_behind(global_block_pos):
-		hide()
+		close()
 	else:
 		position= camera.unproject_position(global_block_pos)
 		show()
@@ -160,3 +165,7 @@ func change_row(delta: int):
 func get_current_row()-> PanelViewerRow:
 	assert(selected_row < rows.size(), "row %d vs size %d" % [selected_row, rows.size()])
 	return rows[selected_row]
+
+
+func _on_update_interval_timeout() -> void:
+	populate()

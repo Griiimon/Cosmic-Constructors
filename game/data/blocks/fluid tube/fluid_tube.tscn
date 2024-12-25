@@ -13,8 +13,8 @@ roughness = 0.15
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_h05mn"]
 material = SubResource("StandardMaterial3D_lirsl")
-top_radius = 0.15
-bottom_radius = 0.15
+top_radius = 0.16
+bottom_radius = 0.16
 height = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8l0d"]

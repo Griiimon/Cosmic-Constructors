@@ -1,3 +1,6 @@
+remove inputs outputs from fluid systems
+split and merge tube groups
+
 FIX fluid splash particles on terrain get stuck, splash position is off
 
 block interact shapecast needs to be custom BLOCK shapecast that can pick up and filter individual blocks

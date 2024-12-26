@@ -2,6 +2,7 @@ extends Node
 
 
 @export var block_library: BlockLibrary
+@export var scene_library: SceneLibrary
 @export var game_settings: GameSettings
 
 var block_definition_lookup: Dictionary

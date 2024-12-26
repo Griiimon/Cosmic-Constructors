@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="SceneLibrary" load_steps=2 format=3 uid="uid://bpfu46bd6dwi8"]
+
+[ext_resource type="Script" path="res://game/global/game data/scene_library.gd" id="1_vf24s"]
+
+[resource]
+script = ExtResource("1_vf24s")

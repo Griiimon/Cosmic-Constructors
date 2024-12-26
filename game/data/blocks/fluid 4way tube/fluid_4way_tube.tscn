@@ -1,9 +1,30 @@
-[gd_scene load_steps=12 format=3 uid="uid://ccn6pur0skbbj"]
+[gd_scene load_steps=17 format=3 uid="uid://ccn6pur0skbbj"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/fluid_tube_instance.gd" id="1_77rli"]
 [ext_resource type="Material" uid="uid://b0wauk64fcqnl" path="res://game/data/blocks/fluid tube/tube_green_light.tres" id="2_eg1sb"]
 [ext_resource type="Material" uid="uid://cew26p031we7e" path="res://game/data/blocks/fluid tube/tube_yellow_light.tres" id="3_hegm7"]
 [ext_resource type="Material" uid="uid://cbqqd1p83l7s5" path="res://game/data/blocks/fluid tube/tube_red_light.tres" id="4_20eo6"]
+[ext_resource type="Script" path="res://game/core/components/fluid container/fluid_connector.gd" id="5_6rdtr"]
+
+[sub_resource type="Resource" id="Resource_e162o"]
+script = ExtResource("5_6rdtr")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, 0, -1)
+
+[sub_resource type="Resource" id="Resource_m7x7m"]
+script = ExtResource("5_6rdtr")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_bma08"]
+script = ExtResource("5_6rdtr")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, 1, 0)
+
+[sub_resource type="Resource" id="Resource_0slxs"]
+script = ExtResource("5_6rdtr")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, -1, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lirsl"]
 albedo_color = Color(0.544974, 0.544974, 0.544974, 1)
@@ -44,13 +65,12 @@ resource_local_to_scene = true
 material = ExtResource("2_eg1sb")
 size = Vector3(0.3, 0.3, 0.3)
 
-[node name="Fluid 4way Tube" type="Node3D" node_paths=PackedStringArray("lights")]
+[node name="Fluid 4way Tube" type="Node3D"]
 script = ExtResource("1_77rli")
-connections = Array[Vector3i]([Vector3i(0, 0, -1), Vector3i(0, 0, 1), Vector3i(0, 1, 0), Vector3i(0, -1, 0)])
 green_light = ExtResource("2_eg1sb")
 yellow_light = ExtResource("3_hegm7")
 red_light = ExtResource("4_20eo6")
-lights = [NodePath("Light")]
+connectors = Array[ExtResource("5_6rdtr")]([SubResource("Resource_e162o"), SubResource("Resource_m7x7m"), SubResource("Resource_bma08"), SubResource("Resource_0slxs")])
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0)

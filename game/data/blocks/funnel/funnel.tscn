@@ -5,6 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://s5pod3jqq31o" path="res://game/core/components/fluid container/fluid_container.tscn" id="3_vlnbn"]
 [ext_resource type="Script" path="res://game/core/components/fluid container/fluid_connector.gd" id="4_l814p"]
 
+[sub_resource type="Resource" id="Resource_8qxxh"]
+script = ExtResource("4_l814p")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, -1, 0)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ug73i"]
 albedo_color = Color(0.515278, 0.297966, 0.118203, 1)
 
@@ -24,13 +29,9 @@ _surfaces = [{
 height = 0.17
 radius = 0.41
 
-[sub_resource type="Resource" id="Resource_ikit7"]
-script = ExtResource("4_l814p")
-block_pos = Vector3i(0, 0, 0)
-direction = Vector3i(0, -1, 0)
-
 [node name="Funnel" type="Node3D"]
 script = ExtResource("1_kp7s0")
+connectors = Array[ExtResource("4_l814p")]([SubResource("Resource_8qxxh")])
 
 [node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 
@@ -50,10 +51,8 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0767463, 0)
 shape = SubResource("CylinderShape3D_hvgh4")
 
-[node name="Fluid Container" parent="." node_paths=PackedStringArray("model_node") instance=ExtResource("3_vlnbn")]
+[node name="Fluid Container" parent="." instance=ExtResource("3_vlnbn")]
 keep_empty = true
 override_capacity = 10.0
-connectors = Array[ExtResource("4_l814p")]([SubResource("Resource_ikit7")])
-model_node = NodePath("../Model")
 
 [connection signal="body_entered" from="Gather Area" to="." method="_on_gather_area_body_entered"]

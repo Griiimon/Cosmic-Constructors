@@ -1,4 +1,4 @@
-extends BlockInstance
+extends TubeGroupMemberInstance
 
 @onready var fluid_container: FluidContainer = $"Fluid Container"
 @onready var fluid_cylinder: MeshInstance3D = $"Fluid Cylinder"
@@ -11,7 +11,9 @@ func _ready() -> void:
 	fluid_container.amount_changed.connect(on_amount_changed)
 
 
-func on_placed(_grid: BlockGrid, grid_block: GridBlock):
+func on_placed(grid: BlockGrid, grid_block: GridBlock):
+	super(grid, grid_block)
+	
 	var tank_definition: TankBlock= grid_block.get_block_definition()
 	fluid_container.max_storage= tank_definition.capacity
 	fluid_cylinder.mesh.surface_set_material(0, tank_definition.fluid.material)
@@ -26,3 +28,7 @@ func on_amount_changed(amount: float):
 		fluid_cylinder.position.y= fluid_cylinder_y_offset + height / 2.0
 	else:
 		fluid_cylinder.hide()
+
+
+func is_input()-> bool:
+	return true

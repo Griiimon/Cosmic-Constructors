@@ -1,9 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://d01s67l80lygi"]
+[gd_scene load_steps=14 format=3 uid="uid://d01s67l80lygi"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/fluid_tube_instance.gd" id="1_l7y3g"]
 [ext_resource type="Material" uid="uid://b0wauk64fcqnl" path="res://game/data/blocks/fluid tube/tube_green_light.tres" id="2_7q7ie"]
 [ext_resource type="Material" uid="uid://cew26p031we7e" path="res://game/data/blocks/fluid tube/tube_yellow_light.tres" id="3_3ymt1"]
 [ext_resource type="Material" uid="uid://cbqqd1p83l7s5" path="res://game/data/blocks/fluid tube/tube_red_light.tres" id="4_uthmv"]
+[ext_resource type="Script" path="res://game/core/components/fluid container/fluid_connector.gd" id="5_r5res"]
+
+[sub_resource type="Resource" id="Resource_qlgli"]
+script = ExtResource("5_r5res")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, 0, -1)
+
+[sub_resource type="Resource" id="Resource_51ueu"]
+script = ExtResource("5_r5res")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, 1, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lirsl"]
 albedo_color = Color(0.544974, 0.544974, 0.544974, 1)
@@ -39,11 +50,11 @@ height = 0.3
 
 [node name="Fluid Corner Tube" type="Node3D" node_paths=PackedStringArray("lights")]
 script = ExtResource("1_l7y3g")
-connections = Array[Vector3i]([Vector3i(0, 0, -1), Vector3i(0, 1, 0)])
 green_light = ExtResource("2_7q7ie")
 yellow_light = ExtResource("3_3ymt1")
 red_light = ExtResource("4_uthmv")
 lights = [NodePath("Light")]
+connectors = Array[ExtResource("5_r5res")]([SubResource("Resource_qlgli"), SubResource("Resource_51ueu")])
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, -0.25)

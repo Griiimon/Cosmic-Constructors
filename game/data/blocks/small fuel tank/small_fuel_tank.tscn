@@ -5,6 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://s5pod3jqq31o" path="res://game/core/components/fluid container/fluid_container.tscn" id="1_pmcxv"]
 [ext_resource type="Script" path="res://game/core/components/fluid container/fluid_connector.gd" id="2_tssye"]
 
+[sub_resource type="Resource" id="Resource_ekvm1"]
+script = ExtResource("2_tssye")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, 1, 0)
+
+[sub_resource type="Resource" id="Resource_phvbk"]
+script = ExtResource("2_tssye")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, -1, 0)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywuix"]
 albedo_color = Color(0.835488, 0.393991, 0.136015, 1)
 metallic = 0.8
@@ -47,18 +57,9 @@ top_radius = 0.43
 bottom_radius = 0.43
 height = 0.001
 
-[sub_resource type="Resource" id="Resource_vxejx"]
-script = ExtResource("2_tssye")
-block_pos = Vector3i(0, 0, 0)
-direction = Vector3i(0, 1, 0)
-
-[sub_resource type="Resource" id="Resource_lwxbe"]
-script = ExtResource("2_tssye")
-block_pos = Vector3i(0, 0, 0)
-direction = Vector3i(0, -1, 0)
-
 [node name="Small Fuel Tank" type="Node3D"]
 script = ExtResource("1_l75wk")
+connectors = Array[ExtResource("2_tssye")]([SubResource("Resource_ekvm1"), SubResource("Resource_phvbk")])
 
 [node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 
@@ -96,6 +97,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 visible = false
 mesh = SubResource("CylinderMesh_jj33w")
 
-[node name="Fluid Container" parent="." node_paths=PackedStringArray("model_node") instance=ExtResource("1_pmcxv")]
-connectors = Array[ExtResource("2_tssye")]([SubResource("Resource_vxejx"), SubResource("Resource_lwxbe")])
-model_node = NodePath("../Model")
+[node name="Fluid Container" parent="." instance=ExtResource("1_pmcxv")]

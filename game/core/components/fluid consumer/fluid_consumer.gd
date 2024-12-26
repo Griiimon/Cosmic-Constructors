@@ -1,6 +1,6 @@
 @tool
 class_name FluidConsumer
-extends FluidBlockComponent
+extends BaseBlockComponent3D
 
 const NODE_NAME= "Fluid Consumer"
 
@@ -13,10 +13,6 @@ var variable_consumption: Callable
 
 func supply(amount: float):
 	supplied_ratio= amount / get_consumption()
-
-
-#func supply_ratio(ratio: float):
-	#supplied_ratio= ratio
 
 
 func get_consumption()-> float:

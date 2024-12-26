@@ -1,6 +1,6 @@
 @tool
 class_name FluidContainer
-extends FluidBlockComponent
+extends BaseBlockComponent3D
 
 signal amount_changed(amount: float)
 
@@ -10,6 +10,8 @@ const NODE_NAME= "Fluid Container"
 @export var throughput: float= 10.0
 @export var override_capacity: float= 0.0
 
+
+var fluid: Fluid
 var content: float
 var max_storage: float
 
@@ -51,13 +53,6 @@ func is_full()-> bool:
 
 func is_emtpy()-> bool:
 	return is_zero_approx(content)
-
-
-func can_connect_from_to(from: GridBlock, to: GridBlock)-> bool:
-	for connector in connectors:
-		if from.to_global(connector.block_pos + connector.direction) == to.local_pos:
-			return true
-	return false
 
 
 func get_extra_properties()-> Array[PropertyViewerPanel.ExtraProperty]:

@@ -1,4 +1,4 @@
-extends BlockInstance
+extends TubeGroupMemberInstance
 
 @onready var gather_area: Area3D = $"Gather Area"
 @onready var fluid_container: FluidContainer = $"Fluid Container"
@@ -11,3 +11,7 @@ func _on_gather_area_body_entered(body: Node3D) -> void:
 		if not fluid_container.is_full():
 			fluid_container.fill(1, drop.fluid)
 			drop.queue_free()
+
+
+func is_input()-> bool:
+	return true

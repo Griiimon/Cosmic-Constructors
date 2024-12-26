@@ -506,9 +506,14 @@ func get_multi_block_positions(block: Block, pos: Vector3i, block_basis: Basis)-
 	return result
 
 
-func get_block_neighbors(pos: Vector3i, include_diagonals: bool= false, include_empty_blocks: bool= false)-> Array[Vector3i]:
+func get_block_neighbors(pos: Vector3i, include_diagonals: bool= false, include_empty_blocks: bool= false, is_multi_block: bool= false)-> Array[Vector3i]:
 	var result: Array[Vector3i]
 	
+	if is_multi_block:
+		for member_block: VirtualGridBlock in (get_block_local(pos) as MultiGridBlock).children:
+			result.append_array(get_block_neighbors(member_block.local_pos, include_diagonals, include_empty_blocks, false))
+		return result
+
 	for x in range(-1, 2):
 		for y in range(-1, 2):
 			for z in range(-1, 2):

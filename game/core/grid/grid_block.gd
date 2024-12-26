@@ -32,7 +32,7 @@ func absorb_damage(damage: int)-> int:
 func destroy(grid: BlockGrid):
 	var block_instance: BlockInstance= get_block_instance()
 	if block_instance:
-		block_instance.on_destroy()
+		block_instance.on_destroy(grid, self)
 	else:
 		block_node.queue_free()
 	grid.remove_block(self)

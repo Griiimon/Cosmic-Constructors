@@ -155,9 +155,9 @@ func on_placed(grid: BlockGrid, _grid_block: GridBlock):
 	wheel.initialize()
 
 
-func on_destroy():
+func on_destroy(grid: BlockGrid, grid_block: GridBlock):
 	wheel.queue_free()
-	queue_free()
+	super(grid, grid_block)
 
 
 func on_update():

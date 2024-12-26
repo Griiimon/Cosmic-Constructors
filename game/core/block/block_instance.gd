@@ -31,7 +31,7 @@ func on_update():
 	pass
 
 
-func on_destroy():
+func on_destroy(_grid: BlockGrid, _grid_block: GridBlock):
 	queue_free()
 
 

@@ -39,17 +39,23 @@ func connect_to_neighbor(grid: BlockGrid, grid_block: GridBlock, neighbor_block:
 
 			if not is_valid_neighbor_block(grid_block, neighbor_block): continue
 			try_to_connect_neighbor_block(neighbor_block)
+	else:
+		if is_valid_neighbor_block(grid_block, neighbor_block):
+			try_to_connect_neighbor_block(neighbor_block)
 
 
-func is_valid_neighbor_block(grid_block: GridBlock, neighbor_block: BaseGridBlock):
+func is_valid_neighbor_block(grid_block: GridBlock, neighbor_block: BaseGridBlock)-> bool:
 	if grid_block.to_global(Vector3.LEFT) != neighbor_block.local_pos and grid_block.to_global(Vector3.RIGHT) != neighbor_block.local_pos: 
 		return false
 	
+	# FIXME redundant?
 	if neighbor_block.to_global(Vector3.LEFT) != grid_block.local_pos and neighbor_block.to_global(Vector3.RIGHT) != grid_block.local_pos:
 		return false
 	
 	var neighbor_instance: BlockInstance= neighbor_block.get_block_instance()
 	if not neighbor_instance: return false
+	
+	return true
 
 
 func try_to_connect_neighbor_block(neighbor_block: BaseGridBlock):
@@ -58,4 +64,4 @@ func try_to_connect_neighbor_block(neighbor_block: BaseGridBlock):
 	if neighbor_instance is DriveShaftInstance:
 		shaft_group= (neighbor_instance as DriveShaftInstance).shaft_group
 	elif neighbor_instance is SuspensionInstance:
-		shaft_group.add_suspension(neighbor_instance)
+		shaft_group.add_suspension.call_deferred(neighbor_instance)

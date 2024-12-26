@@ -48,10 +48,20 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	if is_input():
 		linked_system.add_input(BaseBlockComponent3D.get_from_block(grid_block, FluidContainer.NODE_NAME))
 	elif is_output():
-		linked_system.add_input(BaseBlockComponent3D.get_from_block(grid_block, FluidConsumer.NODE_NAME))
+		linked_system.add_output(BaseBlockComponent3D.get_from_block(grid_block, FluidConsumer.NODE_NAME))
 	else:
-		linked_system.register_block(grid_block)
+		linked_system.add_block(grid_block)
 
+
+func on_destroy(grid: BlockGrid, grid_block: GridBlock):
+	if is_input():
+		linked_system.remove_input(BaseBlockComponent3D.get_from_block(grid_block, FluidContainer.NODE_NAME))
+	elif is_output():
+		linked_system.remove_output(BaseBlockComponent3D.get_from_block(grid_block, FluidConsumer.NODE_NAME))
+	else:
+		linked_system.remove_block(grid_block)
+	
+	super(grid, grid_block)
 
 func can_connect_from_to(from: GridBlock, to: GridBlock)-> bool:
 	for connector in connectors:

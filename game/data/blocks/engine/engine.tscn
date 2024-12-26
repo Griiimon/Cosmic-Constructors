@@ -5,6 +5,16 @@
 [ext_resource type="Script" path="res://game/core/components/fluid container/fluid_connector.gd" id="3_54fld"]
 [ext_resource type="PackedScene" uid="uid://dxobr26jfvcqg" path="res://game/core/components/fluid container/fluid_connector_model.tscn" id="4_qprth"]
 
+[sub_resource type="Resource" id="Resource_g8tj4"]
+script = ExtResource("3_54fld")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, 0, -1)
+
+[sub_resource type="Resource" id="Resource_7iy1q"]
+script = ExtResource("3_54fld")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, 0, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_tr2k0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v2hap"]
@@ -35,18 +45,9 @@ top_radius = 0.05
 bottom_radius = 0.05
 height = 1.0
 
-[sub_resource type="Resource" id="Resource_jtfyu"]
-script = ExtResource("3_54fld")
-block_pos = Vector3i(0, 0, 0)
-direction = Vector3i(0, 0, -1)
-
-[sub_resource type="Resource" id="Resource_fkufj"]
-script = ExtResource("3_54fld")
-block_pos = Vector3i(0, 0, 0)
-direction = Vector3i(0, 0, 1)
-
 [node name="Engine" type="Node3D"]
 script = ExtResource("1_v5cg6")
+connectors = Array[ExtResource("3_54fld")]([SubResource("Resource_g8tj4"), SubResource("Resource_7iy1q")])
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
@@ -85,6 +86,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 [node name="Fluid Connector 2" parent="Model" instance=ExtResource("4_qprth")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0.5)
 
-[node name="Fluid Consumer" parent="." node_paths=PackedStringArray("model_node") instance=ExtResource("2_w41ml")]
-connectors = Array[ExtResource("3_54fld")]([SubResource("Resource_jtfyu"), SubResource("Resource_fkufj")])
-model_node = NodePath("../Model/Base Block")
+[node name="Fluid Consumer" parent="." instance=ExtResource("2_w41ml")]

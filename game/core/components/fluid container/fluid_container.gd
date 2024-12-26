@@ -10,7 +10,6 @@ const NODE_NAME= "Fluid Container"
 @export var throughput: float= 10.0
 @export var override_capacity: float= 0.0
 
-
 var fluid: Fluid
 var content: float
 var max_storage: float
@@ -43,6 +42,10 @@ func drain(val: float):
 		amount_changed.emit(content)
 
 
+func debug_fill():
+	fill(max_storage)
+
+
 func can_store(val: float)-> bool:
 	return content + val <= max_storage
 
@@ -56,7 +59,9 @@ func is_emtpy()-> bool:
 
 
 func get_extra_properties()-> Array[PropertyViewerPanel.ExtraProperty]:
-	return [ PropertyViewerPanel.ExtraProperty.new("Filled", "%d/%d" % [ int(content), int(max_storage)]) ]
+	var result: Array[PropertyViewerPanel.ExtraProperty]= []
+	result.append(PropertyViewerPanel.ExtraProperty.new("Filled", "%d/%d" % [ int(content), int(max_storage)]))
+	return result
 
 
 func get_fill_ratio()-> float:

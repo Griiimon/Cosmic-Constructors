@@ -5,6 +5,8 @@ extends TubeGroupMemberInstance
 
 @onready var fluid_cylinder_y_offset: float= fluid_cylinder.position.y
 
+@onready var fill_debug_action:= BlockPropAction.new("Fill", fluid_container.debug_fill)
+
 
 
 func _ready() -> void:

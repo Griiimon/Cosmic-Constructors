@@ -529,6 +529,13 @@ func get_block_neighbors(pos: Vector3i, include_diagonals: bool= false, include_
 	return result
 
 
+func get_block_neighbor_blocks(pos: Vector3i, include_diagonals: bool= false, include_empty_blocks: bool= false, is_multi_block: bool= false)-> Array[BaseGridBlock]:
+	var result: Array[BaseGridBlock]
+	result.assign(get_block_neighbors(pos, include_diagonals, include_empty_blocks, is_multi_block).\
+			map(func(pos: Vector3i): return get_block_local(pos)))
+	return result
+
+
 func get_block_from_global_pos(global_pos: Vector3)-> BaseGridBlock:
 	var grid_pos: Vector3i= get_local_grid_pos(global_pos)
 	if not blocks.has(grid_pos): return null

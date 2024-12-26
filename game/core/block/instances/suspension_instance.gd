@@ -1,6 +1,8 @@
 class_name SuspensionInstance
 extends BlockInstance
 
+
+@export var is_electric: bool= true
 @export var wheel_scene: PackedScene
 
 var can_steer:= BlockPropBool.new("Steering", true)
@@ -142,6 +144,8 @@ var vehicle_inertia : Vector3
 
 var reverse: bool= false
 
+var input_torque: float= 0.0
+
 
 
 func _ready() -> void:
@@ -178,12 +182,16 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 	if grid.parking_brake:
 		final_brake= 1
 		throttle_input= 0
-	
-	if grid.linear_velocity.length() < 0.1:
-		if final_brake:
-			reverse= true
-		else:
-			reverse= false
+		
+	if is_electric:
+
+		if grid.linear_velocity.length() < 0.1:
+			if final_brake:
+				reverse= true
+			else:
+				reverse= false
+
+		steering_input= -round(grid.requested_movement.x)
 
 	if reverse and not grid.parking_brake:
 		if throttle_input:
@@ -193,14 +201,8 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 			throttle_input= final_brake
 			final_brake= 0
 
-
-	DebugHud.send("Reverse", reverse)
-	DebugHud.send("Throttle", round(throttle_input))
-	
-
 	brake_input= final_brake
 	
-	steering_input= -round(grid.requested_movement.x)
 
 	# brake if movement opposite indended direction
 	#if sign(grid.get_current_speed()) != sign(forward_drive) && !is_zero_approx(grid.linear_v) && forward_drive != 0:
@@ -210,6 +212,10 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 	## no drive inputs, apply parking brake if sitting still
 	#if forward_drive == 0 && steering == 0 && abs(currentSpeed) < autoStopSpeedMS:
 		#final_brake = max_braking_coef
+
+	DebugHud.send("Reverse", reverse)
+	DebugHud.send("Throttle", round(throttle_input))
+
 
 	if wheel:
 		#if wheel.is_at_travel_limit():
@@ -224,8 +230,10 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 		
 		#process_drag()
 		process_braking(grid, delta)
+
 		if can_steer.is_true():
 			process_steering(delta)
+
 		process_throttle(delta)
 		process_motor(delta)
 		process_drive(reverse, delta)
@@ -308,7 +316,10 @@ func process_motor(_delta : float) -> void:
 		#need_clutch = false
 	#
 	#motor_rpm = maxf(motor_rpm, idle_rpm)
-	motor_rpm= throttle_amount * 1000
+	if is_electric:
+		motor_rpm= throttle_amount * 1000
+	else:
+		motor_rpm= throttle_amount * input_torque
 
 
 func process_drive(reverse: bool, delta : float) -> void:

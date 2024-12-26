@@ -20,10 +20,12 @@ func _ready() -> void:
 
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
+	super(grid, grid_block)
 	search_for_drive_shaft(grid, grid_block)
 
 
 func on_neighbor_placed(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
+	super(grid, grid_block, neighbor_block_pos)
 	search_for_drive_shaft(grid, grid_block, grid.get_block_local(neighbor_block_pos))
 
 
@@ -46,7 +48,7 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
 	var torque_output: float= 0.0
 	if active.is_true():
 		current_throttle_input= grid.get_throttle_input()
-		torque_output= current_throttle_input * (grid_block.block_definition as EngineBlock).torque_factor
+		torque_output= current_throttle_input * fluid_consumer.supplied_ratio * (grid_block.block_definition as EngineBlock).torque_factor
 
 	for drive_shaft: LinkedDriveShaftGroup in drive_shafts:
 		drive_shaft.apply_torque(torque_output)

@@ -418,6 +418,10 @@ func register_linked_block_group(group: LinkedBlockGroup):
 	linked_block_groups.append(group)
 
 
+func unregister_linked_block_group(group: LinkedBlockGroup):
+	linked_block_groups.erase(group)
+
+
 func serialize()-> Dictionary:
 	var data: Dictionary
 	#data["id"]= world.grids.get_children().find(self)

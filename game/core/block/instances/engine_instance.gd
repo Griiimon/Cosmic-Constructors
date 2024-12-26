@@ -52,13 +52,13 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
 		drive_shaft.apply_torque(torque_output)
 
 	if torque_output > 0:
-		if not tween:
+		if not tween or not tween.is_running():
 			tween= create_tween()
-			tween.tween_property(model, "position.y", 0.1, 0.1)
-			tween.tween_property(model, "position.y", 0.0, 0.1)
+			tween.tween_property(model, "position:y", 0.03, 0.1)
+			tween.tween_property(model, "position:y", 0.0, 0.1)
 			tween.set_loops()
 	else:
-		if tween:
+		if tween and tween.is_running():
 			tween.kill()
 
 

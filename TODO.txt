@@ -1,7 +1,15 @@
-remove inputs outputs from fluid systems
 split and merge tube groups
+	split: check if more 1 neighbor when removing and then have the group flood fill for all neighbors, removing any queued neighbor when found within flood fill
 
 FIX fluid splash particles on terrain get stuck, splash position is off
+
+serialize fluid containers content
+
+trigger debug action immediately when pressed
+
+grayer color for extra properties in property viewer
+
+standing control station
 
 block interact shapecast needs to be custom BLOCK shapecast that can pick up and filter individual blocks
 	do everything manually, move a intersect_shape() in increments and check against indivual shapes
@@ -191,3 +199,18 @@ cars: use roguecar components, like engine blocks, steering/brake blocks etc. ma
 only allowed to build peripheral entities ( and even blocks? ) next to 3d printer
 
 special blocks like rails, where you can attach machine entities to like crane or elevator platform, can send signals ( A, B, C ) to those machines to facilitate control from main grid 
+
+radar dish, can pick up near enemies where its facing ( fading hud enemy signals that stay active for 10-30 secs after last pickup )
+
+tiny 25cm grid for drones etc ( zoom option while building? )
+
+
+TECHNOLOGIES:
+------------------------
+
+PlayerEquipment:
+	-Remote Control
+
+
+Block Properties:
+	actual suspension on Wheel Suspensions

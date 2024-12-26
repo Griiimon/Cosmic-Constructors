@@ -76,7 +76,7 @@ func populate():
 		var row: PanelViewerRow= add_row()
 		row.property= property
 		if selected_row == -1:
-			selected_row= rows.size()
+			selected_row= rows.size() - 1
 
 
 func add_row()-> PanelViewerRow:

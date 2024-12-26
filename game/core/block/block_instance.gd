@@ -88,7 +88,7 @@ func get_properties()-> Array[BlockProperty]:
 	
 	for prop in get_property_list():
 		match prop.class_name:
-			"BlockPropBool", "BlockPropFloat", "BlockPropInt":
+			"BlockPropBool", "BlockPropFloat", "BlockPropInt", "BlockPropAction":
 				result.append(get(prop.name))
 	
 	return result

@@ -4,11 +4,12 @@ var callback: Callable
 var display_name: String
 
 
-func _init(_name: String, _callback= null) -> void:
+func _init(_name: String, _callback= null, instant_callback: bool= true) -> void:
 	display_name= _name
 	if _callback:
 		callback= _callback
-	do_callback.call_deferred()
+	if instant_callback:
+		do_callback.call_deferred()
 
 
 func do_callback():

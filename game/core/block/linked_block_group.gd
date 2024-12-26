@@ -26,8 +26,19 @@ func copy(from: LinkedBlockGroup):
 	blocks= blocks.duplicate(true)
 
 
-func register_block(grid_block: GridBlock, value: Variant= 0):
+func add_block(grid_block: GridBlock, value: Variant= 0):
 	set_block(grid_block, value)
+
+
+func remove_block(grid_block: GridBlock):
+	blocks.erase(grid_block.local_pos)
+	empty_check()
+
+
+func empty_check():
+	if blocks.is_empty():
+		grid.unregister_linked_block_group(self)
+
 
 
 func set_block(grid_block: GridBlock, value: Variant):

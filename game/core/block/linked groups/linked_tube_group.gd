@@ -117,6 +117,20 @@ func add_input(input: FluidContainer):
 		inputs.append(input)
 
 
+func remove_input(input: FluidContainer):
+	inputs.erase(input)
+
+
 func add_output(output: FluidConsumer):
 	if not output in outputs:
 		outputs.append(output)
+
+
+func remove_output(output: FluidConsumer):
+	outputs.erase(output)
+
+
+func empty_check():
+	if not outputs.is_empty() or not inputs.is_empty(): return
+	if blocks.is_empty():
+		grid.unregister_linked_block_group(self)

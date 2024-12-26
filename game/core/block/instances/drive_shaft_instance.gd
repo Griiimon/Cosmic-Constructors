@@ -10,6 +10,11 @@ var shaft_group: LinkedDriveShaftGroup
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	connect_to_neighbor(grid, grid_block)
 
+	if not shaft_group:
+		shaft_group= LinkedDriveShaftGroup.new(grid)
+
+	shaft_group.add_block(grid_block)
+
 
 func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
 	on_placed(grid, grid_block)
@@ -51,6 +56,6 @@ func try_to_connect_neighbor_block(neighbor_block: BaseGridBlock):
 	var neighbor_instance: BlockInstance= neighbor_block.get_block_instance()
 
 	if neighbor_instance is DriveShaftInstance:
-		shaft_group.add_block(neighbor_block)
+		shaft_group= (neighbor_instance as DriveShaftInstance).shaft_group
 	elif neighbor_instance is SuspensionInstance:
 		shaft_group.add_suspension(neighbor_instance)

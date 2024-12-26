@@ -1,6 +1,8 @@
-extends BlockInstanceOnOff
+extends TubeGroupMemberInstance
 
 @export var max_fuel_consumption: float= 1.0
+
+@onready var active:= BlockPropBool.new("Active", false, on_set_active)
 
 @onready var model: Node3D = $Model
 @onready var fluid_consumer: FluidConsumer = $"Fluid Consumer"
@@ -8,6 +10,7 @@ extends BlockInstanceOnOff
 var current_throttle_input: float
 var tween: Tween
 
+var drive_shafts: Array[LinkedDriveShaftGroup]
 
 
 func _ready() -> void:
@@ -16,11 +19,37 @@ func _ready() -> void:
 	fluid_consumer.variable_consumption= func(): return current_throttle_input * max_fuel_consumption
 
 
+func on_placed(grid: BlockGrid, grid_block: GridBlock):
+	search_for_drive_shaft(grid, grid_block)
+
+
+func on_neighbor_placed(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
+	search_for_drive_shaft(grid, grid_block, grid.get_block_local(neighbor_block_pos))
+
+
+func search_for_drive_shaft(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_block: BaseGridBlock= null):
+	var neighbor_blocks: Array[BaseGridBlock]= []
+	if not neighbor_block:
+		neighbor_blocks.append_array(grid.get_block_neighbor_blocks(grid_block.local_pos))
+	else:
+		neighbor_blocks.append(neighbor_block)
+
+	for neighbor in neighbor_blocks:
+		var neighbor_instance: BlockInstance= neighbor.get_block_instance()
+		if neighbor_instance and neighbor_instance is DriveShaftInstance:
+			var drive_shaft_group: LinkedDriveShaftGroup= (neighbor_instance as DriveShaftInstance).shaft_group
+			if not drive_shaft_group in drive_shafts:
+				drive_shafts.append(drive_shaft_group)
+
+
 func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
 	var torque_output: float= 0.0
 	if active.is_true():
 		current_throttle_input= grid.get_throttle_input()
 		torque_output= current_throttle_input * (grid_block.block_definition as EngineBlock).torque_factor
+
+	for drive_shaft: LinkedDriveShaftGroup in drive_shafts:
+		drive_shaft.apply_torque(torque_output)
 
 	if torque_output > 0:
 		if not tween:
@@ -31,3 +60,11 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
 	else:
 		if tween:
 			tween.kill()
+
+
+func on_set_active():
+	pass
+
+
+func is_output()-> bool:
+	return true

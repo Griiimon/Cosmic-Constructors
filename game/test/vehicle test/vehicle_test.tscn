@@ -103,7 +103,7 @@ shape = SubResource("SphereShape3D_fbd3y")
 
 [node name="Gravity Area" type="Area3D" parent="."]
 collision_layer = 0
-collision_mask = 179
+collision_mask = 691
 gravity_space_override = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity Area"]

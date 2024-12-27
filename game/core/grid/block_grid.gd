@@ -4,6 +4,7 @@ extends RigidBody3D
 
 var world: World
 var blocks: Dictionary
+var block_types: Dictionary
 
 var collision_shapes: Array[CollisionShape3D]
 
@@ -122,6 +123,10 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		if neighbor_instance:
 			neighbor_instance.on_neighbor_placed(self, neighbor_block, grid_block.local_pos)
 
+	if not block_types.has(block):
+		block_types[block]= []
+	block_types[block].append(grid_block)
+
 	update_properties()
 
 	return grid_block
@@ -237,7 +242,8 @@ func remove_block(block: BaseGridBlock):
 		block.collision_shape.queue_free()
 		#block.destroy(self)
 	blocks.erase(block.local_pos)
-
+	block_types[block.get_block_definition()].erase(block)
+	
 	requires_integrity_check= true
 	#update_properties()
 

@@ -21,6 +21,39 @@ static func pierce(shapecast: ShapeCast3D, filter: Callable):
 	return
 
 
+static func pierce_blocks(shapecast: ShapeCast3D, filter: Callable, step_size: float= 0.1):
+	reset()
+
+	if not shapecast.is_colliding(): return
+
+	var query:= PhysicsShapeQueryParameters3D.new()
+	query.shape= shapecast.shape
+	query.collide_with_bodies= shapecast.collide_with_bodies
+	query.collide_with_areas= shapecast.collide_with_areas
+	query.collision_mask= shapecast.collision_mask
+	query.transform= shapecast.global_transform
+
+	var space_state: PhysicsDirectSpaceState3D= shapecast.get_world_3d().direct_space_state
+	var pos: Vector3= shapecast.global_position
+	#var dir: Vector3= (shapecast.target_position * shapecast.global_transform.inverse()).normalized()
+	var dir: Vector3= shapecast.global_position.direction_to(shapecast.to_global(shapecast.target_position))
+	
+	for i in shapecast.target_position.length() / step_size:
+		pos+= dir
+		query.transform.origin= pos
+		var result: Array[Dictionary]= space_state.intersect_shape(query)
+		if result:
+			var first_result: Dictionary= result[0]
+			var collider: CollisionObject3D= first_result.collider
+			if collider is BlockGrid:
+				grid= collider
+				var shape_trans: Transform3D= grid.shape_owner_get_transform(first_result.shape)
+				grid_block= grid.get_block_local(shape_trans.origin)
+				if not filter.call():
+					break
+				reset()
+
+
 static func reset():
 	grid= null
 	grid_block= null

@@ -121,6 +121,9 @@ visible = false
 [node name="Third Person Camera" parent="Head" index="2" instance=ExtResource("3_2hljo")]
 unique_name_in_owner = true
 
+[node name="Misc Item Holder" type="Node3D" parent="Head" index="3"]
+unique_name_in_owner = true
+
 [node name="Movement State Machine" type="Node" parent="." index="4" node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_615c1")
 jump_impulse = 250.0
@@ -160,9 +163,6 @@ one_shot = true
 [node name="Action State Machine" type="Node" parent="." index="5" node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_r1eyq")
 current_state = NodePath("Idle")
-allow_no_state = null
-debug = null
-paused = null
 
 [node name="Idle" type="Node" parent="Action State Machine" index="0"]
 script = ExtResource("6_3y3c5")

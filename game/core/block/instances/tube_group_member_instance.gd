@@ -1,3 +1,4 @@
+@tool
 class_name TubeGroupMemberInstance
 extends BlockInstance
 
@@ -14,7 +15,7 @@ extends BlockInstance
 				connector_instance.position= Vector3(connector.block_pos) + connector.direction * 0.5
 				connector_instance.rotation= Quaternion(Vector3.FORWARD, Vector3(connector.direction)).get_euler()
 				model_node.add_child(connector_instance)
-				connector_instance.owner= get_parent()
+				connector_instance.owner= self
 				connector_instance.name= str("Fluid Connector ", ctr + 1)
 				ctr+= 1
 

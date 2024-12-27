@@ -20,7 +20,7 @@ func _ready() -> void:
 	build_peripheral_entity_state.finished.connect(change_state.bind(idle_state))
 
 
-func attach_rope(from: Vector3)-> Rope:
-	var rope: Rope= player.world.make_rope(from, player.misc_item_holder.global_position)
+func attach_rope(from: Node3D)-> Rope:
+	var rope: Rope= player.world.make_rope(from, player.misc_item_holder)
 	change_state(attach_rope_state)
 	return rope

@@ -6,9 +6,13 @@ extends FiniteStateMachine
 @onready var build_peripheral_entity_state: PlayerBuildPeripheralEntityState = $"Build Peripheral Entity"
 @onready var attach_rope_state: PlayerAttachRopeState = $"Attach Rope"
 
+var player: Player
+
 
 
 func _ready() -> void:
+	player= get_parent()
+
 	idle_state.build_block.connect(change_state.bind(build_state))
 	idle_state.build_peripheral_entity.connect(change_state.bind(build_peripheral_entity_state))
 

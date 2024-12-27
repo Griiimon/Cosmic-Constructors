@@ -35,6 +35,9 @@ func on_destroy(_grid: BlockGrid, _grid_block: GridBlock):
 	queue_free()
 
 
+func interact(grid: BlockGrid, grid_block: GridBlock, player: Player):
+	pass
+
 func register_extra_property_callback(func_ptr: Callable):
 	extra_property_callbacks.append(func_ptr)
 
@@ -122,4 +125,8 @@ func get_linked_block_group()-> LinkedBlockGroup:
 
 
 func has_property_viewer()-> bool:
+	return true
+
+
+func can_interact(grid: BlockGrid, grid_block: GridBlock, player: Player)-> bool:
 	return true

@@ -76,7 +76,7 @@ func on_physics_process(_delta: float):
 			
 			grid_block= grid.get_block_from_global_pos(collision_pos)
 			if grid_block:
-				if grid_block.get_block_definition().can_interact():
+				if grid_block.get_block_definition().can_interact() and grid_block.get_block_instance().can_interact(grid, grid_block, player):
 					grid_block.get_block_instance().interact(grid, grid_block, player)
 					return
 

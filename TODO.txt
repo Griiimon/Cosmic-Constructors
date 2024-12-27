@@ -1,13 +1,17 @@
-hose coupling + hose
+FIX drive shaft ghost material
+
+give hose texture material
+
+make gravity area class
+	and CollisionLayer global with utility functions, like get all physics bodies layers
 
 wheelbarrow
-
-split and merge tube groups
-	split: check if more 1 neighbor when removing and then have the group flood fill for all neighbors, removing any queued neighbor when found within flood fill
+	handle bar block: connects with joint, if player in kinematic mode try hybrid controller solution with feedback rigidbody connected to the joint
+	fixed wheel block: actual wheel is rigidbody, connected by joint with counterforce to lateral sliding?
+	
+split tube groups check if more 1 neighbor when removing and then have the group flood fill for all neighbors, removing any queued neighbor when found within flood fill
 
 FIX fluid splash particles on terrain get stuck, splash position is off
-
-serialize fluid containers content
 
 trigger debug action immediately when pressed
 
@@ -213,6 +217,12 @@ tiny 25cm grid for drones etc ( zoom option while building? )
 can carry fuel can to directly fill tanks a little bit
 
 reward player for staying alive: current player character gets stat boosts for being alive longer ( maybe even for travelling long distances )
+
+skid blocks for making sleds in snow biome
+
+start in "wood age", chopping trees ( drop saplings for replanting ). wood structure block, wooden fixed wheel etc
+
+
 
 TECHNOLOGIES:
 ------------------------

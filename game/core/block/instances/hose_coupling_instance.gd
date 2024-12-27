@@ -17,3 +17,7 @@ func interact(grid: BlockGrid, grid_block: GridBlock, player: Player):
 
 func can_interact(grid: BlockGrid, grid_block: GridBlock, player: Player)-> bool:
 	return not hose or player.action_state_machine.attach_rope_state.is_current_state() 
+
+
+func has_property_viewer()-> bool:
+	return false

@@ -65,3 +65,7 @@ func try_to_connect_neighbor_block(neighbor_block: BaseGridBlock):
 		shaft_group= (neighbor_instance as DriveShaftInstance).shaft_group
 	elif neighbor_instance is SuspensionInstance:
 		shaft_group.add_suspension.call_deferred(neighbor_instance)
+
+
+func has_property_viewer()-> bool:
+	return false

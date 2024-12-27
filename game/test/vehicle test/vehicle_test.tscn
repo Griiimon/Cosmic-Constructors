@@ -80,6 +80,7 @@ script = ExtResource("1_6i4dd")
 
 [node name="Tests" type="Node" parent="."]
 script = ExtResource("2_8kc7o")
+load_world = true
 freeze_grids = true
 
 [node name="Fluid Spawner" parent="." instance=ExtResource("11_sebgl")]

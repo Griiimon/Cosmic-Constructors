@@ -40,9 +40,13 @@ func empty_check():
 		grid.unregister_linked_block_group(self)
 
 
-
 func set_block(grid_block: GridBlock, value: Variant):
 	blocks[grid_block.local_pos]= value
+
+
+func merge(other_group: LinkedBlockGroup):
+	blocks.merge(other_group.blocks)
+	grid.unregister_linked_block_group(other_group)
 
 
 func has_blocks()-> bool:

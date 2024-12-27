@@ -134,3 +134,11 @@ func empty_check():
 	if not outputs.is_empty() or not inputs.is_empty(): return
 	if blocks.is_empty():
 		grid.unregister_linked_block_group(self)
+
+
+func merge(other_group: LinkedBlockGroup):
+	var other_tube_group: LinkedTubeGroup= other_group
+	assert(other_tube_group)
+	inputs.append_array(other_tube_group.inputs)
+	outputs.append_array(other_tube_group.outputs)
+	super(other_group)

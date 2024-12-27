@@ -1,4 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://tv4vsls2rlbl"]
+[gd_scene load_steps=9 format=3 uid="uid://tv4vsls2rlbl"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/seat_instance.gd" id="1_m4ay8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_n7qdn"]
 
@@ -10,10 +12,6 @@ roughness = 0.71
 [sub_resource type="BoxMesh" id="BoxMesh_k2hos"]
 material = SubResource("StandardMaterial3D_rhwlw")
 size = Vector3(0.8, 0.055, 0.4)
-
-[sub_resource type="BoxMesh" id="BoxMesh_2ujkb"]
-material = SubResource("StandardMaterial3D_rhwlw")
-size = Vector3(0.055, 0.6, 0.28)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4y1sr"]
 albedo_color = Color(0.12103, 0.12103, 0.12103, 1)
@@ -28,36 +26,47 @@ is_hemisphere = true
 material = SubResource("StandardMaterial3D_4y1sr")
 size = Vector3(0.02, 0.1, 0.02)
 
-[node name="Control Station" type="Node3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_2ujkb"]
+material = SubResource("StandardMaterial3D_rhwlw")
+size = Vector3(0.055, 0.8, 0.28)
+
+[node name="Control Station" type="Node3D" node_paths=PackedStringArray("player_position")]
+script = ExtResource("1_m4ay8")
+player_position = NodePath("Player Position")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
 mesh = SubResource("BoxMesh_n7qdn")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.797268, -0.603626, 0, 0.603626, 0.797268, 0, 0.192538, -0.290815)
+transform = Transform3D(1, 0, 0, 0, 0.797268, -0.603626, 0, 0.603626, 0.797268, 0, 0.281761, -0.290815)
 mesh = SubResource("BoxMesh_k2hos")
 
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 0.98617, 0.165736, 0, -0.165736, 0.98617, -0.25, 0.0124125, -0.0697115)
+mesh = SubResource("SphereMesh_pcnd8")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D2/MeshInstance3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.124246, 0.0050716)
+mesh = SubResource("BoxMesh_uatrk")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 0.98617, 0.165736, 0, -0.165736, 0.98617, 0.25, 0.0124125, -0.0697115)
+mesh = SubResource("SphereMesh_pcnd8")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D2/MeshInstance3D6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.124246, 0.0050716)
+mesh = SubResource("BoxMesh_uatrk")
+
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37, -0.2, -0.289035)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37, -0.1, -0.289035)
 mesh = SubResource("BoxMesh_2ujkb")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, -0.2, -0.289035)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, -0.1, -0.289035)
 mesh = SubResource("BoxMesh_2ujkb")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.886284, -0.463141, 0, 0.463141, 0.886284, -0.25, 0.144, -0.23)
-mesh = SubResource("SphereMesh_pcnd8")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.124246, 0.0050716)
-mesh = SubResource("BoxMesh_uatrk")
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.886284, -0.463141, 0, 0.463141, 0.886284, 0.25, 0.144, -0.23)
-mesh = SubResource("SphereMesh_pcnd8")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.124246, 0.0050716)
-mesh = SubResource("BoxMesh_uatrk")
+[node name="Player Position" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.25)

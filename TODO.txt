@@ -9,8 +9,6 @@ trigger debug action immediately when pressed
 
 grayer color for extra properties in property viewer
 
-standing control station
-
 block interact shapecast needs to be custom BLOCK shapecast that can pick up and filter individual blocks
 	do everything manually, move a intersect_shape() in increments and check against indivual shapes
 	TRY RAYCAST FIRST? naahh
@@ -203,6 +201,8 @@ special blocks like rails, where you can attach machine entities to like crane o
 radar dish, can pick up near enemies where its facing ( fading hud enemy signals that stay active for 10-30 secs after last pickup )
 
 tiny 25cm grid for drones etc ( zoom option while building? )
+
+can carry fuel can to directly fill tanks a little bit
 
 
 TECHNOLOGIES:

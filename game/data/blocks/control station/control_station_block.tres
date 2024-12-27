@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SeatBlock" load_steps=3 format=3 uid="uid://blbatynmdyylc"]
+
+[ext_resource type="Script" path="res://game/core/block/types/seat_block.gd" id="1_h2co3"]
+[ext_resource type="PackedScene" uid="uid://tv4vsls2rlbl" path="res://game/data/blocks/control station/control_station.tscn" id="1_o2h72"]
+
+[resource]
+script = ExtResource("1_h2co3")
+size = Vector3i(1, 1, 1)
+weight = 10.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = false
+tick_priority = 0
+can_be_built = true
+scene = ExtResource("1_o2h72")
+name = ""

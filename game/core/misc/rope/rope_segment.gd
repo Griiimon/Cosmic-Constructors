@@ -19,7 +19,8 @@ func simulate(from: Vector3, to: Vector3):
 	pull(from - global_position)
 	pull(to - global_position)
 	visual_node.position= lerp(from, to, 0.5)
-	visual_node.look_at(to)
+	if abs((to - visual_node.global_position).normalized().dot(Vector3.UP)) < 1.0:
+		visual_node.look_at(to)
 	mesh.height= from.distance_to(to)
 	
 

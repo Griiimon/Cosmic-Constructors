@@ -1,3 +1,7 @@
+hose coupling + hose
+
+wheelbarrow
+
 split and merge tube groups
 	split: check if more 1 neighbor when removing and then have the group flood fill for all neighbors, removing any queued neighbor when found within flood fill
 
@@ -19,6 +23,8 @@ WorldItemInstance needs to disable collision shape when on connector or else it 
 
 build crane to lift container
 	block groups and hotkeys
+
+plane wings: lift surface block, wing tip block ( improves angular damping in this direction ), flaps block
 
 run damage test with multi blocks in grid
 
@@ -51,6 +57,8 @@ control right-click in tests to remove entire grid
 
 add non solid, frozen rigidbody to player as gravity gauge?
 
+build actual in-game wind-tunnel with ingame colored wind particles blower block
+	grids save aero wind direction for all empty surrounding blocks (or wind deflection angle for used ones vs from each cardinal direction )
 
 pick block should copy rotation
 

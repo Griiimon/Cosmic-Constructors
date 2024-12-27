@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://dyuh65348fokk"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/hose_coupling_instance.gd" id="1_ophur"]
+[ext_resource type="Script" path="res://game/core/components/fluid container/fluid_connector.gd" id="2_lxtni"]
+[ext_resource type="PackedScene" uid="uid://dxobr26jfvcqg" path="res://game/core/components/fluid container/fluid_connector_model.tscn" id="3_a5ne4"]
+
+[sub_resource type="Resource" id="Resource_8sphv"]
+script = ExtResource("2_lxtni")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, 0, -1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nixcm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jeg1y"]
+albedo_color = Color(0.256558, 0.399502, 0.193942, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dx8ow"]
+material = SubResource("StandardMaterial3D_jeg1y")
+top_radius = 0.16
+bottom_radius = 0.16
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yff0k"]
+albedo_color = Color(0.193154, 0.193154, 0.193154, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_74hm8"]
+material = SubResource("StandardMaterial3D_yff0k")
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.05
+
+[node name="Hose Coupling" type="Node3D" node_paths=PackedStringArray("model_node")]
+script = ExtResource("1_ophur")
+connectors = Array[ExtResource("2_lxtni")]([SubResource("Resource_8sphv")])
+model_node = NodePath("Model")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_nixcm")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, -0.25)
+mesh = SubResource("CylinderMesh_dx8ow")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/MeshInstance3D2"]
+mesh = SubResource("CylinderMesh_74hm8")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("CylinderMesh_74hm8")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model/MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("CylinderMesh_74hm8")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model/MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("CylinderMesh_74hm8")
+
+[node name="Fluid Connector 1" type="Node3D" parent="Model" instance=ExtResource("3_a5ne4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)

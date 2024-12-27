@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://rbb1n5pfdkqs"]
+
+[ext_resource type="Script" path="res://game/core/misc/rope/rope.gd" id="1_ogr2o"]
+[ext_resource type="PackedScene" uid="uid://copeodnx8sqki" path="res://game/core/misc/rope/rope_segment.tscn" id="2_h3toc"]
+
+[node name="Rope" type="Node3D"]
+script = ExtResource("1_ogr2o")
+segment_scene = ExtResource("2_h3toc")

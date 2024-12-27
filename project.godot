@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Cosmic Constructors"
-run/main_scene="res://game/test/empty test/empty_test.tscn"
+run/main_scene="res://game/test/rope test/rope_test.tscn"
 config/features=PackedStringArray("4.3", "Double Precision", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -241,7 +241,9 @@ peripheral_entity_modifier={
 3d_physics/layer_5="Physical Objects"
 3d_physics/layer_6="Peripheral Grid Entities"
 3d_physics/layer_7="World Item"
+3d_physics/layer_8="Fluid"
 3d_physics/layer_9="Peripheral Connector"
+3d_physics/layer_10="Rope"
 
 [physics]
 

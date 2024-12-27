@@ -53,6 +53,14 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 		linked_system.add_block(grid_block)
 
 
+func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
+	if is_input():
+		if restore_data.has("fluid_content"):
+			(BaseBlockComponent3D.get_from_node(self, FluidContainer.NODE_NAME) as FluidContainer).content= restore_data["fluid_content"]
+
+	on_placed(grid, grid_block)
+
+
 func on_destroy(grid: BlockGrid, grid_block: GridBlock):
 	if is_input():
 		linked_system.remove_input(BaseBlockComponent3D.get_from_block(grid_block, FluidContainer.NODE_NAME))
@@ -63,15 +71,19 @@ func on_destroy(grid: BlockGrid, grid_block: GridBlock):
 	
 	super(grid, grid_block)
 
+
 func can_connect_from_to(from: GridBlock, to: GridBlock)-> bool:
 	for connector in connectors:
 		if from.to_global(connector.block_pos + connector.direction) == to.local_pos:
 			return true
 	return false
 
-#
-#func get_linked_block_group()-> LinkedBlockGroup:
-	#return linked_system
+
+func serialize()-> Dictionary:
+	var data: Dictionary= super()
+	if is_input():
+		data["fluid_content"]= (BaseBlockComponent3D.get_from_node(self, FluidContainer.NODE_NAME) as FluidContainer).content
+	return data
 
 
 func is_input()-> bool:

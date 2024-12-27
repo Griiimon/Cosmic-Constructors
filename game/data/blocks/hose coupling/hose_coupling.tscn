@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dyuh65348fokk"]
+[gd_scene load_steps=12 format=3 uid="uid://dyuh65348fokk"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/hose_coupling_instance.gd" id="1_ophur"]
 [ext_resource type="Script" path="res://game/core/components/fluid container/fluid_connector.gd" id="2_lxtni"]
@@ -29,6 +29,15 @@ top_radius = 0.2
 bottom_radius = 0.2
 height = 0.05
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3gj2y"]
+albedo_color = Color(0.106237, 0.106237, 0.106237, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gljwx"]
+material = SubResource("StandardMaterial3D_3gj2y")
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.05
+
 [node name="Hose Coupling" type="Node3D" node_paths=PackedStringArray("model_node")]
 script = ExtResource("1_ophur")
 connectors = Array[ExtResource("2_lxtni")]([SubResource("Resource_8sphv")])
@@ -38,7 +47,7 @@ model_node = NodePath("Model")
 visible = false
 mesh = SubResource("BoxMesh_nixcm")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, -0.25)
@@ -59,6 +68,11 @@ mesh = SubResource("CylinderMesh_74hm8")
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Model/MeshInstance3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 mesh = SubResource("CylinderMesh_74hm8")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Model/MeshInstance3D2/MeshInstance3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0283195, 1.73407e-18)
+mesh = SubResource("CylinderMesh_gljwx")
+skeleton = NodePath("../..")
 
 [node name="Fluid Connector 1" type="Node3D" parent="Model" instance=ExtResource("3_a5ne4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)

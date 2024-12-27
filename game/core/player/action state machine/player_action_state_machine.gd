@@ -20,7 +20,15 @@ func _ready() -> void:
 	build_peripheral_entity_state.finished.connect(change_state.bind(idle_state))
 
 
-func attach_rope(from: Node3D)-> Rope:
+func attach_rope_from(from: Node3D)-> Rope:
 	var rope: Rope= player.world.make_rope(from, player.misc_item_holder)
+	attach_rope_state.rope= rope
 	change_state(attach_rope_state)
+	return rope
+
+
+func attach_rope_to(to: Node3D)-> Rope:
+	var rope: Rope= attach_rope_state.rope
+	rope.end= to
+	change_state(idle_state)
 	return rope

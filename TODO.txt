@@ -212,6 +212,7 @@ tiny 25cm grid for drones etc ( zoom option while building? )
 
 can carry fuel can to directly fill tanks a little bit
 
+reward player for staying alive: current player character gets stat boosts for being alive longer ( maybe even for travelling long distances )
 
 TECHNOLOGIES:
 ------------------------

@@ -105,7 +105,11 @@ func drill():
 
 
 func attach_rope(from: Node3D)-> Rope:
-	return action_state_machine.attach_rope(from)
+	if action_state_machine.attach_rope_state.is_current_state():
+		action_state_machine.attach_rope_to(from)
+		return action_state_machine.attach_rope_state.rope
+	else:
+		return action_state_machine.attach_rope_from(from)
 
 
 func get_hand_item()-> HandItem:

@@ -17,6 +17,7 @@ var grids: Node
 var projectiles: Node
 var items: Node
 var peripheral_entities: Node
+var ropes: Node
 
 var grid_freeze_state:= false
 
@@ -29,6 +30,7 @@ func _ready() -> void:
 	projectiles= generate_sub_node("Projectiles")
 	items= generate_sub_node("Items")
 	peripheral_entities= generate_sub_node("Peripheral Entities")
+	ropes= generate_sub_node("Ropes")
 
 
 func _physics_process(_delta: float) -> void:
@@ -311,6 +313,14 @@ func spawn_peripheral_entity(entity: PeripheralEntity, pos: Vector3, rot: Vector
 	entity_instance.rotation= rot
 	peripheral_entities.add_child(entity_instance)
 
+
+func make_rope(from: Node3D, to: Node3D)-> Rope:
+	var rope: Rope= GameData.scene_library.rope.instantiate()
+	rope.from= from
+	rope.to= to
+	ropes.add_child(rope)
+	return rope
+	
 
 func get_grid(id: int)-> BlockGrid:
 	return grids.get_child(id)

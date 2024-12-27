@@ -102,6 +102,10 @@ func drill():
 	action_state_machine.idle_state.drill()
 
 
+func attach_rope(from: Vector3)-> Rope:
+	return action_state_machine.attach_rope(from)
+
+
 func get_hand_item()-> HandItem:
 	if not hand_object or not is_instance_valid(hand_object) or hand_object.is_queued_for_deletion():
 		return null

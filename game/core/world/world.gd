@@ -316,8 +316,8 @@ func spawn_peripheral_entity(entity: PeripheralEntity, pos: Vector3, rot: Vector
 
 func make_rope(from: Node3D, to: Node3D)-> Rope:
 	var rope: Rope= GameData.scene_library.rope.instantiate()
-	rope.from= from
-	rope.to= to
+	rope.start= from
+	rope.end= to
 	ropes.add_child(rope)
 	return rope
 	

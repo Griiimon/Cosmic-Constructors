@@ -41,7 +41,7 @@ func on_physics_process(_delta: float):
 
 	var block_interact_shapecast: ShapeCast3D= player.block_interact_shapecast
 	
-	CustomShapeCast.pierce(block_interact_shapecast, interactive_block_shapecast_filter)
+	CustomShapeCast.pierce_blocks(block_interact_shapecast, interactive_block_shapecast_filter)
 
 	var grid: BlockGrid= CustomShapeCast.grid
 	var grid_block: BaseGridBlock= CustomShapeCast.grid_block
@@ -92,12 +92,5 @@ func drill():
 		terrain.mine(local_pos, radius, true, shapecast.get_collision_point(0) + shapecast.global_basis.z * 0.5, shapecast.global_basis.z)
 
 
-func interactive_block_shapecast_filter(shapecast: ShapeCast3D)-> bool:
-	CustomShapeCast.grid= shapecast.get_collider(0)
-	var collision_pos: Vector3= shapecast.get_collision_point(0) - shapecast.global_basis.z * 0.05
-	CustomShapeCast.grid_block= CustomShapeCast.grid.get_block_from_global_pos(collision_pos)
-
-	DebugHud.send("Grid", CustomShapeCast.grid.name if CustomShapeCast.grid else "null")
-	DebugHud.send("Grid Block", CustomShapeCast.grid_block.local_pos if CustomShapeCast.grid_block else "null")
-
-	return CustomShapeCast.grid_block and (not CustomShapeCast.grid_block.get_block_instance() or not CustomShapeCast.grid_block.get_block_instance().has_property_viewer())
+func interactive_block_shapecast_filter()-> bool:
+	return not CustomShapeCast.grid_block.get_block_instance() or not CustomShapeCast.grid_block.get_block_instance().has_property_viewer()

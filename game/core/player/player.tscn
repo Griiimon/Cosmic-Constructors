@@ -115,13 +115,14 @@ shape = SubResource("SphereShape3D_iybuy")
 target_position = Vector3(0, 0, -2)
 collision_mask = 4
 
+[node name="Misc Item Holder" type="Node3D" parent="Head/Pivot" index="8"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.554139, -1.392)
+
 [node name="Model" parent="Head" index="1"]
 visible = false
 
 [node name="Third Person Camera" parent="Head" index="2" instance=ExtResource("3_2hljo")]
-unique_name_in_owner = true
-
-[node name="Misc Item Holder" type="Node3D" parent="Head" index="3"]
 unique_name_in_owner = true
 
 [node name="Movement State Machine" type="Node" parent="." index="4" node_paths=PackedStringArray("current_state")]

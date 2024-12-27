@@ -237,15 +237,12 @@ func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
 # to be called only by block.destroy()
 func remove_block(block: BaseGridBlock):
 	if not (block is VirtualGridBlock):
-		#mass-= block.block_definition.weight
 		collision_shapes.erase(block.collision_shape)
 		block.collision_shape.queue_free()
-		#block.destroy(self)
 	blocks.erase(block.local_pos)
 	block_types[block.get_block_definition()].erase(block)
 	
 	requires_integrity_check= true
-	#update_properties()
 
 
 func run_integrity_check():

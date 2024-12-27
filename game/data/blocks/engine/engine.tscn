@@ -46,6 +46,7 @@ bottom_radius = 0.05
 height = 1.0
 
 [node name="Engine" type="Node3D"]
+visible = false
 script = ExtResource("1_v5cg6")
 max_fuel_consumption = 0.1
 connectors = Array[ExtResource("3_54fld")]([SubResource("Resource_g8tj4"), SubResource("Resource_7iy1q")])

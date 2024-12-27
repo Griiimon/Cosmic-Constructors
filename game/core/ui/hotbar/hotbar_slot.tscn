@@ -6,7 +6,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_nv3ls"]
 line_spacing = 0.0
-font_size = 12
+font_size = 11
 font_color = Color(0, 0, 0, 1)
 
 [node name="Hotbar Slot" type="PanelContainer"]
@@ -19,9 +19,9 @@ script = ExtResource("1_ju2q1")
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
-text = "Hinge hallo gehts nocht "
 label_settings = SubResource("LabelSettings_nv3ls")
 horizontal_alignment = 1
 autowrap_mode = 1
-visible_characters = 23
+text_overrun_behavior = 1
+visible_characters = 0
 visible_ratio = 0.958333

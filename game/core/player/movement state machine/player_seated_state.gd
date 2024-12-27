@@ -24,6 +24,8 @@ func on_enter():
 
 	player.reparent(seat, false)
 	player.transform= Transform3D.IDENTITY
+	if seat.player_position:
+		player.position= seat.player_position.position
 
 
 func on_exit():

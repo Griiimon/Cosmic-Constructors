@@ -104,7 +104,7 @@ func drill():
 	action_state_machine.idle_state.drill()
 
 
-func attach_rope(from: Vector3)-> Rope:
+func attach_rope(from: Node3D)-> Rope:
 	return action_state_machine.attach_rope(from)
 
 

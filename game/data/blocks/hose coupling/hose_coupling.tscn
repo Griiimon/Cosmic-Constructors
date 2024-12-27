@@ -74,5 +74,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0283195, 1.73407e-18)
 mesh = SubResource("CylinderMesh_gljwx")
 skeleton = NodePath("../..")
 
-[node name="Fluid Connector 1" type="Node3D" parent="Model" instance=ExtResource("3_a5ne4")]
+[node name="Fluid Connector 1" parent="Model" instance=ExtResource("3_a5ne4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)

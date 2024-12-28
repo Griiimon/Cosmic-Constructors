@@ -156,6 +156,11 @@ func _unhandled_input(event: InputEvent) -> void:
 						change_row(-1)
 					MOUSE_BUTTON_WHEEL_DOWN:
 						change_row(1)
+	elif event is InputEventKey:
+		if event.keycode >= KEY_1 and event.keycode <= KEY_9:
+			var row: PanelViewerRow= get_current_row()
+			if can_assign_hotkey_to(row):
+				grid.assign_hotkey(HotkeyAssignmentBlockProperty.new(event.keycode - KEY_1, block, row.property)) 
 
 
 func change_row(delta: int):

@@ -23,14 +23,14 @@ layout_mode = 2
 
 [node name="Label Type" type="Label" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 vertical_alignment = 1
 text_overrun_behavior = 1
 
 [node name="Label Value" type="Label" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(110, 0)
+custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 horizontal_alignment = 2
 vertical_alignment = 1

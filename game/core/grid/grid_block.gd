@@ -4,6 +4,7 @@ extends BaseGridBlock
 var block_definition: Block
 var rotation: Vector3i
 var block_node: Node3D
+var name: String
 var hitpoints: int
 var collision_shape: CollisionShape3D
 
@@ -58,6 +59,12 @@ func get_global_basis(grid: BlockGrid)-> Basis:
 func to_global(offset: Vector3i)-> Vector3i:
 	var vec: Vector3= Vector3(offset) * get_local_basis().inverse() + Vector3(local_pos)
 	return vec.round()
+
+
+func get_name(grid: BlockGrid)-> String:
+	if not name.is_empty():
+		return name
+	return grid.generate_block_name(self)
 
 
 static func rotation_to_basis(block_rotation: Vector3i)-> Basis:

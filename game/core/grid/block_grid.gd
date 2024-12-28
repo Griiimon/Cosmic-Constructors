@@ -425,6 +425,13 @@ func unregister_linked_block_group(group: LinkedBlockGroup):
 	linked_block_groups.erase(group)
 
 
+func generate_block_name(grid_block: GridBlock)-> String:
+	var block: Block= grid_block.get_block_definition()
+	if block_types.has(block):
+		return str(block.get_display_name(), " ", block_types[block].find(grid_block) + 1)
+	return ""
+
+
 func serialize()-> Dictionary:
 	var data: Dictionary
 	#data["id"]= world.grids.get_children().find(self)
@@ -446,6 +453,8 @@ func serialize()-> Dictionary:
 		item["rotation"]= grid_block.rotation
 		if grid_block.hitpoints <  block_definition.max_hitpoints:
 			item["hitpoints"]= grid_block.hitpoints
+		if not grid_block.name.is_empty():
+			item["name"]= grid_block.name
 		
 		var block_instance: BlockInstance= grid_block.get_block_instance()
 		if block_instance:
@@ -475,6 +484,8 @@ static func deserialize(data: Dictionary, new_world: World)-> BlockGrid:
 		var block: BaseGridBlock= grid.add_block(GameData.get_block_definition(item["definition"]), block_position, block_rotation, Utils.get_key_or_default(item, "data", {}))
 		if item.has("hitpoints"):
 			(block as GridBlock).hitpoints= item["hitpoints"]
+		if item.has("name"):
+			(block as GridBlock).name= item["name"]
 		if item.has("data"):
 			block.get_block_instance().deserialize(item["data"])
 		

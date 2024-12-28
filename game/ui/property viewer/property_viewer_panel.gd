@@ -156,11 +156,15 @@ func _unhandled_input(event: InputEvent) -> void:
 						change_row(-1)
 					MOUSE_BUTTON_WHEEL_DOWN:
 						change_row(1)
+	
 	elif event is InputEventKey:
 		if event.keycode >= KEY_1 and event.keycode <= KEY_9:
 			var row: PanelViewerRow= get_current_row()
 			if can_assign_hotkey_to(row):
-				grid.assign_hotkey(HotkeyAssignmentBlockProperty.new(event.keycode - KEY_1, block, row.property)) 
+				var key: int= event.keycode - KEY_0
+				var assignment: BaseHotkeyAssignment= HotkeyAssignmentBlockProperty.new(key, block, row.property)
+				grid.assign_hotkey(assignment) 
+				SignalManager.hotkey_assigned.emit(assignment, grid)
 
 
 func change_row(delta: int):
@@ -177,3 +181,7 @@ func get_current_row()-> PanelViewerRow:
 
 func _on_update_interval_timeout() -> void:
 	populate()
+
+
+func can_assign_hotkey_to(row: PanelViewerRow)-> bool:
+	return row.property != null

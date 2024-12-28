@@ -8,6 +8,7 @@ var slots: Array[HotbarSlot]
 
 
 func _ready() -> void:
+	SignalManager.player_seated.connect(populate_slots_from_seat)
 	for child in hbox_slots.get_children():
 		slots.append(child)
 
@@ -21,3 +22,14 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func select_slot(idx: int):
 	slots[idx].select()
+
+
+func populate_slots_from_seat(grid: BlockGrid, grid_block: GridBlock):
+	var seat: SeatInstance= grid_block.get_block_instance()
+	
+	for i in 9:
+		populate_slot(i, seat.hotkeys[i + 1] if seat.hotkeys.has(i + 1) else null, grid)
+
+
+func populate_slot(idx: int, assignment: BaseHotkeyAssignment, grid: BlockGrid):
+	slots[idx].label.text= assignment.get_as_text(grid) if assignment else ""

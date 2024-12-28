@@ -59,6 +59,3 @@ layout_mode = 2
 
 [node name="Hotbar Slot9" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_5nq3p")]
 layout_mode = 2
-
-[node name="Hotbar Slot10" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_5nq3p")]
-layout_mode = 2

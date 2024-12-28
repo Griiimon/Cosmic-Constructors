@@ -23,5 +23,3 @@ label_settings = SubResource("LabelSettings_nv3ls")
 horizontal_alignment = 1
 autowrap_mode = 1
 text_overrun_behavior = 1
-visible_characters = 0
-visible_ratio = 0.958333

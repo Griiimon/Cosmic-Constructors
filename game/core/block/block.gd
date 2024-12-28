@@ -43,3 +43,7 @@ func can_interact()-> bool:
 
 func is_multi_block()-> bool:
 	return size.x > 1 or size.y > 1 or size.z > 1
+
+
+func get_display_name()-> String:
+	return super().trim_suffix(" Block")

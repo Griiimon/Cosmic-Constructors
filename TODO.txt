@@ -7,8 +7,12 @@ make gravity area class
 
 wheelbarrow
 	handle bar block: connects with joint, if player in kinematic mode try hybrid controller solution with feedback rigidbody connected to the joint
-	fixed wheel block: actual wheel is rigidbody, connected by joint with counterforce to lateral sliding?
-	
+	fixed wheel block: actual wheel is rigidbody, connected by joint free rolling and high friction
+
+pallet storage block (2x2), that tries to snap and pull on pallets that are on top. unless the pallet has contact with any other grid then the magnetizing is temporarily disabled, so it can be lifted with a forklift etc
+
+block selection wireframe for blocks that the interaction shapecast hits
+
 split tube groups check if more 1 neighbor when removing and then have the group flood fill for all neighbors, removing any queued neighbor when found within flood fill
 
 FIX fluid splash particles on terrain get stuck, splash position is off
@@ -17,10 +21,6 @@ trigger debug action immediately when pressed
 
 grayer color for extra properties in property viewer
 
-block interact shapecast needs to be custom BLOCK shapecast that can pick up and filter individual blocks
-	do everything manually, move a intersect_shape() in increments and check against indivual shapes
-	TRY RAYCAST FIRST? naahh
-	
 check if recent atmospheric shader change has any negative effects in Forward+
 
 WorldItemInstance needs to disable collision shape when on connector or else it will take collision layer of grid and react to raycasts
@@ -221,6 +221,10 @@ reward player for staying alive: current player character gets stat boosts for b
 skid blocks for making sleds in snow biome
 
 start in "wood age", chopping trees ( drop saplings for replanting ). wood structure block, wooden fixed wheel etc
+
+terrain generator: save heighmap array when lod0 is generated and calc normals and store
+
+ice will have the same friction as all terrain ( wheels can handle it but.. ) grids could change their friction dynamically depending on what terrain type they are making contact with
 
 
 

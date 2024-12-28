@@ -31,6 +31,7 @@ func on_enter():
 func on_exit():
 	player.model.set_equipment_visibility(true)
 	player.model.set_item_holder_visibility(true)
+	SignalManager.player_left_seat.emit(player)
 
 
 func on_physics_process(_delta: float):

@@ -62,11 +62,11 @@ func populate():
 	selected_row= -1
 	is_value_selected= false
 	rows.clear()
+
+	add_row("Name", block.get_name(grid))
 	
 	for property: ExtraProperty in block_instance.get_extra_properties():
-		var row: PanelViewerRow= add_row()
-		row.label_type.text= property.text
-		row.label_value.text= property.get_value_as_text()
+		var row: PanelViewerRow= add_row(property.text, property.get_value_as_text())
 		row.label_type.modulate= Color.WHITE_SMOKE
 		row.label_value.modulate= Color.WHITE_SMOKE
 		if update_interval.is_stopped():
@@ -79,9 +79,12 @@ func populate():
 			selected_row= rows.size() - 1
 
 
-func add_row()-> PanelViewerRow:
+func add_row(type: String= "", value: String= "")-> PanelViewerRow:
 	var row: PanelViewerRow= ROW_SCENE.instantiate()
 	content_container.add_child(row)
+	row.label_type.text= type
+	row.label_value.text= value
+
 	rows.append(row)
 	return row
 

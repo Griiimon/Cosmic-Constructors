@@ -32,6 +32,7 @@ func _ready():
 	add_child(property_viewer_panel)
 
 	SignalManager.interact_with_block.connect(interact_with_block)
+	SignalManager.hotkey_assigned.connect(on_hotkey_assigned)
 
 
 func _physics_process(_delta: float) -> void:
@@ -56,3 +57,7 @@ func update_temporary_info_label(s: String):
 
 func interact_with_block(grid_block: GridBlock, grid: BlockGrid, player: Player):
 	property_viewer_panel.update(grid_block, grid, player)
+
+
+func on_hotkey_assigned(assignment: BaseHotkeyAssignment, grid: BlockGrid):
+	update_temporary_info_label(str("Hotkey ", assignment.key, " assigned to ", assignment.get_as_text(grid)))

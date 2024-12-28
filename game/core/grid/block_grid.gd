@@ -428,7 +428,11 @@ func unregister_linked_block_group(group: LinkedBlockGroup):
 func generate_block_name(grid_block: GridBlock)-> String:
 	var block: Block= grid_block.get_block_definition()
 	if block_types.has(block):
-		return str(block.get_display_name(), " ", block_types[block].find(grid_block) + 1)
+		var idx: int= block_types[block].find(grid_block) + 1
+		var result: String= block.get_display_name()
+		if idx > 1:
+			result+= str(" ", idx)
+		return result
 	return ""
 
 

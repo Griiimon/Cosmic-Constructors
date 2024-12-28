@@ -31,7 +31,7 @@ func _ready():
 	property_viewer_panel.hide()
 	add_child(property_viewer_panel)
 
-	SignalManager.interact_with_block.connect(interact_with_block)
+	SignalManager.interact_with_block.connect(on_interact_with_block)
 	SignalManager.hotkey_assigned.connect(on_hotkey_assigned)
 
 
@@ -55,7 +55,7 @@ func update_temporary_info_label(s: String):
 	temporary_info_label_cooldown.start()
 
 
-func interact_with_block(grid_block: GridBlock, grid: BlockGrid, player: Player):
+func on_interact_with_block(grid_block: GridBlock, grid: BlockGrid, player: Player):
 	property_viewer_panel.update(grid_block, grid, player)
 
 

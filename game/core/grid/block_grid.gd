@@ -27,6 +27,8 @@ var current_gravity: Vector3
 
 var linked_block_groups: Array[LinkedBlockGroup]
 
+var main_cockpit: SeatInstance
+
 
 
 func _ready() -> void:
@@ -126,6 +128,10 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 	if not block_types.has(block):
 		block_types[block]= []
 	block_types[block].append(grid_block)
+
+	if block_node is SeatInstance:
+		if not main_cockpit:
+			main_cockpit= block_node
 
 	update_properties()
 
@@ -434,6 +440,11 @@ func generate_block_name(grid_block: GridBlock)-> String:
 			result+= str(" ", idx)
 		return result
 	return ""
+
+
+func assign_hotkey(assignment: BaseHotkeyAssignment):
+	if not main_cockpit: return
+	main_cockpit.assign_hotkey(assignment)
 
 
 func serialize()-> Dictionary:

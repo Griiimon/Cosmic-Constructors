@@ -58,14 +58,14 @@ func serialize()-> Dictionary:
 	return data
 
 
-func find_or_make_linked_block_group(grid: BlockGrid, block_pos: Vector3i, create_virtual: bool= false, filter= null)-> LinkedBlockGroup:
-	var neighbors: Array[Vector3i]= get_same_neighbors_positions(grid, block_pos)
+func find_linked_block_group(grid: BlockGrid, grid_block: GridBlock, filter= null)-> LinkedBlockGroup:
+	var neighbors: Array[Vector3i]= get_same_neighbors_positions(grid, grid_block.local_pos)
 	var group: LinkedBlockGroup
 	for neighbor in neighbors:
 		var neighbor_instance: BlockInstance= grid.get_block_instance_at(neighbor)
 		if filter:
 			assert(filter is Callable)
-			if not filter.call(grid, block_pos, neighbor): continue
+			if not filter.call(grid, grid_block, neighbor): continue
 			
 		var neighbor_group: LinkedBlockGroup= neighbor_instance.get_linked_block_group()
 		assert(neighbor_group)
@@ -73,6 +73,11 @@ func find_or_make_linked_block_group(grid: BlockGrid, block_pos: Vector3i, creat
 			assert(false, "Supposed to happen when connecting 2 groups. group mergin not implemented")
 			return null
 		group= neighbor_group
+	return group
+
+
+func find_or_make_linked_block_group(grid: BlockGrid, grid_block: GridBlock, create_virtual: bool= false, filter= null)-> LinkedBlockGroup:
+	var group: LinkedBlockGroup= find_linked_block_group(grid, grid_block, filter)
 
 	if not group:
 		group= LinkedBlockGroup.new(grid, create_virtual)

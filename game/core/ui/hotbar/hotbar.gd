@@ -36,10 +36,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		if mouse_mode and mouse_control_property:
 			if event.button_mask & MOUSE_BUTTON_MASK_LEFT:
 				var mouse_pos_x: float= mouse_texture.anchor_left
-				mouse_pos_x= clampf(mouse_pos_x + event.relative.x * 0.01, 0.0, 1.0)
+				mouse_pos_x= clampf(mouse_pos_x + event.relative.x * 0.005, 0.0, 1.0)
 				mouse_texture.anchor_left= mouse_pos_x
 				mouse_texture.anchor_right= mouse_pos_x
-				
+				mouse_control_property.set_variant(pow((mouse_pos_x * 2 - 1) * 3, 3))
 				get_viewport().set_input_as_handled()
 		
 

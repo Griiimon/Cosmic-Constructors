@@ -41,7 +41,7 @@ visible = false
 mesh = SubResource("BoxMesh_upqdt")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
 mesh = SubResource("BoxMesh_us0db")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]

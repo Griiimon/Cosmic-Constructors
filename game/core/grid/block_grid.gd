@@ -79,8 +79,10 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		var coll_shapes: Array[CollisionShape3D]
 		coll_shapes.assign(block_node.find_children("*", "CollisionShape3D", false))
 		assert(coll_shapes.size() == 1)
-		coll_shapes[0].reparent(self)
 		coll_shape= coll_shapes[0]
+		coll_shape.reparent(self)
+		# TODO necessary?
+		#coll_shape.owner= self
 	else:
 		var shape:= BoxShape3D.new()
 		shape.size= block.size
@@ -97,8 +99,8 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 			coll_shape.position+= grid_block_basis.y * 0.5
 
 		add_child(coll_shape)
-		# FIXME shouldnt the following line be unindented
-		collision_shapes.append(coll_shape)
+
+	collision_shapes.append(coll_shape)
 
 	grid_block.collision_shape= coll_shape
 

@@ -51,7 +51,10 @@ static func pierce_blocks(shapecast: ShapeCast3D, filter: Callable, step_size: f
 			if collider is BlockGrid:
 				grid= collider
 				var shape_trans: Transform3D= grid.shape_owner_get_transform(first_result.shape)
-				grid_block= grid.get_block_local(shape_trans.origin)
+				# TODO following line may fail to produce correct result?
+				#		.. with multi blocks at least? 
+				grid_block= grid.get_block_local(round(shape_trans.origin))
+				var tmp: GridBlock= grid_block
 				if not filter.call():
 					break
 				reset()

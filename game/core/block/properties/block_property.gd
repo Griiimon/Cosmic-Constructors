@@ -42,7 +42,7 @@ func change_value(_modifier: int, _delta: int):
 
 
 func set_variant(_val: Variant):
-	pass
+	do_callback()
 
 
 func change_step_size():

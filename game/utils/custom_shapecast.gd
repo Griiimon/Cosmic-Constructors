@@ -50,11 +50,22 @@ static func pierce_blocks(shapecast: ShapeCast3D, filter: Callable, step_size: f
 			var collider: CollisionObject3D= first_result.collider
 			if collider is BlockGrid:
 				grid= collider
-				var shape_trans: Transform3D= grid.shape_owner_get_transform(first_result.shape)
+				#var shape_trans: Transform3D= grid.shape_owner_get_transform(first_result.shape)
+				
+				#FIXME this is probably bad performance-wise, but cant make finding shapes via owner work
+				var coll_children: Array[Node]= grid.find_children("", "CollisionShape3D", false, false)
+				var shape_trans: Transform3D= coll_children[first_result.shape].transform
+				
 				# TODO following line may fail to produce correct result?
 				#		.. with multi blocks at least? 
 				grid_block= grid.get_block_local(round(shape_trans.origin))
-				var tmp: GridBlock= grid_block
+
+				if not grid_block:
+					# TODO is this happening because of previously deleted shapes, or moving grids, or custom collision shapes?
+					push_warning("Custom Shapecast: no grid block")
+					continue
+				
+				var tmp_debug: GridBlock= grid_block
 				if not filter.call():
 					break
 				reset()

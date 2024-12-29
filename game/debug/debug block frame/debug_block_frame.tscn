@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dn030uowqra0g"]
+
+[ext_resource type="Texture2D" uid="uid://ddsso6kfs5r8l" path="res://game/textures/misc/white_frame.png" id="1_7trfa"]
+[ext_resource type="Script" path="res://game/debug/debug block frame/debug_block_frame.gd" id="1_wqupu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nhvjp"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+specular_mode = 2
+albedo_color = Color(0.761623, 0.22609, 0.0900822, 1)
+albedo_texture = ExtResource("1_7trfa")
+uv1_offset = Vector3(-0.5, -0.5, -0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_11f83"]
+material = SubResource("StandardMaterial3D_nhvjp")
+
+[node name="Debug Block Frame" type="Node"]
+script = ExtResource("1_wqupu")
+
+[node name="Mesh Instance" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_11f83")

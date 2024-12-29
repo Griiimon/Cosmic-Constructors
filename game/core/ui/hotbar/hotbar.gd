@@ -23,7 +23,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func select_slot(idx: int):
-	slots[idx].select()
+	var slot: HotbarSlot= slots[idx]
+	slot.select()
 
 
 func populate_slots_from_seat(grid: BlockGrid, grid_block: GridBlock):
@@ -38,7 +39,7 @@ func populate_slots_from_player(player: Player):
 
 
 func populate_slot(idx: int, assignment: BaseHotkeyAssignment, grid: BlockGrid):
-	slots[idx].label.text= assignment.get_as_text(grid) if assignment else ""
+	slots[idx].assign(assignment, grid)
 
 
 func clear():

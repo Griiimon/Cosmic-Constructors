@@ -81,8 +81,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		assert(coll_shapes.size() == 1)
 		coll_shape= coll_shapes[0]
 		coll_shape.reparent(self)
-		# TODO necessary?
-		#coll_shape.owner= self
+		coll_shape.owner= self
 	else:
 		var shape:= BoxShape3D.new()
 		shape.size= block.size

@@ -144,7 +144,8 @@ var vehicle_inertia : Vector3
 
 var reverse: bool= false
 
-var input_torque: float= 0.0
+#var input_torque: float= 0.0
+var drive_shaft: LinkedDriveShaftGroup
 
 
 
@@ -184,7 +185,6 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 		throttle_input= 0
 		
 	if is_electric:
-
 		if grid.linear_velocity.length() < 0.1:
 			if final_brake:
 				reverse= true
@@ -239,6 +239,9 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 		process_drive(reverse, delta)
 		process_forces(grid, delta)
 
+		if drive_shaft:
+			# TODO i dont think thats correct
+			drive_shaft.torque= min(drive_shaft.torque, wheel.spin / wheel.tire_radius)
 
 #func process_drag() -> void:
 	#var drag := 0.5 * air_density * pow(speed, 2.0) * frontal_area * coefficient_of_drag
@@ -319,10 +322,13 @@ func process_motor(_delta : float) -> void:
 	if is_electric:
 		motor_rpm= throttle_amount * 1000
 	else:
-		motor_rpm= throttle_amount * input_torque
+		#motor_rpm= throttle_amount * input_torque
+		if drive_shaft:
+			motor_rpm= drive_shaft.torque
 
 
 func process_drive(reverse: bool, delta : float) -> void:
+	DebugHud.send("RPM", motor_rpm)
 	process_axle_drive(motor_rpm, reverse, 0, delta)
 
 

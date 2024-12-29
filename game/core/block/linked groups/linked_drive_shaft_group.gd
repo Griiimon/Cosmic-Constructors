@@ -15,13 +15,14 @@ func tick(delta: float):
 	
 	torque*= (1 - friction * delta)
 
-	for suspension in suspensions:
-		suspension.input_torque= torque
+	#for suspension in suspensions:
+		#suspension.input_torque= torque
 
 
 func add_suspension(suspension: SuspensionInstance):
 	if not suspension in suspensions:
 		suspensions.append(suspension)
+		suspension.drive_shaft= self
 
 
 func apply_torque(input_torque: float):

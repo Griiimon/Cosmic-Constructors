@@ -29,7 +29,7 @@ func on_neighbor_removed(_grid: BlockGrid, _grid_block: BaseGridBlock, _neighbor
 
 
 func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
-	model.rotate_x(shaft_group.torque / 10000.0)
+	model.rotate_x(shaft_group.torque / 1000.0)
 
 
 func connect_to_neighbor(grid: BlockGrid, grid_block: GridBlock, neighbor_block: BaseGridBlock= null):

@@ -13,7 +13,7 @@ func assign(_assignment: BaseHotkeyAssignment, grid: BlockGrid):
 	label.text= assignment.get_as_text(grid) if assignment else ""
 
 	
-func select():
+func select(hotbar: Hotbar):
 	if tween and tween.is_running():
 		tween.kill()
 	tween= create_tween()
@@ -22,4 +22,9 @@ func select():
 
 	if assignment:
 		if assignment is HotkeyAssignmentBlockProperty:
-			(assignment as HotkeyAssignmentBlockProperty).property.toggle()
+			var property: BlockProperty= (assignment as HotkeyAssignmentBlockProperty).property
+			if hotbar.mouse_mode:
+				if property is BlockPropFloat:
+					hotbar.start_mouse_control(property)
+				else:
+					property.toggle()

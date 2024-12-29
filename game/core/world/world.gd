@@ -50,6 +50,11 @@ func generate_sub_node(node_name: String)-> Node:
 
 func add_grid(pos: Vector3, rot: Vector3= Vector3.ZERO)-> BlockGrid:
 	var grid:= BlockGrid.new()
+	init_grid(grid, pos, rot)
+	return grid
+	
+
+func init_grid(grid: BlockGrid, pos: Vector3, rot: Vector3):
 	grid.position= pos
 	grid.rotation= rot
 	grid.world= self
@@ -57,7 +62,10 @@ func add_grid(pos: Vector3, rot: Vector3= Vector3.ZERO)-> BlockGrid:
 	grids.add_child(grid)
 	
 	grid.freeze= grid_freeze_state
-	
+
+
+func add_custom_grid(grid: BlockGrid, pos: Vector3, rot: Vector3= Vector3.ZERO)-> BlockGrid:
+	init_grid(grid, pos, rot)
 	return grid
 
 

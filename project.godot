@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Cosmic Constructors"
-run/main_scene="res://game/test/rope test/rope_test.tscn"
+run/main_scene="res://game/test/vehicle test/vehicle_test.tscn"
 config/features=PackedStringArray("4.3", "Double Precision", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -29,6 +29,7 @@ RaycastHelper="*res://game/global/raycast helper/raycast_helper.tscn"
 Effects="*res://game/global/effects/effects.tscn"
 ServerManager="*res://game/global/network managers/server_manager.gd"
 ClientManager="*res://game/global/network managers/client_manager.gd"
+DebugBlockFrame="*res://game/debug/debug block frame/debug_block_frame.tscn"
 
 [debug]
 
@@ -229,6 +230,11 @@ parking_brake={
 peripheral_entity_modifier={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+hotbar_mouse_mode={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194329,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 

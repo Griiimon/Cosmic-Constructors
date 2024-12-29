@@ -1,7 +1,10 @@
 class_name CustomShapeCast
 
+const DEBUG_MODE= true
+
 static var grid: BlockGrid
 static var grid_block: BaseGridBlock
+
 
 
 static func pierce(shapecast: ShapeCast3D, filter: Callable):
@@ -53,6 +56,10 @@ static func pierce_blocks(shapecast: ShapeCast3D, filter: Callable, step_size: f
 					break
 				reset()
 
+
+	if DEBUG_MODE and grid_block:
+		DebugBlockFrame.place_global(grid_block.get_block_instance().global_transform)
+		
 
 static func reset():
 	grid= null

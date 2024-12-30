@@ -1,3 +1,5 @@
+FIX right click in property viewer can sometimes delete blocks ( outside build mode?? )
+
 FIX drive shaft ghost material
 
 give hose texture material
@@ -127,6 +129,13 @@ IS FIXED?
 
 meta tag for BlockInstance scene sub nodes that should be deleted in ghost ( or just delete anything not MeshInstance3D or plain Node3D ? )
 
+
+
+REFACTOR
+-------------
+
+all signal and callback functions should start with on_*
+check early BlockInstances make sure block_ utility functions like to_global() are used
 
 
 

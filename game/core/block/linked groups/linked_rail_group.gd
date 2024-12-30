@@ -6,6 +6,9 @@ var global_transform: Transform3D
 
 var joint: JoltSliderJoint3D
 
+var motor_enabled: BlockPropBool
+var motor_velocity: BlockPropFloat
+
 
 
 func add_block(grid_block: GridBlock, value: Variant= 0):

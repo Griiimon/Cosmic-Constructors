@@ -48,5 +48,6 @@ mesh = SubResource("BoxMesh_p4jl6")
 limit_enabled = true
 limit_upper = 0.5
 limit_lower = -0.5
+motor_enabled = true
 motor_max_force = 100000.0
 transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, 0)

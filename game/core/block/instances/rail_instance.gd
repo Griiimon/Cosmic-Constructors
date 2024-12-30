@@ -3,6 +3,9 @@ extends BlockInstance
 
 @export var carriage_block: Block
 
+@onready var slider_joint: JoltSliderJoint3D = $JoltSliderJoint3D
+
+
 var rail: LinkedRailGroup
 
 
@@ -12,13 +15,19 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 
 	if not group:
 		rail= LinkedRailGroup.new(grid)
-		rail.sub_grid= grid.world.add_custom_grid(CarriageBlockGrid.new(), global_position + global_basis.y, global_rotation)
-		rail.sub_grid.rail= rail
+		rail.sub_grid= grid.world.add_grid(global_position + global_basis.y, global_rotation)
 		rail.sub_grid.add_block(carriage_block, Vector3i.ZERO)
+
+		slider_joint.reparent(grid)
+		rail.joint= slider_joint
+		slider_joint.node_a= slider_joint.get_path_to(grid)
+		slider_joint.node_b= slider_joint.get_path_to(rail.sub_grid)
+
 	else:
 		assert(group is LinkedRailGroup)
 		rail= group
 		
+		slider_joint.queue_free()
 	
 	rail.add_block(grid_block)
 

@@ -6,7 +6,7 @@ var current_key: String
 
 
 
-func _init(_name: String, _dict: Dictionary, _callback= null, instant_callback: bool= true, _owner: GridBlock= null):
+func _init(_name: String, _dict: Dictionary, _callback= null, instant_callback: bool= true, _owner: BlockInstance= null):
 	super(_name, _callback, instant_callback, _owner)
 	enum_dict= _dict
 

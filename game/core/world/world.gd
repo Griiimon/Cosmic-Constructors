@@ -216,6 +216,8 @@ func load_world(world_name: String= "", project_folder: bool= false):
 	if not FileAccess.file_exists(file_name):
 		return
 
+	var grid_data: Dictionary
+	
 	var save_file = FileAccess.open(file_name, FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
 		var json_string = save_file.get_line()
@@ -227,12 +229,13 @@ func load_world(world_name: String= "", project_folder: bool= false):
 			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 			continue
 
-		var grid_data = json.data
+		var grid: BlockGrid= BlockGrid.pre_deserialize(json.data, self)
+		grid_data[grid]= json.data
 
-		var grid: BlockGrid= BlockGrid.deserialize(grid_data, self)
-
-		grid.update_properties()
 	save_file.close()
+
+	for grid: BlockGrid in grids.get_children():
+		grid.deserialize(grid_data[grid])
 
 
 func add_projectile(projectile: ProjectileObject):

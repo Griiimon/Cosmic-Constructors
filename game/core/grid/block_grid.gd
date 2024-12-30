@@ -484,29 +484,32 @@ func serialize()-> Dictionary:
 	return data
 
 
-static func deserialize(data: Dictionary, new_world: World)-> BlockGrid:
+static func pre_deserialize(data: Dictionary, new_world: World)-> BlockGrid:
 	var grid:= BlockGrid.new()
 	grid.world= new_world
 	grid.position= str_to_var("Vector3" + data["position"])
 	grid.rotation= str_to_var("Vector3" + data["rotation"])
-	grid.linear_velocity= str_to_var("Vector3" + data["linear_velocity"])
-	grid.angular_velocity= str_to_var("Vector3" + data["angular_velocity"])
-	grid.parking_brake= Utils.get_key_or_default(data, "parking_brake", false)
-	
+
 	new_world.grids.add_child(grid)
+
+	return grid
+
+
+func deserialize(data: Dictionary):
+	linear_velocity= str_to_var("Vector3" + data["linear_velocity"])
+	angular_velocity= str_to_var("Vector3" + data["angular_velocity"])
+	parking_brake= Utils.get_key_or_default(data, "parking_brake", false)
 
 	for item: Dictionary in data["blocks"]:
 		var block_position: Vector3= str_to_var("Vector3" + item["position"])
 		var block_rotation: Vector3= str_to_var("Vector3" + item["rotation"])
-		var block: BaseGridBlock= grid.add_block(GameData.get_block_definition(item["definition"]), block_position, block_rotation, Utils.get_key_or_default(item, "data", {}))
+		var block: BaseGridBlock= add_block(GameData.get_block_definition(item["definition"]), block_position, block_rotation, Utils.get_key_or_default(item, "data", {}))
 		if item.has("hitpoints"):
 			(block as GridBlock).hitpoints= item["hitpoints"]
 		if item.has("name"):
 			(block as GridBlock).name= item["name"]
 		if item.has("data"):
 			block.get_block_instance().deserialize(item["data"])
-		
-	return grid
 
 
 func can_place_block_at_global(block: Block, global_pos: Vector3, block_rotation: Vector3i= Vector3i.ZERO)-> bool:

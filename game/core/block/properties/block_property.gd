@@ -2,10 +2,14 @@ class_name BlockProperty
 
 var callback: Callable
 var display_name: String
+var owner: GridBlock
 
 
-func _init(_name: String, _callback= null, instant_callback: bool= true) -> void:
+
+func _init(_name: String, _callback= null, instant_callback: bool= true, _owner: GridBlock= null) -> void:
 	display_name= _name
+	owner= _owner
+	
 	if _callback:
 		callback= _callback
 	if instant_callback:

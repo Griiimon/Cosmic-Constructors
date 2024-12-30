@@ -49,11 +49,17 @@ func serialize()-> Dictionary:
 			data["properties"]= {}
 		match prop.class_name:
 			"BlockPropBool":
-				data["properties"][prop.name]= (get(prop.name) as BlockPropBool).is_true()
+				var prop_var: BlockPropBool= get(prop.name)
+				if prop_var.owner and prop_var.owner != self: continue
+				data["properties"][prop.name]= prop_var.is_true()
 			"BlockPropFloat":
-				data["properties"][prop.name]= (get(prop.name) as BlockPropFloat).get_value_f()
+				var prop_var: BlockPropFloat= get(prop.name)
+				if prop_var.owner and prop_var.owner != self: continue
+				data["properties"][prop.name]= prop_var.get_value_f()
 			"BlockPropEnum":
-				data["properties"][prop.name]= (get(prop.name) as BlockPropEnum).get_value_i()
+				var prop_var: BlockPropEnum= get(prop.name)
+				if prop_var.owner and prop_var.owner != self: continue
+				data["properties"][prop.name]= prop_var.get_value_i()
 				
 	return data
 

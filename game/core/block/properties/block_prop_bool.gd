@@ -5,8 +5,8 @@ var b: bool= false
 
 
 
-func _init(_name: String, _b: bool= false, _callback= null):
-	super(_name, _callback)
+func _init(_name: String, _b: bool= false, _callback= null, instant_callback: bool= true, _owner: GridBlock= null):
+	super(_name, _callback, instant_callback, _owner)
 	b= _b
 
 

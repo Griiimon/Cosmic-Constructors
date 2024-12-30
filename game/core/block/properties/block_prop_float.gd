@@ -10,8 +10,8 @@ var range= null
 
 
 
-func _init(_name: String, _f: float= 0.0, _callback= null):
-	super(_name, _callback)
+func _init(_name: String, _f: float= 0.0, _callback= null, instant_callback: bool= true, _owner: GridBlock= null):
+	super(_name, _callback, instant_callback, _owner)
 	f= _f
 
 

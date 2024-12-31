@@ -39,6 +39,7 @@ ambient_light_color = Color(1, 1, 1, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_iybuy"]
 
 [node name="Player" instance=ExtResource("1_kthjw")]
+collision_mask = 55
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0.8, 0)
 script = ExtResource("1_owy5q")

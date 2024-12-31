@@ -10,10 +10,17 @@ func on_enter():
 	item.freeze= true
 	item.collision_layer= 0
 	await get_tree().physics_frame
-	player.misc_item_holder.add_child(item, false)
+	item.reparent(player.misc_item_holder, false)
+	item.position= Vector3.ZERO
 
 
 func on_exit():
 	item.collision_layer= CollisionLayers.WORLD_ITEM
 	item.reparent(player.world.items)
 	item.freeze= false
+
+
+func on_physics_process(delta: float):
+	if Input.is_action_just_pressed("item_interact"):
+		finished.emit()
+		return

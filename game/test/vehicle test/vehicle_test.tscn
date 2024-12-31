@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://d4blx7p2hp5bc"]
+[gd_scene load_steps=32 format=3 uid="uid://d4blx7p2hp5bc"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_6i4dd"]
 [ext_resource type="Script" path="res://game/test/vehicle test/vehicle_tests.gd" id="2_8kc7o"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="6_jsteb"]
 [ext_resource type="Environment" uid="uid://dpnscmd0s8lh5" path="res://game/test/vehicle test/vehicle_test_environment.tres" id="6_s4mlb"]
 [ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="6_s17hf"]
+[ext_resource type="Script" path="res://game/core/misc/environment space area/environment_space_area.gd" id="7_0xvln"]
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="7_hpj7a"]
 [ext_resource type="PackedScene" uid="uid://w6iv7medt6r7" path="res://game/data/peripheral entities/excavator bucket/simple_excavator_bucket.tscn" id="9_cnwvp"]
 [ext_resource type="PackedScene" uid="uid://ced1k5g1mhrng" path="res://game/data/object entities/wooden_pallet.tscn" id="10_e437v"]
@@ -97,6 +98,7 @@ collision_mask = 51
 linear_damp_space_override = 3
 angular_damp_space_override = 3
 angular_damp = 0.2
+script = ExtResource("7_0xvln")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Damping Area"]
 shape = SubResource("SphereShape3D_fbd3y")
@@ -105,6 +107,7 @@ shape = SubResource("SphereShape3D_fbd3y")
 collision_layer = 0
 collision_mask = 691
 gravity_space_override = 3
+script = ExtResource("7_0xvln")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity Area"]
 shape = SubResource("SphereShape3D_fbd3y")

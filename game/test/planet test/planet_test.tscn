@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://buqb4b7dp5dty"]
+[gd_scene load_steps=18 format=3 uid="uid://buqb4b7dp5dty"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_wte7t"]
 [ext_resource type="Script" path="res://game/test/planet test/planet_tests.gd" id="2_8smgd"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="2_dpsqk"]
 [ext_resource type="Resource" uid="uid://y0452womu354" path="res://game/data/hand items/tools/hand drill/hand_drill.tres" id="3_41ocs"]
+[ext_resource type="Script" path="res://game/core/misc/environment space area/environment_space_area.gd" id="4_nmw4n"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="4_yc2d7"]
 [ext_resource type="PackedScene" uid="uid://xgkn2mkwvwmq" path="res://game/core/player/player.tscn" id="5_a1po5"]
 [ext_resource type="VoxelGeneratorGraph" uid="uid://b4umpxnew5cgx" path="res://game/solar system/voxel_graph_planet_v4.tres" id="6_jkjsa"]
@@ -36,6 +37,7 @@ gravity_space_override = 3
 gravity_point = true
 gravity_point_center = Vector3(0, 0, 0)
 gravity_direction = Vector3(0, 0, 0)
+script = ExtResource("4_nmw4n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity Area"]
 shape = SubResource("SphereShape3D_63ws0")
@@ -75,16 +77,3 @@ planet_radius = 1100.0
 atmosphere_height = 1000.0
 sun_path = NodePath("../DirectionalLight")
 custom_shader = ExtResource("13_uc5er")
-shader_params/u_density = 0.11
-shader_params/u_scattering_strength = 0.525
-shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
-shader_params/u_cloud_density_scale = 50.0
-shader_params/u_cloud_bottom = 0.2
-shader_params/u_cloud_top = 0.5
-shader_params/u_cloud_blend = 0.5
-shader_params/u_cloud_shape_invert = 0.0
-shader_params/u_cloud_coverage_bias = 0.0
-shader_params/u_cloud_shape_factor = 0.8
-shader_params/u_cloud_shape_scale = 1.0
-shader_params/u_cloud_shape_texture = null
-shader_params/u_cloud_coverage_cubemap = null

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://18lknojownsw"]
+[gd_scene load_steps=26 format=3 uid="uid://18lknojownsw"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_7fydp"]
 [ext_resource type="Script" path="res://game/test/custom planet test/custom_planet_tests.gd" id="2_d2xmp"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://y0452womu354" path="res://game/data/hand items/tools/hand drill/hand_drill.tres" id="3_xpo15"]
 [ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="5_bbgji"]
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="6_yyq31"]
+[ext_resource type="Script" path="res://game/core/misc/environment space area/environment_space_area.gd" id="7_eyd1c"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="7_w4pu6"]
 [ext_resource type="VoxelGeneratorScript" uid="uid://b26ajmch67psy" path="res://game/test/custom planet test/custom_voxel_generator.tres" id="8_27ipv"]
 [ext_resource type="Material" uid="uid://duf303o0ryv61" path="res://game/test/custom planet test/custom_planet_material.tres" id="9_l2jpv"]
@@ -67,6 +68,7 @@ equipment = SubResource("Resource_4uqcy")
 [node name="Gravity Area" type="Area3D" parent="."]
 collision_mask = 67
 gravity_space_override = 3
+script = ExtResource("7_eyd1c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity Area"]
 shape = SubResource("SphereShape3D_63ws0")

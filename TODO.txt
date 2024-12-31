@@ -1,3 +1,5 @@
+carry object
+
 wheelbarrow
 	handle bar block: connects with joint, if player in kinematic mode try hybrid controller solution with feedback rigidbody connected to the joint
 	fixed wheel block: actual wheel is rigidbody, connected by joint free rolling and high friction

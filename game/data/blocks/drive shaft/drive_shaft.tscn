@@ -29,6 +29,6 @@ radial_segments = 32
 [node name="Drive Shaft" type="Node3D"]
 script = ExtResource("1_mlhpw")
 
-[node name="Model" type="MeshInstance3D" parent="."]
+[node name="Model" type="MeshInstance3D" parent="." groups=["Overwrite Material In Ghost"]]
 transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_8vkao")

@@ -42,6 +42,7 @@ enabled=PackedStringArray("res://addons/csgtomeshinstance/plugin.cfg", "res://ad
 [global_group]
 
 "Keep Ghost"="Don't delete this node when creating a ghost for this scene in building mode"
+"Overwrite Material In Ghost"="Force make this material white in Ghost ( reset Texture )"
 
 [input]
 

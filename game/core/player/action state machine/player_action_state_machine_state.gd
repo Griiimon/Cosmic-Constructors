@@ -2,6 +2,7 @@ class_name PlayerActionStateMachineState
 extends PlayerStateMachineState
 
 const KEEP_GHOST_GROUP= "Keep Ghost"
+const OVERWRITE_MATERIAL_GROUP= "Overwrite Material In Ghost"
 
 var ghost: Node3D
 
@@ -35,7 +36,7 @@ func init_ghost(model: Node3D):
 	if ghost is MeshInstance3D:
 		mesh_instances.append(ghost)
 	
-	for child in mesh_instances:
+	for child: Node in mesh_instances:
 		child.set_script(null)
 		if child is not MeshInstance3D and not child.is_in_group(KEEP_GHOST_GROUP):
 			child.queue_free()
@@ -45,11 +46,11 @@ func init_ghost(model: Node3D):
 			var mesh_instance: MeshInstance3D= child
 			var old_material: Material= mesh_instance.mesh.surface_get_material(0)
 			var new_material: StandardMaterial3D
-			if not old_material or old_material is ShaderMaterial:
+			if not old_material or old_material is ShaderMaterial or child.is_in_group(OVERWRITE_MATERIAL_GROUP):
 				new_material= StandardMaterial3D.new()
 			else:
 				new_material= old_material.duplicate()
-			
+				
 			new_material.albedo_color= Color.SKY_BLUE
 			new_material.albedo_color.a= 0.7
 			

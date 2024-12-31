@@ -22,6 +22,13 @@ func interaction_logic():
 				if grid_block.get_block_definition().can_interact() and grid_block.get_block_instance().can_interact(grid, grid_block, player):
 					grid_block.get_block_instance().interact(grid, grid_block, player)
 					return
+	
+	if Input.is_action_pressed("item_interact"):
+		var shapecast: ShapeCast3D= player.item_interact_shapecast
+		if shapecast.is_colliding():
+			var item: WorldItemInstance= shapecast.get_collider(0)
+			(get_state_machine() as PlayerActionStateMachine).pick_up_item(item)
+			return
 
 
 func init_ghost(model: Node3D):

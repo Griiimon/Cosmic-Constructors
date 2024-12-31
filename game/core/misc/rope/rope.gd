@@ -7,6 +7,11 @@ extends Node3D
 
 @export var segment_scene: PackedScene
 
+var material: StandardMaterial3D:
+	set(m):
+		for segment in segments:
+			segment.mesh.material= m
+
 var segments: Array[RopeSegment]
 
 

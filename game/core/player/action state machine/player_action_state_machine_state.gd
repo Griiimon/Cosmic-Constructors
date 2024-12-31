@@ -23,7 +23,7 @@ func interaction_logic():
 					grid_block.get_block_instance().interact(grid, grid_block, player)
 					return
 	
-	if Input.is_action_pressed("item_interact"):
+	if Input.is_action_just_pressed("item_interact"):
 		var shapecast: ShapeCast3D= player.item_interact_shapecast
 		if shapecast.is_colliding():
 			var item: WorldItemInstance= shapecast.get_collider(0)

@@ -1,19 +1,8 @@
-FIX right click in property viewer can sometimes delete blocks ( outside build mode?? )
-
-FIX drive shaft ghost material
-
-give hose texture material
-
-make gravity area class
-	and CollisionLayer global with utility functions, like get all physics bodies layers
-
 wheelbarrow
 	handle bar block: connects with joint, if player in kinematic mode try hybrid controller solution with feedback rigidbody connected to the joint
 	fixed wheel block: actual wheel is rigidbody, connected by joint free rolling and high friction
 
 pallet storage block (2x2), that tries to snap and pull on pallets that are on top. unless the pallet has contact with any other grid then the magnetizing is temporarily disabled, so it can be lifted with a forklift etc
-
-block selection wireframe for blocks that the interaction shapecast hits
 
 split tube groups check if more 1 neighbor when removing and then have the group flood fill for all neighbors, removing any queued neighbor when found within flood fill
 

@@ -32,8 +32,8 @@ var main_cockpit: SeatInstance
 
 
 func _ready() -> void:
-	collision_layer= Global.GRID_COLLISION_LAYER
-	collision_mask= Global.PLAYER_COLLISION_LAYER + Global.GRID_COLLISION_LAYER + Global.TERRAIN_COLLISION_LAYER
+	collision_layer= CollisionLayers.GRID
+	collision_mask= CollisionLayers.PLAYER + CollisionLayers.GRID + CollisionLayers.TERRAIN
 	
 	can_sleep= false
 	continuous_cd= true

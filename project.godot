@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://game/global/global.gd"
+CollisionLayers="*res://game/global/collision_layers.gd"
 NetworkManager="*res://game/global/network managers/network_manager.gd"
 GameData="*res://game/global/game data/game_data.tscn"
 DebugHud="*res://game/global/debug hud/debug_hud.tscn"

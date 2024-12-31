@@ -1,0 +1,9 @@
+extends Node
+
+const PLAYER= 1
+const GRID= 2
+const TERRAIN= 4
+const PROJECTILE= 8
+const PHYSICAL_OBJECTS= 16
+const PERIPHERAL_GRID_ENTITIES= 32
+const WORLD_ITEM= 64

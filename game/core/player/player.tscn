@@ -29,6 +29,7 @@ radius = 0.4
 radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_47njt"]
+radius = 1.0
 
 [sub_resource type="Environment" id="Environment_lyipp"]
 background_color = Color(0.982343, 0.982342, 0.982342, 1)
@@ -129,7 +130,7 @@ collision_mask = 4
 
 [node name="Misc Item Holder" type="Node3D" parent="Head/Pivot" index="9"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.554139, -1.392)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, -0.9)
 
 [node name="Model" parent="Head" index="1"]
 visible = false

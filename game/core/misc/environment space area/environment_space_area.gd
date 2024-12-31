@@ -1,0 +1,2 @@
+class_name EnvironmentSpaceArea
+extends Area3D

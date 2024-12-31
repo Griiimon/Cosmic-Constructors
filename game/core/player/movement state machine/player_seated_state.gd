@@ -35,7 +35,7 @@ func on_exit():
 
 
 func on_physics_process(_delta: float):
-	if Input.is_action_just_pressed("ui_cancel") or Input.is_action_just_pressed("interact"):
+	if Input.is_action_just_pressed("ui_cancel") or Input.is_action_just_pressed("block_interact"):
 		exit_seat()
 		return
 

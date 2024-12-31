@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://dyuh65348fokk"]
+[gd_scene load_steps=13 format=3 uid="uid://dyuh65348fokk"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/hose_coupling_instance.gd" id="1_ophur"]
+[ext_resource type="Material" uid="uid://bvh5o874isyse" path="res://game/data/blocks/hose coupling/hose_material.tres" id="2_ayop6"]
 [ext_resource type="Script" path="res://game/core/components/fluid container/fluid_connector.gd" id="2_lxtni"]
 [ext_resource type="PackedScene" uid="uid://dxobr26jfvcqg" path="res://game/core/components/fluid container/fluid_connector_model.tscn" id="3_a5ne4"]
 
@@ -40,6 +41,7 @@ height = 0.05
 
 [node name="Hose Coupling" type="Node3D" node_paths=PackedStringArray("model_node")]
 script = ExtResource("1_ophur")
+hose_material = ExtResource("2_ayop6")
 connectors = Array[ExtResource("2_lxtni")]([SubResource("Resource_8sphv")])
 model_node = NodePath("Model")
 

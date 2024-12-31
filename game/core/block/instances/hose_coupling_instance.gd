@@ -1,6 +1,8 @@
 class_name HoseCouplingInstance
 extends TubeGroupMemberInstance
 
+@export var hose_material: StandardMaterial3D
+
 var hose: Rope
 
 
@@ -13,6 +15,7 @@ func interact(grid: BlockGrid, grid_block: GridBlock, player: Player):
 			linked_system.merge((hose.start as HoseCouplingInstance).linked_system)
 		else:
 			hose= player.attach_rope(self)
+			hose.material= hose_material
 	
 
 func can_interact(grid: BlockGrid, grid_block: GridBlock, player: Player)-> bool:

@@ -149,6 +149,9 @@ func switch_block(delta: int):
 
 
 func remove_block():
+	if not player.action_state_machine.build_state.is_current_state():
+		return
+
 	var query:= PhysicsRayQueryParameters3D.create(player.head.global_position, player.build_raycast.to_global(player.build_raycast.target_position))#, Global.GRID_COLLISION_LAYER)
 	#prints("Remove query", query.from, query.to)
 	query.hit_back_faces= false

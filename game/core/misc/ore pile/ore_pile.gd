@@ -111,5 +111,4 @@ func _on_catch_area_body_entered(body: Node3D) -> void:
 
 
 func get_mesh_height()-> float:
-	#return total_amount * 0.001
 	return total_amount * 0.001 * volume_factor

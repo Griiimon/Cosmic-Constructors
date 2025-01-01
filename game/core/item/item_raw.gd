@@ -1,6 +1,7 @@
 class_name RawItem
 extends Item
 
+@export var material: StandardMaterial3D
 
 
 func can_be_conveyored()-> bool:

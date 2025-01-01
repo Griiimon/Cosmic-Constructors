@@ -17,3 +17,11 @@ func get_max_unit_size()-> int:
 
 func can_stack()-> bool:
 	return true
+
+
+func has_dynamic_scale()-> bool:
+	return false
+
+
+func get_scale(count: int)-> float:
+	return 1.0

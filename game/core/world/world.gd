@@ -304,6 +304,8 @@ func spawn_item(item: Item, pos: Vector3, rot: Vector3= Vector3.ZERO, count: int
 	item_instance.position= pos
 	item_instance.rotation= rot
 	item_instance.inv_item= InventoryItem.new(item, count)
+	if item.has_dynamic_scale():
+		item_instance.scale= Vector3.ONE * item.get_scale(count)
 	item_instance.freeze= frozen
 	
 	var model: Node3D= item.model.instantiate()

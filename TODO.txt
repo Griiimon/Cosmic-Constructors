@@ -1,5 +1,15 @@
-carry object
+ore piles: blending noise textures with ratio thresholds
 
+boulders with scattered stones for first tools
+	trees with sticks..
+
+helicopter
+
+fixed rope for carrying objects with heli etc
+	use rope visual but 6dof joint
+
+wooden workbench
+	
 wheelbarrow
 	handle bar block: connects with joint, if player in kinematic mode try hybrid controller solution with feedback rigidbody connected to the joint
 	fixed wheel block: actual wheel is rigidbody, connected by joint free rolling and high friction

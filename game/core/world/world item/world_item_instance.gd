@@ -1,4 +1,4 @@
 class_name WorldItemInstance
 extends RigidBody3D
 
-var item: InventoryItem
+var inv_item: InventoryItem

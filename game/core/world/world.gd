@@ -303,7 +303,7 @@ func spawn_item(item: Item, pos: Vector3, rot: Vector3= Vector3.ZERO, count: int
 	var item_instance: WorldItemInstance= WORLD_ITEM_SCENE.instantiate()
 	item_instance.position= pos
 	item_instance.rotation= rot
-	item_instance.item= InventoryItem.new(item, count)
+	item_instance.inv_item= InventoryItem.new(item, count)
 	item_instance.freeze= frozen
 	
 	var model: Node3D= item.model.instantiate()

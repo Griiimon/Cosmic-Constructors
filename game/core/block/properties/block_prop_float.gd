@@ -7,6 +7,7 @@ var f: float= 0.0
 var toggle_behavior: ToggleBehavior
 var step_size: float= 0.01
 var range= null
+var can_toggle: bool= true
 
 
 
@@ -24,6 +25,8 @@ func get_value_i()-> int:
 
 
 func toggle():
+	if not can_toggle: return
+	
 	match toggle_behavior:
 		ToggleBehavior.FLIP:
 			f= -f
@@ -72,6 +75,11 @@ func set_step_size(step: float):
 
 func set_range(min_range: float, max_range: float):
 	range= Vector2(min_range, max_range)
+	return self
+
+
+func disable_toggle():
+	can_toggle= false
 	return self
 
 

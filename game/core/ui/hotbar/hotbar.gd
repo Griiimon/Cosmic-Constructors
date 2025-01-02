@@ -32,6 +32,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.pressed:
 			if event.keycode >= KEY_1 and event.keycode <= KEY_9:
 				select_slot(event.keycode - KEY_1)
+
 	elif event is InputEventMouseMotion:
 		if mouse_mode and mouse_control_property:
 			if event.button_mask & MOUSE_BUTTON_MASK_LEFT:

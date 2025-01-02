@@ -43,6 +43,7 @@ func toggle():
 
 func set_variant(val: Variant):
 	f= val
+	do_clamp()
 	super(val)
 
 
@@ -56,7 +57,13 @@ func decrease(modifier: int):
 
 func change_value(modifier: int, delta: int):
 	f+= step_size * modifier * delta
+	do_clamp()
 	super(modifier, delta)
+
+
+func do_clamp():
+	if range:
+		f= clampf(f, range.x, range.y)
 
 
 func is_true()-> bool:

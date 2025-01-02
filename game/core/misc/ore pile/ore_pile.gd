@@ -3,6 +3,7 @@ extends Node3D
 
 @export var mesh_size: Vector2
 @export var volume_factor: float
+@export var max_height: float= 1.0
 
 @export var base_noise: FastNoiseLite
 @export var texture_size: int= 128
@@ -13,6 +14,12 @@ extends Node3D
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 @onready var shader_material: ShaderMaterial= mesh_instance.mesh.surface_get_material(0)
 
+@onready var area_collision_shape: CollisionShape3D = $"Catch Area/Area CollisionShape"
+
+@onready var static_box_collision_shape: CollisionShape3D = $"StaticBody3D/Static Box CollisionShape"
+@onready var static_capsule_collision_shape: CollisionShape3D = $"StaticBody3D/Static Capsule CollisionShape"
+
+
 var noises: Array[FastNoiseLite]
 var ratios: Array[float]
 var total_amount: int= 0
@@ -22,11 +29,19 @@ var total_amount: int= 0
 func _ready() -> void:
 	update()
 
+	(area_collision_shape.shape as BoxShape3D).size= Vector3(mesh_size.x, max_height, mesh_size.y)
+	area_collision_shape.position.y= max_height / 2.0
+
+	(static_box_collision_shape.shape as BoxShape3D).size= Vector3(mesh_size.x, 0.01, mesh_size.y)
+	(static_capsule_collision_shape.shape as CapsuleShape3D).radius= min(mesh_size.x, mesh_size.y)
+	(static_capsule_collision_shape.shape as CapsuleShape3D).height= 0.01
+
 
 func update():
 	update_ratios()
 	update_mesh()
 	update_texture()
+	update_collision()
 
 
 func update_ratios():
@@ -81,6 +96,21 @@ func update_texture():
 
 	var weight_texture: ImageTexture= ImageTexture.create_from_image(img)
 	shader_material.set_shader_parameter("weightTexture", weight_texture) 
+
+
+func update_collision():
+	if total_amount == 0:
+		static_box_collision_shape.set_deferred("disabled", true)
+		static_capsule_collision_shape.set_deferred("disabled", true)
+	else:
+		static_box_collision_shape.set_deferred("disabled", false)
+		static_capsule_collision_shape.set_deferred("disabled", false)
+		
+	(static_box_collision_shape.shape as BoxShape3D).size.y= get_mesh_height()
+	static_box_collision_shape.position.y= get_mesh_height() / 2.0
+
+	(static_capsule_collision_shape.shape as CapsuleShape3D).height= get_mesh_height() * 1.1
+	static_capsule_collision_shape.position.y= get_mesh_height() * 0.55
 
 
 func add_raw_item(item: RawItem, amount: int):

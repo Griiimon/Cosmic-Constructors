@@ -1,8 +1,11 @@
 extends BlockInstanceOnOff
 
+@onready var power:BlockPropFloat= BlockPropFloat.new("Power", 100.0).set_range(0.0, 100.0).set_step_size(5).disable_toggle()
+
 @onready var particles: CPUParticles3D = $CPUParticles3D
 
 var particle_stop_delay: Timer
+
 
 
 func _ready() -> void:
@@ -39,7 +42,8 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 
 	if not thruster_block.force_offset:
 		#grid.apply_central_force(-grid_block.get_global_basis(grid).z * thruster_block.thrust * delta)
-		grid.apply_central_force(-global_basis.z * thruster_block.thrust * delta)
+		var total_thrust: float= thruster_block.thrust * power.get_value_f() / 100.0
+		grid.apply_central_force(-global_basis.z * total_thrust * delta)
 
 	if tmp_active:
 		active.set_false()

@@ -323,7 +323,7 @@ func unfreeze_check():
 	var space_state: PhysicsDirectSpaceState3D= get_world_3d().direct_space_state
 	
 	var query:= PhysicsShapeQueryParameters3D.new()
-	query.collision_mask= Global.TERRAIN_COLLISION_LAYER
+	query.collision_mask= CollisionLayers.TERRAIN
 	
 	prints("Run unfreeze check for %s with %d shapes" % [str(name), collision_shapes.size()])
 	

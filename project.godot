@@ -252,6 +252,7 @@ item_interact={
 3d_physics/layer_8="Fluid"
 3d_physics/layer_9="Peripheral Connector"
 3d_physics/layer_10="Rope"
+3d_physics/layer_11="Solid Ore Pile"
 
 [physics]
 

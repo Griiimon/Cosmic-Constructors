@@ -96,7 +96,7 @@ func build_block():
 		local_block_pos= Vector3i.ZERO
 		
 		var query:= PhysicsShapeQueryParameters3D.new()
-		query.collision_mask= Global.TERRAIN_COLLISION_LAYER
+		query.collision_mask= CollisionLayers.TERRAIN
 		query.shape= BoxShape3D.new()
 		query.transform= ghost.transform
 		

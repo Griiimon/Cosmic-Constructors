@@ -12,5 +12,5 @@ func _init(_key: int, _block: GridBlock, _property: BlockProperty):
 	property= _property
 
 
-func get_as_text(grid: BlockGrid)-> String:
+func get_as_text(grid: BlockGrid= null)-> String:
 	return str(block.get_name(grid), "\n", property.display_name)

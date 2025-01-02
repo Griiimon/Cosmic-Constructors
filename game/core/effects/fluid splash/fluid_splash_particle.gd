@@ -21,9 +21,12 @@ func _process(delta: float) -> void:
 		return
 		
 	mesh_instance.scale= lerp(Vector3.ONE, Vector3.ZERO, timer / lifetime)
+	
+	#mesh_instance.look_at(mesh_instance.global_position + linear_velocity.normalized())
+	#print(-global_basis.z)
 
 
-func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
-	if abs(linear_velocity.normalized().dot(Vector3.UP)) < 1:
-		#mesh_instance.look_at(global_position + linear_velocity)
-		state.transform.basis= Basis.looking_at(global_position + linear_velocity)
+#func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	#if abs(linear_velocity.normalized().dot(Vector3.UP)) < 1:
+		###mesh_instance.look_at(global_position + linear_velocity)
+		#state.transform.basis= global_basis.looking_at(global_position + linear_velocity)

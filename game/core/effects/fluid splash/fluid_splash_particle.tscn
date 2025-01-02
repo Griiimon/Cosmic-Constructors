@@ -6,27 +6,28 @@
 friction = 0.0
 bounce = 0.7
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_5jf0v"]
-radius = 0.03
-height = 0.15
+[sub_resource type="SphereMesh" id="SphereMesh_6gd1k"]
+radius = 0.05
+height = 0.1
+radial_segments = 32
+rings = 16
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3alux"]
-radius = 0.1
+radius = 0.01
 
 [node name="Fluid Splash Particle" type="RigidBody3D"]
-collision_layer = 0
+collision_layer = 128
 collision_mask = 55
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_78jry")
 can_sleep = false
 lock_rotation = true
-linear_damp_mode = 1
-linear_damp = 0.5
+linear_damp = 10.0
 script = ExtResource("1_xp8bm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.120778, 0.99268, 0, -0.99268, 0.120778, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_5jf0v")
+mesh = SubResource("SphereMesh_6gd1k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_3alux")

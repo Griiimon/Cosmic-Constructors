@@ -16,7 +16,7 @@ func start():
 	
 	for i in num_particles:
 		var particle: FluidSplashParticle= particle_scene.instantiate()
-		particle.position= global_position
+		#particle.position= position
 		add_child(particle)
 		particle.tree_exited.connect(check_particles)
 		particle.fluid= fluid

@@ -5,6 +5,7 @@ extends Node3D
 @export var volume_factor: float
 @export var max_height: float= 1.0
 
+@export var orig_shader_material: ShaderMaterial
 @export var base_noise: FastNoiseLite
 @export var texture_size: int= 128
 
@@ -12,7 +13,6 @@ extends Node3D
 @export var amounts: Array[float]
 
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
-@onready var shader_material: ShaderMaterial= mesh_instance.mesh.surface_get_material(0)
 
 @onready var area_collision_shape: CollisionShape3D = $"Catch Area/Area CollisionShape"
 
@@ -24,9 +24,13 @@ var noises: Array[FastNoiseLite]
 var ratios: Array[float]
 var total_amount: int= 0
 
+var shader_material: ShaderMaterial
+
 
 
 func _ready() -> void:
+	shader_material= orig_shader_material.duplicate()
+	mesh_instance.mesh.surface_set_material(0, shader_material)
 	update()
 
 	(area_collision_shape.shape as BoxShape3D).size= Vector3(mesh_size.x, max_height, mesh_size.y)

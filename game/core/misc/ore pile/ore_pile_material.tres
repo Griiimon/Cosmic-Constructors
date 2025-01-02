@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ig8oh1gcrbjw"]
+
+[ext_resource type="Shader" path="res://game/core/misc/ore pile/ore_pile.gdshader" id="1_18v3s"]
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_18v3s")

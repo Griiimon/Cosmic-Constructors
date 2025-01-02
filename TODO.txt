@@ -1,7 +1,5 @@
-ore piles: extend catch area to max size initially
-	make solid box + capsule grow with size to reflect items eventually
-	pick items from it
-	make it spill items when rotated
+ore piles: 	pick items from it
+			make it spill items when rotated
 
 items, add mass ( and even dynamic damping? )
 throw items: drop with f or when mouse released, but add force on mouse hold duration

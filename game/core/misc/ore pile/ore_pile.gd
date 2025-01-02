@@ -130,10 +130,26 @@ func add_raw_item(item: RawItem, amount: int):
 
 
 	total_amount+= amount
-	DebugHud.send("Total Amount", total_amount)
-	DebugHud.send("Mesh Height", get_mesh_height())
 	
 	update()
+
+
+func sub_raw_item(material: RawItem)-> int:
+	var count: int= min(get_amount(material), material.get_max_unit_size())
+	var idx: int= materials.find(material)
+	amounts[idx]-= count
+	total_amount-= count
+	
+	assert(amounts[idx] >= 0)
+	
+	if amounts[idx] == 0:
+		materials.remove_at(idx)
+		amounts.remove_at(idx)
+
+	update()
+
+	return count
+
 
 
 func _on_catch_area_body_entered(body: Node3D) -> void:
@@ -145,4 +161,16 @@ func _on_catch_area_body_entered(body: Node3D) -> void:
 
 
 func get_mesh_height()-> float:
-	return total_amount * 0.001 * volume_factor
+	return max(total_amount * 0.001 * volume_factor, 0.01)
+
+
+func get_dominant_material()-> RawItem:
+	var dominant_material: RawItem
+	for material in materials:
+		if dominant_material == null or get_amount(dominant_material) < get_amount(material):
+			dominant_material= material
+	return dominant_material
+
+
+func get_amount(material: RawItem)-> int:
+	return amounts[materials.find(material)]

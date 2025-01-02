@@ -26,8 +26,17 @@ func interaction_logic():
 	if Input.is_action_just_pressed("item_interact"):
 		var shapecast: ShapeCast3D= player.item_interact_shapecast
 		if shapecast.is_colliding():
-			var item: WorldItemInstance= shapecast.get_collider(0)
-			(get_state_machine() as PlayerActionStateMachine).pick_up_item(item)
+			var collider: PhysicsBody3D= shapecast.get_collider(0)
+			if collider is WorldItemInstance:
+				var item: WorldItemInstance= collider
+				(get_state_machine() as PlayerActionStateMachine).pick_up_item(item)
+			else:
+				var ore_pile: OrePile= collider.get_parent()
+				assert(ore_pile)
+				var pile_material: RawItem= ore_pile.get_dominant_material()
+				var inv_item:= InventoryItem.new(pile_material, ore_pile.sub_raw_item(pile_material))
+				var item_instance: WorldItemInstance= player.world.spawn_inventory_item(inv_item, ore_pile.global_position)
+				player.action_state_machine.pick_up_item(item_instance)
 			return
 
 

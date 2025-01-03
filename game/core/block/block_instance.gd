@@ -5,6 +5,15 @@ var default_interaction_property: BlockProperty
 var alternative_interaction_property: BlockProperty
 var extra_property_callbacks: Array[Callable]
 
+var property_table: Dictionary
+
+
+
+func _ready() -> void:
+	for prop in get_property_list():
+		if prop.class_name.begins_with("BlockProp"):
+			var prop_var: BlockProperty= get(prop.name)
+			property_table[prop_var]= prop.name
 
 
 func on_placed(_grid: BlockGrid, _grid_block: GridBlock):

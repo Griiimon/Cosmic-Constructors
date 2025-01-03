@@ -150,6 +150,7 @@ var drive_shaft: LinkedDriveShaftGroup
 
 
 func _ready() -> void:
+	super()
 	default_interaction_property= can_steer
 
 

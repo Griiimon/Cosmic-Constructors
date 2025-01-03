@@ -10,6 +10,7 @@ extends BlockInstance
 
 
 func _ready() -> void:
+	super()
 	default_interaction_property= wing_angle
 
 

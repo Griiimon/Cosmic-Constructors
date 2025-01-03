@@ -27,6 +27,7 @@ var initial_distance: float
 
 
 func _ready() -> void:
+	super()
 	default_interaction_property= velocity
 	alternative_interaction_property= active
 	

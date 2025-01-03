@@ -10,6 +10,7 @@ extends TubeGroupMemberInstance
 
 
 func _ready() -> void:
+	super()
 	fluid_container.amount_changed.connect(on_amount_changed)
 
 

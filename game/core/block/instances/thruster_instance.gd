@@ -9,6 +9,7 @@ var particle_stop_delay: Timer
 
 
 func _ready() -> void:
+	super()
 	default_interaction_property= active
 
 	particle_stop_delay= Timer.new()

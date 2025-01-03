@@ -14,6 +14,7 @@ var drive_shafts: Array[LinkedDriveShaftGroup]
 
 
 func _ready() -> void:
+	super()
 	default_interaction_property= active
 	active.set_true()
 	fluid_consumer.variable_consumption= func(): return current_throttle_input * max_fuel_consumption

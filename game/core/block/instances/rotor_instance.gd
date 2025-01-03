@@ -15,6 +15,7 @@ var initial_angle: float
 
 
 func _ready() -> void:
+	super()
 	default_interaction_property= rotation_speed
 	alternative_interaction_property= active
 	on_set_active.call_deferred()

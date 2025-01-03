@@ -21,6 +21,7 @@ var state: State= State.IDLE: set= set_state
 
 
 func _ready() -> void:
+	super()
 	default_interaction_property= locked
 
 

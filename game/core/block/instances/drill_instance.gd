@@ -11,6 +11,7 @@ var cooldown: Timer
 
 
 func _ready() -> void:
+	super()
 	default_interaction_property= active
 
 	cooldown= Timer.new()

@@ -11,6 +11,7 @@ extends BlockInstanceOnOff
 
 
 func _ready() -> void:
+	super()
 	default_interaction_property= active
 	active.set_true()
 

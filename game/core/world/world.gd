@@ -197,9 +197,20 @@ func save_world(world_name: String= "", project_folder: bool= false):
 		world_name+= "/"
 		
 	var save_file: FileAccess = FileAccess.open(base_path + world_name + SAVE_FILE_NAME, FileAccess.WRITE)
+
+	var world_data:= {}
+	world_data["grids"]= []
+	world_data["players"]= []
+	
 	for grid: BlockGrid in grids.get_children():
-		var json_string = JSON.stringify(grid.serialize())
-		save_file.store_line(json_string)
+		world_data["grids"].append(grid.serialize())
+
+	for grid: BlockGrid in grids.get_children():
+		world_data["players"].append(Global.player.serialize())
+
+	var json_string = JSON.stringify(world_data)
+	save_file.store_line(json_string)
+
 	save_file.close()
 
 
@@ -216,26 +227,31 @@ func load_world(world_name: String= "", project_folder: bool= false):
 	if not FileAccess.file_exists(file_name):
 		return
 
-	var grid_data: Dictionary
-	
+	var world_grid_data: Dictionary
+
 	var save_file = FileAccess.open(file_name, FileAccess.READ)
-	while save_file.get_position() < save_file.get_length():
-		var json_string = save_file.get_line()
+	
+	var json = JSON.new()
 
-		var json = JSON.new()
+	var file_text: String= save_file.get_line()
+	var parse_result = json.parse(file_text)
+	if not parse_result == OK:
+		push_error("JSON Parse Error: ", json.get_error_message(), " in ", file_text, " at line ", json.get_error_line())
+		breakpoint
 
-		var parse_result = json.parse(json_string)
-		if not parse_result == OK:
-			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
-			continue
-
-		var grid: BlockGrid= BlockGrid.pre_deserialize(json.data, self)
-		grid_data[grid]= json.data
-
+	var world_data: Dictionary= json.data
+		
 	save_file.close()
 
+	for grid_data: Dictionary in world_data["grids"]:
+		var grid: BlockGrid= BlockGrid.pre_deserialize(grid_data, self)
+		world_grid_data[grid]= grid_data
+	
 	for grid: BlockGrid in grids.get_children():
-		grid.deserialize(grid_data[grid])
+		grid.deserialize(world_grid_data[grid])
+
+
+	Global.player.deserialize(world_data["players"][0])
 
 
 func add_projectile(projectile: ProjectileObject):

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="HandlesBlock" load_steps=3 format=3 uid="uid://gp46n88pa5t8"]
+
+[ext_resource type="PackedScene" uid="uid://dweomn8gah72l" path="res://game/data/blocks/handles/handles.tscn" id="1_38c5h"]
+[ext_resource type="Script" path="res://game/core/block/types/handles_block.gd" id="2_04wsi"]
+
+[resource]
+script = ExtResource("2_04wsi")
+size = Vector3i(1, 1, 1)
+weight = 1.0
+max_hitpoints = 10
+custom_collision = true
+can_tick = true
+tick_priority = 0
+can_be_built = true
+scene = ExtResource("1_38c5h")
+name = ""

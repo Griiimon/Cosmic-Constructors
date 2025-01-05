@@ -48,6 +48,7 @@ func on_destroy(_grid: BlockGrid, _grid_block: GridBlock):
 func interact(grid: BlockGrid, grid_block: GridBlock, player: Player):
 	pass
 
+
 func register_extra_property_callback(func_ptr: Callable):
 	extra_property_callbacks.append(func_ptr)
 

@@ -139,6 +139,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				match event.button_index:
 					MOUSE_BUTTON_LEFT:
 						get_current_row().toggle()
+						is_value_selected= false
 					MOUSE_BUTTON_RIGHT:
 						is_value_selected= false
 					MOUSE_BUTTON_WHEEL_UP:

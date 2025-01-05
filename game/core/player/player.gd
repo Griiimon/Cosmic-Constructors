@@ -129,6 +129,10 @@ func wear_equipment(item: PlayerEquipmentItem)-> PlayerEquipmentObject:
 	return obj
 
 
+func grab_handles(handles: HandlesInstance):
+	action_state_machine.grab_handles(handles)
+
+
 func serialize()-> Dictionary:
 	var data:= {}
 	data["tool_hotbar"]= tool_hotbar.serialize()
@@ -152,3 +156,7 @@ func get_seat()-> SeatInstance:
 
 func is_seated()-> bool:
 	return movement_state_machine.seated_state.is_current_state()
+
+
+func is_rigidbody()-> bool:
+	return not freeze

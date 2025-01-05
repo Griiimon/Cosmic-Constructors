@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://xgkn2mkwvwmq"]
+[gd_scene load_steps=26 format=3 uid="uid://xgkn2mkwvwmq"]
 
 [ext_resource type="PackedScene" uid="uid://slyw4y7qi46y" path="res://game/core/player/base_player.tscn" id="1_kthjw"]
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
@@ -18,6 +18,7 @@
 [ext_resource type="Resource" uid="uid://dhqmvfs7hnfjl" path="res://game/data/peripheral entities/open top container/open_top_container.tres" id="15_7knt3"]
 [ext_resource type="Script" path="res://game/core/player/action state machine/player_attach_rope_state.gd" id="16_7yrlv"]
 [ext_resource type="Script" path="res://game/core/player/action state machine/player_action_carry_item_state.gd" id="17_dxssv"]
+[ext_resource type="Script" path="res://game/core/player/action state machine/player_action_grab_handles_state.gd" id="18_eocux"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7yawy"]
 height = 0.5
@@ -178,6 +179,9 @@ one_shot = true
 [node name="Action State Machine" type="Node" parent="." index="5" node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_r1eyq")
 current_state = NodePath("Idle")
+allow_no_state = null
+debug = null
+paused = null
 
 [node name="Idle" type="Node" parent="Action State Machine" index="0"]
 script = ExtResource("6_3y3c5")
@@ -195,5 +199,8 @@ script = ExtResource("16_7yrlv")
 
 [node name="Carry Item" type="Node" parent="Action State Machine" index="4"]
 script = ExtResource("17_dxssv")
+
+[node name="Grab Handles" type="Node" parent="Action State Machine" index="5"]
+script = ExtResource("18_eocux")
 
 [node name="Damage Component" parent="." index="6" instance=ExtResource("12_goufb")]

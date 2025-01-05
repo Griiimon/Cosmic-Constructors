@@ -6,6 +6,7 @@ extends FiniteStateMachine
 @onready var build_peripheral_entity_state: PlayerBuildPeripheralEntityState = $"Build Peripheral Entity"
 @onready var attach_rope_state: PlayerAttachRopeState = $"Attach Rope"
 @onready var carry_item_state: PlayerCarryItemState = $"Carry Item"
+@onready var grab_handles_state: PlayerGrabHandlesState = $"Grab Handles"
 
 var player: Player
 
@@ -40,3 +41,7 @@ func attach_rope_to(to: Node3D)-> Rope:
 func pick_up_item(item: WorldItemInstance):
 	carry_item_state.item= item
 	change_state(carry_item_state)
+
+
+func grab_handles(handles: HandlesInstance):
+	change_state(grab_handles)

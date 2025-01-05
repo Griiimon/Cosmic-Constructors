@@ -1,4 +1,5 @@
 when pussing an object in movement mode grid or t-react terrain use a push script to apply Force to the Richard body and the walking velocity will be the prior velocity of that Richard body in the direction the player is looking at. this will have 1 frame of delay but should be still snappy enough
+there is no joint just a soft connection so the handles will try to go to the player's hands fear Force if the player moves his hands up or down the object follows if it isn't heavy enough
 
 FIX debug action in property panel instant action press is buggy
 

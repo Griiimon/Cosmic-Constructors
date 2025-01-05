@@ -44,4 +44,4 @@ func pick_up_item(item: WorldItemInstance):
 
 
 func grab_handles(handles: HandlesInstance):
-	change_state(grab_handles)
+	change_state(grab_handles_state)

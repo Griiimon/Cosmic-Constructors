@@ -205,8 +205,7 @@ func save_world(world_name: String= "", project_folder: bool= false):
 	for grid: BlockGrid in grids.get_children():
 		world_data["grids"].append(grid.serialize())
 
-	for grid: BlockGrid in grids.get_children():
-		world_data["players"].append(Global.player.serialize())
+	world_data["players"].append(Global.player.serialize())
 
 	var json_string = JSON.stringify(world_data)
 	save_file.store_line(json_string)
@@ -250,8 +249,8 @@ func load_world(world_name: String= "", project_folder: bool= false):
 	for grid: BlockGrid in grids.get_children():
 		grid.deserialize(world_grid_data[grid])
 
-
-	Global.player.deserialize(world_data["players"][0])
+	if not world_data["players"].is_empty():
+		Global.player.deserialize(world_data["players"][0])
 
 
 func add_projectile(projectile: ProjectileObject):

@@ -11,9 +11,10 @@ var property_table: Dictionary
 
 func _ready() -> void:
 	for prop in get_property_list():
-		if prop.class_name.begins_with("BlockProp"):
+		if prop.class_name.begins_with("BlockProp") and prop.class_name != "BlockProperty":
 			var prop_var: BlockProperty= get(prop.name)
-			property_table[prop_var]= prop.name
+			#property_table[prop_var.display_name]= prop.name
+			property_table[prop_var.display_name]= prop_var
 
 
 func on_placed(_grid: BlockGrid, _grid_block: GridBlock):
@@ -58,7 +59,7 @@ func serialize()-> Dictionary:
 			data["properties"]= {}
 
 		var prop_var: BlockProperty
-		if prop.class_name.begins_with("BlockProp"):
+		if prop.class_name.begins_with("BlockProp") and prop.class_name != "BlockProperty":
 			prop_var= get(prop.name)
 			if prop_var.owner and prop_var.owner != self: continue
 		

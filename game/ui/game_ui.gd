@@ -13,11 +13,16 @@ extends CanvasLayer
 @onready var velocity_label: Label = %"Velocity Label"
 @onready var gravity_label: Label = %"Gravity Label"
 
+@onready var hotbar: Hotbar = $Hotbar
+
+
 var property_viewer_panel: PropertyViewerPanel
 
 
 
 func _ready():
+	Global.ui= self
+
 	SignalManager.block_property_changed.connect(on_block_property_changed)
 	SignalManager.build_block_changed.connect(on_build_block_changed)
 	
@@ -39,6 +44,11 @@ func _physics_process(_delta: float) -> void:
 	var player: Player= Global.player
 	if player:
 		velocity_label.text= "%.1f m/s" % player.get_velocity().length()
+
+
+func switch_hotbar(hotbar_layout: HotbarLayout):
+	hotbar.switch_layout(hotbar_layout)
+
 
 func on_block_property_changed(prop: BlockProperty):
 	update_temporary_info_label(prop.get_as_text())

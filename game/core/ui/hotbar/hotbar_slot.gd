@@ -8,8 +8,11 @@ var tween: Tween
 
 
 
-func assign(_assignment: BaseHotkeyAssignment, grid: BlockGrid= null):
+func assign(_assignment: BaseHotkeyAssignment, hotbar: Hotbar, grid: BlockGrid= null):
 	assignment= _assignment
+	if hotbar:
+		#hotbar.current_layout.slots[assignment.key - 1]= assignment
+		hotbar.assign(assignment)
 	label.text= assignment.get_as_text(grid) if assignment else ""
 
 	
@@ -23,15 +26,17 @@ func select(hotbar: Hotbar):
 	if Input.is_action_pressed("assign_block_to_hotbar"):
 		var build_state: PlayerBuildState= Global.player.action_state_machine.build_state
 		if build_state.is_current_state():
-			assign(HotkeyAssignmentBuildBlock.new(get_key(hotbar), build_state.current_block))
+			assign(HotkeyAssignmentBuildBlock.new(get_key(hotbar),build_state.current_block), hotbar)
 	elif assignment:
 		if assignment is HotkeyAssignmentBlockProperty:
-			var property: BlockProperty= (assignment as HotkeyAssignmentBlockProperty).property
+			var block_property_assignment: HotkeyAssignmentBlockProperty= assignment
+			var property: BlockProperty= block_property_assignment.get_property(hotbar.current_layout.grid)
 			if hotbar.mouse_mode:
 				if property is BlockPropFloat:
 					hotbar.start_mouse_control(property)
-				else:
-					property.toggle()
+			else:
+				property.toggle()
+
 		elif assignment is HotkeyAssignmentBuildBlock:
 			var build_state: PlayerBuildState= Global.player.action_state_machine.build_state
 			if build_state.is_current_state():

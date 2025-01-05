@@ -444,8 +444,10 @@ func generate_block_name(grid_block: GridBlock)-> String:
 	return ""
 
 
-func assign_hotkey(assignment: BaseHotkeyAssignment):
+func assign_hotkey(assignment: BaseHotkeyAssignment, block_pos: Vector3i= Vector3i.ZERO):
 	if not main_cockpit: return
+	if assignment is HotkeyAssignmentBlockProperty:
+		(assignment as HotkeyAssignmentBlockProperty).block_pos= block_pos
 	main_cockpit.assign_hotkey(assignment)
 
 

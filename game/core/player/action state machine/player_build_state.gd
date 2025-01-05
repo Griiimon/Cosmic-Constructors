@@ -14,6 +14,7 @@ extends PlayerActionStateMachineState
 var grid: BlockGrid
 var local_block_pos: Vector3i
 var block_rotation: Vector3i
+var hotbar_layout:= HotbarLayout.new()
 
 
 
@@ -24,9 +25,12 @@ func on_enter():
 	if current_block:
 		init_ghost(current_block.get_model())
 
+	Global.ui.switch_hotbar(hotbar_layout)
+
 
 func on_exit():
 	remove_ghost()
+	Global.ui.switch_hotbar(player.tool_hotbar)
 
 
 func on_physics_process(delta: float):

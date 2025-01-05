@@ -34,6 +34,7 @@ extends BasePlayer
 
 var hand_object: HandObject
 var active_equipment: Array[PlayerEquipmentObject]
+var tool_hotbar:= HotbarLayout.new()
 
 
 
@@ -128,5 +129,26 @@ func wear_equipment(item: PlayerEquipmentItem)-> PlayerEquipmentObject:
 	return obj
 
 
+func serialize()-> Dictionary:
+	var data:= {}
+	data["tool_hotbar"]= tool_hotbar.serialize()
+	data["build_hotbar"]= action_state_machine.build_state.hotbar_layout.serialize()
+	return data
+
+
+func deserialize(data: Dictionary):
+	tool_hotbar.deserialize(data["tool_hotbar"], world)
+	action_state_machine.build_state.hotbar_layout.deserialize(data["build_hotbar"], world)
+	Global.ui.switch_hotbar(tool_hotbar)
+	
+
 func get_look_vec()-> Vector3:
 	return -first_person_camera.global_basis.z
+
+
+func get_seat()-> SeatInstance:
+	return movement_state_machine.seated_state.seat
+
+
+func is_seated()-> bool:
+	return movement_state_machine.seated_state.is_current_state()

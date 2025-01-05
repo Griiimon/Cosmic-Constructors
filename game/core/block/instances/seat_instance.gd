@@ -4,8 +4,18 @@ extends BlockInstance
 @export var player_position: Node3D
 
 var entity: Entity
-var hotkeys: Dictionary
+var hotbar_layout:= HotbarLayout.new()
 
+
+
+func on_placed(grid: BlockGrid, _grid_block: GridBlock):
+	hotbar_layout.grid= grid
+
+
+func on_restored(grid: BlockGrid, _grid_block: GridBlock, restore_data: Dictionary):
+	hotbar_layout.grid= grid
+	if restore_data.has("hotbar"):
+		hotbar_layout.deserialize(restore_data["hotbar"], grid.world)
 
 
 func interact(grid: BlockGrid, grid_block: GridBlock, player: Player):
@@ -15,4 +25,11 @@ func interact(grid: BlockGrid, grid_block: GridBlock, player: Player):
 
 
 func assign_hotkey(assignment: BaseHotkeyAssignment):
-	hotkeys[assignment.key]= assignment
+	hotbar_layout.assign(assignment)
+
+
+func serialize()-> Dictionary:
+	var data: Dictionary= super()
+	if not hotbar_layout.is_empty():
+		data["hotbar"]= hotbar_layout.serialize()
+	return data

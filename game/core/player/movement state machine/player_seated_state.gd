@@ -27,11 +27,15 @@ func on_enter():
 	if seat.player_position:
 		player.position= seat.player_position.position
 
+	Global.ui.switch_hotbar(seat.hotbar_layout)
+
 
 func on_exit():
 	player.model.set_equipment_visibility(true)
 	player.model.set_item_holder_visibility(true)
 	SignalManager.player_left_seat.emit(player)
+
+	Global.ui.switch_hotbar(player.tool_hotbar)
 
 
 func on_physics_process(_delta: float):

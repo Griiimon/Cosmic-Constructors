@@ -1,5 +1,15 @@
-ore piles: 	pick items from it
-			make it spill items when rotated
+FIX debug action in property panel instant action press is buggy
+
+FIX wheel spawns without taking suspension orientation into account
+
+
+property panel group system:
+	create group
+	add to last group
+	group mode toggle: every thing pressed will affect the entire group, including hotkey assignment
+
+
+ore piles: make it spill items when rotated
 
 items, add mass ( and even dynamic damping? )
 throw items: drop with f or when mouse released, but add force on mouse hold duration

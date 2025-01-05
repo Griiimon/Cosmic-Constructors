@@ -11,8 +11,7 @@ var tween: Tween
 func assign(_assignment: BaseHotkeyAssignment, hotbar: Hotbar, grid: BlockGrid= null):
 	assignment= _assignment
 	if hotbar:
-		#hotbar.current_layout.slots[assignment.key - 1]= assignment
-		hotbar.assign(assignment)
+		hotbar.current_layout.assign(assignment)
 	label.text= assignment.get_as_text(grid) if assignment else ""
 
 	

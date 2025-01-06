@@ -24,8 +24,6 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 			var vec: Vector3= hold_position - rigidbody.global_position
 			#rigidbody.linear_velocity= vec.normalized() * pow(vec.length() * 2, 2)
 			rigidbody.linear_velocity= vec * 5
-			#var quat: Quaternion= grabbed_by_player.handle_grabber.global_basis.get_rotation_quaternion() * rigidbody.global_basis.get_rotation_quaternion().inverse()
-			#rigidbody.apply_torque(quat.get_axis() * quat.get_angle() * 0.1)
 			rigidbody.apply_torque(Utils.calc_angular_velocity(rigidbody.global_basis, grabbed_by_player.handle_grabber.global_basis) * alignment_factor)
 
 
@@ -40,6 +38,7 @@ func update_joint(grid: BlockGrid, player: Player):
 		#rigidbody.rotation= grabbed_by_player.handle_grabber.global_rotation
 		rigidbody.rotation= global_rotation
 		joint.add_child(rigidbody)
+		
 		joint.node_b= joint.get_path_to(rigidbody)
 		
 

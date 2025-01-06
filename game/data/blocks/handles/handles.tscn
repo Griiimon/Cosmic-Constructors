@@ -1,6 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dweomn8gah72l"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/handles_instance.gd" id="1_ysxxn"]
+[ext_resource type="PackedScene" uid="uid://bpre06n0qaygh" path="res://game/data/blocks/handles/handles_rigidbody.tscn" id="2_ij6g1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4eghd"]
 size = Vector3(0.6, 0.4, 0.25)
@@ -20,14 +21,14 @@ size = Vector3(0.05, 0.4, 0.05)
 material = SubResource("StandardMaterial3D_5nvdj")
 size = Vector3(0.05, 0.05, 0.2)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_llv8c"]
-radius = 0.1
-
-[sub_resource type="BoxMesh" id="BoxMesh_j5pov"]
-size = Vector3(0.2, 0.2, 0.2)
+[sub_resource type="BoxMesh" id="BoxMesh_upa71"]
+material = SubResource("StandardMaterial3D_5nvdj")
+size = Vector3(0.2, 0.05, 0.05)
 
 [node name="Handles" type="Node3D"]
 script = ExtResource("1_ysxxn")
+handles_rigidbody_scene = ExtResource("2_ij6g1")
+alignment_factor = 10000.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.369486)
@@ -51,6 +52,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.165, -0.125)
 mesh = SubResource("BoxMesh_40ik4")
 skeleton = NodePath("../..")
 
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.165, 0.0113537)
+mesh = SubResource("BoxMesh_upa71")
+skeleton = NodePath("../..")
+
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.27)
 mesh = SubResource("BoxMesh_b3p15")
@@ -65,23 +71,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.165, -0.125)
 mesh = SubResource("BoxMesh_40ik4")
 skeleton = NodePath("../..")
 
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.165, 0.0113537)
+mesh = SubResource("BoxMesh_upa71")
+skeleton = NodePath("../..")
+
 [node name="JoltGeneric6DOFJoint3D" type="JoltGeneric6DOFJoint3D" parent="."]
 angular_limit_z/upper = 0.174533
 angular_limit_z/lower = -0.174533
-
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-collision_layer = 0
-collision_mask = 0
-gravity_scale = 0.0
-can_sleep = false
-freeze = true
-linear_damp_mode = 1
-angular_damp_mode = 1
-angular_damp = 10.0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("SphereShape3D_llv8c")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-mesh = SubResource("BoxMesh_j5pov")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dweomn8gah72l"]
+[gd_scene load_steps=9 format=3 uid="uid://dweomn8gah72l"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/handles_instance.gd" id="1_ysxxn"]
 
@@ -19,6 +19,12 @@ size = Vector3(0.05, 0.4, 0.05)
 [sub_resource type="BoxMesh" id="BoxMesh_40ik4"]
 material = SubResource("StandardMaterial3D_5nvdj")
 size = Vector3(0.05, 0.05, 0.2)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_llv8c"]
+radius = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_j5pov"]
+size = Vector3(0.2, 0.2, 0.2)
 
 [node name="Handles" type="Node3D"]
 script = ExtResource("1_ysxxn")
@@ -60,6 +66,22 @@ mesh = SubResource("BoxMesh_40ik4")
 skeleton = NodePath("../..")
 
 [node name="JoltGeneric6DOFJoint3D" type="JoltGeneric6DOFJoint3D" parent="."]
-angular_limit_x/enabled = false
-angular_limit_y/enabled = false
-angular_limit_z/enabled = false
+angular_limit_z/upper = 0.174533
+angular_limit_z/lower = -0.174533
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+can_sleep = false
+freeze = true
+linear_damp_mode = 1
+angular_damp_mode = 1
+angular_damp = 10.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_llv8c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_j5pov")

@@ -30,6 +30,7 @@ extends BasePlayer
 @onready var item_camera: Camera3D = %"Item Camera"
 
 @onready var misc_item_holder: Node3D = %"Misc Item Holder"
+@onready var handle_grabber: Node3D = %"Handle Grabber"
 
 
 var hand_object: HandObject

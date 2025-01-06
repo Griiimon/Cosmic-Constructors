@@ -23,6 +23,8 @@ func _ready() -> void:
 
 	carry_item_state.finished.connect(change_state.bind(idle_state))
 
+	grab_handles_state.finished.connect(change_state.bind(idle_state))
+
 
 func attach_rope_from(from: Node3D)-> Rope:
 	var rope: Rope= player.world.make_rope(from, player.misc_item_holder)
@@ -44,4 +46,5 @@ func pick_up_item(item: WorldItemInstance):
 
 
 func grab_handles(handles: HandlesInstance):
+	grab_handles_state.handles= handles
 	change_state(grab_handles_state)

@@ -1,4 +1,4 @@
-FIX debug action in property panel instant action press is buggy
+
 
 FIX wheel spawns without taking suspension orientation into account
 

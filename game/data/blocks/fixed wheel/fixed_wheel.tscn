@@ -24,7 +24,7 @@ roughness = 0.7
 
 [sub_resource type="BoxMesh" id="BoxMesh_klwb4"]
 material = SubResource("StandardMaterial3D_8nw7a")
-size = Vector3(0.1, 0.7, 0.3)
+size = Vector3(0.1, 0.7, 0.15)
 
 [node name="Fixed Wheel" type="Node3D"]
 script = ExtResource("1_25tpm")

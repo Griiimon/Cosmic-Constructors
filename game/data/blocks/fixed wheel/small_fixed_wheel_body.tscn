@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfgykumivext4"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_80a8l"]
+bounce = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_glqlq"]
+radius = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uofnu"]
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.6
+
+[sub_resource type="TorusMesh" id="TorusMesh_rbq7j"]
+material = SubResource("StandardMaterial3D_uofnu")
+inner_radius = 0.2
+outer_radius = 0.35
+
+[node name="Small Fixed Wheel Body" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 6
+physics_material_override = SubResource("PhysicsMaterial_80a8l")
+continuous_cd = true
+linear_damp_mode = 1
+angular_damp_mode = 1
+angular_damp = 0.1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_glqlq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("TorusMesh_rbq7j")

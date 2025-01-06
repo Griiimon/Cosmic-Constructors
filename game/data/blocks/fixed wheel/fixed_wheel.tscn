@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3xrsv653th1c"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/fixed_wheel_instance.gd" id="1_25tpm"]
+[ext_resource type="PackedScene" uid="uid://bfgykumivext4" path="res://game/data/blocks/fixed wheel/small_fixed_wheel_body.tscn" id="2_xp0fd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jbifn"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_btu2r"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_piqrm"]
+size = Vector3(1, 0.5, 1)
+
+[node name="Fixed Wheel" type="Node3D"]
+script = ExtResource("1_25tpm")
+wheel_scene = ExtResource("2_xp0fd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("BoxShape3D_jbifn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_btu2r")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+mesh = SubResource("BoxMesh_piqrm")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+angular_limit_x/enabled = false

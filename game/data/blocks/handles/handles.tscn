@@ -77,5 +77,3 @@ mesh = SubResource("BoxMesh_upa71")
 skeleton = NodePath("../..")
 
 [node name="JoltGeneric6DOFJoint3D" type="JoltGeneric6DOFJoint3D" parent="."]
-angular_limit_z/upper = 0.174533
-angular_limit_z/lower = -0.174533

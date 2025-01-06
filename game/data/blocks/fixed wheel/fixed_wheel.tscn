@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c3xrsv653th1c"]
+[gd_scene load_steps=11 format=3 uid="uid://c3xrsv653th1c"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/fixed_wheel_instance.gd" id="1_25tpm"]
 [ext_resource type="PackedScene" uid="uid://bfgykumivext4" path="res://game/data/blocks/fixed wheel/small_fixed_wheel_body.tscn" id="2_xp0fd"]
@@ -26,6 +26,17 @@ roughness = 0.7
 material = SubResource("StandardMaterial3D_8nw7a")
 size = Vector3(0.1, 0.7, 0.15)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o40rp"]
+albedo_color = Color(0.237284, 0.179678, 0.0346066, 1)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lw0n5"]
+material = SubResource("StandardMaterial3D_o40rp")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.4
+
 [node name="Fixed Wheel" type="Node3D"]
 script = ExtResource("1_25tpm")
 wheel_scene = ExtResource("2_xp0fd")
@@ -43,9 +54,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 mesh = SubResource("BoxMesh_piqrm")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.825646, -0.564189, 0, 0.564189, 0.825646, 0, -0.164871, 0.113463)
+transform = Transform3D(1, 0, 0, 0, 0.825646, -0.564189, 0, 0.564189, 0.825646, 0.397407, -0.164871, 0.151251)
 mesh = SubResource("BoxMesh_klwb4")
 
 [node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 angular_limit_x/enabled = false
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Generic6DOFJoint3D"]
+transform = Transform3D(-0.0117632, -0.999931, 0, 0.999931, -0.0117632, 0, 0, 0, 1, 0.164042, 0, 0)
+mesh = SubResource("CylinderMesh_lw0n5")
+skeleton = NodePath("../..")

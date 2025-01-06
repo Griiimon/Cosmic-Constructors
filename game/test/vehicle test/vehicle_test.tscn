@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d4blx7p2hp5bc"]
+[gd_scene load_steps=35 format=3 uid="uid://d4blx7p2hp5bc"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_6i4dd"]
 [ext_resource type="Script" path="res://game/test/vehicle test/vehicle_tests.gd" id="2_8kc7o"]
@@ -9,9 +9,10 @@
 [ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="6_s17hf"]
 [ext_resource type="Script" path="res://game/core/misc/environment space area/environment_space_area.gd" id="7_0xvln"]
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="7_hpj7a"]
-[ext_resource type="PackedScene" uid="uid://w6iv7medt6r7" path="res://game/data/peripheral entities/excavator bucket/simple_excavator_bucket.tscn" id="9_cnwvp"]
 [ext_resource type="PackedScene" uid="uid://ced1k5g1mhrng" path="res://game/data/object entities/wooden_pallet.tscn" id="10_e437v"]
 [ext_resource type="PackedScene" uid="uid://cwjpaeql42esi" path="res://game/core/fluid/fluid spawner/fluid_spawner.tscn" id="11_sebgl"]
+[ext_resource type="PackedScene" uid="uid://dfyvgxovt2bui" path="res://game/core/misc/ore pile/ore_pile.tscn" id="13_1re07"]
+[ext_resource type="Shader" path="res://game/core/misc/ore pile/ore_pile.gdshader" id="14_mkq7m"]
 
 [sub_resource type="Resource" id="Resource_ic37o"]
 script = ExtResource("7_hpj7a")
@@ -76,14 +77,25 @@ top_radius = 2.0
 bottom_radius = 2.0
 height = 50.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7lcbt"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("14_mkq7m")
+
+[sub_resource type="QuadMesh" id="QuadMesh_mu4vj"]
+size = Vector2(2, 2)
+
 [node name="Vehicle Test" type="Node3D"]
 script = ExtResource("1_6i4dd")
 
 [node name="Tests" type="Node" parent="."]
 script = ExtResource("2_8kc7o")
+load_world = true
+freeze_grids = true
 
 [node name="Fluid Spawner" parent="." instance=ExtResource("11_sebgl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+enabled = false
 interval = 0.5
 
 [node name="Player Spawn" type="Marker3D" parent="."]
@@ -271,8 +283,13 @@ mesh = SubResource("CylinderMesh_hjjcg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -200)
 mesh = SubResource("CylinderMesh_hjjcg")
 
-[node name="Excavator Bucket" parent="." instance=ExtResource("9_cnwvp")]
-transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 4.19572, 0.211451, -4.51573)
-
 [node name="Wooden Pallet" parent="." instance=ExtResource("10_e437v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6817, 0.885055, 12.846)
+
+[node name="Ore Pile" parent="." instance=ExtResource("13_1re07")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.24264, 0.348758, 0)
+orig_shader_material = SubResource("ShaderMaterial_7lcbt")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ore Pile"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, -0.199735, 0.0430958)
+mesh = SubResource("QuadMesh_mu4vj")

@@ -1,6 +1,9 @@
 class_name BlockInstance
 extends Node3D
 
+signal changed_mass
+
+
 var default_interaction_property: BlockProperty
 var alternative_interaction_property: BlockProperty
 var extra_property_callbacks: Array[Callable]
@@ -51,6 +54,10 @@ func interact(grid: BlockGrid, grid_block: GridBlock, player: Player):
 
 func register_extra_property_callback(func_ptr: Callable):
 	extra_property_callbacks.append(func_ptr)
+
+
+func change_mass():
+	changed_mass.emit()
 
 
 func serialize()-> Dictionary:

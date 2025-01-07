@@ -117,10 +117,14 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 			blocks[child_grid_block.local_pos]= child_grid_block
 
 	if block_node is BlockInstance:
+		var instance: BlockInstance= block_node
 		if not restore_data.is_empty():
-			(block_node as BlockInstance).on_restored(self, grid_block, restore_data)
+			instance.on_restored(self, grid_block, restore_data)
 		else:
-			(block_node as BlockInstance).on_placed(self, grid_block)
+			instance.on_placed(self, grid_block)
+
+		instance.changed_mass.connect(update_properties)
+
 
 	for neighbor_pos in get_block_neighbors(pos):
 		var neighbor_block: BaseGridBlock= get_block_local(neighbor_pos)

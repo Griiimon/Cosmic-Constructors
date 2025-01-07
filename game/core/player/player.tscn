@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://xgkn2mkwvwmq"]
+[gd_scene load_steps=27 format=3 uid="uid://xgkn2mkwvwmq"]
 
 [ext_resource type="PackedScene" uid="uid://slyw4y7qi46y" path="res://game/core/player/base_player.tscn" id="1_kthjw"]
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
@@ -24,6 +24,11 @@
 height = 0.5
 radius = 0.4
 
+[sub_resource type="Environment" id="Environment_lyipp"]
+background_color = Color(0.982343, 0.982342, 0.982342, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_ly8po"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4pkix"]
@@ -32,12 +37,10 @@ radius = 1.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_47njt"]
 radius = 1.0
 
-[sub_resource type="Environment" id="Environment_lyipp"]
-background_color = Color(0.982343, 0.982342, 0.982342, 1)
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_iybuy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_nkkr1"]
+size = Vector3(0.1, 0.1, 0.8)
 
 [node name="Player" instance=ExtResource("1_kthjw")]
 collision_mask = 55
@@ -59,41 +62,7 @@ unique_name_in_owner = true
 cull_mask = 1048573
 far = 160000.0
 
-[node name="Build Raycast" type="RayCast3D" parent="Head/Pivot" index="1"]
-unique_name_in_owner = true
-enabled = false
-target_position = Vector3(0, 0, 0)
-collision_mask = 2
-hit_back_faces = false
-
-[node name="Build Peripheral Entity Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="2"]
-unique_name_in_owner = true
-enabled = false
-target_position = Vector3(0, 0, -5)
-max_results = 1
-collision_mask = 118
-
-[node name="Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="3"]
-unique_name_in_owner = true
-shape = SubResource("SphereShape3D_ly8po")
-target_position = Vector3(0, 0, -2.5)
-collision_mask = 2
-
-[node name="Block Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="4"]
-unique_name_in_owner = true
-shape = SubResource("SphereShape3D_4pkix")
-target_position = Vector3(0, 0, -4)
-max_results = 1
-collision_mask = 2
-
-[node name="Item Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="5"]
-unique_name_in_owner = true
-shape = SubResource("SphereShape3D_47njt")
-target_position = Vector3(0, 0, -2.5)
-max_results = 1
-collision_mask = 1088
-
-[node name="Item Viewport Container" type="SubViewportContainer" parent="Head/Pivot" index="6"]
+[node name="Item Viewport Container" type="SubViewportContainer" parent="Head/Pivot" index="1"]
 unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
@@ -123,6 +92,40 @@ sky_mode = 1
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.5, -1.25)
 
+[node name="Build Raycast" type="RayCast3D" parent="Head/Pivot" index="2"]
+unique_name_in_owner = true
+enabled = false
+target_position = Vector3(0, 0, 0)
+collision_mask = 2
+hit_back_faces = false
+
+[node name="Build Peripheral Entity Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="3"]
+unique_name_in_owner = true
+enabled = false
+target_position = Vector3(0, 0, -5)
+max_results = 1
+collision_mask = 118
+
+[node name="Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="4"]
+unique_name_in_owner = true
+shape = SubResource("SphereShape3D_ly8po")
+target_position = Vector3(0, 0, -2.5)
+collision_mask = 2
+
+[node name="Block Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="5"]
+unique_name_in_owner = true
+shape = SubResource("SphereShape3D_4pkix")
+target_position = Vector3(0, 0, -4)
+max_results = 1
+collision_mask = 2
+
+[node name="Item Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="6"]
+unique_name_in_owner = true
+shape = SubResource("SphereShape3D_47njt")
+target_position = Vector3(0, 0, -2.5)
+max_results = 1
+collision_mask = 1088
+
 [node name="Drill Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="7"]
 unique_name_in_owner = true
 enabled = false
@@ -137,6 +140,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, -0.9)
 [node name="Handle Grabber" type="Node3D" parent="Head/Pivot" index="10"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+
+[node name="FPS arms" type="Node3D" parent="Head/Pivot" index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.489999, 0)
+visible = false
+
+[node name="Right Shoulder" type="Node3D" parent="Head/Pivot/FPS arms" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/Pivot/FPS arms/Right Shoulder" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
+mesh = SubResource("BoxMesh_nkkr1")
+
+[node name="Left Shoulder" type="Node3D" parent="Head/Pivot/FPS arms" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/Pivot/FPS arms/Left Shoulder" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
+mesh = SubResource("BoxMesh_nkkr1")
 
 [node name="Model" parent="Head" index="1"]
 visible = false

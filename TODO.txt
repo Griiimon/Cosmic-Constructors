@@ -1,6 +1,7 @@
 FIX wheel spawns without taking suspension orientation into account
 
 show hands and arms ( look at handles ? ) in first person/steer in 3rd person when grabbing handles
+
 pullable object component: for example on Wooden Pallets, so the player can move them by hand just not very effective
 
 property panel group system:
@@ -155,11 +156,13 @@ FIX ghost sometimes getting left behind on moving grid
 FIX bottom out wheel reverse speed hack => dont show wheel rotation
 FIX jetpack counterforce against gravity
 FIX static grids connected to terrain jitter ( only when terrain gets edited, lod changes? ) 
-FIX ghost overlays custom shape blocks
+FIX grabbing handles on same grid player is standing on should have no effect. ALSO if grid is connected to grid players standing on
+FIX grabbing handles weight calculation for all connected grids => make grabbing joint-based
 
 
 IS FIXED?
 	FIX sometimes wrong ( downwards ) momentum when strafing off grid 
+	FIX ghost overlays custom shape blocks
 
 
 meta tag for BlockInstance scene sub nodes that should be deleted in ghost ( or just delete anything not MeshInstance3D or plain Node3D ? )

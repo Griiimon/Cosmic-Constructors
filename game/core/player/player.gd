@@ -32,6 +32,8 @@ extends BasePlayer
 @onready var misc_item_holder: Node3D = %"Misc Item Holder"
 @onready var handle_grabber: Node3D = %"Handle Grabber"
 
+@onready var fps_arms: Node3D = $"Head/Pivot/FPS arms"
+
 
 var hand_object: HandObject
 var active_equipment: Array[PlayerEquipmentObject]
@@ -73,18 +75,30 @@ func _physics_process(delta: float) -> void:
 
 func camera_logic():
 	if Input.is_action_just_pressed("toggle_camera"):
-		if first_person_camera.current:
-			third_person_camera.make_current()
-			third_person_camera.set_process_input(true)
-			model.show()
-			item_viewport_container.hide()
-		else:
+		if is_in_third_person():
 			first_person_camera.make_current()
 			third_person_camera.set_process_input(false)
-			model.hide()
-			item_viewport_container.show()
+			switch_to_first_person()
+		else:
+			third_person_camera.make_current()
+			third_person_camera.set_process_input(true)
+			switch_to_third_person()
 
 	third_person_camera.update()
+
+
+func switch_to_third_person():
+	model.show()
+	item_viewport_container.hide()
+	movement_state_machine.on_enter_third_person()
+	action_state_machine.on_enter_third_person()
+
+
+func switch_to_first_person():
+	model.hide()
+	item_viewport_container.show()
+	movement_state_machine.on_enter_first_person()
+	action_state_machine.on_enter_first_person()
 
 
 func play_animation(anim_name: String, speed: float= 1.0):
@@ -161,3 +175,7 @@ func is_seated()-> bool:
 
 func is_rigidbody()-> bool:
 	return not freeze
+
+
+func is_in_third_person()-> bool:
+	return not first_person_camera.current

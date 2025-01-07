@@ -17,6 +17,7 @@ outer_radius = 0.35
 [node name="Small Fixed Wheel Body" type="RigidBody3D"]
 collision_layer = 16
 collision_mask = 6
+mass = 5.0
 physics_material_override = SubResource("PhysicsMaterial_80a8l")
 continuous_cd = true
 linear_damp_mode = 1

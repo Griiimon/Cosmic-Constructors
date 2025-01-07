@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_5yoey")
 size = Vector3i(1, 1, 1)
-weight = 10.0
+weight = 15.0
 max_hitpoints = 10
 custom_collision = true
 can_tick = false

@@ -261,11 +261,14 @@ func run_integrity_check():
 		queue_free()
 		return
 	
-	var ff_blocks: Array[Vector3i]= flood_fill((blocks.values()[0] as GridBlock).local_pos)
+	var origin_block: GridBlock= blocks.values()[0]
+	if main_grid_connection:
+		origin_block= main_grid_connection
+	
+	var ff_blocks: Array[Vector3i]= flood_fill(origin_block.local_pos)
 
 	if ff_blocks.size() < blocks.size():
-		split(ff_blocks, self)
-		run_integrity_check()
+		split(get_blocks_filtered(ff_blocks), self)
 
 	if freeze:
 		unfreeze_check()
@@ -292,7 +295,9 @@ func split(split_blocks: Array[Vector3i], orig_grid: BlockGrid):
 			new_grid.collision_shapes.append(grid_block.collision_shape)
 
 		blocks.erase(block_pos)
-		
+	
+	new_grid.run_integrity_check()
+	
 	new_grid.freeze= orig_grid.freeze
 	if new_grid.freeze:
 		unfreeze_check()

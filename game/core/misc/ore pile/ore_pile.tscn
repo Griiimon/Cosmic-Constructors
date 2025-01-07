@@ -24,7 +24,6 @@ height = 1.2
 script = ExtResource("1_tt2w2")
 mesh_size = Vector2(1, 1)
 volume_factor = 0.1
-max_height = null
 orig_shader_material = ExtResource("2_73o02")
 base_noise = SubResource("FastNoiseLite_wq8qq")
 

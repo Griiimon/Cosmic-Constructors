@@ -4,5 +4,10 @@ extends BlockInstance
 
 
 
+
 func get_dynamic_mass(grid_block: GridBlock)-> int:
 	return ore_pile.get_mass() + grid_block.get_block_definition().mass
+
+
+func _on_ore_pile_updated() -> void:
+	change_mass()

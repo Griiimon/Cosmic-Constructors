@@ -163,7 +163,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			var row: PanelViewerRow= get_current_row()
 			if can_assign_hotkey_to(row):
 				var key: int= event.keycode - KEY_0
-				var assignment: BaseHotkeyAssignment= HotkeyAssignmentBlockProperty.new(key, block, row.property)
+				var assignment: BaseHotkeyAssignment= HotkeyAssignmentBlockProperty.new(key, block, row.property, grid)
 				grid.assign_hotkey(assignment, block.local_pos) 
 				SignalManager.hotkey_assigned.emit(assignment, grid)
 

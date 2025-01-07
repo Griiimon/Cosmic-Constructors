@@ -70,7 +70,7 @@ func get_name(grid: BlockGrid)-> String:
 func get_mass()-> int:
 	var type: Block= get_block_definition()
 	if type.has_dynamic_mass():
-		return get_block_instance().get_dynamic_mass()
+		return get_block_instance().get_dynamic_mass(self)
 	return get_block_definition().mass
 	
 

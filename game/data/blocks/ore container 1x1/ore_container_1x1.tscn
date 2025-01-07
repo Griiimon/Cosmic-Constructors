@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=4 uid="uid://bvucsloy2pswr"]
+[gd_scene load_steps=8 format=4 uid="uid://bvucsloy2pswr"]
 
+[ext_resource type="Script" path="res://game/core/block/instances/ore_container_instance.gd" id="1_c7i30"]
 [ext_resource type="PackedScene" uid="uid://dfyvgxovt2bui" path="res://game/core/misc/ore pile/ore_pile.tscn" id="1_ggh7r"]
 [ext_resource type="Shader" path="res://game/core/misc/ore pile/ore_pile.gdshader" id="2_s85p2"]
 
@@ -29,6 +30,7 @@ render_priority = 0
 shader = ExtResource("2_s85p2")
 
 [node name="Ore Container 1x1" type="Node3D"]
+script = ExtResource("1_c7i30")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)

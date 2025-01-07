@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://bl80cxbq8b7qh"]
+[gd_resource type="Resource" script_class="OreContainerBlock" load_steps=3 format=3 uid="uid://bl80cxbq8b7qh"]
 
-[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_5yoey"]
 [ext_resource type="PackedScene" uid="uid://bvucsloy2pswr" path="res://game/data/blocks/ore container 1x1/ore_container_1x1.tscn" id="1_11m7k"]
+[ext_resource type="Script" path="res://game/core/block/types/ore_container_block.gd" id="1_qthyk"]
 
 [resource]
-script = ExtResource("1_5yoey")
+script = ExtResource("1_qthyk")
 size = Vector3i(1, 1, 1)
 mass = 25.0
 max_hitpoints = 10

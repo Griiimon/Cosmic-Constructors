@@ -8,7 +8,7 @@ var block_types: Dictionary
 
 var collision_shapes: Array[CollisionShape3D]
 
-var main_grid_id: int
+var main_grid_id: int= -1
 var main_grid_connection: GridBlock
 
 var requested_movement: Vector3
@@ -142,6 +142,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 			main_cockpit= block_node
 
 	if connects_to_main_grid:
+		assert(connects_to_main_grid != self)
 		main_grid_id= world.get_grid_id(connects_to_main_grid)
 		main_grid_connection= grid_block
 
@@ -462,10 +463,11 @@ func generate_block_name(grid_block: GridBlock)-> String:
 
 
 func assign_hotkey(assignment: BaseHotkeyAssignment, block_pos: Vector3i= Vector3i.ZERO):
-	if not main_cockpit: return
+	var cockpit: SeatInstance= get_main_cockpit_recursive()
+	if not cockpit: return
 	if assignment is HotkeyAssignmentBlockProperty:
 		(assignment as HotkeyAssignmentBlockProperty).block_pos= block_pos
-	main_cockpit.assign_hotkey(assignment)
+	cockpit.assign_hotkey(assignment)
 
 
 func serialize()-> Dictionary:
@@ -473,7 +475,8 @@ func serialize()-> Dictionary:
 	data["position"]= position
 	data["rotation"]= rotation
 	
-	if main_grid_connection:
+	if is_sub_grid():
+		data["main_grid_id"]= main_grid_id
 		data["main_grid_connection"]= main_grid_connection
 
 	data["linear_velocity"]= linear_velocity
@@ -518,7 +521,8 @@ static func pre_deserialize(data: Dictionary, new_world: World)-> BlockGrid:
 
 
 func deserialize(data: Dictionary):
-	if data.has("main_grid_connection"):
+	if data.has("main_grid_id"):
+		main_grid_id= data["main_grid_id"]
 		main_grid_connection= str_to_var("Vector3i" + data["main_grid_connection"])
 
 	linear_velocity= str_to_var("Vector3" + data["linear_velocity"])
@@ -649,8 +653,19 @@ func get_block_positions_without(filter_arr: Array[Vector3i])-> Array[Vector3i]:
 	return result
 
 
+func get_main_cockpit_recursive()-> SeatInstance:
+	if main_cockpit: return main_cockpit
+	if is_sub_grid():
+		return world.get_grid(main_grid_id).get_main_cockpit_recursive()
+	return null
+
+
 func is_occupied(grid_pos: Vector3i)-> bool:
 	return blocks.has(grid_pos)
+
+
+func is_sub_grid()-> bool:
+	return main_grid_id > -1
 
 
 func get_id()-> int:

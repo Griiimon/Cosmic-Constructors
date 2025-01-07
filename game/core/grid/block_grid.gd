@@ -268,7 +268,7 @@ func run_integrity_check():
 	var ff_blocks: Array[Vector3i]= flood_fill(origin_block.local_pos)
 
 	if ff_blocks.size() < blocks.size():
-		split(get_blocks_filtered(ff_blocks), self)
+		split(get_blocks_without(ff_blocks), self)
 
 	if freeze:
 		unfreeze_check()
@@ -613,6 +613,14 @@ func get_local_velocity()-> Vector3:
 # TODO could assign and return as Array[GridBlock], but performance cost?
 func get_blocks()-> Array:
 	return blocks.values()
+
+
+func get_blocks_without(filter_arr: Array[GridBlock])-> Array[GridBlock]:
+	var result: Array[GridBlock]
+	for block: GridBlock in blocks.values():
+		if not block in filter_arr:
+			result.append(block)
+	return result
 
 
 func is_occupied(grid_pos: Vector3i)-> bool:

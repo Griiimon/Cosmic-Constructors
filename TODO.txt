@@ -1,3 +1,11 @@
+in addition to BlockPlacementCondition also have BlockDockConditions for neighbors to override placement
+
+assign hotkey to subgrid
+
+when splitting prioritize: with more functional blocks, with more blocks. trigger on_grid_changed(), reconnect signals from BlockInstances
+
+pullable object component: for example on Wooden Pallets, so the player can move them by hand just not very effective
+
 on_grid_changed() in BlockInstance callback if grid split results in new grid. mostly for joint reparenting 
 
 data-> block-> templates folder, where to store template scenes to be instanced from. for example default suspension, which should be the same ( inherited ) for 1,2,3,4m wheels, just with different wheels scenes
@@ -189,19 +197,15 @@ what about block grids inertia, automatically re-calculated when center of mass 
 
 shouldnt all block models face -z? piston and rotor face up
 
-re-center origin of split grids ( to its center of mass )?? needs to snape to Vector3i block pos
-
-how to avoid jetpack collisions causing player to rotate?
-	locking axis not really an option since torque is used for turning
-	=> use angular_velocity to turn/yaw in integrate_forces and set to 0 for no input
+re-center origin of split grids ( to its center of mass )?? needs to snap to Vector3i block pos and update all relative positions
 
 make vehicle wheels rigidbodies with no friction, still use all the calculations but use slider joint for max suspension travel
 
 is there suspension resistance in up direction? if car gets weighed down in the rear shouldnt the front suspension move up?
 
-build mode for periperal entities?
-	can be build like block grids
-	auto-snap to empty peripheral connectors
+build mode for periperal entities: auto-snap to empty peripheral connectors?
+
+handle grabbing with joint and motor instead of velocity and torque?
 
 
 SCENARIOS
@@ -275,6 +279,8 @@ start in "wood age", chopping trees ( drop saplings for replanting ). wood struc
 terrain generator: save heighmap array when lod0 is generated and calc normals and store
 
 ice will have the same friction as all terrain ( wheels can handle it but.. ) grids could change their friction dynamically depending on what terrain type they are making contact with
+
+crop fields: tilling ( turn grass into dirt voxel ) and harvesting manually or with machines
 
 
 

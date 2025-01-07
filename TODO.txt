@@ -1,4 +1,10 @@
+ore pile nomral map array + metallic and roughness value per raw material
 
+ore container dynamic weight
+
+use calc_angular_velocity() in periperal connector code
+
+only add ore to pile if it can take all of it ( or consume and spit out the overflow as new item )
 
 FIX wheel spawns without taking suspension orientation into account
 

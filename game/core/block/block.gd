@@ -2,7 +2,7 @@ class_name Block
 extends NamedResource
 
 @export var size: Vector3i= Vector3i.ONE
-@export var weight: float= 10.0
+@export var mass: float= 10.0
 @export var max_hitpoints: int= 10
 @export var custom_collision: bool= false
 @export var can_tick: bool= false

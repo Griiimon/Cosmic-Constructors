@@ -319,9 +319,9 @@ func update_properties():
 	
 	for grid_block: BaseGridBlock in blocks.values():
 		if grid_block is VirtualGridBlock: continue
-		var weight: int= int(grid_block.get_block_definition().weight)
-		new_center_of_mass= lerp(new_center_of_mass, Vector3(grid_block.local_pos), weight / float(new_mass + weight)) 
-		new_mass+= weight
+		var block_mass: int= int(grid_block.get_block_definition().mass)
+		new_center_of_mass= lerp(new_center_of_mass, Vector3(grid_block.local_pos), block_mass / float(new_mass + block_mass)) 
+		new_mass+= block_mass
 	
 	# to avoid 0 mass
 	mass= max(new_mass, 1)

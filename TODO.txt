@@ -1,3 +1,5 @@
+on_grid_changed() in BlockInstance callback if grid split results in new grid. mostly for joint reparenting 
+
 data-> block-> templates folder, where to store template scenes to be instanced from. for example default suspension, which should be the same ( inherited ) for 1,2,3,4m wheels, just with different wheels scenes
 
 paraglider control with "strapped-in seat": can apply minimal torque to the grid, but no hotbar. only deliver maximum torque if seat is a CoM?

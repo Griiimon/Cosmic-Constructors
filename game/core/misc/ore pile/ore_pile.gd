@@ -137,8 +137,6 @@ func add_raw_item(item: RawItem, amount: int):
 	
 	update()
 
-	DebugHud.send("Pile mass", get_mass())
-
 
 func sub_raw_item(material: RawItem)-> int:
 	var count: int= min(get_amount(material), material.get_max_unit_size())

@@ -42,7 +42,7 @@ mesh = SubResource("ArrayMesh_gg6n5")
 [node name="Ore Pile" parent="." instance=ExtResource("1_ggh7r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 mesh_size = Vector2(0.95, 0.95)
-volume_factor = 0.04
+volume_factor = 0.02
 orig_shader_material = SubResource("ShaderMaterial_oi8vb")
 
 [connection signal="updated" from="Ore Pile" to="." method="_on_ore_pile_updated"]

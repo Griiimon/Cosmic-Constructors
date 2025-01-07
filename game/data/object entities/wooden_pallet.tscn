@@ -1,10 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://ced1k5g1mhrng"]
+[gd_scene load_steps=10 format=3 uid="uid://ced1k5g1mhrng"]
 
 [ext_resource type="Script" path="res://game/core/object entity/instances/pallet.gd" id="1_u58sg"]
 [ext_resource type="PackedScene" uid="uid://4lrcbiiff8n2" path="res://game/core/components/item catcher/item_catcher.tscn" id="2_gp6o0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ssc62"]
 size = Vector3(2, 0.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_15w4t"]
+size = Vector3(2, 0.1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_etd60"]
+size = Vector3(0.4, 0.4, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k4p7n"]
 albedo_color = Color(0.422363, 0.249276, 0.0721424, 1)
@@ -26,8 +32,25 @@ linear_damp = 1.0
 angular_damp = 1.0
 script = ExtResource("1_u58sg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Basic CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_ssc62")
+disabled = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_15w4t")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+shape = SubResource("BoxShape3D_etd60")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, -0.05, 0)
+shape = SubResource("BoxShape3D_etd60")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, -0.05, 0)
+shape = SubResource("BoxShape3D_etd60")
 
 [node name="Model" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0583283, 0)

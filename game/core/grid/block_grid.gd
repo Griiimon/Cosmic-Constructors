@@ -8,6 +8,8 @@ var block_types: Dictionary
 
 var collision_shapes: Array[CollisionShape3D]
 
+var main_grid_connection
+
 var requested_movement: Vector3
 var requested_rotation: Vector3
 
@@ -62,7 +64,7 @@ func init_mass_indicator():
 	mass_indicator.hide()
 
 
-func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO, restore_data: Dictionary= {})-> BaseGridBlock:
+func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO, is_main_grid_connection: bool= false, restore_data: Dictionary= {})-> BaseGridBlock:
 	var grid_block: BaseGridBlock
 	if block.is_multi_block():
 		grid_block= MultiGridBlock.new(block, pos, block_rotation)
@@ -133,6 +135,9 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 	if block_node is SeatInstance:
 		if not main_cockpit:
 			main_cockpit= block_node
+
+	if is_main_grid_connection:
+		main_grid_connection= pos
 
 	update_properties()
 
@@ -459,9 +464,12 @@ func assign_hotkey(assignment: BaseHotkeyAssignment, block_pos: Vector3i= Vector
 
 func serialize()-> Dictionary:
 	var data: Dictionary
-	#data["id"]= world.grids.get_children().find(self)
 	data["position"]= position
 	data["rotation"]= rotation
+	
+	if main_grid_connection:
+		data["main_grid_connection"]= main_grid_connection
+
 	data["linear_velocity"]= linear_velocity
 	data["angular_velocity"]= angular_velocity
 	data["parking_brake"]= parking_brake
@@ -504,14 +512,18 @@ static func pre_deserialize(data: Dictionary, new_world: World)-> BlockGrid:
 
 
 func deserialize(data: Dictionary):
+	if data.has("main_grid_connection"):
+		main_grid_connection= str_to_var("Vector3i" + data["main_grid_connection"])
+
 	linear_velocity= str_to_var("Vector3" + data["linear_velocity"])
 	angular_velocity= str_to_var("Vector3" + data["angular_velocity"])
 	parking_brake= Utils.get_key_or_default(data, "parking_brake", false)
 
+
 	for item: Dictionary in data["blocks"]:
 		var block_position: Vector3= str_to_var("Vector3" + item["position"])
 		var block_rotation: Vector3= str_to_var("Vector3" + item["rotation"])
-		var block: BaseGridBlock= add_block(GameData.get_block_definition(item["definition"]), block_position, block_rotation, Utils.get_key_or_default(item, "data", {}))
+		var block: BaseGridBlock= add_block(GameData.get_block_definition(item["definition"]), block_position, block_rotation, false, Utils.get_key_or_default(item, "data", {}))
 		if item.has("hitpoints"):
 			(block as GridBlock).hitpoints= item["hitpoints"]
 		if item.has("name"):

@@ -27,7 +27,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	joint.node_a= joint.get_path_to(grid)
 	joint.node_b= joint.get_path_to(sub_grid)
 	
-	sub_grid.add_block(rotor_head_block, Vector3i.ZERO, grid_block.rotation)
+	sub_grid.add_block(rotor_head_block, Vector3i.ZERO, grid_block.rotation, true)
 
 
 func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):

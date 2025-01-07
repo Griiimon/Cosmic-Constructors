@@ -1,6 +1,8 @@
 class_name OrePile
 extends Node3D
 
+signal updated
+
 @export var mesh_size: Vector2
 @export var volume_factor: float
 @export var max_height: float= 1.0
@@ -46,6 +48,8 @@ func update():
 	update_mesh()
 	update_texture()
 	update_collision()
+	
+	updated.emit()
 
 
 func update_ratios():
@@ -151,7 +155,6 @@ func sub_raw_item(material: RawItem)-> int:
 	update()
 
 	return count
-
 
 
 func _on_catch_area_body_entered(body: Node3D) -> void:

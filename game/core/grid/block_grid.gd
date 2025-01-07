@@ -142,6 +142,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 func _physics_process(delta: float) -> void:
 	requested_movement= requested_movement.normalized()
 
+	DebugPanel.send(self, "ID", world.get_grid_id(self))
 	DebugPanel.send(self, "Req Movement", requested_movement)
 	#DebugPanel.send(self, "Req Rotation", requested_movement)
 	DebugPanel.send(self, "Velocity", linear_velocity.round())

@@ -154,5 +154,5 @@ func can_interact(grid: BlockGrid, grid_block: GridBlock, player: Player)-> bool
 	return true
 
 
-func get_dynamic_mass()-> int:
+func get_dynamic_mass(grid_block: GridBlock)-> int:
 	return 1

@@ -23,8 +23,10 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 			var hold_position: Vector3= grabbed_by_player.handle_grabber.global_position
 			var vec: Vector3= hold_position - rigidbody.global_position
 			#rigidbody.linear_velocity= vec.normalized() * pow(vec.length() * 2, 2)
-			rigidbody.linear_velocity= vec * 5
-			rigidbody.apply_torque(Utils.calc_angular_velocity(rigidbody.global_basis, grabbed_by_player.handle_grabber.global_basis) * alignment_factor)
+			rigidbody.linear_velocity= vec * 10  
+			var strength: float= 10.0 / get_grid().mass
+			rigidbody.linear_velocity.limit_length(10 * strength)
+			rigidbody.apply_torque(Utils.calc_angular_velocity(rigidbody.global_basis, grabbed_by_player.handle_grabber.global_basis) * alignment_factor * strength)
 
 
 func update_joint(grid: BlockGrid, player: Player):
@@ -48,3 +50,9 @@ func disconnect_joint():
 	if rigidbody:
 		rigidbody.queue_free()
 		rigidbody= null
+
+
+func get_grid()-> BlockGrid:
+	if not joint.node_a:
+		return null
+	return joint.get_node(joint.node_a)

@@ -48,3 +48,11 @@ func pick_up_item(item: WorldItemInstance):
 func grab_handles(handles: HandlesInstance):
 	grab_handles_state.handles= handles
 	change_state(grab_handles_state)
+
+
+func on_enter_first_person():
+	current_state.on_enter_first_person()
+
+
+func on_enter_third_person():
+	current_state.on_enter_third_person()

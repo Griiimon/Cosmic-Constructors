@@ -62,3 +62,11 @@ func jump(impulse: bool= true):
 
 func on_pre_enter_state():
 	player.reset_animation()
+
+
+func on_enter_first_person():
+	current_state.on_enter_first_person()
+
+
+func on_enter_third_person():
+	current_state.on_enter_third_person()

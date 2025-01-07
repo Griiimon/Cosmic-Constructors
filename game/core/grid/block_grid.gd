@@ -273,7 +273,7 @@ func run_integrity_check():
 	var ff_blocks: Array[Vector3i]= flood_fill(origin_block.local_pos)
 
 	if ff_blocks.size() < blocks.size():
-		split(get_blocks_without(ff_blocks), self)
+		split(get_block_positions_without(ff_blocks), self)
 
 	if freeze:
 		unfreeze_check()
@@ -632,6 +632,14 @@ func get_blocks_without(filter_arr: Array[GridBlock])-> Array[GridBlock]:
 	for block: GridBlock in blocks.values():
 		if not block in filter_arr:
 			result.append(block)
+	return result
+
+
+func get_block_positions_without(filter_arr: Array[Vector3i])-> Array[Vector3i]:
+	var result: Array[Vector3i]
+	for block: GridBlock in blocks.values():
+		if not block.local_pos in filter_arr:
+			result.append(block.local_pos)
 	return result
 
 

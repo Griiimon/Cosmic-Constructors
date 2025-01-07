@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_cxbke")
 size = Vector3i(1, 1, 1)
-weight = 10.0
+mass = 5.0
 max_hitpoints = 10
 custom_collision = false
 can_tick = false

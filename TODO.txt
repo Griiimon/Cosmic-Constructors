@@ -1,3 +1,15 @@
+data-> block-> templates folder, where to store template scenes to be instanced from. for example default suspension, which should be the same ( inherited ) for 1,2,3,4m wheels, just with different wheels scenes
+
+paraglider control with "strapped-in seat": can apply minimal torque to the grid, but no hotbar. only deliver maximum torque if seat is a CoM?
+
+show hands and arms ( look at handles ? ) in first person/steer in 3rd person when grabbing handles
+
+propeller/fans: like low force thrusters ( with built-in rotation capabilities? )
+
+can i rotate a subgrid on a rotor by pulling on handles?
+	lock mode for rotor, rails: motor 0 velocity means locked or free
+
+
 ore pile nomral map array + metallic and roughness value per raw material
 
 ore container dynamic weight
@@ -212,6 +224,10 @@ Survival (and PVP):
 	wait for item drops ( at campfire, beacon, random )
 	search loot
 	enemy drones and robots
+
+
+Wave Defense:
+	...
 
 
 

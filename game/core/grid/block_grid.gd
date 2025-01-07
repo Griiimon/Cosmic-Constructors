@@ -8,7 +8,8 @@ var block_types: Dictionary
 
 var collision_shapes: Array[CollisionShape3D]
 
-var main_grid_connection
+var main_grid_id: int
+var main_grid_connection: GridBlock
 
 var requested_movement: Vector3
 var requested_rotation: Vector3
@@ -64,7 +65,7 @@ func init_mass_indicator():
 	mass_indicator.hide()
 
 
-func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO, is_main_grid_connection: bool= false, restore_data: Dictionary= {})-> BaseGridBlock:
+func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO, connects_to_main_grid: BlockGrid= null, restore_data: Dictionary= {})-> BaseGridBlock:
 	var grid_block: BaseGridBlock
 	if block.is_multi_block():
 		grid_block= MultiGridBlock.new(block, pos, block_rotation)
@@ -140,8 +141,9 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		if not main_cockpit:
 			main_cockpit= block_node
 
-	if is_main_grid_connection:
-		main_grid_connection= pos
+	if connects_to_main_grid:
+		main_grid_id= world.get_grid_id(connects_to_main_grid)
+		main_grid_connection= grid_block
 
 	update_properties()
 
@@ -527,7 +529,7 @@ func deserialize(data: Dictionary):
 	for item: Dictionary in data["blocks"]:
 		var block_position: Vector3= str_to_var("Vector3" + item["position"])
 		var block_rotation: Vector3= str_to_var("Vector3" + item["rotation"])
-		var block: BaseGridBlock= add_block(GameData.get_block_definition(item["definition"]), block_position, block_rotation, false, Utils.get_key_or_default(item, "data", {}))
+		var block: BaseGridBlock= add_block(GameData.get_block_definition(item["definition"]), block_position, block_rotation, null, Utils.get_key_or_default(item, "data", {}))
 		if item.has("hitpoints"):
 			(block as GridBlock).hitpoints= item["hitpoints"]
 		if item.has("name"):

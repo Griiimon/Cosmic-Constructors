@@ -133,6 +133,8 @@ func add_raw_item(item: RawItem, amount: int):
 	
 	update()
 
+	DebugHud.send("Pile mass", get_mass())
+
 
 func sub_raw_item(material: RawItem)-> int:
 	var count: int= min(get_amount(material), material.get_max_unit_size())
@@ -174,3 +176,7 @@ func get_dominant_material()-> RawItem:
 
 func get_amount(material: RawItem)-> int:
 	return amounts[materials.find(material)]
+
+
+func get_mass()-> int:
+	return total_amount / 1000

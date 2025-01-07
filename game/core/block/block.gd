@@ -45,5 +45,9 @@ func is_multi_block()-> bool:
 	return size.x > 1 or size.y > 1 or size.z > 1
 
 
+func has_dynamic_mass()-> bool:
+	return false
+
+
 func get_display_name()-> String:
 	return super().trim_suffix(" Block")

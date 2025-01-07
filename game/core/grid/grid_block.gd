@@ -67,5 +67,12 @@ func get_name(grid: BlockGrid)-> String:
 	return grid.generate_block_name(self)
 
 
+func get_mass()-> int:
+	var type: Block= get_block_definition()
+	if type.has_dynamic_mass():
+		return get_block_instance().get_dynamic_mass()
+	return get_block_definition().mass
+	
+
 static func rotation_to_basis(block_rotation: Vector3i)-> Basis:
 	return Basis.from_euler(block_rotation * deg_to_rad(90))	

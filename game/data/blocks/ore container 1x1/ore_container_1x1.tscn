@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=4 uid="uid://bvucsloy2pswr"]
+
+[ext_resource type="PackedScene" uid="uid://dfyvgxovt2bui" path="res://game/core/misc/ore pile/ore_pile.tscn" id="1_ggh7r"]
+[ext_resource type="Shader" path="res://game/core/misc/ore pile/ore_pile.gdshader" id="2_s85p2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iuobd"]
+size = Vector3(1, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qn08"]
+albedo_color = Color(0.776471, 0.690196, 0, 1)
+metallic = 0.7
+roughness = 0.3
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_gg6n5"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAwMzMPMDMzDwAAAAAAAAAAAAAAAAAAIA/wMzMPMDMzDwAAAAAAACAP8HMzDyo7ZE9AAAAAAAAgD8AAIA/AACAP83MzDyamXk/wczMPKjtkT0AAAAAAACAP83MzDyamXk/SsJtP5qZeT8AAIA/AACAP5qZeT+amXk/zczMPJqZeT8AAIA/AACAP0rCbT+amXk/AACAPwAAgD8AAIA/AAAAAJqZeT/AzMw8AACAPwAAAAAAAAAAAAAAAJqZeT/AzMw8rO2RPc7MzDwAAAAAAAAAAM7MzDzOzMw8mpl5P0vCbT+amXk/mpl5PwAAgD8AAIA/AACAPwAAgD+amXk/wMzMPJqZeT9Lwm0/mpl5P8DMzDwAAAAAAAAAAKztkT3OzMw8AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAnW1HPQAAgD+gbUc9oG1HPQAAgD8AAIA/nG1HPZxtRz2gbUc9AAAAAAAAgD8AAIA/AACAPwAAgD+gbUc9AAAAAAAAgD8AAAAAAAAAAJ1tRz0AAIA/AACAPwAAAAAAAIA/AAAAAJ1tRz2gbUc9oG1HPQAAgD8AAIA/nG1HPZxtRz0AAIA/oG1HPQAAgD8AAIA/nW1HPQAAgD+gbUc9oG1HPQAAgD8AAIA/nG1HPZxtRz2gbUc9AAAAAAAAgD8AAIA/AACAPwAAgD+gbUc9AAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAJolzPyaJcz8AAAAAJolzPwAAAAAAAAAAAACAPyaJcz8AAAAAAAAAAAAAgD8AAAAAAACAPyaJcz8miXM/JolzPwAAAAAAAAAA"),
+"format": 34359738391,
+"material": SubResource("StandardMaterial3D_0qn08"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 108,
+"vertex_data": PackedByteArray("AAAAPwAAAD8AAAA/AAAAPwAAAD8AAAC/AAAAPwAAAL8AAAC/AAAAPwAAAL8AAAC/AAAAPwAAAL8AAAA/AAAAPwAAAD8AAAA/MzPzPgAAAD8zM/M+AAAAPwAAAD8AAAA/AAAAvwAAAD8AAAA/MzPzPgAAAD8zM/M+AAAAvwAAAD8AAAA/lYTbPgAAAD8zM/M+AAAAvwAAAD8AAAA/AAAAvwAAAD8AAAC/MzPzvgAAAD8zM/M+lYTbPgAAAD8zM/M+AAAAvwAAAD8AAAA/MzPzvgAAAD8zM/M+MzPzvgAAAD+VhNu+AAAAvwAAAD8AAAC/MzPzvgAAAD8zM/O+MzPzvgAAAD8zM/M+AAAAvwAAAD8AAAC/MzPzvgAAAD+VhNu+AAAAvwAAAD8AAAC/AAAAPwAAAD8AAAC/MzPzPgAAAD8zM/O+AAAAPwAAAD8AAAC/AAAAPwAAAD8AAAA/MzPzPgAAAD8zM/O+MzPzPgAAAD+VhNs+AAAAPwAAAD8AAAA/MzPzPgAAAD8zM/M+lYTbvgAAAD8zM/O+MzPzvgAAAD8zM/O+AAAAvwAAAD8AAAC/AAAAvwAAAD8AAAC/MzPzPgAAAD8zM/O+lYTbvgAAAD8zM/O+MzPzPgAAAD8zM/O+AAAAPwAAAD8AAAA/MzPzPgAAAD+VhNs+AAAAPwAAAD8AAAA/AAAAPwAAAL8AAAA/AAAAvwAAAL8AAAA/AAAAvwAAAL8AAAA/AAAAvwAAAD8AAAA/AAAAPwAAAD8AAAA/AAAAvwAAAD8AAAC/AAAAvwAAAD8AAAA/AAAAvwAAAL8AAAA/AAAAvwAAAL8AAAA/AAAAvwAAAL8AAAC/AAAAvwAAAD8AAAC/AAAAvwAAAL8AAAA/AAAAPwAAAL8AAAA/AAAAPwAAAL8AAAC/AAAAPwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAA/AAAAPwAAAL8AAAC/AAAAPwAAAD8AAAC/AAAAvwAAAD8AAAC/AAAAvwAAAD8AAAC/AAAAvwAAAL8AAAC/AAAAPwAAAL8AAAC/MzPzPgAAAD8zM/O+MzPzPgAAAD+VhNs+MzPzPkwS574zM/O+MzPzPgAAAD+VhNs+MzPzPgAAAD8zM/M+MzPzPkwS574zM/O+MzPzPkwS574zM/O+MzPzPgAAAD8zM/M+MzPzPkwS574zM/M+MzPzPgAAAD8zM/M+MzPzvkwS574zM/M+MzPzPkwS574zM/M+MzPzPgAAAD8zM/M+lYTbPgAAAD8zM/M+MzPzvkwS574zM/M+lYTbPgAAAD8zM/M+MzPzvgAAAD8zM/M+MzPzvkwS574zM/M+MzPzvgAAAD8zM/M+MzPzvgAAAD+VhNu+MzPzvkwS574zM/M+MzPzvgAAAD+VhNu+MzPzvgAAAD8zM/O+MzPzvkwS574zM/M+MzPzvkwS574zM/M+MzPzvgAAAD8zM/O+MzPzvkwS574zM/O+MzPzvkwS574zM/M+MzPzPkwS574zM/O+MzPzPkwS574zM/M+MzPzPkwS574zM/O+MzPzvkwS574zM/M+MzPzvkwS574zM/O+lYTbvgAAAD8zM/O+MzPzPgAAAD8zM/O+MzPzPkwS574zM/O+MzPzvgAAAD8zM/O+MzPzPkwS574zM/O+MzPzvkwS574zM/O+MzPzvgAAAD8zM/O+lYTbvgAAAD8zM/O+MzPzPkwS574zM/O+////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5//3///wAAAAD/f///AAAAAP9//////wAA/3///wAAAAD/f/////8AAP9//////wAA/3//////AAD/f///AAAAAP9//////wAA/3//////AAD/f/////8AAP9//////wAA/3//////AAD/f///AAAAAP9///8AAAAA/3//////AAD/f///AAAAAP9//////wAA/3///wAAAAD/f/////8AAP9///8AAAAA/3//////AAD/f///AAAAAP9///8AAAAA/3///wAAAAD/f///AAAAAP9//////wAA/3///wAAAAD/f///AAAAAP9///8AAAAA/3///wAAAAD/f///AAAAAP9///8AAAAA/3///wAAAAD/f///AAAAAP9///8AAAAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8//////wAA/z//////AAD/P/////8AAP8/AAD/f/9/AIAAAP9//38AgAAA/3//fwCAAAD/f/9/AIAAAP9//38AgAAA/3//fwCAAAD/f/9/AIAAAP9//38AgAAA/3//fwCA/////wAA/7//////AAD/v/////8AAP+//////wAA/7//////AAD/v/////8AAP+//////wAA/7//////AAD/v/////8AAP+/////f/9/AID///9//38AgP///3//fwCA////f/9/AID///9//38AgP///3//fwCA////f/9/AID///9//38AgP///3//fwCA/3//////////f/////////9//////////3//////////f/////////9//////////3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+/")
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oi8vb"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_s85p2")
+
+[node name="Ore Container 1x1" type="Node3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+shape = SubResource("BoxShape3D_iuobd")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_gg6n5")
+
+[node name="Ore Pile" parent="." instance=ExtResource("1_ggh7r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+mesh_size = Vector2(0.95, 0.95)
+max_height = 1.0
+orig_shader_material = SubResource("ShaderMaterial_oi8vb")

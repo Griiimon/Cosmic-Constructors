@@ -336,8 +336,8 @@ func spawn_item(item: Item, pos: Vector3, rot: Vector3= Vector3.ZERO, count: int
 	return item_instance
 
 
-func spawn_inventory_item(inv_item: InventoryItem, pos: Vector3)-> WorldItemInstance:
-	return spawn_item(inv_item.item, pos, Vector3.ZERO, inv_item.count)
+func spawn_inventory_item(inv_item: InventoryItem, pos: Vector3, rot: Vector3= Vector3.ZERO, frozen: bool= false)-> WorldItemInstance:
+	return spawn_item(inv_item.item, pos, rot, inv_item.count, frozen)
 
 
 func spawn_peripheral_entity(entity: PeripheralEntity, pos: Vector3, rot: Vector3):

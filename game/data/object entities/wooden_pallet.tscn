@@ -28,8 +28,11 @@ size = Vector3(2, 0.1, 0.3)
 
 [node name="Wooden Pallet" type="RigidBody3D"]
 mass = 20.0
-linear_damp = 1.0
-angular_damp = 1.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -0.5, 0)
+continuous_cd = true
+linear_damp = 2.0
+angular_damp = 2.0
 script = ExtResource("1_u58sg")
 
 [node name="Basic CollisionShape3D" type="CollisionShape3D" parent="."]

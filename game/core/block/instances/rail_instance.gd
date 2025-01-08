@@ -5,8 +5,9 @@ extends BlockInstance
 
 @onready var slider_joint: JoltSliderJoint3D = $JoltSliderJoint3D
 
-var motor_enabled: BlockPropBool
-var motor_velocity: BlockPropFloat
+# create dummy variable instances only for building the property table correctly
+var motor_enabled:= BlockPropBool.new("Motor")
+var motor_velocity:= BlockPropFloat.new("Velocity")
 
 var rail: LinkedRailGroup
 

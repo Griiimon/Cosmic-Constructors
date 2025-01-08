@@ -40,10 +40,6 @@ disabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 shape = SubResource("BoxShape3D_15w4t")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
-shape = SubResource("BoxShape3D_etd60")
-
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, -0.05, 0)
 shape = SubResource("BoxShape3D_etd60")
@@ -56,6 +52,7 @@ shape = SubResource("BoxShape3D_etd60")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0583283, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+visible = false
 mesh = SubResource("BoxMesh_m8tu3")
 skeleton = NodePath("../..")
 

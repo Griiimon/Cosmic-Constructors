@@ -1,3 +1,9 @@
+FIX rail limits still off when loading new
+
+higher default damping on suspension
+
+suspension invert steering option
+
 FIX wheel spawns without taking suspension orientation into account
 
 pullable object component: for example on Wooden Pallets, so the player can move them by hand just not very effective

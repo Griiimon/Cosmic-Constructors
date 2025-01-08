@@ -65,7 +65,7 @@ static func pierce_blocks(shapecast: ShapeCast3D, filter: Callable, step_size: f
 					push_warning("Custom Shapecast: no grid block")
 					continue
 				
-				var tmp_debug: GridBlock= grid_block
+				var tmp_debug: BaseGridBlock= grid_block
 				if not filter.call():
 					break
 				reset()

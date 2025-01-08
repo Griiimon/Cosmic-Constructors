@@ -16,8 +16,7 @@ func _ready() -> void:
 	for prop in get_property_list():
 		if prop.class_name.begins_with("BlockProp") and prop.class_name != "BlockProperty":
 			var prop_var: BlockProperty= get(prop.name)
-			#property_table[prop_var.display_name]= prop.name
-			property_table[prop_var.display_name]= prop_var
+			property_table[prop_var.display_name]= prop.name
 
 
 func on_placed(_grid: BlockGrid, _grid_block: GridBlock):
@@ -163,3 +162,7 @@ func can_interact(grid: BlockGrid, grid_block: GridBlock, player: Player)-> bool
 
 func get_dynamic_mass(grid_block: GridBlock)-> int:
 	return 1
+
+
+func get_property_by_display_name(display_name: String)-> BlockProperty:
+	return get(property_table[display_name])

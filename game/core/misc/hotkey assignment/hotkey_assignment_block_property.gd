@@ -40,7 +40,7 @@ func get_block(caller_grid: BlockGrid)-> GridBlock:
 func get_property(caller_grid: BlockGrid)-> BlockProperty:
 	var block: GridBlock= get_block(get_grid(caller_grid.world))
 	if not block: return null
-	return block.get_block_instance().property_table[property_name]
+	return block.get_block_instance().get_property_by_display_name(property_name)
 	
 
 func get_as_text(caller_grid: BlockGrid= null)-> String:

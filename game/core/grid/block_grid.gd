@@ -477,7 +477,7 @@ func serialize()-> Dictionary:
 	
 	if is_sub_grid():
 		data["main_grid_id"]= main_grid_id
-		data["main_grid_connection"]= main_grid_connection
+		data["main_grid_connection"]= main_grid_connection.local_pos
 
 	data["linear_velocity"]= linear_velocity
 	data["angular_velocity"]= angular_velocity
@@ -521,10 +521,6 @@ static func pre_deserialize(data: Dictionary, new_world: World)-> BlockGrid:
 
 
 func deserialize(data: Dictionary):
-	if data.has("main_grid_id"):
-		main_grid_id= data["main_grid_id"]
-		main_grid_connection= str_to_var("Vector3i" + data["main_grid_connection"])
-
 	linear_velocity= str_to_var("Vector3" + data["linear_velocity"])
 	angular_velocity= str_to_var("Vector3" + data["angular_velocity"])
 	parking_brake= Utils.get_key_or_default(data, "parking_brake", false)
@@ -540,6 +536,10 @@ func deserialize(data: Dictionary):
 			(block as GridBlock).name= item["name"]
 		if item.has("data"):
 			block.get_block_instance().deserialize(item["data"])
+
+	if data.has("main_grid_id"):
+		main_grid_id= data["main_grid_id"]
+		main_grid_connection= get_block_local(str_to_var("Vector3i" + data["main_grid_connection"]))
 
 
 func can_place_block_at_global(block: Block, global_pos: Vector3, block_rotation: Vector3i= Vector3i.ZERO)-> bool:

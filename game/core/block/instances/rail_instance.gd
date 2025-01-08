@@ -41,14 +41,10 @@ func init(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary= {}):
 		if restore_data:
 			slider_joint.global_position= rail.sub_grid.global_position - rail.sub_grid.global_basis.y
 			var offset: Vector3= to_local(slider_joint.global_position)
-			#prints("Carriage offset", offset.z)
+			#DebugHud.send("Carriage offset", offset.z)
 			
-			# TODO verify this formula actually works in all cases
-			var frac: float= (round(offset.z) - offset.z) * sign(-offset.z) 
-			#prints("Frac", frac)
-			
-			slider_joint.limit_lower-= frac
-			slider_joint.limit_upper-= frac
+			slider_joint.limit_lower+= offset.z
+			slider_joint.limit_upper+= offset.z
 			
 		slider_joint.node_a= slider_joint.get_path_to(grid)
 		slider_joint.node_b= slider_joint.get_path_to(rail.sub_grid)

@@ -138,6 +138,10 @@ func add_raw_item(item: RawItem, amount: int):
 	update()
 
 
+func add_inv_item(inv_item: InventoryItem):
+	add_raw_item(inv_item.item, inv_item.count)
+
+
 func sub_raw_item(material: RawItem)-> int:
 	var count: int= min(get_amount(material), material.get_max_unit_size())
 	var idx: int= materials.find(material)
@@ -159,7 +163,7 @@ func _on_catch_area_body_entered(body: Node3D) -> void:
 	assert(body is WorldItemInstance)
 	var item_inst: WorldItemInstance= body
 	if item_inst.inv_item.item as RawItem:
-		add_raw_item(item_inst.inv_item.item, item_inst.inv_item.count)
+		add_inv_item(item_inst.inv_item)
 		item_inst.queue_free()
 
 

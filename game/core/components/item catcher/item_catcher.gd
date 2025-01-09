@@ -28,4 +28,14 @@ func catch(inv_item: InventoryItem):
 
 
 func on_body_entered(body: Node3D):
+	if not is_instance_valid(body): return
+	
+	assert(body is RigidBody3D)
+	if (body as RigidBody3D).freeze: return
+
 	assert(body is WorldItemInstance)
+
+	var item_instance: WorldItemInstance= body
+	assert(can_catch_item(item_instance.inv_item))
+	catch(item_instance.inv_item)
+	item_instance.queue_free()

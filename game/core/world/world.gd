@@ -329,9 +329,13 @@ func spawn_item(item: Item, pos: Vector3, rot: Vector3= Vector3.ZERO, count: int
 
 	items.add_child(item_instance)
 
+
 	for collision_shape in model.find_children("*", "CollisionShape3D"):
 		#collision_shape.owner= null
-		collision_shape.reparent(item_instance)
+		if frozen:
+			collision_shape.queue_free()
+		else:
+			collision_shape.reparent(item_instance)
 
 	return item_instance
 

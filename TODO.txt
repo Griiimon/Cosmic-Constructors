@@ -1,12 +1,14 @@
-FIX rail limits still off when loading new
-
-higher default damping on suspension
+area above conveyor that can catch item instances
 
 suspension invert steering option
+	power
+	brakes
+	spring
 
-FIX wheel spawns without taking suspension orientation into account
+if conveyor doesnt have a target check if it can drop an item ( on pallet)
 
 pullable object component: for example on Wooden Pallets, so the player can move them by hand just not very effective
+	try to pull on a pallet snap block using ramp
 
 property panel group system:
 	create group
@@ -34,6 +36,7 @@ tree spawner
 wooden workbench
 
 
+higher default damping on suspension, hard code?
 
 when splitting prioritize: with more functional blocks, with more blocks. trigger on_grid_changed(), reconnect signals from BlockInstances
 
@@ -162,6 +165,7 @@ FIX jetpack counterforce against gravity
 FIX static grids connected to terrain jitter ( only when terrain gets edited, lod changes? ) 
 FIX grabbing handles on same grid player is standing on should have no effect. ALSO if grid is connected to grid players standing on
 FIX grabbing handles weight calculation for all connected grids => make grabbing joint-based
+FIX suspension jitter with joints
 
 
 IS FIXED?

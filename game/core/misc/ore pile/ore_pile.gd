@@ -185,3 +185,7 @@ func get_amount(material: RawItem)-> int:
 
 func get_mass()-> int:
 	return total_amount / 1000
+
+
+func is_full()-> bool:
+	return get_mesh_height() >= max_height

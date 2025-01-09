@@ -566,11 +566,9 @@ func get_multi_block_positions(block: Block, pos: Vector3i, block_basis: Basis)-
 	for x in block.size.x:
 		for y in block.size.y:
 			for z in block.size.z:
-				var offset:= Vector3(x, y, z)
+				var offset:= Vector3(x, y, -z)
 				if offset:
-					# FIXME this calculation seems so wrong but it works
-					# 	is it because my multi blocks are rotated to face -z by default?
-					result.append(pos - Vector3i(block_basis * offset))
+					result.append(pos + Vector3i(block_basis * offset))
 	return result
 
 

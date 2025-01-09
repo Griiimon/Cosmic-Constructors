@@ -20,7 +20,8 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 	if linked_container.is_empty(): return
 	
 	if item_ejector.can_eject():
-		var inv_item: InventoryItem= linked_container.inventory.slots[0]
-		var count: int= min(inv_item.count, inv_item.item.get_max_unit_size())
-		item_ejector.eject_item(inv_item, grid.world, count)
-		linked_container.inventory.sub_from_item(inv_item, count)
+		var orig_inv_item: InventoryItem= linked_container.inventory.slots[0]
+		var eject_item: InventoryItem= orig_inv_item.duplicate()
+		eject_item.count= min(orig_inv_item.count, orig_inv_item.item.get_max_unit_size())
+		item_ejector.eject_item(eject_item, grid.world)
+		linked_container.inventory.sub_from_item(orig_inv_item, eject_item.count)

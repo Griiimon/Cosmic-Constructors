@@ -4,6 +4,7 @@ extends BlockInstance
 
 @onready var item_start_pos: Marker3D = $"Item Start Pos"
 @onready var item_end_pos: Marker3D = $"Item End Pos"
+@onready var item_ejector: ItemEjector = $"Item Ejector"
 
 var item_instance: WorldItemInstance
 var target: ConveyorTarget
@@ -27,14 +28,21 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, delta: float):
 			item_instance.global_position= get_item_pos(progress)
 		
 		if progress >= 1:
-			if target and target.can_take_item(item_instance.inv_item):
-				target.take_item(item_instance)
-				progress= 0
-				item_instance= null
+			if target: 
+				if target.can_take_item(item_instance.inv_item):
+					target.take_item(item_instance)
+					progress= 0
+					item_instance= null
+			else:
+				if item_ejector.can_eject():
+					item_ejector.eject_item(item_instance.inv_item, world) 
+					progress= 0
+					item_instance.queue_free()
+					item_instance= null
 
 
 func on_neighbor_placed(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
-	if grid_block.to_global(Vector3i.FORWARD) == neighbor_block_pos or grid_block.to_global(Vector3i.BACK) == neighbor_block_pos:
+	if grid_block.to_global(Vector3i.FORWARD) == neighbor_block_pos:
 		assert(neighbor_block_pos != grid_block.local_pos)
 		var conveyor_target: ConveyorTarget= BaseBlockComponent.get_from_block_pos(grid, neighbor_block_pos, ConveyorTarget.NODE_NAME)
 		if conveyor_target:

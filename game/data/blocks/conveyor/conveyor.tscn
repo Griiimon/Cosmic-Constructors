@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://clfksjpvg60v8"]
+[gd_scene load_steps=15 format=3 uid="uid://clfksjpvg60v8"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/conveyor_instance.gd" id="1_2cr6b"]
 [ext_resource type="PackedScene" uid="uid://d1yd7cvio7mxv" path="res://game/core/components/conveyor target/conveyor_target.tscn" id="2_43hh3"]
 [ext_resource type="PackedScene" uid="uid://4lrcbiiff8n2" path="res://game/core/components/item catcher/item_catcher.tscn" id="3_ow3od"]
+[ext_resource type="PackedScene" uid="uid://iixyhw4jvjeq" path="res://game/core/components/item ejector/item_ejector.tscn" id="4_47sw3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sln4j"]
 size = Vector3(1, 0.1, 1)
@@ -106,7 +107,6 @@ size = Vector3(0.8, 0.1, 0.8)
 
 [node name="Conveyor" type="Node3D"]
 script = ExtResource("1_2cr6b")
-speed = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_sln4j")
@@ -126,6 +126,9 @@ mesh = SubResource("BoxMesh_m6uo5")
 [node name="Conveyor Target" parent="." instance=ExtResource("2_43hh3")]
 
 [node name="Item Catcher" parent="." instance=ExtResource("3_ow3od")]
+
+[node name="Item Ejector" parent="." instance=ExtResource("4_47sw3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6)
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.984174, 0.177205, 0, -0.177205, 0.984174, 0, -0.145901, 0)

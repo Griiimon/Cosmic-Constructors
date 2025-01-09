@@ -27,7 +27,7 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, delta: float):
 			item_instance.global_position= get_item_pos(progress)
 		
 		if progress >= 1:
-			if target and target.can_take_item(item_instance.item.item):
+			if target and target.can_take_item(item_instance.item):
 				target.take_item(item_instance)
 				progress= 0
 				item_instance= null
@@ -42,8 +42,8 @@ func on_neighbor_placed(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_blo
 			target= conveyor_target
 
 
-func _on_item_catcher_caught_item(item: Item) -> void:
-	item_instance= world.spawn_item(item, get_item_start_pos(), global_rotation, true)
+func _on_item_catcher_caught_item(inv_item: InventoryItem) -> void:
+	item_instance= world.spawn_inventory_item(inv_item, get_item_start_pos(), global_rotation, true)
 
 
 func _on_conveyor_target_took_item(_item_instance: WorldItemInstance) -> void:
@@ -52,12 +52,12 @@ func _on_conveyor_target_took_item(_item_instance: WorldItemInstance) -> void:
 	item_instance.global_position= get_item_start_pos()
 
 
-func can_conveyor_target_take_item(item: Item)-> bool:
+func can_conveyor_target_take_item(inv_item: InventoryItem)-> bool:
 	return item_instance == null
 
 
-func can_item_catcher_catch_item(item: Item)-> bool:
-	return can_conveyor_target_take_item(item)
+func can_item_catcher_catch_item(inv_item: InventoryItem)-> bool:
+	return can_conveyor_target_take_item(inv_item)
 		
 
 func get_item_start_pos()-> Vector3:

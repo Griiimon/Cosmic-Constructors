@@ -7,12 +7,12 @@ var count: int
 
 
 
-func can_item_catcher_catch_item(item: Item)-> bool:
-	return stored_item == null or ( item == stored_item and find_tile_with_space() )
+func can_item_catcher_catch_item(inv_item: InventoryItem)-> bool:
+	return stored_item == null or ( inv_item.item == stored_item and find_tile_with_space() )
 
 
-func _on_item_catcher_caught_item(item: Item) -> void:
-	stored_item= item
+func _on_item_catcher_caught_item(inv_item: InventoryItem) -> void:
+	stored_item= inv_item.item
 	var tile: Marker3D= find_tile_with_space()
 	assert(tile)
 	add_to_stack(tile)

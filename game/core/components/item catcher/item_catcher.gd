@@ -1,7 +1,7 @@
 class_name ItemCatcher
 extends BaseBlockComponent
 
-signal caught_item(item: Item)
+signal caught_item(inv_item: InventoryItem)
 
 const NODE_NAME= "Item Catcher"
 # TODO ..or let the parent register a function?
@@ -18,13 +18,13 @@ func _ready() -> void:
 		active_area.body_entered.connect(on_body_entered)
 
 
-func can_catch_item(item: Item= null)-> bool:
+func can_catch_item(inv_item: InventoryItem= null)-> bool:
 	assert(get_parent().has_method(CAN_CATCH_FUNCTION_NAME))
-	return get_parent().call(CAN_CATCH_FUNCTION_NAME, item)
+	return get_parent().call(CAN_CATCH_FUNCTION_NAME, inv_item)
 
 
-func catch(item: Item):
-	caught_item.emit(item)
+func catch(inv_item: InventoryItem):
+	caught_item.emit(inv_item)
 
 
 func on_body_entered(body: Node3D):

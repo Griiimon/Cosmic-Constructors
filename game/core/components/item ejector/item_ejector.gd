@@ -11,14 +11,14 @@ const NODE_NAME= "Item Ejector"
 
 
 
-func eject_item(item: Item, world: World, count: int= 1):
+func eject_item(inv_item: InventoryItem, world: World, count: int= 1):
 	if only_with_valid_target:
 		assert(count == 1)
 		var catcher: ItemCatcher= get_item_catcher()
-		if catcher and catcher.can_catch_item(item):
-			catcher.catch(item)
+		if catcher and catcher.can_catch_item(inv_item):
+			catcher.catch(inv_item)
 	else:
-		world.spawn_item(item, item_spawn_position.global_position, item_spawn_position.global_rotation, count)
+		world.spawn_inventory_item(inv_item, item_spawn_position.global_position, item_spawn_position.global_rotation)
 	cooldown.start()
 
 

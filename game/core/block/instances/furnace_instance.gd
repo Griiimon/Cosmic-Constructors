@@ -15,5 +15,5 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 	
 	if progress >= 1:
 		if ejector.can_eject():
-			ejector.eject_item(recipe.product, grid.world)
+			ejector.eject_item(InventoryItem.new(recipe.product), grid.world)
 			progress= 0

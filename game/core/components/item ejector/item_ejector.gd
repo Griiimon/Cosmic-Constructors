@@ -11,9 +11,9 @@ const NODE_NAME= "Item Ejector"
 
 
 
-func eject_item(inv_item: InventoryItem, world: World, count: int= 1):
+func eject_item(inv_item: InventoryItem, world: World):
 	if only_with_valid_target:
-		assert(count == 1)
+		assert(inv_item.count == 1)
 		var catcher: ItemCatcher= get_item_catcher()
 		if catcher and catcher.can_catch_item(inv_item):
 			catcher.catch(inv_item)

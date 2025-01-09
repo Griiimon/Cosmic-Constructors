@@ -106,6 +106,7 @@ size = Vector3(0.8, 0.1, 0.8)
 
 [node name="Conveyor" type="Node3D"]
 script = ExtResource("1_2cr6b")
+speed = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_sln4j")

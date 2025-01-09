@@ -34,7 +34,7 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, delta: float):
 
 
 func on_neighbor_placed(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
-	if neighbor_block_pos == Vector3i((Vector3(grid_block.local_pos) - grid_block.get_local_basis().z).floor()):
+	if grid_block.to_global(Vector3i.FORWARD) == neighbor_block_pos or grid_block.to_global(Vector3i.BACK) == neighbor_block_pos:
 		assert(neighbor_block_pos != grid_block.local_pos)
 		var conveyor_target: ConveyorTarget= BaseBlockComponent.get_from_block_pos(grid, neighbor_block_pos, ConveyorTarget.NODE_NAME)
 		if conveyor_target:

@@ -60,8 +60,7 @@ func align_ghost():
 	var raycast: RayCast3D= player.build_raycast
 
 	if raycast.is_colliding():
-		var collision_pos: Vector3= raycast.get_collision_point()
-		collision_pos+= raycast.global_basis.z * 0.05
+		var collision_pos: Vector3= Utils.get_raycast_outside_collision_point(raycast)
 		
 		var old_grid: BlockGrid= grid
 		grid= raycast.get_collider()
@@ -114,8 +113,7 @@ func pick_block():
 	var raycast: RayCast3D= player.build_raycast
 	
 	if raycast.is_colliding():
-		var collision_pos: Vector3= raycast.get_collision_point()
-		collision_pos-= raycast.global_basis.z * 0.05
+		var collision_pos: Vector3= Utils.get_raycast_inside_collision_point(raycast)
 		
 		grid= raycast.get_collider()
 		assert(grid != null)

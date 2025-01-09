@@ -48,3 +48,11 @@ static func calc_angular_velocity(from_basis: Basis, to_basis: Basis) -> Vector3
 	var axis = Vector3(delta_q.x, delta_q.y, delta_q.z).normalized()
 
 	return axis * angle
+
+
+static func get_raycast_inside_collision_point(raycast: RayCast3D)-> Vector3:
+	return raycast.get_collision_point() - raycast.global_basis.z * 0.05
+
+
+static func get_raycast_outside_collision_point(raycast: RayCast3D)-> Vector3:
+	return raycast.get_collision_point() + raycast.global_basis.z * 0.05

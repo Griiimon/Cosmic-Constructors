@@ -27,7 +27,7 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, delta: float):
 			item_instance.global_position= get_item_pos(progress)
 		
 		if progress >= 1:
-			if target and target.can_take_item(item_instance.item):
+			if target and target.can_take_item(item_instance.inv_item):
 				target.take_item(item_instance)
 				progress= 0
 				item_instance= null

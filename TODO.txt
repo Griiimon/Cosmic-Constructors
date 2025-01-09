@@ -1,14 +1,15 @@
-area above conveyor that can catch item instances
+pullable object component: for example on Wooden Pallets, so the player can move them by hand just not very effective
+	try to pull on a pallet snap block using ramp
+
+item ejector: if item is raw resource check for container with raycast
+
+when the car isnt moving ( for a bit? ) put an additional damping factor on the suspension
 
 suspension invert steering option
 	power
 	brakes
 	spring
 
-if conveyor doesnt have a target check if it can drop an item ( on pallet)
-
-pullable object component: for example on Wooden Pallets, so the player can move them by hand just not very effective
-	try to pull on a pallet snap block using ramp
 
 property panel group system:
 	create group

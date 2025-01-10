@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://18lknojownsw"]
+[gd_scene load_steps=27 format=3 uid="uid://18lknojownsw"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_7fydp"]
 [ext_resource type="Script" path="res://game/test/custom planet test/custom_planet_sandbox.gd" id="2_d2xmp"]
@@ -18,6 +18,7 @@
 [ext_resource type="Resource" uid="uid://dthyojrp18xoy" path="res://game/core/world/terrain/types/grass_terrain.tres" id="14_nyk10"]
 [ext_resource type="Resource" uid="uid://bgnjd8cbucnn2" path="res://game/core/world/terrain/types/stone_terrain.tres" id="15_mee4x"]
 [ext_resource type="Resource" uid="uid://dn783p1l2b7nn" path="res://game/core/world/terrain/types/iron_ore_terrain.tres" id="16_62ayq"]
+[ext_resource type="Resource" uid="uid://b4r5qmp3a4uct" path="res://game/core/world/terrain/types/dirt_terrain.tres" id="18_7u07l"]
 
 [sub_resource type="Resource" id="Resource_4uqcy"]
 script = ExtResource("6_yyq31")
@@ -31,7 +32,7 @@ texturing_mode = 1
 
 [sub_resource type="Resource" id="Resource_75u82"]
 script = ExtResource("12_owbdg")
-types = Array[ExtResource("13_fkc0r")]([ExtResource("14_nyk10"), ExtResource("15_mee4x"), ExtResource("16_62ayq")])
+types = Array[ExtResource("13_fkc0r")]([ExtResource("14_nyk10"), ExtResource("15_mee4x"), ExtResource("16_62ayq"), ExtResource("18_7u07l")])
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vdqjr"]
 panorama = ExtResource("10_fxdwa")

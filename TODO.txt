@@ -1,4 +1,5 @@
 pullable object component: for example on Wooden Pallets, so the player can move them by hand just not very effective
+	WHAT KEY to use. F has other functionality here.. G
 	try to pull on a pallet snap block using ramp
 
 item ejector: if item is raw resource check for container with raycast
@@ -10,7 +11,7 @@ suspension invert steering option
 	brakes
 	spring
 
-
+serializable inventories
 property panel group system:
 	create group
 	add to last group
@@ -167,6 +168,7 @@ FIX static grids connected to terrain jitter ( only when terrain gets edited, lo
 FIX grabbing handles on same grid player is standing on should have no effect. ALSO if grid is connected to grid players standing on
 FIX grabbing handles weight calculation for all connected grids => make grabbing joint-based
 FIX suspension jitter with joints
+INVESTIGATE possible to pick up item from floor and from OreContainer with one F push in the same frame. almost seemed so
 
 
 IS FIXED?

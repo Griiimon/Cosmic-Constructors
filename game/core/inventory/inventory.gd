@@ -60,6 +60,11 @@ func sub(item_type: Item, count: int= 1, do_update: bool= true):
 	assert(false, "trying to substract non-existing item/too many items")
 
 
+func sub_ingredients(recipe: RecipeIngredients):
+	for ingredient in recipe.ingredients:
+		sub(ingredient.item, ingredient.count)
+
+
 func add_to_item(inv_item: InventoryItem, count: int= 1, do_update: bool= true):
 	assert(inv_item in slots)
 	inv_item.count+= count
@@ -101,6 +106,13 @@ func has_item(item: Item, count: int= 1)-> bool:
 			total-= inv_item.count
 			
 	return false
+
+
+func has_ingredients(recipe: RecipeIngredients)-> bool:
+	for ingredient in recipe.ingredients:
+		if not has_item(ingredient.item, ingredient.count):
+			return false
+	return true
 
 
 func get_item_count(item: Item)-> int:

@@ -1,3 +1,5 @@
+supporting structure block if destroyed the spawn in temporary area for one or two seconds that puts a lot of linear dampening on grits so they fall slowly
+
 pullable object component: for example on Wooden Pallets, so the player can move them by hand just not very effective
 	WHAT KEY to use. F has other functionality here.. G
 	try to pull on a pallet snap block using ramp

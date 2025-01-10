@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://csujbe1ddlwu"]
+
+[ext_resource type="Script" path="res://game/data/blocks/scaffolding/scaffolding_area.gd" id="1_se6wh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yjqbu"]
+
+[node name="Area3D" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+linear_damp_space_override = 3
+linear_damp = 25.0
+angular_damp_space_override = 3
+angular_damp = 25.0
+script = ExtResource("1_se6wh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_yjqbu")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="queue_free"]

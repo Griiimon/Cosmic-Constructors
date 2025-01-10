@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://dygjlclq8nxvm"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/scaffolding_instance.gd" id="1_iqtq5"]
+[ext_resource type="PackedScene" uid="uid://csujbe1ddlwu" path="res://game/data/blocks/scaffolding/scaffolding_area.tscn" id="2_gbx7u"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_m60ik"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xt612"]
+albedo_color = Color(0.606956, 0.327489, 0.0406256, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ufe3t"]
+material = SubResource("StandardMaterial3D_xt612")
+size = Vector3(0.1, 1, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u4tly"]
+material = SubResource("StandardMaterial3D_xt612")
+size = Vector3(1, 0.1, 1)
+
+[node name="Scaffolding" type="Node3D"]
+script = ExtResource("1_iqtq5")
+area_scene = ExtResource("2_gbx7u")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_m60ik")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ufe3t")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+mesh = SubResource("BoxMesh_u4tly")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0l66srtretwy"]
+[gd_scene load_steps=10 format=3 uid="uid://d0l66srtretwy"]
 
 [ext_resource type="Script" path="res://game/debug/debug settings/debug_settings.gd" id="1_is5ng"]
 [ext_resource type="Script" path="res://game/core/block/block.gd" id="2_au0m6"]
@@ -8,7 +8,8 @@
 [ext_resource type="Resource" uid="uid://cjpjllcayxapu" path="res://game/data/blocks/hinge/hinge_block.tres" id="6_ahjun"]
 [ext_resource type="Resource" uid="uid://dsoctxtpedeyd" path="res://game/data/blocks/rail/rail_block.tres" id="7_lpoa3"]
 [ext_resource type="Resource" uid="uid://bh6lk8mefhhlv" path="res://game/data/blocks/thruster/thruster_block.tres" id="8_mcivm"]
+[ext_resource type="Resource" uid="uid://me33p8wjch0a" path="res://game/data/blocks/scaffolding/scaffolding_block.tres" id="9_6ycuy"]
 
 [node name="Debug Settings" type="Node"]
 script = ExtResource("1_is5ng")
-default_build_hotbar_layout = Array[ExtResource("2_au0m6")]([ExtResource("3_mvfbq"), ExtResource("4_6gtd1"), ExtResource("5_le4lb"), ExtResource("6_ahjun"), ExtResource("7_lpoa3"), ExtResource("8_mcivm")])
+default_build_hotbar_layout = Array[ExtResource("2_au0m6")]([ExtResource("3_mvfbq"), ExtResource("4_6gtd1"), ExtResource("5_le4lb"), ExtResource("6_ahjun"), ExtResource("7_lpoa3"), ExtResource("8_mcivm"), ExtResource("9_6ycuy")])

@@ -9,7 +9,7 @@
 [sub_resource type="Resource" id="Resource_7uyie"]
 script = ExtResource("1_aya0f")
 item = ExtResource("2_wiyln")
-count = 5
+count = 500
 
 [sub_resource type="Resource" id="Resource_l60wn"]
 script = ExtResource("3_qmyig")

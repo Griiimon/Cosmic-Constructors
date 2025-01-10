@@ -106,7 +106,7 @@ func build_block():
 		if player.get_world_3d().direct_space_state.intersect_shape(query):
 			grid.freeze= true
 		
-	grid.add_block(current_block, local_block_pos, block_rotation)
+	grid.add_block(current_block, local_block_pos)
 
 
 func pick_block():

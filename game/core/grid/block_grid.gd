@@ -254,7 +254,7 @@ func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
 	return model
 
 
-# to be called only by block.destroy()
+# to be called only by BaseGridBlock.destroy()
 func remove_block(block: BaseGridBlock):
 	if not (block is VirtualGridBlock):
 		#shape_owner_remove_shape(0, shape_owner_get_shape_index(0, 

@@ -28,8 +28,10 @@ func mine(local_pos: Vector3i, radius: float, spawn_items: bool= false, material
 	
 	for key in new_resources.keys():
 		var raw_item: RawItem= terrain_properties.types[key].raw_material
-		assert(not collected_resources.has(raw_item))
-		collected_resources[raw_item]= new_resources[key]
+		if collected_resources.has(raw_item):
+			collected_resources[raw_item]+= new_resources[key]
+		else:
+			collected_resources[raw_item]= new_resources[key]
 
 		if spawn_items:
 			var item_instance: WorldItemInstance= world.spawn_item(raw_item, material_spawn_pos)

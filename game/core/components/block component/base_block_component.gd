@@ -1,5 +1,5 @@
 class_name BaseBlockComponent
-extends Node
+extends BaseComponent
 
 
 
@@ -15,7 +15,3 @@ static func get_from_block(block: BaseGridBlock, node_name: String)-> BaseBlockC
 	if block_instance:
 		return get_from_node(block_instance, node_name)
 	return null
-
-
-static func get_from_node(node: Node, node_name: String)-> BaseBlockComponent:
-	return node.get_node_or_null(node_name)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=35 format=3 uid="uid://d4blx7p2hp5bc"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_6i4dd"]
-[ext_resource type="Script" path="res://game/test/vehicle test/vehicle_tests.gd" id="2_8kc7o"]
+[ext_resource type="Script" path="res://game/test/vehicle test/vehicle_sandbox.gd" id="2_8kc7o"]
 [ext_resource type="Script" path="res://game/player_spawn.gd" id="3_8bwff"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="3_n8ygw"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="6_jsteb"]
@@ -88,10 +88,10 @@ size = Vector2(2, 2)
 [node name="Vehicle Test" type="Node3D"]
 script = ExtResource("1_6i4dd")
 
-[node name="Tests" type="Node" parent="."]
+[node name="Sandbox" type="Node" parent="."]
 script = ExtResource("2_8kc7o")
+spawn_ore = true
 load_world = true
-freeze_grids = true
 
 [node name="Fluid Spawner" parent="." instance=ExtResource("11_sebgl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)

@@ -256,6 +256,11 @@ func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
 
 # to be called only by BaseGridBlock.destroy()
 func remove_block(block: BaseGridBlock):
+	for neighbor_block in get_block_neighbor_blocks(block.local_pos):
+		var block_inst: BlockInstance= neighbor_block.get_block_instance()
+		if block_inst:
+			block_inst.on_neighbor_removed(self, neighbor_block, block.local_pos)
+
 	if not (block is VirtualGridBlock):
 		#shape_owner_remove_shape(0, shape_owner_get_shape_index(0, 
 		collision_shapes.erase(block.collision_shape)

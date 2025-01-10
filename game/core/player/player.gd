@@ -13,6 +13,7 @@ extends BasePlayer
 @onready var floor_shapecast: ShapeCast3D = $"Floor Shapecast"
 @onready var block_interact_shapecast: ShapeCast3D = %"Block Interact Shapecast"
 @onready var item_interact_shapecast: ShapeCast3D = %"Item Interact Shapecast"
+@onready var pull_shapecast: ShapeCast3D = %"Pull Shapecast"
 
 @onready var head: Node3D = $Head
 @onready var first_person_camera: Camera3D = %"First Person Camera"

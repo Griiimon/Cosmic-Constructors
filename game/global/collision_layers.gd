@@ -9,7 +9,7 @@ const PERIPHERAL_GRID_ENTITIES= 32
 const WORLD_ITEM= 64
 const FLUID= 128
 const ROPE= 512
-
+const PULLABLE= 2048
 
 
 func get_all_body_layers()-> int:

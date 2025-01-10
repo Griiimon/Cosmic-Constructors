@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://xgkn2mkwvwmq"]
+[gd_scene load_steps=28 format=3 uid="uid://xgkn2mkwvwmq"]
 
 [ext_resource type="PackedScene" uid="uid://slyw4y7qi46y" path="res://game/core/player/base_player.tscn" id="1_kthjw"]
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://game/core/player/action state machine/player_attach_rope_state.gd" id="16_7yrlv"]
 [ext_resource type="Script" path="res://game/core/player/action state machine/player_action_carry_item_state.gd" id="17_dxssv"]
 [ext_resource type="Script" path="res://game/core/player/action state machine/player_action_grab_handles_state.gd" id="18_eocux"]
+[ext_resource type="Script" path="res://game/core/player/action state machine/player_action_pull_state.gd" id="19_lfvx8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7yawy"]
 height = 0.5
@@ -126,22 +127,29 @@ target_position = Vector3(0, 0, -2.5)
 max_results = 1
 collision_mask = 1088
 
-[node name="Drill Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="7"]
+[node name="Pull Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="7"]
+unique_name_in_owner = true
+shape = SubResource("SphereShape3D_47njt")
+target_position = Vector3(0, 0, -3.5)
+max_results = 1
+collision_mask = 2048
+
+[node name="Drill Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="8"]
 unique_name_in_owner = true
 enabled = false
 shape = SubResource("SphereShape3D_iybuy")
 target_position = Vector3(0, 0, -2)
 collision_mask = 4
 
-[node name="Misc Item Holder" type="Node3D" parent="Head/Pivot" index="9"]
+[node name="Misc Item Holder" type="Node3D" parent="Head/Pivot" index="10"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, -0.9)
 
-[node name="Handle Grabber" type="Node3D" parent="Head/Pivot" index="10"]
+[node name="Handle Grabber" type="Node3D" parent="Head/Pivot" index="11"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 
-[node name="FPS arms" type="Node3D" parent="Head/Pivot" index="11"]
+[node name="FPS arms" type="Node3D" parent="Head/Pivot" index="12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.489999, 0)
 visible = false
 
@@ -224,5 +232,9 @@ script = ExtResource("17_dxssv")
 
 [node name="Grab Handles" type="Node" parent="Action State Machine" index="5"]
 script = ExtResource("18_eocux")
+
+[node name="Pull" type="Node" parent="Action State Machine" index="6"]
+script = ExtResource("19_lfvx8")
+max_strength = 20000.0
 
 [node name="Damage Component" parent="." index="6" instance=ExtResource("12_goufb")]

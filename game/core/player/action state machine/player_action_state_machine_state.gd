@@ -39,6 +39,13 @@ func interaction_logic():
 				player.action_state_machine.pick_up_item(item_instance)
 			return
 
+	if Input.is_action_just_pressed("pull"):
+		var shapecast: ShapeCast3D= player.pull_shapecast
+		if shapecast.is_colliding():
+			var collider: PhysicsBody3D= shapecast.get_collider(0)
+			player.action_state_machine.pull(BaseComponent.get_from_node(collider, PullableComponent.NODE_NAME))
+		return
+
 
 func init_ghost(model: Node3D):
 	

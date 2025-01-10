@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ced1k5g1mhrng"]
+[gd_scene load_steps=11 format=3 uid="uid://ced1k5g1mhrng"]
 
 [ext_resource type="Script" path="res://game/core/object entity/instances/pallet.gd" id="1_u58sg"]
 [ext_resource type="PackedScene" uid="uid://4lrcbiiff8n2" path="res://game/core/components/item catcher/item_catcher.tscn" id="2_gp6o0"]
+[ext_resource type="PackedScene" uid="uid://2q4u62poidg1" path="res://game/core/components/pullable component/pullable_component.tscn" id="3_e84f0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ssc62"]
 size = Vector3(2, 0.5, 2)
@@ -90,6 +91,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, 0)
 mesh = SubResource("BoxMesh_0smv5")
 
 [node name="Item Catcher" parent="." instance=ExtResource("2_gp6o0")]
+
+[node name="Pullable" parent="." instance=ExtResource("3_e84f0")]
 
 [node name="Large Grid" type="Marker3D" parent="."]
 unique_name_in_owner = true

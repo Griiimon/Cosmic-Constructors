@@ -40,3 +40,7 @@ func add_to_stack(tile: Marker3D):
 	var item_instance: Node3D= stored_item.model.instantiate()
 	tile.add_child(item_instance)
 	item_instance.position.y+= tile.get_child_count() * 0.1
+
+
+func can_pull_pullable()-> bool:
+	return true

@@ -7,6 +7,7 @@ extends BlockInstanceOnOff
 @onready var item_catcher: ItemCatcher = $"Item Catcher"
 
 var progress: float= 0.0
+var storage: Inventory= Inventory.new()
 
 
 
@@ -16,13 +17,24 @@ func _ready() -> void:
 	
 func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 	if progress < 1:
-		progress+= delta
-	
+		if storage.has_ingredients(recipe.ingredients):
+			progress+= delta
+			if not fire_particles.emitting:
+				fire_particles.emitting= true
+		else:
+			if fire_particles.emitting:
+				fire_particles.emitting= false
+
 	if progress >= 1:
 		if ejector.can_eject():
 			ejector.eject_item(InventoryItem.new(recipe.product), grid.world)
 			progress= 0
+			storage.sub_ingredients(recipe.ingredients)
 
 
 func on_add_ingredient(inv_item: InventoryItem):
-	
+	storage.add_item(inv_item)
+
+
+func can_item_catcher_catch_item(inv_item: InventoryItem)-> bool:
+	return true

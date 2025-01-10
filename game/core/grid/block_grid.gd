@@ -407,7 +407,7 @@ func request_rotation(rot_vec: Vector3):
 	requested_rotation+= rot_vec
 
 
-func flood_fill(origin: Vector3i)-> Array[Vector3i]:
+func flood_fill(origin: Vector3i, filter= null)-> Array[Vector3i]:
 	var result_list: Array[Vector3i]
 	var unprocessed_list: Array[Vector3i]
 	
@@ -422,6 +422,7 @@ func flood_fill(origin: Vector3i)-> Array[Vector3i]:
 		
 		for neighbor in neighbors:
 			if not neighbor in result_list:
+				if filter and not filter.call(self, neighbor): continue
 				result_list.append(neighbor)
 				if not neighbor in unprocessed_list:
 					unprocessed_list.append(neighbor)

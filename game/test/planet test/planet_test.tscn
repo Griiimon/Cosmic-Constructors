@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://buqb4b7dp5dty"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_wte7t"]
-[ext_resource type="Script" path="res://game/test/planet test/planet_tests.gd" id="2_8smgd"]
+[ext_resource type="Script" path="res://game/test/planet test/planet_sandbox.gd" id="2_8smgd"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="2_dpsqk"]
 [ext_resource type="Resource" uid="uid://y0452womu354" path="res://game/data/hand items/tools/hand drill/hand_drill.tres" id="3_41ocs"]
 [ext_resource type="Script" path="res://game/core/misc/environment space area/environment_space_area.gd" id="4_nmw4n"]
@@ -27,7 +27,7 @@ back_item = ExtResource("6_tarnc")
 [node name="Planet Test" type="Node3D"]
 script = ExtResource("1_wte7t")
 
-[node name="Tests" type="Node" parent="."]
+[node name="Sandbox" type="Node" parent="."]
 script = ExtResource("2_8smgd")
 equip_item = ExtResource("3_41ocs")
 

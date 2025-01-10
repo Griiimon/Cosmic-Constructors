@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://bws4nr4sjg6bt"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_hy62o"]
-[ext_resource type="Script" path="res://game/test/damage test/damage_tests.gd" id="2_wkbyi"]
+[ext_resource type="Script" path="res://game/test/damage test/damage_sandbox.gd" id="2_wkbyi"]
 [ext_resource type="Resource" uid="uid://jxoc0g7ajehb" path="res://game/data/hand items/weapons/rocket launcher/rocket_launcher.tres" id="3_e07li"]
 [ext_resource type="Texture2D" path="res://skybox/proc_stars.dds" id="3_o606f"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="4_8hosm"]
@@ -50,7 +50,7 @@ size = Vector3(500, 0.1, 500)
 [node name="Damage Test" type="Node3D"]
 script = ExtResource("1_hy62o")
 
-[node name="Tests" type="Node" parent="."]
+[node name="Sandbox" type="Node" parent="."]
 script = ExtResource("2_wkbyi")
 equip_item = ExtResource("3_e07li")
 project_folder_world = false

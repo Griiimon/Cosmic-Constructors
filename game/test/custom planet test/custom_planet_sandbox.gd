@@ -1,4 +1,4 @@
-extends BaseTests
+extends BaseSandbox
 
 
 func on_start():

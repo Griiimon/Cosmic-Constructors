@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=3 uid="uid://c536lmrqpr6cu"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_cfpp6"]
-[ext_resource type="Script" path="res://game/test/large planet test/large_planet_tests.gd" id="2_2n5tn"]
+[ext_resource type="Script" path="res://game/test/large planet test/large_planet_sandbox.gd" id="2_2n5tn"]
 [ext_resource type="Resource" uid="uid://y0452womu354" path="res://game/data/hand items/tools/hand drill/hand_drill.tres" id="3_4hmgi"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="4_48to3"]
 [ext_resource type="Script" path="res://game/core/misc/environment space area/environment_space_area.gd" id="4_77i47"]
@@ -276,7 +276,7 @@ volumetric_fog_density = 0.0
 [node name="Large Planet Test" type="Node3D"]
 script = ExtResource("1_cfpp6")
 
-[node name="Tests" type="Node" parent="."]
+[node name="Sandbox" type="Node" parent="."]
 script = ExtResource("2_2n5tn")
 equip_item = ExtResource("3_4hmgi")
 

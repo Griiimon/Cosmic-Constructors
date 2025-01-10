@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cd45r4ydi70p"]
 
-[ext_resource type="Script" path="res://game/base_tests.gd" id="1_fd624"]
+[ext_resource type="Script" path="res://game/base_sandbox.gd" id="1_fd624"]
 [ext_resource type="Script" path="res://game/game.gd" id="1_o413o"]
 [ext_resource type="Script" path="res://game/player_spawn.gd" id="4_okbv6"]
 [ext_resource type="Resource" uid="uid://6jymoqkdm6kr" path="res://game/data/equipment/back/jetpack/space_jetpack.tres" id="5_lx1rr"]
@@ -16,7 +16,7 @@ back_item = ExtResource("5_lx1rr")
 [node name="Empty Test" type="Node3D"]
 script = ExtResource("1_o413o")
 
-[node name="Tests" type="Node" parent="."]
+[node name="Sandbox" type="Node" parent="."]
 script = ExtResource("1_fd624")
 load_world = true
 freeze_grids = true

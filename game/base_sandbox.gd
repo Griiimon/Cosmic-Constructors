@@ -1,4 +1,4 @@
-class_name BaseTests
+class_name BaseSandbox
 extends Node
 
 @export var remove_voxel_terrain:= false

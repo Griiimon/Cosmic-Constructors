@@ -29,6 +29,7 @@ func catch(inv_item: InventoryItem):
 
 func on_body_entered(body: Node3D):
 	if not is_instance_valid(body): return
+	if body.is_queued_for_deletion(): return
 	
 	assert(body is RigidBody3D)
 	if (body as RigidBody3D).freeze: return

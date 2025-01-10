@@ -2,24 +2,24 @@ pullable object component: for example on Wooden Pallets, so the player can move
 	WHAT KEY to use. F has other functionality here.. G
 	try to pull on a pallet snap block using ramp
 
-item ejector: if item is raw resource check for container with raycast
-
-when the car isnt moving ( for a bit? ) put an additional damping factor on the suspension
+pallet storage block (2x2), that tries to snap and pull on pallets that are on top. unless the pallet has contact with any other grid then the magnetizing is temporarily disabled, so it can be lifted with a forklift etc
 
 suspension invert steering option
 	power
 	brakes
 	spring
 
-serializable inventories
+when the car isnt moving ( for a bit? ) put an additional damping factor on the suspension
+
+terrain height map array store and calc normals
+
+pick block should copy rotation
+
+
 property panel group system:
 	create group
 	add to last group
 	group mode toggle: every thing pressed will affect the entire group, including hotkey assignment
-
-terrain height map array store and calc normals
-
-pallet storage block (2x2), that tries to snap and pull on pallets that are on top. unless the pallet has contact with any other grid then the magnetizing is temporarily disabled, so it can be lifted with a forklift etc
 
 ore pile nomral map array + metallic and roughness value per raw material
 
@@ -27,11 +27,9 @@ on_grid_changed() in BlockInstance callback if grid split results in new grid. m
 
 items, add mass ( and even dynamic damping? )
 
+serializable inventories
+
 throw items: drop with f or when mouse released, but add force on mouse hold duration
-
-WorldItemInstance needs to disable collision shape when on connector or else it will take collision layer of grid and react to raycasts
-
-pick block should copy rotation
 
 tree spawner
 
@@ -100,6 +98,7 @@ PanelViewer edit mode: unique, all (same type), mirrored ( which axis? axis aren
 "thick" wireframe shader for unfinished blocks?
 
 add motion blur ( sphynx addon ) to fluid drops
+ or just make them a little transparent and each drop has a trail of 5 - 10 drop meshes that will be destroyed at the same position where the original drop was destroyed
 
 air ship
 

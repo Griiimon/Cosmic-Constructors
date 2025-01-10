@@ -1,13 +1,9 @@
 [gd_scene load_steps=13 format=4 uid="uid://cgg6tb8y1qi3m"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/furnace_instance.gd" id="1_ixfdn"]
-[ext_resource type="Resource" uid="uid://b5j26qxxk25de" path="res://game/data/items/intermediates/steel ingot/steel_ingot.tres" id="2_0woud"]
+[ext_resource type="Resource" uid="uid://d2tb2pfogfi1f" path="res://game/data/recipe/furnace recipes/steel_ingot_recipe.tres" id="2_88d31"]
 [ext_resource type="PackedScene" uid="uid://iixyhw4jvjeq" path="res://game/core/components/item ejector/item_ejector.tscn" id="2_d85vm"]
-[ext_resource type="Script" path="res://game/core/recipes/furnace_recipe.gd" id="3_63usp"]
-
-[sub_resource type="Resource" id="Resource_i3vvf"]
-script = ExtResource("3_63usp")
-product = ExtResource("2_0woud")
+[ext_resource type="PackedScene" uid="uid://4lrcbiiff8n2" path="res://game/core/components/item catcher/item_catcher.tscn" id="5_xyna7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y6say"]
 albedo_color = Color(0.294641, 0.294641, 0.294641, 1)
@@ -45,9 +41,12 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.444444, 0.82963)
 colors = PackedColorArray(0.937255, 0.101961, 0, 1, 0.878431, 0.380392, 0, 1, 0, 0, 0, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_f6sd2"]
+size = Vector3(1, 0.25, 1)
+
 [node name="Furnace" type="Node3D"]
 script = ExtResource("1_ixfdn")
-recipe = SubResource("Resource_i3vvf")
+recipe = ExtResource("2_88d31")
 
 [node name="CSGBox3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -75,4 +74,12 @@ color_ramp = SubResource("Gradient_igkyk")
 
 [node name="Item Ejector" parent="." instance=ExtResource("2_d85vm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
-only_with_valid_target = null
+
+[node name="Item Catcher" parent="." node_paths=PackedStringArray("active_area") instance=ExtResource("5_xyna7")]
+active_area = NodePath("../Catch Area")
+
+[node name="Catch Area" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6332, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Catch Area"]
+shape = SubResource("BoxShape3D_f6sd2")

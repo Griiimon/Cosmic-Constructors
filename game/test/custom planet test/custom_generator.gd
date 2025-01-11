@@ -2,6 +2,7 @@
 class_name CustomVoxelGenerator
 extends VoxelGeneratorScript
 
+
 @export var height_noise: FastNoiseLite
 @export var height_factor: float= 100.0
 @export var mountains_noise: FastNoiseLite
@@ -24,27 +25,51 @@ func _get_used_channels_mask( ):
 
 func _generate_block(out_buffer : VoxelBuffer, origin_in_voxels : Vector3i, lod : int) -> void:
 	var size: Vector3i= out_buffer.get_size()
+	var height_arr= Array2D.new(size.x, size.z)
+	var normals_arr= Array2D.new(size.x, size.z)
 	
-	#if lod == 0:
-		#var height_arr= Array2D.new(size.x, size.z)
-		#for rz in size.z:
-			#for rx in size.x:
-				#
+	if true: #lod == 0:
+		for rz in size.z:
+			for rx in size.x:
+				var pos_world := Vector3(origin_in_voxels) + Vector3(rx << lod, 0, rz << lod)
+
+				var height := height_noise.get_noise_2d(pos_world.x, pos_world.z)
+				height*= height
+				height*= height_factor
+				
+				var mountains: float= mountains_noise.get_noise_2d(pos_world.x, pos_world.z)
+				if abs(mountains) > mountains_threshold:
+					var new_height= height * sign(mountains) * mountains_multiplier
+					height= lerp(height, new_height, clampf((abs(mountains) - mountains_threshold) * 10.0, 0.0, 1.0))
+				
+				height_arr.put(rx, rz, height)
+
+		for rz in size.z:
+			for rx in size.x:
+				var height: float= height_arr.read(rx, rz)
+				
+				var h1: float= height
+				if rx > 0:
+					h1= height_arr.readv(Vector2i(rx - 1, rz))
+				var h2: float= height
+				if rx < size.x - 1 and rz > 0:
+					h2= height_arr.readv(Vector2i(rx + 1, rz - 1))
+				var h3: float= height
+				if rx < size.x - 1 and rz < size.z - 1:
+					h3= height_arr.readv(Vector2i(rx + 1, rz + 1))
+
+				var plane:= Plane(Vector3(rx - 1, h1, rz), Vector3(rx + 1, h2, rz - 1), Vector3(rx + 1, h3, rz + 1))
+				normals_arr.put(rx, rz, plane.normal)
+				
 		
 
 	for rz in size.z:
 		for rx in size.x:
 			var pos_world := Vector3(origin_in_voxels) + Vector3(rx << lod, 0, rz << lod)
 
-			var height := height_noise.get_noise_2d(pos_world.x, pos_world.z)
-			height*= height
-			height*= height_factor
-			
 			var mountains: float= mountains_noise.get_noise_2d(pos_world.x, pos_world.z)
-			if abs(mountains) > mountains_threshold:
-				var new_height= height * sign(mountains) * mountains_multiplier
-				height= lerp(height, new_height, clampf((abs(mountains) - mountains_threshold) * 10.0, 0.0, 1.0))
 			
+			var height: float= height_arr.read(rx, rz)
 
 			for ry in out_buffer.get_size().y:
 				pos_world.y = origin_in_voxels.y + (ry << lod)
@@ -55,9 +80,10 @@ func _generate_block(out_buffer : VoxelBuffer, origin_in_voxels : Vector3i, lod 
 
 				out_buffer.set_voxel(VoxelTool.vec4i_to_u16_indices(Vector4i(0, 1, 2, 3)), rx, ry, rz, VoxelBuffer.CHANNEL_INDICES)
 				var weights:= Color(1, 0, 0, 0)
-				if abs(mountains) > mountains_threshold or pos_world.y < height - 10 * (lod + 1):
+#				if abs(mountains) > mountains_threshold or pos_world.y < height - 10 * (lod + 1):
+				if Vector3.UP.dot(normals_arr.read(rx, rz)) < 0.5:
 					weights= Color(0, 1, 0, 0)
-				elif pos_world.y < height - 2 * (lod * 2 + 1):
+				elif pos_world.y < height - 2 * (lod * 5 + 1):
 					weights= Color(0, 0, 0, 1)
 				
 				if lerp(iron_noise1.get_noise_3dv(pos_world), iron_noise2.get_noise_3dv(pos_world), iron_noise_weight) > iron_threshold:

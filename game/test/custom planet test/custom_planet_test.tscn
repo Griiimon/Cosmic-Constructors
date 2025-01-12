@@ -83,9 +83,9 @@ script = ExtResource("3_cfpqv")
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 generator = ExtResource("8_27ipv")
 mesher = SubResource("VoxelMesherTransvoxel_oycf3")
-view_distance = 2048
+view_distance = 4096
 voxel_bounds = AABB(-65536, -65536, -65536, 131072, 131072, 131072)
-lod_count = 7
+lod_count = 9
 lod_distance = 24.0
 secondary_lod_distance = 24.0
 material = ExtResource("9_l2jpv")
@@ -96,7 +96,6 @@ terrain_properties = SubResource("Resource_75u82")
 
 [node name="DirectionalLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.996084, 0.0146873, 0.087179, 0.0884075, 0.165481, 0.982242, 1.06741e-18, 0.986104, -0.166132, 0, 275.302, 0)
-visible = false
 shadow_enabled = true
 directional_shadow_max_distance = 2000.0
 

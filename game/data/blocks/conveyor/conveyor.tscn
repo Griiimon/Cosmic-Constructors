@@ -139,6 +139,7 @@ shape = SubResource("BoxShape3D_1db4g")
 
 [node name="Item Ejector" parent="." instance=ExtResource("4_47sw3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6)
+only_with_valid_target = true
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.984174, 0.177205, 0, -0.177205, 0.984174, 0, -0.145901, 0)

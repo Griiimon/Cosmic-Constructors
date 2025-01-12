@@ -74,6 +74,7 @@ color_ramp = SubResource("Gradient_igkyk")
 
 [node name="Item Ejector" parent="." instance=ExtResource("2_d85vm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+only_with_valid_target = true
 
 [node name="Item Catcher" parent="." node_paths=PackedStringArray("active_area") instance=ExtResource("5_xyna7")]
 active_area = NodePath("../Catch Area")

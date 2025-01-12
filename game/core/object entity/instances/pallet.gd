@@ -17,6 +17,7 @@ func _on_item_catcher_caught_item(inv_item: InventoryItem) -> void:
 	assert(tile)
 	add_to_stack(tile)
 	count+= 1
+	mass+= inv_item.item.base_mass
 
 
 func find_tile_with_space()-> Marker3D:

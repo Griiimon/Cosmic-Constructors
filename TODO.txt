@@ -1,5 +1,3 @@
-FIX block building smooth rotation and actually rotation started to fail again
-
 pallet storage block (2x2), that tries to snap and pull on pallets that are on top. unless the pallet has contact with any other grid then the magnetizing is temporarily disabled, so it can be lifted with a forklift etc
 
 suspension invert steering option

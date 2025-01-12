@@ -141,6 +141,25 @@ func get_same_neighbors_positions(grid: BlockGrid, block_pos: Vector3i)-> Array[
 	return result
 
 
+static func get_neighbor_class_instances(grid: BlockGrid, grid_block: BaseGridBlock, global_class_name: String, neighbor_block_pos= null, allow_multiple: bool= true)-> Array[BlockInstance]:
+	var result: Array[BlockInstance]= []
+	
+	var neighbor_instance: BlockInstance
+	if neighbor_block_pos:
+		neighbor_instance= grid.get_block_local(neighbor_block_pos).get_block_instance()
+		if not neighbor_instance or (neighbor_instance.get_script() as GDScript).get_global_name() != global_class_name:
+			return result
+		result.append(neighbor_instance)
+	else:
+		var neighbor_instances: Array[BlockInstance]= grid.get_block_neighbor_instances(grid_block.local_pos, global_class_name)
+		if neighbor_instances.is_empty(): return result
+		if neighbor_instances.size() > 1 and not allow_multiple:
+			return result
+		result.append_array(neighbor_instances)
+	
+	return result
+
+
 func get_extra_properties()-> Array[PropertyViewerPanel.ExtraProperty]:
 	var result: Array[PropertyViewerPanel.ExtraProperty]= []
 	for func_ptr in extra_property_callbacks:

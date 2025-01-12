@@ -27,6 +27,7 @@ fractal_weighted_strength = 0.46
 script = ExtResource("1_6qigk")
 height_noise = SubResource("FastNoiseLite_xkm8b")
 height_factor = 100.0
+slope_stone_threshold = 0.8
 mountains_noise = SubResource("FastNoiseLite_erd3y")
 mountains_threshold = 0.3
 mountains_multiplier = 5.0

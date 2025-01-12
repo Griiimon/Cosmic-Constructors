@@ -1,8 +1,6 @@
-pallet is full
+Use reverse R for driving
 
-steering + brake blocks
-
-dynamic pallet weight 
+steering + brake blocks with tick priority an process grid requested movement instead of wheels 
 
 fluid dispenser
 
@@ -15,7 +13,8 @@ suspension invert steering option
 
 when the car isnt moving ( for a bit? ) put an additional damping factor on the suspension
 
-terrain height map array store and calc normals
+terrain height map array store and calc normals:
+Chunks of height info are created independent of the terrain generator, but terrain generator ( can look if height map for current chunk has been created - HOW TO MATCH WEIRD 19x19 voxel chunks) queries height from that cache which will either return a cached value or call get_height() if cache doesn't exist yet
 
 pick block should copy rotation
 

@@ -5,6 +5,9 @@ enum StorageSize { TINY, SMALL, LARGE, HUGE}
 
 @export var model: PackedScene
 @export var storage_size: StorageSize= StorageSize.SMALL
+@export var base_mass: float= 0.5
+@export var mass_per_item: float= 0.0
+
 
 
 func can_be_conveyored()-> bool:
@@ -25,3 +28,7 @@ func has_dynamic_scale()-> bool:
 
 func get_scale(count: int)-> float:
 	return 1.0
+
+
+func get_mass(count: int)-> float:
+	return base_mass + mass_per_item * count

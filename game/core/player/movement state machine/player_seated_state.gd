@@ -68,6 +68,9 @@ func on_physics_process(_delta: float):
 		get_grid().parking_brake= not get_grid().parking_brake
 		SignalManager.toggle_parking_brake.emit(get_grid().parking_brake)
 
+	if Input.is_action_just_pressed("reverse"):
+		get_grid().reverse_mode= not get_grid().reverse_mode
+
 
 func on_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

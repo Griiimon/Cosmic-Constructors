@@ -17,6 +17,8 @@ var requested_rotation: Vector3
 var inertial_dampeners: bool= false
 var parking_brake: bool= false
 
+var reverse_mode: bool= false
+
 var total_gyro_strength: float= 0
 
 var mass_indicator: Node3D
@@ -488,6 +490,7 @@ func serialize()-> Dictionary:
 	data["linear_velocity"]= linear_velocity
 	data["angular_velocity"]= angular_velocity
 	data["parking_brake"]= parking_brake
+	data["reverse_mode"]= reverse_mode
 	
 	data["blocks"]= []
 	
@@ -530,6 +533,7 @@ func deserialize(data: Dictionary):
 	linear_velocity= str_to_var("Vector3" + data["linear_velocity"])
 	angular_velocity= str_to_var("Vector3" + data["angular_velocity"])
 	parking_brake= Utils.get_key_or_default(data, "parking_brake", false)
+	reverse_mode= Utils.get_key_or_default(data, "reverse_mode", false)
 
 
 	for item: Dictionary in data["blocks"]:

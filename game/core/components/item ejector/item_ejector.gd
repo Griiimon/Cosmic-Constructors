@@ -31,7 +31,7 @@ func get_item_catcher()-> ItemCatcher:
 			var grid: BlockGrid= collider
 			assert(grid)
 			var collision_pos: Vector3= Utils.get_raycast_inside_collision_point(raycast)
-			var grid_block: GridBlock= grid.get_block_from_global_pos(collision_pos)
+			var grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_pos)
 			assert(grid_block)
 			return BaseBlockComponent.get_from_block(grid_block, ItemCatcher.NODE_NAME)
 		else:

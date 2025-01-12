@@ -608,6 +608,15 @@ func get_block_neighbor_blocks(pos: Vector3i, include_diagonals: bool= false, in
 	return result
 
 
+func get_block_neighbor_instances(pos: Vector3i, global_class_name: String, include_diagonals: bool= false, is_multi_block: bool= false)-> Array[BlockInstance]:
+	var result: Array[BlockInstance]= []
+	for block: BaseGridBlock in get_block_neighbor_blocks(pos, include_diagonals, false, is_multi_block):
+		var instance: BlockInstance= block.get_block_instance()
+		if instance and not instance in result and (instance.get_script() as GDScript).get_global_name() == global_class_name:
+			result.append(instance)
+	return result
+
+
 func get_block_from_global_pos(global_pos: Vector3)-> BaseGridBlock:
 	var grid_pos: Vector3i= get_local_grid_pos(global_pos)
 	if not blocks.has(grid_pos): return null

@@ -34,7 +34,7 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, delta: float):
 					progress= 0
 					item_instance= null
 			else:
-				if item_ejector.can_eject():
+				if item_ejector.can_eject(item_instance.inv_item):
 					item_ejector.eject_item(item_instance.inv_item, world) 
 					progress= 0
 					item_instance.queue_free()

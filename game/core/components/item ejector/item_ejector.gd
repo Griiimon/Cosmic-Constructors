@@ -40,5 +40,5 @@ func get_item_catcher()-> ItemCatcher:
 	return null
 
 
-func can_eject()-> bool:
-	return cooldown.is_stopped() and ( not only_with_valid_target or get_item_catcher() != null )
+func can_eject(inv_item: InventoryItem)-> bool:
+	return cooldown.is_stopped() and ( not only_with_valid_target or ( get_item_catcher() != null and get_item_catcher().can_catch_item(inv_item) ))

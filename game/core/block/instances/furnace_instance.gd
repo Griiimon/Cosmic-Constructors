@@ -27,7 +27,7 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 
 	if progress >= 1:
 		var inv_item:= InventoryItem.new(recipe.product)
-		if ejector.can_eject():
+		if ejector.can_eject(inv_item):
 			ejector.eject_item(inv_item, grid.world)
 			progress= 0
 			if not DebugSettings.infinite_furnace_ingredients:

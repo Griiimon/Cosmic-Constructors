@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SteeringBlock" load_steps=3 format=3 uid="uid://bu4fqiedlml0g"]
+
+[ext_resource type="PackedScene" uid="uid://boi480axvobwy" path="res://game/data/blocks/steering/steering.tscn" id="1_dl3u4"]
+[ext_resource type="Script" path="res://game/core/block/types/steering_block.gd" id="1_n0x1i"]
+
+[resource]
+script = ExtResource("1_n0x1i")
+size = Vector3i(1, 1, 1)
+mass = 10.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = true
+tick_priority = 1
+can_be_built = true
+scene = ExtResource("1_dl3u4")
+name = ""

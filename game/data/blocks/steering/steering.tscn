@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=3 uid="uid://boi480axvobwy"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/steering_instance.gd" id="1_rwgu8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ajeps"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noldv"]
+albedo_color = Color(0.583504, 0.412865, 0.2999, 1)
+metallic = 1.0
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_3o3p5"]
+material = SubResource("StandardMaterial3D_noldv")
+size = Vector3(0.2, 0.355, 0.95)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jxekq"]
+albedo_color = Color(0.111197, 0.111197, 0.111197, 1)
+metallic = 0.7
+roughness = 0.3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_io3r1"]
+material = SubResource("StandardMaterial3D_jxekq")
+top_radius = 0.07
+bottom_radius = 0.07
+height = 0.44
+radial_segments = 32
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q67j7"]
+albedo_color = Color(0.424931, 0.424931, 0.424931, 1)
+metallic = 1.0
+roughness = 0.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rascc"]
+material = SubResource("StandardMaterial3D_q67j7")
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.545
+radial_segments = 12
+rings = 2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2fle0"]
+material = SubResource("StandardMaterial3D_q67j7")
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.825
+radial_segments = 12
+rings = 2
+
+[node name="Steering Block" type="Node3D"]
+script = ExtResource("1_rwgu8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_ajeps")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.940561, 0, -0.339625, 0, 1, 0, 0.339625, 0, 0.940561, 0.236161, 0, 0)
+mesh = SubResource("BoxMesh_3o3p5")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(0.940561, 0, 0.339625, 0, 1, 0, -0.339625, 0, 0.940561, 0.00192784, 0, 0.379264)
+mesh = SubResource("CylinderMesh_io3r1")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(0.940561, 0, 0.339625, 0, 1, 0, -0.339625, 0, 0.940561, 0.0208484, 0, -0.351361)
+mesh = SubResource("CylinderMesh_io3r1")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.366425, 0, 0)
+mesh = SubResource("BoxMesh_3o3p5")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(0.940561, 0, 0.339625, 0, 1, 0, -0.339625, 0, 0.940561, 0.00192784, 0, 0.379264)
+mesh = SubResource("CylinderMesh_io3r1")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(0.940561, 0, 0.339625, 0, 1, 0, -0.339625, 0, 0.940561, 0.00192784, 0, -0.339746)
+mesh = SubResource("CylinderMesh_io3r1")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, -0.120039, 0, 0.385898)
+mesh = SubResource("CylinderMesh_rascc")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, -0.0136917, 0, -0.345644)
+mesh = SubResource("CylinderMesh_2fle0")

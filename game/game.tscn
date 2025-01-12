@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_dxwo3"]
 [ext_resource type="PackedScene" uid="uid://qr0bko2hsrbk" path="res://game/debug/space grid/debug_space_grid.tscn" id="1_ek1sn"]
-[ext_resource type="Script" path="res://game/base_tests.gd" id="1_o5dc5"]
+[ext_resource type="Script" path="res://game/base_sandbox.gd" id="1_o5dc5"]
 [ext_resource type="Resource" uid="uid://y0452womu354" path="res://game/data/hand items/tools/hand drill/hand_drill.tres" id="3_l58sr"]
 [ext_resource type="Script" path="res://game/player_spawn.gd" id="3_qnlsh"]
 [ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="4_jpp4l"]
@@ -30,7 +30,7 @@ frequency = 0.0139
 
 [sub_resource type="VoxelGeneratorGraph" id="VoxelGeneratorGraph_r7ijg"]
 graph_data = {
-"connections": [[1, 0, 9, 0], [1, 0, 13, 0], [10, 0, 11, 0], [2, 0, 9, 1], [2, 0, 13, 1], [11, 0, 12, 0], [3, 0, 9, 2], [3, 0, 13, 2], [12, 0, 4, 0], [13, 0, 12, 1], [9, 0, 10, 0]],
+"connections": [[1, 0, 9, 0], [1, 0, 13, 0], [2, 0, 9, 1], [2, 0, 13, 1], [10, 0, 11, 0], [3, 0, 9, 2], [3, 0, 13, 2], [11, 0, 12, 0], [12, 0, 4, 0], [13, 0, 12, 1], [9, 0, 10, 0]],
 "nodes": {
 "1": {
 "gui_position": Vector2(440, 50),

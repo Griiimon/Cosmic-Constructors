@@ -66,10 +66,6 @@ func _generate_block(out_buffer : VoxelBuffer, origin_in_voxels : Vector3i, lod 
 					h3= height_arr.readv(Vector2i(rx + 1, rz + 1))
 				
 				var plane:= Plane(Vector3((rx - 1) << lod, h1, rz << lod), Vector3((rx + 1) << lod, h2, (rz - 1) << lod), Vector3((rx + 1) << lod, h3, (rz + 1) << lod))
-				#var plane:= Plane(Vector3((rx - 1) * pow(2, 0), h1, rz * pow(2, lod)), Vector3((rx + 1) * pow(2, lod), h2, (rz - 1) * pow(2, lod)), Vector3((rx + 1) * pow(2, lod), h3, (rz + 1) * pow(2, lod)))
-				##var plane:= Plane(Vector3((rx - 1) , h1, rz ), Vector3((rx + 1) , h2, (rz - 1) ), Vector3((rx + 1) , h3, (rz + 1) ))
-				#if lod == 0:
-					#prints(lod, plane.normal)
 				normals_arr.put(rx, rz, plane.normal)
 				
 		
@@ -95,7 +91,7 @@ func _generate_block(out_buffer : VoxelBuffer, origin_in_voxels : Vector3i, lod 
 #				if abs(mountains) > mountains_threshold or pos_world.y < height - 10 * (lod + 1):
 				if slope < slope_stone_threshold:# - lod * 0.05:
 					weights= Color(0, 1, 0, 0)
-				elif pos_world.y < height - 2 * (lod * 5 + 1):
+				elif pos_world.y < height - 2 * (1 << lod):
 					weights= Color(0, 0, 0, 1)
 				
 				if lerp(iron_noise1.get_noise_3dv(pos_world), iron_noise2.get_noise_3dv(pos_world), iron_noise_weight) > iron_threshold:

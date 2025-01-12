@@ -13,3 +13,4 @@
 [node name="Debug Settings" type="Node"]
 script = ExtResource("1_is5ng")
 default_build_hotbar_layout = Array[ExtResource("2_au0m6")]([ExtResource("3_mvfbq"), ExtResource("4_6gtd1"), ExtResource("5_le4lb"), ExtResource("6_ahjun"), ExtResource("7_lpoa3"), ExtResource("8_mcivm"), ExtResource("9_6ycuy")])
+infinite_furnace_ingredients = true

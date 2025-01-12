@@ -1,6 +1,7 @@
 extends Node
 
 @export var default_build_hotbar_layout: Array[Block]
+@export var infinite_furnace_ingredients: bool= false
 
 
 

@@ -64,6 +64,11 @@ func init_grid(grid: BlockGrid, pos: Vector3, rot: Vector3):
 	grid.freeze= grid_freeze_state
 
 
+func remove_grid(grid: BlockGrid):
+	grids.remove_child(grid)
+	grid.queue_free()
+
+
 # not used
 func add_custom_grid(grid: BlockGrid, pos: Vector3, rot: Vector3= Vector3.ZERO)-> BlockGrid:
 	init_grid(grid, pos, rot)

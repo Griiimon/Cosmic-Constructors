@@ -88,7 +88,10 @@ func _input(event: InputEvent) -> void:
 	elif event is InputEventMouseButton:
 		if event.pressed:
 			if event.button_index == MOUSE_BUTTON_RIGHT:
-				remove_block()
+				if event.ctrl_pressed:
+					remove_grid()
+				else:
+					remove_block()
 			elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 				switch_block(-1)
 			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
@@ -164,6 +167,20 @@ func remove_block():
 		var grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_point) 
 		if not grid_block: return
 		grid_block.destroy(grid)
+
+
+func remove_grid():
+	if not player.action_state_machine.build_state.is_current_state():
+		return
+
+	var query:= PhysicsRayQueryParameters3D.create(player.head.global_position, player.build_raycast.to_global(player.build_raycast.target_position))#, Global.GRID_COLLISION_LAYER)
+	#prints("Remove query", query.from, query.to)
+	query.hit_back_faces= false
+	query.hit_from_inside= false
+	var result= player.get_world_3d().direct_space_state.intersect_ray(query)
+	if result and (result.collider as CollisionObject3D).collision_layer == CollisionLayers.GRID:
+		var grid: BlockGrid= result.collider
+		grid.world.remove_grid(grid)
 
 
 func sit_in_nearest_seat():

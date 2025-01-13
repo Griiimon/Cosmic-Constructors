@@ -25,4 +25,4 @@ func init(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_block_pos= null):
 
 func physics_tick(grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 	if suspension:
-		suspension.steering_input= -round(grid.requested_movement.x)
+		suspension.steering_input= -round(grid.requested_local_movement.x)

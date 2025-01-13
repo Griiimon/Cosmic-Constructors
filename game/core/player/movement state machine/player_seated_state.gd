@@ -49,15 +49,15 @@ func on_physics_process(_delta: float):
 		Input.get_axis("move_forward", "move_back"))
 
 	if not grid_move_vec.is_zero_approx():
-		#DebugHud.send("Local Grid Move Vec", grid_move_vec)
+		DebugHud.send("Local Grid Move Vec", grid_move_vec)
 
-		# TODO account for seat yaw, pitch, roll
+		# TODO account for seat pitch, roll
 		# yaw
-		grid_move_vec= grid_move_vec.rotated(seat.basis.y, -seat.global_basis.z.angle_to(get_grid().basis.z))
+		var global_grid_move_vec: Vector3= grid_move_vec.rotated(seat.basis.y, -seat.global_basis.z.angle_to(get_grid().basis.z))
 
-		#DebugHud.send("Grid Move Vec", grid_move_vec)
+		DebugHud.send("Grid Move Vec", global_grid_move_vec)
 
-		get_grid().request_movement(grid_move_vec)
+		get_grid().request_movement(grid_move_vec, global_grid_move_vec)
 
 	var roll_axis= Input.get_axis("roll_left", "roll_right")
 	if not is_zero_approx(roll_axis):

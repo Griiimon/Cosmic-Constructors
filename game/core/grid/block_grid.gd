@@ -11,6 +11,7 @@ var collision_shapes: Array[CollisionShape3D]
 var main_grid_id: int= -1
 var main_grid_connection: GridBlock
 
+var requested_local_movement: Vector3
 var requested_movement: Vector3
 var requested_rotation: Vector3
 
@@ -405,8 +406,9 @@ func raycast(from: Vector3, to: Vector3, hit_from_inside: bool= false, step_size
 
 
 # normalized
-func request_movement(move_vec: Vector3):
-	requested_movement+= move_vec
+func request_movement(local_move_vec: Vector3, global_move_vec: Vector3):
+	requested_local_movement+= local_move_vec
+	requested_movement+= global_move_vec
 
 
 # not normalized
@@ -567,7 +569,7 @@ func can_place_block_at_global(block: Block, global_pos: Vector3, block_rotation
 
 
 func get_throttle_input()-> float:
-	var forward_drive: float= max(0, -requested_movement.z)
+	var forward_drive: float= max(0, -requested_local_movement.z)
 	return forward_drive
 
 

@@ -173,9 +173,9 @@ func on_update():
 
 func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 	if is_electric:
-		throttle_input= round(max(0, -grid.requested_movement.z))
-		brake_input= round(max(0, grid.requested_movement.z))
-		steering_input= -round(grid.requested_movement.x)
+		throttle_input= round(max(0, -grid.requested_local_movement.z))
+		brake_input= round(max(0, grid.requested_local_movement.z))
+		steering_input= -round(grid.requested_local_movement.x)
 
 	if grid.parking_brake:
 		brake_input= 1

@@ -25,4 +25,4 @@ func init(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_block_pos= null):
 
 func physics_tick(grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 	if suspension:
-		suspension.brake_input= max(0, grid.requested_movement.z)
+		suspension.brake_input= max(0, grid.requested_local_movement.z)

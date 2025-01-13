@@ -94,7 +94,9 @@ func align_ghost():
 
 
 func build_block():
+	var new_grid:= false
 	if not grid:
+		new_grid= true
 		grid= player.world.add_grid(ghost.position, ghost.global_rotation)
 		local_block_pos= Vector3i.ZERO
 		
@@ -106,7 +108,7 @@ func build_block():
 		if player.get_world_3d().direct_space_state.intersect_shape(query):
 			grid.freeze= true
 		
-	grid.add_block(current_block, local_block_pos)
+	grid.add_block(current_block, local_block_pos, Vector3i.ZERO if new_grid else block_rotation)
 
 
 func pick_block():

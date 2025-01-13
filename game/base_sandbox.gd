@@ -88,7 +88,7 @@ func _input(event: InputEvent) -> void:
 	elif event is InputEventMouseButton:
 		if event.pressed:
 			if event.button_index == MOUSE_BUTTON_RIGHT:
-				if event.ctrl_pressed:
+				if event.shift_pressed:
 					remove_grid()
 				else:
 					remove_block()

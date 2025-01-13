@@ -49,6 +49,13 @@ func merge(other_group: LinkedBlockGroup):
 	grid.unregister_linked_block_group(other_group)
 
 
+func merge_all(other_groups: Array[LinkedBlockGroup])-> LinkedBlockGroup:
+	for other_group in other_groups:
+		if self == other_group: continue
+		merge(other_group)
+	return self
+
+
 func has_blocks()-> bool:
 	return not blocks.is_empty() 
 

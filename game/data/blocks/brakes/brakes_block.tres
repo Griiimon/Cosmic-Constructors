@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BrakesBlock" load_steps=3 format=3 uid="uid://drm4oy7f7nxk3"]
+
+[ext_resource type="PackedScene" uid="uid://suf83sg8b2yp" path="res://game/data/blocks/brakes/brakes.tscn" id="1_gqehq"]
+[ext_resource type="Script" path="res://game/core/block/types/brakes_block.gd" id="2_c12va"]
+
+[resource]
+script = ExtResource("2_c12va")
+size = Vector3i(1, 1, 1)
+mass = 10.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = true
+tick_priority = 1
+can_be_built = true
+scene = ExtResource("1_gqehq")
+name = ""

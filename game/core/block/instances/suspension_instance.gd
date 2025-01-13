@@ -172,26 +172,18 @@ func on_update():
 
 
 func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
-	var forward_drive: float= round(max(0, -grid.requested_movement.z))
-	var final_brake: float= round(max(0, grid.requested_movement.z))
-
-	# no braking if we are driving
-	if forward_drive > 0:
-		final_brake = 0
-
-	throttle_input= forward_drive
+	if is_electric:
+		throttle_input= round(max(0, -grid.requested_movement.z))
+		brake_input= round(max(0, grid.requested_movement.z))
+		steering_input= -round(grid.requested_movement.x)
 
 	if grid.parking_brake:
-		final_brake= 1
+		brake_input= 1
 		throttle_input= 0
 	
 	reverse= grid.reverse_mode
 		
-	if is_electric:
-		steering_input= -round(grid.requested_movement.x)
 
-	brake_input= final_brake
-	
 	## no drive inputs, apply parking brake if sitting still
 	#if forward_drive == 0 && steering == 0 && abs(currentSpeed) < autoStopSpeedMS:
 		#final_brake = max_braking_coef

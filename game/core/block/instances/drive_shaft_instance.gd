@@ -24,8 +24,10 @@ func on_neighbor_placed(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_blo
 	connect_to_neighbor(grid, grid_block, grid.get_block_local(neighbor_block_pos))
 	
 
-func on_neighbor_removed(_grid: BlockGrid, _grid_block: BaseGridBlock, _neighbor_block_pos: Vector3i):
-	pass
+func on_neighbor_removed(grid: BlockGrid, _grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
+	var inst: BlockInstance= grid.get_block_local(neighbor_block_pos).get_block_instance()
+	if inst and inst is SuspensionInstance:
+		shaft_group.remove_suspension(inst)
 
 
 func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):

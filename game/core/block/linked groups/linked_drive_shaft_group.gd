@@ -25,5 +25,9 @@ func add_suspension(suspension: SuspensionInstance):
 		suspension.drive_shaft= self
 
 
+func remove_suspension(suspension: SuspensionInstance):
+	suspensions.erase(suspension)
+
+
 func apply_torque(input_torque: float):
 	new_torque+= input_torque

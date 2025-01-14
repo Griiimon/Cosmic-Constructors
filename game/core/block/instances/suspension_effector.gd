@@ -5,6 +5,12 @@ var suspension: SuspensionInstance
 
 
 
+func on_neighbor_removed(grid: BlockGrid, _grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
+	var inst: BlockInstance= grid.get_block_local(neighbor_block_pos).get_block_instance()
+	if inst == suspension:
+		suspension= null
+
+
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	init(grid, grid_block)
 

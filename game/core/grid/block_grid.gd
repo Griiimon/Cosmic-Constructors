@@ -155,6 +155,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 
 func _physics_process(delta: float) -> void:
+	requested_local_movement= requested_local_movement.normalized()
 	requested_movement= requested_movement.normalized()
 
 	DebugPanel.send(self, "ID", world.get_grid_id(self))
@@ -183,6 +184,7 @@ func _physics_process(delta: float) -> void:
 	apply_effects()
 
 	requested_movement= Vector3.ZERO
+	requested_local_movement= Vector3.ZERO
 	requested_rotation= Vector3.ZERO
 
 	if requires_integrity_check:

@@ -3,6 +3,7 @@ extends BlockInstance
 
 
 @export var is_electric: bool= true
+@export var is_right: bool= true
 @export var wheel_scene: PackedScene
 
 var can_steer:= BlockPropBool.new("Steering", true)
@@ -156,7 +157,10 @@ func _ready() -> void:
 
 func on_placed(grid: BlockGrid, _grid_block: GridBlock):
 	wheel= wheel_scene.instantiate()
-	wheel.position= position + basis.x
+	wheel.position= position + basis.x * (1 if is_right else -1)
+	wheel.base_rotation= rotation.y
+	#if not is_right:
+		#wheel.base_rotation+= deg_to_rad(180)
 	grid.add_child(wheel)
 	wheel.initialize()
 

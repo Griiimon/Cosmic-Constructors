@@ -1,17 +1,17 @@
 [gd_scene load_steps=5 format=3 uid="uid://chpy7qe518bqs"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/suspension_instance.gd" id="1_ot68d"]
-[ext_resource type="PackedScene" uid="uid://c42hpkx3axitr" path="res://game/core/car/wheel_4r.tscn" id="2_ldjg5"]
-[ext_resource type="PackedScene" uid="uid://dkckf5tosfa32" path="res://game/core/car/suspension_model.tscn" id="3_xhibd"]
+[ext_resource type="Script" path="res://game/core/block/instances/suspension_instance.gd" id="1_p6ukb"]
+[ext_resource type="PackedScene" uid="uid://c42hpkx3axitr" path="res://game/core/car/wheel_4r.tscn" id="2_dbc5t"]
+[ext_resource type="PackedScene" uid="uid://dkckf5tosfa32" path="res://game/core/car/suspension_model.tscn" id="3_einmk"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_d27qx"]
 
 [node name="Suspension 2x2" type="Node3D"]
-script = ExtResource("1_ot68d")
-wheel_scene = ExtResource("2_ldjg5")
+script = ExtResource("1_p6ukb")
+wheel_scene = ExtResource("2_dbc5t")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
 mesh = SubResource("BoxMesh_d27qx")
 
-[node name="Suspension Model" parent="." instance=ExtResource("3_xhibd")]
+[node name="Suspension Model" parent="." instance=ExtResource("3_einmk")]

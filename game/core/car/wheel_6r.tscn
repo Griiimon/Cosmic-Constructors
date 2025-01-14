@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://d3tx7ikwat0o"]
 
-[ext_resource type="Script" path="res://game/core/car/wheel.gd" id="1_rbnuk"]
-[ext_resource type="PackedScene" uid="uid://bwv7mbohgftby" path="res://game/core/car/wheel_model.tscn" id="2_v002u"]
+[ext_resource type="Script" path="res://game/core/car/wheel.gd" id="1_3m7ns"]
+[ext_resource type="PackedScene" uid="uid://bwv7mbohgftby" path="res://game/core/car/wheel_model.tscn" id="2_2tjxg"]
 
 [node name="Wheel 3x3" type="Node3D"]
-script = ExtResource("1_rbnuk")
+script = ExtResource("1_3m7ns")
 collision_mask = 4
 tire_width = 500.0
 braking_grip_multiplier = 0.1
 mass_over_wheel = 100.0
 
-[node name="Model" parent="." instance=ExtResource("2_v002u")]
+[node name="Model" parent="." instance=ExtResource("2_2tjxg")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)

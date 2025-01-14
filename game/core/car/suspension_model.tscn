@@ -33,7 +33,7 @@ height = 1.0
 material = SubResource("StandardMaterial3D_1cttr")
 size = Vector3(0.4, 1, 0.05)
 
-[node name="Suspension Model" type="Node3D"]
+[node name="Suspension Model" type="Node3D" groups=["Keep Ghost"]]
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0, 0)

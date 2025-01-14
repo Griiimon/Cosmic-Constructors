@@ -364,7 +364,7 @@ func unfreeze_check():
 	var query:= PhysicsShapeQueryParameters3D.new()
 	query.collision_mask= CollisionLayers.TERRAIN
 	
-	prints("Run unfreeze check for %s with %d shapes" % [str(name), collision_shapes.size()])
+	#prints("Run unfreeze check for %s with %d shapes" % [str(name), collision_shapes.size()])
 	
 	for coll_shape: CollisionShape3D in collision_shapes:
 		query.transform= coll_shape.global_transform
@@ -372,7 +372,7 @@ func unfreeze_check():
 		if space_state.intersect_shape(query, 1):
 			return
 	
-	print(" Success")
+	#print(" Success")
 	freeze= false
 
 

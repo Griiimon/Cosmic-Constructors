@@ -42,9 +42,15 @@ func on_player_spawned():
 		player.equip_hand_item(equip_item)
 
 	if load_world and NetworkManager.is_single_player:
+		await get_tree().physics_frame
+		# TODO
+		#if Global.terrain:
+			#while not Global.terrain.is_area_meshed(..):
+				#await get_tree().physics_frame
 		Global.game.world.load_world(custom_world_name, project_folder_world)
 
-	player.world.freeze_grids(freeze_grids)
+	if freeze_grids:
+		player.world.freeze_grids(freeze_grids)
 
 	on_start()
 

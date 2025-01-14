@@ -61,7 +61,8 @@ func init_grid(grid: BlockGrid, pos: Vector3, rot: Vector3):
 	grid.current_gravity= PhysicsServer3D.area_get_param(get_world_3d().space, PhysicsServer3D.AREA_PARAM_GRAVITY_VECTOR) * PhysicsServer3D.area_get_param(get_world_3d().space, PhysicsServer3D.AREA_PARAM_GRAVITY)
 	grids.add_child(grid)
 	
-	grid.freeze= grid_freeze_state
+	if not grid.freeze:
+		grid.freeze= grid_freeze_state
 
 
 func remove_grid(grid: BlockGrid):

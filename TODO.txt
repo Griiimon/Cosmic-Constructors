@@ -1,9 +1,3 @@
-test electric vs normal suspension vehicle
-
-mirrored suspensions
-
-copy tire material from fixed wheel
-
 static grids should stay static on reload
 
 fluid dispenser

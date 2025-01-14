@@ -190,6 +190,7 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 
 	DebugHud.send("Reverse", reverse)
 	DebugHud.send("Throttle", round(throttle_input))
+	DebugHud.send("Brake Input", round(brake_input))
 
 
 	if wheel:

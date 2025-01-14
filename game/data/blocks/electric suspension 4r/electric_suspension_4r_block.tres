@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SuspensionBlock" load_steps=3 format=3 uid="uid://co1e871t8xucg"]
 
-[ext_resource type="PackedScene" uid="uid://chpy7qe518bqs" path="res://game/data/blocks/electric suspension 2x2/electric_suspension 2x2.tscn" id="1_pxtv8"]
+[ext_resource type="PackedScene" uid="uid://chpy7qe518bqs" path="res://game/data/blocks/electric suspension 4r/electric_suspension_4r.tscn" id="1_pxtv8"]
 [ext_resource type="Script" path="res://game/core/block/types/suspension_block.gd" id="2_oegn7"]
 
 [resource]

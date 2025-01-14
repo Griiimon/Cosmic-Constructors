@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SuspensionBlock" load_steps=3 format=3 uid="uid://y6qet5tihtpj"]
 
 [ext_resource type="Script" path="res://game/core/block/types/suspension_block.gd" id="1_nc4vv"]
-[ext_resource type="PackedScene" uid="uid://cawliegrpmkhl" path="res://game/data/blocks/electric suspension/electric_suspension.tscn" id="1_wnxta"]
+[ext_resource type="PackedScene" uid="uid://cawliegrpmkhl" path="res://game/data/blocks/electric suspension 6r/electric_suspension_6r.tscn" id="1_wnxta"]
 
 [resource]
 script = ExtResource("1_nc4vv")

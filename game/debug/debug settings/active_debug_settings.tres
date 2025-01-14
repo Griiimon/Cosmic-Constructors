@@ -9,4 +9,4 @@
 script = ExtResource("2_8ih3d")
 default_build_hotbar_layout = Array[ExtResource("1_o1lrl")]([ExtResource("2_lpgs8"), ExtResource("3_jcges")])
 infinite_furnace_ingredients = true
-force_freeze_status = true
+force_freeze_status = false

@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://c42hpkx3axitr"]
+[gd_scene load_steps=4 format=3 uid="uid://c42hpkx3axitr"]
 
 [ext_resource type="Script" path="res://game/core/car/wheel.gd" id="1_pno3q"]
 [ext_resource type="PackedScene" uid="uid://bwv7mbohgftby" path="res://game/core/car/wheel_model.tscn" id="2_2bxus"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_indq1"]
+size = Vector3(0.33, 0.22, 2.275)
 
 [node name="Wheel 2x2" type="Node3D"]
 script = ExtResource("1_pno3q")
@@ -13,3 +16,7 @@ mass_over_wheel = 100.0
 
 [node name="Model" parent="." instance=ExtResource("2_2bxus")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.83789, -1.9191)
+mesh = SubResource("BoxMesh_indq1")

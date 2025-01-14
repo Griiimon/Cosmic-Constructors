@@ -1,4 +1,6 @@
-static grids should stay static on reload
+sky3d addon
+
+static grids should stay static on reload ( make sure terrain is generated before blocks are placed )
 
 fluid dispenser
 

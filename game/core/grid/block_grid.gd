@@ -109,8 +109,6 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 	grid_block.collision_shape= coll_shape
 
-	#mass+= block.weight
-
 	grid_block.block_node= block_node
 
 	if block.is_multi_block():
@@ -150,6 +148,8 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		main_grid_connection= grid_block
 
 	update_properties()
+
+	freeze_check(block_node.global_transform)
 
 	return grid_block
 
@@ -323,7 +323,7 @@ func split(split_blocks: Array[Vector3i], orig_grid: BlockGrid):
 	
 	new_grid.freeze= orig_grid.freeze
 	if new_grid.freeze:
-		unfreeze_check()
+		new_grid.unfreeze_check()
 	new_grid.update_properties()
 
 
@@ -346,6 +346,16 @@ func update_properties():
 	center_of_mass= new_center_of_mass
 
 	mass_indicator.position= center_of_mass
+
+
+func freeze_check(global_block_transform: Transform3D):
+	var query:= PhysicsShapeQueryParameters3D.new()
+	query.collision_mask= CollisionLayers.TERRAIN
+	query.shape= BoxShape3D.new()
+	query.transform= global_block_transform
+	
+	if get_world_3d().direct_space_state.intersect_shape(query):
+		freeze= true
 
 
 func unfreeze_check():

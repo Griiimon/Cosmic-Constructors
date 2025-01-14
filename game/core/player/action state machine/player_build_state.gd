@@ -100,13 +100,13 @@ func build_block():
 		grid= player.world.add_grid(ghost.position, ghost.global_rotation)
 		local_block_pos= Vector3i.ZERO
 		
-		var query:= PhysicsShapeQueryParameters3D.new()
-		query.collision_mask= CollisionLayers.TERRAIN
-		query.shape= BoxShape3D.new()
-		query.transform= ghost.transform
-		
-		if player.get_world_3d().direct_space_state.intersect_shape(query):
-			grid.freeze= true
+		#var query:= PhysicsShapeQueryParameters3D.new()
+		#query.collision_mask= CollisionLayers.TERRAIN
+		#query.shape= BoxShape3D.new()
+		#query.transform= ghost.transform
+		#
+		#if player.get_world_3d().direct_space_state.intersect_shape(query):
+			#grid.freeze= true
 		
 	grid.add_block(current_block, local_block_pos, Vector3i.ZERO if new_grid else block_rotation)
 

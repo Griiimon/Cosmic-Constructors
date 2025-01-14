@@ -16,7 +16,11 @@ mesh = SubResource("BoxMesh_d27qx")
 
 [node name="Suspension Model" parent="." instance=ExtResource("3_w1kre")]
 
+[node name="Backplate" parent="Suspension Model" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0.275)
+
 [node name="Frontplate" parent="Suspension Model" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, -0.275)
 visible = false
 
 [editable path="Suspension Model"]

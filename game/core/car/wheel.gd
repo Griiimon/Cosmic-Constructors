@@ -74,6 +74,7 @@ var rest_query:= PhysicsShapeQueryParameters3D.new()
 
 var grounded:= false
 var bottom_out := false
+var base_rotation: float= 0
 
 
 
@@ -105,7 +106,7 @@ func initialize() -> void:
 func steer(input : float, max_steering_angle : float):
 	#input *= steering_ratio
 	#rotation.y = (max_steering_angle * (input + (1 - cos(input * 0.5 * PI)) * ackermann)) + toe
-	rotation.y = max_steering_angle * input
+	rotation.y = max_steering_angle * input + base_rotation
 
 
 # TODO what in here currently has any impact?

@@ -17,6 +17,7 @@ mass_over_wheel = 100.0
 [node name="Model" parent="." instance=ExtResource("2_2bxus")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Debug Bar" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.83789, -1.9191)
+visible = false
 mesh = SubResource("BoxMesh_indq1")

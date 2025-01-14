@@ -15,3 +15,8 @@ visible = false
 mesh = SubResource("BoxMesh_d27qx")
 
 [node name="Suspension Model" parent="." instance=ExtResource("3_einmk")]
+
+[node name="Frontplate" parent="Suspension Model" index="5"]
+visible = false
+
+[editable path="Suspension Model"]

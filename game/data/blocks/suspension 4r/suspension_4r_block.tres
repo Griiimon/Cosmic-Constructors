@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="SuspensionBlock" load_steps=3 format=3 uid="uid://n6ntthcab7gm"]
 
-[ext_resource type="PackedScene" uid="uid://c76d6bdkhai3w" path="res://game/data/blocks/suspension 4r/suspension_4r.tscn" id="1_2ciix"]
-[ext_resource type="Script" path="res://game/core/block/types/suspension_block.gd" id="2_xjocg"]
+[ext_resource type="PackedScene" uid="uid://c76d6bdkhai3w" path="res://game/data/blocks/suspension 4r/suspension_4r.tscn" id="1_5i1us"]
+[ext_resource type="Script" path="res://game/core/block/types/suspension_block.gd" id="2_tonnb"]
 
 [resource]
-script = ExtResource("2_xjocg")
+script = ExtResource("2_tonnb")
 size = Vector3i(1, 1, 1)
 mass = 10.0
 max_hitpoints = 10
@@ -12,5 +12,5 @@ custom_collision = false
 can_tick = true
 tick_priority = 2
 can_be_built = true
-scene = ExtResource("1_2ciix")
+scene = ExtResource("1_5i1us")
 name = ""

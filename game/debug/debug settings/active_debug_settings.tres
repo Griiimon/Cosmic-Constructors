@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DebugSettingsResource" load_steps=5 format=3 uid="uid://c6n34fkqwwpqh"]
+
+[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_o1lrl"]
+[ext_resource type="Script" path="res://game/debug/debug settings/debug_settings_resource.gd" id="2_8ih3d"]
+[ext_resource type="Resource" uid="uid://sueib6rdbmc0" path="res://game/data/blocks/light structure/light_structure_block.tres" id="2_lpgs8"]
+[ext_resource type="Resource" uid="uid://k2s38yf1cnl4" path="res://game/data/blocks/pilot seat/pilot_seat_block.tres" id="3_jcges"]
+
+[resource]
+script = ExtResource("2_8ih3d")
+default_build_hotbar_layout = Array[ExtResource("1_o1lrl")]([ExtResource("2_lpgs8"), ExtResource("3_jcges")])
+infinite_furnace_ingredients = true
+force_freeze_status = true

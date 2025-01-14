@@ -17,7 +17,7 @@ func _ready() -> void:
 	
 func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 	if progress < 1:
-		if storage.has_ingredients(recipe.ingredients) or DebugSettings.infinite_furnace_ingredients:
+		if storage.has_ingredients(recipe.ingredients) or DebugSettings.active.infinite_furnace_ingredients:
 			progress+= delta
 			if not fire_particles.emitting:
 				fire_particles.emitting= true
@@ -30,7 +30,7 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 		if ejector.can_eject(inv_item):
 			ejector.eject_item(inv_item, grid.world)
 			progress= 0
-			if not DebugSettings.infinite_furnace_ingredients:
+			if not DebugSettings.active.infinite_furnace_ingredients:
 				storage.sub_ingredients(recipe.ingredients)
 
 

@@ -293,7 +293,8 @@ func run_integrity_check():
 		split(get_block_positions_without(ff_blocks), self)
 
 	if freeze:
-		unfreeze_check()
+		if not DebugSettings.active.force_freeze_status:
+			unfreeze_check()
 	else:
 		update_properties()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwv7mbohgftby"]
+[gd_scene load_steps=11 format=3 uid="uid://bwv7mbohgftby"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2pls0"]
 friction = 0.0
@@ -27,11 +27,29 @@ roughness = 0.54
 material = SubResource("StandardMaterial3D_l8gjt")
 size = Vector3(5.04, 0.57, 0.625)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qf4t"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_72tyu"]
+noise_type = 2
+frequency = 0.1983
+fractal_type = 0
+cellular_distance_function = 1
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kv7vq"]
+width = 256
+height = 256
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_72tyu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wgawb"]
 albedo_color = Color(0, 0, 0, 1)
+roughness = 0.6
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = SubResource("NoiseTexture2D_kv7vq")
 
 [sub_resource type="TorusMesh" id="TorusMesh_yfd3n"]
-material = SubResource("StandardMaterial3D_3qf4t")
+material = SubResource("StandardMaterial3D_wgawb")
 inner_radius = 0.712
 
 [node name="Model" type="Node3D"]

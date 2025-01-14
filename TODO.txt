@@ -2,6 +2,8 @@ test electric vs normal suspension vehicle
 
 mirrored suspensions
 
+copy tire material from fixed wheel
+
 static grids should stay static on reload
 
 fluid dispenser
@@ -23,7 +25,9 @@ pick block should copy rotation
 dont magnet boot grid walk in gravity environment, keep up like terrain
 
 
-adaptive physics ticks per second
+flood fill building mode for quickly creating grids
+
+adaptive physics ticks per second ( needs to be multiple of 60 and on server only to properly sync with client? ) 
 
 property panel group system:
 	create group
@@ -237,6 +241,12 @@ Mini Factory and logistics:
 	fill truck gas tank with fuel canister
 	then drive to fueling station
 
+
+Car jump:
+	jump from ramp onto platform
+	distance is to great for a jump
+	add wings ( deploy via hinge joint right before jump )
+	
 
 Racing:
 	track with waypoint lap time detection

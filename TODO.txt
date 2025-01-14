@@ -1,5 +1,7 @@
 test electric vs normal suspension vehicle
 
+mirrored suspensions
+
 static grids should stay static on reload
 
 fluid dispenser
@@ -20,6 +22,8 @@ pick block should copy rotation
 
 dont magnet boot grid walk in gravity environment, keep up like terrain
 
+
+adaptive physics ticks per second
 
 property panel group system:
 	create group
@@ -264,20 +268,9 @@ basic/intermediate/advanced/expert/master sciene levels/recipes
 
 moving celestial bodies by putting each in its own world3d ( not possible in multiplayer currently cuz Voxel plugin will build collision for all voxel terrains at local coords? )
 
-cars: use roguecar components, like engine blocks, steering/brake blocks etc. maybe even do aerodynamic calculations
+only allowed to build peripheral entities next to 3d printer
 
-4 suspension limit game settings: 
-	- check all suspension limits and set a global var on the grid (?)
-		to cancel out local y velocity with an impulse
-
-	- no travel limit
-	- static body limiting
-	- suspension block or wheel breaks immediately
-	- high exponential counter force/impulse ( depending on grid mass )
-
-only allowed to build peripheral entities ( and even blocks? ) next to 3d printer
-
-special blocks like rails, where you can attach machine entities to like crane or elevator platform, can send signals ( A, B, C ) to those machines to facilitate control from main grid 
+grids can send signals ( A, B, C ) to subgrids to facilitate control from main grid 
 
 radar dish, can pick up near enemies where its facing ( fading hud enemy signals that stay active for 10-30 secs after last pickup )
 
@@ -290,8 +283,6 @@ reward player for staying alive: current player character gets stat boosts for b
 skid blocks for making sleds in snow biome
 
 start in "wood age", chopping trees ( drop saplings for replanting ). wood structure block, wooden fixed wheel etc
-
-terrain generator: save heighmap array when lod0 is generated and calc normals and store
 
 ice will have the same friction as all terrain ( wheels can handle it but.. ) grids could change their friction dynamically depending on what terrain type they are making contact with
 

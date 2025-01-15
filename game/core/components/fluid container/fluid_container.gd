@@ -28,6 +28,7 @@ func fill(val: float, new_fluid: Fluid= null):
 	assert(new_fluid == null or fluid == null or fluid == new_fluid)
 	if new_fluid != null:
 		fluid= new_fluid
+	assert(fluid)
 	
 	var prev_content: float= content
 	content= min(content + val, max_storage)

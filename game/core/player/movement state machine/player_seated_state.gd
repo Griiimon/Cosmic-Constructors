@@ -9,6 +9,7 @@ var stored_position_relative: Vector3
 
 func on_enter():
 	player.play_animation("steer")
+	player.play_animation("sit")
 	player.model.set_equipment_visibility(false)
 	player.model.set_item_holder_visibility(false)
 

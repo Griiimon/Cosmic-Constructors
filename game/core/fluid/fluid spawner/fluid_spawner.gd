@@ -3,7 +3,16 @@ extends Node3D
 
 signal on_drop
 
-@export var enabled: bool= true
+@export var enabled: bool= true:
+	set(b):
+		enabled= b
+		if not is_inside_tree(): return
+		
+		if enabled and timer.is_stopped():
+			timer.start()
+		elif not enabled:
+			timer.stop()
+			
 @export var fluid: Fluid
 @export var drop_scene: PackedScene
 

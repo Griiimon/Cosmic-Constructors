@@ -1,8 +1,6 @@
+property viewer not recognizing some clicks
+
 sky3d addon
-
-static grids should stay static on reload ( make sure terrain is generated before blocks are placed )
-
-fluid dispenser
 
 pallet storage block (2x2), that tries to snap and pull on pallets that are on top. unless the pallet has contact with any other grid then the magnetizing is temporarily disabled, so it can be lifted with a forklift etc
 
@@ -20,6 +18,12 @@ pick block should copy rotation
 
 dont magnet boot grid walk in gravity environment, keep up like terrain
 
+
+Components can_* functions just use Callable refs like with FluidConsumer
+
+Fluid Consumer: make sure correct fluid is supplied
+
+BlockGrid is_anchored flag ( serialized ) to easier decide all possible freeze/unfreeze options and also dont depend on terrain being spawned to freeze block
 
 flood fill building mode for quickly creating grids
 

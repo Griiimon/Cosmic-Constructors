@@ -47,6 +47,7 @@ func search_for_drive_shaft(grid: BlockGrid, grid_block: BaseGridBlock, neighbor
 
 func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
 	var torque_output: float= 0.0
+	current_throttle_input= 0
 	if active.is_true():
 		current_throttle_input= grid.get_throttle_input()
 		torque_output= current_throttle_input * fluid_consumer.supplied_ratio * (grid_block.block_definition as EngineBlock).torque_factor

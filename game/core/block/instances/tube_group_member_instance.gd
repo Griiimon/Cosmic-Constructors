@@ -87,6 +87,10 @@ func serialize()-> Dictionary:
 	return data
 
 
+func get_fluid()-> Fluid:
+	return linked_system.fluid
+
+
 func is_input()-> bool:
 	return false
 

@@ -57,7 +57,9 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
 	if is_input():
 		if restore_data.has("fluid_content"):
-			(BaseBlockComponent3D.get_from_node(self, FluidContainer.NODE_NAME) as FluidContainer).content= restore_data["fluid_content"]
+			var fluid_container: FluidContainer= BaseBlockComponent3D.get_from_node(self, FluidContainer.NODE_NAME) as FluidContainer
+			#fluid_container.fluid= GameData.get_fluid_definition(restore_data["fluid"])
+			fluid_container.content= restore_data["fluid_content"]
 
 	on_placed(grid, grid_block)
 
@@ -83,7 +85,11 @@ func can_connect_from_to(from: GridBlock, to: GridBlock)-> bool:
 func serialize()-> Dictionary:
 	var data: Dictionary= super()
 	if is_input():
-		data["fluid_content"]= (BaseBlockComponent3D.get_from_node(self, FluidContainer.NODE_NAME) as FluidContainer).content
+		var fluid_container: FluidContainer= BaseBlockComponent3D.get_from_node(self, FluidContainer.NODE_NAME) as FluidContainer
+		if fluid_container.fluid:
+			#data["fluid"]= fluid_container.fluid.get_display_name()
+			data["fluid_content"]= fluid_container.content
+		
 	return data
 
 

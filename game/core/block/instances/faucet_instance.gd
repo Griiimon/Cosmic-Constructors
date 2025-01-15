@@ -17,6 +17,12 @@ func _ready() -> void:
 	fluid_consumer.variable_consumption= get_variable_consumption
 
 
+func on_placed(grid: BlockGrid, grid_block: GridBlock):
+	super(grid, grid_block)
+	
+	fluid_spawner.world= grid.world
+
+
 func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 	if active.is_true():
 		if stored_fluid < max_stored_fluid:

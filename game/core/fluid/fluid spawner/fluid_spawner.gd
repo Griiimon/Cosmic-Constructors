@@ -1,6 +1,8 @@
 class_name FluidSpawner
 extends Node3D
 
+signal on_drop
+
 @export var enabled: bool= true
 @export var fluid: Fluid
 @export var drop_scene: PackedScene
@@ -26,4 +28,4 @@ func _on_timer_timeout() -> void:
 	add_child(drop)
 	drop.fluid= fluid
 	drop.top_level= true
-	
+	on_drop.emit()

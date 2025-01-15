@@ -8,6 +8,8 @@ var cached_input_ratio: Dictionary
 var can_currently_provide: float
 var fill_containers: bool
 
+var fluid: Fluid
+
 
 
 func tick(_delta: float):
@@ -19,6 +21,12 @@ func process_input():
 	can_currently_provide= 0
 	cached_input_ratio= {}
 	fill_containers= false
+
+	for input: FluidContainer in inputs:
+		if not fluid:
+			fluid= input.fluid
+		else:
+			assert(not input.fluid or input.fluid == fluid)
 
 	precalculate_input_ratios()
 	if is_zero_approx(can_currently_provide): return

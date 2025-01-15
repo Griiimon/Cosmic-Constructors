@@ -8,6 +8,8 @@ var fluid: Fluid:
 		fluid= f
 		mesh_instance.mesh.material= fluid.material
 
+var amount: float= 1.0
+
 var previous_position: Vector3
 
 

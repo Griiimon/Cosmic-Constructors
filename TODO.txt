@@ -243,14 +243,16 @@ Mini Factory and logistics:
 
 
 Car jump:
-	jump from ramp onto platform
+	jump from ramp onto platform ( flood fill build mode )
 	distance is to great for a jump
 	add wings ( deploy via hinge joint right before jump )
 	
 
 Racing:
+	Terrain3D
 	track with waypoint lap time detection
 	build cars next to track and try to go for fastest lap
+
 
 
 Survival (and PVP):

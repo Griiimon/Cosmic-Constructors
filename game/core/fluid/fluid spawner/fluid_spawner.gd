@@ -3,6 +3,8 @@ extends Node3D
 
 signal on_drop
 
+@export var world: World
+
 @export var enabled: bool= true:
 	set(b):
 		enabled= b
@@ -23,6 +25,7 @@ signal on_drop
 
 
 
+
 func _ready() -> void:
 	timer.wait_time= interval
 	if enabled:
@@ -30,11 +33,12 @@ func _ready() -> void:
 
 
 func _on_timer_timeout() -> void:
+	assert(world)
 	var drop: FluidDrop= drop_scene.instantiate()
 	drop.position= global_position
 	drop.position.x+= randf_range(-random_offset, random_offset)
 	drop.position.z+= randf_range(-random_offset, random_offset)
-	add_child(drop)
+	world.add_child(drop)
 	drop.fluid= fluid
 	drop.top_level= true
 	on_drop.emit()

@@ -1,3 +1,4 @@
+class_name FluidSpawner
 extends Node3D
 
 @export var enabled: bool= true

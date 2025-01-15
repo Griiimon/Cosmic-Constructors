@@ -18,6 +18,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	super(grid, grid_block)
 	
 	var tank_definition: TankBlock= grid_block.get_block_definition()
+	fluid_container.fluid= tank_definition.fluid
 	fluid_container.max_storage= tank_definition.capacity
 	fluid_cylinder.mesh.surface_set_material(0, tank_definition.fluid.material)
 	

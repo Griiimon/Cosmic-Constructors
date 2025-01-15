@@ -1,3 +1,4 @@
+class_name Pallet
 extends ObjectEntity
 
 const STACK_SIZE= 10

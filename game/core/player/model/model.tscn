@@ -119,6 +119,8 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_uxfsy"]
 resource_name = "steer"
+length = 0.5
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -126,7 +128,7 @@ tracks/0/path = NodePath("Right Shoulder:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat64Array(0, 1),
+"times": PackedFloat64Array(0, 0.5),
 "transitions": PackedFloat64Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, -1.0472), Vector3(0, 1.5708, 0)]
@@ -138,7 +140,7 @@ tracks/1/path = NodePath("Left Shoulder:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat64Array(0, 1),
+"times": PackedFloat64Array(0, 0.5),
 "transitions": PackedFloat64Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 1.0472), Vector3(0, -1.5708, 0)]
@@ -198,6 +200,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_8rtpl"]
 resource_name = "sit"
+length = 0.5
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -206,7 +209,7 @@ tracks/0/path = NodePath("Right Hip:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat64Array(0, 1),
+"times": PackedFloat64Array(0, 0.5),
 "transitions": PackedFloat64Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0.872665, 0, 0)]
@@ -218,7 +221,7 @@ tracks/1/path = NodePath("Left Hip:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat64Array(0, 1),
+"times": PackedFloat64Array(0, 0.5),
 "transitions": PackedFloat64Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0.872665, 0, 0)]

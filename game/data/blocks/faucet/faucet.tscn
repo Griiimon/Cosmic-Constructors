@@ -56,7 +56,7 @@ mesh = SubResource("SphereMesh_tnx3s")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.345894, 0)
 enabled = false
 fluid = null
-random_offset = 0.02
+random_offset = 0.05
 
 [node name="Fluid Consumer" parent="." instance=ExtResource("4_ngm5s")]
 constant_consumption = 1.0

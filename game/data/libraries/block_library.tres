@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="BlockLibrary" load_steps=50 format=3 uid="uid://qj17gtekw1sc"]
+[gd_resource type="Resource" script_class="BlockLibrary" load_steps=51 format=3 uid="uid://qj17gtekw1sc"]
 
 [ext_resource type="Script" path="res://game/core/block/block.gd" id="1_1y7x0"]
-[ext_resource type="Script" path="res://game/libraries/block library/block_library.gd" id="1_wp3mq"]
+[ext_resource type="Script" path="res://game/global/game data/block_library.gd" id="1_wp3mq"]
 [ext_resource type="Resource" uid="uid://sueib6rdbmc0" path="res://game/data/blocks/light structure/light_structure_block.tres" id="2_y3r5d"]
 [ext_resource type="Resource" uid="uid://k2s38yf1cnl4" path="res://game/data/blocks/pilot seat/pilot_seat_block.tres" id="3_sr2pb"]
 [ext_resource type="Resource" uid="uid://bh6lk8mefhhlv" path="res://game/data/blocks/thruster/thruster_block.tres" id="4_ex1ql"]
@@ -49,7 +49,8 @@
 [ext_resource type="Resource" uid="uid://drm4oy7f7nxk3" path="res://game/data/blocks/brakes/brakes_block.tres" id="46_8grvt"]
 [ext_resource type="Resource" uid="uid://cv81agnptpnbf" path="res://game/data/blocks/electric suspension 4r left/electric_suspension_4r_left_block.tres" id="47_3ulyd"]
 [ext_resource type="Resource" uid="uid://c8xvjag2d3hdr" path="res://game/data/blocks/suspension 4r left/suspension_4r_left_block.tres" id="48_1gq8e"]
+[ext_resource type="Resource" uid="uid://di5gp3ydhdfot" path="res://game/data/blocks/faucet/faucet_block.tres" id="49_ywixf"]
 
 [resource]
 script = ExtResource("1_wp3mq")
-blocks = Array[ExtResource("1_1y7x0")]([ExtResource("2_y3r5d"), ExtResource("3_sr2pb"), ExtResource("4_ex1ql"), ExtResource("4_rwth5"), ExtResource("6_ybohw"), ExtResource("7_uxxxt"), ExtResource("8_lq4sf"), ExtResource("9_p6pxt"), ExtResource("10_861ep"), ExtResource("11_xw0o1"), ExtResource("12_4bye6"), ExtResource("13_sgr7s"), ExtResource("14_odph0"), ExtResource("15_m8eu2"), ExtResource("15_xkpd2"), ExtResource("16_yo0pu"), ExtResource("17_4qlvj"), ExtResource("18_7bdby"), ExtResource("19_5h5sf"), ExtResource("21_q7jd8"), ExtResource("22_h7djk"), ExtResource("22_ejvuv"), ExtResource("24_3v7km"), ExtResource("25_s3ift"), ExtResource("26_sr8ee"), ExtResource("27_0vmdf"), ExtResource("28_cadeo"), ExtResource("29_58t8f"), ExtResource("30_ohdos"), ExtResource("31_35lwm"), ExtResource("31_ypduw"), ExtResource("31_mvdak"), ExtResource("34_8mbqn"), ExtResource("35_851rq"), ExtResource("36_6jurl"), ExtResource("37_3c8i0"), ExtResource("38_7y3jd"), ExtResource("39_jpnw2"), ExtResource("40_xymg7"), ExtResource("41_gaxg5"), ExtResource("42_7gpy8"), ExtResource("43_us2od"), ExtResource("44_hsbjf"), ExtResource("45_53kyu"), ExtResource("46_8grvt"), ExtResource("47_3ulyd"), ExtResource("48_1gq8e")])
+blocks = Array[ExtResource("1_1y7x0")]([ExtResource("2_y3r5d"), ExtResource("3_sr2pb"), ExtResource("4_ex1ql"), ExtResource("4_rwth5"), ExtResource("6_ybohw"), ExtResource("7_uxxxt"), ExtResource("8_lq4sf"), ExtResource("9_p6pxt"), ExtResource("10_861ep"), ExtResource("11_xw0o1"), ExtResource("12_4bye6"), ExtResource("13_sgr7s"), ExtResource("14_odph0"), ExtResource("15_m8eu2"), ExtResource("15_xkpd2"), ExtResource("16_yo0pu"), ExtResource("17_4qlvj"), ExtResource("18_7bdby"), ExtResource("19_5h5sf"), ExtResource("21_q7jd8"), ExtResource("22_h7djk"), ExtResource("22_ejvuv"), ExtResource("24_3v7km"), ExtResource("25_s3ift"), ExtResource("26_sr8ee"), ExtResource("27_0vmdf"), ExtResource("28_cadeo"), ExtResource("29_58t8f"), ExtResource("30_ohdos"), ExtResource("31_35lwm"), ExtResource("31_ypduw"), ExtResource("31_mvdak"), ExtResource("34_8mbqn"), ExtResource("35_851rq"), ExtResource("36_6jurl"), ExtResource("37_3c8i0"), ExtResource("38_7y3jd"), ExtResource("39_jpnw2"), ExtResource("40_xymg7"), ExtResource("41_gaxg5"), ExtResource("42_7gpy8"), ExtResource("43_us2od"), ExtResource("44_hsbjf"), ExtResource("45_53kyu"), ExtResource("46_8grvt"), ExtResource("47_3ulyd"), ExtResource("48_1gq8e"), ExtResource("49_ywixf")])

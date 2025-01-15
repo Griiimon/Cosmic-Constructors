@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FluidLibrary" load_steps=4 format=3 uid="uid://g05xl7xk0q31"]
+
+[ext_resource type="Script" path="res://game/core/fluid/fluid.gd" id="1_xk83l"]
+[ext_resource type="Resource" uid="uid://dqigc04c411p" path="res://game/data/fluids/fuel.tres" id="2_18kbd"]
+[ext_resource type="Script" path="res://game/global/game data/fluid_library.gd" id="3_ub1xs"]
+
+[resource]
+script = ExtResource("3_ub1xs")
+fluids = Array[ExtResource("1_xk83l")]([ExtResource("2_18kbd")])

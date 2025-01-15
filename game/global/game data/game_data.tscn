@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://clyvgxp3kcd52"]
+[gd_scene load_steps=6 format=3 uid="uid://clyvgxp3kcd52"]
 
 [ext_resource type="Script" path="res://game/global/game data/game_data.gd" id="1_rttg5"]
 [ext_resource type="Resource" uid="uid://qj17gtekw1sc" path="res://game/data/libraries/block_library.tres" id="2_38wp1"]
 [ext_resource type="Resource" uid="uid://bpfu46bd6dwi8" path="res://game/data/libraries/scene_library.tres" id="3_5djl7"]
 [ext_resource type="Resource" uid="uid://bsrlmhm5h1y3x" path="res://game/global/game data/game_settings.tres" id="3_dfk4b"]
+[ext_resource type="Resource" uid="uid://g05xl7xk0q31" path="res://game/data/libraries/fluid_library.tres" id="4_rp14o"]
 
 [node name="Game Data" type="Node"]
 script = ExtResource("1_rttg5")
 block_library = ExtResource("2_38wp1")
 scene_library = ExtResource("3_5djl7")
+fluid_library = ExtResource("4_rp14o")
 game_settings = ExtResource("3_dfk4b")

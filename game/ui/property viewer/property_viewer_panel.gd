@@ -150,14 +150,17 @@ func _unhandled_input(event: InputEvent) -> void:
 				match event.button_index:
 					MOUSE_BUTTON_LEFT:
 						if selected_row > -1:
-							is_value_selected= true
+							if get_current_row().property is BlockPropAction:
+								get_current_row().toggle()
+							else:
+								is_value_selected= true
 					MOUSE_BUTTON_RIGHT:
 						close()
 					MOUSE_BUTTON_WHEEL_UP:
 						change_row(-1)
 					MOUSE_BUTTON_WHEEL_DOWN:
 						change_row(1)
-	
+		get_viewport().set_input_as_handled()
 	elif event is InputEventKey:
 		if event.keycode >= KEY_1 and event.keycode <= KEY_9:
 			var row: PanelViewerRow= get_current_row()
@@ -166,6 +169,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				var assignment: BaseHotkeyAssignment= HotkeyAssignmentBlockProperty.new(key, block, row.property, grid)
 				grid.assign_hotkey(assignment, block.local_pos) 
 				SignalManager.hotkey_assigned.emit(assignment, grid)
+		get_viewport().set_input_as_handled()
 
 
 func change_row(delta: int):

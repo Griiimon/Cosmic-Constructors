@@ -1,0 +1,56 @@
+[gd_scene load_steps=11 format=3 uid="uid://dqc2w8evbpc7x"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/faucet_instance.gd" id="1_87el2"]
+[ext_resource type="Script" path="res://game/core/components/fluid container/fluid_connector.gd" id="2_ctdq0"]
+[ext_resource type="PackedScene" uid="uid://cwjpaeql42esi" path="res://game/core/fluid/fluid spawner/fluid_spawner.tscn" id="3_ynhs8"]
+[ext_resource type="PackedScene" uid="uid://k7fxvysvmall" path="res://game/core/components/fluid consumer/fluid_consumer.tscn" id="4_ngm5s"]
+
+[sub_resource type="Resource" id="Resource_mafw4"]
+script = ExtResource("2_ctdq0")
+block_pos = Vector3i(0, 0, 0)
+direction = Vector3i(0, 1, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x1x6o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qmhj3"]
+albedo_color = Color(0.515278, 0.297966, 0.118203, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xwvsc"]
+material = SubResource("StandardMaterial3D_qmhj3")
+top_radius = 0.15
+bottom_radius = 0.05
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jiyed"]
+albedo_color = Color(0.256558, 0.399502, 0.193942, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_tnx3s"]
+material = SubResource("StandardMaterial3D_jiyed")
+radius = 0.2
+height = 0.3
+
+[node name="Faucet" type="Node3D"]
+script = ExtResource("1_87el2")
+connectors = Array[ExtResource("2_ctdq0")]([SubResource("Resource_mafw4")])
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_x1x6o")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.182741, 0)
+mesh = SubResource("CylinderMesh_xwvsc")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.416211, 0)
+mesh = SubResource("SphereMesh_tnx3s")
+
+[node name="Fluid Spawner" parent="." instance=ExtResource("3_ynhs8")]
+enabled = false
+fluid = null
+random_offset = 0.02
+
+[node name="Fluid Consumer" parent="." instance=ExtResource("4_ngm5s")]
+constant_consumption = 1.0
+
+[connection signal="on_drop" from="Fluid Spawner" to="." method="on_fluid_spawner_drop"]

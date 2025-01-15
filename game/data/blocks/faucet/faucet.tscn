@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dqc2w8evbpc7x"]
+[gd_scene load_steps=12 format=3 uid="uid://dqc2w8evbpc7x"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/faucet_instance.gd" id="1_87el2"]
 [ext_resource type="Script" path="res://game/core/components/fluid container/fluid_connector.gd" id="2_ctdq0"]
@@ -9,6 +9,9 @@
 script = ExtResource("2_ctdq0")
 block_pos = Vector3i(0, 0, 0)
 direction = Vector3i(0, 1, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f8odk"]
+size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_x1x6o"]
 
@@ -33,6 +36,10 @@ height = 0.3
 script = ExtResource("1_87el2")
 connectors = Array[ExtResource("2_ctdq0")]([SubResource("Resource_mafw4")])
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("BoxShape3D_f8odk")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
 mesh = SubResource("BoxMesh_x1x6o")
@@ -46,6 +53,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.416211, 0)
 mesh = SubResource("SphereMesh_tnx3s")
 
 [node name="Fluid Spawner" parent="." instance=ExtResource("3_ynhs8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.345894, 0)
 enabled = false
 fluid = null
 random_offset = 0.02

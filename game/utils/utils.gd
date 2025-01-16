@@ -25,28 +25,47 @@ static func get_key_or_default(dict: Dictionary, key: String, default: Variant)-
 	return dict[key]
 
 
-static func calc_angular_velocity(from_basis: Basis, to_basis: Basis) -> Vector3:
+static func calc_angular_velocity(from_basis: Basis, to_basis: Basis, dual_z_align: bool = false) -> Vector3:
 	var q1 = from_basis.get_rotation_quaternion()
 	var q2 = to_basis.get_rotation_quaternion()
-
-	# Transform quaternion from q1 to q2
-	var delta_q = q2 * q1.inverse()
-
-	# Calculate angle of rotation
-	var angle = 2 * acos(delta_q.w)
-
+	
+	var angle: float
+	var delta_q: Quaternion
+	
+	# FIXME dual z align will flip at a certain angle
+	if dual_z_align:
+		# Create an alternative target basis rotated 180° around y axis
+		var alt_basis = to_basis.rotated(to_basis.y, PI)
+		var alt_q2 = alt_basis.get_rotation_quaternion()
+		
+		# Calculate both possible quaternion deltas
+		var delta_q1 = q2 * q1.inverse()
+		var delta_q2 = alt_q2 * q1.inverse()
+		
+		# Calculate angles for both options
+		var angle1 = 2 * acos(delta_q1.w)
+		var angle2 = 2 * acos(delta_q2.w)
+		
+		# Use the quaternion that results in the smaller angle
+		delta_q = delta_q1 if angle1 < angle2 else delta_q2
+		angle = min(angle1, angle2)
+	else:
+		# Original behavior
+		delta_q = q2 * q1.inverse()
+		angle = 2 * acos(delta_q.w)
+	
 	# Use the shortest rotation path
 	if angle > PI:
 		delta_q = -delta_q
 		angle = TAU - angle
-
+	
 	# Avoid divide-by-zero errors for negligible rotations
 	if angle < 0.0001:
 		return Vector3.ZERO
-
+	
 	# Calculate axis of rotation
 	var axis = Vector3(delta_q.x, delta_q.y, delta_q.z).normalized()
-
+	
 	return axis * angle
 
 

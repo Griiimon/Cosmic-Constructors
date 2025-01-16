@@ -8,6 +8,7 @@ var stored_position_relative: Vector3
 
 
 func on_enter():
+	player.action_state_machine.paused= true
 	player.play_animation("steer")
 	player.play_animation("sit")
 	player.model.set_equipment_visibility(false)
@@ -37,6 +38,7 @@ func on_exit():
 	SignalManager.player_left_seat.emit(player)
 
 	Global.ui.switch_hotbar(player.tool_hotbar)
+	player.action_state_machine.paused= false
 
 
 func on_physics_process(_delta: float):

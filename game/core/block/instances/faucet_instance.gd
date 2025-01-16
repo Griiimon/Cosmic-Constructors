@@ -14,6 +14,9 @@ var stored_fluid: float
 
 
 func _ready() -> void:
+	super()
+	default_interaction_property= active
+	
 	fluid_consumer.variable_consumption= get_variable_consumption
 
 

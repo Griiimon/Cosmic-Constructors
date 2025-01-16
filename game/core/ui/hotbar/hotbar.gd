@@ -42,8 +42,16 @@ func _unhandled_input(event: InputEvent) -> void:
 				mouse_texture.anchor_left= mouse_pos_x
 				mouse_texture.anchor_right= mouse_pos_x
 				mouse_control_property.set_variant(pow((mouse_pos_x * 2 - 1) * 3, 3))
-				get_viewport().set_input_as_handled()
-		
+	elif event is InputEventMouseButton:
+		if event.pressed:
+			if event.button_index == MOUSE_BUTTON_RIGHT:
+				if mouse_mode and mouse_control_property:
+					mouse_control_property.set_variant(0.0)
+					mouse_texture.anchor_left= 0.5
+					mouse_texture.anchor_right= 0.5
+					get_viewport().set_input_as_handled()
+		get_viewport().set_input_as_handled()
+
 
 func select_slot(idx: int):
 	var slot: HotbarSlot= slots[idx]

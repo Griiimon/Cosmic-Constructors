@@ -1,12 +1,9 @@
-3r electric suspension + mirror
-
-hide hand tool while: carrying object, pulling, grabbing etc
-
 sky3d addon
 
-pick block should copy rotation
+block categories
+	build mode: use custom block list, either full list or category list 
 
-suspension invert steering option
+base scroll container like property viewer, inherit for building menu block categories
 
 
 property panel group system:
@@ -19,11 +16,16 @@ suspension props
 	brakes
 	spring
 
+plane fill: flood fill plane without placing blocks ( set a max cap ) and only if contained plane is found spawn blocks
+
 when the car isnt moving ( for a bit? ) put an additional damping factor on the suspension
 
 terrain height map array store and calc normals:
 Chunks of height info are created independent of the terrain generator, but terrain generator ( can look if height map for current chunk has been created - HOW TO MATCH WEIRD 19x19 voxel chunks) queries height from that cache which will either return a cached value or call get_height() if cache doesn't exist yet
 
+Ore Intake: Ore Funnel, takes ore from above one-by-one and ejects below to valid target 
+
+grid walk: use magnetic boots on non-frozen grids
 
 Components can_* functions just use Callable refs like with FluidConsumer
 
@@ -31,6 +33,8 @@ Fluid Consumer: make sure correct fluid is supplied
 
 BlockGrid is_anchored flag ( serialized ) to easier decide all possible freeze/unfreeze options and also dont depend on terrain being spawned to freeze block
 
+
+keep available keys + short desc in a dictionary per action state for quick help
 
 ore pile nomral map array + metallic and roughness value per raw material
 
@@ -246,7 +250,12 @@ Car jump:
 	jump from ramp onto platform ( flood fill build mode )
 	distance is to great for a jump
 	add wings ( deploy via hinge joint right before jump )
-	
+
+
+Ore Collector:
+	Ore Dump Truck 3x2 container and sucker arm
+	collect ore with sucker
+	dump ( rotate container ) at Ore Intake + conveyor
 
 Racing:
 	Terrain3D

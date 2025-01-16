@@ -9,11 +9,13 @@ signal build_peripheral_entity
 func on_enter():
 	player.block_interact_shapecast.enabled= true
 	player.item_interact_shapecast.enabled= true
+	player.hand_item_container.show()
 
 
 func on_exit():
 	player.block_interact_shapecast.enabled= false
 	player.item_interact_shapecast.enabled= false
+	player.hand_item_container.hide()
 
 
 func on_physics_process(_delta: float):

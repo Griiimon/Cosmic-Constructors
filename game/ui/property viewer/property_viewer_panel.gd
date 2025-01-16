@@ -162,13 +162,21 @@ func _unhandled_input(event: InputEvent) -> void:
 						change_row(1)
 		get_viewport().set_input_as_handled()
 	elif event is InputEventKey:
-		if event.keycode >= KEY_1 and event.keycode <= KEY_9:
-			var row: PanelViewerRow= get_current_row()
-			if can_assign_hotkey_to(row):
-				var key: int= event.keycode - KEY_0
-				var assignment: BaseHotkeyAssignment= HotkeyAssignmentBlockProperty.new(key, block, row.property, grid)
-				grid.assign_hotkey(assignment, block.local_pos) 
-				SignalManager.hotkey_assigned.emit(assignment, grid)
+		if event.pressed:
+			if event.keycode >= KEY_1 and event.keycode <= KEY_9:
+				var row: PanelViewerRow= get_current_row()
+				if can_assign_hotkey_to(row):
+					var key: int= event.keycode - KEY_0
+					var assignment: BaseHotkeyAssignment= HotkeyAssignmentBlockProperty.new(key, block, row.property, grid)
+					grid.assign_hotkey(assignment, block.local_pos) 
+					SignalManager.hotkey_assigned.emit(assignment, grid)
+			else:
+				match event.keycode:
+					KEY_PAGEUP:
+						change_row(-1)
+					KEY_PAGEDOWN:
+						change_row(1)
+
 		get_viewport().set_input_as_handled()
 
 

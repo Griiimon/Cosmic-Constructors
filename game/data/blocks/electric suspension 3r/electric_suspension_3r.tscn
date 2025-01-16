@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bo7phvjb2q8jg"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/suspension_instance.gd" id="1_p3b4q"]
+[ext_resource type="PackedScene" uid="uid://brnstsxarhb8p" path="res://game/core/car/wheel_3r.tscn" id="2_212pg"]
+[ext_resource type="PackedScene" uid="uid://dkckf5tosfa32" path="res://game/core/car/suspension_model.tscn" id="3_4qgcd"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_d27qx"]
+
+[node name="Suspension 3R" type="Node3D"]
+script = ExtResource("1_p3b4q")
+wheel_scene = ExtResource("2_212pg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_d27qx")
+
+[node name="Suspension Model" parent="." instance=ExtResource("3_4qgcd")]
+
+[node name="Frontplate" parent="Suspension Model" index="5"]
+visible = false
+
+[editable path="Suspension Model"]

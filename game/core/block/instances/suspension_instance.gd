@@ -7,6 +7,7 @@ extends BlockInstance
 @export var wheel_scene: PackedScene
 
 var can_steer:= BlockPropBool.new("Steering", true)
+var invert_steer:= BlockPropBool.new("Invert Steering", false)
 
 var wheel: Wheel
 
@@ -257,6 +258,9 @@ func process_braking(grid: BlockGrid, delta : float) -> void:
 
 
 func process_steering(delta : float) -> void:
+	if invert_steer.is_true():
+		steering_amount= -steering_amount
+
 	steering_amount= lerp(steering_amount, steering_input, delta * steering_speed)
 	wheel.steer(steering_amount, max_steering_angle)
 

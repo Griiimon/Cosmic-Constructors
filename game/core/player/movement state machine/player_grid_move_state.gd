@@ -27,11 +27,13 @@ func post_move():
 
 
 func initial_align():
-	player.global_transform= Utils.align_with_y(player.global_transform, get_floor_normal())
+	if not player.get_gravity().length():
+		player.global_transform= Utils.align_with_y(player.global_transform, get_floor_normal())
 
 
-func continuous_align(_delta: float):
-	pass
+func continuous_align(delta: float):
+	if player.get_gravity().length():
+		player.global_transform= player.global_transform.interpolate_with(Utils.align_with_y(player.global_transform, -player.get_gravity().normalized()), delta * 10)
 
 
 #func on_left_ground():

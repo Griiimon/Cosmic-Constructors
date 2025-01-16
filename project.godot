@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Cosmic Constructors"
-run/main_scene="res://game/test/vehicle test/vehicle_test.tscn"
+run/main_scene="res://game/test/custom planet test/custom_planet_test.tscn"
 config/features=PackedStringArray("4.3", "Double Precision", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -39,7 +39,7 @@ gdscript/warnings/unused_signal=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/csgtomeshinstance/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/csgtomeshinstance/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/sky_3d/plugin.cfg")
 
 [global_group]
 

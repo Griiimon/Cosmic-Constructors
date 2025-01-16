@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://18lknojownsw"]
+[gd_scene load_steps=23 format=3 uid="uid://18lknojownsw"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_7fydp"]
 [ext_resource type="Script" path="res://game/test/custom planet test/custom_planet_sandbox.gd" id="2_d2xmp"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="7_w4pu6"]
 [ext_resource type="VoxelGeneratorScript" uid="uid://b26ajmch67psy" path="res://game/test/custom planet test/custom_voxel_generator.tres" id="8_27ipv"]
 [ext_resource type="Material" uid="uid://duf303o0ryv61" path="res://game/test/custom planet test/custom_planet_material.tres" id="9_l2jpv"]
-[ext_resource type="Texture2D" uid="uid://dtlptku1k7pm1" path="res://addons/zylann.atmosphere/demo/space_background.webp" id="10_fxdwa"]
 [ext_resource type="Script" path="res://game/core/world/terrain/my_terrain.gd" id="11_bvo6j"]
 [ext_resource type="Script" path="res://game/core/world/terrain/terrain_properties.gd" id="12_owbdg"]
 [ext_resource type="Script" path="res://game/core/world/terrain/terrain_type_properties.gd" id="13_fkc0r"]
@@ -33,25 +32,6 @@ texturing_mode = 1
 [sub_resource type="Resource" id="Resource_75u82"]
 script = ExtResource("12_owbdg")
 types = Array[ExtResource("13_fkc0r")]([ExtResource("14_nyk10"), ExtResource("15_mee4x"), ExtResource("16_62ayq"), ExtResource("18_7u07l")])
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vdqjr"]
-panorama = ExtResource("10_fxdwa")
-
-[sub_resource type="Sky" id="Sky_mx20v"]
-sky_material = SubResource("PanoramaSkyMaterial_vdqjr")
-
-[sub_resource type="Environment" id="Environment_wyx6a"]
-background_mode = 2
-sky = SubResource("Sky_mx20v")
-glow_enabled = true
-glow_levels/3 = 0.0
-glow_levels/4 = 1.0
-glow_levels/6 = 1.0
-glow_intensity = 4.0
-glow_strength = 0.8
-glow_blend_mode = 0
-glow_hdr_scale = 1.0
-volumetric_fog_density = 0.0
 
 [node name="Custom Planet Test" type="Node3D"]
 script = ExtResource("1_7fydp")
@@ -93,11 +73,3 @@ collision_layer = 4
 run_stream_in_editor = false
 script = ExtResource("11_bvo6j")
 terrain_properties = SubResource("Resource_75u82")
-
-[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.996084, 0.0146873, 0.087179, 0.0884075, 0.165481, 0.982242, 1.06741e-18, 0.986104, -0.166132, 0, 275.302, 0)
-shadow_enabled = true
-directional_shadow_max_distance = 2000.0
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_wyx6a")

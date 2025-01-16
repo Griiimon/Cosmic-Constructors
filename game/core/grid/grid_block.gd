@@ -51,6 +51,10 @@ func get_local_basis()-> Basis:
 	return rotation_to_basis(rotation)
 
 
+func get_local_block_rotation()-> Vector3i:
+	return get_local_basis().get_euler() / deg_to_rad(90)
+
+
 func get_global_basis(grid: BlockGrid)-> Basis:
 	#FIXME this is wrong!?
 	return get_local_basis() * grid.global_basis

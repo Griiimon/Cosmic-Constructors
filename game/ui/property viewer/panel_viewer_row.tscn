@@ -7,12 +7,14 @@
 bg_color = Color(0.345098, 0.345098, 0.345098, 0)
 
 [node name="Panel Viewer Row" type="PanelContainer"]
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xmhy5")
 script = ExtResource("1_r2f0p")
 selection_style_box = ExtResource("2_au6eg")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 1
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
@@ -20,6 +22,7 @@ theme_override_constants/margin_bottom = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Label Type" type="Label" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true

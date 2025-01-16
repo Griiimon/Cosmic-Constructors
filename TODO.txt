@@ -1,16 +1,20 @@
-dont magnet boot grid walk in gravity environment, keep up like terrain
-
-pick block should copy rotation
-
 3r electric suspension + mirror
+
+hide hand tool while: carrying object, pulling, grabbing etc
 
 sky3d addon
 
-property viewer not recognizing some clicks
-
-
+pick block should copy rotation
 
 suspension invert steering option
+
+
+property panel group system:
+	create group
+	add to last group
+	group mode toggle: every thing pressed will affect the entire group, including hotkey assignment
+
+suspension props
 	power
 	brakes
 	spring
@@ -21,22 +25,12 @@ terrain height map array store and calc normals:
 Chunks of height info are created independent of the terrain generator, but terrain generator ( can look if height map for current chunk has been created - HOW TO MATCH WEIRD 19x19 voxel chunks) queries height from that cache which will either return a cached value or call get_height() if cache doesn't exist yet
 
 
-
-
 Components can_* functions just use Callable refs like with FluidConsumer
 
 Fluid Consumer: make sure correct fluid is supplied
 
 BlockGrid is_anchored flag ( serialized ) to easier decide all possible freeze/unfreeze options and also dont depend on terrain being spawned to freeze block
 
-flood fill building mode for quickly creating grids
-
-adaptive physics ticks per second ( needs to be multiple of 60 and on server only to properly sync with client? ) 
-
-property panel group system:
-	create group
-	add to last group
-	group mode toggle: every thing pressed will affect the entire group, including hotkey assignment
 
 ore pile nomral map array + metallic and roughness value per raw material
 
@@ -75,6 +69,8 @@ use calc_angular_velocity() in periperal connector code
 only add ore to pile if it can take all of it ( or consume and spit out the overflow as new item )
 
 in addition to BlockPlacementCondition also have BlockDockConditions for neighbors to override placement
+
+adaptive physics ticks per second ( needs to be multiple of 60 and on server only to properly sync with client? ) 
 
 
 
@@ -174,7 +170,6 @@ grid angular dampeners
 save player only in cryo pod, otherwise use default spawn points or medbay
 
 FIX landing walking on grid triggers left_ground continuously!?
-FIX wing collision shapes
 FIX getting stuck in terrain when going EVA ( will intersect_shape work against terrain? because Area didnt seem to => JOLT OPT-IN )
 FIX removing MultiBlocks can lead to crash ( only when splitting grids? )
 FIX when player stands on Grid that gets split at any pos he sometimes gets thrown off
@@ -186,6 +181,7 @@ FIX static grids connected to terrain jitter ( only when terrain gets edited, lo
 FIX grabbing handles on same grid player is standing on should have no effect. ALSO if grid is connected to grid players standing on
 FIX grabbing handles weight calculation for all connected grids => make grabbing joint-based
 FIX suspension jitter with joints
+FIX build block placement after placing custom shape 
 INVESTIGATE possible to pick up item from floor and from OreContainer with one F push in the same frame. almost seemed so
 
 

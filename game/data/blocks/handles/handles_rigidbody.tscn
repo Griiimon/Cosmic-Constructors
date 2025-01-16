@@ -22,4 +22,5 @@ angular_damp = 10.0
 shape = SubResource("SphereShape3D_llv8c")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_j5pov")

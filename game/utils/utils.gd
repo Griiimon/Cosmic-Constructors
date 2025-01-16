@@ -32,9 +32,9 @@ static func calc_angular_velocity(from_basis: Basis, to_basis: Basis, dual_z_ali
 	var angle: float
 	var delta_q: Quaternion
 	
-	# FIXME dual z align will flip at a certain angle
 	if dual_z_align:
 		# Create an alternative target basis rotated 180° around y axis
+		# TODO use global or local axis?
 		#var alt_basis = to_basis.rotated(to_basis.y, PI)
 		var alt_basis = to_basis.rotated(Vector3.UP, PI)
 		var alt_q2 = alt_basis.get_rotation_quaternion()

@@ -617,6 +617,25 @@ func get_block_neighbors(pos: Vector3i, include_diagonals: bool= false, include_
 	return result
 
 
+func get_empty_block_neighbors(pos: Vector3i, include_diagonals: bool= false, is_multi_block: bool= false)-> Array[Vector3i]:
+	var result: Array[Vector3i]
+	
+	if is_multi_block:
+		for member_block: VirtualGridBlock in (get_block_local(pos) as MultiGridBlock).children:
+			result.append_array(get_empty_block_neighbors(member_block.local_pos, include_diagonals, false))
+		return result
+
+	for x in range(-1, 2):
+		for y in range(-1, 2):
+			for z in range(-1, 2):
+				if [x, y, z].count(0) == (1 if include_diagonals else 2):
+					var neighbor_pos: Vector3i= pos + Vector3i(x, y, z)
+					if not blocks.has(neighbor_pos):
+						result.append(neighbor_pos)
+	
+	return result
+
+
 func get_block_neighbor_blocks(pos: Vector3i, include_diagonals: bool= false, include_empty_blocks: bool= false, is_multi_block: bool= false)-> Array[BaseGridBlock]:
 	var result: Array[BaseGridBlock]
 	result.assign(get_block_neighbors(pos, include_diagonals, include_empty_blocks, is_multi_block).\

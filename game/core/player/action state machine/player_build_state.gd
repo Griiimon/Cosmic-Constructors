@@ -100,15 +100,20 @@ func build_block():
 		grid= player.world.add_grid(ghost.position, ghost.global_rotation)
 		local_block_pos= Vector3i.ZERO
 		
-		#var query:= PhysicsShapeQueryParameters3D.new()
-		#query.collision_mask= CollisionLayers.TERRAIN
-		#query.shape= BoxShape3D.new()
-		#query.transform= ghost.transform
-		#
-		#if player.get_world_3d().direct_space_state.intersect_shape(query):
-			#grid.freeze= true
+	var grid_block_rotation: Vector3i= Vector3i.ZERO if new_grid else block_rotation
+	var grid_block: BaseGridBlock= grid.add_block(current_block, local_block_pos, grid_block_rotation)
+	
+	var ignore_axis: int
+	if Input.is_action_pressed("plane_fill"):
+		if not grid.get_block_local(local_block_pos + Vector3i.UP) and not grid.get_block_local(local_block_pos + Vector3i.DOWN):
+			ignore_axis= Vector3i.AXIS_Y
+		elif not grid.get_block_local(local_block_pos + Vector3i.FORWARD) and not grid.get_block_local(local_block_pos + Vector3i.BACK):
+			ignore_axis= Vector3i.AXIS_Z
+		elif not grid.get_block_local(local_block_pos + Vector3i.LEFT) and not grid.get_block_local(local_block_pos + Vector3i.RIGHT):
+			ignore_axis= Vector3i.AXIS_X
+ 
+		plane_fill(local_block_pos, grid_block_rotation, ignore_axis)
 		
-	grid.add_block(current_block, local_block_pos, Vector3i.ZERO if new_grid else block_rotation)
 	ghost.hide()
 
 
@@ -159,3 +164,19 @@ func rotation_input(action_name: String, no_grid: bool)-> bool:
 		return Input.is_action_pressed(action_name)
 	else:
 		return Input.is_action_just_pressed(action_name)
+
+
+# TODO add safeguards
+func plane_fill(block_pos: Vector3i, grid_block_rotation: Vector3i, ignore_axis: int):
+	var occupied_positions: Array[Vector3i]= [block_pos]
+	var position_list: Array[Vector3i]= [block_pos]
+	
+	while not position_list.is_empty():
+		var current_pos: Vector3i= position_list.pop_front()
+		for neighbor in grid.get_empty_block_neighbors(current_pos):
+			if (neighbor - current_pos)[ignore_axis] != 0: continue
+			if not neighbor in occupied_positions and not neighbor in position_list:
+				if not grid.get_block_local(neighbor):
+					position_list.append(neighbor)
+					occupied_positions.append(neighbor)
+					grid.add_block(current_block, neighbor, grid_block_rotation)

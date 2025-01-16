@@ -24,6 +24,7 @@ func _process(_delta: float):
 	if not enabled: return
 	
 	var camera: Camera3D= get_viewport().get_camera_3d()
+	if not camera or not is_instance_valid(camera): return
 
 	for obj in panels.keys().duplicate():
 		if not is_instance_valid(obj) or obj.is_queued_for_deletion():

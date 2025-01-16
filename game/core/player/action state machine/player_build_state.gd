@@ -109,6 +109,7 @@ func build_block():
 			#grid.freeze= true
 		
 	grid.add_block(current_block, local_block_pos, Vector3i.ZERO if new_grid else block_rotation)
+	ghost.hide()
 
 
 func pick_block():

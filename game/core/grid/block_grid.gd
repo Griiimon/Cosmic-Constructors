@@ -569,6 +569,7 @@ func deserialize(data: Dictionary):
 
 func can_place_block_at_global(block: Block, global_pos: Vector3, block_rotation: Vector3i= Vector3i.ZERO)-> bool:
 	var local_pos: Vector3i= get_local_grid_pos(global_pos)
+	if get_block_local(local_pos): return false
 
 	if get_block_neighbors(local_pos).is_empty():
 		return false

@@ -129,7 +129,8 @@ func pick_block():
 		var picked_grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_pos)
 		if picked_grid_block:
 			current_block= picked_grid_block.get_block_definition()
-
+			block_rotation= picked_grid_block.get_local_block_rotation()
+			
 
 func rotate_ghost(delta: float):
 	var no_grid: bool= grid == null

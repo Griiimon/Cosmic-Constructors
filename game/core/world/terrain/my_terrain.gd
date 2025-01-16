@@ -32,10 +32,13 @@ func mine(local_pos: Vector3i, radius: float, spawn_items: bool= false, material
 			collected_resources[raw_item]+= new_resources[key]
 		else:
 			collected_resources[raw_item]= new_resources[key]
-
-		if spawn_items:
-			var item_instance: WorldItemInstance= world.spawn_item(raw_item, material_spawn_pos)
-			item_instance.linear_velocity= item_impulse
 	
-	#DebugHud.send("Ress", collected_resources)
+	#prints("New ress", new_resources)
+	#prints("Coll ress", collected_resources)
+
+	for raw_item: RawItem in collected_resources.keys():
+		if spawn_items:
+			var item_instance: WorldItemInstance= world.spawn_item(raw_item, material_spawn_pos, Vector3.ZERO, collected_resources[raw_item] * 200)
+			item_instance.linear_velocity= item_impulse
+
 	return collected_resources

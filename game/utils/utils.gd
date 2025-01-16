@@ -35,7 +35,8 @@ static func calc_angular_velocity(from_basis: Basis, to_basis: Basis, dual_z_ali
 	# FIXME dual z align will flip at a certain angle
 	if dual_z_align:
 		# Create an alternative target basis rotated 180° around y axis
-		var alt_basis = to_basis.rotated(to_basis.y, PI)
+		#var alt_basis = to_basis.rotated(to_basis.y, PI)
+		var alt_basis = to_basis.rotated(Vector3.UP, PI)
 		var alt_q2 = alt_basis.get_rotation_quaternion()
 		
 		# Calculate both possible quaternion deltas
@@ -44,7 +45,14 @@ static func calc_angular_velocity(from_basis: Basis, to_basis: Basis, dual_z_ali
 		
 		# Calculate angles for both options
 		var angle1 = 2 * acos(delta_q1.w)
+		if angle1 > PI:
+			delta_q1 = -delta_q1
+			angle1 = TAU - angle1
+		
 		var angle2 = 2 * acos(delta_q2.w)
+		if angle2 > PI:
+			delta_q2 = -delta_q2
+			angle2 = TAU - angle2
 		
 		# Use the quaternion that results in the smaller angle
 		delta_q = delta_q1 if angle1 < angle2 else delta_q2
@@ -54,10 +62,10 @@ static func calc_angular_velocity(from_basis: Basis, to_basis: Basis, dual_z_ali
 		delta_q = q2 * q1.inverse()
 		angle = 2 * acos(delta_q.w)
 	
-	# Use the shortest rotation path
-	if angle > PI:
-		delta_q = -delta_q
-		angle = TAU - angle
+		# Use the shortest rotation path
+		if angle > PI:
+			delta_q = -delta_q
+			angle = TAU - angle
 	
 	# Avoid divide-by-zero errors for negligible rotations
 	if angle < 0.0001:

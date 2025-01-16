@@ -6,10 +6,11 @@
 [resource]
 script = ExtResource("1_b2bu0")
 size = Vector3i(1, 1, 1)
-weight = 10.0
+mass = 10.0
 max_hitpoints = 10
 custom_collision = true
 can_tick = false
-can_be_built = true
+tick_priority = 0
+can_be_built = false
 scene = ExtResource("1_eendx")
 name = ""

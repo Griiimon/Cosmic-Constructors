@@ -1,4 +1,6 @@
-pallet storage block (2x2), that tries to snap and pull on pallets that are on top. unless the pallet has contact with any other grid then the magnetizing is temporarily disabled, so it can be lifted with a forklift etc
+dont magnet boot grid walk in gravity environment, keep up like terrain
+
+pick block should copy rotation
 
 3r electric suspension + mirror
 
@@ -18,9 +20,7 @@ when the car isnt moving ( for a bit? ) put an additional damping factor on the 
 terrain height map array store and calc normals:
 Chunks of height info are created independent of the terrain generator, but terrain generator ( can look if height map for current chunk has been created - HOW TO MATCH WEIRD 19x19 voxel chunks) queries height from that cache which will either return a cached value or call get_height() if cache doesn't exist yet
 
-pick block should copy rotation
 
-dont magnet boot grid walk in gravity environment, keep up like terrain
 
 
 Components can_* functions just use Callable refs like with FluidConsumer

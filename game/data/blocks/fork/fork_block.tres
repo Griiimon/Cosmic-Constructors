@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://c5hwcgthdm5q5"]
+[gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://c5hwcgthdm5q5"]
 
 [ext_resource type="PackedScene" uid="uid://crlemuuvl30mi" path="res://game/data/blocks/fork/fork.tscn" id="1_b4sfi"]
+[ext_resource type="Resource" uid="uid://jqjluu1sfgbm" path="res://game/data/misc/block categories/physics.tres" id="1_lrw2h"]
 [ext_resource type="Script" path="res://game/core/block/block.gd" id="2_hj4qt"]
 
 [resource]
@@ -12,5 +13,6 @@ custom_collision = true
 can_tick = false
 tick_priority = 0
 can_be_built = true
+category = ExtResource("1_lrw2h")
 scene = ExtResource("1_b4sfi")
 name = ""

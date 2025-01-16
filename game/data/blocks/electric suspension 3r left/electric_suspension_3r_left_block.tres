@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="SuspensionBlock" load_steps=3 format=3 uid="uid://dpvs5ub2e5ne6"]
+[gd_resource type="Resource" script_class="SuspensionBlock" load_steps=4 format=3 uid="uid://dpvs5ub2e5ne6"]
 
 [ext_resource type="PackedScene" uid="uid://bo7phvjb2q8jg" path="res://game/data/blocks/electric suspension 3r/electric_suspension_3r.tscn" id="1_4elrb"]
+[ext_resource type="Resource" uid="uid://cunos21ar0qix" path="res://game/data/misc/block categories/car.tres" id="1_fyp28"]
 [ext_resource type="Script" path="res://game/core/block/types/suspension_block.gd" id="2_ponbv"]
 
 [resource]
@@ -12,5 +13,6 @@ custom_collision = false
 can_tick = true
 tick_priority = 0
 can_be_built = true
+category = ExtResource("1_fyp28")
 scene = ExtResource("1_4elrb")
 name = ""

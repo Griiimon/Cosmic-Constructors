@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="OreContainerBlock" load_steps=3 format=3 uid="uid://bl80cxbq8b7qh"]
+[gd_resource type="Resource" script_class="OreContainerBlock" load_steps=4 format=3 uid="uid://bl80cxbq8b7qh"]
 
 [ext_resource type="PackedScene" uid="uid://bvucsloy2pswr" path="res://game/data/blocks/ore container 1x1/ore_container_1x1.tscn" id="1_11m7k"]
+[ext_resource type="Resource" uid="uid://biexi21n3yo8" path="res://game/data/misc/block categories/storage.tres" id="1_db2m8"]
 [ext_resource type="Script" path="res://game/core/block/types/ore_container_block.gd" id="1_qthyk"]
 
 [resource]
@@ -12,5 +13,6 @@ custom_collision = true
 can_tick = false
 tick_priority = 0
 can_be_built = true
+category = ExtResource("1_db2m8")
 scene = ExtResource("1_11m7k")
 name = ""

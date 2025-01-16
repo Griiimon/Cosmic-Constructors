@@ -8,6 +8,7 @@ extends NamedResource
 @export var can_tick: bool= false
 @export var tick_priority: int= 0
 @export var can_be_built: bool= true
+@export var category: BlockCategory
 @export var texture: Texture2D
 @export var material: StandardMaterial3D
 @export var scene: PackedScene

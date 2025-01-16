@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://me33p8wjch0a"]
+[gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://me33p8wjch0a"]
 
 [ext_resource type="PackedScene" uid="uid://dygjlclq8nxvm" path="res://game/data/blocks/scaffolding/scaffolding.tscn" id="1_6112e"]
 [ext_resource type="Script" path="res://game/core/block/block.gd" id="1_pln3g"]
+[ext_resource type="Resource" uid="uid://bm6ih6jhatj7i" path="res://game/data/misc/block categories/basic.tres" id="1_rtrny"]
 
 [resource]
 script = ExtResource("1_pln3g")
@@ -12,5 +13,6 @@ custom_collision = false
 can_tick = false
 tick_priority = 0
 can_be_built = true
+category = ExtResource("1_rtrny")
 scene = ExtResource("1_6112e")
 name = ""

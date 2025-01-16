@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="SuspensionBlock" load_steps=3 format=3 uid="uid://c8xvjag2d3hdr"]
+[gd_resource type="Resource" script_class="SuspensionBlock" load_steps=4 format=3 uid="uid://c8xvjag2d3hdr"]
 
+[ext_resource type="Resource" uid="uid://cunos21ar0qix" path="res://game/data/misc/block categories/car.tres" id="1_duyp6"]
 [ext_resource type="PackedScene" uid="uid://bemoeg1t6qpti" path="res://game/data/blocks/suspension 4r left/suspension_4r_left.tscn" id="1_el514"]
 [ext_resource type="Script" path="res://game/core/block/types/suspension_block.gd" id="2_63755"]
 
@@ -12,5 +13,6 @@ custom_collision = false
 can_tick = true
 tick_priority = 2
 can_be_built = true
+category = ExtResource("1_duyp6")
 scene = ExtResource("1_el514")
 name = ""

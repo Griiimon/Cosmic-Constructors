@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="TankBlock" load_steps=4 format=3 uid="uid://c4mm3rkr7ekcw"]
+[gd_resource type="Resource" script_class="TankBlock" load_steps=5 format=3 uid="uid://c4mm3rkr7ekcw"]
 
+[ext_resource type="Resource" uid="uid://biexi21n3yo8" path="res://game/data/misc/block categories/storage.tres" id="1_5ep41"]
 [ext_resource type="PackedScene" uid="uid://br6liai788ug6" path="res://game/data/blocks/small fuel tank/small_fuel_tank.tscn" id="1_6l12e"]
 [ext_resource type="Resource" uid="uid://dqigc04c411p" path="res://game/data/fluids/fuel.tres" id="1_8dct0"]
 [ext_resource type="Script" path="res://game/core/block/types/tank_block.gd" id="1_cs4ek"]
@@ -15,5 +16,6 @@ custom_collision = false
 can_tick = false
 tick_priority = 0
 can_be_built = true
+category = ExtResource("1_5ep41")
 scene = ExtResource("1_6l12e")
 name = ""

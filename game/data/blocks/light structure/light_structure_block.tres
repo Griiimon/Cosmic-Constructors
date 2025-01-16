@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://sueib6rdbmc0"]
+[gd_resource type="Resource" script_class="Block" load_steps=5 format=3 uid="uid://sueib6rdbmc0"]
 
+[ext_resource type="Resource" uid="uid://bm6ih6jhatj7i" path="res://game/data/misc/block categories/basic.tres" id="1_c8xu6"]
 [ext_resource type="Script" path="res://game/core/block/block.gd" id="1_g2c86"]
 [ext_resource type="Material" uid="uid://d3i78bj0va1cg" path="res://game/data/blocks/block_triplanar_material.tres" id="1_spn0b"]
 [ext_resource type="Texture2D" uid="uid://dm7jhw1cb8pid" path="res://game/data/blocks/light structure/light_structure_texture.png" id="2_82sg4"]
@@ -7,11 +8,13 @@
 [resource]
 script = ExtResource("1_g2c86")
 size = Vector3i(1, 1, 1)
-weight = 10.0
+mass = 10.0
 max_hitpoints = 10
 custom_collision = false
 can_tick = false
+tick_priority = 0
 can_be_built = true
+category = ExtResource("1_c8xu6")
 texture = ExtResource("2_82sg4")
 material = ExtResource("1_spn0b")
 name = ""

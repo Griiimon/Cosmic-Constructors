@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://cd6vpdqpygghf"]
+[gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://cd6vpdqpygghf"]
 
 [ext_resource type="Script" path="res://game/core/block/block.gd" id="1_g382e"]
+[ext_resource type="Resource" uid="uid://cxs5vv3urkfhr" path="res://game/data/misc/block categories/production.tres" id="1_i231w"]
 [ext_resource type="PackedScene" uid="uid://cgg6tb8y1qi3m" path="res://game/data/blocks/furnace/furnace.tscn" id="1_kt5v3"]
 
 [resource]
@@ -12,5 +13,6 @@ custom_collision = false
 can_tick = true
 tick_priority = 0
 can_be_built = true
+category = ExtResource("1_i231w")
 scene = ExtResource("1_kt5v3")
 name = ""

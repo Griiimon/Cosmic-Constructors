@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://dcfek6wn02688"]
+[gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://dcfek6wn02688"]
 
 [ext_resource type="PackedScene" uid="uid://dcqoyepwwljd4" path="res://game/data/blocks/pallet baseplate/pallet_baseplate.tscn" id="1_3u400"]
 [ext_resource type="Script" path="res://game/core/block/block.gd" id="1_p1c38"]
+[ext_resource type="Resource" uid="uid://biexi21n3yo8" path="res://game/data/misc/block categories/storage.tres" id="1_pbugw"]
 
 [resource]
 script = ExtResource("1_p1c38")
@@ -12,5 +13,6 @@ custom_collision = true
 can_tick = true
 tick_priority = 0
 can_be_built = true
+category = ExtResource("1_pbugw")
 scene = ExtResource("1_3u400")
 name = ""

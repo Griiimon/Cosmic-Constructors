@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://b6adhur0i2vps"]
+[gd_resource type="Resource" script_class="Block" load_steps=5 format=3 uid="uid://b6adhur0i2vps"]
 
+[ext_resource type="Resource" uid="uid://bm6ih6jhatj7i" path="res://game/data/misc/block categories/basic.tres" id="1_mf2my"]
 [ext_resource type="Script" path="res://game/core/block/block.gd" id="2_7df43"]
 [ext_resource type="Texture2D" uid="uid://mncyxbpmfvhw" path="res://game/data/blocks/heavy structure/heavy_structure_texture.png" id="3_r48vg"]
 
@@ -17,6 +18,7 @@ custom_collision = false
 can_tick = false
 tick_priority = 0
 can_be_built = true
+category = ExtResource("1_mf2my")
 texture = ExtResource("3_r48vg")
 material = SubResource("StandardMaterial3D_74aku")
 name = ""

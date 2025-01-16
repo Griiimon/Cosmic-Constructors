@@ -1,16 +1,18 @@
-[gd_resource type="Resource" script_class="RotorBlock" load_steps=3 format=3 uid="uid://du3bitby5ve4s"]
+[gd_resource type="Resource" script_class="RotorBlock" load_steps=4 format=3 uid="uid://du3bitby5ve4s"]
 
 [ext_resource type="PackedScene" uid="uid://d34fumc1c8e0e" path="res://game/data/blocks/rotor/rotor.tscn" id="1_5obsp"]
+[ext_resource type="Resource" uid="uid://jqjluu1sfgbm" path="res://game/data/misc/block categories/physics.tres" id="1_ixv8o"]
 [ext_resource type="Script" path="res://game/core/block/types/rotor_block.gd" id="1_pykky"]
 
 [resource]
 script = ExtResource("1_pykky")
 size = Vector3i(1, 1, 1)
-weight = 10.0
+mass = 10.0
 max_hitpoints = 10
 custom_collision = true
 can_tick = false
 tick_priority = 0
 can_be_built = true
+category = ExtResource("1_ixv8o")
 scene = ExtResource("1_5obsp")
 name = ""

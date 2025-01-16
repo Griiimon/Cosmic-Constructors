@@ -1,16 +1,18 @@
-[gd_resource type="Resource" script_class="TubeBlock" load_steps=3 format=3 uid="uid://bw5aa1kbykr2c"]
+[gd_resource type="Resource" script_class="TubeBlock" load_steps=4 format=3 uid="uid://bw5aa1kbykr2c"]
 
 [ext_resource type="Script" path="res://game/core/block/types/tube_block.gd" id="1_2q60m"]
+[ext_resource type="Resource" uid="uid://d4f2nvlgovoej" path="res://game/data/misc/block categories/logistics.tres" id="1_itw6a"]
 [ext_resource type="PackedScene" uid="uid://bpf1ecmswenqr" path="res://game/data/blocks/fluid tube/fluid_tube.tscn" id="1_rangt"]
 
 [resource]
 script = ExtResource("1_2q60m")
 size = Vector3i(1, 1, 1)
-weight = 1.0
+mass = 10.0
 max_hitpoints = 2
 custom_collision = false
 can_tick = false
 tick_priority = 0
 can_be_built = true
+category = ExtResource("1_itw6a")
 scene = ExtResource("1_rangt")
 name = ""

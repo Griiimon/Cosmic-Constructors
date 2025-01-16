@@ -1,15 +1,18 @@
-[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://bmjgpm6ppgrgi"]
+[gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://bmjgpm6ppgrgi"]
 
 [ext_resource type="Script" path="res://game/core/block/block.gd" id="1_dd7uj"]
 [ext_resource type="PackedScene" uid="uid://dlqfopapxt0b7" path="res://game/data/blocks/lift wing/lift_wing.tscn" id="1_ewk16"]
+[ext_resource type="Resource" uid="uid://cv5uooety4fpg" path="res://game/data/misc/block categories/airplane.tres" id="1_nbr1g"]
 
 [resource]
 script = ExtResource("1_dd7uj")
 size = Vector3i(2, 1, 1)
-weight = 10.0
+mass = 10.0
 max_hitpoints = 10
 custom_collision = false
 can_tick = true
+tick_priority = 0
 can_be_built = true
+category = ExtResource("1_nbr1g")
 scene = ExtResource("1_ewk16")
 name = ""

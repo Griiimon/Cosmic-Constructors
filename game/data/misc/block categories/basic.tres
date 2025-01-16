@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BlockCategory" load_steps=2 format=3 uid="uid://bm6ih6jhatj7i"]
+
+[ext_resource type="Script" path="res://game/core/block/block_category.gd" id="1_wwwkb"]
+
+[resource]
+script = ExtResource("1_wwwkb")
+name = ""

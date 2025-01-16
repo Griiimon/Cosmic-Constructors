@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://di5gp3ydhdfot"]
+[gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://di5gp3ydhdfot"]
 
 [ext_resource type="PackedScene" uid="uid://dqc2w8evbpc7x" path="res://game/data/blocks/faucet/faucet.tscn" id="1_2eemu"]
 [ext_resource type="Script" path="res://game/core/block/block.gd" id="1_alvrp"]
+[ext_resource type="Resource" uid="uid://d4f2nvlgovoej" path="res://game/data/misc/block categories/logistics.tres" id="1_c7ewl"]
 
 [resource]
 script = ExtResource("1_alvrp")
@@ -12,5 +13,6 @@ custom_collision = true
 can_tick = true
 tick_priority = 0
 can_be_built = true
+category = ExtResource("1_c7ewl")
 scene = ExtResource("1_2eemu")
 name = ""

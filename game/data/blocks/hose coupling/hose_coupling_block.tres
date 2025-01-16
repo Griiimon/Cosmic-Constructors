@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="HoseCouplingBlock" load_steps=3 format=3 uid="uid://pb4xqj1cimd3"]
+[gd_resource type="Resource" script_class="HoseCouplingBlock" load_steps=4 format=3 uid="uid://pb4xqj1cimd3"]
 
 [ext_resource type="Script" path="res://game/core/block/types/hose_coupling_block.gd" id="1_cxbke"]
+[ext_resource type="Resource" uid="uid://d4f2nvlgovoej" path="res://game/data/misc/block categories/logistics.tres" id="1_mfn82"]
 [ext_resource type="PackedScene" uid="uid://dyuh65348fokk" path="res://game/data/blocks/hose coupling/hose_coupling.tscn" id="1_qf4ol"]
 
 [resource]
@@ -12,5 +13,6 @@ custom_collision = false
 can_tick = false
 tick_priority = 0
 can_be_built = true
+category = ExtResource("1_mfn82")
 scene = ExtResource("1_qf4ol")
 name = ""

@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="HandlesBlock" load_steps=3 format=3 uid="uid://gp46n88pa5t8"]
+[gd_resource type="Resource" script_class="HandlesBlock" load_steps=4 format=3 uid="uid://gp46n88pa5t8"]
 
 [ext_resource type="PackedScene" uid="uid://dweomn8gah72l" path="res://game/data/blocks/handles/handles.tscn" id="1_38c5h"]
+[ext_resource type="Resource" uid="uid://jqjluu1sfgbm" path="res://game/data/misc/block categories/physics.tres" id="1_hdryg"]
 [ext_resource type="Script" path="res://game/core/block/types/handles_block.gd" id="2_04wsi"]
 
 [resource]
@@ -12,5 +13,6 @@ custom_collision = true
 can_tick = true
 tick_priority = 0
 can_be_built = true
+category = ExtResource("1_hdryg")
 scene = ExtResource("1_38c5h")
 name = ""

@@ -16,6 +16,7 @@ visible = false
 mesh = SubResource("BoxMesh_d27qx")
 
 [node name="Suspension Model" parent="." instance=ExtResource("3_potox")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
 [node name="Backplate" parent="Suspension Model" index="4"]
 visible = false

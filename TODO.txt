@@ -1,4 +1,16 @@
-sky3d addon
+use cheaty jetpack rotation ( no angular velocity just integrate force rotation )
+
+freeze grids on load with LOD terrain. when lod chunk generates with lod 0 call deferred to an intersect_shape call that unfreezes grids ( unless anchored )
+
+and/or put voxel viewer on grids
+
+save physical/world items
+
+thrusters particle TARGET direction seems to be in global coords
+
+
+
+
 
 block categories
 	build mode: use custom block list, either full list or category list 

@@ -75,6 +75,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Head/Pivot/Item Viewport Container" index="0"]
 transparent_bg = true
 handle_input_locally = false
+gui_disable_input = true
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 

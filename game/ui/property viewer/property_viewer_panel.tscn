@@ -6,6 +6,7 @@
 [node name="Property Viewer Panel" type="PanelContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_force_pass_scroll_events = false
 script = ExtResource("1_6mjmq")
 ROW_SCENE = ExtResource("2_uhxg5")
 

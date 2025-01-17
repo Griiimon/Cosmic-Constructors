@@ -14,6 +14,7 @@ func _ready() -> void:
 		child.layers = 2
 
 
+# FIXME this wont be called currently
 func use():
 	if animation_player:
 		animation_player.play("use")

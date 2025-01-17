@@ -19,23 +19,6 @@ func on_exit():
 
 
 func on_physics_process(_delta: float):
-	var hand_item: HandItem= player.get_hand_item()
-	if hand_item:
-		var hand_object: HandObject= player.hand_object
-
-		if Input.is_action_pressed("use_item_primary"):
-			if Input.is_action_just_pressed("use_item_primary"):
-				if hand_item.primary_use_continuous:
-					hand_object.start_using()
-				else:
-					hand_object.use()
-				return
-					
-		elif Input.is_action_just_released("use_item_primary"):
-			if hand_item.primary_use_continuous:
-				hand_object.stop_using()
-				return
-
 	if Input.is_action_just_pressed("build"):
 		if Input.is_action_pressed("peripheral_entity_modifier"):
 			build_peripheral_entity.emit()
@@ -70,6 +53,27 @@ func on_physics_process(_delta: float):
 						return
 
 	interaction_logic()
+
+
+func on_unhandled_input(event: InputEvent):
+	var hand_item: HandItem= player.get_hand_item()
+	if hand_item:
+		var hand_object: HandObject= player.hand_object
+
+		if event.is_action_pressed("use_item_primary"):
+			if hand_item.primary_use_continuous:
+				hand_object.start_using()
+			else:
+				# FIXME this wont be called
+				hand_object.use()
+			return
+					
+		elif event.is_action_released("use_item_primary"):
+			if hand_item.primary_use_continuous:
+				hand_object.stop_using()
+				return
+	
+
 	
 
 func equip_hand_item(hand_item: HandItem):

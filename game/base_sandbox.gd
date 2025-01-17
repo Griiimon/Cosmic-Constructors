@@ -70,7 +70,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed: 
 			if event.keycode == KEY_F1:
-				mine_gold()
+				spawn_pallet()
 			elif event.keycode == KEY_F2:
 				player.world.freeze_grids(false)
 			elif event.keycode == KEY_F3:
@@ -195,3 +195,9 @@ func sit_in_nearest_seat():
 			if block.get_block_definition() is SeatBlock:
 				player.sit(block.get_block_instance())
 				return
+
+
+func spawn_pallet():
+	var pallet: Pallet= load("res://game/data/object entities/wooden_pallet.tscn").instantiate()
+	pallet.position= player.global_position + player.get_look_vec() + Vector3.UP
+	player.world.add_child(pallet)

@@ -2,14 +2,13 @@
 
 [ext_resource type="Script" path="res://game/launcher.gd" id="1_rwhuf"]
 [ext_resource type="PackedScene" uid="uid://bws4nr4sjg6bt" path="res://game/test/damage test/damage_test.tscn" id="2_5w3hj"]
-[ext_resource type="PackedScene" uid="uid://buqb4b7dp5dty" path="res://game/test/planet test/planet_test.tscn" id="2_17158"]
+[ext_resource type="PackedScene" uid="uid://18lknojownsw" path="res://game/test/custom planet test/custom_planet_test.tscn" id="2_8u165"]
 
 [node name="Launcher" type="Node"]
 script = ExtResource("1_rwhuf")
-use_interface = true
-run_test_scene = ExtResource("2_17158")
+run_test_scene = ExtResource("2_8u165")
 game_scene = ExtResource("2_5w3hj")
-maximize_window = true
+fullscreen = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 

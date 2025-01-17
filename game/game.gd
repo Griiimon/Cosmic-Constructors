@@ -39,6 +39,7 @@ func spawn_player():
 	player.world= $World
 	player.equipment= player_spawn.equipment
 	add_child(player)
+	move_child(player, 1)
 
 
 func add_peer(player_state: Dictionary):

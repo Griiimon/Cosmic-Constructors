@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://mvxp51g6bm1j"]
+
+[node name="Block Grid Voxel Viewer" type="VoxelViewer"]
+requires_visuals = false

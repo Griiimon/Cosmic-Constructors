@@ -54,6 +54,7 @@ func _ready() -> void:
 	process_physics_priority= 5
 
 	add_child(load("res://game/core/components/damage component/damage_component.tscn").instantiate())
+	add_child(GameData.scene_library.block_grid_voxel_viewer.instantiate())
 
 	init_mass_indicator()
 

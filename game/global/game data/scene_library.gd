@@ -6,3 +6,4 @@ extends Resource
 @export var rope: PackedScene
 @export var block_grid_voxel_viewer: PackedScene
 @export var damage_component: PackedScene
+@export var lod_activated: PackedScene

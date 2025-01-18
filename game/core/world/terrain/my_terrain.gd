@@ -7,6 +7,10 @@ extends VoxelLodTerrain
 
 
 
+func _init():
+	Global.terrain= self
+
+
 func _ready() -> void:
 	await get_parent().ready
 	if not world:

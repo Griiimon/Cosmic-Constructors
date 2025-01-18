@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://5afsu5gm3djh"]
+
+[ext_resource type="Script" path="res://game/core/misc/lod activated/lod_activated.gd" id="1_lvhar"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8rut3"]
+
+[node name="Lod Activated" type="Area3D"]
+collision_layer = 4096
+monitoring = false
+script = ExtResource("1_lvhar")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_8rut3")

@@ -10,6 +10,8 @@ const WORLD_ITEM= 64
 const FLUID= 128
 const ROPE= 512
 const PULLABLE= 2048
+const LOD_ACTIVATED= 4096
+
 
 
 func get_all_body_layers()-> int:

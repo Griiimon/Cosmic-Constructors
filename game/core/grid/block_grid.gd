@@ -39,6 +39,8 @@ var linked_block_groups: Array[LinkedBlockGroup]
 
 var main_cockpit: SeatInstance
 
+var lod_activation: LodActivated
+
 
 
 func _ready() -> void:
@@ -73,7 +75,7 @@ func init_mass_indicator():
 	mass_indicator.hide()
 
 
-func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO, connects_to_main_grid: BlockGrid= null, restore_data: Dictionary= {})-> BaseGridBlock:
+func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO, connects_to_main_grid: BlockGrid= null, restore_data= null)-> BaseGridBlock:
 	var grid_block: BaseGridBlock
 	if block.is_multi_block():
 		grid_block= MultiGridBlock.new(block, pos, block_rotation)
@@ -125,7 +127,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 	if block_node is BlockInstance:
 		var instance: BlockInstance= block_node
-		if not restore_data.is_empty():
+		if restore_data:
 			instance.on_restored(self, grid_block, restore_data)
 		else:
 			instance.on_placed(self, grid_block)
@@ -154,7 +156,8 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 	update_properties()
 
-	anchor_check(block_node.global_transform, coll_shape.shape)
+	if not restore_data:
+		anchor_check(block_node.global_transform, coll_shape.shape)
 
 	return grid_block
 
@@ -572,6 +575,12 @@ func deserialize(data: Dictionary):
 	if data.has("main_grid_id"):
 		main_grid_id= data["main_grid_id"]
 		main_grid_connection= get_block_local(str_to_var("Vector3i" + data["main_grid_connection"]))
+
+	if not is_anchored and Global.terrain:
+		freeze= true
+		lod_activation= GameData.scene_library.lod_activated.instantiate()
+		add_child(lod_activation)
+		lod_activation.terrain_initialized.connect(func(): freeze= false)
 
 
 func can_place_block_at_global(block: Block, global_pos: Vector3, block_rotation: Vector3i= Vector3i.ZERO)-> bool:

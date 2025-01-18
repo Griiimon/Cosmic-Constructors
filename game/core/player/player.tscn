@@ -184,7 +184,6 @@ jetpack_active = true
 dampeners_active = true
 yaw_factor = 0.2
 pitch_factor = 0.2
-roll_factor = 3.0
 boost_factor = 3.0
 damping_factor = 100.0
 min_land_velocity = 0.2

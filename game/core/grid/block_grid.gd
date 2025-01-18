@@ -17,6 +17,10 @@ var requested_rotation: Vector3
 
 var inertial_dampeners: bool= false
 var parking_brake: bool= false
+var is_anchored: bool= false:
+	set(b):
+		is_anchored= b
+		freeze= is_anchored
 
 var reverse_mode: bool= false
 
@@ -150,7 +154,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 	update_properties()
 
-	freeze_check(block_node.global_transform)
+	anchor_check(block_node.global_transform, coll_shape)
 
 	return grid_block
 
@@ -349,14 +353,14 @@ func update_properties():
 	mass_indicator.position= center_of_mass
 
 
-func freeze_check(global_block_transform: Transform3D):
+func anchor_check(global_block_transform: Transform3D, shape: Shape3D):
 	var query:= PhysicsShapeQueryParameters3D.new()
 	query.collision_mask= CollisionLayers.TERRAIN
-	query.shape= BoxShape3D.new()
+	query.shape= shape
 	query.transform= global_block_transform
 	
 	if get_world_3d().direct_space_state.intersect_shape(query):
-		freeze= true
+		is_anchored= true
 
 
 func unfreeze_check():
@@ -374,7 +378,7 @@ func unfreeze_check():
 			return
 	
 	#print(" Success")
-	freeze= false
+	is_anchored= false
 
 
 func take_damage(damage: Damage, coll_shape: CollisionShape3D):
@@ -507,6 +511,7 @@ func serialize()-> Dictionary:
 	data["angular_velocity"]= angular_velocity
 	data["parking_brake"]= parking_brake
 	data["reverse_mode"]= reverse_mode
+	data["is_anchored"]= is_anchored
 	
 	data["blocks"]= []
 	
@@ -550,7 +555,8 @@ func deserialize(data: Dictionary):
 	angular_velocity= str_to_var("Vector3" + data["angular_velocity"])
 	parking_brake= Utils.get_key_or_default(data, "parking_brake", false)
 	reverse_mode= Utils.get_key_or_default(data, "reverse_mode", false)
-
+	is_anchored= Utils.get_key_or_default(data, "is_anchored", false)
+	
 
 	for item: Dictionary in data["blocks"]:
 		var block_position: Vector3= str_to_var("Vector3" + item["position"])

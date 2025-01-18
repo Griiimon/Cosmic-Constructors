@@ -46,7 +46,6 @@ size = Vector3(0.1, 0.1, 0.8)
 [node name="Player" instance=ExtResource("1_kthjw")]
 collision_mask = 55
 center_of_mass_mode = 1
-center_of_mass = Vector3(0, 0.8, 0)
 script = ExtResource("1_owy5q")
 equipment = null
 
@@ -183,8 +182,9 @@ current_state = NodePath("EVA")
 script = ExtResource("3_o2tyv")
 jetpack_active = true
 dampeners_active = true
-rotation_speed = 1000.0
-roll_factor = 5.0
+yaw_factor = 0.2
+pitch_factor = 0.2
+roll_factor = 3.0
 boost_factor = 3.0
 damping_factor = 100.0
 min_land_velocity = 0.2

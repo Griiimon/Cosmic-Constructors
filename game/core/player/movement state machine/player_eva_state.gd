@@ -19,12 +19,11 @@ signal landed
 		SignalManager.toggle_dampeners.emit(dampeners_active)
 		update_gravity()
 
-@export var rotation_speed: float= 0.02
 @export var yaw_factor: float= 1.0
 @export var pitch_factor: float= 1.0 
 @export var roll_factor: float= 1.0
-
-#@export var acceleration: float= 10.0
+@export var up_vector_realism_ration: float= 0.2
+ 
 @export var boost_factor: float= 2.0
 
 @export var damping_factor: float= 1.0
@@ -38,6 +37,8 @@ var pitch_input: float
 var roll_input: float
 
 var move_vec: Vector3
+
+#var rot_quat: Quaternion
 
 
 
@@ -68,20 +69,6 @@ func on_physics_process(delta: float):
 	if Input.is_action_just_pressed("jetpack"):
 		jetpack_active= not jetpack_active
 		return
-
-	roll_input= Input.get_axis("roll_right", "roll_left")
-
-	var quat_pitch:= Quaternion(player.global_basis.x, deg_to_rad(pitch_input) * pitch_factor)
-	var quat_yaw:= Quaternion(player.global_basis.y, deg_to_rad(yaw_input) * yaw_factor)
-	var quat_roll:= Quaternion(player.global_basis.z, deg_to_rad(roll_input) * roll_factor)
-
-	pitch_input= 0
-	yaw_input= 0
-	roll_input= 0
-
-	var rot_quat: Quaternion= quat_yaw * quat_pitch * quat_roll
-	
-	player.angular_velocity= rot_quat.get_axis() * rot_quat.get_euler().length() * rotation_speed * delta
 
 	if jetpack_active:
 		
@@ -123,6 +110,33 @@ func on_physics_process(delta: float):
 			#player.apply_central_force(-player.get_gravity() * player.mass)
 		
 		player.apply_central_force(move_vec)
+
+
+func on_integrate_forces(state: PhysicsDirectBodyState3D):
+	roll_input= Input.get_axis("roll_right", "roll_left")
+
+	#var processed_up_vector: Vector3= lerp(Vector3.UP * ( 1 if state.transform.basis.y.dot(Vector3.UP) > 0 else -1 ), state.transform.basis.y, up_vector_realism_ration)
+	#if processed_up_vector.length_squared() > 0:
+		#state.transform.basis= state.transform.basis.rotated(processed_up_vector.normalized(), deg_to_rad(yaw_input) * yaw_factor)
+	#
+	#state.transform.basis= state.transform.basis.rotated(state.transform.basis.x, deg_to_rad(pitch_input) * pitch_factor)
+	#state.transform.basis= state.transform.basis.rotated(state.transform.basis.z, deg_to_rad(roll_input) * roll_factor)
+	
+	if abs(yaw_input) > abs(pitch_input):
+		pitch_input= 0
+	elif abs(pitch_input) > abs(yaw_input):
+		yaw_input= 0
+
+	var local_basis:= Basis.IDENTITY
+	local_basis= local_basis.rotated(Vector3.UP, deg_to_rad(yaw_input) * yaw_factor)
+	local_basis= local_basis.rotated(Vector3.RIGHT, deg_to_rad(pitch_input) * pitch_factor)
+	local_basis= local_basis.rotated(Vector3.FORWARD, deg_to_rad(roll_input) * roll_factor)
+
+	state.transform.basis= state.transform.basis * local_basis
+
+	pitch_input= 0
+	yaw_input= 0
+	roll_input= 0
 
 
 func on_input(event: InputEvent):

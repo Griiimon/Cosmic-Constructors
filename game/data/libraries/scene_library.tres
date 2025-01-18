@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="SceneLibrary" load_steps=5 format=3 uid="uid://bpfu46bd6dwi8"]
+[gd_resource type="Resource" script_class="SceneLibrary" load_steps=6 format=3 uid="uid://bpfu46bd6dwi8"]
 
 [ext_resource type="PackedScene" uid="uid://mvxp51g6bm1j" path="res://game/core/grid/block grid voxel viewer/block_grid_voxel_viewer.tscn" id="1_01a2v"]
 [ext_resource type="PackedScene" uid="uid://dxobr26jfvcqg" path="res://game/core/components/fluid container/fluid_connector_model.tscn" id="1_atj2b"]
 [ext_resource type="Script" path="res://game/global/game data/scene_library.gd" id="1_vf24s"]
 [ext_resource type="PackedScene" uid="uid://rbb1n5pfdkqs" path="res://game/core/misc/rope/rope.tscn" id="2_aa6pu"]
+[ext_resource type="PackedScene" uid="uid://djg68ac2wsojx" path="res://game/core/components/damage component/damage_component.tscn" id="3_r5ubm"]
 
 [resource]
 script = ExtResource("1_vf24s")
 connector_model = ExtResource("1_atj2b")
 rope = ExtResource("2_aa6pu")
 block_grid_voxel_viewer = ExtResource("1_01a2v")
+damage_component = ExtResource("3_r5ubm")

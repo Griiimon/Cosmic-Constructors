@@ -12,5 +12,6 @@ func _ready() -> void:
 func on_enter_first_person():
 	pass
 
+
 func on_enter_third_person():
 	pass

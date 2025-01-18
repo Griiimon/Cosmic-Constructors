@@ -275,6 +275,7 @@ plane_fill={
 3d_physics/layer_10="Rope"
 3d_physics/layer_11="Solid Ore Pile"
 3d_physics/layer_12="Pullable"
+3d_physics/layer_13="Lod Activated"
 
 [physics]
 

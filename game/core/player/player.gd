@@ -74,6 +74,11 @@ func _physics_process(delta: float) -> void:
 		equipment_object.tick(self, delta)
 
 
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	movement_state_machine.on_integrate_forces(state)
+	action_state_machine.on_integrate_forces(state)
+
+
 func camera_logic():
 	if Input.is_action_just_pressed("toggle_camera"):
 		if is_in_third_person():

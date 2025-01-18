@@ -130,7 +130,7 @@ func on_integrate_forces(state: PhysicsDirectBodyState3D):
 	var local_basis:= Basis.IDENTITY
 	local_basis= local_basis.rotated(Vector3.UP, deg_to_rad(yaw_input) * yaw_factor)
 	local_basis= local_basis.rotated(Vector3.RIGHT, deg_to_rad(pitch_input) * pitch_factor)
-	local_basis= local_basis.rotated(Vector3.FORWARD, deg_to_rad(roll_input) * roll_factor)
+	local_basis= local_basis.rotated(Vector3.FORWARD, -deg_to_rad(roll_input) * roll_factor)
 
 	state.transform.basis= state.transform.basis * local_basis
 

@@ -1,0 +1,6 @@
+[gd_resource type="VoxelGeneratorScript" script_class="MyWaveGenerator" load_steps=2 format=3 uid="uid://bnl8b7ei7tc3n"]
+
+[ext_resource type="Script" path="res://game/test/lod terrain test/my_wave_generator.gd" id="1_2i6je"]
+
+[resource]
+script = ExtResource("1_2i6je")

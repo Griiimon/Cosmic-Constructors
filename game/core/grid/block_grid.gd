@@ -154,7 +154,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 	update_properties()
 
-	anchor_check(block_node.global_transform, coll_shape)
+	anchor_check(block_node.global_transform, coll_shape.shape)
 
 	return grid_block
 

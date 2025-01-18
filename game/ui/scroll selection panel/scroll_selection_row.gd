@@ -1,4 +1,4 @@
-class_name PanelViewerRow
+class_name ScrollSelectionRow
 extends PanelContainer
 
 @export var selection_style_box: StyleBoxFlat
@@ -6,17 +6,10 @@ extends PanelContainer
 @onready var label_type: Label = %"Label Type"
 @onready var label_value: Label = %"Label Value"
 
-var property: BlockProperty:
-	set(p):
-		property= p
-		if not property: return
-		update()
-
 
 
 func update():
-	label_type.text= property.display_name
-	label_value.text= property.get_value_as_text()
+	pass
 
 
 func select_type():
@@ -41,10 +34,12 @@ func deselect():
 
 
 func change_value(delta: int, modifier: int= 1):
-	property.change_value(10 if Input.is_action_pressed("property_value_modifier_10x") else 1, delta)
 	update()
 
 
 func toggle():
-	property.toggle()
 	update()
+
+
+func can_toggle()-> bool:
+	return true

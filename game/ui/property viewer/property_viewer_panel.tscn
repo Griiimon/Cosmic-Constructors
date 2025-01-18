@@ -1,27 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx3tq7r2hkw6p"]
+[gd_scene load_steps=3 format=3 uid="uid://daoodbkrxv86s"]
 
-[ext_resource type="Script" path="res://game/ui/property viewer/property_viewer_panel.gd" id="1_6mjmq"]
-[ext_resource type="PackedScene" uid="uid://sfkbywiwrwuk" path="res://game/ui/property viewer/panel_viewer_row.tscn" id="2_uhxg5"]
+[ext_resource type="PackedScene" uid="uid://bmpjev3uj24g4" path="res://game/ui/scroll selection panel/scroll_selection_panel.tscn" id="1_og64x"]
+[ext_resource type="PackedScene" uid="uid://b5f12rr7oiqem" path="res://game/ui/property viewer/property_viewer_row.tscn" id="2_jsj2r"]
 
-[node name="Property Viewer Panel" type="PanelContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_force_pass_scroll_events = false
-script = ExtResource("1_6mjmq")
-ROW_SCENE = ExtResource("2_uhxg5")
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer Content" type="VBoxContainer" parent="MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="Update Interval" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="timeout" from="Update Interval" to="." method="_on_update_interval_timeout"]
+[node name="Property Viewer Panel" instance=ExtResource("1_og64x")]
+ROW_SCENE = ExtResource("2_jsj2r")

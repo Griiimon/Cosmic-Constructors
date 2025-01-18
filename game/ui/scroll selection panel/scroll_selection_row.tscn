@@ -1,16 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://sfkbywiwrwuk"]
+[gd_scene load_steps=4 format=3 uid="uid://cjgnwhuf4jta4"]
 
-[ext_resource type="Script" path="res://game/ui/property viewer/panel_viewer_row.gd" id="1_r2f0p"]
-[ext_resource type="StyleBox" uid="uid://bbv11tmo5ry0i" path="res://game/ui/property viewer/selection_style_box.tres" id="2_au6eg"]
+[ext_resource type="Script" path="res://game/ui/scroll selection panel/scroll_selection_row.gd" id="1_nxwbd"]
+[ext_resource type="StyleBox" uid="uid://g8ibp8ymnjgx" path="res://game/ui/scroll selection panel/selection_style_box.tres" id="2_0bnh6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xmhy5"]
 bg_color = Color(0.345098, 0.345098, 0.345098, 0)
 
-[node name="Panel Viewer Row" type="PanelContainer"]
+[node name="Scroll Selection Row" type="PanelContainer"]
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xmhy5")
-script = ExtResource("1_r2f0p")
-selection_style_box = ExtResource("2_au6eg")
+script = ExtResource("1_nxwbd")
+selection_style_box = ExtResource("2_0bnh6")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

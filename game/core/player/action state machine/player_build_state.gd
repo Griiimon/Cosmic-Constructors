@@ -12,6 +12,7 @@ extends PlayerActionStateMachineState
 			init_ghost(current_block.get_model())
 
 var block_list: Array[Block]
+var block_index: int
 
 var grid: BlockGrid
 var local_block_pos: Vector3i
@@ -62,8 +63,24 @@ func on_physics_process(delta: float):
 		return
 	elif Input.is_action_just_pressed("toggle_block_categories"):
 		SignalManager.toggle_block_category_panel.emit()
+	else:
+		var switch_block_delta: int= int(Input.get_axis("next_block", "previous_block"))
+		
+		if switch_block_delta:
+			switch_block(switch_block_delta)
+		return
 
 	ghost.show()
+
+
+func on_unhandled_input(event: InputEvent):
+	if event is InputEventMouseButton:
+		if event.pressed:
+			match event.button_index:
+				MOUSE_BUTTON_WHEEL_UP:
+					switch_block(-1)
+				MOUSE_BUTTON_WHEEL_DOWN:
+					switch_block(1)
 
 
 func align_ghost():
@@ -193,13 +210,28 @@ func plane_fill(block_pos: Vector3i, grid_block_rotation: Vector3i, ignore_axis:
 					grid.add_block(current_block, neighbor, grid_block_rotation)
 
 
+func switch_block(delta: int):
+	var block_index= block_list.find(current_block)
+
+	block_index= wrapi(block_index + delta, 0, block_list.size())
+	current_block= block_list[block_index]
+
+	while not current_block.can_be_built:
+		block_index= wrapi(block_index + ( 1 if delta == 0 else delta), 0, block_list.size())
+		current_block= block_list[block_index]
+	
+	SignalManager.build_block_changed.emit(current_block)
+
+
+func set_full_block_list():
+	block_list= GameData.block_library.blocks
+	block_index= 0
+	switch_block(0)
+
+
 func on_block_category_selected(category: BlockCategory):
 	if is_current_state():
 		if category:
 			block_list= GameData.block_categories[category]
 		else:
 			set_full_block_list()
-
-
-func set_full_block_list():
-	block_list= GameData.block_library.blocks

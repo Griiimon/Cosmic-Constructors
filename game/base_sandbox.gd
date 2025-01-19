@@ -85,11 +85,6 @@ func _input(event: InputEvent) -> void:
 			elif event.keycode == KEY_F9:
 				get_tree().reload_current_scene.call_deferred()
 				return
-			else:
-				var switch_block_delta: int= int(Input.get_axis("next_block", "previous_block"))
-				
-				if switch_block_delta:
-					switch_block(switch_block_delta)
 
 	elif event is InputEventMouseButton:
 		if event.pressed:
@@ -98,10 +93,6 @@ func _input(event: InputEvent) -> void:
 					remove_grid()
 				else:
 					remove_block()
-			elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
-				switch_block(-1)
-			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-				switch_block(1)
 
 
 func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
@@ -137,24 +128,6 @@ func mine_gold():
 		collected_resources[key]+= new_resources[key]
 	
 	DebugHud.send("Gold", collected_resources[1] if collected_resources.has(1) else 0.0)	
-
-	
-func switch_block(delta: int):
-	if not player.action_state_machine.build_state.is_current_state():
-		return
-		
-	var build_state: PlayerBuildState= player.action_state_machine.build_state
-	var blocks: Array[Block]= GameData.block_library.blocks
-	var block_index= blocks.find(build_state.current_block)
-
-	block_index= wrapi(block_index + delta, 0, blocks.size())
-	build_state.current_block= blocks[block_index]
-
-	while not build_state.current_block.can_be_built:
-		block_index= wrapi(block_index + delta, 0, blocks.size())
-		build_state.current_block= blocks[block_index]
-	
-	SignalManager.build_block_changed.emit(build_state.current_block)
 
 
 func remove_block():

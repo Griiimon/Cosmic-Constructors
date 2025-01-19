@@ -1,21 +1,13 @@
-use cheaty jetpack rotation ( no angular velocity just integrate force rotation )
-
-freeze grids on load with LOD terrain. when lod chunk generates with lod 0 call deferred to an intersect_shape call that unfreezes grids ( unless anchored )
-
-and/or put voxel viewer on grids
+save and load blueprints ( use half transparent boxes per grid block )
 
 save physical/world items
 
 thrusters particle TARGET direction seems to be in global coords
 
-
-
-
-
 block categories
 	build mode: use custom block list, either full list or category list 
 
-base scroll container like property viewer, inherit for building menu block categories
+transfer block_types when splitting grids
 
 
 property panel group system:
@@ -321,6 +313,7 @@ ice will have the same friction as all terrain ( wheels can handle it but.. ) gr
 
 crop fields: tilling ( turn grass into dirt voxel ) and harvesting manually or with machines
 
+hard stone type that cannot be mined, only tnt etc
 
 
 TECHNOLOGIES:

@@ -15,6 +15,8 @@ extends CanvasLayer
 
 @onready var hotbar: Hotbar = $Hotbar
 
+@onready var block_category_selection_panel: BlockCategorySelectionPanel = %"Block Category Selection Panel"
+
 
 var property_viewer_panel: PropertyViewerPanel
 
@@ -29,15 +31,18 @@ func _ready():
 	SignalManager.toggle_jetpack.connect(func(b: bool): jetpack_button.disabled= not b)
 	SignalManager.toggle_dampeners.connect(func(b: bool): dampeners_button.disabled= not b)
 	SignalManager.toggle_parking_brake.connect(func(b: bool): parking_brake_button.disabled= not b)
+
+	SignalManager.interact_with_block.connect(on_interact_with_block)
+	SignalManager.hotkey_assigned.connect(on_hotkey_assigned)
+	SignalManager.toggle_block_category_panel.connect(on_toggle_block_category_panel)
 		
 	temporary_info_label_cooldown.timeout.connect(func(): temporary_info_label.hide())
+	block_category_selection_panel.category_selected(on_block_category_selected)
 
 	property_viewer_panel= PROPERTY_VIEWER_SCENE.instantiate()
 	property_viewer_panel.hide()
 	add_child(property_viewer_panel)
 
-	SignalManager.interact_with_block.connect(on_interact_with_block)
-	SignalManager.hotkey_assigned.connect(on_hotkey_assigned)
 
 
 func _physics_process(_delta: float) -> void:
@@ -71,3 +76,11 @@ func on_interact_with_block(grid_block: GridBlock, grid: BlockGrid, player: Play
 
 func on_hotkey_assigned(assignment: BaseHotkeyAssignment, grid: BlockGrid):
 	update_temporary_info_label(str("Hotkey ", assignment.key, " assigned to ", assignment.get_as_text(grid)))
+
+
+func on_toggle_block_category_panel():
+	block_category_selection_panel.visible= not block_category_selection_panel.visible
+
+
+func on_block_category_selected(category: BlockCategory):
+	SignalManager.selected_block_category.emit(category)

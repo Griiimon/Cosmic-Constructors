@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cn7c8npnm1ukd"]
+[gd_scene load_steps=7 format=3 uid="uid://cn7c8npnm1ukd"]
 
 [ext_resource type="Script" path="res://game/ui/game_ui.gd" id="1_2qjqn"]
 [ext_resource type="PackedScene" uid="uid://daoodbkrxv86s" path="res://game/ui/property viewer/property_viewer_panel.tscn" id="2_dffew"]
 [ext_resource type="PackedScene" uid="uid://cyqk6bx0sio80" path="res://game/core/ui/hotbar/hotbar.tscn" id="3_f78jc"]
+[ext_resource type="PackedScene" uid="uid://c6ye43hpjckha" path="res://game/ui/block category selection/block_category_selection_panel.tscn" id="4_f0uq6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ey7n7"]
 font_size = 36
@@ -105,3 +106,11 @@ text = "1 g"
 horizontal_alignment = 2
 
 [node name="Hotbar" parent="." instance=ExtResource("3_f78jc")]
+
+[node name="CenterContainer Block Categories" type="CenterContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Block Category Selection Panel" parent="CenterContainer Block Categories" instance=ExtResource("4_f0uq6")]
+unique_name_in_owner = true
+layout_mode = 2

@@ -11,11 +11,20 @@ extends PlayerActionStateMachineState
 		if current_block:
 			init_ghost(current_block.get_model())
 
+var block_list: Array[Block]
+
 var grid: BlockGrid
 var local_block_pos: Vector3i
 var block_rotation: Vector3i
 var hotbar_layout:= HotbarLayout.new()
 
+
+
+func _ready() -> void:
+	super()
+	SignalManager.selected_block_category.connect(on_block_category_selected)
+
+	set_full_block_list()
 
 
 func on_enter():
@@ -51,7 +60,8 @@ func on_physics_process(delta: float):
 	elif Input.is_action_just_pressed("pick_block"):
 		pick_block()
 		return
-
+	elif Input.is_action_just_pressed("toggle_block_categories"):
+		SignalManager.toggle_block_category_panel.emit()
 
 	ghost.show()
 
@@ -181,3 +191,15 @@ func plane_fill(block_pos: Vector3i, grid_block_rotation: Vector3i, ignore_axis:
 					position_list.append(neighbor)
 					occupied_positions.append(neighbor)
 					grid.add_block(current_block, neighbor, grid_block_rotation)
+
+
+func on_block_category_selected(category: BlockCategory):
+	if is_current_state():
+		if category:
+			block_list= GameData.block_categories[category]
+		else:
+			set_full_block_list()
+
+
+func set_full_block_list():
+	block_list= GameData.block_library.blocks

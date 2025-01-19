@@ -1,0 +1,4 @@
+class_name BlockCategorySelectionRow
+extends ScrollSelectionRow
+
+var category: BlockCategory

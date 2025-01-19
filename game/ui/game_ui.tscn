@@ -108,9 +108,13 @@ horizontal_alignment = 2
 [node name="Hotbar" parent="." instance=ExtResource("3_f78jc")]
 
 [node name="CenterContainer Block Categories" type="CenterContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Block Category Selection Panel" parent="CenterContainer Block Categories" instance=ExtResource("4_f0uq6")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2

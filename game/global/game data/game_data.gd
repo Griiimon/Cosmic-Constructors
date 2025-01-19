@@ -14,8 +14,8 @@ var block_categories: Dictionary
 
 func _ready() -> void:
 	for block in block_library.blocks:
+		if not block.category: continue
 		block_definition_lookup[block.get_display_name()]= block
-		assert(block.category)
 		if not block_categories.has(block.category):
 			block_categories[block.category]= []
 		block_categories[block.category].append(block)

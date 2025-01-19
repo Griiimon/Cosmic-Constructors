@@ -8,12 +8,18 @@ extends Node
 
 var block_definition_lookup: Dictionary
 var fluid_definition_lookup: Dictionary
+var block_categories: Dictionary
 
 
 
 func _ready() -> void:
 	for block in block_library.blocks:
 		block_definition_lookup[block.get_display_name()]= block
+		assert(block.category)
+		if not block_categories.has(block.category):
+			block_categories[block.category]= []
+		block_categories[block.category].append(block)
+
 
 	for fluid in fluid_library.fluids:
 		fluid_definition_lookup[fluid.get_display_name()]= fluid

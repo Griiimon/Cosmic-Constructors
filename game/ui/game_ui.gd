@@ -37,7 +37,7 @@ func _ready():
 	SignalManager.toggle_block_category_panel.connect(on_toggle_block_category_panel)
 		
 	temporary_info_label_cooldown.timeout.connect(func(): temporary_info_label.hide())
-	block_category_selection_panel.category_selected(on_block_category_selected)
+	block_category_selection_panel.category_selected.connect(on_block_category_selected)
 
 	property_viewer_panel= PROPERTY_VIEWER_SCENE.instantiate()
 	property_viewer_panel.hide()

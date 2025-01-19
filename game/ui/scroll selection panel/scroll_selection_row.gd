@@ -1,6 +1,9 @@
 class_name ScrollSelectionRow
 extends PanelContainer
 
+signal toggled
+
+
 @export var selection_style_box: StyleBoxFlat
 
 @onready var label_type: Label = %"Label Type"
@@ -38,6 +41,7 @@ func change_value(delta: int, modifier: int= 1):
 
 
 func toggle():
+	toggled.emit()
 	update()
 
 

@@ -118,9 +118,16 @@ func _unhandled_input(event: InputEvent) -> void:
 func change_row(delta: int):
 	super(delta)
 	if not get_current_row().property:
-		#TODO guard against infinte loop
+		if not has_any_property_row():
+			return
 		change_row(delta)
 
+
+func has_any_property_row()-> bool:
+	for row in rows:
+		if (row as PropertyViewerRow).property:
+			return true
+	return false
 	
 func can_assign_hotkey_to(row: PropertyViewerRow)-> bool:
 	return row.property != null

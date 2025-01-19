@@ -47,3 +47,7 @@ func toggle():
 
 func can_toggle()-> bool:
 	return true
+
+
+func can_select()-> bool:
+	return true

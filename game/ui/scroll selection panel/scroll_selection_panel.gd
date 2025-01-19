@@ -82,7 +82,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			else:
 				match event.button_index:
 					MOUSE_BUTTON_LEFT:
-						if selected_row > -1:
+						if selected_row > -1 and get_current_row().can_select():
 							if get_current_row().can_toggle():
 								get_current_row().toggle()
 							else:

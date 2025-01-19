@@ -26,3 +26,7 @@ func toggle():
 
 func can_toggle()-> bool:
 	return property is BlockPropAction	
+
+
+func can_select()-> bool:
+	return property != null

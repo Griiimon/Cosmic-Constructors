@@ -59,6 +59,10 @@ func close():
 	update_interval.stop()
 
 
+func _gui_input(event: InputEvent) -> void:
+	_unhandled_input(event)
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible: return
 	

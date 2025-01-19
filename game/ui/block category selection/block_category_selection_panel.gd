@@ -6,6 +6,7 @@ signal category_selected(category: BlockCategory)
 
 
 func _ready() -> void:
+	SignalManager.canceled_build_mode.connect(func(): hide())
 	populate()
 
 
@@ -20,6 +21,9 @@ func populate():
 		row.category= category
 		row.toggled.connect(choose_category.bind(category))
 
+	selected_row= 0
+
 
 func choose_category(category: BlockCategory):
 	category_selected.emit(category)
+	hide()

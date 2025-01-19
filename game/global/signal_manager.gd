@@ -2,6 +2,7 @@ extends Node
 
 signal block_property_changed
 signal build_block_changed
+signal canceled_build_mode
 
 signal player_spawned
 

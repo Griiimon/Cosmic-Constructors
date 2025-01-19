@@ -1,11 +1,10 @@
+FIX infinite loop in empty property viewer panels
+
 save and load blueprints ( use half transparent boxes per grid block )
 
 save physical/world items
 
 thrusters particle TARGET direction seems to be in global coords
-
-block categories
-	build mode: use custom block list, either full list or category list 
 
 transfer block_types when splitting grids
 

@@ -41,10 +41,11 @@ func on_enter():
 func on_exit():
 	remove_ghost()
 	Global.ui.switch_hotbar(player.tool_hotbar)
-
+	SignalManager.canceled_build_mode.emit()
+	
 
 func on_physics_process(delta: float):
-	if Input.is_action_just_pressed("ui_cancel") or Input.is_action_just_pressed("build"):
+	if Input.is_action_just_pressed("build"):
 		finished.emit()
 		return
 	
@@ -55,13 +56,7 @@ func on_physics_process(delta: float):
 
 	rotate_ghost(delta)
 
-	if Input.is_action_just_pressed("build_block"):
-		build_block()
-		return
-	elif Input.is_action_just_pressed("pick_block"):
-		pick_block()
-		return
-	elif Input.is_action_just_pressed("toggle_block_categories"):
+	if Input.is_action_just_pressed("toggle_block_categories"):
 		SignalManager.toggle_block_category_panel.emit()
 	elif Input.is_action_just_pressed("previous_block"):
 		switch_block(-1)
@@ -74,6 +69,20 @@ func on_physics_process(delta: float):
 
 
 func on_unhandled_input(event: InputEvent):
+	if event.is_action_pressed("build_block"):
+		if ghost:
+			build_block()
+			get_viewport().set_input_as_handled()
+			return
+			
+	if event is InputEventKey:
+		if event.is_action_pressed("ui_cancel"):
+			finished.emit()
+		elif event.is_action_pressed("pick_block"):
+			pick_block()
+		else:
+			return
+		get_viewport().set_input_as_handled()
 	if event is InputEventMouseButton:
 		if event.pressed:
 			match event.button_index:
@@ -224,14 +233,14 @@ func switch_block(delta: int):
 
 
 func set_full_block_list():
-	block_list= GameData.block_library.blocks
-	block_index= 0
-	switch_block(0)
+	block_list= GameData.block_library.blocks.duplicate()
 
 
 func on_block_category_selected(category: BlockCategory):
 	if is_current_state():
 		if category:
-			block_list= GameData.block_categories[category]
+			block_list.assign(GameData.block_categories[category])
 		else:
 			set_full_block_list()
+	block_index= 0
+	switch_block(0)

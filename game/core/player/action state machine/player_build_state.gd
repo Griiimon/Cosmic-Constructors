@@ -63,13 +63,13 @@ func on_physics_process(delta: float):
 		return
 	elif Input.is_action_just_pressed("toggle_block_categories"):
 		SignalManager.toggle_block_category_panel.emit()
-	else:
-		var switch_block_delta: int= int(Input.get_axis("next_block", "previous_block"))
-		
-		if switch_block_delta:
-			switch_block(switch_block_delta)
+	elif Input.is_action_just_pressed("previous_block"):
+		switch_block(-1)
 		return
-
+	elif Input.is_action_just_pressed("next_block"):
+		switch_block(1)
+		return
+		
 	ghost.show()
 
 

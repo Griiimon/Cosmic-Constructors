@@ -19,3 +19,5 @@ signal hotkey_assigned(assignment: BaseHotkeyAssignment, grid: BlockGrid)
 
 signal toggle_block_category_panel
 signal selected_block_category(category: BlockCategory)
+
+signal blueprint_selected

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://xgkn2mkwvwmq"]
+[gd_scene load_steps=30 format=3 uid="uid://xgkn2mkwvwmq"]
 
 [ext_resource type="PackedScene" uid="uid://slyw4y7qi46y" path="res://game/core/player/base_player.tscn" id="1_kthjw"]
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
@@ -20,6 +20,8 @@
 [ext_resource type="Script" path="res://game/core/player/action state machine/player_action_carry_item_state.gd" id="17_dxssv"]
 [ext_resource type="Script" path="res://game/core/player/action state machine/player_action_grab_handles_state.gd" id="18_eocux"]
 [ext_resource type="Script" path="res://game/core/player/action state machine/player_action_pull_state.gd" id="19_lfvx8"]
+[ext_resource type="Script" path="res://game/core/player/action state machine/player_save_blueprint_state.gd" id="20_og83w"]
+[ext_resource type="Script" path="res://game/core/player/action state machine/player_load_blueprint_state.gd" id="21_64gxf"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7yawy"]
 height = 0.5
@@ -212,6 +214,7 @@ one_shot = true
 [node name="Action State Machine" type="Node" parent="." index="5" node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_r1eyq")
 current_state = NodePath("Idle")
+debug = true
 
 [node name="Idle" type="Node" parent="Action State Machine" index="0"]
 script = ExtResource("6_3y3c5")
@@ -236,5 +239,11 @@ script = ExtResource("18_eocux")
 [node name="Pull" type="Node" parent="Action State Machine" index="6"]
 script = ExtResource("19_lfvx8")
 max_strength = 20000.0
+
+[node name="Save Blueprint" type="Node" parent="Action State Machine" index="7"]
+script = ExtResource("20_og83w")
+
+[node name="Load Blueprint" type="Node" parent="Action State Machine" index="8"]
+script = ExtResource("21_64gxf")
 
 [node name="Damage Component" parent="." index="6" instance=ExtResource("12_goufb")]

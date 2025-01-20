@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://liedqn3wshke"]
+
+[ext_resource type="PackedScene" uid="uid://bmpjev3uj24g4" path="res://game/ui/scroll selection panel/scroll_selection_panel.tscn" id="1_qypb1"]
+[ext_resource type="Script" path="res://game/ui/blueprint menu/blueprint_scroll_panel.gd" id="2_8wfmc"]
+[ext_resource type="PackedScene" uid="uid://cjgnwhuf4jta4" path="res://game/ui/scroll selection panel/scroll_selection_row.tscn" id="3_d1dvf"]
+
+[node name="Blueprint Scroll Panel" instance=ExtResource("1_qypb1")]
+script = ExtResource("2_8wfmc")
+ROW_SCENE = ExtResource("3_d1dvf")

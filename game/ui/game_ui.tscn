@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cn7c8npnm1ukd"]
+[gd_scene load_steps=9 format=3 uid="uid://cn7c8npnm1ukd"]
 
 [ext_resource type="Script" path="res://game/ui/game_ui.gd" id="1_2qjqn"]
 [ext_resource type="PackedScene" uid="uid://daoodbkrxv86s" path="res://game/ui/property viewer/property_viewer_panel.tscn" id="2_dffew"]
 [ext_resource type="PackedScene" uid="uid://cyqk6bx0sio80" path="res://game/core/ui/hotbar/hotbar.tscn" id="3_f78jc"]
 [ext_resource type="PackedScene" uid="uid://c6ye43hpjckha" path="res://game/ui/block category selection/block_category_selection_panel.tscn" id="4_f0uq6"]
+[ext_resource type="PackedScene" uid="uid://0td1dfglmvte" path="res://game/ui/line edit popup/line_edit_popup.tscn" id="5_lwhlq"]
+[ext_resource type="PackedScene" uid="uid://liedqn3wshke" path="res://game/ui/blueprint menu/blueprint_scroll_panel.tscn" id="5_vi7xv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ey7n7"]
 font_size = 36
@@ -119,3 +121,18 @@ mouse_filter = 2
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+
+[node name="CenterContainer Blueprint menu" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Blueprint Scroll Panel" parent="CenterContainer Blueprint menu" instance=ExtResource("5_vi7xv")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Line Edit Popup" parent="." instance=ExtResource("5_lwhlq")]
+visible = false

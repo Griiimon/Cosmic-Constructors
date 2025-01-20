@@ -73,8 +73,16 @@ func on_unhandled_input(event: InputEvent):
 				hand_object.stop_using()
 				return
 	
+	if event.is_action_pressed("blueprint"):
+		var ray_query:= PhysicsRayQueryParameters3D.create(player.head.global_position,\
+		 	player.head.global_position + player.get_look_vec() * 20, CollisionLayers.GRID)
+		var result: Dictionary= player.get_world_3d().direct_space_state.intersect_ray(ray_query)
+		
+		if result and result.collider:
+			player.action_state_machine.save_blueprint(result.collider)
+		else:
+			player.action_state_machine.load_blueprint()
 
-	
 
 func equip_hand_item(hand_item: HandItem):
 	force_unequip_item()

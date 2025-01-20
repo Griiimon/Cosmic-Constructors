@@ -16,6 +16,9 @@ extends CanvasLayer
 @onready var hotbar: Hotbar = $Hotbar
 
 @onready var block_category_selection_panel: BlockCategorySelectionPanel = %"Block Category Selection Panel"
+@onready var blueprint_scroll_panel: BlueprintScrollPanel = %"Blueprint Scroll Panel"
+
+@onready var line_edit_popup: LineEditPopup = $"Line Edit Popup"
 
 
 var property_viewer_panel: PropertyViewerPanel
@@ -53,6 +56,14 @@ func _physics_process(_delta: float) -> void:
 
 func switch_hotbar(hotbar_layout: HotbarLayout):
 	hotbar.switch_layout(hotbar_layout)
+
+
+func open_blueprint_menu():
+	blueprint_scroll_panel.open()
+
+
+func open_line_edit_popup(title: String, callback: Callable):
+	line_edit_popup.open(title, callback)
 
 
 func on_block_property_changed(prop: BlockProperty):

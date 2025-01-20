@@ -8,6 +8,8 @@ extends FiniteStateMachine
 @onready var carry_item_state: PlayerCarryItemState = $"Carry Item"
 @onready var grab_handles_state: PlayerGrabHandlesState = $"Grab Handles"
 @onready var pull_state: PlayerPullState = $Pull
+@onready var save_blueprint_state: PlayerSaveBlueprintState = $"Save Blueprint"
+@onready var load_blueprint_state: PlayerLoadBlueprintState = $"Load Blueprint"
 
 var player: Player
 
@@ -27,6 +29,9 @@ func _ready() -> void:
 	grab_handles_state.finished.connect(change_state.bind(idle_state))
 	
 	pull_state.finished.connect(change_state.bind(idle_state))
+
+	save_blueprint_state.finished.connect(change_state.bind(idle_state))
+	load_blueprint_state.finished.connect(change_state.bind(idle_state))
 
 
 func attach_rope_from(from: Node3D)-> Rope:
@@ -56,6 +61,15 @@ func grab_handles(handles: HandlesInstance):
 func pull(pullable: PullableComponent):
 	pull_state.pullable= pullable
 	change_state(pull_state)
+
+
+func save_blueprint(grid: BlockGrid):
+	save_blueprint_state.grid= grid
+	change_state(save_blueprint_state)
+
+
+func load_blueprint():
+	change_state(load_blueprint_state)
 
 
 func on_enter_first_person():

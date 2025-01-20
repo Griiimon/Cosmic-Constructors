@@ -49,7 +49,7 @@ func add_row(type: String= "", value: String= "")-> ScrollSelectionRow:
 	return row
 
 
-func open(_block: GridBlock, _grid: BlockGrid):
+func open(_block: GridBlock= null, _grid: BlockGrid= null):
 	populate()
 	show()
 

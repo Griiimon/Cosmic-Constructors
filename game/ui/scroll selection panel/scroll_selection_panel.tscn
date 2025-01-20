@@ -1,14 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmpjev3uj24g4"]
+[gd_scene load_steps=2 format=3 uid="uid://bmpjev3uj24g4"]
 
-[ext_resource type="Script" path="res://game/ui/property viewer/property_viewer_panel.gd" id="1_sk8o5"]
-[ext_resource type="PackedScene" uid="uid://cjgnwhuf4jta4" path="res://game/ui/scroll selection panel/scroll_selection_row.tscn" id="2_pcm5o"]
+[ext_resource type="Script" path="res://game/ui/scroll selection panel/scroll_selection_panel.gd" id="1_s3gh1"]
 
 [node name="Scroll Selection Panel" type="PanelContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_force_pass_scroll_events = false
-script = ExtResource("1_sk8o5")
-ROW_SCENE = ExtResource("2_pcm5o")
+script = ExtResource("1_s3gh1")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

@@ -56,7 +56,8 @@ func populate():
 			selected_row= rows.size() - 1
 
 
-func open(_block: GridBlock, _grid: BlockGrid):
+func open(_block: GridBlock= null, _grid: BlockGrid= null):
+	assert(_grid and _block)
 	grid= _grid
 	block= _block
 	

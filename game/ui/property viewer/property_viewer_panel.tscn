@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://daoodbkrxv86s"]
+[gd_scene load_steps=4 format=3 uid="uid://daoodbkrxv86s"]
 
 [ext_resource type="PackedScene" uid="uid://bmpjev3uj24g4" path="res://game/ui/scroll selection panel/scroll_selection_panel.tscn" id="1_og64x"]
 [ext_resource type="PackedScene" uid="uid://b5f12rr7oiqem" path="res://game/ui/property viewer/property_viewer_row.tscn" id="2_jsj2r"]
+[ext_resource type="Script" path="res://game/ui/property viewer/property_viewer_panel.gd" id="2_skv15"]
 
 [node name="Property Viewer Panel" instance=ExtResource("1_og64x")]
+script = ExtResource("2_skv15")
 ROW_SCENE = ExtResource("2_jsj2r")

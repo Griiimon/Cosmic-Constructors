@@ -45,4 +45,5 @@ func _on_server_button_pressed() -> void:
 func _on_client_button_pressed() -> void:
 	interface_ui.hide()
 	NetworkManager.is_single_player= false
+	NetworkManager.is_client= true
 	NetworkManager.run(game_scene)

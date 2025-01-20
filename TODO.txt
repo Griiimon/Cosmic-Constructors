@@ -1,4 +1,5 @@
-fix warnings
+FIX non-force-offset thrusters should apply force not at center but calculated CoM
+FIX when interval updating property viewer only update extra properties 
 
 ore pile nomral map array + metallic and roughness value per raw material
 
@@ -12,6 +13,8 @@ thrusters particle TARGET direction seems to be in global coords
 
 Components can_* functions just use Callable refs like with FluidConsumer
 
+
+add debug console plugin
 
 tree spawner
 

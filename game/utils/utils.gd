@@ -19,9 +19,11 @@ static func free_children(node: Node):
 		child.queue_free()
 
 
-static func get_key_or_default(dict: Dictionary, key: String, default: Variant)-> Variant:
+static func get_key_or_default(dict: Dictionary, key: String, default: Variant, prefix: String= "")-> Variant:
 	if not dict.has(key):
 		return default
+	if prefix:
+		return str_to_var(prefix + dict[key])
 	return dict[key]
 
 

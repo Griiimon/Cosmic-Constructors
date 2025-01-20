@@ -28,8 +28,9 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 		var total_thrust: float= thruster_block.thrust * power.get_value_f() / 100.0
 		grid.apply_central_force(-global_basis.z * total_thrust * delta)
 	
-	solid_fuel_pct-= power.get_value_f() / 100.0 * delta / thruster_block.burn_duration
+	solid_fuel_pct-= power.get_value_f() * delta / thruster_block.burn_duration
 	if solid_fuel_pct <= 0:
+		solid_fuel_pct= 0
 		active.set_false()
 
 
@@ -39,7 +40,10 @@ func on_set_active():
 	if active.is_true():
 		particles.emitting= true
 		active.is_locked= true
-
+		power.is_locked= true
+	else:
+		particles.emitting= true
+		
 
 func serialize()-> Dictionary:
 	var data: Dictionary= super()

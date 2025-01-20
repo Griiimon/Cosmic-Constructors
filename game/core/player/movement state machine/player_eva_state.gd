@@ -38,7 +38,7 @@ var roll_input: float
 
 var move_vec: Vector3
 
-#var rot_quat: Quaternion
+var dynamic_up_vector: Vector3
 
 
 
@@ -49,9 +49,11 @@ func on_enter():
 	var head_forward: Vector3= -player.head.global_basis.z
 	player.reset_camera()
 	player.look_at(player.global_position + head_forward, player.global_basis.y)
+	dynamic_up_vector= player.global_basis.y
 
 	player.angular_damp= angular_damping
 	update_gravity()
+
 
 
 func on_exit():
@@ -115,24 +117,24 @@ func on_physics_process(delta: float):
 func on_integrate_forces(state: PhysicsDirectBodyState3D):
 	roll_input= Input.get_axis("roll_right", "roll_left")
 
-	#var processed_up_vector: Vector3= lerp(Vector3.UP * ( 1 if state.transform.basis.y.dot(Vector3.UP) > 0 else -1 ), state.transform.basis.y, up_vector_realism_ration)
-	#if processed_up_vector.length_squared() > 0:
-		#state.transform.basis= state.transform.basis.rotated(processed_up_vector.normalized(), deg_to_rad(yaw_input) * yaw_factor)
-	#
-	#state.transform.basis= state.transform.basis.rotated(state.transform.basis.x, deg_to_rad(pitch_input) * pitch_factor)
-	#state.transform.basis= state.transform.basis.rotated(state.transform.basis.z, deg_to_rad(roll_input) * roll_factor)
 	
-	if abs(yaw_input) > abs(pitch_input):
-		pitch_input= 0
-	elif abs(pitch_input) > abs(yaw_input):
-		yaw_input= 0
+	#if abs(yaw_input) > abs(pitch_input):
+		#pitch_input= 0
+	#elif abs(pitch_input) > abs(yaw_input):
+		#yaw_input= 0
 
-	var local_basis:= Basis.IDENTITY
-	local_basis= local_basis.rotated(Vector3.UP, deg_to_rad(yaw_input) * yaw_factor)
-	local_basis= local_basis.rotated(Vector3.RIGHT, deg_to_rad(pitch_input) * pitch_factor)
-	local_basis= local_basis.rotated(Vector3.FORWARD, -deg_to_rad(roll_input) * roll_factor)
+	#var local_basis:= Basis.IDENTITY
+	#local_basis= local_basis.rotated(Vector3.UP, deg_to_rad(yaw_input) * yaw_factor)
+	#local_basis= local_basis.rotated(Vector3.RIGHT, deg_to_rad(pitch_input) * pitch_factor)
+	#local_basis= local_basis.rotated(Vector3.FORWARD, -deg_to_rad(roll_input) * roll_factor)
+#
+	#state.transform.basis= state.transform.basis * local_basis
 
-	state.transform.basis= state.transform.basis * local_basis
+	dynamic_up_vector= lerp(dynamic_up_vector, state.transform.basis.y, state.step * 5).normalized()
+	
+	state.transform.basis= state.transform.basis.rotated(dynamic_up_vector, deg_to_rad(yaw_input) * yaw_factor)
+	state.transform.basis= state.transform.basis.rotated(state.transform.basis.x, deg_to_rad(pitch_input) * pitch_factor)
+	state.transform.basis= state.transform.basis.rotated(-state.transform.basis.z, -deg_to_rad(roll_input) * roll_factor)
 
 	pitch_input= 0
 	yaw_input= 0

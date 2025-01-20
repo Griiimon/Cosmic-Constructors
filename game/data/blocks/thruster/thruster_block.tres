@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="ThrusterBlock" load_steps=4 format=3 uid="uid://bh6lk8mefhhlv"]
+[gd_resource type="Resource" script_class="ThrusterBlock" load_steps=4 format=3 uid="uid://8q22was2s7fl"]
 
-[ext_resource type="PackedScene" uid="uid://cuwcwrs2vl3gv" path="res://game/data/blocks/thruster/thruster.tscn" id="1_4gxl2"]
-[ext_resource type="Resource" uid="uid://ckiejbyle02pl" path="res://game/data/misc/block categories/spaceship.tres" id="1_oab61"]
-[ext_resource type="Script" path="res://game/core/block/types/thruster_block.gd" id="2_j06ed"]
+[ext_resource type="Resource" uid="uid://ckiejbyle02pl" path="res://game/data/misc/block categories/spaceship.tres" id="1_vww1i"]
+[ext_resource type="PackedScene" uid="uid://b5r1xvg0vfvfs" path="res://game/data/blocks/thruster/thruster.tscn" id="2_05ob0"]
+[ext_resource type="Script" path="res://game/core/block/types/thruster_block.gd" id="3_mwqqw"]
 
 [resource]
-script = ExtResource("2_j06ed")
+script = ExtResource("3_mwqqw")
 thrust = 10000.0
 force_offset = false
 size = Vector3i(1, 1, 1)
@@ -15,6 +15,6 @@ custom_collision = false
 can_tick = true
 tick_priority = 0
 can_be_built = true
-category = ExtResource("1_oab61")
-scene = ExtResource("1_4gxl2")
+category = ExtResource("1_vww1i")
+scene = ExtResource("2_05ob0")
 name = ""

@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://cuwcwrs2vl3gv"]
+[gd_scene load_steps=10 format=3 uid="uid://b5r1xvg0vfvfs"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/thruster_instance.gd" id="1_dmm3l"]
+[ext_resource type="Script" path="res://game/core/block/instances/thruster_instance.gd" id="1_rlpb6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmbc1"]
 albedo_color = Color(0.344076, 0.344076, 0.344076, 1)
@@ -31,7 +31,7 @@ size = Vector3(0.01, 0.01, 0.2)
 colors = PackedColorArray(0.676492, 0.667585, 0.101887, 1, 0.739234, 0.196967, 0.0293132, 1)
 
 [node name="Thruster" type="Node3D"]
-script = ExtResource("1_dmm3l")
+script = ExtResource("1_rlpb6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)

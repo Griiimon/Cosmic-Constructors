@@ -82,7 +82,7 @@ func serialize()-> Dictionary:
 	return data
 
 
-func block_group_filter(grid: BlockGrid, grid_block: GridBlock, neighbor_pos: Vector3i)-> bool:
+func block_group_filter(_grid: BlockGrid, grid_block: GridBlock, neighbor_pos: Vector3i)-> bool:
 	return grid_block.to_global(Vector3i.FORWARD) == neighbor_pos or grid_block.to_global(Vector3i.BACK) == neighbor_pos
 
 

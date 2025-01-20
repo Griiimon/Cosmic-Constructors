@@ -654,7 +654,7 @@ func get_empty_block_neighbors(pos: Vector3i, include_diagonals: bool= false, is
 func get_block_neighbor_blocks(pos: Vector3i, include_diagonals: bool= false, include_empty_blocks: bool= false, is_multi_block: bool= false)-> Array[BaseGridBlock]:
 	var result: Array[BaseGridBlock]
 	result.assign(get_block_neighbors(pos, include_diagonals, include_empty_blocks, is_multi_block).\
-			map(func(pos: Vector3i): return get_block_local(pos)))
+			map(func(local_pos: Vector3i): return get_block_local(local_pos)))
 	return result
 
 

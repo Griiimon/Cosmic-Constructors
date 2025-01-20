@@ -20,7 +20,7 @@ func on_exit():
 	item.freeze= false
 
 
-func on_physics_process(delta: float):
+func on_physics_process(_delta: float):
 	if Input.is_action_just_pressed("item_interact"):
 		finished.emit()
 		return

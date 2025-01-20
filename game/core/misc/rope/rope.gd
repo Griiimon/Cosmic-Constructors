@@ -24,7 +24,7 @@ func _ready() -> void:
 		segments.append(segment)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	for i in num_segments:
 		var target1: Vector3
 		var target2: Vector3

@@ -311,13 +311,13 @@ func process_motor(_delta : float) -> void:
 			motor_rpm= drive_shaft.torque
 
 
-func process_drive(reverse: bool, delta : float) -> void:
+func process_drive(in_reverse: bool, delta : float) -> void:
 	DebugHud.send("RPM", motor_rpm)
-	process_axle_drive(motor_rpm, reverse, 0, delta)
+	process_axle_drive(motor_rpm, in_reverse, 0, delta)
 
 
-func process_axle_drive(torque : float, reverse, drive_inertia : float, delta : float) -> void:
-	wheel.process_torque(torque, reverse, drive_inertia, brake_force, false, delta)
+func process_axle_drive(torque : float, in_reverse: bool, drive_inertia : float, delta : float) -> void:
+	wheel.process_torque(torque, in_reverse, drive_inertia, brake_force, false, delta)
 
 
 func process_forces(grid: BlockGrid, delta : float) -> void:

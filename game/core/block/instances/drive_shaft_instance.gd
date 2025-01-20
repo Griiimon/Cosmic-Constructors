@@ -16,7 +16,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	shaft_group.add_block(grid_block)
 
 
-func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
+func on_restored(grid: BlockGrid, grid_block: GridBlock, _restore_data: Dictionary):
 	on_placed(grid, grid_block)
 
 

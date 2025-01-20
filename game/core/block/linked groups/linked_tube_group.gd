@@ -66,7 +66,7 @@ func process_output():
 
 		total_requested= can_currently_provide - total_requested
 		var fill_capacities: Dictionary
-		var total_fill_capacity: float
+		var total_fill_capacity: float= 0.0
 		
 		for input in inputs:
 			if input.keep_empty: continue

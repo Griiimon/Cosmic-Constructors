@@ -17,7 +17,7 @@ func open(_title: String, _callback: Callable):
 	Input.mouse_mode= Input.MOUSE_MODE_VISIBLE
 
 
-func _on_button_ok_pressed(new_text: String= "") -> void:
+func _on_button_ok_pressed(_new_text: String= "") -> void:
 	hide()
 	Input.mouse_mode= previous_mouse_mode
 	callback.call(line_edit.text)

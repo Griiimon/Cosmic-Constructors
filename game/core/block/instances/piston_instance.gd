@@ -51,7 +51,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	joint.node_a= joint.get_path_to(grid)
 	joint.node_b= joint.get_path_to(sub_grid)
 	
-	var piston_head_grid_block: GridBlock= sub_grid.add_block(piston_head_block, Vector3i.ZERO, grid_block.rotation, grid)
+	sub_grid.add_block(piston_head_block, Vector3i.ZERO, grid_block.rotation, grid)
 
 
 func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
@@ -66,7 +66,7 @@ func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionar
 	restore_grid_connection.call_deferred(grid, grid_block, restore_data["sub_grid_id"])
 	
 	
-func restore_grid_connection(grid: BlockGrid, grid_block: GridBlock, sub_grid_id: int):
+func restore_grid_connection(grid: BlockGrid, _grid_block: GridBlock, sub_grid_id: int):
 	sub_grid= grid.world.get_grid(sub_grid_id)
 	
 	joint.node_a= joint.get_path_to(grid)

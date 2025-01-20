@@ -11,7 +11,7 @@ var rigidbody: RigidBody3D
 
 
 
-func interact(grid: BlockGrid, grid_block: GridBlock, player: Player):
+func interact(grid: BlockGrid, _grid_block: GridBlock, player: Player):
 	player.grab_handles(self)
 	grabbed_by_player= player
 	update_joint(grid, player)

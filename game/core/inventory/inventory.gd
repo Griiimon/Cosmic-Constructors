@@ -30,7 +30,6 @@ func add_item(inv_item: InventoryItem):
 
 
 func add(item: Item, count: int= 1, do_update: bool= true):
-	var total: int= count
 	for inv_item in slots:
 		if inv_item.item == item:
 			inv_item.count+= count

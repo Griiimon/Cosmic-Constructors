@@ -104,32 +104,6 @@ func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
 			grid.add_block(default_block, Vector3i(x, 0, z) - Vector3i(size.x / 2.0, 0, size.y / 2.0) / 2)
 
 
-func mine_gold():
-	return
-	var terrain: VoxelLodTerrain= $"../Asteroid".get_child(0)
-	var local_pos: Vector3i= terrain.to_local($"../Player".global_position)
-	#var local_pos: Vector3i= $"../Player".global_position
-	var radius: float= 5
-	
-	VoxelUtils.pre_mine(terrain, local_pos, radius)
-	
-	var tool: VoxelToolLodTerrain= terrain.get_voxel_tool()
-	tool.channel= VoxelBuffer.CHANNEL_SDF
-	tool.mode= VoxelTool.MODE_REMOVE
-	tool.do_sphere(local_pos, radius)
-	
-	#await get_tree().create_timer(1).timeout
-
-	var new_resources: Dictionary= VoxelUtils.mined(terrain, local_pos, radius)
-
-	for key in new_resources.keys():
-		if not collected_resources.has(key):
-			collected_resources[key]= 0.0
-		collected_resources[key]+= new_resources[key]
-	
-	DebugHud.send("Gold", collected_resources[1] if collected_resources.has(1) else 0.0)	
-
-
 func remove_block():
 	if not player.action_state_machine.build_state.is_current_state():
 		return

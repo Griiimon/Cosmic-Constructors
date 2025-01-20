@@ -36,7 +36,7 @@ func deselect():
 	deselect_value()
 
 
-func change_value(delta: int, modifier: int= 1):
+func change_value(_delta: int, _modifier: int= 1):
 	update()
 
 

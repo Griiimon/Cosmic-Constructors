@@ -26,7 +26,7 @@ func has_dynamic_scale()-> bool:
 	return false
 
 
-func get_scale(count: int)-> float:
+func get_scale(_count: int)-> float:
 	return 1.0
 
 

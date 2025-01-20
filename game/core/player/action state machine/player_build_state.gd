@@ -137,7 +137,7 @@ func build_block():
 		local_block_pos= Vector3i.ZERO
 		
 	var grid_block_rotation: Vector3i= Vector3i.ZERO if new_grid else block_rotation
-	var grid_block: BaseGridBlock= grid.add_block(current_block, local_block_pos, grid_block_rotation)
+	grid.add_block(current_block, local_block_pos, grid_block_rotation)
 	
 	var ignore_axis: int
 	if Input.is_action_pressed("plane_fill"):
@@ -220,8 +220,7 @@ func plane_fill(block_pos: Vector3i, grid_block_rotation: Vector3i, ignore_axis:
 
 
 func switch_block(delta: int):
-	var block_index= block_list.find(current_block)
-
+	block_index= block_list.find(current_block)
 	block_index= wrapi(block_index + delta, 0, block_list.size())
 	current_block= block_list[block_index]
 

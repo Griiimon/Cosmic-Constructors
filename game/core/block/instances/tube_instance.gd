@@ -14,7 +14,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	update_light()
 
 
-func on_neighbor_placed(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
+func on_neighbor_placed(_grid: BlockGrid, _grid_block: BaseGridBlock, _neighbor_block_pos: Vector3i):
 	update_light()
 
 

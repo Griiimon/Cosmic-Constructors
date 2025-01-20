@@ -25,7 +25,7 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, delta: float):
 	if item_instance:
 		if progress < 1:
 			progress= clampf(progress + delta, 0, 1)
-			item_instance.global_position= get_item_pos(progress)
+			item_instance.global_position= get_item_pos()
 		
 		if progress >= 1:
 			if target: 
@@ -72,6 +72,5 @@ func get_item_start_pos()-> Vector3:
 	return to_global(item_start_pos.position)
 
 
-func get_item_pos(progress: float)-> Vector3:
-	progress= clampf(progress, 0, 1)
-	return to_global(lerp(item_start_pos.position, item_end_pos.position, progress))
+func get_item_pos()-> Vector3:
+	return to_global(lerp(item_start_pos.position, item_end_pos.position, clampf(progress, 0, 1)))

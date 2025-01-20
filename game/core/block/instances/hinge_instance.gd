@@ -33,7 +33,7 @@ func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionar
 	restore_grid_connection.call_deferred(grid, grid_block, restore_data["sub_grid_id"])
 	
 	
-func restore_grid_connection(grid: BlockGrid, grid_block: GridBlock, sub_grid_id: int):
+func restore_grid_connection(grid: BlockGrid, _grid_block: GridBlock, sub_grid_id: int):
 	sub_grid= grid.world.get_grid(sub_grid_id)
 	
 	joint.node_a= joint.get_path_to(grid)

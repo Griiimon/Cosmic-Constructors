@@ -18,11 +18,11 @@ func _ready() -> void:
 	previous_position= global_position
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	previous_position= global_position
 
 
-func _on_body_entered(body: Node) -> void:
+func _on_body_entered(_body: Node) -> void:
 	var body_state= PhysicsServer3D.body_get_direct_state(get_rid())
 	
 	#Effects.spawn_fluid_splash(body_state.get_contact_collider_position(0), body_state.get_contact_local_normal(0) * linear_velocity, fluid)

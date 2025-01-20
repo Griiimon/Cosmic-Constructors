@@ -11,8 +11,8 @@ var motor_velocity: BlockPropFloat
 
 
 
-func _init(grid: BlockGrid, virtual: bool= false):
-	super(grid, virtual)
+func _init(_grid: BlockGrid, virtual: bool= false):
+	super(_grid, virtual)
 	global_transform= grid.global_transform
 
 

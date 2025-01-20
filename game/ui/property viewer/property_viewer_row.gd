@@ -14,7 +14,7 @@ func update():
 	label_value.text= property.get_value_as_text()
 
 
-func change_value(delta: int, modifier: int= 1):
+func change_value(delta: int, _modifier: int= 1):
 	property.change_value(10 if Input.is_action_pressed("property_value_modifier_10x") else 1, delta)
 	update()
 

@@ -69,10 +69,10 @@ func update_texture():
 	if materials.is_empty(): return
 	
 	var texture_images: Array[Image]
-
+	var img: Image
+	
 	for i in materials.size():
-		var img: Image= materials[i].material.albedo_texture.get_image()
-		#img.save_png("res://temp/%d.png" % i)
+		img= materials[i].material.albedo_texture.get_image()
 		texture_images.append(img)
 		
 	var texture_array:= Texture2DArray.new()
@@ -82,7 +82,7 @@ func update_texture():
 	shader_material.set_shader_parameter("albedoTextures", texture_array) 
 
 
-	var img: Image= Image.create(texture_size, texture_size, false, Image.FORMAT_R8)
+	img= Image.create(texture_size, texture_size, false, Image.FORMAT_R8)
 
 	
 	for x in texture_size:
@@ -172,7 +172,7 @@ func get_mesh_height()-> float:
 
 
 func get_dominant_material()-> RawItem:
-	var dominant_material: RawItem
+	var dominant_material: RawItem= null
 	for material in materials:
 		if dominant_material == null or get_amount(dominant_material) < get_amount(material):
 			dominant_material= material
@@ -180,11 +180,11 @@ func get_dominant_material()-> RawItem:
 
 
 func get_amount(material: RawItem)-> int:
-	return amounts[materials.find(material)]
+	return int(amounts[materials.find(material)])
 
 
 func get_mass()-> int:
-	return total_amount / 1000
+	return round(total_amount / 1000)
 
 
 func is_full()-> bool:

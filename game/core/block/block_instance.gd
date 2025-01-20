@@ -23,7 +23,7 @@ func on_placed(_grid: BlockGrid, _grid_block: GridBlock):
 	pass
 
 
-func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
+func on_restored(grid: BlockGrid, grid_block: GridBlock, _restore_data: Dictionary):
 	on_placed(grid, grid_block)
 
 
@@ -47,7 +47,7 @@ func on_destroy(_grid: BlockGrid, _grid_block: GridBlock):
 	queue_free()
 
 
-func interact(grid: BlockGrid, grid_block: GridBlock, player: Player):
+func interact(_grid: BlockGrid, _grid_block: GridBlock, _player: Player):
 	pass
 
 
@@ -83,7 +83,7 @@ func serialize()-> Dictionary:
 
 func find_linked_block_group(grid: BlockGrid, grid_block: GridBlock, filter= null)-> LinkedBlockGroup:
 	var neighbors: Array[Vector3i]= get_same_neighbors_positions(grid, grid_block.local_pos)
-	var group: LinkedBlockGroup
+	var group: LinkedBlockGroup= null
 	for neighbor in neighbors:
 		var neighbor_instance: BlockInstance= grid.get_block_instance_at(neighbor)
 		if filter:
@@ -175,11 +175,11 @@ func has_property_viewer()-> bool:
 	return true
 
 
-func can_interact(grid: BlockGrid, grid_block: GridBlock, player: Player)-> bool:
+func can_interact(_grid: BlockGrid, _grid_block: GridBlock, _player: Player)-> bool:
 	return true
 
 
-func get_dynamic_mass(grid_block: GridBlock)-> int:
+func get_dynamic_mass(_grid_block: GridBlock)-> int:
 	return 1
 
 

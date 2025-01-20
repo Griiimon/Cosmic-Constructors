@@ -171,6 +171,10 @@ func get_look_vec()-> Vector3:
 	return -first_person_camera.global_basis.z
 
 
+func get_look_ahead_pos(distance: float)-> Vector3:
+	return head.global_position + get_look_vec() * distance
+
+
 func get_seat()-> SeatInstance:
 	return movement_state_machine.seated_state.seat
 

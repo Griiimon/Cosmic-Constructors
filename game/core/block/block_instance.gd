@@ -107,10 +107,8 @@ func serialize()-> Dictionary:
 				data["properties"][prop.name]= (prop_var as BlockPropFloat).get_value_f()
 			"BlockPropEnum":
 				data["properties"][prop.name]= (prop_var as BlockPropEnum).get_value_i()
-			_:
-				breakpoint
 		
-		if prop_var.is_locked:
+		if prop_var and prop_var.is_locked:
 			locked_properties.append(ctr)
 			
 		ctr+= 1
@@ -123,7 +121,7 @@ func serialize()-> Dictionary:
 
 func deserialize(data: Dictionary):
 	var locked_properties: Array[int]
-	locked_properties= Utils.get_key_or_default(data, "locked_properties", [])
+	locked_properties.assign(Utils.get_key_or_default(data, "locked_properties", []))
 	var ctr:= 0
 
 	if data.has("properties"):

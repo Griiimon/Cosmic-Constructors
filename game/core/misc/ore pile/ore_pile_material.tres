@@ -6,3 +6,7 @@
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_18v3s")
+shader_parameter/metallicArr = null
+shader_parameter/specularArr = null
+shader_parameter/roughnessArr = null
+shader_parameter/normalScaleArr = null

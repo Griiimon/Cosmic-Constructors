@@ -68,18 +68,44 @@ func update_mesh():
 func update_texture():
 	if materials.is_empty(): return
 	
-	var texture_images: Array[Image]
+	var albedo_texture_images: Array[Image]
+	var normal_texture_images: Array[Image]
+	
+	var metallic_arr: PackedFloat32Array
+	var specular_arr: PackedFloat32Array
+	var roughness_arr: PackedFloat32Array
+	var normal_scale_arr: PackedFloat32Array
+
+	metallic_arr.resize(16)
+	specular_arr.resize(16)
+	roughness_arr.resize(16)
+	normal_scale_arr.resize(16)
+	
 	var img: Image
 	
 	for i in materials.size():
 		img= materials[i].material.albedo_texture.get_image()
-		texture_images.append(img)
+		albedo_texture_images.append(img)
+		img= materials[i].material.normal_texture.get_image()
+		normal_texture_images.append(img)
+
+		metallic_arr[i]= materials[i].material.metallic
+		specular_arr[i]= materials[i].material.metallic_specular
+		roughness_arr[i]= materials[i].material.roughness
+		normal_scale_arr[i]= materials[i].material.normal_scale
 		
 	var texture_array:= Texture2DArray.new()
-
-	texture_array.create_from_images(texture_images)
-	#texture_array.create_from_images(materials.map(func(x: RawItem): return x.material.albedo_texture.get_image()))
+	texture_array.create_from_images(albedo_texture_images)
 	shader_material.set_shader_parameter("albedoTextures", texture_array) 
+
+	texture_array= Texture2DArray.new()
+	texture_array.create_from_images(normal_texture_images)
+	shader_material.set_shader_parameter("normalTextures", texture_array) 
+
+	shader_material.set_shader_parameter("metallicArr", metallic_arr) 
+	shader_material.set_shader_parameter("specularArr", specular_arr) 
+	shader_material.set_shader_parameter("roughnessArr", roughness_arr) 
+	shader_material.set_shader_parameter("normalScaleArr", normal_scale_arr) 
 
 
 	img= Image.create(texture_size, texture_size, false, Image.FORMAT_R8)

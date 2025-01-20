@@ -30,6 +30,14 @@ func get_block_definition(block_name: String)-> Block:
 	return block_definition_lookup[block_name]
 
 
+func get_block(id: int)-> Block:
+	return block_library.blocks[id]
+
+
+func get_block_id(block: Block)-> int:
+	return block_library.blocks.find(block)
+
+
 func get_fluid_definition(fluid_name: String)-> Fluid:
 	assert(fluid_definition_lookup.has(fluid_name))
 	return fluid_definition_lookup[fluid_name]

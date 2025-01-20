@@ -23,14 +23,17 @@ func set_variant(val: Variant):
 
 
 func toggle():
+	if is_locked: return
 	increase(1)
 	
 
 func increase(modifier: int):
+	if is_locked: return
 	change_value(modifier, 1)
 
 
 func decrease(modifier: int):
+	if is_locked: return
 	change_value(modifier, -1)
 
 

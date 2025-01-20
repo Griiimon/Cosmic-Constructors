@@ -25,6 +25,7 @@ func get_value_i()-> int:
 
 
 func toggle():
+	if is_locked: return
 	if not can_toggle: return
 	
 	match toggle_behavior:
@@ -48,10 +49,12 @@ func set_variant(val: Variant):
 
 
 func increase(modifier: int):
+	if is_locked: return
 	change_value(modifier, 1)
 
 
 func decrease(modifier: int):
+	if is_locked: return
 	change_value(modifier, -1)
 
 

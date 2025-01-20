@@ -3,6 +3,7 @@ class_name BlockProperty
 var callback: Callable
 var display_name: String
 var owner: BlockInstance
+var is_locked: bool= false
 
 
 

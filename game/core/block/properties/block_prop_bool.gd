@@ -15,15 +15,18 @@ func get_value_i()-> int:
 
 
 func toggle():
+	if is_locked: return
 	b= not b
 	super()
 
 
 func increase(_modifier: int):
+	if is_locked: return
 	toggle()
 
 
 func decrease(_modifier: int):
+	if is_locked: return
 	toggle()
 
 
@@ -42,12 +45,12 @@ func is_true()-> bool:
 
 func set_true():
 	if not b:
-		toggle()
+		set_variant(true)
 
 
 func set_false():
 	if b:
-		toggle()
+		set_variant(false)
 
 
 func get_value_as_text()-> String:

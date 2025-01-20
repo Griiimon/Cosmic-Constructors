@@ -59,28 +59,6 @@ func change_mass():
 	changed_mass.emit()
 
 
-func serialize()-> Dictionary:
-	var data: Dictionary
-	for prop in get_property_list():
-		if not data.has("properties"):
-			data["properties"]= {}
-
-		var prop_var: BlockProperty
-		if prop.class_name.begins_with("BlockProp") and prop.class_name != "BlockProperty":
-			prop_var= get(prop.name)
-			if prop_var.owner and prop_var.owner != self: continue
-		
-		match prop.class_name:
-			"BlockPropBool":
-				data["properties"][prop.name]= (prop_var as BlockPropBool).is_true()
-			"BlockPropFloat":
-				data["properties"][prop.name]= (prop_var as BlockPropFloat).get_value_f()
-			"BlockPropEnum":
-				data["properties"][prop.name]= (prop_var as BlockPropEnum).get_value_i()
-				
-	return data
-
-
 func find_linked_block_group(grid: BlockGrid, grid_block: GridBlock, filter= null)-> LinkedBlockGroup:
 	var neighbors: Array[Vector3i]= get_same_neighbors_positions(grid, grid_block.local_pos)
 	var group: LinkedBlockGroup= null
@@ -108,10 +86,53 @@ func find_or_make_linked_block_group(grid: BlockGrid, grid_block: GridBlock, cre
 	return group
 
 
+func serialize()-> Dictionary:
+	var data: Dictionary
+	var locked_properties: Array[int]= []
+	var ctr:= 0
+	
+	for prop in get_property_list():
+		if not data.has("properties"):
+			data["properties"]= {}
+
+		var prop_var: BlockProperty
+		if prop.class_name.begins_with("BlockProp") and prop.class_name != "BlockProperty":
+			prop_var= get(prop.name)
+			if prop_var.owner and prop_var.owner != self: continue
+		
+		match prop.class_name:
+			"BlockPropBool":
+				data["properties"][prop.name]= (prop_var as BlockPropBool).is_true()
+			"BlockPropFloat":
+				data["properties"][prop.name]= (prop_var as BlockPropFloat).get_value_f()
+			"BlockPropEnum":
+				data["properties"][prop.name]= (prop_var as BlockPropEnum).get_value_i()
+			_:
+				breakpoint
+		
+		if prop_var.is_locked:
+			locked_properties.append(ctr)
+			
+		ctr+= 1
+	
+	if not locked_properties.is_empty():
+		data["locked_properties"]= locked_properties
+	
+	return data
+
+
 func deserialize(data: Dictionary):
+	var locked_properties: Array[int]
+	locked_properties= Utils.get_key_or_default(data, "locked_properties", [])
+	var ctr:= 0
+
 	if data.has("properties"):
 		for prop_name in data["properties"].keys():
-			(get(prop_name) as BlockProperty).set_variant(data["properties"][prop_name])
+			var prop_var: BlockProperty= get(prop_name)
+			prop_var.set_variant(data["properties"][prop_name])
+			if ctr in locked_properties:
+				prop_var.is_locked= true
+			ctr+= 1
 
 
 func get_properties()-> Array[BlockProperty]:

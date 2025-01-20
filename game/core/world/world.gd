@@ -63,6 +63,9 @@ func init_grid(grid: BlockGrid, pos: Vector3, rot: Vector3):
 	
 	if not grid.freeze:
 		grid.freeze= grid_freeze_state
+	
+	if NetworkManager.is_client:
+		grid.freeze= true
 
 
 func remove_grid(grid: BlockGrid):

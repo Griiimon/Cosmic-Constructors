@@ -125,6 +125,9 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 			grid_block.children.append(child_grid_block)
 			blocks[child_grid_block.local_pos]= child_grid_block
 
+	if NetworkManager.is_client:
+		return grid_block
+
 	if block_node is BlockInstance:
 		var instance: BlockInstance= block_node
 		if restore_data:
@@ -163,6 +166,11 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 
 func _physics_process(delta: float) -> void:
+	assert(not ( NetworkManager.is_client and not freeze ))
+	if NetworkManager.is_client:
+		#prints("Client grid", name, global_position, blocks.size())
+		return
+
 	requested_local_movement= requested_local_movement.normalized()
 	requested_movement= requested_movement.normalized()
 

@@ -4,6 +4,7 @@ const INTERPOLATION_OFFSET_TICKS= 30
 
 var ticks: int
 var peer_states: Dictionary
+var grid_states: Dictionary
 
 
 
@@ -35,6 +36,9 @@ func _physics_process(_delta: float) -> void:
 			for peer: BasePlayer in Global.game.peers.get_children():
 				update_peer_node(peer)
 		
+			for grid: BlockGrid in Global.game.world.get_grids():
+				update_grid(grid)
+
 	ticks+= 1
 
 
@@ -88,6 +92,48 @@ func update_peer_node(player: BasePlayer):
 	player.global_basis= player.global_basis.slerp(new_basis, 1 - smooth)
 
 
+func store_grid_state(grid_state: Dictionary):
+	var grid_id: int= GridSyncState.get_grid_id(grid_state)
+	if not grid_states.has(grid_id):
+		grid_states[grid_id]= [grid_state]
+	else:
+		var arr: Array= grid_states[grid_id]
+		var this_timestamp: int= GridSyncState.get_timestamp(grid_state)
+		var last_timestamp: int= GridSyncState.get_timestamp(arr[-1])
+		
+		if this_timestamp > last_timestamp:
+			arr.append(grid_state)
+
+
+func update_grid(grid: BlockGrid):
+	var grid_id: int= Global.game.world.get_grid_id(grid)
+	if not grid_states.has(grid_id):
+		return
+	
+	var arr: Array= grid_states[grid_id]
+	if arr.size() == 1:
+		GridSyncState.parse_sync_state(grid, arr[0])
+		return
+	
+	var render_tick: int= ticks - INTERPOLATION_OFFSET_TICKS
+	
+	while arr.size() > 2 and GridSyncState.get_timestamp(arr[1]) < render_tick:
+		arr.remove_at(0)
+
+	var past_state: Dictionary= arr[0]
+	var future_state: Dictionary= arr[1]
+	
+	var interpolation_factor: float= (render_tick - GridSyncState.get_timestamp(past_state)) / float(PlayerSyncState.get_timestamp(future_state) - PlayerSyncState.get_timestamp(past_state))
+
+	var smooth: float= 0.9
+	
+	var new_pos: Vector3= lerp(GridSyncState.get_position(past_state), GridSyncState.get_position(future_state), interpolation_factor)
+	grid.global_position= lerp(grid.global_position, new_pos, 1 - smooth)
+
+	var new_basis: Basis= Basis.from_euler(GridSyncState.get_rotation(past_state)).slerp(Basis.from_euler(GridSyncState.get_rotation(future_state)), interpolation_factor)
+	grid.global_basis= grid.global_basis.slerp(new_basis, 1 - smooth)
+
+
 func send_sync_event(type: int, args: Array= []):
 	ServerManager.receive_sync_event.rpc(type, args)
 
@@ -102,7 +148,8 @@ func send_all_sync_events(receiver: int):
 
 @rpc("any_peer", "reliable")
 func receive_sync_event(type: int, args: Array, peer_id: int):
-	if peer_id == NetworkManager.peer_id: return
+	if peer_id == NetworkManager.peer_id and not EventSyncState.can_sender_process_event(type):
+		return
 	EventSyncState.process_event(type, args, peer_id)
 
 
@@ -118,7 +165,7 @@ func receive_world_state(data: Dictionary):
 	if not Global.game: return
 	if not Global.player: return
 	
-	#prints("Client receive world state", data)
+	prints("Client receive world state", data)
 	
 	var player_states: Array= WorldSyncState.parse_player_states(data)
 	for peer_state: Dictionary in player_states:
@@ -131,6 +178,10 @@ func receive_world_state(data: Dictionary):
 			base_player= Global.game.add_peer(peer_state)
 		
 		store_peer_state(peer_state)
+
+	var grid_states: Array= WorldSyncState.parse_grid_states(data)
+	for grid_state: Dictionary in grid_states:
+		store_grid_state(grid_state)
 
 
 @rpc("any_peer", "reliable")

@@ -1,15 +1,23 @@
 class_name EventSyncState
 
-enum Type { START_PLAYER_ANIMATION, RESET_PLAYER_ANIMATION, WEAR_EQUIPMENT, CLEAR_EQUIPMENT_SLOT, EQUIP_HAND_ITEM }
+enum Type { START_PLAYER_ANIMATION, RESET_PLAYER_ANIMATION, WEAR_EQUIPMENT, CLEAR_EQUIPMENT_SLOT, EQUIP_HAND_ITEM, ADD_GRID, ADD_BLOCK }
 
 
 
 static func process_event(type: Type, args: Array, peer_id: int):
 	if not Global.game: return
+	if not Global.game.world: return
+	var world: World= Global.game.world
 	
-	var player: BasePlayer= Global.game.get_peer(peer_id)
+	var player: BasePlayer= null
 	
-	if not player: return
+	if peer_id != NetworkManager.peer_id:
+		player= Global.game.get_peer(peer_id)
+		
+		if not player: 
+			# TODO how would this happen?
+			breakpoint
+			return
 	
 	match type:
 		Type.START_PLAYER_ANIMATION:
@@ -22,3 +30,17 @@ static func process_event(type: Type, args: Array, peer_id: int):
 			player.wear_equipment(load(args[0]))
 		Type.CLEAR_EQUIPMENT_SLOT:
 			pass
+		Type.ADD_GRID:
+			#FIXME multiple players creating grids simultaneously may lead to wrong order
+			world.add_grid(args[0], args[1])
+		Type.ADD_BLOCK:
+			var grid: BlockGrid= Global.game.world.get_grid(args[0])
+			var block: Block= GameData.get_block(args[1])
+			grid.add_block(block, args[2], args[3])
+
+
+static func can_sender_process_event(type: Type)-> bool:
+	match type:
+		Type.ADD_BLOCK:
+			return true
+	return false

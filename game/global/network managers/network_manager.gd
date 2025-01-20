@@ -2,6 +2,7 @@ extends Node
 
 var is_single_player:= true
 var is_server:= false
+var is_client:= false
 
 const DEFAULT_SERVER_IP= "127.0.0.1"
 

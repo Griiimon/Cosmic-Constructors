@@ -33,6 +33,7 @@ func _physics_process(_delta: float) -> void:
 	if ticks % 3 == 0:
 		var world_state: Dictionary
 		WorldSyncState.add_player_states(world_state, player_states.values())
+		WorldSyncState.add_grid_states(world_state, get_grid_states())
 		ClientManager.receive_world_state.rpc(world_state)
 
 	ticks+= 1
@@ -52,6 +53,16 @@ func add_player(id: int):
 func remove_player(id: int):
 	prints("Removing peer", id)
 	player_disconnected.emit(id)
+
+
+func get_grid_states()-> Array:
+	var states: Array= []
+	if Global.game:
+		var world: World= Global.game.world
+		if world:
+			for grid in world.get_grids():
+				states.append(GridSyncState.build_sync_state(grid))
+	return states
 
 
 @rpc("any_peer", "reliable")
@@ -78,7 +89,24 @@ func receive_player_state(data: Dictionary):
 
 @rpc("any_peer", "reliable")
 func receive_sync_event(type: int, args: Array):
+	pre_process_sync_event(type, args)
 	ClientManager.receive_sync_event.rpc(type, args, get_sender_id())
+
+
+func pre_process_sync_event(type: int, args: Array):
+	var world: World= Global.game.world
+	
+	match type:
+		EventSyncState.Type.ADD_GRID:
+			#FIXME multiple players creating grids simultaneously may lead to wrong order
+			world.add_grid(args[0], args[1])
+		EventSyncState.Type.ADD_BLOCK:
+			assert(NetworkManager.is_server)
+			var grid: BlockGrid= Global.game.world.get_grid(args[0])
+			var block: Block= GameData.get_block(args[1])
+			grid.add_block(block, args[2], args[3])
+			
+	
 	
 
 func get_sender_id()-> int:

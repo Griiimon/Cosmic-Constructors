@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=7 format=3 uid="uid://dykd75twpcvhd"]
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://dykd75twpcvhd"]
 
 [sub_resource type="Gradient" id="Gradient_dtc4i"]
 colors = PackedColorArray(0.185246, 0.20795, 0.211029, 1, 0.375859, 0.413126, 0.418175, 1)
@@ -14,21 +14,17 @@ height = 256
 color_ramp = SubResource("Gradient_dtc4i")
 noise = SubResource("FastNoiseLite_hieca")
 
-[sub_resource type="Gradient" id="Gradient_wxwtm"]
-colors = PackedColorArray(0.469436, 0.251104, 0, 1, 0.27618, 0.125286, 0.0729172, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_nbvmr"]
-frequency = 0.0455
-fractal_octaves = 1
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l7rej"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5nc6x"]
 width = 256
 height = 256
 as_normal_map = true
-bump_strength = 20.0
-color_ramp = SubResource("Gradient_wxwtm")
-noise = SubResource("FastNoiseLite_nbvmr")
+color_ramp = SubResource("Gradient_dtc4i")
+noise = SubResource("FastNoiseLite_hieca")
 
 [resource]
 albedo_texture = SubResource("NoiseTexture2D_ru5rh")
-normal_texture = SubResource("NoiseTexture2D_l7rej")
+metallic = 0.2
+roughness = 0.7
+normal_enabled = true
+normal_scale = 2.5
+normal_texture = SubResource("NoiseTexture2D_5nc6x")

@@ -23,5 +23,8 @@ noise = SubResource("FastNoiseLite_nbvmr")
 
 [resource]
 albedo_texture = SubResource("NoiseTexture2D_dsruc")
+metallic_specular = 0.2
+roughness = 0.5
 normal_enabled = true
+normal_scale = 2.0
 normal_texture = SubResource("NoiseTexture2D_l7rej")

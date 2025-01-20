@@ -542,11 +542,11 @@ func serialize()-> Dictionary:
 	return data
 
 
-static func pre_deserialize(data: Dictionary, new_world: World)-> BlockGrid:
+static func pre_deserialize(data: Dictionary, new_world: World, default_position: Vector3= Vector3.ZERO)-> BlockGrid:
 	var grid:= BlockGrid.new()
 	grid.world= new_world
-	grid.position= str_to_var("Vector3" + data["position"])
-	grid.rotation= str_to_var("Vector3" + data["rotation"])
+	grid.position= Utils.get_key_or_default(data, "position", default_position, "Vector3")
+	grid.rotation= Utils.get_key_or_default(data, "rotation", Vector3.ZERO, "Vector3")
 
 	new_world.grids.add_child(grid)
 
@@ -554,12 +554,11 @@ static func pre_deserialize(data: Dictionary, new_world: World)-> BlockGrid:
 
 
 func deserialize(data: Dictionary):
-	linear_velocity= str_to_var("Vector3" + data["linear_velocity"])
-	angular_velocity= str_to_var("Vector3" + data["angular_velocity"])
+	linear_velocity= Utils.get_key_or_default(data, "linear_velocity", Vector3.ZERO, "Vector3")
+	angular_velocity= Utils.get_key_or_default(data, "angular_velocity", Vector3.ZERO, "Vector3")
 	parking_brake= Utils.get_key_or_default(data, "parking_brake", false)
 	reverse_mode= Utils.get_key_or_default(data, "reverse_mode", false)
 	is_anchored= Utils.get_key_or_default(data, "is_anchored", false)
-	
 
 	for item: Dictionary in data["blocks"]:
 		var block_position: Vector3= str_to_var("Vector3" + item["position"])

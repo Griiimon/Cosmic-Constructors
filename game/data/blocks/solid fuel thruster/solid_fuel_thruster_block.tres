@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SolidFuelThrusterBlock" load_steps=2 format=3 uid="uid://bh6lk8mefhhlv"]
+
+[ext_resource type="Script" path="res://game/core/block/types/solid_fuel_thruster_block.gd" id="1_8vkei"]
+
+[resource]
+script = ExtResource("1_8vkei")
+burn_duration = 30.0
+thrust = 20000.0
+force_offset = false
+size = Vector3i(1, 1, 1)
+mass = 100.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = true
+tick_priority = 0
+can_be_built = true
+name = ""

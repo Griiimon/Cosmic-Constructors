@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://0td1dfglmvte"]
+
+[ext_resource type="Script" path="res://game/ui/line edit popup/line_edit_popup.gd" id="1_12bce"]
+
+[node name="Line Edit Popup" type="PopupPanel"]
+auto_translate_mode = 1
+title = "Blueprint Name"
+initial_position = 2
+size = Vector2i(308, 113)
+visible = true
+borderless = false
+always_on_top = true
+script = ExtResource("1_12bce")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 304.0
+offset_bottom = 109.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 25)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 25
+placeholder_text = "test"
+alignment = 1
+
+[node name="Button OK" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 30
+text = "  OK  "
+
+[connection signal="close_requested" from="." to="." method="_on_button_ok_pressed"]
+[connection signal="text_submitted" from="VBoxContainer/LineEdit" to="." method="_on_button_ok_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button OK" to="." method="_on_button_ok_pressed"]

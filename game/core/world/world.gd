@@ -369,5 +369,11 @@ func get_grid(id: int)-> BlockGrid:
 	return grids.get_child(id)
 
 
+func get_grids()-> Array[BlockGrid]:
+	var result: Array[BlockGrid]
+	result.assign(grids.get_children())
+	return result
+
+
 func get_grid_id(grid: BlockGrid)-> int:
 	return grids.get_children().find(grid)

@@ -1,10 +1,27 @@
-FIX infinite loop in empty property viewer panels
+fix warnings
 
-save and load blueprints ( use half transparent boxes per grid block )
+ore pile nomral map array + metallic and roughness value per raw material
 
-save physical/world items
+keep available keys + short desc in a dictionary per action state for quick help
+
+on_grid_changed() in BlockInstance callback if grid split results in new grid. mostly for joint reparenting 
+
+network grid syncing
 
 thrusters particle TARGET direction seems to be in global coords
+
+Components can_* functions just use Callable refs like with FluidConsumer
+
+
+tree spawner
+
+wooden workbench
+
+ore piles: make it spill items when rotated
+
+load blueprints: use half transparent boxes per grid block )
+
+save physical/world items
 
 transfer block_types when splitting grids
 
@@ -28,20 +45,8 @@ Chunks of height info are created independent of the terrain generator, but terr
 
 Ore Intake: Ore Funnel, takes ore from above one-by-one and ejects below to valid target 
 
-grid walk: use magnetic boots on non-frozen grids
-
-Components can_* functions just use Callable refs like with FluidConsumer
-
 Fluid Consumer: make sure correct fluid is supplied
 
-BlockGrid is_anchored flag ( serialized ) to easier decide all possible freeze/unfreeze options and also dont depend on terrain being spawned to freeze block
-
-
-keep available keys + short desc in a dictionary per action state for quick help
-
-ore pile nomral map array + metallic and roughness value per raw material
-
-on_grid_changed() in BlockInstance callback if grid split results in new grid. mostly for joint reparenting 
 
 items, add mass ( and even dynamic damping? )
 
@@ -49,18 +54,13 @@ serializable inventories
 
 throw items: drop with f or when mouse released, but add force on mouse hold duration
 
-tree spawner
-
-wooden workbench
-
-
-fix warnings
-
 higher default damping on suspension, hard code?
 
-when splitting prioritize: with more functional blocks, with more blocks. trigger on_grid_changed(), reconnect signals from BlockInstances
+when splitting
+	prioritize: with more functional blocks, with more blocks
+	trigger on_grid_changed()
+	reconnect signals from BlockInstances
 
-data-> block-> templates folder, where to store template scenes to be instanced from. for example default suspension, which should be the same ( inherited ) for 1,2,3,4m wheels, just with different wheels scenes
 
 paraglider control with "strapped-in seat": can apply minimal torque to the grid, but no hotbar. only deliver maximum torque if seat is a CoM?
 
@@ -80,9 +80,6 @@ in addition to BlockPlacementCondition also have BlockDockConditions for neighbo
 adaptive physics ticks per second ( needs to be multiple of 60 and on server only to properly sync with client? ) 
 
 
-
-ore piles: make it spill items when rotated
-
 player variable jump height ( hold and release )
 
 boulders with scattered stones for first tools
@@ -96,30 +93,27 @@ fixed rope for carrying objects with heli etc
 
 split tube groups check if more 1 neighbor when removing and then have the group flood fill for all neighbors, removing any queued neighbor when found within flood fill
 
-trigger debug action immediately when pressed
-
 grayer color for extra properties in property viewer
 
 check if recent atmospheric shader change has any negative effects in Forward+
 
 
-build crane to lift container
-	block groups and hotkeys
 
-plane wings: lift surface block, wing tip block ( improves angular damping in this direction ), flaps block
+plane wings: 
+	lift surface block
+	wing tip block ( improves angular damping in this direction )
+	flaps block
 
 run damage test with multi blocks in grid
 
 
 save PeripheralGridEntities ( + connections )
 
-FIX empty grids cause save game corruption?
-
 PanelViewer edit mode: unique, all (same type), mirrored ( which axis? axis aren't even consistent ) => choose&connect mirror block
 
 "thick" wireframe shader for unfinished blocks?
 
-add motion blur ( sphynx addon ) to fluid drops
+add motion blur ( sphynx addon? ) to fluid drops
  or just make them a little transparent and each drop has a trail of 5 - 10 drop meshes that will be destroyed at the same position where the original drop was destroyed
 
 air ship
@@ -127,10 +121,6 @@ air ship
 add custom lower, upper limit and torque to joint blocks
 
 spring
-
-elevator 
-
-control right-click in tests to remove entire grid
 
 add non solid, frozen rigidbody to player as gravity gauge?
 
@@ -144,10 +134,6 @@ upside down wheels should skip any calculations ( shapecast normal != wheel basi
 implement rolling resistance
 
 implement per axis linear damping calculated from air resistance profile
-
-multiplayer grid syncing
-
-custom planet generator
 
 avoid overlap with other grid while building
 
@@ -195,9 +181,8 @@ INVESTIGATE possible to pick up item from floor and from OreContainer with one F
 IS FIXED?
 	FIX sometimes wrong ( downwards ) momentum when strafing off grid 
 	FIX ghost overlays custom shape blocks
+	FIX empty grids cause save game corruption?
 
-
-meta tag for BlockInstance scene sub nodes that should be deleted in ghost ( or just delete anything not MeshInstance3D or plain Node3D ? )
 
 
 
@@ -237,16 +222,35 @@ SCENARIOS
 ----------------
 
 Mini Factory and logistics:
-	[ fell tree and produce wooden pallet at workbench ]
 	drill [coal and] iron
 	transport with wheelbarrow to factory
 	unload into furnace
 	conveyor iron ingots to wooden pallet
-!	electric 3r suspension forklift pallet onto truck
+	electric 3r suspension forklift pallet onto truck
 	[use refinery to turn coal into oil]
 	[and fuel refinery to turn oil into fuel]
 	[fill truck gas tank with fuel canister]
 	then drive to fueling station
+
+
+Survival Start:
+	collect stick and rock, craft axe
+	fell tree
+	produce wooden pallet at workbench
+
+
+Minecraft Game Mode:
+	Blocky terrain
+	Build House, put Roof on hinge
+	open House top and launch space rocket 
+
+	make trees frozen grids with non-overlapping base block anchor
+	build felling vehicle with saw
+	saw off base block
+	use sucker block to lift unfrozen tree
+	put tree in trunk with saws
+	sawed blocks will drop logs
+	logs are collected with hoppers and place in chest
 
 
 Car jump:

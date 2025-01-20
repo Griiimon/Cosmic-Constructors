@@ -1,6 +1,8 @@
-[gd_resource type="Resource" script_class="SolidFuelThrusterBlock" load_steps=2 format=3 uid="uid://bh6lk8mefhhlv"]
+[gd_resource type="Resource" script_class="SolidFuelThrusterBlock" load_steps=4 format=3 uid="uid://bh6lk8mefhhlv"]
 
+[ext_resource type="PackedScene" uid="uid://cuwcwrs2vl3gv" path="res://game/data/blocks/solid fuel thruster/solid_fuel_thruster.tscn" id="1_4gxl2"]
 [ext_resource type="Script" path="res://game/core/block/types/solid_fuel_thruster_block.gd" id="1_8vkei"]
+[ext_resource type="Resource" uid="uid://ckiejbyle02pl" path="res://game/data/misc/block categories/spaceship.tres" id="1_oab61"]
 
 [resource]
 script = ExtResource("1_8vkei")
@@ -14,4 +16,6 @@ custom_collision = false
 can_tick = true
 tick_priority = 0
 can_be_built = true
+category = ExtResource("1_oab61")
+scene = ExtResource("1_4gxl2")
 name = ""

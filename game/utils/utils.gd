@@ -85,3 +85,7 @@ static func get_raycast_inside_collision_point(raycast: RayCast3D)-> Vector3:
 
 static func get_raycast_outside_collision_point(raycast: RayCast3D)-> Vector3:
 	return raycast.get_collision_point() + raycast.global_basis.z * 0.05
+
+
+static func get_short_vec3(vec: Vector3)-> String:
+	return "%.1f, %.1f, %1.f" % [vec.x, vec.y, vec.z]

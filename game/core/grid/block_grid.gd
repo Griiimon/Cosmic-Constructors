@@ -1,6 +1,10 @@
 class_name BlockGrid
 extends RigidBody3D
 
+signal id_assigned
+
+
+var id: int= -1
 
 var world: World
 var blocks: Dictionary
@@ -156,7 +160,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 	if connects_to_main_grid:
 		assert(connects_to_main_grid != self)
-		main_grid_id= world.get_grid_id(connects_to_main_grid)
+		main_grid_id= connects_to_main_grid.id
 		main_grid_connection= grid_block
 
 	update_properties()
@@ -170,7 +174,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 func _physics_process(delta: float) -> void:
 	assert(not ( NetworkManager.is_client and not freeze ))
 
-	DebugPanel.send(self, "ID", world.get_grid_id(self))
+	DebugPanel.send(self, "ID", id)
 	DebugPanel.send(self, "Req Movement", requested_movement)
 	#DebugPanel.send(self, "Req Rotation", requested_movement)
 	DebugPanel.send(self, "Velocity", linear_velocity.round())
@@ -744,7 +748,3 @@ func is_occupied(grid_pos: Vector3i)-> bool:
 
 func is_sub_grid()-> bool:
 	return main_grid_id > -1
-
-
-func get_id()-> int:
-	return world.get_grid_id(self)

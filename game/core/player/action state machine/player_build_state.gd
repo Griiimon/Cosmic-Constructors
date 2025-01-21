@@ -136,10 +136,8 @@ func build_block():
 		grid= player.world.add_grid(ghost.position, ghost.global_rotation)
 
 		if NetworkManager.is_client:
-			# FIXME this shouldn't be allowed by the client or at least needs
-			# 	server confirmation
 			ClientManager.send_sync_event(EventSyncState.Type.ADD_GRID,\
-				[ghost.position, ghost.global_rotation, player.world.get_grid_id(grid)])
+				[ghost.position, ghost.global_rotation, grid.id])
 			grid.id_pending= true
 			
 		local_block_pos= Vector3i.ZERO
@@ -147,8 +145,16 @@ func build_block():
 	var grid_block_rotation: Vector3i= Vector3i.ZERO if new_grid else block_rotation
 	
 	if NetworkManager.is_client:
+		var stored_grid: BlockGrid= grid
+		
+		if grid.id_pending:
+			await grid.id_assigned
+
+		grid= stored_grid
+		assert(grid)
+
 		ClientManager.send_sync_event(EventSyncState.Type.ADD_BLOCK,\
-		 [player.world.get_grid_id(grid), GameData.get_block_id(current_block),\
+		 [grid.id, GameData.get_block_id(current_block),\
 			local_block_pos, grid_block_rotation])
 	else:
 		grid.add_block(current_block, local_block_pos, grid_block_rotation)

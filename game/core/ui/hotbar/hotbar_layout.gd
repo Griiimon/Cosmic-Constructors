@@ -24,7 +24,7 @@ func serialize()-> Dictionary:
 			data["slots"].append(assignment.serialize())
 
 	if grid:
-		data["grid_id"]= grid.world.get_grid_id(grid)
+		data["grid_id"]= grid.id
 
 	return data
 

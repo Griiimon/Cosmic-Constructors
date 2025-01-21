@@ -66,7 +66,7 @@ func on_set_active():
 
 func serialize()-> Dictionary:
 	var data: Dictionary= super()
-	data["sub_grid_id"]= sub_grid.get_id()
+	data["sub_grid_id"]= sub_grid.id
 	return data
 
 

@@ -3,7 +3,8 @@ extends BaseHotkeyAssignment
 
 var block_pos: Vector3i
 var property_name: String
-# TODO use weakref to actual grid object, ids can change
+
+# TODO use weakref to actual grid object? ids can change (?) 
 var grid_id: int
 
 
@@ -16,7 +17,7 @@ func _init(_key: int, block: GridBlock= null, property: BlockProperty= null, gri
 	if property:
 		property_name= property.display_name
 	if grid:
-		grid_id= grid.get_id()
+		grid_id= grid.id
 
 
 func serialize()-> Dictionary:

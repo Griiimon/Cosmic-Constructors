@@ -9,7 +9,7 @@ const KEY_TIMESTAMP = "time"
 
 static func build_sync_state(grid: BlockGrid)-> Dictionary:
 	var data: Dictionary
-	data[KEY_ID]= Global.game.world.get_grid_id(grid)
+	data[KEY_ID]= grid.id
 	data[KEY_POSITION]= grid.global_position
 	data[KEY_ROTATION]= grid.global_rotation
 	data[KEY_TIMESTAMP]= ServerManager.ticks

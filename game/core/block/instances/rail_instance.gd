@@ -78,7 +78,7 @@ func on_set_motor_velocity():
 
 func serialize()-> Dictionary:
 	var data: Dictionary= super()
-	data["sub_grid_id"]= rail.sub_grid.get_id()
+	data["sub_grid_id"]= rail.sub_grid.id
 	return data
 
 

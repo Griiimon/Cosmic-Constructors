@@ -41,6 +41,8 @@ var main_cockpit: SeatInstance
 
 var lod_activation: LodActivated
 
+var id_pending:= false
+
 
 
 func _ready() -> void:

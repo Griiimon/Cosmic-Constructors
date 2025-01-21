@@ -107,6 +107,8 @@ func store_grid_state(grid_state: Dictionary):
 
 func update_grid(grid: BlockGrid):
 	var grid_id: int= Global.game.world.get_grid_id(grid)
+	if grid.id_pending: return
+	
 	if not grid_states.has(grid_id):
 		return
 	
@@ -192,6 +194,17 @@ func spawn():
 @rpc("any_peer", "reliable")
 func request_full_peer_sync():
 	send_all_sync_events(get_sender_id())
+
+
+@rpc("any_peer", "reliable")
+func update_grid_id(global_grid_id: int, local_grid_id: int):
+	var world: World= Global.game.world
+	assert(world)
+	var grid: BlockGrid= world.get_grid(local_grid_id)
+	assert(grid)
+	world.grids.move_child(grid, global_grid_id)
+	grid.id_pending= false
+	print("Updating grid id from %d to %d" % [local_grid_id, global_grid_id])
 
 
 func get_sender_id()-> int:

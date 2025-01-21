@@ -133,16 +133,19 @@ func build_block():
 	var new_grid:= false
 	if not grid:
 		new_grid= true
+		grid= player.world.add_grid(ghost.position, ghost.global_rotation)
+
 		if NetworkManager.is_client:
 			# FIXME this shouldn't be allowed by the client or at least needs
 			# 	server confirmation
 			ClientManager.send_sync_event(EventSyncState.Type.ADD_GRID,\
-				[ghost.position, ghost.global_rotation])
-		
-		grid= player.world.add_grid(ghost.position, ghost.global_rotation)
+				[ghost.position, ghost.global_rotation, player.world.get_grid_id(grid)])
+			grid.id_pending= true
+			
 		local_block_pos= Vector3i.ZERO
 		
 	var grid_block_rotation: Vector3i= Vector3i.ZERO if new_grid else block_rotation
+	
 	if NetworkManager.is_client:
 		ClientManager.send_sync_event(EventSyncState.Type.ADD_BLOCK,\
 		 [player.world.get_grid_id(grid), GameData.get_block_id(current_block),\

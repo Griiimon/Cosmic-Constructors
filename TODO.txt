@@ -1,4 +1,9 @@
+assign grids ids, dont use child order
+
 request all grids on connect ( and store all sync events in a queue to be executed when all grids have loaded )
+	PAUSE SERVER WHILE players are connecting
+	
+network sync plane_fill and blueprint spawning
 
 sync remove_block, remove grid
 

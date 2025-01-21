@@ -202,6 +202,11 @@ func update_grid_id(global_grid_id: int, local_grid_id: int):
 	assert(world)
 	var grid: BlockGrid= world.get_grid(local_grid_id)
 	assert(grid)
+	
+	while global_grid_id >= world.grids.size():
+		push_warning("global grid id %d out of bounds ( %d )" % [global_grid_id, world.grids.size])
+		await get_tree().physics_frame
+
 	world.grids.move_child(grid, global_grid_id)
 	grid.id_pending= false
 	print("Updating grid id from %d to %d" % [local_grid_id, global_grid_id])

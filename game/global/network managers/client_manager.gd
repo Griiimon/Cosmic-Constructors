@@ -1,6 +1,6 @@
 extends Node
 
-const INTERPOLATION_OFFSET_TICKS= 30
+const INTERPOLATION_OFFSET_TICKS= 10
 
 var ticks: int
 var peer_states: Dictionary
@@ -83,7 +83,7 @@ func update_peer_node(player: BasePlayer):
 	
 	var interpolation_factor: float= (render_tick - PlayerSyncState.get_timestamp(past_state)) / float(PlayerSyncState.get_timestamp(future_state) - PlayerSyncState.get_timestamp(past_state))
 
-	var smooth: float= 0.9
+	var smooth: float= 0.5
 	
 	var new_pos: Vector3= lerp(PlayerSyncState.get_position(past_state), PlayerSyncState.get_position(future_state), interpolation_factor)
 	player.global_position= lerp(player.global_position, new_pos, 1 - smooth)
@@ -125,7 +125,7 @@ func update_grid(grid: BlockGrid):
 	
 	var interpolation_factor: float= (render_tick - GridSyncState.get_timestamp(past_state)) / float(PlayerSyncState.get_timestamp(future_state) - PlayerSyncState.get_timestamp(past_state))
 
-	var smooth: float= 0.9
+	var smooth: float= 0.1
 	
 	var new_pos: Vector3= lerp(GridSyncState.get_position(past_state), GridSyncState.get_position(future_state), interpolation_factor)
 	grid.global_position= lerp(grid.global_position, new_pos, 1 - smooth)
@@ -135,7 +135,7 @@ func update_grid(grid: BlockGrid):
 
 
 func send_sync_event(type: int, args: Array= []):
-	ServerManager.receive_sync_event.rpc(type, args)
+	ServerManager.receive_sync_event.rpc_id(1, type, args)
 
 
 func send_all_sync_events(receiver: int):
@@ -165,7 +165,7 @@ func receive_world_state(data: Dictionary):
 	if not Global.game: return
 	if not Global.player: return
 	
-	prints("Client receive world state", data)
+	#prints("Client receive world state", data)
 	
 	var player_states: Array= WorldSyncState.parse_player_states(data)
 	for peer_state: Dictionary in player_states:

@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://c4sn7mi6fgdo2"]
 
 [ext_resource type="Script" path="res://game/launcher.gd" id="1_rwhuf"]
-[ext_resource type="PackedScene" uid="uid://bws4nr4sjg6bt" path="res://game/test/damage test/damage_test.tscn" id="2_5w3hj"]
 [ext_resource type="PackedScene" uid="uid://18lknojownsw" path="res://game/test/custom planet test/custom_planet_test.tscn" id="2_8u165"]
+[ext_resource type="PackedScene" uid="uid://d4blx7p2hp5bc" path="res://game/test/vehicle test/vehicle_test.tscn" id="3_nay8q"]
 
 [node name="Launcher" type="Node"]
 script = ExtResource("1_rwhuf")
+use_interface = true
 run_test_scene = ExtResource("2_8u165")
-game_scene = ExtResource("2_5w3hj")
-fullscreen = true
+game_scene = ExtResource("3_nay8q")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

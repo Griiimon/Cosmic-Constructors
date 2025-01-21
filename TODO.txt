@@ -1,3 +1,10 @@
+request all grids on connect ( and store all sync events in a queue to be executed when all grids have loaded )
+
+sync remove_block, remove grid
+
+sync BlockProperties
+
+
 FIX non-force-offset thrusters should apply force not at center but calculated CoM
 FIX when interval updating property viewer only update extra properties 
 

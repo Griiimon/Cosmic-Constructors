@@ -379,4 +379,6 @@ func get_grids()-> Array[BlockGrid]:
 
 
 func get_grid_id(grid: BlockGrid)-> int:
-	return grids.get_children().find(grid)
+	# TODO investigate performance
+	return grid.get_index()
+	#return grids.get_children().find(grid)

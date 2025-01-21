@@ -1,2 +1,2 @@
-# Space-Ships-and-Asteroids
+# Cosmic Constructors
 Space Engineers clone made in Godot

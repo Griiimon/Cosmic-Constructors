@@ -120,7 +120,12 @@ func remove_block():
 		collision_point+= -player.build_raycast.global_basis.z * 0.05
 		var grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_point) 
 		if not grid_block: return
-		grid_block.destroy(grid)
+		
+		if NetworkManager.is_client:
+			ClientManager.send_sync_event(EventSyncState.Type.REMOVE_BLOCK,\
+			 [grid.id, grid_block.local_pos])
+		else:
+			grid_block.destroy(grid)
 
 
 func remove_grid():

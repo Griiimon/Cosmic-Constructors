@@ -1,6 +1,6 @@
 class_name EventSyncState
 
-enum Type { START_PLAYER_ANIMATION, RESET_PLAYER_ANIMATION, WEAR_EQUIPMENT, CLEAR_EQUIPMENT_SLOT, EQUIP_HAND_ITEM, ADD_GRID, ADD_BLOCK }
+enum Type { START_PLAYER_ANIMATION, RESET_PLAYER_ANIMATION, WEAR_EQUIPMENT, CLEAR_EQUIPMENT_SLOT, EQUIP_HAND_ITEM, ADD_GRID, ADD_BLOCK, REMOVE_BLOCK }
 
 
 
@@ -37,10 +37,14 @@ static func process_event(type: Type, args: Array, peer_id: int):
 			var grid: BlockGrid= Global.game.world.get_grid(args[0])
 			var block: Block= GameData.get_block(args[1])
 			grid.add_block(block, args[2], args[3])
+		Type.REMOVE_BLOCK:
+			var grid: BlockGrid= Global.game.world.get_grid(args[0])
+			var local_pos: Vector3i= args[1]
+			grid.get_block_local(local_pos).destroy(grid)
 
 
 static func can_sender_process_event(type: Type)-> bool:
 	match type:
-		Type.ADD_BLOCK:
+		Type.ADD_BLOCK, Type.REMOVE_BLOCK:
 			return true
 	return false

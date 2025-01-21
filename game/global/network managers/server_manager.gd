@@ -114,6 +114,12 @@ func pre_process_sync_event(type: int, args: Array, sender_id: int):
 			var grid: BlockGrid= Global.game.world.get_grid(args[0])
 			var block: Block= GameData.get_block(args[1])
 			grid.add_block(block, args[2], args[3])
+		EventSyncState.Type.REMOVE_BLOCK:
+			assert(NetworkManager.is_server)
+			var grid: BlockGrid= Global.game.world.get_grid(args[0])
+			var local_pos: Vector3i= args[1]
+			var block: GridBlock= grid.get_block_local(local_pos)
+			block.destroy(grid)
 			
 	
 	

@@ -22,7 +22,7 @@ func on_neighbor_placed(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_blo
 func init(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_block_pos= null):
 	if suspension: return
 	
-	var neighbor_instances: Array[BlockInstance]= get_neighbor_class_instances(grid, grid_block, "SuspensionInstance", neighbor_block_pos, false)
+	var neighbor_instances: Array[BlockInstance]= get_neighbor_class_instances(grid, grid_block, (SuspensionInstance as GDScript).get_global_name(), neighbor_block_pos, false)
 	if neighbor_instances.is_empty(): return
 	
 	suspension= neighbor_instances[0]

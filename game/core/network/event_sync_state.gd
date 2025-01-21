@@ -16,7 +16,7 @@ static func process_event(type: Type, args: Array, peer_id: int):
 		
 		if not player: 
 			# TODO how would this happen?
-			breakpoint
+			push_warning("EventSyncState peer %d doesnt know about %d" % [NetworkManager.peer_id, peer_id])
 			return
 	
 	match type:

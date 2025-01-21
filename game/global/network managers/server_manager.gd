@@ -36,6 +36,9 @@ func _physics_process(_delta: float) -> void:
 		WorldSyncState.add_grid_states(world_state, get_grid_states())
 		ClientManager.receive_world_state.rpc(world_state)
 
+	for grid: BlockGrid in Global.game.world.get_grids():
+		DebugHud.send(grid.name, Utils.get_short_vec3(grid.global_position))
+
 	ticks+= 1
 
 

@@ -140,6 +140,8 @@ func remove_grid():
 	if result and (result.collider as CollisionObject3D).collision_layer == CollisionLayers.GRID:
 		var grid: BlockGrid= result.collider
 		grid.world.remove_grid(grid)
+		if NetworkManager.is_client:
+			ClientManager.send_sync_event(EventSyncState.Type.REMOVE_GRID, [grid.id])
 
 
 func sit_in_nearest_seat():

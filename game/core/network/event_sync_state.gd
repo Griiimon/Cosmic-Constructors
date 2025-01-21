@@ -1,6 +1,6 @@
 class_name EventSyncState
 
-enum Type { START_PLAYER_ANIMATION, RESET_PLAYER_ANIMATION, WEAR_EQUIPMENT, CLEAR_EQUIPMENT_SLOT, EQUIP_HAND_ITEM, ADD_GRID, ADD_BLOCK, REMOVE_BLOCK }
+enum Type { START_PLAYER_ANIMATION, RESET_PLAYER_ANIMATION, WEAR_EQUIPMENT, CLEAR_EQUIPMENT_SLOT, EQUIP_HAND_ITEM, ADD_GRID, ADD_BLOCK, REMOVE_BLOCK, REMOVE_GRID }
 
 
 
@@ -31,7 +31,6 @@ static func process_event(type: Type, args: Array, peer_id: int):
 		Type.CLEAR_EQUIPMENT_SLOT:
 			pass
 		Type.ADD_GRID:
-			#FIXME multiple players creating grids simultaneously may lead to wrong order
 			world.add_grid(args[0], args[1])
 		Type.ADD_BLOCK:
 			var grid: BlockGrid= Global.game.world.get_grid(args[0])
@@ -41,6 +40,9 @@ static func process_event(type: Type, args: Array, peer_id: int):
 			var grid: BlockGrid= Global.game.world.get_grid(args[0])
 			var local_pos: Vector3i= args[1]
 			grid.get_block_local(local_pos).destroy(grid)
+		Type.REMOVE_GRID:
+			var grid_id: int= args[0]
+			world.remove_grid(world.get_grid(grid_id))
 
 
 static func can_sender_process_event(type: Type)-> bool:

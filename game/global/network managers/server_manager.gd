@@ -120,7 +120,10 @@ func pre_process_sync_event(type: int, args: Array, sender_id: int):
 			var local_pos: Vector3i= args[1]
 			var block: GridBlock= grid.get_block_local(local_pos)
 			block.destroy(grid)
-			
+		EventSyncState.Type.REMOVE_GRID:
+			var grid_id: int= args[0]
+			world.remove_grid(world.get_grid(grid_id))
+
 	
 	
 

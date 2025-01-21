@@ -101,7 +101,9 @@ func pre_process_sync_event(type: int, args: Array, sender_id: int):
 	
 	match type:
 		EventSyncState.Type.ADD_GRID:
-			var grid: BlockGrid= world.add_grid(args[0], args[1])
+			var position: Vector3= args[0]
+			var rotation: Vector3= args[1]
+			var grid: BlockGrid= world.add_grid(position, rotation)
 			var global_grid_id: int= grid.id
 			var local_grid_id: int= args[2]
 			if global_grid_id != local_grid_id:
@@ -111,21 +113,26 @@ func pre_process_sync_event(type: int, args: Array, sender_id: int):
 
 		EventSyncState.Type.ADD_BLOCK:
 			assert(NetworkManager.is_server)
-			var grid: BlockGrid= Global.game.world.get_grid(args[0])
-			var block: Block= GameData.get_block(args[1])
-			grid.add_block(block, args[2], args[3])
+			var grid_id: int= args[0]
+			var grid: BlockGrid= Global.game.world.get_grid(grid_id)
+			var block_id: int= args[1]
+			var block: Block= GameData.get_block(block_id)
+			var local_pos: Vector3i= args[2]
+			var block_rotation: Vector3i= args[3]
+			grid.add_block(block, local_pos, block_rotation)
+
 		EventSyncState.Type.REMOVE_BLOCK:
 			assert(NetworkManager.is_server)
-			var grid: BlockGrid= Global.game.world.get_grid(args[0])
+			var grid_id: int= args[0]
+			var grid: BlockGrid= Global.game.world.get_grid(grid_id)
 			var local_pos: Vector3i= args[1]
 			var block: GridBlock= grid.get_block_local(local_pos)
 			block.destroy(grid)
+
 		EventSyncState.Type.REMOVE_GRID:
 			var grid_id: int= args[0]
 			world.remove_grid(world.get_grid(grid_id))
 
-	
-	
 
 func get_sender_id()-> int:
 	return NetworkManager.get_sender_id()

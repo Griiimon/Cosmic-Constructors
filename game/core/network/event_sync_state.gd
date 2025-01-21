@@ -23,23 +23,37 @@ static func process_event(type: Type, args: Array, peer_id: int):
 		Type.START_PLAYER_ANIMATION:
 			assert(args[0] is String)
 			player.play_animation(args[0])
+
 		Type.RESET_PLAYER_ANIMATION:
 			player.reset_animation()
+
 		Type.WEAR_EQUIPMENT:
 			assert(args[0] is String)
 			player.wear_equipment(load(args[0]))
+
 		Type.CLEAR_EQUIPMENT_SLOT:
 			pass
+
 		Type.ADD_GRID:
-			world.add_grid(args[0], args[1])
+			var position: Vector3= args[0]
+			var rotation: Vector3= args[1]
+			world.add_grid(position, rotation)
+
 		Type.ADD_BLOCK:
-			var grid: BlockGrid= Global.game.world.get_grid(args[0])
-			var block: Block= GameData.get_block(args[1])
-			grid.add_block(block, args[2], args[3])
+			var grid_id: int= args[0]
+			var grid: BlockGrid= Global.game.world.get_grid(grid_id)
+			var block_id: int= args[1]
+			var block: Block= GameData.get_block(block_id)
+			var local_pos: Vector3i= args[2]
+			var block_rotation: Vector3i= args[3]
+			grid.add_block(block, local_pos, block_rotation)
+
 		Type.REMOVE_BLOCK:
-			var grid: BlockGrid= Global.game.world.get_grid(args[0])
+			var grid_id: int= args[0]
+			var grid: BlockGrid= Global.game.world.get_grid(grid_id)
 			var local_pos: Vector3i= args[1]
 			grid.get_block_local(local_pos).destroy(grid)
+
 		Type.REMOVE_GRID:
 			var grid_id: int= args[0]
 			world.remove_grid(world.get_grid(grid_id))

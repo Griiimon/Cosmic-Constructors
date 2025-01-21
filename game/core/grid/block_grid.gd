@@ -169,12 +169,6 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 func _physics_process(delta: float) -> void:
 	assert(not ( NetworkManager.is_client and not freeze ))
-	if NetworkManager.is_client:
-		#prints("Client grid", name, global_position, blocks.size())
-		return
-
-	requested_local_movement= requested_local_movement.normalized()
-	requested_movement= requested_movement.normalized()
 
 	DebugPanel.send(self, "ID", world.get_grid_id(self))
 	DebugPanel.send(self, "Req Movement", requested_movement)
@@ -184,6 +178,13 @@ func _physics_process(delta: float) -> void:
 	DebugPanel.send(self, "Mass", mass)
 	DebugPanel.send(self, "Blocks", blocks.size())
 	DebugPanel.send(self, "Freeze", freeze)
+
+	if NetworkManager.is_client:
+		#prints("Client grid", name, global_position, blocks.size())
+		return
+
+	requested_local_movement= requested_local_movement.normalized()
+	requested_movement= requested_movement.normalized()
 
 	if not freeze:
 		run_dampeners(delta)

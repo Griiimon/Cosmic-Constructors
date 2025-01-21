@@ -10,6 +10,8 @@ extends Node
 
 @export var maximize_window: bool= false
 @export var fullscreen: bool= false
+@export var auto_minimize_server: bool= true
+
 
 @onready var interface_ui: CanvasLayer = $UI
 
@@ -39,6 +41,7 @@ func _on_server_button_pressed() -> void:
 	interface_ui.hide()
 	NetworkManager.is_server= true
 	NetworkManager.is_single_player= false
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
 	NetworkManager.run(game_scene)
 
 

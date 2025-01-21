@@ -106,7 +106,7 @@ func pre_process_sync_event(type: int, args: Array, sender_id: int):
 			var local_grid_id: int= args[2]
 			if global_grid_id != local_grid_id:
 				print("Mapping local grid id %d from peer %d to %d" % [local_grid_id, sender_id, global_grid_id]) 
-			ClientManager.update_grid_id.rpc_id(sender_id, global_grid_id, local_grid_id)
+				ClientManager.update_grid_id.rpc_id(sender_id, global_grid_id, local_grid_id)
 
 		EventSyncState.Type.ADD_BLOCK:
 			assert(NetworkManager.is_server)

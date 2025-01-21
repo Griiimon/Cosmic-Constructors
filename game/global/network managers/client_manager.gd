@@ -203,8 +203,8 @@ func update_grid_id(global_grid_id: int, local_grid_id: int):
 	var grid: BlockGrid= world.get_grid(local_grid_id)
 	assert(grid)
 	
-	while global_grid_id >= world.grids.size():
-		push_warning("global grid id %d out of bounds ( %d )" % [global_grid_id, world.grids.size])
+	while global_grid_id >= world.grids.get_child_count():
+		push_warning("global grid id %d out of bounds ( %d )" % [global_grid_id, world.grids.get_child_count()])
 		await get_tree().physics_frame
 
 	world.grids.move_child(grid, global_grid_id)

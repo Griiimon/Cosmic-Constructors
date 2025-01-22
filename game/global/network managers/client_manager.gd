@@ -9,6 +9,7 @@ var grid_states: Dictionary
 
 
 func _ready() -> void:
+	process_mode= PROCESS_MODE_ALWAYS
 	set_physics_process(false)
 
 
@@ -148,6 +149,10 @@ func send_all_sync_events(receiver: int):
 		receive_sync_event.rpc_id(receiver, EventSyncState.Type.WEAR_EQUIPMENT, [equipment_object.item.resource_path], NetworkManager.peer_id)
 
 
+func request_resume():
+	ServerManager.request_resume.rpc_id(1)
+
+
 @rpc("any_peer", "reliable")
 func receive_sync_event(type: int, args: Array, peer_id: int):
 	if peer_id == NetworkManager.peer_id and not EventSyncState.can_sender_process_event(type):
@@ -220,6 +225,8 @@ func receive_initial_world(compressed_json: PackedByteArray):
 		await get_tree().process_frame
 	
 	Global.game.world.load_world(world_data)
+
+	request_resume()
 
 
 func get_sender_id()-> int:

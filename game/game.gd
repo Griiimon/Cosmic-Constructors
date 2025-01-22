@@ -50,5 +50,15 @@ func add_peer(player_state: Dictionary):
 	PlayerSyncState.parse_sync_state(base_player, player_state)
 
 
+func pause_execution(b: bool):
+	print("Pausing Game" if b else "Resuming Game")
+	get_tree().paused= b
+	PhysicsServer3D.set_active(not b)
+
+
 func get_peer(peer_id: int)-> BasePlayer:
 	return peers.get_node_or_null(str(peer_id))
+
+
+func is_paused()-> bool:
+	return get_tree().paused

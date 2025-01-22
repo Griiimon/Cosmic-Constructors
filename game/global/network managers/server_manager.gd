@@ -2,6 +2,7 @@ extends Node
 
 signal player_connected(id: int)
 signal player_disconnected(id: int)
+signal resume_game
 
 const BASE_PLAYER_SCENE= preload("res://game/core/player/base_player.tscn")
 
@@ -12,6 +13,7 @@ var player_instances: Dictionary
 
 
 func _ready() -> void:
+	process_mode= PROCESS_MODE_ALWAYS
 	set_physics_process(false)
 
 
@@ -56,11 +58,16 @@ func add_player(id: int):
 	player_instances[id]= player
 	player_connected.emit(id)
 
+	if Global.game.is_paused():
+		await resume_game
+
 	var world_state: Dictionary= WorldSyncState.build_initial_world_state(Global.game.world)
 	ClientManager.receive_initial_world.rpc_id(id, Utils.compress_string(JSON.stringify(world_state)))
 
-	#Global.game.pause_execution(true)
-	#await ...
+	Global.game.pause_execution(true)
+	await resume_game
+	Global.game.pause_execution(false)
+	
 	set_physics_process(true)
 
 
@@ -88,7 +95,12 @@ func request_game_scene():
 @rpc("any_peer", "reliable")
 func request_spawn():
 	ClientManager.spawn.rpc_id(get_sender_id())
-	
+
+
+@rpc("any_peer", "reliable")
+func request_resume():
+	resume_game.emit()
+
 	
 @rpc("any_peer")
 func receive_player_state(data: Dictionary):

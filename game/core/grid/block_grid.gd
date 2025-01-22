@@ -132,6 +132,11 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 			grid_block.children.append(child_grid_block)
 			blocks[child_grid_block.local_pos]= child_grid_block
 
+	if connects_to_main_grid:
+		assert(connects_to_main_grid != self)
+		main_grid_id= connects_to_main_grid.id
+		main_grid_connection= grid_block
+
 	if NetworkManager.is_client:
 		return grid_block
 
@@ -159,11 +164,6 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		if not main_cockpit:
 			main_cockpit= block_node
 
-	if connects_to_main_grid:
-		assert(connects_to_main_grid != self)
-		main_grid_id= connects_to_main_grid.id
-		main_grid_connection= grid_block
-
 	update_properties()
 
 	if not restore_data:
@@ -185,7 +185,8 @@ func _physics_process(delta: float) -> void:
 	DebugPanel.send(self, "Freeze", freeze)
 
 	if NetworkManager.is_client:
-		#prints("Client grid", name, global_position, blocks.size())
+		if requires_integrity_check:
+			run_integrity_check()
 		return
 
 	requested_local_movement= requested_local_movement.normalized()
@@ -297,9 +298,8 @@ func remove_block(block: BaseGridBlock):
 		block.collision_shape.queue_free()
 	blocks.erase(block.local_pos)
 
-	if NetworkManager.is_client: return
-
-	block_types[block.get_block_definition()].erase(block)
+	if not NetworkManager.is_client:
+		block_types[block.get_block_definition()].erase(block)
 	
 	requires_integrity_check= true
 
@@ -308,7 +308,7 @@ func run_integrity_check():
 	requires_integrity_check= false
 	
 	if blocks.is_empty(): 
-		queue_free()
+		world.remove_grid(self)
 		return
 	
 	var origin_block: GridBlock= blocks.values()[0]
@@ -319,6 +319,9 @@ func run_integrity_check():
 
 	if ff_blocks.size() < blocks.size():
 		split(get_block_positions_without(ff_blocks), self)
+
+
+	if NetworkManager.is_client: return
 
 	if freeze:
 		if not DebugSettings.active.force_freeze_status:

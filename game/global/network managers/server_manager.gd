@@ -7,6 +7,7 @@ const BASE_PLAYER_SCENE= preload("res://game/core/player/base_player.tscn")
 
 var player_states: Dictionary
 var ticks: int
+var player_instances: Dictionary
 
 
 
@@ -49,6 +50,7 @@ func add_player(id: int):
 	var player: BasePlayer= BASE_PLAYER_SCENE.instantiate()
 	player.name= str(id)
 	Global.game.peers.add_child(player, true)
+	player_instances[id]= player
 	player_connected.emit(id)
 	set_physics_process(true)
 
@@ -88,6 +90,8 @@ func receive_player_state(data: Dictionary):
 	if not player_states.has(peer_id) or PlayerSyncState.get_timestamp(player_states[peer_id]) < timestamp:
 		player_states[peer_id]= data
 	PlayerSyncState.add_peer_id(player_states[peer_id], peer_id)
+	
+	PlayerSyncState.parse_sync_state(player_instances[peer_id], data)
 
 
 @rpc("any_peer", "reliable")

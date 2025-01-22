@@ -1,9 +1,10 @@
 class_name PlayerSyncState
 
-const KEY_PEER_ID = "id"
-const KEY_POSITION = "pos"
-const KEY_ROTATION = "rot"
-const KEY_TIMESTAMP = "time"
+const KEY_PEER_ID= "id"
+const KEY_POSITION= "pos"
+const KEY_ROTATION= "rot"
+const KEY_TIMESTAMP= "time"
+const KEY_VELOCITY= "vel"
 
 
 
@@ -11,6 +12,7 @@ static func build_sync_state(player: Player)-> Dictionary:
 	var data: Dictionary
 	data[KEY_POSITION]= player.global_position
 	data[KEY_ROTATION]= player.global_rotation
+	data[KEY_VELOCITY]= player.get_velocity()
 	data[KEY_TIMESTAMP]= ClientManager.ticks
 	return data
 
@@ -18,6 +20,8 @@ static func build_sync_state(player: Player)-> Dictionary:
 static func parse_sync_state(player: BasePlayer, data: Dictionary):
 	player.global_position= data[KEY_POSITION]
 	player.global_rotation= data[KEY_ROTATION]
+	if NetworkManager.is_server:
+		player.linear_velocity= data[KEY_VELOCITY]
 
 
 static func add_peer_id(data: Dictionary, peer_id: int):

@@ -107,7 +107,7 @@ static func compress_string(s: String)-> PackedByteArray:
 	return peer.get_data(compressed_size)[1]
 
 
-func decompress_string(data: PackedByteArray)-> String:
+static func decompress_string(data: PackedByteArray)-> String:
 	var peer:= StreamPeerGZIP.new()
 	peer.start_decompression(false)
 	peer.put_data(data)

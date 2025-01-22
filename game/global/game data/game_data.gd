@@ -41,3 +41,7 @@ func get_block_id(block: Block)-> int:
 func get_fluid_definition(fluid_name: String)-> Fluid:
 	assert(fluid_definition_lookup.has(fluid_name))
 	return fluid_definition_lookup[fluid_name]
+
+
+func get_mouse_sensitivity()-> float:
+	return game_settings.control_settings.mouse_sensitivity

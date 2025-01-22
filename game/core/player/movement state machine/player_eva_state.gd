@@ -144,8 +144,9 @@ func on_integrate_forces(state: PhysicsDirectBodyState3D):
 func on_input(event: InputEvent):
 	if event is InputEventMouseMotion:
 		if event.alt_pressed: return
-		yaw_input= -event.relative.x
-		pitch_input= -event.relative.y
+		var sensitivity: float= GameData.get_mouse_sensitivity()
+		yaw_input= -event.relative.x * sensitivity
+		pitch_input= -event.relative.y * sensitivity
 
 
 # FIXME having trouble with inertial dampeners + gravity counter force

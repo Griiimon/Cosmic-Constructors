@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ControlSettings" load_steps=2 format=3 uid="uid://bc3l8x7ck8dw3"]
+
+[ext_resource type="Script" path="res://game/global/game data/control_settings.gd" id="1_iftd4"]
+
+[resource]
+script = ExtResource("1_iftd4")
+mouse_sensitivity = 1.0

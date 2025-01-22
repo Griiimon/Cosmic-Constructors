@@ -38,7 +38,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event is InputEventMouseMotion:
 			if event.button_mask & MOUSE_BUTTON_MASK_LEFT:
 				var mouse_pos_x: float= mouse_texture.anchor_left
-				mouse_pos_x= clampf(mouse_pos_x + event.relative.x * 0.005, 0.0, 1.0)
+				mouse_pos_x= clampf(mouse_pos_x + event.relative.x * 0.005 * GameData.get_mouse_sensitivity(), 0.0, 1.0)
 				mouse_texture.anchor_left= mouse_pos_x
 				mouse_texture.anchor_right= mouse_pos_x
 				mouse_control_property.set_variant(pow((mouse_pos_x * 2 - 1) * 3, 3))

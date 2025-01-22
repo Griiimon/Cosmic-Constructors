@@ -410,7 +410,11 @@ func make_rope(from: Node3D, to: Node3D)-> Rope:
 	rope.end= to
 	ropes.add_child(rope)
 	return rope
-	
+
+
+func has_grid(id: int)-> bool:
+	return lookup_id_to_grid.has(id)
+
 
 func get_grid(id: int)-> BlockGrid:
 	return lookup_id_to_grid[id]

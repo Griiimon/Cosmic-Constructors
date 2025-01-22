@@ -89,3 +89,30 @@ static func get_raycast_outside_collision_point(raycast: RayCast3D)-> Vector3:
 
 static func get_short_vec3(vec: Vector3)-> String:
 	return "%.1f, %.1f, %1.f" % [vec.x, vec.y, vec.z]
+
+
+static func compress_string(s: String)-> PackedByteArray:
+	var peer:= StreamPeerGZIP.new()
+	var buffer: PackedByteArray= s.to_ascii_buffer()
+	assert(buffer.get_string_from_ascii() == s)
+	var buffer_size: int= buffer.size()
+
+	peer.start_compression(false)
+	peer.put_data(buffer)
+	peer.finish()
+
+	var compressed_size: int= peer.get_available_bytes()
+	prints("Compression ratio", int(float(compressed_size) / buffer_size * 100.0)) 
+
+	return peer.get_data(compressed_size)[1]
+
+
+func decompress_string(data: PackedByteArray)-> String:
+	var peer:= StreamPeerGZIP.new()
+	peer.start_decompression(false)
+	peer.put_data(data)
+	peer.finish()
+	
+	var uncompressed_size: int= peer.get_available_bytes()
+	return (peer.get_data(uncompressed_size)[1] as PackedByteArray).get_string_from_ascii()
+	

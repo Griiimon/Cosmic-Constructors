@@ -11,7 +11,7 @@ const KEY_VELOCITY= "vel"
 static func build_sync_state(player: Player)-> Dictionary:
 	var data: Dictionary
 	data[KEY_POSITION]= player.global_position
-	data[KEY_ROTATION]= player.global_rotation
+	data[KEY_ROTATION]= player.get_head_rotation()
 	data[KEY_VELOCITY]= player.get_velocity()
 	data[KEY_TIMESTAMP]= ClientManager.ticks
 	return data

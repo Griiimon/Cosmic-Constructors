@@ -175,6 +175,10 @@ func get_look_ahead_pos(distance: float)-> Vector3:
 	return head.global_position + get_look_vec() * distance
 
 
+func get_head_rotation()-> Vector3:
+	return head.global_rotation
+
+
 func get_seat()-> SeatInstance:
 	return movement_state_machine.seated_state.seat
 

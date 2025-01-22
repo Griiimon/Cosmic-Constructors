@@ -33,7 +33,7 @@ func _process(_delta: float) -> void:
 			close()
 			return
 
-	
+
 func populate():
 	Utils.free_children(content_container)
 	selected_row= -1
@@ -52,6 +52,8 @@ func populate():
 	for property in block_instance.get_properties():
 		var row: PropertyViewerRow= add_row()
 		row.property= property
+		row.grid= grid
+		row.grid_block= block
 		if selected_row == -1:
 			selected_row= rows.size() - 1
 
@@ -129,6 +131,7 @@ func has_any_property_row()-> bool:
 		if (row as PropertyViewerRow).property:
 			return true
 	return false
-	
+
+
 func can_assign_hotkey_to(row: PropertyViewerRow)-> bool:
 	return row.property != null

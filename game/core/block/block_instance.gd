@@ -127,7 +127,7 @@ func deserialize(data: Dictionary):
 	if data.has("properties"):
 		for prop_name in data["properties"].keys():
 			var prop_var: BlockProperty= get(prop_name)
-			prop_var.set_variant(data["properties"][prop_name])
+			prop_var.set_variant(null, null, data["properties"][prop_name], false)
 			if ctr in locked_properties:
 				prop_var.is_locked= true
 			ctr+= 1

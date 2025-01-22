@@ -4,6 +4,7 @@ var callback: Callable
 var display_name: String
 var owner: BlockInstance
 var is_locked: bool= false
+var client_side: bool= false
 
 
 
@@ -17,8 +18,13 @@ func _init(_name: String, _callback= null, instant_callback: bool= true, _owner:
 		do_callback.call_deferred()
 
 
+func client_side_callback():
+	client_side= true
+	return self
+
+
 func do_callback():
-	if callback:
+	if callback and (not NetworkManager.is_client or client_side):
 		callback.call()
 
 
@@ -30,28 +36,41 @@ func get_value_i()-> int:
 	return 0
 
 
-func toggle():
+func toggle(grid: BlockGrid, grid_block: GridBlock, sync: bool= true):
+	if sync: sync(grid, grid_block)
 	do_callback()
 
 
-func increase(_modifier: int):
+func increase(grid: BlockGrid, grid_block: GridBlock, _modifier: int, sync: bool= true):
 	do_callback()
 
 
-func decrease(_modifier: int):
+func decrease(grid: BlockGrid, grid_block: GridBlock, _modifier: int, sync: bool= true):
 	do_callback()
 
 
-func change_value(_modifier: int, _delta: int):
+func change_value(grid: BlockGrid, grid_block: GridBlock, _modifier: int, _delta: int, sync: bool= true):
 	do_callback()
 
 
-func set_variant(_val: Variant):
+func set_variant(grid: BlockGrid, grid_block: GridBlock, _val: Variant, sync: bool= true):
 	do_callback()
+
+
+func sync(grid: BlockGrid, grid_block: GridBlock):
+	if NetworkManager.is_single_player: return
+	if NetworkManager.is_client:
+		ServerManager.receive_sync_event.rpc_id(1, EventSyncState.Type.CHANGE_BLOCK_PROPERTY, [grid.id, grid_block.local_pos, display_name, get_variant()])
+	else:
+		ServerManager.broadcast_sync_event(EventSyncState.Type.CHANGE_BLOCK_PROPERTY, [grid.id, grid_block.local_pos, display_name, get_variant()])
 
 
 func change_step_size():
 	pass
+
+
+func get_variant()-> Variant:
+	return null
 
 
 func is_true()-> bool:

@@ -31,7 +31,7 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 	solid_fuel_pct-= power.get_value_f() * delta / thruster_block.burn_duration
 	if solid_fuel_pct <= 0:
 		solid_fuel_pct= 0
-		active.set_false()
+		active.set_false(grid, grid_block)
 
 
 func on_set_active():

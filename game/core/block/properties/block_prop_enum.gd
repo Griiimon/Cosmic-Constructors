@@ -15,31 +15,35 @@ func get_value_i()-> int:
 	return enum_dict[current_key]
 
 
-func set_variant(val: Variant):
+func toggle(grid: BlockGrid, grid_block: GridBlock, sync: bool= true):
+	if is_locked: return
+	increase(grid, grid_block, 1, sync)
+	
+
+func increase(grid: BlockGrid, grid_block: GridBlock, modifier: int, sync: bool= true):
+	if is_locked: return
+	change_value(grid, grid_block, modifier, 1, sync)
+
+
+func decrease(grid: BlockGrid, grid_block: GridBlock, modifier: int, sync: bool= true):
+	if is_locked: return
+	change_value(grid, grid_block, modifier, -1, sync)
+
+
+func change_value(grid: BlockGrid, grid_block: GridBlock, modifier: int, delta: int, sync: bool= true):
+	current_key= enum_dict.keys()[wrapi(enum_dict.keys().find(current_key) + delta, 0, enum_dict.keys().size())]
+	super(grid, grid_block, modifier, delta, sync)
+
+
+func set_variant(grid: BlockGrid, grid_block: GridBlock, val: Variant, sync: bool= true):
 	assert(val is int)
 	var index: int= enum_dict.values().find(int(val))
 	assert(index != -1)
 	current_key= enum_dict.keys()[index]
 
 
-func toggle():
-	if is_locked: return
-	increase(1)
-	
-
-func increase(modifier: int):
-	if is_locked: return
-	change_value(modifier, 1)
-
-
-func decrease(modifier: int):
-	if is_locked: return
-	change_value(modifier, -1)
-
-
-func change_value(modifier: int, delta: int):
-	current_key= enum_dict.keys()[wrapi(enum_dict.keys().find(current_key) + delta, 0, enum_dict.keys().size())]
-	super(modifier, delta)
+func get_variant()-> Variant:
+	return get_value_i()
 
 
 func get_value_as_text()-> String:

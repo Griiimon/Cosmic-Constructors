@@ -29,12 +29,17 @@ func select(hotbar: Hotbar):
 	elif assignment:
 		if assignment is HotkeyAssignmentBlockProperty:
 			var block_property_assignment: HotkeyAssignmentBlockProperty= assignment
-			var property: BlockProperty= block_property_assignment.get_property(hotbar.current_layout.grid)
+
+			var grid: BlockGrid= block_property_assignment.get_grid(hotbar.current_layout.grid.world)
+			var grid_block: GridBlock= grid.get_block_local(block_property_assignment.block_pos)
+			#var property: BlockProperty= block_property_assignment.get_property(hotbar.current_layout.grid)
+			var property: BlockProperty= block_property_assignment.get_property(grid)
+			
 			if hotbar.mouse_mode:
 				if property is BlockPropFloat:
-					hotbar.start_mouse_control(property)
+					hotbar.start_mouse_control(block_property_assignment)
 			else:
-				property.toggle()
+				property.toggle(grid, grid_block)
 
 		elif assignment is HotkeyAssignmentBuildBlock:
 			var build_state: PlayerBuildState= Global.player.action_state_machine.build_state

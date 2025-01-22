@@ -76,7 +76,7 @@ func on_set_locked():
 		if state == State.READY:
 			set_state(State.CONNECTED)
 		else:
-			locked.set_false()
+			locked.set_false(null, null, false)
 	else:
 		if state == State.CONNECTED:
 			set_state(State.IDLE)

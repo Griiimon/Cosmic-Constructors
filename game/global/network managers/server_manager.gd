@@ -117,8 +117,14 @@ func receive_player_state(data: Dictionary):
 
 @rpc("any_peer", "reliable")
 func receive_sync_event(type: int, args: Array):
+	assert(NetworkManager.is_server)
 	pre_process_sync_event(type, args, get_sender_id())
-	ClientManager.receive_sync_event.rpc(type, args, get_sender_id())
+	broadcast_sync_event(type, args, get_sender_id())
+
+
+func broadcast_sync_event(type: int, args: Array, sender_id: int= 1):
+	assert(NetworkManager.is_server)
+	ClientManager.receive_sync_event.rpc(type, args, sender_id)
 
 
 func pre_process_sync_event(type: int, args: Array, sender_id: int):
@@ -158,6 +164,9 @@ func pre_process_sync_event(type: int, args: Array, sender_id: int):
 			var grid_id: int= args[0]
 			world.remove_grid(world.get_grid(grid_id))
 
+		EventSyncState.Type.CHANGE_BLOCK_PROPERTY:
+			EventSyncState.change_block_property(world, args)
+			
 
 func get_sender_id()-> int:
 	return NetworkManager.get_sender_id()

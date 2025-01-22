@@ -14,43 +14,47 @@ func get_value_i()-> int:
 	return 1 if is_true() else 0
 
 
-func toggle():
+func toggle(grid: BlockGrid, grid_block: GridBlock, sync: bool= true):
 	if is_locked: return
 	b= not b
-	super()
+	super(grid, grid_block, sync)
 
 
-func increase(_modifier: int):
+func increase(grid: BlockGrid, grid_block: GridBlock, _modifier: int, sync: bool= true):
 	if is_locked: return
-	toggle()
+	toggle(grid, grid_block, sync)
 
 
-func decrease(_modifier: int):
+func decrease(grid: BlockGrid, grid_block: GridBlock, _modifier: int, sync: bool= true):
 	if is_locked: return
-	toggle()
+	toggle(grid, grid_block, sync)
 
 
-func change_value(_modifier: int, _delta: int):
-	toggle()
+func change_value(grid: BlockGrid, grid_block: GridBlock, _modifier: int, _delta: int, sync: bool= true):
+	toggle(grid, grid_block, sync)
 	
 
-func set_variant(val: Variant):
+func set_variant(grid: BlockGrid, grid_block: GridBlock, val: Variant, sync: bool= true):
 	b= val
-	super(val)
+	super(grid, grid_block, val, sync)
+
+
+func set_true(grid: BlockGrid, grid_block: GridBlock, sync: bool= true):
+	if not b:
+		set_variant(grid, grid_block, true, sync)
+
+
+func set_false(grid: BlockGrid, grid_block: GridBlock, sync: bool= true):
+	if b:
+		set_variant(grid, grid_block, false, sync)
 
 
 func is_true()-> bool:
 	return b
 
 
-func set_true():
-	if not b:
-		set_variant(true)
-
-
-func set_false():
-	if b:
-		set_variant(false)
+func get_variant()-> Variant:
+	return b
 
 
 func get_value_as_text()-> String:

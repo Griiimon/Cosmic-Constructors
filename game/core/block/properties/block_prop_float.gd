@@ -24,49 +24,53 @@ func get_value_i()-> int:
 	return round(f)
 
 
-func toggle():
+func toggle(grid: BlockGrid, grid_block: GridBlock, sync: bool= true):
 	if is_locked: return
 	if not can_toggle: return
 	
 	match toggle_behavior:
 		ToggleBehavior.FLIP:
 			f= -f
-			super()
+			super(grid, grid_block, sync)
 			return
 		ToggleBehavior.INCREASE:
-			increase(1)
+			increase(grid, grid_block, 1, sync)
 		ToggleBehavior.DECREASE:
-			decrease(1)
+			decrease(grid, grid_block, 1, sync)
 	
 	if range:
 		f= clamp(f, (range as Vector2).x, (range as Vector2).y)
 
 
-func set_variant(val: Variant):
+func set_variant(grid: BlockGrid, grid_block: GridBlock, val: Variant, sync: bool= true):
 	f= val
 	do_clamp()
-	super(val)
+	super(grid, grid_block, val, sync)
 
 
-func increase(modifier: int):
+func increase(grid: BlockGrid, grid_block: GridBlock, modifier: int, sync: bool= true):
 	if is_locked: return
-	change_value(modifier, 1)
+	change_value(grid, grid_block, modifier, 1, sync)
 
 
-func decrease(modifier: int):
+func decrease(grid: BlockGrid, grid_block: GridBlock, modifier: int, sync: bool= true):
 	if is_locked: return
-	change_value(modifier, -1)
+	change_value(grid, grid_block, modifier, -1, sync)
 
 
-func change_value(modifier: int, delta: int):
+func change_value(grid: BlockGrid, grid_block: GridBlock, modifier: int, delta: int, sync: bool= true):
 	f+= step_size * modifier * delta
 	do_clamp()
-	super(modifier, delta)
+	super(grid, grid_block, modifier, delta)
 
 
 func do_clamp():
 	if range:
 		f= clampf(f, range.x, range.y)
+
+
+func get_variant()-> Variant:
+	return f
 
 
 func is_true()-> bool:

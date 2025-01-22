@@ -7,6 +7,9 @@ var property: BlockProperty:
 		if not property: return
 		update()
 
+var grid: BlockGrid
+var grid_block: GridBlock
+
 
 
 func update():
@@ -15,12 +18,12 @@ func update():
 
 
 func change_value(delta: int, _modifier: int= 1):
-	property.change_value(10 if Input.is_action_pressed("property_value_modifier_10x") else 1, delta)
+	property.change_value(grid, grid_block, 10 if Input.is_action_pressed("property_value_modifier_10x") else 1, delta)
 	update()
 
 
 func toggle():
-	property.toggle()
+	property.toggle(grid, grid_block)
 	update()
 
 

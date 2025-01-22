@@ -13,7 +13,7 @@ extends BlockInstanceOnOff
 func _ready() -> void:
 	super()
 	default_interaction_property= active
-	active.set_true()
+	active.set_true(null, null, false)
 
 
 func physics_tick(grid: BlockGrid, _grid_block: GridBlock, _delta: float):

@@ -48,7 +48,7 @@ func on_physics_process(_delta: float):
 												 else block_instance.alternative_interaction_property
 
 					if property:
-						property.toggle()
+						property.toggle(grid, grid_block)
 						SignalManager.block_property_changed.emit(property)
 						return
 

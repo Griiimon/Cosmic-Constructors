@@ -14,7 +14,7 @@ var mouse_mode: bool= false:
 		if not is_inside_tree(): return
 		mouse_control.visible= b
 
-var mouse_control_property: BlockProperty
+var mouse_control_assignment: HotkeyAssignmentBlockProperty
 
 
 
@@ -34,19 +34,25 @@ func _unhandled_input(event: InputEvent) -> void:
 			if event.keycode >= KEY_1 and event.keycode <= KEY_9:
 				select_slot(event.keycode - KEY_1)
 
-	elif mouse_mode and mouse_control_property:
+	elif mouse_mode and mouse_control_assignment:
 		if event is InputEventMouseMotion:
 			if event.button_mask & MOUSE_BUTTON_MASK_LEFT:
 				var mouse_pos_x: float= mouse_texture.anchor_left
 				mouse_pos_x= clampf(mouse_pos_x + event.relative.x * 0.005 * GameData.get_mouse_sensitivity(), 0.0, 1.0)
 				mouse_texture.anchor_left= mouse_pos_x
 				mouse_texture.anchor_right= mouse_pos_x
-				mouse_control_property.set_variant(pow((mouse_pos_x * 2 - 1) * 3, 3))
+				
+				var grid: BlockGrid= mouse_control_assignment.get_grid(Global.world)
+				var grid_block: GridBlock= grid.get_block_local(mouse_control_assignment.block_pos)
+				mouse_control_assignment.property.set_variant(grid, grid_block, pow((mouse_pos_x * 2 - 1) * 3, 3))
 				get_viewport().set_input_as_handled()
 		elif event is InputEventMouseButton:
 			if event.pressed:
 				if event.button_index == MOUSE_BUTTON_RIGHT:
-					mouse_control_property.set_variant(0.0)
+					var grid: BlockGrid= mouse_control_assignment.get_grid(Global.world)
+					var grid_block: GridBlock= grid.get_block_local(mouse_control_assignment.block_pos)
+					mouse_control_assignment.property.set_variant(grid, grid_block, 0.0)
+
 					mouse_texture.anchor_left= 0.5
 					mouse_texture.anchor_right= 0.5
 					get_viewport().set_input_as_handled()
@@ -84,12 +90,12 @@ func update_layout():
 		slot.assign(current_layout.slots[i], null, current_layout.grid)
 
 
-func start_mouse_control(property: BlockProperty):
-	mouse_control_property= property
+func start_mouse_control(assignment: HotkeyAssignmentBlockProperty):
+	mouse_control_assignment= assignment
 
 
 func cancel_mouse_control():
-	mouse_control_property= null
+	mouse_control_assignment= null
 
 
 func clear():

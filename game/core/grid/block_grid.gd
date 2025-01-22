@@ -24,6 +24,7 @@ var parking_brake: bool= false
 var is_anchored: bool= false:
 	set(b):
 		is_anchored= b
+		if NetworkManager.is_client: return
 		freeze= is_anchored
 
 var reverse_mode: bool= false
@@ -522,6 +523,7 @@ func assign_hotkey(assignment: BaseHotkeyAssignment, block_pos: Vector3i= Vector
 
 func serialize()-> Dictionary:
 	var data: Dictionary
+	data["id"]= id
 	data["position"]= position
 	data["rotation"]= rotation
 	
@@ -564,6 +566,11 @@ func serialize()-> Dictionary:
 static func pre_deserialize(data: Dictionary, new_world: World, default_position: Vector3= Vector3.ZERO)-> BlockGrid:
 	var grid:= BlockGrid.new()
 	grid.world= new_world
+	
+	grid.id= Utils.get_key_or_default(data, "id", new_world.next_grid_id)
+	new_world.lookup_id_to_grid[grid.id]= grid
+	new_world.next_grid_id= max(grid.id + 1, new_world.next_grid_id + 1)
+	
 	grid.position= Utils.get_key_or_default(data, "position", default_position, "Vector3")
 	grid.rotation= Utils.get_key_or_default(data, "rotation", Vector3.ZERO, "Vector3")
 

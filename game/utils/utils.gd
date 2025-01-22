@@ -102,7 +102,7 @@ static func compress_string(s: String)-> PackedByteArray:
 	peer.finish()
 
 	var compressed_size: int= peer.get_available_bytes()
-	prints("Compression ratio", int(float(compressed_size) / buffer_size * 100.0)) 
+	prints("Compression ratio %.2f" % (float(compressed_size) / buffer_size)) 
 
 	return peer.get_data(compressed_size)[1]
 
@@ -111,7 +111,7 @@ static func decompress_string(data: PackedByteArray)-> String:
 	var peer:= StreamPeerGZIP.new()
 	peer.start_decompression(false)
 	peer.put_data(data)
-	peer.finish()
+	#peer.finish()
 	
 	var uncompressed_size: int= peer.get_available_bytes()
 	return (peer.get_data(uncompressed_size)[1] as PackedByteArray).get_string_from_ascii()

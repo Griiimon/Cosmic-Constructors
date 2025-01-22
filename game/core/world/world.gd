@@ -251,9 +251,7 @@ func save_world(world_name: String= "", project_folder: bool= false):
 	save_file.close()
 
 
-func load_world(world_name: String= "", project_folder: bool= false):
-	is_loading= true
-	
+func load_world_from_file(world_name: String= "", project_folder: bool= false):
 	var base_path:= "user://"
 	if project_folder:
 		base_path= get_tree().current_scene.scene_file_path.get_base_dir() + "/"
@@ -266,7 +264,6 @@ func load_world(world_name: String= "", project_folder: bool= false):
 	if not FileAccess.file_exists(file_name):
 		return
 
-	var world_grid_data: Dictionary
 
 	var save_file = FileAccess.open(file_name, FileAccess.READ)
 	
@@ -277,10 +274,16 @@ func load_world(world_name: String= "", project_folder: bool= false):
 	if not parse_result == OK:
 		push_error("JSON Parse Error: ", json.get_error_message(), " in ", file_text, " at line ", json.get_error_line())
 		breakpoint
-
-	var world_data: Dictionary= json.data
 		
 	save_file.close()
+
+	load_world(json.data)
+
+
+func load_world(world_data: Dictionary):
+	is_loading= true
+	
+	var world_grid_data: Dictionary
 
 	for grid_data: Dictionary in world_data["grids"]:
 		var grid: BlockGrid= BlockGrid.pre_deserialize(grid_data, self)

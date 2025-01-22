@@ -47,7 +47,7 @@ func on_player_spawned():
 		#if Global.terrain:
 			#while not Global.terrain.is_area_meshed(..):
 				#await get_tree().physics_frame
-		Global.game.world.load_world(custom_world_name, project_folder_world)
+		Global.game.world.load_world_from_file(custom_world_name, project_folder_world)
 
 	if freeze_grids:
 		player.world.freeze_grids(freeze_grids)

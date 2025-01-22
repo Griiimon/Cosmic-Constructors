@@ -26,7 +26,7 @@ func join(address: String, port: int):
 
 	multiplayer.connected_to_server.connect(start_game)
 	multiplayer.connection_failed.connect(connection_failed.bind("Connection failed"))
-	ClientManager.set_physics_process(true)
+	set_physics_process(true)
 
 
 func _physics_process(_delta: float) -> void:

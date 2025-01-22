@@ -3,8 +3,6 @@ extends BaseHotkeyAssignment
 
 var block_pos: Vector3i
 var property_name: String
-
-# TODO use weakref to actual grid object? ids can change (?) 
 var grid_id: int
 
 

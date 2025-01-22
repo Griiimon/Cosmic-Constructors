@@ -209,7 +209,18 @@ func update_grid_id(global_grid_id: int, local_grid_id: int):
 	
 	grid.id_pending= false
 	grid.id_assigned.emit()
+
+
+@rpc("any_peer", "reliable")
+func receive_initial_world(compressed_json: PackedByteArray):
+	var json_str: String= Utils.decompress_string(compressed_json)
+	var world_data: Dictionary= JSON.parse_string(json_str)
+	prints("Client received world data", world_data)
+	while not Global.game or not Global.game.world:
+		await get_tree().process_frame
 	
+	Global.game.world.load_world(world_data)
+
 
 func get_sender_id()-> int:
 	return NetworkManager.get_sender_id()

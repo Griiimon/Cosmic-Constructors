@@ -19,3 +19,14 @@ static func add_grid_states(world_state: Dictionary, grid_states: Array):
 
 static func parse_grid_states(world_state: Dictionary)-> Array:
 	return world_state[KEY_GRIDS]
+
+
+static func build_initial_world_state(world: World)-> Dictionary:
+	var result: Dictionary
+	result["grids"]= []
+	result["players"]= []
+
+	for grid: BlockGrid in world.get_grids():
+		result["grids"].append(grid.serialize())
+	
+	return result

@@ -44,14 +44,23 @@ func _physics_process(_delta: float) -> void:
 
 
 func add_player(id: int):
-	# TODO does the server even need these nodes or will
-	# a simple peer_id => position dictionary suffice?
 	print("Peer %d connected to server" % id)
+	
+	while Global.game.world.is_loading:
+		print(" still loading..")
+		await get_tree().process_frame
+		
 	var player: BasePlayer= BASE_PLAYER_SCENE.instantiate()
 	player.name= str(id)
 	Global.game.peers.add_child(player, true)
 	player_instances[id]= player
 	player_connected.emit(id)
+
+	var world_state: Dictionary= WorldSyncState.build_initial_world_state(Global.game.world)
+	ClientManager.receive_initial_world.rpc_id(id, Utils.compress_string(JSON.stringify(world_state)))
+
+	#Global.game.pause_execution(true)
+	#await ...
 	set_physics_process(true)
 
 

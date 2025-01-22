@@ -288,7 +288,9 @@ func load_world(world_data: Dictionary):
 	for grid_data: Dictionary in world_data["grids"]:
 		var grid: BlockGrid= BlockGrid.pre_deserialize(grid_data, self)
 		world_grid_data[grid]= grid_data
-	
+		if NetworkManager.is_client:
+			grid.freeze= true
+
 	for grid: BlockGrid in grids.get_children():
 		grid.deserialize(world_grid_data[grid])
 

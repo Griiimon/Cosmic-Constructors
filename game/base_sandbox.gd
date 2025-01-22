@@ -41,7 +41,7 @@ func on_player_spawned():
 	if equip_item:
 		player.equip_hand_item(equip_item)
 
-	if load_world and NetworkManager.is_single_player:
+	if load_world and not NetworkManager.is_client: #NetworkManager.is_single_player:
 		await get_tree().physics_frame
 		# TODO
 		#if Global.terrain:
@@ -49,7 +49,7 @@ func on_player_spawned():
 				#await get_tree().physics_frame
 		Global.game.world.load_world_from_file(custom_world_name, project_folder_world)
 
-	if freeze_grids:
+	if freeze_grids and NetworkManager.is_single_player:
 		player.world.freeze_grids(freeze_grids)
 
 	on_start()

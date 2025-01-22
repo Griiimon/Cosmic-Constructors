@@ -1,8 +1,13 @@
+FIX property viewer not working on MultiBlock => interact_with_block signal receiver expects GridBlock, signal sends BaseGridBlock. convert before sending?
 FIX block splitting still wonky. only with anchored? only in multiplayer?
+FIX thruster particles on client
+FIX spawning rotor on client doesnt spawn head
+FIX removing multiblock, sync state expects GridBlock
+
 
 network sync plane_fill and blueprint spawning
 
-sync BlockProperties
+sync extra block properties ( only while visible on client, viewer panel etc? )
 
 send requested movement to server ( for keys that are held it should be the events when pressed and then released as "reliable" )
 

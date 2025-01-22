@@ -26,6 +26,7 @@ func join(address: String, port: int):
 
 	multiplayer.connected_to_server.connect(start_game)
 	multiplayer.connection_failed.connect(connection_failed.bind("Connection failed"))
+	multiplayer.server_disconnected.connect(get_tree().quit)
 	set_physics_process(true)
 
 

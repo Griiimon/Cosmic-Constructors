@@ -214,7 +214,6 @@ one_shot = true
 [node name="Action State Machine" type="Node" parent="." index="5" node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_r1eyq")
 current_state = NodePath("Idle")
-debug = true
 
 [node name="Idle" type="Node" parent="Action State Machine" index="0"]
 script = ExtResource("6_3y3c5")

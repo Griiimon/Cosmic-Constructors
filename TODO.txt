@@ -1,20 +1,19 @@
-request all grids on connect ( and store all sync events in a queue to be executed when all grids have loaded )
-	PAUSE SERVER WHILE players are connecting
-	dont let players connect while world is still loading
+FIX block splitting still wonky. only with anchored? only in multiplayer?
 
 network sync plane_fill and blueprint spawning
 
-block splitting should only be executed on server? Not necessarily but
-	new grid ids need to synced => build a list of all split grids, this list has the same grid pointers in same order. so the server can send an approriate update using the list indices and the previous grid id of the original grid
-
 sync BlockProperties
+
+send requested movement to server ( for keys that are held it should be the events when pressed and then released as "reliable" )
 
 vehicle wheel need to work on grids
 
-sync player (model?) rotation while walking
+desync test: hash all grid ids + blocks.size() and compare to server
 
-put mouse sensitivity in game_settings.control_settings and save that sub resource so it can stay unique on different machines during git pulls
+test peer disconnection from server. may not need any handling
 
+
+block splitting new grid ids need to be synced => build a list of all split grids, this list has the same grid pointers in same order. so the server can send an approriate update using the list indices and the previous grid id of the original grid
 
 FIX non-force-offset thrusters should apply force not at center but calculated CoM
 FIX when interval updating property viewer only update extra properties 

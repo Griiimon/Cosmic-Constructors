@@ -1,6 +1,8 @@
 class_name World
 extends Node3D
 
+signal finished_loading
+
 const SAVE_FILE_NAME= "world.json"
 const WORLD_ITEM_SCENE= preload("res://game/core/world/world item/world_item_instance.tscn")
 
@@ -26,6 +28,8 @@ var lookup_id_to_grid: Dictionary
 var grid_freeze_state:= false
 
 var delayed_forces: Array[DelayedExplosiveForce]
+
+var is_loading:= false
 
 
 
@@ -248,6 +252,8 @@ func save_world(world_name: String= "", project_folder: bool= false):
 
 
 func load_world(world_name: String= "", project_folder: bool= false):
+	is_loading= true
+	
 	var base_path:= "user://"
 	if project_folder:
 		base_path= get_tree().current_scene.scene_file_path.get_base_dir() + "/"
@@ -285,6 +291,14 @@ func load_world(world_name: String= "", project_folder: bool= false):
 
 	if not world_data["players"].is_empty():
 		Global.player.deserialize(world_data["players"][0])
+
+	# to ensure everything was initialized properly and deferred calls have been handled
+	await get_tree().physics_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	is_loading= false
+	finished_loading.emit()
 
 
 func add_projectile(projectile: ProjectileObject):

@@ -1,6 +1,7 @@
 extends BlockInstanceOnOff
 
-@onready var power:BlockPropFloat= BlockPropFloat.new("Power", 100.0).set_range(0.0, 100.0).set_step_size(5).disable_toggle()
+@onready var power:BlockPropFloat= BlockPropFloat.new("Power", 100.0).\
+	set_range(0.0, 100.0).set_step_size(5).disable_toggle().client_side_callback()
 
 @onready var particles: CPUParticles3D = $CPUParticles3D
 
@@ -36,7 +37,7 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 			var local_thrust: Vector3= get_local_thrust_direction(grid_block)
 			if local_thrust.dot(grid.requested_movement) > 0.1:
 				tmp_active= true
-				active.toggle()
+				active.toggle(grid, grid_block)
 
 	if not active.is_true(): return
 	var thruster_block: ThrusterBlock= grid_block.block_definition
@@ -47,7 +48,7 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 		grid.apply_central_force(-global_basis.z * total_thrust * delta)
 
 	if tmp_active:
-		active.set_false()
+		active.set_false(grid, grid_block)
 
 
 func get_local_thrust_direction(grid_block: GridBlock)-> Vector3:

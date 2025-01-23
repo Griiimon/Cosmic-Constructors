@@ -82,7 +82,7 @@ func _input(event: InputEvent) -> void:
 			elif event.keycode == KEY_F4:
 				DebugPanel.toggle()
 			elif event.keycode == KEY_F5:
-				player.world.save_world(custom_world_name, project_folder_world)
+				get_world().save_world(custom_world_name, project_folder_world)
 			elif event.keycode == KEY_F9:
 				get_tree().reload_current_scene.call_deferred()
 				return
@@ -145,6 +145,7 @@ func remove_grid():
 
 
 func sit_in_nearest_seat():
+	if not player: return
 	for grid: BlockGrid in player.world.grids.get_children():
 		for block: BaseGridBlock in grid.get_blocks():
 			if block.get_block_definition() is SeatBlock:
@@ -153,6 +154,11 @@ func sit_in_nearest_seat():
 
 
 func spawn_pallet():
+	if not player: return
 	var pallet: Pallet= load("res://game/data/object entities/wooden_pallet.tscn").instantiate()
 	pallet.position= player.global_position + player.get_look_vec() + Vector3.UP
 	player.world.add_child(pallet)
+
+
+func get_world()-> World:
+	return (get_parent() as Game).world

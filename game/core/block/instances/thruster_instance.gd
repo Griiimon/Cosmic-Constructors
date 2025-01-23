@@ -1,7 +1,7 @@
 extends BlockInstanceOnOff
 
 @onready var power:BlockPropFloat= BlockPropFloat.new("Power", 100.0).\
-	set_range(0.0, 100.0).set_step_size(5).disable_toggle().client_side_callback()
+	set_range(0.0, 100.0).set_step_size(5).disable_toggle()
 
 @onready var particles: CPUParticles3D = $CPUParticles3D
 
@@ -12,6 +12,7 @@ var particle_stop_delay: Timer
 func _ready() -> void:
 	super()
 	default_interaction_property= active
+	active.client_side_callback()
 
 	particle_stop_delay= Timer.new()
 	particle_stop_delay.one_shot= true

@@ -40,7 +40,6 @@ func destroy(grid: BlockGrid):
 
 
 func get_grid_block()-> GridBlock:
-	assert(false, "Abstract class")
 	return self
 
 

@@ -109,12 +109,14 @@ func switch_to_first_person():
 
 func play_animation(anim_name: String, speed: float= 1.0):
 	super(anim_name, speed)
-	ClientManager.send_sync_event(EventSyncState.Type.START_PLAYER_ANIMATION, [anim_name])
+	if NetworkManager.is_client:
+		ClientManager.send_sync_event(EventSyncState.Type.START_PLAYER_ANIMATION, [anim_name])
 
 
 func reset_animation():
 	super()
-	ClientManager.send_sync_event(EventSyncState.Type.RESET_PLAYER_ANIMATION)
+	if NetworkManager.is_client:
+		ClientManager.send_sync_event(EventSyncState.Type.RESET_PLAYER_ANIMATION)
 
 
 func equip_hand_item(hand_item: HandItem):
@@ -146,7 +148,8 @@ func wear_equipment(item: PlayerEquipmentItem)-> PlayerEquipmentObject:
 	obj.item= item
 	active_equipment.append(obj)
 	obj.init(self)
-	ClientManager.send_sync_event(EventSyncState.Type.WEAR_EQUIPMENT, [item.resource_path])
+	if NetworkManager.is_client:
+		ClientManager.send_sync_event(EventSyncState.Type.WEAR_EQUIPMENT, [item.resource_path])
 	return obj
 
 

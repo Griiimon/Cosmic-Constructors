@@ -139,10 +139,12 @@ func update_grid(grid: BlockGrid):
 
 
 func send_sync_event(type: int, args: Array= []):
+	assert(NetworkManager.is_client)
 	ServerManager.receive_sync_event.rpc_id(1, type, args)
 
 
 func send_all_sync_events(receiver: int):
+	assert(NetworkManager.is_client)
 	var player: Player= Global.player
 	if not player: return
 	

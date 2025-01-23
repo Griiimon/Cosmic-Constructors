@@ -1,5 +1,7 @@
+test rotor with 2 clients
+
 FIX property viewer not working on MultiBlock => interact_with_block signal receiver expects GridBlock, signal sends BaseGridBlock. convert before sending?
-FIX block splitting still wonky. only with anchored? only in multiplayer?
+FIX block splitting still wonky. only with anchored? only in multiplayer! split anchored grids stay frozen on client => only run unfreeze check on server and then sync 
 FIX thruster particles on client
 FIX spawning rotor on client doesnt spawn head
 FIX removing multiblock, sync state expects GridBlock

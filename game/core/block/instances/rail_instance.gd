@@ -29,9 +29,10 @@ func init(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary= {}):
 		if restore_data:
 			rail.sub_grid= grid.world.get_grid(restore_data["sub_grid_id"])
 		else:
-			rail.sub_grid= grid.world.add_grid(global_position + global_basis.y, global_rotation)
-			rail.sub_grid.add_block(carriage_block, Vector3i.ZERO, Vector3i.ZERO, grid)
-		
+			#rail.sub_grid= grid.world.add_grid(global_position + global_basis.y, global_rotation)
+			#rail.sub_grid.add_block(carriage_block, Vector3i.ZERO, Vector3i.ZERO, grid)
+			rail.sub_grid= grid.add_sub_grid(global_position + global_basis.y, global_rotation, carriage_block, Vector3i.ZERO)
+
 		rail.motor_enabled= motor_enabled
 		rail.motor_velocity= motor_velocity
 

@@ -22,12 +22,11 @@ func _ready() -> void:
 
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
-	sub_grid= grid.world.add_grid(grid.get_global_block_pos(grid_block.local_pos) + global_basis.y, grid.rotation)
+	var sub_grid_pos: Vector3= grid.get_global_block_pos(grid_block.local_pos) + global_basis.y
+	sub_grid= grid.add_sub_grid(sub_grid_pos, grid.rotation, rotor_head_block, grid_block.rotation)
 	
 	joint.node_a= joint.get_path_to(grid)
 	joint.node_b= joint.get_path_to(sub_grid)
-	
-	sub_grid.add_block(rotor_head_block, Vector3i.ZERO, grid_block.rotation, grid)
 
 
 func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):

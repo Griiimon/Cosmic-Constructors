@@ -63,22 +63,22 @@ func add_grid(pos: Vector3, rot: Vector3= Vector3.ZERO)-> BlockGrid:
 	return grid
 
 
-func assign_grid_id(grid: BlockGrid, new_id: bool= true, custom_id: int= -1):
+func assign_grid_id(grid: BlockGrid, new_id: bool= true, custom_id: int= -1, reassign: bool= true):
 	var new_grid_id: int
 	if new_id:
 		new_grid_id= next_grid_id
 		next_grid_id+= 1
 	else:
-		assert(not lookup_id_to_grid.has(custom_id))
-		assert(grid.id != -1)
-		assert(grid.id_pending)
-		
-		lookup_id_to_grid.erase(grid.id)
+		if reassign:
+			assert(not lookup_id_to_grid.has(custom_id))
+			assert(grid.id != -1)
+			assert(grid.id_pending)
+			
+			lookup_id_to_grid.erase(grid.id)
 		new_grid_id= custom_id
 	
 	grid.id= new_grid_id
 	lookup_id_to_grid[new_grid_id]= grid
-	#lookup_grid_to_id[grid]= new_grid_id
 
 
 func init_grid(grid: BlockGrid, pos: Vector3, rot: Vector3):

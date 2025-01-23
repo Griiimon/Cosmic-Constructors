@@ -16,9 +16,10 @@ static func process_event(type: Type, args: Array, peer_id: int):
 		player= Global.game.get_peer(peer_id)
 		
 		if not player: 
-			# TODO can this happen?
+			# FIXME is this something to worry about?
 			push_warning("EventSyncState peer %d doesnt know about %d" % [NetworkManager.peer_id, peer_id])
-			breakpoint
+			#breakpoint
+			return
 
 	
 	match type:

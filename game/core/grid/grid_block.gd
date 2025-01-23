@@ -39,6 +39,11 @@ func destroy(grid: BlockGrid):
 	grid.remove_block(self)
 
 
+func get_grid_block()-> GridBlock:
+	assert(false, "Abstract class")
+	return self
+
+
 func get_block_instance()-> BlockInstance:
 	return block_node as BlockInstance
 

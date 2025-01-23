@@ -36,7 +36,7 @@ func on_physics_process(_delta: float):
 	if block_interact_shapecast.is_colliding():
 		if grid_block and grid_block.get_block_instance():
 			if Input.is_action_pressed("open_block_property_panel"):
-				SignalManager.interact_with_block.emit(grid_block, grid, player)
+				SignalManager.interact_with_block.emit(grid_block.get_grid_block(), grid, player)
 				return
 
 	if Input.is_action_just_pressed("toggle_block_property") or Input.is_action_just_pressed("toggle_block_alt_property"):

@@ -17,6 +17,10 @@ func destroy(grid: BlockGrid):
 	parent.destroy(grid)
 
 
+func get_grid_block()-> GridBlock:
+	return parent
+
+
 func get_block_instance()-> BlockInstance:
 	return parent.get_block_instance()
 

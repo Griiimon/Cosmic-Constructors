@@ -24,6 +24,11 @@ func destroy(_grid: BlockGrid):
 	pass
 
 
+func get_grid_block()-> GridBlock:
+	assert(false, "Abstract class")
+	return null
+
+
 func get_block_instance()-> BlockInstance:
 	assert(false, "Abstract class")
 	return null

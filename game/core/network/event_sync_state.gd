@@ -12,13 +12,14 @@ static func process_event(type: Type, args: Array, peer_id: int):
 	var world: World= Global.game.world
 	var player: BasePlayer= null
 	
-	if peer_id != NetworkManager.peer_id:
+	if peer_id != 1 and peer_id != NetworkManager.peer_id:
 		player= Global.game.get_peer(peer_id)
 		
 		if not player: 
-			# TODO how would this happen?
+			# TODO can this happen?
 			push_warning("EventSyncState peer %d doesnt know about %d" % [NetworkManager.peer_id, peer_id])
-			return
+			breakpoint
+
 	
 	match type:
 		Type.START_PLAYER_ANIMATION:
@@ -38,8 +39,10 @@ static func process_event(type: Type, args: Array, peer_id: int):
 		Type.ADD_GRID:
 			var position: Vector3= args[0]
 			var rotation: Vector3= args[1]
-			world.add_grid(position, rotation)
-
+			var grid_id: int= args[2]
+			var grid: BlockGrid= world.add_grid(position, rotation)
+			world.assign_grid_id(grid, false, grid_id, false)
+			
 		Type.ADD_BLOCK:
 			var grid_id: int= args[0]
 			var grid: BlockGrid= Global.game.world.get_grid(grid_id)

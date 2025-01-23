@@ -1,11 +1,12 @@
-test rotor with 2 clients
+FIX anchoring blocks when lying on terrain with minimal overlap
 
-FIX property viewer not working on MultiBlock => interact_with_block signal receiver expects GridBlock, signal sends BaseGridBlock. convert before sending?
 FIX block splitting still wonky. only with anchored? only in multiplayer! split anchored grids stay frozen on client => only run unfreeze check on server and then sync 
 FIX thruster particles on client
-FIX spawning rotor on client doesnt spawn head
 FIX removing multiblock, sync state expects GridBlock
 
+pressing save on client will re-route to server
+
+sitting, being parented to grid probably needs to happen on server as well?
 
 network sync plane_fill and blueprint spawning
 
@@ -20,6 +21,15 @@ desync test: hash all grid ids + blocks.size() and compare to server
 test peer disconnection from server. may not need any handling
 
 
+why is player able to push grids in multiplayer while walking, but not in singleplayer?
+	because on server he is never frozen
+	=> add push script for singleplayer
+	
+add debug console
+
+make MyTerrain a component so it doesnt need to inherit LODTerrain
+	and FIX Drilling behavior on simple staticbody terrain
+	
 block splitting new grid ids need to be synced => build a list of all split grids, this list has the same grid pointers in same order. so the server can send an approriate update using the list indices and the previous grid id of the original grid
 
 FIX non-force-offset thrusters should apply force not at center but calculated CoM
@@ -52,6 +62,9 @@ save physical/world items
 
 transfer block_types when splitting grids
 
+
+FIX handles hard to grab when facing slightly down
+	=> interact raycast could check if there's anything to interact with and if not run an additional 0.5 - 1m sphere check for interactables
 
 property panel group system:
 	create group

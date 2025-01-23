@@ -73,7 +73,7 @@ func _input(event: InputEvent) -> void:
 				spawn_pallet()
 			elif event.keycode == KEY_F2:
 				if not NetworkManager.is_client:
-					player.world.freeze_grids(false)
+					get_world().freeze_grids(false)
 			elif event.keycode == KEY_F3:
 				if player:
 					#player.wear_equipment(load("res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres"))

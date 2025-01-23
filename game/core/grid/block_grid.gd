@@ -172,6 +172,15 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 	return grid_block
 
 
+func add_sub_grid(sub_grid_pos: Vector3, sub_grid_rot: Vector3, sub_grid_block: Block, grid_block_rot: Vector3i)-> BlockGrid:
+	var sub_grid: BlockGrid= world.add_grid(sub_grid_pos, sub_grid_rot)
+	sub_grid.add_block(sub_grid_block, Vector3i.ZERO, grid_block_rot, self)
+	if NetworkManager.is_server:
+		ServerManager.broadcast_sync_event(EventSyncState.Type.ADD_GRID, [sub_grid_pos, sub_grid_rot, sub_grid.id])
+		ServerManager.broadcast_sync_event(EventSyncState.Type.ADD_BLOCK, [sub_grid.id, GameData.get_block_id(sub_grid_block), Vector3i.ZERO, grid_block_rot])
+	return sub_grid
+
+
 func _physics_process(delta: float) -> void:
 	assert(not ( NetworkManager.is_client and not freeze ))
 

@@ -83,6 +83,8 @@ func _input(event: InputEvent) -> void:
 				DebugPanel.toggle()
 			elif event.keycode == KEY_F5:
 				get_world().save_world(custom_world_name, project_folder_world)
+			elif event.keycode == KEY_F6:
+				get_tree().debug_collisions_hint= not get_tree().debug_collisions_hint
 			elif event.keycode == KEY_F9:
 				get_tree().reload_current_scene.call_deferred()
 				return

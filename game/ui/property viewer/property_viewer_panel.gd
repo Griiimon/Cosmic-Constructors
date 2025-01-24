@@ -22,7 +22,10 @@ var initial_player_look: Vector3
 
 func _process(_delta: float) -> void:
 	if not visible: return
-	
+	if not is_valid(): 
+		close()
+		return
+
 	var global_block_pos: Vector3= grid.get_global_block_pos(block.local_pos)
 	if get_viewport().get_camera_3d().is_position_behind(global_block_pos):
 		close()
@@ -35,6 +38,10 @@ func _process(_delta: float) -> void:
 
 
 func populate():
+	if not is_valid(): 
+		close()
+		return
+	
 	Utils.free_children(content_container)
 	var stored_row: int= selected_row
 	var stored_value_selected: bool= is_value_selected
@@ -148,3 +155,8 @@ func has_any_property_row()-> bool:
 
 func can_assign_hotkey_to(row: PropertyViewerRow)-> bool:
 	return row.property != null
+
+
+func is_valid()-> bool:
+	return is_instance_valid(grid) and is_instance_valid(block) and is_instance_valid(block_instance)
+	

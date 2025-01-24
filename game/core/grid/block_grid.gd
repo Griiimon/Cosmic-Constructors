@@ -391,6 +391,9 @@ func update_properties():
 func anchor_check(global_block_transform: Transform3D, shape: Shape3D):
 	var query:= PhysicsShapeQueryParameters3D.new()
 	query.collision_mask= CollisionLayers.TERRAIN
+	shape= shape.duplicate()
+	if shape is BoxShape3D:
+		shape.size*= 0.9
 	query.shape= shape
 	query.transform= global_block_transform
 	

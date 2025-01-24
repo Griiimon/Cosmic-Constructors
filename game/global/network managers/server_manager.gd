@@ -204,5 +204,10 @@ func set_player_data(data_arr: Array[Dictionary]):
 		player_data[data.name]= data
 
 
+@rpc("any_peer", "reliable")
+func request_save(custom_world_name: String, project_folder_world: bool):
+	Global.game.world.save_world(custom_world_name, project_folder_world)
+
+
 func get_sender_id()-> int:
 	return NetworkManager.get_sender_id()

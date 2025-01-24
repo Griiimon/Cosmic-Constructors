@@ -89,7 +89,10 @@ func _input(event: InputEvent) -> void:
 			elif event.keycode == KEY_F4:
 				DebugPanel.toggle()
 			elif event.keycode == KEY_F5:
-				get_world().save_world(custom_world_name, project_folder_world)
+				if NetworkManager.is_client:
+					ServerManager.request_save.rpc_id(1, custom_world_name, project_folder_world)
+				else:
+					get_world().save_world(custom_world_name, project_folder_world)
 			elif event.keycode == KEY_F6:
 				get_tree().debug_collisions_hint= not get_tree().debug_collisions_hint
 			elif event.keycode == KEY_F9:

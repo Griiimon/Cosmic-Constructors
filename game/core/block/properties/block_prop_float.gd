@@ -59,6 +59,7 @@ func decrease(grid: BlockGrid, grid_block: GridBlock, modifier: int, sync: bool=
 
 
 func change_value(grid: BlockGrid, grid_block: GridBlock, modifier: int, delta: int, sync: bool= true):
+	if is_locked: return
 	f+= step_size * modifier * delta
 	do_clamp()
 	super(grid, grid_block, modifier, delta)

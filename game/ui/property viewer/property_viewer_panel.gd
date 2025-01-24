@@ -54,14 +54,22 @@ func populate():
 	for property in block_instance.get_properties():
 		var row: PropertyViewerRow= add_row()
 		row.property= property
-		row.grid= grid
-		row.grid_block= block
-		if selected_row == -1:
-			selected_row= rows.size() - 1
+		if property.is_read_only:
+			row.property= null
+		else:
+			row.grid= grid
+			row.grid_block= block
+			if selected_row == -1:
+				selected_row= rows.size() - 1
 
 	if stored_row > -1:
 		selected_row= stored_row
 		is_value_selected= stored_value_selected
+
+	if block_instance.requires_property_viewer_updates():
+		if update_interval.is_stopped():
+			update_interval.start()
+
 
 func open(_block: GridBlock= null, _grid: BlockGrid= null):
 	assert(_grid and _block)
@@ -101,7 +109,7 @@ func update(_block: GridBlock, _grid: BlockGrid, player: Player):
 		close()
 	else:
 		position= camera.unproject_position(global_block_pos)
-		show()
+		open(_block, _grid)
 		initial_player_look= player.get_look_vec()
 
 

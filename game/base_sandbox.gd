@@ -27,10 +27,13 @@ func _ready() -> void:
 		if terrain:
 			terrain.queue_free()
 
-	if game.player:
-		on_player_spawned()
+	if NetworkManager.is_server:
+		do_load_world()
 	else:
-		SignalManager.player_spawned.connect(on_player_spawned)
+		if game.player:
+			on_player_spawned()
+		else:
+			SignalManager.player_spawned.connect(on_player_spawned)
 
 
 func on_player_spawned():
@@ -41,6 +44,15 @@ func on_player_spawned():
 	if equip_item:
 		player.equip_hand_item(equip_item)
 
+	do_load_world()
+
+	if freeze_grids and NetworkManager.is_single_player:
+		player.world.freeze_grids(freeze_grids)
+
+	on_start()
+
+
+func do_load_world():
 	if load_world and not NetworkManager.is_client: #NetworkManager.is_single_player:
 		await get_tree().physics_frame
 		# TODO
@@ -48,12 +60,7 @@ func on_player_spawned():
 			#while not Global.terrain.is_area_meshed(..):
 				#await get_tree().physics_frame
 		Global.game.world.load_world_from_file(custom_world_name, project_folder_world)
-
-	if freeze_grids and NetworkManager.is_single_player:
-		player.world.freeze_grids(freeze_grids)
-
-	on_start()
-
+	
 
 func on_start():
 	pass

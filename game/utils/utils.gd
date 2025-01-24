@@ -115,4 +115,11 @@ static func decompress_string(data: PackedByteArray)-> String:
 	
 	var uncompressed_size: int= peer.get_available_bytes()
 	return (peer.get_data(uncompressed_size)[1] as PackedByteArray).get_string_from_ascii()
-	
+
+
+static func extract_value_from_cmd_line_args(key: String)-> String:
+	key= "--" + key
+	for arg in OS.get_cmdline_args():
+		if arg.begins_with(key):
+			return arg.replace(key + "=", "")
+	return "N/A"

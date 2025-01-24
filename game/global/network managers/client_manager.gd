@@ -251,5 +251,13 @@ func receive_player_data(data: Dictionary):
 	Global.player.deserialize(data)
 
 
+@rpc("any_peer", "reliable")
+func receive_grid_anchored_state(grid_id: int, anchored: bool):
+	if not Global.game.world.has_grid(grid_id):
+		push_warning("Peer %s received grid anchored state update for non-existing grid %d" % [ NetworkManager.peer_id, grid_id ])
+		return
+	Global.game.world.get_grid(grid_id).is_anchored= anchored
+
+
 func get_sender_id()-> int:
 	return NetworkManager.get_sender_id()

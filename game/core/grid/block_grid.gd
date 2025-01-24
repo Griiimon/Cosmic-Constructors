@@ -23,9 +23,12 @@ var inertial_dampeners: bool= false
 var parking_brake: bool= false
 var is_anchored: bool= false:
 	set(b):
+		if is_anchored == b: return
 		is_anchored= b
 		if NetworkManager.is_client: return
 		freeze= is_anchored
+		if NetworkManager.is_server and not Global.game.world.is_loading:
+			ServerManager.sync_grid_anchored_state(self)
 
 var reverse_mode: bool= false
 

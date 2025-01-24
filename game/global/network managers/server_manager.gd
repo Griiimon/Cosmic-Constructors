@@ -209,5 +209,12 @@ func request_save(custom_world_name: String, project_folder_world: bool):
 	Global.game.world.save_world(custom_world_name, project_folder_world)
 
 
+@rpc("any_peer", "reliable")
+func sync_grid_anchored_state(grid: BlockGrid):
+	# DESYNC
+	# FIXME send with timestamp: if multiple for same grid are send in short succession.. bad
+	ClientManager.receive_grid_anchored_state.rpc(grid.id, grid.is_anchored)
+
+
 func get_sender_id()-> int:
 	return NetworkManager.get_sender_id()

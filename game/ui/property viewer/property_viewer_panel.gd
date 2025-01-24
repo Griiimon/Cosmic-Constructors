@@ -36,6 +36,8 @@ func _process(_delta: float) -> void:
 
 func populate():
 	Utils.free_children(content_container)
+	var stored_row: int= selected_row
+	var stored_value_selected: bool= is_value_selected
 	selected_row= -1
 	is_value_selected= false
 	rows.clear()
@@ -57,6 +59,9 @@ func populate():
 		if selected_row == -1:
 			selected_row= rows.size() - 1
 
+	if stored_row > -1:
+		selected_row= stored_row
+		is_value_selected= stored_value_selected
 
 func open(_block: GridBlock= null, _grid: BlockGrid= null):
 	assert(_grid and _block)

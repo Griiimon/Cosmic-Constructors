@@ -276,12 +276,13 @@ func load_world_from_file(world_name: String= "", project_folder: bool= false):
 	var json = JSON.new()
 
 	var file_text: String= save_file.get_line()
+	save_file.close()
+
 	var parse_result = json.parse(file_text)
 	if not parse_result == OK:
 		push_error("JSON Parse Error: ", json.get_error_message(), " in ", file_text, " at line ", json.get_error_line())
 		breakpoint
 		
-	save_file.close()
 
 	load_world(json.data)
 

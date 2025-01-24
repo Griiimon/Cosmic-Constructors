@@ -182,7 +182,8 @@ static func get_neighbor_class_instances(grid: BlockGrid, grid_block: BaseGridBl
 func get_extra_properties()-> Array[PropertyViewerPanel.ExtraProperty]:
 	var result: Array[PropertyViewerPanel.ExtraProperty]= []
 	for func_ptr in extra_property_callbacks:
-		result.append_array(func_ptr.call())
+		var args: Array= func_ptr.call()
+		result.append(PropertyViewerPanel.ExtraProperty.new(args[0], args[1]))
 	return result
 
 

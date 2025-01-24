@@ -11,7 +11,7 @@ func _ready() -> void:
 	super()
 	default_interaction_property= active
 
-	register_extra_property_callback(get_extra_properties)
+	register_extra_property_callback(provide_extra_properties)
 
 
 func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
@@ -51,7 +51,8 @@ func serialize()-> Dictionary:
 	return data
 
 
-func get_extra_properties()-> Array[PropertyViewerPanel.ExtraProperty]:
-	var result: Array[PropertyViewerPanel.ExtraProperty]= []
-	result.append(PropertyViewerPanel.ExtraProperty.new("Fuel", str(int(solid_fuel_pct), "%")))
-	return result
+func provide_extra_properties()-> Array:
+	#var result: Array[PropertyViewerPanel.ExtraProperty]= []
+	#result.append(PropertyViewerPanel.ExtraProperty.new("Fuel", str(int(solid_fuel_pct), "%")))
+	#return result
+	return [ "Fuel", str(int(solid_fuel_pct), "%") ]

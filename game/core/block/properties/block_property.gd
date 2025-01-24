@@ -61,10 +61,12 @@ func decrease(grid: BlockGrid, grid_block: GridBlock, _modifier: int, sync: bool
 
 
 func change_value(grid: BlockGrid, grid_block: GridBlock, _modifier: int, _delta: int, sync: bool= true):
+	if sync: sync(grid, grid_block)
 	do_callback()
 
 
 func set_variant(grid: BlockGrid, grid_block: GridBlock, _val: Variant, sync: bool= true):
+	if sync: sync(grid, grid_block)
 	do_callback()
 
 

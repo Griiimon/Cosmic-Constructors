@@ -235,8 +235,10 @@ func save_world(world_name: String= "", project_folder: bool= false):
 		if not DirAccess.open(base_path).dir_exists(world_name):
 			DirAccess.open(base_path).make_dir(world_name)
 		world_name+= "/"
-		
-	var save_file: FileAccess = FileAccess.open(base_path + world_name + SAVE_FILE_NAME, FileAccess.WRITE)
+	
+	var file_path: String= base_path + world_name + SAVE_FILE_NAME
+	var save_file: FileAccess = FileAccess.open(file_path, FileAccess.WRITE)
+	assert(FileAccess.get_open_error() == OK)
 
 	var world_data:= {}
 	world_data["grids"]= []
@@ -251,9 +253,13 @@ func save_world(world_name: String= "", project_folder: bool= false):
 		world_data["players"]= await ServerManager.serialize_players()
 
 	var json_string = JSON.stringify(world_data)
+	assert(not json_string.is_empty())
+	
 	save_file.store_line(json_string)
 
 	save_file.close()
+	
+	assert(not FileAccess.get_file_as_string(file_path).is_empty())
 
 
 func load_world_from_file(world_name: String= "", project_folder: bool= false):

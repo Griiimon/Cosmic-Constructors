@@ -241,6 +241,7 @@ func tick_blocks(delta: float):
 		if definition.can_tick:
 			var instance: BlockInstance= block.get_block_instance()
 			assert(instance)
+			instance.process_sync_queue(self, block)
 			if definition.tick_priority > 0:
 				if not deferred_ticks.has(definition.tick_priority):
 					deferred_ticks[definition.tick_priority]= []

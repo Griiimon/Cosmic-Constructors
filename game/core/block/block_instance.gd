@@ -10,6 +10,9 @@ var alternative_interaction_property: BlockProperty
 
 var property_table: Dictionary
 
+# for BlockProperties that aren't auto-synced 
+var property_sync_queue: Dictionary
+
 
 
 func _ready() -> void:
@@ -45,6 +48,17 @@ func on_update():
 
 func on_destroy(_grid: BlockGrid, _grid_block: GridBlock):
 	queue_free()
+
+
+func process_sync_queue(grid: BlockGrid, grid_block: GridBlock):
+	if property_sync_queue.is_empty(): return
+	
+	var frame: int= Engine.get_physics_frames()
+	if property_sync_queue.has(frame):
+		var property: BlockProperty= property_sync_queue[frame]
+		assert(not property.auto_sync)
+		property.sync(grid, grid_block, false)
+		property_sync_queue.erase(frame)
 
 
 func interact(_grid: BlockGrid, _grid_block: GridBlock, _player: Player):
@@ -84,6 +98,17 @@ func find_or_make_linked_block_group(grid: BlockGrid, grid_block: GridBlock, cre
 		group= LinkedBlockGroup.new(grid, create_virtual)
 
 	return group
+
+
+func queue_property_sync(property: BlockProperty):
+	if NetworkManager.is_single_player: return
+	assert(NetworkManager.is_server)
+	if not property in property_sync_queue.values():
+		var target_frame: int= Engine.get_physics_frames() + 60
+		# make sure frame keys are unique, even if it means delaying this update interval a little bit
+		while property_sync_queue.has(target_frame):
+			target_frame+= 1
+		property_sync_queue[target_frame]= property
 
 
 func serialize()-> Dictionary:

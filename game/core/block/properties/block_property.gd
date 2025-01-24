@@ -11,6 +11,7 @@ var is_locked: bool= false:
 		
 var client_side: bool= false
 var is_read_only: bool= false
+var auto_sync: bool= true
 
 
 
@@ -31,6 +32,11 @@ func client_side_callback():
 
 func read_only():
 	is_read_only= true
+	return self
+
+
+func sync_on_request():
+	auto_sync= false
 	return self
 
 
@@ -70,8 +76,10 @@ func set_variant(grid: BlockGrid, grid_block: GridBlock, _val: Variant, sync: bo
 	do_callback()
 
 
-func sync(grid: BlockGrid, grid_block: GridBlock):
+func sync(grid: BlockGrid, grid_block: GridBlock, auto: bool= true):
 	if NetworkManager.is_single_player: return
+	if auto and not auto_sync: return
+	
 	if NetworkManager.is_client:
 		ServerManager.receive_sync_event.rpc_id(1, EventSyncState.Type.CHANGE_BLOCK_PROPERTY, [grid.id, grid_block.local_pos, display_name, get_variant()])
 	else:

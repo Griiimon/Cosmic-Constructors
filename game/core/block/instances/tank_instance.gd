@@ -6,7 +6,7 @@ extends TubeGroupMemberInstance
 @onready var fluid_cylinder_y_offset: float= fluid_cylinder.position.y
 
 @onready var fill_debug_action:= BlockPropAction.new("Fill", fluid_container.debug_fill)
-@onready var fluid_content: BlockPropFloat= BlockPropFloat.new("Content", 0.0).read_only()
+@onready var fluid_content: BlockPropFloat= BlockPropFloat.new("Content", 0.0).read_only().sync_on_request()
 
 var update_content:= true
 
@@ -31,6 +31,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
 	if update_content:
 		fluid_content.set_variant(grid, grid_block, fluid_container.content)
+		queue_property_sync(fluid_content)
 		update_content= false
 	
 

@@ -1,18 +1,20 @@
-FIX anchoring blocks when lying on terrain with minimal overlap
+use new property view update technique for other blocks that require it
+
+sync extra block properties ( only while visible on client, viewer panel etc? )
+	also save selection when updated on single/client
 
 FIX block splitting still wonky. only with anchored? only in multiplayer! split anchored grids stay frozen on client => only run unfreeze check on server and then sync 
 FIX thruster particles on client
+	Fixed! but what happens when a player joins while the thruster is already active
 FIX removing multiblock, sync state expects GridBlock
-
-pressing save on client will re-route to server
 
 sitting, being parented to grid probably needs to happen on server as well?
 
 network sync plane_fill and blueprint spawning
 
-sync extra block properties ( only while visible on client, viewer panel etc? )
-
 send requested movement to server ( for keys that are held it should be the events when pressed and then released as "reliable" )
+
+add sub grids to blueprints
 
 vehicle wheel need to work on grids
 
@@ -20,6 +22,8 @@ desync test: hash all grid ids + blocks.size() and compare to server
 
 test peer disconnection from server. may not need any handling
 
+
+basic noise terrain creator with tool script, terrain generator resource, grass/rock shader with normal
 
 why is player able to push grids in multiplayer while walking, but not in singleplayer?
 	because on server he is never frozen
@@ -47,6 +51,8 @@ thrusters particle TARGET direction seems to be in global coords
 
 Components can_* functions just use Callable refs like with FluidConsumer
 
+
+persistent PlayerData ( like hotbars ) outside of Player ( entity ) class
 
 add debug console plugin
 
@@ -214,7 +220,9 @@ FIX static grids connected to terrain jitter ( only when terrain gets edited, lo
 FIX grabbing handles on same grid player is standing on should have no effect. ALSO if grid is connected to grid players standing on
 FIX grabbing handles weight calculation for all connected grids => make grabbing joint-based
 FIX suspension jitter with joints
-FIX build block placement after placing custom shape 
+FIX build block placement after placing custom shape
+FIX world.json sometimes get corrupted ( due to multiple saves? ) 
+
 INVESTIGATE possible to pick up item from floor and from OreContainer with one F push in the same frame. almost seemed so
 
 

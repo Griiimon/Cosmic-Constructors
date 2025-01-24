@@ -42,7 +42,7 @@ func on_set_active():
 		active.is_locked= true
 		power.is_locked= true
 	else:
-		particles.emitting= true
+		particles.emitting= false
 		
 
 func serialize()-> Dictionary:

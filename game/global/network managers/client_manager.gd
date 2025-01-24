@@ -232,5 +232,24 @@ func receive_initial_world(compressed_json: PackedByteArray):
 	request_resume()
 
 
+@rpc("any_peer", "reliable")
+func request_player_save_data():
+	if Global.player:
+		ServerManager.receive_player_save_data.rpc_id(1, Global.player.serialize())
+
+
+@rpc("any_peer", "reliable")
+func request_player_name():
+	ServerManager.receive_player_name.rpc_id(1, NetworkManager.player_name)
+
+
+@rpc("any_peer", "reliable")
+func receive_player_data(data: Dictionary):
+	prints("%s received player data" % NetworkManager.player_name, data)
+	while not Global.player:
+		await get_tree().process_frame
+	Global.player.deserialize(data)
+
+
 func get_sender_id()-> int:
 	return NetworkManager.get_sender_id()

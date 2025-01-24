@@ -9,6 +9,8 @@ const BASE_PLAYER_SCENE= preload("res://game/core/player/base_player.tscn")
 var player_states: Dictionary
 var ticks: int
 var player_instances: Dictionary
+var player_data: Dictionary
+
 
 
 
@@ -25,7 +27,7 @@ func host(port: int, game_scene: PackedScene):
 		return
 	
 	multiplayer.multiplayer_peer = NetworkManager.enet_peer
-	multiplayer.peer_connected.connect(add_player)
+	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(remove_player)
 
 	prints("Hosting scene", game_scene.resource_path)
@@ -45,18 +47,33 @@ func _physics_process(_delta: float) -> void:
 	ticks+= 1
 
 
-func add_player(id: int):
+func peer_connected(id: int):
 	print("Peer %d connected to server" % id)
-	
+	ClientManager.request_player_name.rpc_id(id)
+
+
+@rpc("any_peer", "reliable")
+func receive_player_name(player_name: String):
+	print("Peer %d identified as %s" % [ get_sender_id(), player_name ])
+	add_player(get_sender_id(), player_name)
+
+
+func add_player(id: int, player_name: String):
 	while Global.game.world.is_loading:
-		print(" still loading..")
+		print(" World still loading..")
 		await get_tree().process_frame
+
+	var data: Dictionary
+	if player_data.has(player_name):
+		data= player_data[player_name]
+		ClientManager.receive_player_data.rpc_id(id, data)
 		
 	var player: BasePlayer= BASE_PLAYER_SCENE.instantiate()
 	player.name= str(id)
 	Global.game.peers.add_child(player, true)
 	player_instances[id]= player
 	player_connected.emit(id)
+	
 
 	if Global.game.is_paused():
 		await resume_game
@@ -166,7 +183,26 @@ func pre_process_sync_event(type: int, args: Array, sender_id: int):
 
 		EventSyncState.Type.CHANGE_BLOCK_PROPERTY:
 			EventSyncState.change_block_property(world, args)
-			
+
+
+func serialize_players()-> Array[Dictionary]:
+	ClientManager.request_player_save_data.rpc()
+	# FIXME super hacky
+	await get_tree().create_timer(1).timeout
+	var result: Array[Dictionary]
+	result.assign(player_data.values())
+	return result
+
+
+@rpc("any_peer", "reliable")
+func receive_player_save_data(data: Dictionary):
+	player_data["name"]= data
+
+
+func set_player_data(data_arr: Array[Dictionary]):
+	for data in data_arr:
+		player_data[data.name]= data
+
 
 func get_sender_id()-> int:
 	return NetworkManager.get_sender_id()

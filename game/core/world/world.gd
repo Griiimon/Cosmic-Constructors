@@ -225,6 +225,8 @@ func apply_delayed_explosive_force(force: DelayedExplosiveForce):
 
 
 func save_world(world_name: String= "", project_folder: bool= false):
+	assert(not NetworkManager.is_client)
+	
 	var base_path:= "user://"
 	if project_folder:
 		base_path= get_tree().current_scene.scene_file_path.get_base_dir() + "/"
@@ -243,7 +245,10 @@ func save_world(world_name: String= "", project_folder: bool= false):
 	for grid: BlockGrid in grids.get_children():
 		world_data["grids"].append(grid.serialize())
 
-	world_data["players"].append(Global.player.serialize())
+	if NetworkManager.is_single_player:
+		world_data["players"].append(Global.player.serialize())
+	else:
+		world_data["players"]= await ServerManager.serialize_players()
 
 	var json_string = JSON.stringify(world_data)
 	save_file.store_line(json_string)
@@ -264,6 +269,7 @@ func load_world_from_file(world_name: String= "", project_folder: bool= false):
 	if not FileAccess.file_exists(file_name):
 		return
 
+	prints("Loading world", file_name)
 
 	var save_file = FileAccess.open(file_name, FileAccess.READ)
 	
@@ -295,7 +301,12 @@ func load_world(world_data: Dictionary):
 		grid.deserialize(world_grid_data[grid])
 
 	if not world_data["players"].is_empty():
-		Global.player.deserialize(world_data["players"][0])
+		var player_data_arr: Array[Dictionary]
+		player_data_arr.assign(world_data["players"])
+		if NetworkManager.is_single_player:
+			Global.player.deserialize(player_data_arr[0])
+		else:
+			ServerManager.set_player_data(player_data_arr)
 
 	# to ensure everything was initialized properly and deferred calls have been handled
 	await get_tree().physics_frame

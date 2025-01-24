@@ -159,6 +159,7 @@ func grab_handles(handles: HandlesInstance):
 
 func serialize()-> Dictionary:
 	var data:= {}
+	data["name"]= NetworkManager.player_name
 	data["tool_hotbar"]= tool_hotbar.serialize()
 	data["build_hotbar"]= action_state_machine.build_state.hotbar_layout.serialize()
 	return data

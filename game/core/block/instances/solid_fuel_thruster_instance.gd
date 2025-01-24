@@ -52,7 +52,4 @@ func serialize()-> Dictionary:
 
 
 func provide_extra_properties()-> Array:
-	#var result: Array[PropertyViewerPanel.ExtraProperty]= []
-	#result.append(PropertyViewerPanel.ExtraProperty.new("Fuel", str(int(solid_fuel_pct), "%")))
-	#return result
 	return [ "Fuel", str(int(solid_fuel_pct), "%") ]

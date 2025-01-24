@@ -1,9 +1,8 @@
 extends BlockInstanceOnOff
 
+@onready var solid_fuel_pct: BlockPropFloat= BlockPropFloat.new("Fuel", 100.0).set_range(0.0, 100.0).read_only()
 @onready var power: BlockPropFloat= BlockPropFloat.new("Power", 100.0).set_range(0.0, 100.0).set_step_size(5).disable_toggle()
 @onready var particles: CPUParticles3D = $CPUParticles3D
-
-var solid_fuel_pct: float= 100.0
 
 
 
@@ -11,11 +10,11 @@ func _ready() -> void:
 	super()
 	default_interaction_property= active
 
-	register_extra_property_callback(provide_extra_properties)
+	#register_extra_property_callback(provide_extra_properties)
 
 
 func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
-	solid_fuel_pct= restore_data["fuel_pct"]
+	#solid_fuel_pct= restore_data["fuel_pct"]
 	on_placed(grid, grid_block)
 
 
@@ -28,9 +27,8 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 		var total_thrust: float= thruster_block.thrust * power.get_value_f() / 100.0
 		grid.apply_central_force(-global_basis.z * total_thrust * delta)
 	
-	solid_fuel_pct-= power.get_value_f() * delta / thruster_block.burn_duration
-	if solid_fuel_pct <= 0:
-		solid_fuel_pct= 0
+	solid_fuel_pct.set_variant(grid, grid_block, solid_fuel_pct.get_value_f() - power.get_value_f() * delta / thruster_block.burn_duration)
+	if solid_fuel_pct.get_value_f() <= 0:
 		active.set_false(grid, grid_block)
 
 
@@ -45,11 +43,15 @@ func on_set_active():
 		particles.emitting= false
 		
 
-func serialize()-> Dictionary:
-	var data: Dictionary= super()
-	data["fuel_pct"]= solid_fuel_pct
-	return data
+func requires_property_viewer_updates()-> bool:
+	return true
 
 
-func provide_extra_properties()-> Array:
-	return [ "Fuel", str(int(solid_fuel_pct), "%") ]
+#func serialize()-> Dictionary:
+	#var data: Dictionary= super()
+	#data["fuel_pct"]= solid_fuel_pct
+	#return data
+
+
+#func provide_extra_properties()-> Array:
+	#return [ "Fuel", str(int(solid_fuel_pct), "%") ]

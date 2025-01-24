@@ -195,6 +195,10 @@ func has_property_viewer()-> bool:
 	return true
 
 
+func requires_property_viewer_updates()-> bool:
+	return false
+
+
 func can_interact(_grid: BlockGrid, _grid_block: GridBlock, _player: Player)-> bool:
 	return true
 

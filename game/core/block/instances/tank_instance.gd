@@ -6,6 +6,9 @@ extends TubeGroupMemberInstance
 @onready var fluid_cylinder_y_offset: float= fluid_cylinder.position.y
 
 @onready var fill_debug_action:= BlockPropAction.new("Fill", fluid_container.debug_fill)
+@onready var fluid_content: BlockPropFloat= BlockPropFloat.new("Content", 0.0).read_only()
+
+var update_content:= true
 
 
 
@@ -25,6 +28,12 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	on_amount_changed(fluid_container.content)
 
 
+func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
+	if update_content:
+		fluid_content.set_variant(grid, grid_block, fluid_container.content)
+		update_content= false
+	
+
 func on_amount_changed(amount: float):
 	if amount > 0:
 		fluid_cylinder.show()
@@ -34,7 +43,12 @@ func on_amount_changed(amount: float):
 		fluid_cylinder.position.y= fluid_cylinder_y_offset + height / 2.0
 	else:
 		fluid_cylinder.hide()
+	update_content= true
 
 
 func is_input()-> bool:
+	return true
+
+
+func requires_property_viewer_updates()-> bool:
 	return true

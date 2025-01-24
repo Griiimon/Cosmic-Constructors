@@ -9,13 +9,7 @@ extends BlockInstanceOnOff
 func _ready() -> void:
 	super()
 	default_interaction_property= active
-
-	#register_extra_property_callback(provide_extra_properties)
-
-
-func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
-	#solid_fuel_pct= restore_data["fuel_pct"]
-	on_placed(grid, grid_block)
+	active.client_side_callback()
 
 
 func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
@@ -45,13 +39,3 @@ func on_set_active():
 
 func requires_property_viewer_updates()-> bool:
 	return true
-
-
-#func serialize()-> Dictionary:
-	#var data: Dictionary= super()
-	#data["fuel_pct"]= solid_fuel_pct
-	#return data
-
-
-#func provide_extra_properties()-> Array:
-	#return [ "Fuel", str(int(solid_fuel_pct), "%") ]

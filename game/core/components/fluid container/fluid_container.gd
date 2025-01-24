@@ -19,9 +19,8 @@ var max_storage: float
 func _ready() -> void:
 	if override_capacity > 0:
 		max_storage= override_capacity
-		
-	await get_parent().ready
-	(get_parent() as BlockInstance).register_extra_property_callback(get_extra_properties)
+	#await get_parent().ready
+	#(get_parent() as BlockInstance).register_extra_property_callback(get_extra_properties)
 
 
 func fill(val: float, new_fluid: Fluid= null):
@@ -59,10 +58,10 @@ func is_emtpy()-> bool:
 	return is_zero_approx(content)
 
 
-func get_extra_properties()-> Array[PropertyViewerPanel.ExtraProperty]:
-	var result: Array[PropertyViewerPanel.ExtraProperty]= []
-	result.append(PropertyViewerPanel.ExtraProperty.new("Filled", "%d/%d" % [ int(content), int(max_storage)]))
-	return result
+#func get_extra_properties()-> Array[PropertyViewerPanel.ExtraProperty]:
+	#var result: Array[PropertyViewerPanel.ExtraProperty]= []
+	#result.append(PropertyViewerPanel.ExtraProperty.new("Filled", "%d/%d" % [ int(content), int(max_storage)]))
+	#return result
 
 
 func get_fill_ratio()-> float:

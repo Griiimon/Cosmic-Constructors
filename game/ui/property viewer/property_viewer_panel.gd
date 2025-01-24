@@ -1,16 +1,16 @@
 class_name PropertyViewerPanel
 extends ScrollSelectionPanel
 
-class ExtraProperty:
-	var text: String
-	var value: Variant
-
-	func _init(_text: String, _value):
-		text= _text
-		value= _value
-
-	func get_value_as_text()-> String:
-		return ("%.4f" % value) if value is float else value
+#class ExtraProperty:
+	#var text: String
+	#var value: Variant
+#
+	#func _init(_text: String, _value):
+		#text= _text
+		#value= _value
+#
+	#func get_value_as_text()-> String:
+		#return ("%.4f" % value) if value is float else value
 
 
 var grid: BlockGrid
@@ -44,12 +44,12 @@ func populate():
 
 	add_row("Name", block.get_name(grid))
 	
-	for property: ExtraProperty in block_instance.get_extra_properties():
-		var row: PropertyViewerRow= add_row(property.text, property.get_value_as_text())
-		row.label_type.modulate= Color.WHITE_SMOKE
-		row.label_value.modulate= Color.WHITE_SMOKE
-		if update_interval.is_stopped():
-			update_interval.start()
+	#for property: ExtraProperty in block_instance.get_extra_properties():
+		#var row: PropertyViewerRow= add_row(property.text, property.get_value_as_text())
+		#row.label_type.modulate= Color.WHITE_SMOKE
+		#row.label_value.modulate= Color.WHITE_SMOKE
+		#if update_interval.is_stopped():
+			#update_interval.start()
 
 	for property in block_instance.get_properties():
 		var row: PropertyViewerRow= add_row()

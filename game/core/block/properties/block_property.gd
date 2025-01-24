@@ -3,8 +3,14 @@ class_name BlockProperty
 var callback: Callable
 var display_name: String
 var owner: BlockInstance
-var is_locked: bool= false
+var is_locked: bool= false:
+	get():
+		if is_read_only: 
+			return true
+		return is_locked
+		
 var client_side: bool= false
+var is_read_only: bool= false
 
 
 
@@ -20,6 +26,11 @@ func _init(_name: String, _callback= null, instant_callback: bool= true, _owner:
 
 func client_side_callback():
 	client_side= true
+	return self
+
+
+func read_only():
+	is_read_only= true
 	return self
 
 

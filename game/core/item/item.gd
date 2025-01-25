@@ -1,5 +1,5 @@
 class_name Item
-extends Resource
+extends NamedResource
 
 enum StorageSize { TINY, SMALL, LARGE, HUGE}
 

@@ -243,6 +243,7 @@ func save_world(world_name: String= "", project_folder: bool= false):
 	var world_data:= {}
 	world_data["grids"]= []
 	world_data["players"]= []
+	world_data["items"]= []
 	
 	for grid: BlockGrid in grids.get_children():
 		world_data["grids"].append(grid.serialize())
@@ -251,6 +252,9 @@ func save_world(world_name: String= "", project_folder: bool= false):
 		world_data["players"].append(Global.player.serialize())
 	else:
 		world_data["players"]= await ServerManager.serialize_players()
+
+	for item: WorldItemInstance in items.get_children():
+		world_data["items"].append(item.serialize())
 
 	var json_string = JSON.stringify(world_data)
 	assert(not json_string.is_empty())
@@ -314,6 +318,10 @@ func load_world(world_data: Dictionary):
 			Global.player.deserialize(player_data_arr[0])
 		else:
 			ServerManager.set_player_data(player_data_arr)
+
+	if world_data.has("items"):
+		for item_data: Dictionary in world_data["items"]:
+			spawn_serialized_item(item_data)
 
 	# to ensure everything was initialized properly and deferred calls have been handled
 	await get_tree().physics_frame
@@ -413,6 +421,19 @@ func spawn_item(item: Item, pos: Vector3, rot: Vector3= Vector3.ZERO, count: int
 
 func spawn_inventory_item(inv_item: InventoryItem, pos: Vector3, rot: Vector3= Vector3.ZERO, frozen: bool= false)-> WorldItemInstance:
 	return spawn_item(inv_item.item, pos, rot, inv_item.count, frozen)
+
+
+func spawn_serialized_item(data: Dictionary):
+	var inv_item: InventoryItem= InventoryItem.deserialize(data["inv_item"])
+	var pos: Vector3= Utils.get_key_or_default(data, "pos", Vector3.ZERO, "Vector3")
+	var rot: Vector3= Utils.get_key_or_default(data, "rot", Vector3.ZERO, "Vector3")
+	var item_inst: WorldItemInstance= spawn_inventory_item(inv_item, pos, rot)
+
+	var linear_velocity: Vector3= Utils.get_key_or_default(data, "vel", Vector3.ZERO, "Vector3")
+	var angular_velocity: Vector3= Utils.get_key_or_default(data, "ang_vel", Vector3.ZERO, "Vector3")
+
+	item_inst.linear_velocity= linear_velocity
+	item_inst.angular_velocity= angular_velocity
 
 
 func spawn_peripheral_entity(entity: PeripheralEntity, pos: Vector3, rot: Vector3):

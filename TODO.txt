@@ -1,24 +1,22 @@
-send requested movement to server ( for keys that are held it should be the events when pressed and then released as "reliable" )
-
-FIX block splitting still wonky. only with anchored? only in multiplayer! split anchored grids stay frozen on client => only run unfreeze check on server and then sync 
-FIX thruster particles on client
-	Fixed! but what happens when a player joins while the thruster is already active
-FIX removing multiblock, sync state expects GridBlock
-
-sitting, being parented to grid probably needs to happen on server as well?
+transfer block_types when splitting grids => just rebuild 
 
 network sync plane_fill ( special case? dont just sync spawning each block)
- and blueprint spawning
-
+ and blueprint spawning ( send entire grid at once )
 
 add sub grids to blueprints
 
-vehicle wheel need to work on grids
+vehicle wheel should work on grids
 
-desync test: hash all grid ids + blocks.size() and compare to server
+desync test: hash all grid ids + blocks dict and compare to server
 
 test peer disconnection from server. may not need any handling
 
+
+client not allowed to enter occupied seat
+
+What happens with particles when a player joins while the thruster is already active
+
+sitting on other client needs to reparent the peer like the server. what happens if a client joins with another client already sitting 
 
 basic noise terrain creator with tool script, terrain generator resource, grass/rock shader with normal
 
@@ -31,7 +29,7 @@ add debug console
 make MyTerrain a component so it doesnt need to inherit LODTerrain
 	and FIX Drilling behavior on simple staticbody terrain
 	
-block splitting new grid ids need to be synced => build a list of all split grids, this list has the same grid pointers in same order. so the server can send an approriate update using the list indices and the previous grid id of the original grid
+block splitting new grid ids need to be synced ( still ? ) => build a list of all split grids, this list has the same grid pointers in same order. so the server can send an approriate update using the list indices and the previous grid id of the original grid ]
 
 FIX non-force-offset thrusters should apply force not at center but calculated CoM
 FIX when interval updating property viewer only update extra properties 
@@ -62,8 +60,6 @@ ore piles: make it spill items when rotated
 load blueprints: use half transparent boxes per grid block )
 
 save physical/world items
-
-transfer block_types when splitting grids
 
 
 FIX handles hard to grab when facing slightly down
@@ -227,6 +223,7 @@ IS FIXED?
 	FIX sometimes wrong ( downwards ) momentum when strafing off grid 
 	FIX ghost overlays custom shape blocks
 	FIX empty grids cause save game corruption?
+	FIX block splitting still wonky in multiplayer?
 
 
 
@@ -362,6 +359,8 @@ ice will have the same friction as all terrain ( wheels can handle it but.. ) gr
 crop fields: tilling ( turn grass into dirt voxel ) and harvesting manually or with machines
 
 hard stone type that cannot be mined, only tnt etc
+
+Assemblers will not stockpile products without ability to drop product. will produce 1 tho and player can grab it
 
 
 TECHNOLOGIES:

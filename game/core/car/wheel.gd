@@ -12,7 +12,6 @@ extends Node3D
 @onready var model: Node3D = $Model
 
 
-@export_flags_3d_physics var collision_mask
 @export var wheel_mass := 1.0
 @export var tire_radius := 3.0
 @export var tire_width := 205.0
@@ -39,6 +38,8 @@ var longitudinal_grip_ratio := { "Road" : 0.5, "Dirt": 0.5, "Grass" : 0.5}
 @export var bump_stop_multiplier := 1.0
 @export var wheel_to_body_torque_multiplier := 0.0
 @export var mass_over_wheel := 1.0
+
+var collision_mask: int
 
 var wheel_moment := 0.0
 var spin := 0.0
@@ -87,13 +88,18 @@ func initialize() -> void:
 	model.rotation_order = EULER_ORDER_ZXY
 	wheel_moment = 0.5 * wheel_mass * pow(tire_radius, 2)
 
+	collision_mask= CollisionLayers.GRID + CollisionLayers.TERRAIN
+	var grid: BlockGrid= get_parent()
+	
 	query.collision_mask= collision_mask
 	var sphere:= SphereShape3D.new()
 	sphere.radius= tire_radius
 	query.shape= sphere
+	query.exclude= [ grid.get_rid() ]
 
 	rest_query.collision_mask= collision_mask
 	rest_query.shape= sphere
+	rest_query.exclude= query.exclude
 
 	max_spring_length = spring_length
 	current_cof = coefficient_of_friction[surface_type]

@@ -3,6 +3,8 @@ extends PlayerStateMachineState
 
 
 var seat: SeatInstance
+var seat_block: GridBlock
+
 var stored_position_relative: Vector3
 #var tween: Tween
 
@@ -19,17 +21,11 @@ func on_enter():
 	
 	player.reset_camera()
 	
-	player.freeze_mode= RigidBody3D.FREEZE_MODE_STATIC
-	player.freeze= true
-	player.collision_shape.disabled= true
-	await get_tree().physics_frame
-
-	player.reparent(seat, false)
-	player.transform= Transform3D.IDENTITY
-	if seat.player_position:
-		player.position= seat.player_position.position
+	player.put_in_seat(seat)
 
 	Global.ui.switch_hotbar(seat.hotbar_layout)
+
+	ServerManager.player_entered_seat.rpc_id(1, get_grid().id, seat_block.local_pos)
 
 
 func on_exit():
@@ -40,32 +36,47 @@ func on_exit():
 	Global.ui.switch_hotbar(player.tool_hotbar)
 	player.action_state_machine.paused= false
 
+	ServerManager.player_left_seat.rpc_id(1)
+
 
 func on_physics_process(_delta: float):
 	if Input.is_action_just_pressed("ui_cancel") or Input.is_action_just_pressed("block_interact"):
-		exit_seat()
+		player.leave_seat(get_grid(), stored_position_relative)
+		seat.entity= null
+		finished.emit()
+
 		return
 
-	var grid_move_vec:= Vector3(\
-		Input.get_axis("strafe_left", "strafe_right"),
-		Input.get_axis("sink", "rise"),
-		Input.get_axis("move_forward", "move_back"))
+	if NetworkManager.is_single_player:
+		var grid_move_vec:= Vector3(\
+			Input.get_axis("strafe_left", "strafe_right"),
+			Input.get_axis("sink", "rise"),
+			Input.get_axis("move_forward", "move_back"))
 
-	if not grid_move_vec.is_zero_approx():
-		DebugHud.send("Local Grid Move Vec", grid_move_vec)
+		if not grid_move_vec.is_zero_approx():
+			DebugHud.send("Local Grid Move Vec", grid_move_vec)
 
-		# TODO account for seat pitch, roll
-		# yaw
-		var global_grid_move_vec: Vector3= grid_move_vec.rotated(seat.basis.y, -seat.global_basis.z.angle_to(get_grid().basis.z))
+			# TODO account for seat pitch, roll
+			# yaw
+			var global_grid_move_vec: Vector3= grid_move_vec.rotated(seat.basis.y, -seat.global_basis.z.angle_to(get_grid().basis.z))
 
-		DebugHud.send("Grid Move Vec", global_grid_move_vec)
+			DebugHud.send("Grid Move Vec", global_grid_move_vec)
 
-		get_grid().request_movement(grid_move_vec, global_grid_move_vec)
+			get_grid().request_movement(grid_move_vec, global_grid_move_vec)
+
+	else:
+		ClientManager.collect_grid_control_inputs(get_grid().id, seat_block.local_pos)
 
 	var roll_axis= Input.get_axis("roll_left", "roll_right")
 	if not is_zero_approx(roll_axis):
 		# TODO account for seat yaw, pitch, roll
-		get_grid().request_rotation(Vector3(0, 0, -deg_to_rad(roll_axis)))
+		var rot_vec:= Vector3(0, 0, -deg_to_rad(roll_axis))
+		if NetworkManager.is_single_player:
+			get_grid().request_rotation(rot_vec)
+		else:
+			ServerManager.grid_control_rotation_request.rpc_id(1, get_grid().id, rot_vec)
+
+
 
 	if Input.is_action_just_pressed("parking_brake"):
 		get_grid().parking_brake= not get_grid().parking_brake
@@ -79,18 +90,10 @@ func on_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		var rot_vec: Vector3= Vector3(-deg_to_rad(event.relative.y), -deg_to_rad(event.relative.x), 0) * GameData.get_mouse_sensitivity()
 		# TODO account for seat yaw, pitch, roll
-		get_grid().request_rotation(rot_vec)
-
-
-func exit_seat():
-	player.reparent(get_tree().current_scene)
-	player.global_position= get_grid().to_global(stored_position_relative)
-	finished.emit()
-
-	await get_tree().physics_frame
-	player.freeze= false
-	player.collision_shape.disabled= false
-	seat.entity= null
+		if NetworkManager.is_single_player:
+			get_grid().request_rotation(rot_vec)
+		else:
+			ServerManager.grid_control_rotation_request.rpc_id(1, get_grid().id, rot_vec)
 
 
 func get_grid()-> BlockGrid:

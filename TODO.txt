@@ -1,7 +1,4 @@
-use new property view update technique for other blocks that require it
-
-sync extra block properties ( only while visible on client, viewer panel etc? )
-	also save selection when updated on single/client
+send requested movement to server ( for keys that are held it should be the events when pressed and then released as "reliable" )
 
 FIX block splitting still wonky. only with anchored? only in multiplayer! split anchored grids stay frozen on client => only run unfreeze check on server and then sync 
 FIX thruster particles on client
@@ -10,9 +7,9 @@ FIX removing multiblock, sync state expects GridBlock
 
 sitting, being parented to grid probably needs to happen on server as well?
 
-network sync plane_fill and blueprint spawning
+network sync plane_fill ( special case? dont just sync spawning each block)
+ and blueprint spawning
 
-send requested movement to server ( for keys that are held it should be the events when pressed and then released as "reliable" )
 
 add sub grids to blueprints
 

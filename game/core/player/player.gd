@@ -4,8 +4,6 @@ extends BasePlayer
 @export var world: World
 @export var equipment: PlayerEquipment
 
-@onready var collision_shape: CollisionShape3D = $CollisionShape3D
-
 @onready var build_raycast: RayCast3D = %"Build Raycast"
 @onready var build_peripheral_entity_shapecast: ShapeCast3D = %"Build Peripheral Entity Shapecast"
 
@@ -57,8 +55,8 @@ func _ready() -> void:
 	SignalManager.player_spawned.emit()
 
 
-func sit(seat: SeatInstance):
-	movement_state_machine.sit(seat)
+func sit(seat_block: GridBlock):
+	movement_state_machine.sit(seat_block)
 
 
 func reset_camera():

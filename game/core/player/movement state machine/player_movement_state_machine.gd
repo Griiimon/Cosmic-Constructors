@@ -17,7 +17,7 @@ func _ready() -> void:
 	player= get_parent()
 	
 	eva_state.landed.connect(landed)
-	seated_state.finished.connect(change_state.bind(eva_state))
+	seated_state.finished.connect(on_left_seat)
 	
 	grid_state.jetpack_enabled.connect(init_eva)
 	grid_state.jumped.connect(jump)
@@ -29,8 +29,9 @@ func _ready() -> void:
 	jump_state.jetpack_enabled.connect(init_eva)
 	
 	
-func sit(seat: SeatInstance):
-	seated_state.seat= seat
+func sit(seat_block: GridBlock):
+	seated_state.seat= seat_block.get_block_instance()
+	seated_state.seat_block= seat_block
 	change_state(seated_state)
 
 
@@ -58,6 +59,10 @@ func jump(impulse: bool= true):
 	if impulse:
 		player.apply_central_impulse(player.global_basis.y * jump_impulse)
 		jump_state.land_cooldown.start()
+
+
+func on_left_seat():
+	change_state(eva_state)
 
 
 func on_pre_enter_state():

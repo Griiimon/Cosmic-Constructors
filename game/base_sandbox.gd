@@ -161,7 +161,7 @@ func sit_in_nearest_seat():
 	for grid: BlockGrid in player.world.grids.get_children():
 		for block: BaseGridBlock in grid.get_blocks():
 			if block.get_block_definition() is SeatBlock:
-				player.sit(block.get_block_instance())
+				player.sit(block.get_grid_block())
 				return
 
 

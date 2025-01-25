@@ -1,6 +1,7 @@
 extends Node
 
 const INTERPOLATION_OFFSET_TICKS= 10
+const CONTROL_INPUTS= [ "strafe_left", "strafe_right", "sink", "rise", "move_forward", "move_back" ]
 
 var ticks: int
 var peer_states: Dictionary
@@ -257,6 +258,33 @@ func receive_grid_anchored_state(grid_id: int, anchored: bool):
 		push_warning("Peer %s received grid anchored state update for non-existing grid %d" % [ NetworkManager.peer_id, grid_id ])
 		return
 	Global.game.world.get_grid(grid_id).is_anchored= anchored
+
+
+func collect_grid_control_inputs(grid_id: int, seat_pos: Vector3i):
+	var input_vec: Array[int]
+	var requires_sync:= false
+	
+	for action: String in CONTROL_INPUTS:
+		if Input.is_action_just_pressed(action):
+			input_vec.append(1)
+			requires_sync= true
+		elif Input.is_action_just_released(action):
+			input_vec.append(-1)
+			requires_sync= true
+		else:
+			input_vec.append(0)
+
+	if requires_sync:
+		ServerManager.grid_control_movement_request.rpc_id(1, grid_id, seat_pos, input_vec)
+
+
+func force_exit_seat():
+	if not Global.player: return
+	var state_machine: PlayerMovementStateMachine= Global.player.movement_state_machine
+	if not state_machine.seated_state.is_current_state():
+		return
+	
+	state_machine.on_left_seat()
 
 
 func get_sender_id()-> int:

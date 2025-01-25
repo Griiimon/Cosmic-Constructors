@@ -1,6 +1,8 @@
 class_name BasePlayer
 extends Entity
 
+@onready var collision_shape: CollisionShape3D = $CollisionShape3D
+
 @onready var model: PlayerModel = %Model
 
 var last_position: Vector3
@@ -38,6 +40,28 @@ func wear_equipment(item: PlayerEquipmentItem)-> PlayerEquipmentObject:
 		model.equipment.add_child(obj)
 		return obj
 	return null
+
+
+func put_in_seat(seat: SeatInstance): 
+	freeze_mode= RigidBody3D.FREEZE_MODE_STATIC
+	freeze= true
+	collision_shape.disabled= true
+	await get_tree().physics_frame
+
+	reparent(seat, false)
+	transform= Transform3D.IDENTITY
+	if seat.player_position:
+		position= seat.player_position.position
+
+
+func leave_seat(grid: BlockGrid= null, exit_pos= null):
+	reparent(get_tree().current_scene)
+	if grid and exit_pos:
+		global_position= grid.to_global(exit_pos)
+
+	await get_tree().physics_frame
+	freeze= false
+	collision_shape.disabled= false
 
 
 func get_peer_id()-> int:

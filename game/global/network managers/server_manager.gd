@@ -11,6 +11,7 @@ var ticks: int
 var player_instances: Dictionary
 var player_data: Dictionary
 
+var control_movement_requests: Dictionary
 
 
 
@@ -35,11 +36,34 @@ func host(port: int, game_scene: PackedScene):
 
 
 func _physics_process(_delta: float) -> void:
+	var world: World= Global.game.world
+	
 	if ticks % 3 == 0:
 		var world_state: Dictionary
 		WorldSyncState.add_player_states(world_state, player_states.values())
 		WorldSyncState.add_grid_states(world_state, get_grid_states())
 		ClientManager.receive_world_state.rpc(world_state)
+
+	for grid_id: int in control_movement_requests.keys():
+		if not world.has_grid(grid_id): continue
+		var request: Dictionary= control_movement_requests[grid_id]
+		var grid: BlockGrid= world.get_grid(grid_id)
+		var seat_block: GridBlock= grid.get_block_local(request["seat"])
+		if not seat_block: continue
+		var seat: SeatInstance= seat_block.get_block_instance()
+		
+		var arr: Array[int]= request["input"]
+		var grid_move_vec:= Vector3(arr[1] - arr[0], arr[3] - arr[2], arr[5] - arr[4])
+		
+		DebugHud.send("Local Grid Move Vec", grid_move_vec)
+
+		# TODO account for seat pitch, roll
+		# yaw
+		var global_grid_move_vec: Vector3= grid_move_vec.rotated(seat.basis.y, -seat.global_basis.z.angle_to(grid.basis.z))
+
+		DebugHud.send("Grid Move Vec", global_grid_move_vec)
+
+		grid.request_movement(grid_move_vec, global_grid_move_vec)
 
 	for grid: BlockGrid in Global.game.world.get_grids():
 		DebugHud.send(grid.name, Utils.get_short_vec3(grid.global_position))
@@ -214,6 +238,60 @@ func sync_grid_anchored_state(grid: BlockGrid):
 	# DESYNC
 	# FIXME send with timestamp: if multiple for same grid are send in short succession.. bad
 	ClientManager.receive_grid_anchored_state.rpc(grid.id, grid.is_anchored)
+
+
+@rpc("any_peer", "reliable")
+func grid_control_movement_request(grid_id: int, seat_pos: Vector3i, input_vec: Array[int]):
+	var world: World= Global.game.world
+	if not world.has_grid(grid_id): return
+	var has_pressed_keys: bool= input_vec.any(func(x): return x == 1)
+
+	if not control_movement_requests.has(grid_id):
+		if not has_pressed_keys: return
+		control_movement_requests[grid_id]= {}
+		control_movement_requests[grid_id]["seat"]= seat_pos
+		control_movement_requests[grid_id]["input"]= input_vec
+	else:
+		for i in ClientManager.CONTROL_INPUTS.size():
+			if input_vec[i] == 0: continue
+			var val: int= clampi(input_vec[i], 0, 1)
+			control_movement_requests[grid_id]["input"][i]= val
+
+	has_pressed_keys= control_movement_requests[grid_id]["input"].any(func(x): return x == 1)
+
+	if not has_pressed_keys:
+		control_movement_requests.erase(grid_id)
+		DebugHud.send("Local Grid Move Vec", Vector3.ZERO)
+		DebugHud.send("Grid Move Vec", Vector3.ZERO)
+
+
+@rpc("any_peer", "reliable")
+func grid_control_rotation_request(grid_id: int, rot_vec: Vector3):
+	var world: World= Global.game.world
+	if not world.has_grid(grid_id): return
+	world.get_grid(grid_id).request_rotation(rot_vec)
+
+
+@rpc("any_peer", "reliable")
+func player_entered_seat(grid_id: int, seat_pos: Vector3i):
+	var world: World= Global.game.world
+	var player: BasePlayer= player_instances[get_sender_id()]
+	if not world.has_grid(grid_id):
+		ClientManager.force_exit_seat.rpc_id(get_sender_id())
+		return
+	var grid= world.get_grid(grid_id)
+	var seat_block: GridBlock= grid.get_block_local(seat_pos)
+	if not seat_block:
+		ClientManager.force_exit_seat.rpc_id(get_sender_id())
+		return
+		
+	player.put_in_seat(seat_block.get_block_instance())
+
+
+@rpc("any_peer", "reliable")
+func player_left_seat():
+	var player: BasePlayer= player_instances[get_sender_id()]
+	player.leave_seat()
 
 
 func get_sender_id()-> int:

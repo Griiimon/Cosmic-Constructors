@@ -20,7 +20,7 @@ func on_restored(grid: BlockGrid, _grid_block: GridBlock, restore_data: Dictiona
 
 func interact(grid: BlockGrid, grid_block: GridBlock, player: Player):
 	if not entity:
-		player.sit(self)
+		player.sit(grid_block)
 		SignalManager.player_seated.emit(grid, grid_block)
 
 

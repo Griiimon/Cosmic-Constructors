@@ -133,6 +133,8 @@ func remove_block():
 		var grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_point) 
 		if not grid_block: return
 		
+		grid_block= grid_block.get_grid_block()
+		
 		if NetworkManager.is_client:
 			ClientManager.send_sync_event(EventSyncState.Type.REMOVE_BLOCK,\
 			 [grid.id, grid_block.local_pos])

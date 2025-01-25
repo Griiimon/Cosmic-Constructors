@@ -25,7 +25,8 @@ func on_enter():
 
 	Global.ui.switch_hotbar(seat.hotbar_layout)
 
-	ServerManager.player_entered_seat.rpc_id(1, get_grid().id, seat_block.local_pos)
+	if NetworkManager.is_client:
+		ServerManager.player_entered_seat.rpc_id(1, get_grid().id, seat_block.local_pos)
 
 
 func on_exit():
@@ -36,7 +37,8 @@ func on_exit():
 	Global.ui.switch_hotbar(player.tool_hotbar)
 	player.action_state_machine.paused= false
 
-	ServerManager.player_left_seat.rpc_id(1)
+	if NetworkManager.is_client:
+		ServerManager.player_left_seat.rpc_id(1)
 
 
 func on_physics_process(_delta: float):

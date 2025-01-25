@@ -302,10 +302,15 @@ func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i):
 # to be called only by BaseGridBlock.destroy()
 func remove_block(block: BaseGridBlock):
 	if not NetworkManager.is_client:
+		var block_inst: BlockInstance= block.get_block_instance()
+		if block_inst:
+			if block_inst == main_cockpit:
+				search_for_new_main_cockpit([block as GridBlock])
+	
 		for neighbor_block in get_block_neighbor_blocks(block.local_pos):
-			var block_inst: BlockInstance= neighbor_block.get_block_instance()
-			if block_inst:
-				block_inst.on_neighbor_removed(self, neighbor_block, block.local_pos)
+			var neighbor_inst: BlockInstance= neighbor_block.get_block_instance()
+			if neighbor_inst:
+				neighbor_inst.on_neighbor_removed(self, neighbor_block, block.local_pos)
 
 	if not (block is VirtualGridBlock):
 		#shape_owner_remove_shape(0, shape_owner_get_shape_index(0, 
@@ -334,9 +339,10 @@ func run_integrity_check():
 	
 	var ff_blocks: Array[Vector3i]= flood_fill(origin_block.local_pos)
 
+	var did_split:= false
 	if ff_blocks.size() < blocks.size():
 		split(get_block_positions_without(ff_blocks), self)
-
+		did_split= true
 
 	if NetworkManager.is_client: return
 
@@ -345,6 +351,10 @@ func run_integrity_check():
 			unfreeze_check()
 	else:
 		update_properties()
+	
+	if did_split:
+		build_block_types_dict()
+		search_for_new_main_cockpit()
 
 
 func split(split_blocks: Array[Vector3i], orig_grid: BlockGrid):
@@ -369,12 +379,12 @@ func split(split_blocks: Array[Vector3i], orig_grid: BlockGrid):
 	
 	new_grid.run_integrity_check()
 	new_grid.build_block_types_dict()
+	new_grid.search_for_new_main_cockpit()
 	
 	new_grid.freeze= orig_grid.freeze
 	if new_grid.freeze:
 		new_grid.unfreeze_check()
 	new_grid.update_properties()
-	build_block_types_dict()
 
 
 func update_properties():
@@ -436,6 +446,18 @@ func build_block_types_dict():
 		if not block_types.has(block.get_block_definition()):
 			block_types[block.get_block_definition()]= []
 		block_types[block.get_block_definition()].append(block)
+
+
+func search_for_new_main_cockpit(exlude_list: Array[GridBlock]= []):
+	var new_main_cockpit: SeatInstance= null
+	for block in blocks.values():
+		if not block in exlude_list:
+			var block_inst: BlockInstance= block.get_block_instance()
+			if block_inst is SeatInstance:
+				if not new_main_cockpit or block_inst == main_cockpit:
+					new_main_cockpit= block_inst
+	
+	main_cockpit= new_main_cockpit
 
 
 func take_damage(damage: Damage, coll_shape: CollisionShape3D):

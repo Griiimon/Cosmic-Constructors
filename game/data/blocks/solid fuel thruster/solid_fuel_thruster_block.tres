@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_8vkei")
 burn_duration = 30.0
-thrust = 20000.0
+thrust = 200000.0
 force_offset = false
 size = Vector3i(1, 1, 1)
 mass = 100.0

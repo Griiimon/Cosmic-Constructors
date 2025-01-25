@@ -20,7 +20,7 @@ void fragment() {
 	NORMAL_MAP= normalColor.rgb;
 	//NORMAL_MAP_DEPTH= 10.0;
 	NORMAL_MAP_DEPTH= normalScaleArr[index];
-	
+
 /*	METALLIC= 0.5;
 	SPECULAR= 0.5;
 	ROUGHNESS= 0.5; */

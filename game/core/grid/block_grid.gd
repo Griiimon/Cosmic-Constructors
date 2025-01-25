@@ -23,10 +23,11 @@ var inertial_dampeners: bool= false
 var parking_brake: bool= false
 var is_anchored: bool= false:
 	set(b):
+		if freeze != b and not NetworkManager.is_client:
+			freeze= b
 		if is_anchored == b: return
 		is_anchored= b
-		if NetworkManager.is_client: return
-		freeze= is_anchored
+		#if NetworkManager.is_client: return
 		if NetworkManager.is_server and not Global.game.world.is_loading:
 			ServerManager.sync_grid_anchored_state(self)
 
@@ -195,6 +196,7 @@ func _physics_process(delta: float) -> void:
 	DebugPanel.send(self, "Mass", mass)
 	DebugPanel.send(self, "Blocks", blocks.size())
 	DebugPanel.send(self, "Freeze", freeze)
+	DebugPanel.send(self, "Is Anchored", is_anchored)
 
 	if NetworkManager.is_client:
 		if requires_integrity_check:
@@ -411,7 +413,7 @@ func unfreeze_check():
 	var query:= PhysicsShapeQueryParameters3D.new()
 	query.collision_mask= CollisionLayers.TERRAIN
 	
-	#prints("Run unfreeze check for %s with %d shapes" % [str(name), collision_shapes.size()])
+	prints("Run unfreeze check for %s with %d shapes" % [str(name), collision_shapes.size()])
 	
 	for coll_shape: CollisionShape3D in collision_shapes:
 		query.transform= coll_shape.global_transform
@@ -419,7 +421,7 @@ func unfreeze_check():
 		if space_state.intersect_shape(query, 1):
 			return
 	
-	#print(" Success")
+	print(" Success")
 	is_anchored= false
 
 

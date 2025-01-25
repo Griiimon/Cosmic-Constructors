@@ -7,7 +7,7 @@ func _init(_name: String, _callback):
 	super(_name, _callback, false)
 
 
-func toggle(grid: BlockGrid, grid_block: GridBlock, sync: bool= true):
+func toggle(_grid: BlockGrid, _grid_block: GridBlock, _sync: bool= true):
 	do_callback()
 
 func increase(grid: BlockGrid, grid_block: GridBlock, _modifier: int, sync: bool= true):

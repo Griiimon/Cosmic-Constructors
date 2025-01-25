@@ -40,7 +40,7 @@ func set_variant(grid: BlockGrid, grid_block: GridBlock, val: Variant, sync: boo
 	var index: int= enum_dict.values().find(int(val))
 	assert(index != -1)
 	current_key= enum_dict.keys()[index]
-
+	super(grid, grid_block, val, sync)
 
 func get_variant()-> Variant:
 	return get_value_i()

@@ -25,8 +25,8 @@ func serialize()-> Dictionary:
 	 "grid_id" : grid_id }
 
 
-static func deserialize(key: int, data: Dictionary)-> HotkeyAssignmentBlockProperty:
-	var inst:= HotkeyAssignmentBlockProperty.new(key, null, null)
+static func deserialize(_key: int, data: Dictionary)-> HotkeyAssignmentBlockProperty:
+	var inst:= HotkeyAssignmentBlockProperty.new(_key, null, null)
 	inst.block_pos= str_to_var("Vector3i" + data["block_pos"])
 	inst.property_name= data["property"]
 	inst.grid_id= data["grid_id"]

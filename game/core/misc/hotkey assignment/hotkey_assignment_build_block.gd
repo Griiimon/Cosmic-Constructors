@@ -14,8 +14,8 @@ func serialize()-> Dictionary:
 	return { "assignment_type" : (get_script() as Script).get_global_name(), "block" : block_definition.get_display_name() }
 
 
-static func deserialize(key: int, data: Dictionary)-> HotkeyAssignmentBuildBlock:
-	return HotkeyAssignmentBuildBlock.new(key, GameData.get_block_definition(data["block"]))
+static func deserialize(_key: int, data: Dictionary)-> HotkeyAssignmentBuildBlock:
+	return HotkeyAssignmentBuildBlock.new(_key, GameData.get_block_definition(data["block"]))
 	
 
 func get_as_text(_grid: BlockGrid= null)-> String:

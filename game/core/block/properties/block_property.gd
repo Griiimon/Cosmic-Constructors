@@ -54,29 +54,29 @@ func get_value_i()-> int:
 
 
 func toggle(grid: BlockGrid, grid_block: GridBlock, sync: bool= true):
-	if sync: sync(grid, grid_block)
+	if sync: do_sync(grid, grid_block)
 	do_callback()
 
 
-func increase(grid: BlockGrid, grid_block: GridBlock, _modifier: int, sync: bool= true):
+func increase(_grid: BlockGrid, _grid_block: GridBlock, _modifier: int, _sync: bool= true):
 	do_callback()
 
 
-func decrease(grid: BlockGrid, grid_block: GridBlock, _modifier: int, sync: bool= true):
+func decrease(_grid: BlockGrid, _grid_block: GridBlock, _modifier: int, _sync: bool= true):
 	do_callback()
 
 
 func change_value(grid: BlockGrid, grid_block: GridBlock, _modifier: int, _delta: int, sync: bool= true):
-	if sync: sync(grid, grid_block)
+	if sync: do_sync(grid, grid_block)
 	do_callback()
 
 
 func set_variant(grid: BlockGrid, grid_block: GridBlock, _val: Variant, sync: bool= true):
-	if sync: sync(grid, grid_block)
+	if sync: do_sync(grid, grid_block)
 	do_callback()
 
 
-func sync(grid: BlockGrid, grid_block: GridBlock, auto: bool= true):
+func do_sync(grid: BlockGrid, grid_block: GridBlock, auto: bool= true):
 	if NetworkManager.is_single_player: return
 	if auto and not auto_sync: return
 	

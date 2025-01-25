@@ -6,7 +6,7 @@ enum ToggleBehavior { FLIP, INCREASE, DECREASE }
 var f: float= 0.0
 var toggle_behavior: ToggleBehavior
 var step_size: float= 0.01
-var range= null
+var value_range= null
 var can_toggle: bool= true
 
 
@@ -38,8 +38,8 @@ func toggle(grid: BlockGrid, grid_block: GridBlock, sync: bool= true):
 		ToggleBehavior.DECREASE:
 			decrease(grid, grid_block, 1, sync)
 	
-	if range:
-		f= clamp(f, (range as Vector2).x, (range as Vector2).y)
+	if value_range:
+		f= clamp(f, (value_range as Vector2).x, (value_range as Vector2).y)
 
 
 func set_variant(grid: BlockGrid, grid_block: GridBlock, val: Variant, sync: bool= true):
@@ -62,12 +62,12 @@ func change_value(grid: BlockGrid, grid_block: GridBlock, modifier: int, delta: 
 	if is_locked: return
 	f+= step_size * modifier * delta
 	do_clamp()
-	super(grid, grid_block, modifier, delta)
+	super(grid, grid_block, modifier, delta, sync)
 
 
 func do_clamp():
-	if range:
-		f= clampf(f, range.x, range.y)
+	if value_range:
+		f= clampf(f, value_range.x, value_range.y)
 
 
 func get_variant()-> Variant:
@@ -89,7 +89,7 @@ func set_step_size(step: float):
 
 
 func set_range(min_range: float, max_range: float):
-	range= Vector2(min_range, max_range)
+	value_range= Vector2(min_range, max_range)
 	return self
 
 

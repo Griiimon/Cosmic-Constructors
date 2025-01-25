@@ -190,8 +190,8 @@ func receive_world_state(data: Dictionary):
 		
 		store_peer_state(peer_state)
 
-	var grid_states: Array= WorldSyncState.parse_grid_states(data)
-	for grid_state: Dictionary in grid_states:
+	var new_grid_states: Array= WorldSyncState.parse_grid_states(data)
+	for grid_state: Dictionary in new_grid_states:
 		store_grid_state(grid_state)
 
 

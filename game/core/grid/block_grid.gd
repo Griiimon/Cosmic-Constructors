@@ -311,10 +311,12 @@ func remove_block(block: BaseGridBlock):
 		#shape_owner_remove_shape(0, shape_owner_get_shape_index(0, 
 		collision_shapes.erase(block.collision_shape)
 		block.collision_shape.queue_free()
+
+		if not NetworkManager.is_client:
+			block_types[block.get_block_definition()].erase(block)
+
 	blocks.erase(block.local_pos)
 
-	if not NetworkManager.is_client:
-		block_types[block.get_block_definition()].erase(block)
 	
 	requires_integrity_check= true
 
@@ -366,11 +368,13 @@ func split(split_blocks: Array[Vector3i], orig_grid: BlockGrid):
 		blocks.erase(block_pos)
 	
 	new_grid.run_integrity_check()
+	new_grid.build_block_types_dict()
 	
 	new_grid.freeze= orig_grid.freeze
 	if new_grid.freeze:
 		new_grid.unfreeze_check()
 	new_grid.update_properties()
+	build_block_types_dict()
 
 
 func update_properties():
@@ -423,6 +427,15 @@ func unfreeze_check():
 	
 	print(" Success")
 	is_anchored= false
+
+
+func build_block_types_dict():
+	block_types.clear()
+	for block: BaseGridBlock in blocks.values():
+		if block is VirtualGridBlock: continue
+		if not block_types.has(block.get_block_definition()):
+			block_types[block.get_block_definition()]= []
+		block_types[block.get_block_definition()].append(block)
 
 
 func take_damage(damage: Damage, coll_shape: CollisionShape3D):

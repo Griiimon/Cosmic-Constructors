@@ -5,5 +5,5 @@
 
 [resource]
 script = ExtResource("1_rpwx5")
-thrust = 75000.0
+thrust = 50000.0
 scene = ExtResource("1_bhsc6")

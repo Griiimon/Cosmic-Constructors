@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Cosmic Constructors"
-run/main_scene="res://game/test/custom planet test/custom_planet_test.tscn"
+run/main_scene="res://game/test/vehicle test/vehicle_test.tscn"
 config/features=PackedStringArray("4.3", "Double Precision", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -286,6 +286,7 @@ blueprint={
 3d_physics/layer_11="Solid Ore Pile"
 3d_physics/layer_12="Pullable"
 3d_physics/layer_13="Lod Activated"
+3d_physics/layer_14="Gravity Gauge"
 
 [physics]
 

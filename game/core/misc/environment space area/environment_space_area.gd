@@ -4,4 +4,4 @@ extends Area3D
 
 
 func _ready() -> void:
-	collision_mask= CollisionLayers.get_all_body_layers()
+	collision_mask= CollisionLayers.get_all_body_layers() + CollisionLayers.GRAVITY_GAUGE

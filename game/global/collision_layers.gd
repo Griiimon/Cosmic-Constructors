@@ -11,6 +11,7 @@ const FLUID= 128
 const ROPE= 512
 const PULLABLE= 2048
 const LOD_ACTIVATED= 4096
+const GRAVITY_GAUGE= 8192
 
 
 

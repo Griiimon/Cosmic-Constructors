@@ -339,9 +339,10 @@ func run_integrity_check():
 	
 	var ff_blocks: Array[Vector3i]= flood_fill(origin_block.local_pos)
 
+	
 	var did_split:= false
 	if ff_blocks.size() < blocks.size():
-		split(get_block_positions_without(ff_blocks), self)
+		split(get_block_positions_without(ff_blocks))
 		did_split= true
 
 	if NetworkManager.is_client: return
@@ -357,7 +358,7 @@ func run_integrity_check():
 		search_for_new_main_cockpit()
 
 
-func split(split_blocks: Array[Vector3i], orig_grid: BlockGrid):
+func split(split_blocks: Array[Vector3i]):
 	print("Splitting of %d Blocks" % split_blocks.size())
 	var new_grid: BlockGrid= world.add_grid(position, rotation)
 	
@@ -381,7 +382,7 @@ func split(split_blocks: Array[Vector3i], orig_grid: BlockGrid):
 	new_grid.build_block_types_dict()
 	new_grid.search_for_new_main_cockpit()
 	
-	new_grid.freeze= orig_grid.freeze
+	new_grid.freeze= self.freeze
 	if new_grid.freeze:
 		new_grid.unfreeze_check()
 	new_grid.update_properties()

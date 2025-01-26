@@ -1,4 +1,4 @@
-class_name PlayerEvaState
+class_name PlayerEvaStateFake
 extends PlayerStateMachineState
 
 signal landed
@@ -22,7 +22,7 @@ signal landed
 @export var yaw_factor: float= 1.0
 @export var pitch_factor: float= 1.0 
 @export var roll_factor: float= 1.0
-@export var up_vector_realism_ration: float= 0.2
+@export var up_vector_align_speed: float= 5
  
 @export var boost_factor: float= 2.0
 
@@ -130,7 +130,7 @@ func on_integrate_forces(state: PhysicsDirectBodyState3D):
 #
 	#state.transform.basis= state.transform.basis * local_basis
 
-	dynamic_up_vector= lerp(dynamic_up_vector, state.transform.basis.y, state.step * 5).normalized()
+	dynamic_up_vector= lerp(dynamic_up_vector, state.transform.basis.y, state.step * up_vector_align_speed).normalized()
 	
 	state.transform.basis= state.transform.basis.rotated(dynamic_up_vector, deg_to_rad(yaw_input) * yaw_factor)
 	state.transform.basis= state.transform.basis.rotated(state.transform.basis.x, deg_to_rad(pitch_input) * pitch_factor)

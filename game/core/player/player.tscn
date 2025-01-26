@@ -4,9 +4,9 @@
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
 [ext_resource type="Script" path="res://game/core/player/movement state machine/player_movement_state_machine.gd" id="2_615c1"]
 [ext_resource type="PackedScene" uid="uid://ctdtmf0rnptdc" path="res://game/core/player/third person camera/third_person_camera.tscn" id="3_2hljo"]
-[ext_resource type="Script" path="res://game/core/player/movement state machine/player_eva_state.gd" id="3_o2tyv"]
 [ext_resource type="Script" path="res://game/core/player/movement state machine/player_seated_state.gd" id="4_aaxal"]
 [ext_resource type="Script" path="res://game/core/player/action state machine/player_action_state_machine.gd" id="4_r1eyq"]
+[ext_resource type="Script" path="res://game/core/player/movement state machine/player_eva_state_realistic.gd" id="5_5ampj"]
 [ext_resource type="Script" path="res://game/core/player/action state machine/player_build_state.gd" id="5_avkim"]
 [ext_resource type="Script" path="res://game/core/player/movement state machine/player_grid_move_state.gd" id="5_ri51i"]
 [ext_resource type="Script" path="res://game/core/player/action state machine/player_action_idle_state.gd" id="6_3y3c5"]
@@ -181,11 +181,11 @@ jump_impulse = 250.0
 current_state = NodePath("EVA")
 
 [node name="EVA" type="Node" parent="Movement State Machine" index="0"]
-script = ExtResource("3_o2tyv")
+script = ExtResource("5_5ampj")
 jetpack_active = true
 dampeners_active = true
-yaw_factor = 0.2
-pitch_factor = 0.2
+rotation_speed = 1000.0
+roll_factor = 5.0
 boost_factor = 3.0
 damping_factor = 100.0
 min_land_velocity = 0.2

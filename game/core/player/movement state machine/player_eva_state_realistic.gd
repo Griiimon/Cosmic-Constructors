@@ -1,5 +1,4 @@
-# Angular velocity from yawing while pitching causes too much roll
-class_name PlayerEvaStateRealistic
+class_name PlayerEvaState
 extends PlayerStateMachineState
 
 signal landed
@@ -24,6 +23,7 @@ signal landed
 @export var yaw_factor: float= 1.0
 @export var pitch_factor: float= 1.0 
 @export var roll_factor: float= 1.0
+@export var up_vector_align_speed: float= 5
 
 #@export var acceleration: float= 10.0
 @export var boost_factor: float= 2.0
@@ -40,6 +40,8 @@ var roll_input: float
 
 var move_vec: Vector3
 
+var dynamic_up_vector: Vector3
+
 
 
 func on_enter():
@@ -49,8 +51,10 @@ func on_enter():
 	var head_forward: Vector3= -player.head.global_basis.z
 	player.reset_camera()
 	player.look_at(player.global_position + head_forward, player.global_basis.y)
+	dynamic_up_vector= player.global_basis.y
 
 	player.angular_damp= angular_damping
+
 	update_gravity()
 
 
@@ -72,8 +76,10 @@ func on_physics_process(delta: float):
 
 	roll_input= Input.get_axis("roll_right", "roll_left")
 
+	dynamic_up_vector= lerp(dynamic_up_vector, player.global_basis.y, delta * up_vector_align_speed).normalized()
+
+	var quat_yaw:= Quaternion(dynamic_up_vector, deg_to_rad(yaw_input) * yaw_factor)
 	var quat_pitch:= Quaternion(player.global_basis.x, deg_to_rad(pitch_input) * pitch_factor)
-	var quat_yaw:= Quaternion(player.global_basis.y, deg_to_rad(yaw_input) * yaw_factor)
 	var quat_roll:= Quaternion(player.global_basis.z, deg_to_rad(roll_input) * roll_factor)
 
 	pitch_input= 0

@@ -6,6 +6,7 @@ signal updated
 @export var mesh_size: Vector2
 @export var volume_factor: float
 @export var max_height: float= 1.0
+@export var flip_dot: float= -0.1
 
 @export var orig_shader_material: ShaderMaterial
 @export var base_noise: FastNoiseLite
@@ -18,8 +19,11 @@ signal updated
 
 @onready var area_collision_shape: CollisionShape3D = $"Catch Area/Area CollisionShape"
 
+@onready var gravity_gauge: CollisionObject3D = $"Gravity Gauge"
 @onready var static_box_collision_shape: CollisionShape3D = $"StaticBody3D/Static Box CollisionShape"
 @onready var static_capsule_collision_shape: CollisionShape3D = $"StaticBody3D/Static Capsule CollisionShape"
+
+@onready var drop_cooldown: Timer = $"Drop Cooldown"
 
 
 var noises: Array[FastNoiseLite]
@@ -42,6 +46,13 @@ func _ready() -> void:
 	(static_capsule_collision_shape.shape as CapsuleShape3D).radius= min(mesh_size.x, mesh_size.y)
 	(static_capsule_collision_shape.shape as CapsuleShape3D).height= 0.01
 
+
+func _physics_process(delta: float) -> void:
+	if is_empty(): return
+	
+	if is_flipped() and drop_cooldown.is_stopped():
+		drop_item(Global.game.world)
+		drop_cooldown.start()
 
 func update():
 	update_ratios()
@@ -185,10 +196,17 @@ func sub_raw_item(material: RawItem)-> int:
 	return count
 
 
+func drop_item(world: World)-> WorldItemInstance:
+	var pile_material: RawItem= get_dominant_material()
+	var inv_item:= InventoryItem.new(pile_material, sub_raw_item(pile_material))
+	var spawn_pos: Vector3= global_position + global_basis.y * (get_mesh_height() + 0.5)
+	return world.spawn_inventory_item(inv_item, spawn_pos)
+	
+
 func _on_catch_area_body_entered(body: Node3D) -> void:
 	assert(body is WorldItemInstance)
 	var item_inst: WorldItemInstance= body
-	if item_inst.inv_item.item as RawItem:
+	if item_inst.inv_item.item as RawItem and not is_flipped():
 		add_inv_item(item_inst.inv_item)
 		item_inst.queue_free()
 
@@ -215,3 +233,12 @@ func get_mass()-> int:
 
 func is_full()-> bool:
 	return get_mesh_height() >= max_height
+
+
+func is_empty()-> bool:
+	return materials.is_empty()
+
+
+func is_flipped()-> bool:
+	var grav_dir: Vector3= gravity_gauge.get_gravity().normalized()
+	return grav_dir.dot(global_basis.y) > flip_dot

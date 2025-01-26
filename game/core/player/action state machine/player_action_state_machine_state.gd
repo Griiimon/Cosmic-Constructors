@@ -33,9 +33,7 @@ func interaction_logic():
 			else:
 				var ore_pile: OrePile= collider.get_parent()
 				assert(ore_pile)
-				var pile_material: RawItem= ore_pile.get_dominant_material()
-				var inv_item:= InventoryItem.new(pile_material, ore_pile.sub_raw_item(pile_material))
-				var item_instance: WorldItemInstance= player.world.spawn_inventory_item(inv_item, ore_pile.global_position)
+				var item_instance: WorldItemInstance= ore_pile.drop_item(player.world)
 				player.action_state_machine.pick_up_item(item_instance)
 			return
 

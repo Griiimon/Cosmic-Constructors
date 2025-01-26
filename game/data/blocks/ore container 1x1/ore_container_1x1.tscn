@@ -29,6 +29,10 @@ _surfaces = [{
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_s85p2")
+shader_parameter/metallicArr = null
+shader_parameter/specularArr = null
+shader_parameter/roughnessArr = null
+shader_parameter/normalScaleArr = null
 
 [node name="Ore Container 1x1" type="Node3D"]
 script = ExtResource("1_c7i30")

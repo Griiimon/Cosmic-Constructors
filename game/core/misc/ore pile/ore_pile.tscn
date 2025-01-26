@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfyvgxovt2bui"]
+[gd_scene load_steps=9 format=3 uid="uid://dfyvgxovt2bui"]
 
 [ext_resource type="Script" path="res://game/core/misc/ore pile/ore_pile.gd" id="1_tt2w2"]
 [ext_resource type="Material" uid="uid://ig8oh1gcrbjw" path="res://game/core/misc/ore pile/ore_pile_material.tres" id="2_73o02"]
@@ -20,6 +20,8 @@ size = Vector3(1, 0.1, 1)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_53aqb"]
 height = 1.2
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_16sck"]
+
 [node name="Ore Pile" type="Node3D"]
 script = ExtResource("1_tt2w2")
 mesh_size = Vector2(1, 1)
@@ -40,7 +42,7 @@ monitorable = false
 shape = SubResource("BoxShape3D_0rrwc")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-collision_layer = 1024
+collision_layer = 9216
 collision_mask = 64
 
 [node name="Static Box CollisionShape" type="CollisionShape3D" parent="StaticBody3D"]
@@ -50,5 +52,19 @@ disabled = true
 [node name="Static Capsule CollisionShape" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("CapsuleShape3D_53aqb")
 disabled = true
+
+[node name="Gravity Gauge" type="RigidBody3D" parent="."]
+collision_layer = 8192
+collision_mask = 0
+can_sleep = false
+freeze = true
+freeze_mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity Gauge"]
+shape = SubResource("SphereShape3D_16sck")
+
+[node name="Drop Cooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 
 [connection signal="body_entered" from="Catch Area" to="." method="_on_catch_area_body_entered"]

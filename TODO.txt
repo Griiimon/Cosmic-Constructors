@@ -1,17 +1,23 @@
-transfer block_types when splitting grids => just rebuild 
+change main_grid_id to weakref(grid_ptr)
+
+on_grid_changed() in piston recalculate limits and initial offset when changing joint node?
 
 network sync plane_fill ( special case? dont just sync spawning each block)
  and blueprint spawning ( send entire grid at once )
 
 add sub grids to blueprints
 
-vehicle wheel should work on grids
-
 desync test: hash all grid ids + blocks dict and compare to server
 
 test peer disconnection from server. may not need any handling
 
+serialize ore pile + ore container
 
+
+when serializing blueprints dont serialize content of blocks like ore container, gas tank..
+
+save/load ObjectEntity
+ 
 client not allowed to enter occupied seat
 
 What happens with particles when a player joins while the thruster is already active
@@ -40,12 +46,13 @@ keep available keys + short desc in a dictionary per action state for quick help
 
 on_grid_changed() in BlockInstance callback if grid split results in new grid. mostly for joint reparenting 
 
-network grid syncing
 
 thrusters particle TARGET direction seems to be in global coords
 
 Components can_* functions just use Callable refs like with FluidConsumer
 
+
+also close property viewer panel via distance threshold
 
 persistent PlayerData ( like hotbars ) outside of Player ( entity ) class
 
@@ -55,11 +62,6 @@ tree spawner
 
 wooden workbench
 
-ore piles: make it spill items when rotated
-
-load blueprints: use half transparent boxes per grid block )
-
-save physical/world items
 
 
 FIX handles hard to grab when facing slightly down
@@ -214,7 +216,7 @@ FIX grabbing handles on same grid player is standing on should have no effect. A
 FIX grabbing handles weight calculation for all connected grids => make grabbing joint-based
 FIX suspension jitter with joints
 FIX build block placement after placing custom shape
-FIX world.json sometimes get corrupted ( due to multiple saves? ) 
+FIX hinge snaps back to ang 0 when deactivated => because of grid deletions/splitting?
 
 INVESTIGATE possible to pick up item from floor and from OreContainer with one F push in the same frame. almost seemed so
 
@@ -224,6 +226,7 @@ IS FIXED?
 	FIX ghost overlays custom shape blocks
 	FIX empty grids cause save game corruption?
 	FIX block splitting still wonky in multiplayer?
+	FIX world.json sometimes get corrupted ( due to multiple saves? ) 
 
 
 
@@ -266,6 +269,7 @@ SCENARIOS
 Mini Factory and logistics:
 	drill [coal and] iron
 	transport with wheelbarrow to factory
+	build elevator to bring wheelbarrow up to furnace intake
 	unload into furnace
 	conveyor iron ingots to wooden pallet
 	electric 3r suspension forklift pallet onto truck
@@ -324,6 +328,9 @@ Survival (and PVP):
 Wave Defense:
 	...
 
+
+Artillery / Ballerburg:
+	...
 
 
 NEW MECHANICS

@@ -86,6 +86,7 @@ func on_set_active():
 	if active.is_true():
 		joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_LINEAR_LIMIT_LOWER, 0 - initial_distance)
 		joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_LINEAR_LIMIT_UPPER, max_distance - initial_distance)
+		change_velocity()
 	else:
 		while not joint.node_a:
 			await get_tree().physics_frame

@@ -31,8 +31,12 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 
 func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
 	restore_grid_connection.call_deferred(grid, grid_block, restore_data["sub_grid_id"])
-	
-	
+
+
+func on_grid_changed():
+	joint.node_a= joint.get_path_to(get_parent())
+
+
 func restore_grid_connection(grid: BlockGrid, _grid_block: GridBlock, sub_grid_id: int):
 	sub_grid= grid.world.get_grid(sub_grid_id)
 	

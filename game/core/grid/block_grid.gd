@@ -52,6 +52,8 @@ var lod_activation: LodActivated
 
 var id_pending:= false
 
+var queue_blocks_changed_grid: Array[BlockInstance]
+
 
 
 func _ready() -> void:
@@ -231,6 +233,10 @@ func _physics_process(delta: float) -> void:
 
 
 func tick_blocks(delta: float):
+	while not queue_blocks_changed_grid.is_empty():
+		var block_inst: BlockInstance= queue_blocks_changed_grid.pop_front()
+		block_inst.on_grid_changed()
+	
 	for group: LinkedBlockGroup in linked_block_groups:
 		group.tick(delta)
 	
@@ -375,7 +381,11 @@ func split(split_blocks: Array[Vector3i]):
 			grid_block.collision_shape.reparent(new_grid)
 			collision_shapes.erase(grid_block.collision_shape)
 			new_grid.collision_shapes.append(grid_block.collision_shape)
-
+			
+			var block_inst: BlockInstance= grid_block.get_block_instance()
+			if block_inst and not block_inst in queue_blocks_changed_grid:
+				queue_blocks_changed_grid.append(block_inst)
+			
 		blocks.erase(block_pos)
 	
 	new_grid.run_integrity_check()

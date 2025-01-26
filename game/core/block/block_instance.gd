@@ -38,6 +38,10 @@ func on_neighbor_removed(_grid: BlockGrid, _grid_block: BaseGridBlock, _neighbor
 	pass
 
 
+func on_grid_changed():
+	pass
+
+
 func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 	pass
 

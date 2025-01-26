@@ -1,6 +1,8 @@
 class_name ScrollSelectionPanel
 extends PanelContainer
 
+signal closed
+
 
 @export var ROW_SCENE: PackedScene
 
@@ -57,6 +59,7 @@ func open(_block: GridBlock= null, _grid: BlockGrid= null):
 func close():
 	hide()
 	update_interval.stop()
+	closed.emit()
 
 
 func _gui_input(event: InputEvent) -> void:

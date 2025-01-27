@@ -238,3 +238,7 @@ func get_dynamic_mass(_grid_block: GridBlock)-> int:
 
 func get_property_by_display_name(display_name: String)-> BlockProperty:
 	return get(property_table[display_name])
+
+
+func get_grid()-> BlockGrid:
+	return get_parent()

@@ -1,6 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxsph1bkcnesp"]
+[gd_scene load_steps=10 format=3 uid="uid://bxsph1bkcnesp"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/merge_block_instance.gd" id="1_2v5pu"]
+[ext_resource type="Material" uid="uid://bnlxy83nnlr2n" path="res://game/data/blocks/merge block/green_light.tres" id="2_ayq7k"]
+[ext_resource type="Material" uid="uid://bvhpcpujdfi8d" path="res://game/data/blocks/merge block/red_light.tres" id="3_7d3ol"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_alf2v"]
 
@@ -13,14 +15,8 @@ roughness = 0.2
 material = SubResource("StandardMaterial3D_aa2ph")
 size = Vector3(0.9, 1, 0.9)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pclx8"]
-shading_mode = 0
-specular_mode = 2
-disable_ambient_light = true
-albedo_color = Color(1.92523e-06, 0.82754, 0.240329, 1)
-
 [sub_resource type="CylinderMesh" id="CylinderMesh_xtopn"]
-material = SubResource("StandardMaterial3D_pclx8")
+material = ExtResource("2_ayq7k")
 height = 0.4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6jel5"]
@@ -34,6 +30,8 @@ size = Vector3(0.04, 0.1, 0.2)
 
 [node name="Merge Block" type="Node3D"]
 script = ExtResource("1_2v5pu")
+green_light = ExtResource("2_ayq7k")
+red_light = ExtResource("3_7d3ol")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
@@ -42,7 +40,8 @@ mesh = SubResource("BoxMesh_alf2v")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_jatpl")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D2"]
+[node name="Light" type="MeshInstance3D" parent="MeshInstance3D2"]
+unique_name_in_owner = true
 mesh = SubResource("CylinderMesh_xtopn")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D2"]

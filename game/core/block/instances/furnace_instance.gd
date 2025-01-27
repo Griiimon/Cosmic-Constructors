@@ -12,6 +12,7 @@ var storage: Inventory= Inventory.new()
 
 
 func _ready() -> void:
+	super()
 	item_catcher.caught_item.connect(on_add_ingredient)
 	
 	

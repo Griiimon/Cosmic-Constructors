@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://bxsph1bkcnesp"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/merge_block_instance.gd" id="1_2v5pu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_alf2v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aa2ph"]
+albedo_color = Color(0.500598, 0.317571, 0.238515, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_jatpl"]
+material = SubResource("StandardMaterial3D_aa2ph")
+size = Vector3(0.9, 1, 0.9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pclx8"]
+shading_mode = 0
+specular_mode = 2
+disable_ambient_light = true
+albedo_color = Color(1.92523e-06, 0.82754, 0.240329, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xtopn"]
+material = SubResource("StandardMaterial3D_pclx8")
+height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6jel5"]
+albedo_color = Color(0.550293, 0.550293, 0.550293, 1)
+metallic = 1.0
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_ai4gu"]
+material = SubResource("StandardMaterial3D_6jel5")
+size = Vector3(0.04, 0.1, 0.2)
+
+[node name="Merge Block" type="Node3D"]
+script = ExtResource("1_2v5pu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_alf2v")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_jatpl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D2"]
+mesh = SubResource("CylinderMesh_xtopn")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.5, 0)
+mesh = SubResource("BoxMesh_ai4gu")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0.5, 0)
+mesh = SubResource("BoxMesh_ai4gu")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 1.53081e-17, 0.5, 0.25)
+mesh = SubResource("BoxMesh_ai4gu")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -1.53081e-17, 0.5, -0.25)
+mesh = SubResource("BoxMesh_ai4gu")
+
+[node name="JoltGeneric6DOFJoint3D" type="JoltGeneric6DOFJoint3D" parent="."]

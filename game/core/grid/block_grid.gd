@@ -12,7 +12,8 @@ var block_types: Dictionary
 
 var collision_shapes: Array[CollisionShape3D]
 
-var main_grid_id: int= -1
+#var main_grid_id: int= -1
+var main_grid_ref: WeakRef
 var main_grid_connection: GridBlock
 
 var requested_local_movement: Vector3
@@ -140,7 +141,8 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 	if connects_to_main_grid:
 		assert(connects_to_main_grid != self)
-		main_grid_id= connects_to_main_grid.id
+		#main_grid_id= connects_to_main_grid.id
+		main_grid_ref= weakref(connects_to_main_grid)
 		main_grid_connection= grid_block
 
 	if NetworkManager.is_client:
@@ -595,7 +597,7 @@ func serialize()-> Dictionary:
 	data["rotation"]= rotation
 	
 	if is_sub_grid():
-		data["main_grid_id"]= main_grid_id
+		data["main_grid_id"]= (main_grid_ref.get_ref() as BlockGrid).id
 		data["main_grid_connection"]= main_grid_connection.local_pos
 
 	data["linear_velocity"]= linear_velocity
@@ -665,7 +667,7 @@ func deserialize(data: Dictionary):
 			block.get_block_instance().deserialize(item["data"])
 
 	if data.has("main_grid_id"):
-		main_grid_id= data["main_grid_id"]
+		main_grid_ref= weakref(world.get_grid(data["main_grid_id"]))
 		main_grid_connection= get_block_local(str_to_var("Vector3i" + data["main_grid_connection"]))
 
 	if not is_anchored and Global.terrain:
@@ -816,7 +818,7 @@ func get_block_positions_without(filter_arr: Array[Vector3i])-> Array[Vector3i]:
 func get_main_cockpit_recursive()-> SeatInstance:
 	if main_cockpit: return main_cockpit
 	if is_sub_grid():
-		return world.get_grid(main_grid_id).get_main_cockpit_recursive()
+		return (main_grid_ref.get_ref() as BlockGrid).get_main_cockpit_recursive()
 	return null
 
 
@@ -825,4 +827,8 @@ func is_occupied(grid_pos: Vector3i)-> bool:
 
 
 func is_sub_grid()-> bool:
-	return main_grid_id > -1
+	if not main_grid_ref: return false
+	if not main_grid_ref.get_ref():
+		main_grid_ref= null
+		return false
+	return true

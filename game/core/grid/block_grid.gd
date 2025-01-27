@@ -150,7 +150,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 	if block_node is BlockInstance:
 		var instance: BlockInstance= block_node
-		if restore_data:
+		if restore_data != null:
 			instance.on_restored(self, grid_block, restore_data)
 		else:
 			instance.on_placed(self, grid_block)

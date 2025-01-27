@@ -89,7 +89,7 @@ func init_mass_indicator():
 	mass_indicator.hide()
 
 
-func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO, connects_to_main_grid: BlockGrid= null, restore_data= null)-> BaseGridBlock:
+func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO, connects_to_main_grid: BlockGrid= null, restore_data= null, instance_callback= null)-> BaseGridBlock:
 	var grid_block: BaseGridBlock
 	if block.is_multi_block():
 		grid_block= MultiGridBlock.new(block, pos, block_rotation)
@@ -150,6 +150,10 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 	if block_node is BlockInstance:
 		var instance: BlockInstance= block_node
+		if instance_callback:
+			assert(instance_callback is Callable)
+			instance_callback.call(instance)
+		
 		if restore_data != null:
 			instance.on_restored(self, grid_block, restore_data)
 		else:
@@ -180,9 +184,9 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 	return grid_block
 
 
-func add_sub_grid(sub_grid_pos: Vector3, sub_grid_rot: Vector3, sub_grid_block: Block, grid_block_rot: Vector3i)-> BlockGrid:
+func add_sub_grid(sub_grid_pos: Vector3, sub_grid_rot: Vector3, sub_grid_block: Block, grid_block_rot: Vector3i, instance_callback= null)-> BlockGrid:
 	var sub_grid: BlockGrid= world.add_grid(sub_grid_pos, sub_grid_rot)
-	sub_grid.add_block(sub_grid_block, Vector3i.ZERO, grid_block_rot, self)
+	sub_grid.add_block(sub_grid_block, Vector3i.ZERO, grid_block_rot, self, null, instance_callback)
 	if NetworkManager.is_server:
 		ServerManager.broadcast_sync_event(EventSyncState.Type.ADD_GRID, [sub_grid_pos, sub_grid_rot, sub_grid.id])
 		ServerManager.broadcast_sync_event(EventSyncState.Type.ADD_BLOCK, [sub_grid.id, GameData.get_block_id(sub_grid_block), Vector3i.ZERO, grid_block_rot])

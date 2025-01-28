@@ -10,8 +10,10 @@ enum State { IDLE, MOVE }
 @onready var orig_segment: MeshInstance3D = $Segments/Segment
 
 @onready var joint: JoltGeneric6DOFJoint3D = $JoltGeneric6DOFJoint3D
+@onready var orig_joint= joint.duplicate()
 
 @onready var velocity:= BlockPropFloat.new("Velocity", 1.0, change_velocity)
+
 
 var sub_grid: BlockGrid
 
@@ -54,6 +56,8 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 
 
 func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
+	if not sub_grid: return
+	
 	var extension: float= get_joint_distance()
 	DebugHud.send("Extension", "%.2f" % extension)
 	
@@ -66,18 +70,37 @@ func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionar
 
 
 func on_grid_changed():
-	joint.node_a= joint.get_path_to(get_parent())
+	print("Grid changed")
+	restore_grid_connection(get_parent(), null, sub_grid.id, true)
 
 	
-func restore_grid_connection(grid: BlockGrid, _grid_block: GridBlock, sub_grid_id: int):
+func restore_grid_connection(grid: BlockGrid, _grid_block: GridBlock, sub_grid_id: int, reset_joint: bool= false):
 	sub_grid= grid.world.get_grid(sub_grid_id)
+	prints("Grid", grid.id)
+	prints("Sub grid", sub_grid.id)
+
+	if reset_joint:
+		print("Reset joint")
+		joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_LINEAR_LIMIT, false)
+	else:
+		initial_distance= get_joint_distance()
+		DebugHud.send("Init dist", initial_distance)
 	
+
 	joint.node_a= joint.get_path_to(grid)
 	joint.node_b= joint.get_path_to(sub_grid)
 
-	initial_distance= get_joint_distance()
+
+	prints("dist", get_joint_distance())
 
 	on_set_active()
+
+	await get_tree().physics_frame
+	prints("dist2", get_joint_distance())
+	joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_LINEAR_LIMIT, true)
+
+	await get_tree().physics_frame
+	prints("dist3", get_joint_distance())
 
 
 func change_velocity():

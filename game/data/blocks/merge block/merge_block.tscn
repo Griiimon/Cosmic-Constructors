@@ -16,6 +16,7 @@ material = SubResource("StandardMaterial3D_aa2ph")
 size = Vector3(0.9, 1, 0.9)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_xtopn"]
+resource_local_to_scene = true
 material = ExtResource("2_ayq7k")
 height = 0.4
 

@@ -171,9 +171,12 @@ func on_destroy(grid: BlockGrid, grid_block: GridBlock):
 	super(grid, grid_block)
 
 
-func on_update():
+func on_grid_changed():
 	if get_parent() != wheel.get_parent():
 		wheel.reparent(get_parent())
+
+	wheel.query.exclude= [ get_grid().get_rid() ]
+	wheel.rest_query.exclude= [ get_grid().get_rid() ]
 
 
 func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):

@@ -3,6 +3,14 @@ extends RigidBody3D
 
 signal id_assigned
 
+class SubGridConnection:
+	var sub_grid: BlockGrid
+	var connection_block: GridBlock
+
+	func _init(_sub_grid: BlockGrid, _connection_block: GridBlock):
+		sub_grid= _sub_grid
+		connection_block= _connection_block
+
 
 var id: int= -1
 
@@ -55,6 +63,8 @@ var id_pending:= false
 var queue_blocks_changed_grid: Array[BlockInstance]
 
 var queue_blocks_forced_update: Array[GridBlock]
+
+var sub_grid_connections: Array[SubGridConnection]
 
 
 
@@ -184,9 +194,11 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 	return grid_block
 
 
-func add_sub_grid(sub_grid_pos: Vector3, sub_grid_rot: Vector3, sub_grid_block: Block, grid_block_rot: Vector3i, instance_callback= null)-> BlockGrid:
+func add_sub_grid(sub_grid_pos: Vector3, sub_grid_rot: Vector3, connection_block: GridBlock, sub_grid_block: Block, grid_block_rot: Vector3i, instance_callback= null)-> BlockGrid:
 	var sub_grid: BlockGrid= world.add_grid(sub_grid_pos, sub_grid_rot)
 	sub_grid.add_block(sub_grid_block, Vector3i.ZERO, grid_block_rot, self, null, instance_callback)
+	sub_grid_connections.append(SubGridConnection.new(sub_grid, connection_block))
+	
 	if NetworkManager.is_server:
 		ServerManager.broadcast_sync_event(EventSyncState.Type.ADD_GRID, [sub_grid_pos, sub_grid_rot, sub_grid.id])
 		ServerManager.broadcast_sync_event(EventSyncState.Type.ADD_BLOCK, [sub_grid.id, GameData.get_block_id(sub_grid_block), Vector3i.ZERO, grid_block_rot])
@@ -643,7 +655,14 @@ func serialize()-> Dictionary:
 				item["data"]= block_data
 		
 		data["blocks"].append(item)
-	
+
+	if not sub_grid_connections.is_empty():
+		data["sub_grids"]= []
+		for connection in sub_grid_connections:
+			data["sub_grids"].append(\
+				{ "id": connection.sub_grid.id,\
+				 "block_pos": connection.connection_block.local_pos })
+
 	return data
 
 
@@ -684,6 +703,13 @@ func deserialize(data: Dictionary):
 	if data.has("main_grid_id"):
 		main_grid_ref= weakref(world.get_grid(data["main_grid_id"]))
 		main_grid_connection= get_block_local(str_to_var("Vector3i" + data["main_grid_connection"]))
+
+	if data.has("sub_grids"):
+		for sub_grid_data in data["sub_grids"]:
+			var block_pos: Vector3i= Utils.get_key_or_default(sub_grid_data, "block_pos", Vector3i.ZERO, "Vector3i")
+			sub_grid_connections.append(SubGridConnection.new(\
+				world.get_grid(sub_grid_data["id"]),\
+				get_block_local(block_pos)))
 
 	if not is_anchored and Global.terrain:
 		freeze= true

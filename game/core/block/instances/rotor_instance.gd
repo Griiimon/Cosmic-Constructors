@@ -23,7 +23,7 @@ func _ready() -> void:
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	var sub_grid_pos: Vector3= grid.get_global_block_pos(grid_block.local_pos) + global_basis.y
-	sub_grid= grid.add_sub_grid(sub_grid_pos, grid.rotation, rotor_head_block, grid_block.rotation)
+	sub_grid= grid.add_sub_grid(sub_grid_pos, grid.rotation, grid_block, rotor_head_block, grid_block.rotation)
 	
 	joint.node_a= joint.get_path_to(grid)
 	joint.node_b= joint.get_path_to(sub_grid)

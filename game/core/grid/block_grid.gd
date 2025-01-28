@@ -55,6 +55,8 @@ var id_pending:= false
 
 var queue_blocks_changed_grid: Array[BlockInstance]
 
+var queue_blocks_forced_update: Array[BlockInstance]
+
 
 
 func _ready() -> void:
@@ -241,7 +243,13 @@ func _physics_process(delta: float) -> void:
 func tick_blocks(delta: float):
 	while not queue_blocks_changed_grid.is_empty():
 		var block_inst: BlockInstance= queue_blocks_changed_grid.pop_front()
+		if not is_instance_valid(block_inst): continue
 		block_inst.on_grid_changed()
+	
+	while not queue_blocks_forced_update.is_empty():
+		var block_inst: BlockInstance= queue_blocks_forced_update.pop_front()
+		if not is_instance_valid(block_inst): continue
+		block_inst.on_update()
 	
 	for group: LinkedBlockGroup in linked_block_groups:
 		group.tick(delta)
@@ -591,6 +599,10 @@ func assign_hotkey(assignment: BaseHotkeyAssignment, block_pos: Vector3i= Vector
 		(assignment as HotkeyAssignmentBlockProperty).block_pos= block_pos
 	cockpit.assign_hotkey(assignment)
 
+
+func force_update(inst: BlockInstance):
+	assert(inst.get_parent() == self)
+	queue_blocks_forced_update.append(inst)
 
 func serialize()-> Dictionary:
 	var data: Dictionary

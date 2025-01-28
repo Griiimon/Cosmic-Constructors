@@ -46,7 +46,7 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 	pass
 
 
-func on_update():
+func on_update(_grid: BlockGrid, _grid_block: GridBlock):
 	pass
 
 
@@ -113,6 +113,10 @@ func queue_property_sync(property: BlockProperty):
 		while property_sync_queue.has(target_frame):
 			target_frame+= 1
 		property_sync_queue[target_frame]= property
+
+
+func force_update(grid_block: GridBlock):
+	get_grid().force_update(grid_block)
 
 
 func serialize()-> Dictionary:

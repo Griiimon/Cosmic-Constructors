@@ -55,7 +55,7 @@ var id_pending:= false
 
 var queue_blocks_changed_grid: Array[BlockInstance]
 
-var queue_blocks_forced_update: Array[BlockInstance]
+var queue_blocks_forced_update: Array[GridBlock]
 
 
 
@@ -247,9 +247,11 @@ func tick_blocks(delta: float):
 		block_inst.on_grid_changed()
 	
 	while not queue_blocks_forced_update.is_empty():
-		var block_inst: BlockInstance= queue_blocks_forced_update.pop_front()
+		var grid_block: GridBlock= queue_blocks_forced_update.pop_front()
+		if not grid_block: continue
+		var block_inst: BlockInstance= grid_block.get_block_instance()
 		if not is_instance_valid(block_inst): continue
-		block_inst.on_update()
+		block_inst.on_update(self, grid_block)
 	
 	for group: LinkedBlockGroup in linked_block_groups:
 		group.tick(delta)
@@ -600,9 +602,9 @@ func assign_hotkey(assignment: BaseHotkeyAssignment, block_pos: Vector3i= Vector
 	cockpit.assign_hotkey(assignment)
 
 
-func force_update(inst: BlockInstance):
-	assert(inst.get_parent() == self)
-	queue_blocks_forced_update.append(inst)
+func force_update(block: GridBlock):
+	assert(block.get_block_instance() and block.get_block_instance().get_grid() == self)
+	queue_blocks_forced_update.append(block)
 
 func serialize()-> Dictionary:
 	var data: Dictionary

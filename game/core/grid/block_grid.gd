@@ -12,7 +12,7 @@ var block_types: Dictionary
 
 var collision_shapes: Array[CollisionShape3D]
 
-#var main_grid_id: int= -1
+
 var main_grid_ref: WeakRef
 var main_grid_connection: GridBlock
 
@@ -28,7 +28,6 @@ var is_anchored: bool= false:
 			freeze= b
 		if is_anchored == b: return
 		is_anchored= b
-		#if NetworkManager.is_client: return
 		if NetworkManager.is_server and not Global.game.world.is_loading:
 			ServerManager.sync_grid_anchored_state(self)
 
@@ -143,7 +142,6 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 	if connects_to_main_grid:
 		assert(connects_to_main_grid != self)
-		#main_grid_id= connects_to_main_grid.id
 		main_grid_ref= weakref(connects_to_main_grid)
 		main_grid_connection= grid_block
 
@@ -605,6 +603,7 @@ func assign_hotkey(assignment: BaseHotkeyAssignment, block_pos: Vector3i= Vector
 func force_update(block: GridBlock):
 	assert(block.get_block_instance() and block.get_block_instance().get_grid() == self)
 	queue_blocks_forced_update.append(block)
+
 
 func serialize()-> Dictionary:
 	var data: Dictionary

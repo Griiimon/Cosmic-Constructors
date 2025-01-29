@@ -683,19 +683,21 @@ static func pre_deserialize(data: Dictionary, new_world: World, default_position
 	var grid:= BlockGrid.new()
 	grid.world= new_world
 	
-	grid.id= Utils.get_key_or_default(data, "id", new_world.next_grid_id)
-	new_world.lookup_id_to_grid[grid.id]= grid
-	new_world.next_grid_id= max(grid.id + 1, new_world.next_grid_id + 1)
+	if new_world:
+		grid.id= Utils.get_key_or_default(data, "id", new_world.next_grid_id)
+		new_world.lookup_id_to_grid[grid.id]= grid
+		new_world.next_grid_id= max(grid.id + 1, new_world.next_grid_id + 1)
 	
 	grid.position= Utils.get_key_or_default(data, "position", default_position, "Vector3")
 	grid.rotation= Utils.get_key_or_default(data, "rotation", Vector3.ZERO, "Vector3")
 
-	new_world.grids.add_child(grid)
+	if new_world:
+		new_world.grids.add_child(grid)
 
 	return grid
 
 
-func deserialize(data: Dictionary, block_models_only: bool= false):
+func deserialize(data: Dictionary, block_models_only: bool= false, main_grid: BlockGrid= null, sub_grids: Array[BlockGrid]= []):
 	linear_velocity= Utils.get_key_or_default(data, "linear_velocity", Vector3.ZERO, "Vector3")
 	angular_velocity= Utils.get_key_or_default(data, "angular_velocity", Vector3.ZERO, "Vector3")
 	parking_brake= Utils.get_key_or_default(data, "parking_brake", false)
@@ -716,11 +718,19 @@ func deserialize(data: Dictionary, block_models_only: bool= false):
 
 	if block_models_only: return
 
-	if data.has("main_grid_id"):
+	if main_grid:
+		main_grid_ref= weakref(main_grid)
+		main_grid_connection= get_block_local(str_to_var("Vector3i" + data["main_grid_connection"]))
+	elif data.has("main_grid_id"):
 		main_grid_ref= weakref(world.get_grid(data["main_grid_id"]))
 		main_grid_connection= get_block_local(str_to_var("Vector3i" + data["main_grid_connection"]))
 
-	if data.has("sub_grids"):
+	if not sub_grids.is_empty():
+		for i in sub_grids.size():
+			var sub_grid_data: Dictionary= data["sub_grids"][i]
+			var block_pos: Vector3i= Utils.get_key_or_default(sub_grid_data, "block_pos", Vector3i.ZERO, "Vector3i")
+			sub_grid_connections.append(SubGridConnection.new(sub_grids[i], get_block_local(block_pos)))
+	elif data.has("sub_grids"):
 		for sub_grid_data in data["sub_grids"]:
 			var block_pos: Vector3i= Utils.get_key_or_default(sub_grid_data, "block_pos", Vector3i.ZERO, "Vector3i")
 			sub_grid_connections.append(SubGridConnection.new(\

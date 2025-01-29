@@ -706,12 +706,15 @@ func deserialize(data: Dictionary, block_models_only: bool= false):
 		var block_position: Vector3= str_to_var("Vector3" + item["position"])
 		var block_rotation: Vector3= str_to_var("Vector3" + item["rotation"])
 		var block: BaseGridBlock= add_block(GameData.get_block_definition(item["definition"]), block_position, block_rotation, null, Utils.get_key_or_default(item, "data", {}), null, block_models_only)
-		if item.has("hitpoints"):
-			(block as GridBlock).hitpoints= item["hitpoints"]
-		if item.has("name"):
-			(block as GridBlock).name= item["name"]
-		if item.has("data"):
-			block.get_block_instance().deserialize(item["data"])
+		if not block_models_only:
+			if item.has("hitpoints"):
+				(block as GridBlock).hitpoints= item["hitpoints"]
+			if item.has("name"):
+				(block as GridBlock).name= item["name"]
+			if item.has("data"):
+				block.get_block_instance().deserialize(item["data"])
+
+	if block_models_only: return
 
 	if data.has("main_grid_id"):
 		main_grid_ref= weakref(world.get_grid(data["main_grid_id"]))

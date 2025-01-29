@@ -31,6 +31,10 @@ func _process(_delta: float) -> void:
 		close()
 		return
 	
+	if Global.player.global_position.distance_to(global_block_pos) > 6:
+		close()
+		return
+	
 	if Global.player:
 		if Global.player.get_look_vec().dot(initial_player_look) < 0.7:
 			close()

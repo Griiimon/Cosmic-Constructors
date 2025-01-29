@@ -53,6 +53,11 @@ func create_blueprint(blueprint_name: String):
 		grid_data.erase("linear_velocity")
 		grid_data.erase("angular_velocity")
 		grid_data.erase("is_anchored")
+		
+		if grid_data.has("sub_grids"):
+			push_warning("Blueprint won't serialize sub grids recursively")
+			grid_data.erase("sub_grids") 
+		
 		all_grids.append(grid_data)
 
 	file.store_string(JSON.stringify(all_grids))

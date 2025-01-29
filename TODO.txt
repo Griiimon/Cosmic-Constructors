@@ -1,22 +1,47 @@
-change main_grid_id to weakref(grid_ptr)
-
-on_grid_changed() in piston recalculate limits and initial offset when changing joint node?
+FIX on_grid_changed() [ REPARENT JOINT? ] in piston ( hinge, rotor, [rail?] ) recalculate limits and initial offset when changing joint node?
 
 network sync plane_fill ( special case? dont just sync spawning each block)
  and blueprint spawning ( send entire grid at once )
 
-add sub grids to blueprints
+test merge blocks in network
 
-desync test: hash all grid ids + blocks dict and compare to server
+basic noise terrain creator with tool script, terrain generator resource, grass/rock shader with normal
+
+FIX non-force-offset thrusters should apply force not at center but calculated CoM
+
+keep available keys + short desc in a dictionary per action state for quick help
+
+suspension props
+	power
+	brakes
+	spring
+
+thrusters particle TARGET direction seems to be in global coords
+
+
+restored WorldItemInstances need LodActivation
+
+subgrids: unregister and cleanup when sub grid gets deleted
+
+BlockInstances that spawn sub grids should override on_removed() to disconnect them
+
+player respawn ( via console )
+
+
+dynamic desync check ( triggered by console ): hash all grid ids + blocks dict and compare to server
 
 test peer disconnection from server. may not need any handling
 
 serialize ore pile + ore container
 
+sync WorldItemInstances ( only when not frozen/sleeping )
+
+
+guard against recursive sub grid blueprint while until implemented
 
 when serializing blueprints dont serialize content of blocks like ore container, gas tank..
 
-save/load ObjectEntity
+save/load ObjectEntity ( Pallet etc )
  
 client not allowed to enter occupied seat
 
@@ -24,7 +49,8 @@ What happens with particles when a player joins while the thruster is already ac
 
 sitting on other client needs to reparent the peer like the server. what happens if a client joins with another client already sitting 
 
-basic noise terrain creator with tool script, terrain generator resource, grass/rock shader with normal
+
+grid impact damage
 
 why is player able to push grids in multiplayer while walking, but not in singleplayer?
 	because on server he is never frozen
@@ -37,31 +63,18 @@ make MyTerrain a component so it doesnt need to inherit LODTerrain
 	
 block splitting new grid ids need to be synced ( still ? ) => build a list of all split grids, this list has the same grid pointers in same order. so the server can send an approriate update using the list indices and the previous grid id of the original grid ]
 
-FIX non-force-offset thrusters should apply force not at center but calculated CoM
-FIX when interval updating property viewer only update extra properties 
-
-ore pile nomral map array + metallic and roughness value per raw material
-
-keep available keys + short desc in a dictionary per action state for quick help
-
-on_grid_changed() in BlockInstance callback if grid split results in new grid. mostly for joint reparenting 
+implement MergeBlock re-locking
 
 
-thrusters particle TARGET direction seems to be in global coords
+recursive sub grid blueprints ( deeper then one level )
 
 Components can_* functions just use Callable refs like with FluidConsumer
 
-
-also close property viewer panel via distance threshold
-
 persistent PlayerData ( like hotbars ) outside of Player ( entity ) class
-
-add debug console plugin
 
 tree spawner
 
 wooden workbench
-
 
 
 FIX handles hard to grab when facing slightly down
@@ -72,12 +85,8 @@ property panel group system:
 	add to last group
 	group mode toggle: every thing pressed will affect the entire group, including hotkey assignment
 
-suspension props
-	power
-	brakes
-	spring
 
-plane fill: flood fill plane without placing blocks ( set a max cap ) and only if contained plane is found spawn blocks
+plane fill v2: flood fill plane without placing blocks ( set a max cap ) and only if contained plane is found spawn blocks
 
 when the car isnt moving ( for a bit? ) put an additional damping factor on the suspension
 
@@ -89,7 +98,7 @@ Ore Intake: Ore Funnel, takes ore from above one-by-one and ejects below to vali
 Fluid Consumer: make sure correct fluid is supplied
 
 
-items, add mass ( and even dynamic damping? )
+items: add mass ( and even dynamic damping? )
 
 serializable inventories
 

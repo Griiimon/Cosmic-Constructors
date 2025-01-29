@@ -29,7 +29,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 
 
 func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
-	restore_grid_connection.call_deferred(grid, grid_block, restore_data["sub_grid_id"])
+	restore_grid_connection.call_deferred(grid, grid_block, remap_sub_grid_id(restore_data))
 
 
 func on_grid_changed():

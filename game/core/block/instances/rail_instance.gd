@@ -27,7 +27,7 @@ func init(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary= {}):
 		rail= LinkedRailGroup.new(grid)
 		
 		if restore_data:
-			rail.sub_grid= grid.world.get_grid(restore_data["sub_grid_id"])
+			rail.sub_grid= grid.world.get_grid(remap_sub_grid_id(restore_data))
 		else:
 			#rail.sub_grid= grid.world.add_grid(global_position + global_basis.y, global_rotation)
 			#rail.sub_grid.add_block(carriage_block, Vector3i.ZERO, Vector3i.ZERO, grid)

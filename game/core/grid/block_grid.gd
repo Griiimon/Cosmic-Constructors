@@ -630,7 +630,7 @@ func force_update(block: GridBlock):
 	queue_blocks_forced_update.append(block)
 
 
-func serialize()-> Dictionary:
+func serialize(local_sub_grid_ids: bool= false)-> Dictionary:
 	var data: Dictionary
 	data["id"]= id
 	data["position"]= position
@@ -671,9 +671,13 @@ func serialize()-> Dictionary:
 
 	if not sub_grid_connections.is_empty():
 		data["sub_grids"]= []
-		for connection in sub_grid_connections:
+		for i in sub_grid_connections.size():
+			var connection: SubGridConnection= sub_grid_connections[i]
+			var sub_grid_id: int= connection.sub_grid.id
+			if local_sub_grid_ids:
+				sub_grid_id= i
 			data["sub_grids"].append(\
-				{ "id": connection.sub_grid.id,\
+				{ "id": sub_grid_id,\
 				 "block_pos": connection.connection_block.local_pos })
 
 	return data
@@ -697,7 +701,7 @@ static func pre_deserialize(data: Dictionary, new_world: World, default_position
 	return grid
 
 
-func deserialize(data: Dictionary, block_models_only: bool= false, main_grid: BlockGrid= null, sub_grids: Array[BlockGrid]= []):
+func deserialize(data: Dictionary, block_models_only: bool= false, main_grid: BlockGrid= null, sub_grids: Array[BlockGrid]= [], sub_grid_id_remaps: Dictionary= {}):
 	linear_velocity= Utils.get_key_or_default(data, "linear_velocity", Vector3.ZERO, "Vector3")
 	angular_velocity= Utils.get_key_or_default(data, "angular_velocity", Vector3.ZERO, "Vector3")
 	parking_brake= Utils.get_key_or_default(data, "parking_brake", false)
@@ -707,7 +711,12 @@ func deserialize(data: Dictionary, block_models_only: bool= false, main_grid: Bl
 	for item: Dictionary in data["blocks"]:
 		var block_position: Vector3= str_to_var("Vector3" + item["position"])
 		var block_rotation: Vector3= str_to_var("Vector3" + item["rotation"])
-		var block: BaseGridBlock= add_block(GameData.get_block_definition(item["definition"]), block_position, block_rotation, null, Utils.get_key_or_default(item, "data", {}), null, block_models_only)
+		var restore_data: Dictionary= Utils.get_key_or_default(item, "data", {})
+		if not sub_grid_id_remaps.is_empty():
+			restore_data["sub_grid_id_remaps"]= sub_grid_id_remaps
+		var block: BaseGridBlock= add_block(GameData.get_block_definition(item["definition"]),\
+				 block_position, block_rotation, null, restore_data, null, block_models_only)
+
 		if not block_models_only:
 			if item.has("hitpoints"):
 				(block as GridBlock).hitpoints= item["hitpoints"]

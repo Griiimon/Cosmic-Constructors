@@ -38,7 +38,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
 	if restore_data.has("counter_part_grid_id"):
 		is_original= true
-		var counter_part_grid: BlockGrid= grid.world.get_grid(restore_data["counter_part_grid_id"])
+		var counter_part_grid: BlockGrid= grid.world.get_grid(remap_sub_grid_id(restore_data, "counter_part_grid_id"))
 		counter_part_block_pos= Utils.get_key_or_default(restore_data, "counter_part_block_pos", Vector3i.ZERO, "Vector3i")
 		delayed_restore.call_deferred(grid, grid_block, counter_part_grid)
 	

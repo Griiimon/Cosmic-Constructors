@@ -119,6 +119,13 @@ func force_update(grid_block: GridBlock):
 	get_grid().force_update(grid_block)
 
 
+func remap_sub_grid_id(data: Dictionary, key: String= "sub_grid_id")-> int:
+	var id: int= data[key]
+	if data.has("sub_grid_id_remaps"):
+		id= data["sub_grid_id_remaps"][id]
+	return id
+
+
 func serialize()-> Dictionary:
 	var data: Dictionary
 	var locked_properties: Array[int]= []

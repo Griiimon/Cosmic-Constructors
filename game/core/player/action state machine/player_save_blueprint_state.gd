@@ -48,7 +48,7 @@ func create_blueprint(blueprint_name: String):
 		var a_to_b: Transform3D= grid.transform.affine_inverse() * sub_grid.transform
 		grid_data["rotation"]= a_to_b.basis.get_euler()
 		
-		grid_data["local_id"]= i + 1
+		grid_data["local_id"]= sub_grid.id
 		grid_data.erase("id")
 		grid_data.erase("linear_velocity")
 		grid_data.erase("angular_velocity")

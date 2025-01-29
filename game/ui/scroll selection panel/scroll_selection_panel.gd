@@ -5,6 +5,11 @@ signal closed
 
 
 @export var ROW_SCENE: PackedScene
+@export var title: String
+
+
+@onready var title_label: Label = %Title
+@onready var title_separator: HSeparator = %HSeparator
 
 @onready var content_container: VBoxContainer = %"VBoxContainer Content"
 @onready var update_interval: Timer = $"Update Interval"
@@ -27,6 +32,15 @@ var is_value_selected: bool= false:
 		is_value_selected= b
 		if is_value_selected:
 			get_current_row().select_value()
+
+
+
+func _ready() -> void:
+	if title:
+		title_label.text= title
+	else:
+		title_label.hide()
+		title_separator.hide()
 
 
 func populate():

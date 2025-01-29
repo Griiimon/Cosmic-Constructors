@@ -7,3 +7,4 @@
 [node name="Blueprint Scroll Panel" instance=ExtResource("1_qypb1")]
 script = ExtResource("2_8wfmc")
 ROW_SCENE = ExtResource("3_d1dvf")
+title = "Blueprints"

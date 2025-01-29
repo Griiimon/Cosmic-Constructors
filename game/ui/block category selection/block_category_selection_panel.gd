@@ -6,6 +6,7 @@ signal category_selected(category: BlockCategory)
 
 
 func _ready() -> void:
+	super()
 	SignalManager.canceled_build_mode.connect(func(): hide())
 	populate()
 

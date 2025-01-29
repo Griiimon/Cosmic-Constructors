@@ -7,3 +7,4 @@
 [node name="Block Category Selection Panel" instance=ExtResource("1_ifctd")]
 script = ExtResource("2_nkoeq")
 ROW_SCENE = ExtResource("3_jt0p2")
+title = "Block Category"

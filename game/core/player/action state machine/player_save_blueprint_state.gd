@@ -44,12 +44,13 @@ func create_blueprint(blueprint_name: String):
 		var sub_grid_connection: BlockGrid.SubGridConnection= grid.sub_grid_connections[i]
 		var sub_grid: BlockGrid= sub_grid_connection.sub_grid
 		grid_data= sub_grid.serialize()
-		grid_data["position"]= sub_grid.position - grid.position
+		grid_data["position"]= sub_grid.global_position - grid.global_position
 		var a_to_b: Transform3D= grid.transform.affine_inverse() * sub_grid.transform
 		grid_data["rotation"]= a_to_b.basis.get_euler()
 		
 		grid_data["local_id"]= sub_grid.id
 		grid_data.erase("id")
+		grid_data.erase("main_grid_id")
 		grid_data.erase("linear_velocity")
 		grid_data.erase("angular_velocity")
 		grid_data.erase("is_anchored")

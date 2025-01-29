@@ -18,6 +18,7 @@ func on_exit():
 	item.collision_layer= CollisionLayers.WORLD_ITEM
 	item.reparent(player.world.items)
 	item.freeze= false
+	item.linear_velocity= player.get_velocity()
 
 
 func on_physics_process(_delta: float):

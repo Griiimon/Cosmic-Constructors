@@ -120,6 +120,8 @@ func _unhandled_input(event: InputEvent) -> void:
 				KEY_PAGEDOWN:
 					change_row(1)
 					get_viewport().set_input_as_handled()
+				KEY_ESCAPE:
+					close()
 
 
 func change_row(delta: int):

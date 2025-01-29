@@ -30,13 +30,32 @@ func create_blueprint(blueprint_name: String):
 	var file:= FileAccess.open(base_directory.get_current_dir() + "/" + "blueprint.json", FileAccess.WRITE)
 	var grid_data: Dictionary= grid.serialize()
 	
+	grid_data.erase("id")
 	grid_data.erase("position")
 	grid_data.erase("rotation")
 	grid_data.erase("linear_velocity")
 	grid_data.erase("angular_velocity")
 	grid_data.erase("is_anchored")
 
-	file.store_string(JSON.stringify(grid_data))
+	var all_grids: Array[Dictionary]
+	all_grids.append(grid_data)
+
+	for i in grid.sub_grid_connections.size():
+		var sub_grid_connection: BlockGrid.SubGridConnection= grid.sub_grid_connections[i]
+		var sub_grid: BlockGrid= sub_grid_connection.sub_grid
+		grid_data= sub_grid.serialize()
+		grid_data["position"]= sub_grid.position - grid.position
+		var a_to_b: Transform3D= grid.transform.affine_inverse() * sub_grid.transform
+		grid_data["rotation"]= a_to_b.basis.get_euler()
+		
+		grid_data["local_id"]= i + 1
+		grid_data.erase("id")
+		grid_data.erase("linear_velocity")
+		grid_data.erase("angular_velocity")
+		grid_data.erase("is_anchored")
+		all_grids.append(grid_data)
+
+	file.store_string(JSON.stringify(all_grids))
 	file.close()
 
 

@@ -6,3 +6,7 @@
 collision_layer = 64
 collision_mask = 1142
 script = ExtResource("1_tp043")
+
+[node name="VoxelViewer" type="VoxelViewer" parent="."]
+view_distance = 64
+requires_visuals = false

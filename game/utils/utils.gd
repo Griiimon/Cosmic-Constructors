@@ -155,7 +155,8 @@ static func get_input_action_mapping(action_name: String)-> String:
 	return ""
 
 
-static func add_label(parent_control: Control, text: String):
+static func add_label(parent_control: Control, text: String)-> Label:
 	var label:= Label.new()
 	label.text= text
 	parent_control.add_child(label)
+	return label

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://clfksjpvg60v8"]
+[gd_scene load_steps=17 format=3 uid="uid://clfksjpvg60v8"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/conveyor_instance.gd" id="1_2cr6b"]
 [ext_resource type="PackedScene" uid="uid://d1yd7cvio7mxv" path="res://game/core/components/conveyor target/conveyor_target.tscn" id="2_43hh3"]
@@ -101,12 +101,16 @@ metallic = 0.5
 material = SubResource("StandardMaterial3D_2bd72")
 size = Vector3(0.1, 0.2, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1db4g"]
-size = Vector3(1, 0.5, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_gouso"]
 material = SubResource("StandardMaterial3D_2bd72")
 size = Vector3(0.8, 0.1, 0.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jxi6p"]
+material = SubResource("StandardMaterial3D_2bd72")
+size = Vector3(0.8, 0.05, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1db4g"]
+size = Vector3(1, 0.5, 1)
 
 [node name="Conveyor" type="Node3D"]
 script = ExtResource("1_2cr6b")
@@ -126,6 +130,14 @@ mesh = SubResource("BoxMesh_m6uo5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0, 0)
 mesh = SubResource("BoxMesh_m6uo5")
 
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.984174, 0.177205, 0, -0.177205, 0.984174, 0, -0.145901, 0)
+mesh = SubResource("BoxMesh_gouso")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0345539, 0)
+mesh = SubResource("BoxMesh_jxi6p")
+
 [node name="Conveyor Target" parent="." instance=ExtResource("2_43hh3")]
 
 [node name="Item Catcher" parent="." node_paths=PackedStringArray("active_area") instance=ExtResource("3_ow3od")]
@@ -140,10 +152,6 @@ shape = SubResource("BoxShape3D_1db4g")
 [node name="Item Ejector" parent="." instance=ExtResource("4_47sw3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6)
 only_with_valid_target = true
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.984174, 0.177205, 0, -0.177205, 0.984174, 0, -0.145901, 0)
-mesh = SubResource("BoxMesh_gouso")
 
 [node name="Item Start Pos" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.5)

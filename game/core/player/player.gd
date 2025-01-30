@@ -195,3 +195,7 @@ func is_rigidbody()-> bool:
 
 func is_in_third_person()-> bool:
 	return not first_person_camera.current
+
+
+func is_jetpack_active()-> bool:
+	return movement_state_machine.eva_state.is_current_state() and movement_state_machine.eva_state.jetpack_enabled

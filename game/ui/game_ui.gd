@@ -9,6 +9,7 @@ extends CanvasLayer
 @onready var jetpack_button: Button = %"Jetpack Button"
 @onready var dampeners_button: Button = %"Dampeners Button"
 @onready var parking_brake_button: Button = %"Parking Brake Button"
+@onready var reverse_button: Button = %"Reverse Button"
 
 @onready var velocity_label: Label = %"Velocity Label"
 @onready var gravity_label: Label = %"Gravity Label"
@@ -43,8 +44,12 @@ func _ready():
 	SignalManager.toggle_jetpack.connect(func(b: bool): jetpack_button.disabled= not b)
 	SignalManager.toggle_dampeners.connect(func(b: bool): dampeners_button.disabled= not b)
 	SignalManager.toggle_parking_brake.connect(func(b: bool): parking_brake_button.disabled= not b)
+	SignalManager.toggle_reverse_mode.connect(func(b: bool): reverse_button.disabled= not b)
 
 	SignalManager.player_set_action_state.connect(on_player_action_state_changed)
+
+	SignalManager.player_seated.connect(on_player_seated)
+	SignalManager.player_left_seat.connect(on_player_left_seat)
 
 	SignalManager.interact_with_block.connect(on_interact_with_block)
 	SignalManager.hotkey_assigned.connect(on_hotkey_assigned)
@@ -128,3 +133,20 @@ func on_toggle_block_category_panel():
 
 func on_block_category_selected(category: BlockCategory):
 	SignalManager.selected_block_category.emit(category)
+
+
+func on_player_seated(grid: BlockGrid, grid_block: GridBlock):
+	parking_brake_button.show()
+	reverse_button.show()
+	jetpack_button.hide()
+	
+	parking_brake_button.button_pressed= grid.parking_brake
+	reverse_button.button_pressed= grid.reverse_mode
+
+
+func on_player_left_seat(player: Player):
+	parking_brake_button.hide()
+	reverse_button.hide()
+	jetpack_button.show()
+	
+	jetpack_button.button_pressed= player.is_jetpack_active()

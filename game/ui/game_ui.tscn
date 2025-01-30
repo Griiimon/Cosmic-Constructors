@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cn7c8npnm1ukd"]
+[gd_scene load_steps=11 format=3 uid="uid://cn7c8npnm1ukd"]
 
 [ext_resource type="Script" path="res://game/ui/game_ui.gd" id="1_2qjqn"]
 [ext_resource type="PackedScene" uid="uid://daoodbkrxv86s" path="res://game/ui/property viewer/property_viewer_panel.tscn" id="2_dffew"]
+[ext_resource type="StyleBox" uid="uid://s62tntui521q" path="res://game/ui/styles/thin_white_border.tres" id="3_54orl"]
 [ext_resource type="PackedScene" uid="uid://cyqk6bx0sio80" path="res://game/core/ui/hotbar/hotbar.tscn" id="3_f78jc"]
 [ext_resource type="PackedScene" uid="uid://c6ye43hpjckha" path="res://game/ui/block category selection/block_category_selection_panel.tscn" id="4_f0uq6"]
 [ext_resource type="PackedScene" uid="uid://0td1dfglmvte" path="res://game/ui/line edit popup/line_edit_popup.tscn" id="5_lwhlq"]
@@ -14,6 +15,9 @@ outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nsb8r"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wchwq"]
+bg_color = Color(0.6, 0.6, 0.6, 0.45098)
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_2qjqn")
@@ -106,6 +110,37 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "1 g"
 horizontal_alignment = 2
+
+[node name="PanelContainer Input Leged" type="PanelContainer" parent="Global MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wchwq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Global MarginContainer/PanelContainer Input Leged"]
+layout_mode = 2
+
+[node name="Label Toggle Input Legend" type="Label" parent="Global MarginContainer/PanelContainer Input Leged/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = ExtResource("3_54orl")
+text = "F1"
+
+[node name="MarginContainer Input Legend" type="MarginContainer" parent="Global MarginContainer/PanelContainer Input Leged/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="GridContainer Input Legend" type="GridContainer" parent="Global MarginContainer/PanelContainer Input Leged/VBoxContainer/MarginContainer Input Legend"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 50
+columns = 2
 
 [node name="Hotbar" parent="." instance=ExtResource("3_f78jc")]
 

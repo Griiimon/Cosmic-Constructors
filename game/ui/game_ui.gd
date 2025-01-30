@@ -15,6 +15,9 @@ extends CanvasLayer
 
 @onready var hotbar: Hotbar = $Hotbar
 
+@onready var input_legend_container: GridContainer = %"GridContainer Input Legend"
+@onready var input_legend_margin_container: MarginContainer = %"MarginContainer Input Legend"
+
 @onready var block_category_selection_panel: BlockCategorySelectionPanel = %"Block Category Selection Panel"
 @onready var blueprint_scroll_panel: BlueprintScrollPanel = %"Blueprint Scroll Panel"
 
@@ -22,6 +25,12 @@ extends CanvasLayer
 
 
 var property_viewer_panel: PropertyViewerPanel
+
+var input_legend_toggled: bool= false:
+	set(b):
+		input_legend_toggled= b
+		if not is_inside_tree(): return
+		input_legend_margin_container.visible= b
 
 
 
@@ -35,6 +44,8 @@ func _ready():
 	SignalManager.toggle_dampeners.connect(func(b: bool): dampeners_button.disabled= not b)
 	SignalManager.toggle_parking_brake.connect(func(b: bool): parking_brake_button.disabled= not b)
 
+	SignalManager.player_set_action_state.connect(on_player_action_state_changed)
+
 	SignalManager.interact_with_block.connect(on_interact_with_block)
 	SignalManager.hotkey_assigned.connect(on_hotkey_assigned)
 	SignalManager.toggle_block_category_panel.connect(on_toggle_block_category_panel)
@@ -47,11 +58,13 @@ func _ready():
 	add_child(property_viewer_panel)
 
 
-
 func _physics_process(_delta: float) -> void:
 	var player: Player= Global.player
 	if player:
 		velocity_label.text= "%.1f m/s" % player.get_velocity().length()
+
+	if Input.is_action_just_pressed("toggle_input_legend"):
+		input_legend_toggled= not input_legend_toggled
 
 
 func switch_hotbar(hotbar_layout: HotbarLayout):
@@ -72,6 +85,26 @@ func on_block_property_changed(prop: BlockProperty):
 
 func on_build_block_changed(block: Block):
 	update_temporary_info_label(block.get_display_name())
+
+
+func on_player_action_state_changed(state: PlayerActionStateMachineState):
+	Utils.free_children(input_legend_container)
+	
+	var input_mappings: Dictionary= state.input_mappings
+	
+	if input_mappings.is_empty():
+		input_legend_margin_container.hide()
+	else:
+		for input_action: String in input_mappings.keys():
+			var action_label: Label= Utils.add_label(input_legend_container, Utils.get_input_action_mapping(input_action))
+			action_label.add_theme_stylebox_override("normal", GameData.style_library.thin_white_border)
+		
+			var desc: String= input_mappings[input_action]
+			var desc_label: Label= Utils.add_label(input_legend_container, desc)
+			desc_label.horizontal_alignment= HORIZONTAL_ALIGNMENT_RIGHT
+
+		if input_legend_toggled:
+			input_legend_margin_container.show()
 
 
 func update_temporary_info_label(s: String):

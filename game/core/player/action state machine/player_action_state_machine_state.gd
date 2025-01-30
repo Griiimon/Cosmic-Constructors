@@ -1,6 +1,7 @@
 class_name PlayerActionStateMachineState
 extends PlayerStateMachineState
 
+@export var input_mappings: Dictionary
 
 var ghost: Node3D
 

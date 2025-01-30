@@ -4,6 +4,7 @@ extends Node
 @export var scene_library: SceneLibrary
 @export var fluid_library: FluidLibrary
 @export var item_library: ItemLibrary
+@export var style_library: StyleLibrary
 @export var game_settings: GameSettings
 
 var block_definition_lookup: Dictionary

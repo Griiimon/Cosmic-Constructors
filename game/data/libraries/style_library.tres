@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StyleLibrary" load_steps=3 format=3 uid="uid://c7dhf5aduri7s"]
+
+[ext_resource type="Script" path="res://game/global/game data/style_library.gd" id="1_2r4dy"]
+[ext_resource type="StyleBox" uid="uid://s62tntui521q" path="res://game/ui/styles/thin_white_border.tres" id="2_g4154"]
+
+[resource]
+script = ExtResource("1_2r4dy")
+thin_white_border = ExtResource("2_g4154")

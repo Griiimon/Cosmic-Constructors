@@ -1,5 +1,22 @@
 FIX on_grid_changed() [ REPARENT JOINT? ] in piston ( hinge, rotor, [rail?] ) recalculate limits and initial offset when changing joint node?
 
+FIX rail slider limits still out of bounds even on initial build 
+	check if rails direction has to do something with it ( global Z vs Y)
+
+disable parking button when out of seat
+
+rail: lock linear limit with motor off
+
+live toggle DebugHud ( F7? )
+
+T - align block with terrain ( gravity up vector )
+
+stop rotating camera while in block category menu ( same with blueprint menu? make it a scroll menu feature? )
+
+move remove block/grid code from sandbox to build state, use input actions for legend
+
+add reverse mode UI button
+
 network sync plane_fill ( special case? dont just sync spawning each block)
  and blueprint spawning ( send entire grid at once )
 
@@ -9,8 +26,6 @@ basic noise terrain creator with tool script, terrain generator resource, grass/
 
 FIX non-force-offset thrusters should apply force not at center but calculated CoM
 
-keep available keys + short desc in a dictionary per action state for quick help
-
 suspension props
 	power
 	brakes
@@ -18,6 +33,12 @@ suspension props
 
 thrusters particle TARGET direction seems to be in global coords
 
+
+solid fuel thruster dynamic weight
+
+serialize hose coupling connections
+
+add blue print distance and rotation control
 
 restored WorldItemInstances need LodActivation
 

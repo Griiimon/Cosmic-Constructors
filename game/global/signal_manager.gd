@@ -9,6 +9,7 @@ signal player_spawned
 signal toggle_jetpack(enabled: bool)
 signal toggle_dampeners(enabled: bool)
 signal toggle_parking_brake(enabled: bool)
+signal reverse_mode_toggled(enabled: bool)
 
 signal interact_with_block(grid_block: BaseGridBlock, grid: BlockGrid, player: Player)
 

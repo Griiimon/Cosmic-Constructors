@@ -86,6 +86,7 @@ func on_physics_process(_delta: float):
 
 	if Input.is_action_just_pressed("reverse"):
 		get_grid().reverse_mode= not get_grid().reverse_mode
+		SignalManager.reverse_mode_toggled.emit(get_grid().reverse_mode)
 
 
 func on_input(event: InputEvent) -> void:

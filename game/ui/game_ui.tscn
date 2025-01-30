@@ -70,6 +70,13 @@ disabled = true
 button_mask = 0
 text = "Parking (P)"
 
+[node name="Reverse Button" type="Button" parent="Global MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+button_mask = 0
+text = "Reverse (R)"
+
 [node name="Jetpack Button" type="Button" parent="Global MarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -82,7 +89,7 @@ unique_name_in_owner = true
 layout_mode = 2
 disabled = true
 button_mask = 0
-text = "Dampeners (Y)"
+text = "Dampeners (Z)"
 
 [node name="PanelContainer2" type="PanelContainer" parent="Global MarginContainer"]
 layout_mode = 2

@@ -80,6 +80,8 @@ func on_unhandled_input(event: InputEvent):
 			finished.emit()
 		elif event.is_action_pressed("pick_block"):
 			pick_block()
+		elif event.is_action_pressed("align_block"):
+			gravity_align_ghost()
 		else:
 			return
 		get_viewport().set_input_as_handled()
@@ -250,6 +252,19 @@ func switch_block(delta: int):
 	
 	SignalManager.build_block_changed.emit(current_block)
 
+
+# align the ghost with up vector ( = -gravity )
+func gravity_align_ghost():
+	if not ghost: return
+
+	#var trans: Transform3D= Utils.align_with_y(ghost.global_transform, -player.get_gravity().normalized())
+	#var quat:= Quaternion(player.pivot.global_basis)
+	
+	# FIXME 
+	#  make this work in accordance with rotate_ghost()
+	#  absolutely no idea how
+
+	#block_rotation= Vector3i.ZERO
 
 func set_full_block_list():
 	block_list= GameData.block_library.blocks.duplicate()

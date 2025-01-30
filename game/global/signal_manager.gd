@@ -15,6 +15,8 @@ signal interact_with_block(grid_block: BaseGridBlock, grid: BlockGrid, player: P
 signal player_seated(grid: BlockGrid, grid_block: GridBlock)
 signal player_left_seat(player: Player)
 
+signal player_set_action_state(state: PlayerActionStateMachineState)
+
 signal hotkey_assigned(assignment: BaseHotkeyAssignment, grid: BlockGrid)
 
 signal toggle_block_category_panel

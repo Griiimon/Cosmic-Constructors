@@ -18,6 +18,8 @@ var player: Player
 func _ready() -> void:
 	player= get_parent()
 
+	state_changed.connect(SignalManager.player_set_action_state.emit)
+
 	idle_state.build_block.connect(change_state.bind(build_state))
 	idle_state.build_peripheral_entity.connect(change_state.bind(build_peripheral_entity_state))
 

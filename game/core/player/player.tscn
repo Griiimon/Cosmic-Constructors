@@ -217,10 +217,34 @@ current_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="Action State Machine" index="0"]
 script = ExtResource("6_3y3c5")
+input_mappings = {
+"block_interact": "Interact with Block",
+"blueprint": "Blueprint",
+"build": "Build Mode",
+"item_interact": "Interact with Item",
+"open_block_property_panel": "Block Property Panel",
+"pull": "Pull Object",
+"toggle_block_alt_property": "Toggle secondary Block Property",
+"toggle_block_property": "Toggle default Block Property"
+}
 
 [node name="Build" type="Node" parent="Action State Machine" index="1"]
 script = ExtResource("5_avkim")
 current_block = ExtResource("11_2od4b")
+input_mappings = {
+"build_block": "Build Block",
+"next_block": "Next Block",
+"pick_block": "Pick Block",
+"plane_fill": "Plane fill",
+"previous_block": "Previous Block",
+"roll_block_left": "Roll Block Left",
+"roll_block_right": "Roll Block Right",
+"rotate_block_down": "Rotate Block Down",
+"rotate_block_left": "Rotate Block Left",
+"rotate_block_right": "Rotate Block Right",
+"rotate_block_up": "Rotate Block Up",
+"toggle_block_categories": "Block Categories"
+}
 
 [node name="Build Peripheral Entity" type="Node" parent="Action State Machine" index="2"]
 script = ExtResource("14_06130")
@@ -228,16 +252,28 @@ current_entity = ExtResource("15_7knt3")
 
 [node name="Attach Rope" type="Node" parent="Action State Machine" index="3"]
 script = ExtResource("16_7yrlv")
+input_mappings = {
+"block_interact": "Block Interact"
+}
 
 [node name="Carry Item" type="Node" parent="Action State Machine" index="4"]
 script = ExtResource("17_dxssv")
+input_mappings = {
+"item_interact": "Drop"
+}
 
 [node name="Grab Handles" type="Node" parent="Action State Machine" index="5"]
 script = ExtResource("18_eocux")
+input_mappings = {
+"block_interact": "Let Go"
+}
 
 [node name="Pull" type="Node" parent="Action State Machine" index="6"]
 script = ExtResource("19_lfvx8")
 max_strength = 20000.0
+input_mappings = {
+"pull": "Stop pulling"
+}
 
 [node name="Save Blueprint" type="Node" parent="Action State Machine" index="7"]
 script = ExtResource("20_og83w")

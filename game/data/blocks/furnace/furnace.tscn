@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://cgg6tb8y1qi3m"]
+[gd_scene load_steps=14 format=4 uid="uid://cgg6tb8y1qi3m"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/furnace_instance.gd" id="1_ixfdn"]
 [ext_resource type="Resource" uid="uid://d2tb2pfogfi1f" path="res://game/data/recipe/furnace recipes/steel_ingot_recipe.tres" id="2_88d31"]
@@ -26,6 +26,10 @@ _surfaces = [{
 material = SubResource("StandardMaterial3D_y6say")
 size = Vector3(0.775, 0.035, 0.085)
 
+[sub_resource type="BoxMesh" id="BoxMesh_xl0ar"]
+material = SubResource("StandardMaterial3D_y6say")
+size = Vector3(1.05, 0.2, 1.05)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wo78j"]
 vertex_color_use_as_albedo = true
 
@@ -48,13 +52,17 @@ size = Vector3(1, 0.25, 1)
 script = ExtResource("1_ixfdn")
 recipe = ExtResource("2_88d31")
 
-[node name="CSGBox3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("ArrayMesh_dsv37")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.840008, -0.542573, 0, 0.542573, 0.840008, 0, 0.238672, 0.523342)
 mesh = SubResource("BoxMesh_3mq5x")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.379382, 0)
+mesh = SubResource("BoxMesh_xl0ar")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 emitting = false

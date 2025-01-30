@@ -2,6 +2,8 @@ extends CanvasLayer
 
 
 @export var enabled: bool= false
+@export var start_hidden:= true
+
 
 class DebugHUDItem:
 	var name: String
@@ -20,12 +22,14 @@ var dict: Dictionary
 
 
 func _ready():
+	visible= not start_hidden
 	set_process(enabled)
 
 
 func send(key: String, value, and_print: bool= false):
 	if not enabled: return
-	visible= true
+	if dict.is_empty() and not start_hidden:
+		show()
 	if not dict.has(key):
 		var label_key= Label.new()
 		#label_key.custom_minimum_size.x= grid_container.custom_minimum_size.x - 10
@@ -53,6 +57,9 @@ func send(key: String, value, and_print: bool= false):
 
 
 func _process(_delta):
+	if Input.is_action_just_pressed("toggle_debug_hud"):
+		visible= not visible
+	
 	for key in dict.keys():
 		dict[key].label_value.text= str(dict[key].value)
 

@@ -123,3 +123,33 @@ static func extract_value_from_cmd_line_args(key: String)-> String:
 		if arg.begins_with(key):
 			return arg.replace(key + "=", "")
 	return "N/A"
+
+
+static func get_input_action_mapping(action_name: String)-> String:
+	var setting_name: String= "input/" + action_name
+
+	var mapping= ProjectSettings.get_setting(setting_name)
+
+	if not mapping:
+		push_error("Input action doesnt exist ", action_name)
+		return ""
+	
+	var event: InputEvent= mapping["events"][0]
+
+	if event is InputEventKey:
+		return OS.get_keycode_string(event.get_physical_keycode_with_modifiers())
+	elif event is InputEventMouseButton:
+		match event.button_index:
+			MOUSE_BUTTON_LEFT:
+				return "Left MouseBtn"
+			MOUSE_BUTTON_RIGHT:
+				return "Right MouseBtn"
+			MOUSE_BUTTON_MIDDLE:
+				return "Middle MouseBtn"
+			MOUSE_BUTTON_WHEEL_UP:
+				return "Mouse Wheel Up"
+			MOUSE_BUTTON_WHEEL_DOWN:
+				return "Mouse Wheel Down"
+
+	push_error("Cant decode input mapping ", action_name)
+	return ""

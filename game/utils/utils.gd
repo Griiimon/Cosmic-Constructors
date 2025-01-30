@@ -153,3 +153,9 @@ static func get_input_action_mapping(action_name: String)-> String:
 
 	push_error("Cant decode input mapping ", action_name)
 	return ""
+
+
+static func add_label(parent_control: Control, text: String):
+	var label:= Label.new()
+	label.text= text
+	parent_control.add_child(label)

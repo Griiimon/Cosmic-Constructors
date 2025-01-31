@@ -41,10 +41,10 @@ func _ready():
 	SignalManager.block_property_changed.connect(on_block_property_changed)
 	SignalManager.build_block_changed.connect(on_build_block_changed)
 	
-	SignalManager.toggle_jetpack.connect(func(b: bool): jetpack_button.disabled= not b)
-	SignalManager.toggle_dampeners.connect(func(b: bool): dampeners_button.disabled= not b)
-	SignalManager.toggle_parking_brake.connect(func(b: bool): parking_brake_button.disabled= not b)
-	SignalManager.toggle_reverse_mode.connect(func(b: bool): reverse_button.disabled= not b)
+	SignalManager.jetpack_toggled.connect(func(b: bool): jetpack_button.disabled= not b)
+	SignalManager.dampeners_toggled.connect(func(b: bool): dampeners_button.disabled= not b)
+	SignalManager.parking_brake_toggled.connect(func(b: bool): parking_brake_button.disabled= not b)
+	SignalManager.reverse_mode_toggled.connect(func(b: bool): reverse_button.disabled= not b)
 
 	SignalManager.player_set_action_state.connect(on_player_action_state_changed)
 

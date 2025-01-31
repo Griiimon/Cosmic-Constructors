@@ -8,7 +8,7 @@ signal landed
 		jetpack_active= b
 		if not player:
 			await SignalManager.player_spawned
-		SignalManager.toggle_jetpack.emit(jetpack_active)
+		SignalManager.jetpack_toggled.emit(jetpack_active)
 		update_gravity()
 		
 @export var dampeners_active: bool= true:
@@ -16,7 +16,7 @@ signal landed
 		dampeners_active= b
 		if not player:
 			await SignalManager.player_spawned
-		SignalManager.toggle_dampeners.emit(dampeners_active)
+		SignalManager.dampeners_toggled.emit(dampeners_active)
 		update_gravity()
 
 @export var rotation_speed: float= 0.02

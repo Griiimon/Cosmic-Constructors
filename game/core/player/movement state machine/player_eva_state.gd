@@ -8,7 +8,7 @@ signal landed
 		jetpack_active= b
 		if not player:
 			await SignalManager.player_spawned
-		SignalManager.toggle_jetpack.emit(jetpack_active)
+		SignalManager.jetpack_toggled.emit(jetpack_active)
 		update_gravity()
 		
 @export var dampeners_active: bool= true:
@@ -16,7 +16,7 @@ signal landed
 		dampeners_active= b
 		if not player:
 			await SignalManager.player_spawned
-		SignalManager.toggle_dampeners.emit(dampeners_active)
+		SignalManager.dampeners_toggled.emit(dampeners_active)
 		update_gravity()
 
 @export var yaw_factor: float= 1.0
@@ -85,7 +85,7 @@ func on_physics_process(delta: float):
 		
 		move_vec= (Vector3(horizontal_input, vertical_input, forward_input))
 		
-		if Input.is_action_just_pressed("toggle_dampeners"):
+		if Input.is_action_just_pressed("dampeners_toggled"):
 			dampeners_active= not dampeners_active
 		
 		

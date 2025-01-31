@@ -28,18 +28,18 @@ func on_integrate_forces(_state: PhysicsDirectBodyState3D):
 	pass
 
 
-func _input(event: InputEvent) -> void:
-	if is_current_state():
-		on_input(event)
+#func _input(event: InputEvent) -> void:
+	#if is_current_state():
+		#on_input(event)
 
 
 func on_input(_event: InputEvent):
 	pass
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if is_current_state():
-		on_unhandled_input(event)
+#func _unhandled_input(event: InputEvent) -> void:
+	#if is_current_state():
+		#on_unhandled_input(event)
 
 
 func on_unhandled_input(_event: InputEvent):

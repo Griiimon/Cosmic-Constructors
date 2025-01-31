@@ -36,6 +36,11 @@ func on_integrate_forces(state: PhysicsDirectBodyState3D):
 		current_state.on_integrate_forces(state)
 
 
+func _input(event: InputEvent):
+	if current_state and not paused:
+		current_state.on_input(event)
+
+
 func _unhandled_input(event: InputEvent):
 	if current_state and not paused:
 		current_state.on_unhandled_input(event)

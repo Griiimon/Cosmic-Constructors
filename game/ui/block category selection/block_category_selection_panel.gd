@@ -27,4 +27,4 @@ func populate():
 
 func choose_category(category: BlockCategory):
 	category_selected.emit(category)
-	hide()
+	close()

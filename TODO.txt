@@ -3,19 +3,14 @@ FIX on_grid_changed() [ REPARENT JOINT? ] in piston ( hinge, rotor, [rail?] ) re
 FIX rail slider limits still out of bounds even on initial build 
 	check if rails direction has to do something with it ( global Z vs Y)
 
-disable parking button when out of seat
-
 rail: lock linear limit with motor off
 
-live toggle DebugHud ( F7? )
-
-T - align block with terrain ( gravity up vector )
 
 stop rotating camera while in block category menu ( same with blueprint menu? make it a scroll menu feature? )
-
+	movement_state_machine.paused= true
+	
+	
 move remove block/grid code from sandbox to build state, use input actions for legend
-
-add reverse mode UI button
 
 network sync plane_fill ( special case? dont just sync spawning each block)
  and blueprint spawning ( send entire grid at once )
@@ -204,8 +199,6 @@ upside down wheels should skip any calculations ( shapecast normal != wheel basi
 
 implement rolling resistance
 
-implement per axis linear damping calculated from air resistance profile
-
 avoid overlap with other grid while building
 
 player carry ore chunks, add collision shape but keep center of mass
@@ -247,6 +240,7 @@ FIX grabbing handles weight calculation for all connected grids => make grabbing
 FIX suspension jitter with joints
 FIX build block placement after placing custom shape
 FIX hinge snaps back to ang 0 when deactivated => because of grid deletions/splitting?
+FIX align block with terrain ( gravity up vector )
 
 INVESTIGATE possible to pick up item from floor and from OreContainer with one F push in the same frame. almost seemed so
 
@@ -399,6 +393,8 @@ hard stone type that cannot be mined, only tnt etc
 
 Assemblers will not stockpile products without ability to drop product. will produce 1 tho and player can grab it
 
+implement per axis linear damping calculated from air resistance profile
+	would work for single main grid with cached per-axis profiles updated after changes done to the grid. if it werent for sub grids that can dynamically change relative position and angles too. would lead to continuous heavy calculations 
 
 TECHNOLOGIES:
 ------------------------

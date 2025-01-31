@@ -128,7 +128,10 @@ func on_hotkey_assigned(assignment: BaseHotkeyAssignment, grid: BlockGrid):
 
 
 func on_toggle_block_category_panel():
-	block_category_selection_panel.visible= not block_category_selection_panel.visible
+	if block_category_selection_panel.visible:
+		block_category_selection_panel.close()
+	else:
+		block_category_selection_panel.open()
 
 
 func on_block_category_selected(category: BlockCategory):

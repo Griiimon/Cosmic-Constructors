@@ -66,6 +66,7 @@ func add_row(type: String= "", value: String= "")-> ScrollSelectionRow:
 
 
 func open(_block: GridBlock= null, _grid: BlockGrid= null):
+	Global.player.movement_state_machine.paused= true
 	populate()
 	show()
 
@@ -74,6 +75,7 @@ func close():
 	hide()
 	update_interval.stop()
 	closed.emit()
+	Global.player.movement_state_machine.paused= false
 
 
 func _gui_input(event: InputEvent) -> void:

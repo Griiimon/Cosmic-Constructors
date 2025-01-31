@@ -62,13 +62,16 @@ func on_exit():
 	player.gravity_scale= 1
 
 
-func on_physics_process(delta: float):
+func on_always_physics_process(_delta: float):
 	if (not jetpack_active or not player.in_gravity()) and player.floor_shapecast.is_colliding():
 		#if player.to_local(player.linear_velocity).y < -min_land_velocity:
 		#if (player.basis * player.linear_velocity).y < -min_land_velocity:
 		if not jetpack_active or player.linear_velocity.dot(-player.global_basis.y) > min_land_velocity:
 			landed.emit()
 			return
+	
+
+func on_physics_process(delta: float):
 
 	if Input.is_action_just_pressed("jetpack"):
 		jetpack_active= not jetpack_active

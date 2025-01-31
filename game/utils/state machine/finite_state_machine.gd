@@ -25,8 +25,10 @@ func _process(delta: float):
 
 
 func _physics_process(delta: float):
-	if current_state and not paused:
-		current_state.on_physics_process(delta)
+	if current_state:
+		current_state.on_always_physics_process(delta)
+		if not paused:
+			current_state.on_physics_process(delta)
 
 
 func on_integrate_forces(state: PhysicsDirectBodyState3D):

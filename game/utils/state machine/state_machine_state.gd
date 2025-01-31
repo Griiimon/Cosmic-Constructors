@@ -20,6 +20,10 @@ func on_physics_process(_delta: float):
 	pass
 
 
+func on_always_physics_process(_delta: float):
+	pass
+
+
 func on_integrate_forces(_state: PhysicsDirectBodyState3D):
 	pass
 

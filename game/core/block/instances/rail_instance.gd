@@ -29,8 +29,6 @@ func init(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary= {}):
 		if restore_data:
 			rail.sub_grid= grid.world.get_grid(remap_sub_grid_id(restore_data))
 		else:
-			#rail.sub_grid= grid.world.add_grid(global_position + global_basis.y, global_rotation)
-			#rail.sub_grid.add_block(carriage_block, Vector3i.ZERO, Vector3i.ZERO, grid)
 			rail.sub_grid= grid.add_sub_grid(global_position + global_basis.y, global_rotation, grid_block, carriage_block, Vector3i.ZERO)
 
 		rail.motor_enabled= motor_enabled
@@ -46,7 +44,8 @@ func init(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary= {}):
 			
 			slider_joint.limit_lower+= offset.z
 			slider_joint.limit_upper+= offset.z
-			
+		rail.store_limits()
+		
 		slider_joint.node_a= slider_joint.get_path_to(grid)
 		slider_joint.node_b= slider_joint.get_path_to(rail.sub_grid)
 
@@ -70,7 +69,18 @@ func on_destroy(grid: BlockGrid, grid_block: GridBlock):
 
 
 func on_set_motor_active():
-	slider_joint.motor_enabled= motor_enabled.is_true()
+	#slider_joint.motor_enabled= motor_enabled.is_true()
+	
+	if not motor_enabled.is_true():
+		rail.store_limits()
+ 
+		var vec: Vector3= rail.sub_grid.global_position - ( rail.joint.global_transform.origin + rail.joint.global_basis.y )
+		var dot_factor: float= round(rail.joint.global_basis.x.dot(vec.normalized()))
+
+		rail.joint.limit_lower= vec.length() * dot_factor
+		rail.joint.limit_upper= vec.length() * dot_factor
+	else:
+		rail.restore_limits()
 
 
 func on_set_motor_velocity():

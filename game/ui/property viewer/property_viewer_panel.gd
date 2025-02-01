@@ -94,8 +94,8 @@ func open(_block: GridBlock= null, _grid: BlockGrid= null):
 	show()
 
 
-func close():
-	hide()
+func close(trigger_signal: bool= true):
+	super(trigger_signal)
 	update_interval.stop()
 
 

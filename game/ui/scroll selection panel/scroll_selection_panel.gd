@@ -71,10 +71,11 @@ func open(_block: GridBlock= null, _grid: BlockGrid= null):
 	show()
 
 
-func close():
+func close(trigger_signal: bool= true):
 	hide()
 	update_interval.stop()
-	closed.emit()
+	if trigger_signal:
+		closed.emit()
 	Global.player.movement_state_machine.paused= false
 
 

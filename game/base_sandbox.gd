@@ -103,8 +103,6 @@ func _input(event: InputEvent) -> void:
 			if event.button_index == MOUSE_BUTTON_RIGHT:
 				if event.shift_pressed:
 					remove_grid()
-				else:
-					remove_block()
 
 
 func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
@@ -114,31 +112,6 @@ func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
 		for z in size.y:
 			@warning_ignore("narrowing_conversion")
 			grid.add_block(default_block, Vector3i(x, 0, z) - Vector3i(size.x / 2.0, 0, size.y / 2.0) / 2)
-
-
-func remove_block():
-	if not player.action_state_machine.build_state.is_current_state():
-		return
-
-	var query:= PhysicsRayQueryParameters3D.create(player.head.global_position, player.build_raycast.to_global(player.build_raycast.target_position))#, Global.GRID_COLLISION_LAYER)
-	#prints("Remove query", query.from, query.to)
-	query.hit_back_faces= false
-	query.hit_from_inside= false
-	var result= player.get_world_3d().direct_space_state.intersect_ray(query)
-	if result and result.collider.collision_layer == CollisionLayers.GRID:
-		var grid: BlockGrid= result.collider
-		var collision_point: Vector3= result.position
-		collision_point+= -player.build_raycast.global_basis.z * 0.05
-		var grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_point) 
-		if not grid_block: return
-		
-		grid_block= grid_block.get_grid_block()
-		
-		if NetworkManager.is_client:
-			ClientManager.send_sync_event(EventSyncState.Type.REMOVE_BLOCK,\
-			 [grid.id, grid_block.local_pos])
-		else:
-			grid_block.destroy(grid)
 
 
 func remove_grid():

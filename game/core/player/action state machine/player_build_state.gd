@@ -74,7 +74,11 @@ func on_unhandled_input(event: InputEvent):
 			build_block()
 			get_viewport().set_input_as_handled()
 			return
-			
+	elif event.is_action_pressed("remove_block"):
+		remove_block()
+		get_viewport().set_input_as_handled()
+		return
+		
 	if event is InputEventKey:
 		if event.is_action_pressed("ui_cancel"):
 			finished.emit()
@@ -266,8 +270,32 @@ func gravity_align_ghost():
 
 	#block_rotation= Vector3i.ZERO
 
+
 func set_full_block_list():
 	block_list= GameData.block_library.blocks.duplicate()
+
+
+func remove_block():
+	var query:= PhysicsRayQueryParameters3D.create(player.head.global_position, player.build_raycast.to_global(player.build_raycast.target_position))#, Global.GRID_COLLISION_LAYER)
+	query.hit_back_faces= false
+	query.hit_from_inside= false
+	var result= player.get_world_3d().direct_space_state.intersect_ray(query)
+	
+	if result and result.collider.collision_layer == CollisionLayers.GRID:
+		var grid: BlockGrid= result.collider
+		var collision_point: Vector3= Utils.get_raycast_inside_collision_point(player.build_raycast)
+		#var collision_point: Vector3= result.position
+		#collision_point+= -player.build_raycast.global_basis.z * 0.05
+		var grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_point) 
+		if not grid_block: return
+		
+		grid_block= grid_block.get_grid_block()
+		
+		if NetworkManager.is_client:
+			ClientManager.send_sync_event(EventSyncState.Type.REMOVE_BLOCK,\
+			 [grid.id, grid_block.local_pos])
+		else:
+			grid_block.destroy(grid)
 
 
 func on_block_category_selected(category: BlockCategory):

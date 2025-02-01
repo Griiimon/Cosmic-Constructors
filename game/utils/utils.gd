@@ -133,24 +133,30 @@ static func get_input_action_mapping(action_name: String)-> String:
 	if not mapping:
 		push_error("Input action doesnt exist ", action_name)
 		return ""
-	
-	var event: InputEvent= mapping["events"][0]
 
-	if event is InputEventKey:
-		return OS.get_keycode_string(event.get_physical_keycode_with_modifiers())
-	elif event is InputEventMouseButton:
-		match event.button_index:
-			MOUSE_BUTTON_LEFT:
-				return "Left MouseBtn"
-			MOUSE_BUTTON_RIGHT:
-				return "Right MouseBtn"
-			MOUSE_BUTTON_MIDDLE:
-				return "Middle MouseBtn"
-			MOUSE_BUTTON_WHEEL_UP:
-				return "Mouse Wheel Up"
-			MOUSE_BUTTON_WHEEL_DOWN:
-				return "Mouse Wheel Down"
+	var result:= ""
+	for event: InputEvent in mapping["events"]:
+		if result:
+			result+= " / "
 
+		if event is InputEventKey:
+			result+= OS.get_keycode_string(event.get_physical_keycode_with_modifiers())
+		elif event is InputEventMouseButton:
+			match event.button_index:
+				MOUSE_BUTTON_LEFT:
+					result+= "Left MouseBtn"
+				MOUSE_BUTTON_RIGHT:
+					result+= "Right MouseBtn"
+				MOUSE_BUTTON_MIDDLE:
+					result+= "Middle MouseBtn"
+				MOUSE_BUTTON_WHEEL_UP:
+					result+= "Mouse Wheel Up"
+				MOUSE_BUTTON_WHEEL_DOWN:
+					result+= "Mouse Wheel Down"
+
+	if not result.is_empty():
+		return result
+		
 	push_error("Cant decode input mapping ", action_name)
 	return ""
 

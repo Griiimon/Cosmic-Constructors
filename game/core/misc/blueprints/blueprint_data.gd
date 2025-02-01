@@ -54,7 +54,7 @@ func load_blueprint(data: Array, model_only: bool= false, world: World= null):
 		
 	for i in all_grids.size():
 		var sub_grid: BlockGrid= sub_grids[i]
-		sub_grid.deserialize(all_grids[i], model_only, grid, sub_grids, sub_grid_id_remaps)
+		sub_grid.deserialize(all_grids[i], model_only, grid, [], sub_grid_id_remaps)
 		if model_only:
 			grid.add_child(sub_grid)
 		else:

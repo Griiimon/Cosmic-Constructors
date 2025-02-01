@@ -1,16 +1,9 @@
+FIX pressing ESC in block category kills build mode too.. unhandled input..
+
 FIX on_grid_changed() [ REPARENT JOINT? ] in piston ( hinge, rotor, [rail?] ) recalculate limits and initial offset when changing joint node?
 
-FIX rail slider limits still out of bounds even on initial build 
-	check if rails direction has to do something with it ( global Z vs Y)
 
-rail: lock linear limit with motor off
-
-
-stop rotating camera while in block category menu ( same with blueprint menu? make it a scroll menu feature? )
-	movement_state_machine.paused= true
-	
-	
-move remove block/grid code from sandbox to build state, use input actions for legend
+move remove block/grid & planefill code from sandbox to build state, use input actions for legend
 
 network sync plane_fill ( special case? dont just sync spawning each block)
  and blueprint spawning ( send entire grid at once )
@@ -135,7 +128,7 @@ sucker block: sucks world items up and keeps them sucked while active. use shape
 propeller/fans: like low force thrusters ( with built-in rotation capabilities? )
 
 can i rotate a subgrid on a rotor by pulling on handles?
-	lock mode for rotor, rails: motor 0 velocity means locked or free
+	lock mode for rotor: motor 0 velocity means locked or free
 
 use calc_angular_velocity() in periperal connector code
 

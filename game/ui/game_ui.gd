@@ -141,7 +141,7 @@ func on_block_category_selected(category: BlockCategory):
 	SignalManager.selected_block_category.emit(category)
 
 
-func on_player_seated(grid: BlockGrid, grid_block: GridBlock):
+func on_player_seated(grid: BlockGrid, _grid_block: GridBlock):
 	parking_brake_button.show()
 	reverse_button.show()
 	jetpack_button.hide()

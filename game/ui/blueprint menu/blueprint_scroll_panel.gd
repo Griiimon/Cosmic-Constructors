@@ -16,4 +16,4 @@ func populate():
 
 func on_row_toggled(dir_name: String):
 	SignalManager.blueprint_selected.emit(dir_name)
-	hide()
+	close()

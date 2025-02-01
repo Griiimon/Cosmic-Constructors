@@ -122,6 +122,8 @@ func force_update(grid_block: GridBlock):
 func remap_sub_grid_id(data: Dictionary, key: String= "sub_grid_id")-> int:
 	var id: int= data[key]
 	if data.has("sub_grid_id_remaps"):
+		if not data["sub_grid_id_remaps"].has(id):
+			return -1
 		id= data["sub_grid_id_remaps"][id]
 	return id
 

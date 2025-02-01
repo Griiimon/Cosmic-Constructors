@@ -124,6 +124,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					get_viewport().set_input_as_handled()
 				KEY_ESCAPE:
 					close()
+					get_viewport().set_input_as_handled()
 
 
 func change_row(delta: int):

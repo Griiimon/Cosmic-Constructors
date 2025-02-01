@@ -29,7 +29,9 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 
 
 func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
-	restore_grid_connection.call_deferred(grid, grid_block, remap_sub_grid_id(restore_data))
+	var sub_grid_id: int= remap_sub_grid_id(restore_data)
+	if sub_grid_id > 1:
+		restore_grid_connection.call_deferred(grid, grid_block, sub_grid_id)
 
 
 func on_grid_changed():
@@ -49,10 +51,13 @@ func restore_grid_connection(grid: BlockGrid, _grid_block: GridBlock, sub_grid_i
 
 
 func change_speed():
+	if not sub_grid: return
 	joint.motor_target_velocity= rotation_speed.get_value_f()
 
 
 func on_set_active():
+	if not sub_grid: return
+
 	if active.is_true():
 		joint.motor_enabled= true
 		joint.limit_lower= deg_to_rad(-90) - initial_angle

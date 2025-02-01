@@ -30,7 +30,9 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 
 
 func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
-	restore_grid_connection.call_deferred(grid, grid_block, remap_sub_grid_id(restore_data))
+	var sub_grid_id: int= remap_sub_grid_id(restore_data)
+	if sub_grid_id > 1:
+		restore_grid_connection.call_deferred(grid, grid_block, sub_grid_id)
 
 
 func on_grid_changed():
@@ -49,10 +51,13 @@ func restore_grid_connection(grid: BlockGrid, _grid_block: GridBlock, sub_grid_i
 
 
 func change_speed():
+	if not sub_grid: return
 	joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_ANGULAR_MOTOR_TARGET_VELOCITY, rotation_speed.get_value_f())
 
 
 func on_set_active():
+	if not sub_grid: return
+
 	if active.is_true():
 		joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_ANGULAR_MOTOR, true)
 		joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_ANGULAR_LIMIT, false)

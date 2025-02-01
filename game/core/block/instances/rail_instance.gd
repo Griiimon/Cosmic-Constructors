@@ -29,7 +29,9 @@ func init(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary= {}):
 		rail= LinkedRailGroup.new(grid)
 		
 		if restore_data:
-			rail.sub_grid= grid.world.get_grid(remap_sub_grid_id(restore_data))
+			var sub_grid_id: int= remap_sub_grid_id(restore_data)
+			if sub_grid_id > -1:
+				rail.sub_grid= grid.world.get_grid(sub_grid_id)
 		else:
 			rail.sub_grid= grid.add_sub_grid(global_position + global_basis.y, global_rotation, grid_block, carriage_block, Vector3i.ZERO)
 
@@ -40,18 +42,22 @@ func init(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary= {}):
 		slider_joint.reparent(grid)
 		rail.joint= slider_joint
 		
-		if restore_data:
+		if restore_data and rail.sub_grid:
 			slider_joint.global_position= rail.sub_grid.global_position - rail.sub_grid.global_basis.y
 			var offset: Vector3= to_local(slider_joint.global_position)
 			#DebugHud.send("Carriage offset", offset.z)
 			
 			slider_joint.limit_lower+= offset.z
 			slider_joint.limit_upper+= offset.z
+		
 		rail.store_limits()
 		
-		slider_joint.node_a= slider_joint.get_path_to(grid)
-		slider_joint.node_b= slider_joint.get_path_to(rail.sub_grid)
-
+		if rail.sub_grid:
+			slider_joint.node_a= slider_joint.get_path_to(grid)
+			slider_joint.node_b= slider_joint.get_path_to(rail.sub_grid)
+		else:
+			slider_joint.node_a= ""
+			slider_joint.node_b= ""
 	else:
 		assert(group is LinkedRailGroup)
 		rail= group
@@ -73,6 +79,8 @@ func on_destroy(grid: BlockGrid, grid_block: GridBlock):
 
 
 func on_set_motor_active():
+	if not rail.sub_grid: return
+	
 	if not motor_enabled.is_true():
 		if motor_lock.is_true():
 			rail.joint.motor_enabled= false

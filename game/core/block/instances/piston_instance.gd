@@ -66,7 +66,9 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 
 
 func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
-	restore_grid_connection.call_deferred(grid, grid_block, remap_sub_grid_id(restore_data))
+	var sub_grid_id: int= remap_sub_grid_id(restore_data)
+	if sub_grid_id > 1:
+		restore_grid_connection.call_deferred(grid, grid_block, sub_grid_id)
 
 
 func on_grid_changed():
@@ -81,7 +83,8 @@ func restore_grid_connection(grid: BlockGrid, _grid_block: GridBlock, sub_grid_i
 
 	if reset_joint:
 		print("Reset joint")
-		joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_LINEAR_LIMIT, false)
+		#joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_LINEAR_LIMIT, false)
+		initial_distance= get_joint_distance() * 2
 	else:
 		initial_distance= get_joint_distance()
 		DebugHud.send("Init dist", initial_distance)
@@ -104,10 +107,13 @@ func restore_grid_connection(grid: BlockGrid, _grid_block: GridBlock, sub_grid_i
 
 
 func change_velocity():
+	if not sub_grid: return
 	joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_LINEAR_MOTOR_TARGET_VELOCITY, velocity.get_value_f())
 
 
 func on_set_active():
+	if not sub_grid: return
+	
 	joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_LINEAR_MOTOR, active.is_true())
 
 	if active.is_true():

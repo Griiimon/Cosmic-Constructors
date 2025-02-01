@@ -140,8 +140,14 @@ static func get_input_action_mapping(action_name: String)-> String:
 			result+= " / "
 
 		if event is InputEventKey:
-			result+= OS.get_keycode_string(event.get_physical_keycode_with_modifiers())
+			var keycode= event.get_physical_keycode_with_modifiers()
+			result+= OS.get_keycode_string(keycode)
+		
 		elif event is InputEventMouseButton:
+			var mask: int= event.get_modifiers_mask()
+			if mask > 0:
+				result+= OS.get_keycode_string(mask)
+							
 			match event.button_index:
 				MOUSE_BUTTON_LEFT:
 					result+= "Left MouseBtn"

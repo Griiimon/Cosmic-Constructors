@@ -237,6 +237,8 @@ input_mappings = {
 "pick_block": "Pick Block",
 "plane_fill": "Plane fill",
 "previous_block": "Previous Block",
+"remove_block": "Remove Block",
+"remove_grid": "Remove Grid",
 "roll_block_left": "Roll Block Left",
 "roll_block_right": "Roll Block Right",
 "rotate_block_down": "Rotate Block Down",

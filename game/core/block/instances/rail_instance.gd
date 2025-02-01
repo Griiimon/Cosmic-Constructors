@@ -8,6 +8,7 @@ extends BlockInstance
 # create dummy variable instances only for building the property table correctly
 var motor_enabled:= BlockPropBool.new("Motor")
 var motor_velocity:= BlockPropFloat.new("Velocity")
+var motor_lock:= BlockPropBool.new("Lock")
 
 var rail: LinkedRailGroup
 
@@ -23,6 +24,7 @@ func init(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary= {}):
 	if not group:
 		motor_enabled= BlockPropBool.new("Motor", true, on_set_motor_active, true, self)
 		motor_velocity= BlockPropFloat.new("Velocity", 0.0, on_set_motor_velocity, false, self)
+		motor_lock= BlockPropBool.new("Lock", true, null, false, self)
 
 		rail= LinkedRailGroup.new(grid)
 		
@@ -33,6 +35,7 @@ func init(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary= {}):
 
 		rail.motor_enabled= motor_enabled
 		rail.motor_velocity= motor_velocity
+		rail.motor_lock= motor_lock
 
 		slider_joint.reparent(grid)
 		rail.joint= slider_joint
@@ -54,6 +57,7 @@ func init(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary= {}):
 		rail= group
 		motor_enabled= rail.motor_enabled
 		motor_velocity= rail.motor_velocity
+		motor_lock= rail.motor_lock
 		
 		slider_joint.queue_free()
 	
@@ -69,17 +73,21 @@ func on_destroy(grid: BlockGrid, grid_block: GridBlock):
 
 
 func on_set_motor_active():
-	#slider_joint.motor_enabled= motor_enabled.is_true()
-	
 	if not motor_enabled.is_true():
-		rail.store_limits()
- 
-		var vec: Vector3= rail.sub_grid.global_position - ( rail.joint.global_transform.origin + rail.joint.global_basis.y )
-		var dot_factor: float= round(rail.joint.global_basis.x.dot(vec.normalized()))
+		if motor_lock.is_true():
+			rail.joint.motor_enabled= false
+			rail.store_limits()
+	 
+			var vec: Vector3= rail.sub_grid.global_position - ( rail.joint.global_transform.origin + rail.joint.global_basis.y )
+			var dot_factor: float= round(rail.joint.global_basis.x.dot(vec.normalized()))
 
-		rail.joint.limit_lower= vec.length() * dot_factor
-		rail.joint.limit_upper= vec.length() * dot_factor
+			rail.joint.limit_lower= vec.length() * dot_factor
+			rail.joint.limit_upper= vec.length() * dot_factor
+		else:
+			rail.joint.motor_enabled= true
+
 	else:
+		rail.joint.motor_enabled= true
 		rail.restore_limits()
 
 

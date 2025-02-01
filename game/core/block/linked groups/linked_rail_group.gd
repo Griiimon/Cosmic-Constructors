@@ -8,6 +8,7 @@ var joint: JoltSliderJoint3D
 
 var motor_enabled: BlockPropBool
 var motor_velocity: BlockPropFloat
+var motor_lock: BlockPropBool
 
 var stored_limits: Vector2
 

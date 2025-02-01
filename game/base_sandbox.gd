@@ -98,12 +98,6 @@ func _input(event: InputEvent) -> void:
 				get_tree().reload_current_scene.call_deferred()
 				return
 
-	elif event is InputEventMouseButton:
-		if event.pressed:
-			if event.button_index == MOUSE_BUTTON_RIGHT:
-				if event.shift_pressed:
-					remove_grid()
-
 
 func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
 	var grid: BlockGrid= Global.game.world.add_grid(pos)
@@ -112,22 +106,6 @@ func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
 		for z in size.y:
 			@warning_ignore("narrowing_conversion")
 			grid.add_block(default_block, Vector3i(x, 0, z) - Vector3i(size.x / 2.0, 0, size.y / 2.0) / 2)
-
-
-func remove_grid():
-	if not player.action_state_machine.build_state.is_current_state():
-		return
-
-	var query:= PhysicsRayQueryParameters3D.create(player.head.global_position, player.build_raycast.to_global(player.build_raycast.target_position))#, Global.GRID_COLLISION_LAYER)
-	#prints("Remove query", query.from, query.to)
-	query.hit_back_faces= false
-	query.hit_from_inside= false
-	var result= player.get_world_3d().direct_space_state.intersect_ray(query)
-	if result and (result.collider as CollisionObject3D).collision_layer == CollisionLayers.GRID:
-		var grid: BlockGrid= result.collider
-		grid.world.remove_grid(grid)
-		if NetworkManager.is_client:
-			ClientManager.send_sync_event(EventSyncState.Type.REMOVE_GRID, [grid.id])
 
 
 func sit_in_nearest_seat():

@@ -74,11 +74,15 @@ func on_unhandled_input(event: InputEvent):
 			build_block()
 			get_viewport().set_input_as_handled()
 			return
+	elif event.is_action_pressed("remove_grid"):
+		remove_grid()
+		get_viewport().set_input_as_handled()
+		return
 	elif event.is_action_pressed("remove_block"):
 		remove_block()
 		get_viewport().set_input_as_handled()
 		return
-		
+
 	if event is InputEventKey:
 		if event.is_action_pressed("ui_cancel"):
 			finished.emit()
@@ -296,6 +300,18 @@ func remove_block():
 			 [grid.id, grid_block.local_pos])
 		else:
 			grid_block.destroy(grid)
+
+
+func remove_grid():
+	var query:= PhysicsRayQueryParameters3D.create(player.head.global_position, player.build_raycast.to_global(player.build_raycast.target_position))#, Global.GRID_COLLISION_LAYER)
+	query.hit_back_faces= false
+	query.hit_from_inside= false
+	var result= player.get_world_3d().direct_space_state.intersect_ray(query)
+	if result and (result.collider as CollisionObject3D).collision_layer == CollisionLayers.GRID:
+		var grid: BlockGrid= result.collider
+		grid.world.remove_grid(grid)
+		if NetworkManager.is_client:
+			ClientManager.send_sync_event(EventSyncState.Type.REMOVE_GRID, [grid.id])
 
 
 func on_block_category_selected(category: BlockCategory):

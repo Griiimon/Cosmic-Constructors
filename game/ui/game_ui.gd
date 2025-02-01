@@ -102,6 +102,9 @@ func on_player_action_state_changed(state: PlayerActionStateMachineState):
 	else:
 		for input_action: String in input_mappings.keys():
 			var action_label: Label= Utils.add_label(input_legend_container, Utils.get_input_action_mapping(input_action))
+			action_label.size_flags_horizontal= Control.SIZE_SHRINK_BEGIN
+			action_label.horizontal_alignment= HORIZONTAL_ALIGNMENT_CENTER
+			action_label.custom_minimum_size.x= 30
 			action_label.add_theme_stylebox_override("normal", GameData.style_library.thin_white_border)
 		
 			var desc: String= input_mappings[input_action]

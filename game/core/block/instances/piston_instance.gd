@@ -67,7 +67,7 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 
 func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
 	var sub_grid_id: int= remap_sub_grid_id(restore_data)
-	if sub_grid_id > 1:
+	if sub_grid_id > -1:
 		restore_grid_connection.call_deferred(grid, grid_block, sub_grid_id)
 
 

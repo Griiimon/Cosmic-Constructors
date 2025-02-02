@@ -97,7 +97,6 @@ func add_player(id: int, player_name: String):
 	Global.game.peers.add_child(player, true)
 	player_instances[id]= player
 	player_connected.emit(id)
-	
 
 	if Global.game.is_paused():
 		await resume_game
@@ -306,7 +305,14 @@ func spawn_blueprint(compressed_data: PackedByteArray, position: Vector3, rotati
 	var world: World= Global.game.world
 	var blueprint_data:= BlueprintData.new()
 	blueprint_data.load_blueprint(data, false, world)
-	blueprint_data.place(position, world)
+	var grids: Array[BlockGrid]= blueprint_data.place(position, world)
+
+	var grid_data: Array[Dictionary]= []
+	for grid in grids:
+		grid_data.append(grid.serialize())
+	
+	var compressed_grid_data: PackedByteArray= Utils.compress_string(JSON.stringify(grid_data))
+	ClientManager.receive_grids.rpc(compressed_grid_data)
 
 
 func get_sender_id()-> int:

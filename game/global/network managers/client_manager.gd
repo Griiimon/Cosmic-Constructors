@@ -196,6 +196,27 @@ func receive_world_state(data: Dictionary):
 
 
 @rpc("any_peer", "reliable")
+func receive_grids(compressed_data: PackedByteArray): 
+	var json_str: String= Utils.decompress_string(compressed_data)
+	var json:= JSON.new()
+	
+	if json.parse(json_str) != OK:
+		push_error("Receive grids parse error", json.get_error_message(), json.get_error_line())
+		return
+
+	assert(Global.game.world)
+	var world_grid_data: Dictionary
+	
+	for grid_data: Dictionary in json.data:
+		var grid: BlockGrid= BlockGrid.pre_deserialize(grid_data, Global.game.world)
+		world_grid_data[grid]= grid_data
+		grid.freeze= true
+
+	for grid: BlockGrid in world_grid_data.keys():
+		grid.deserialize(world_grid_data[grid])
+
+
+@rpc("any_peer", "reliable")
 func spawn():
 	Global.game.spawn_player()
 

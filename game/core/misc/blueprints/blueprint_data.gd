@@ -10,21 +10,25 @@ var position: Vector3:
 
 
 
-func place(pos: Vector3, world: World):
+func place(pos: Vector3, world: World)-> Array[BlockGrid]:
+	var result: Array[BlockGrid]
 	position= pos
+	
+	result.append(grid)
 	
 	if sub_grids_node:
 		for child in sub_grids_node.get_children():
 			child.reparent(world.grids)
-	
+			result.append(child)
+
 		sub_grids_node.queue_free()
 		sub_grids_node= null
 
+	return result
 
-#func load_blueprint(blueprint_name: String, model_only: bool= false, world: World= null):
+
 func load_blueprint(data: Array, model_only: bool= false, world: World= null):
-	#var data: Array= get_blueprint_data_from_file(blueprint_name)
-	
+	prints("Load blueprint data", data)
 	var all_grids: Array[Dictionary]
 	all_grids.assign(data)
 
@@ -58,7 +62,7 @@ func load_blueprint(data: Array, model_only: bool= false, world: World= null):
 		if model_only:
 			grid.add_child(sub_grid)
 		else:
-			sub_grid.reparent(grid, false)
+			sub_grid.reparent(sub_grids_node, false)
 
 
 func clear():

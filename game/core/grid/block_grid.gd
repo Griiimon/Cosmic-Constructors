@@ -159,6 +159,9 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		main_grid_connection= grid_block
 
 	if NetworkManager.is_client:
+		if block_node is BlockInstance:
+			var instance: BlockInstance= block_node
+			instance.on_placed_client(self, grid_block)
 		return grid_block
 
 	if block_node is BlockInstance:

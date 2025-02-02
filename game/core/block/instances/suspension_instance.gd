@@ -157,13 +157,19 @@ func _ready() -> void:
 
 
 func on_placed(grid: BlockGrid, _grid_block: GridBlock):
+	spawn_wheel(grid)
+	wheel.initialize()
+
+
+func on_placed_client(grid: BlockGrid, _grid_block: GridBlock):
+	spawn_wheel(grid)
+
+
+func spawn_wheel(grid: BlockGrid):
 	wheel= wheel_scene.instantiate()
 	wheel.position= position + basis.x * (1 if is_right else -1)
 	wheel.base_rotation= rotation.y
-	#if not is_right:
-		#wheel.base_rotation+= deg_to_rad(180)
 	grid.add_child(wheel)
-	wheel.initialize()
 
 
 func on_destroy(grid: BlockGrid, grid_block: GridBlock):
@@ -190,7 +196,6 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 		throttle_input= 0
 	
 	reverse= grid.reverse_mode
-		
 
 	## no drive inputs, apply parking brake if sitting still
 	#if forward_drive == 0 && steering == 0 && abs(currentSpeed) < autoStopSpeedMS:
@@ -200,13 +205,7 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 	DebugHud.send("Throttle", round(throttle_input))
 	DebugHud.send("Brake Input", round(brake_input))
 
-
 	if wheel:
-		#if wheel.is_at_travel_limit():
-			#grid.add_effect(BlockGridCancelYVelocityEffect.new(pow(1 + wheel.max_travel - wheel.previous_distance, 8) - 1, wheel.previous_hit.hit_normal))
-			#wheel.brake(1)
-			#DebugHud.send("Over", "%.4f" % ( wheel.max_travel - wheel.previous_distance ))
-	
 		delta_time += delta
 		local_velocity = lerp(((grid.global_transform.origin - previous_global_position) / delta) * global_transform.basis, local_velocity, 0.5)
 		previous_global_position = grid.global_position
@@ -226,6 +225,7 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 		if drive_shaft:
 			# TODO i dont think thats correct
 			drive_shaft.torque= min(drive_shaft.torque, wheel.spin / wheel.tire_radius)
+
 
 #func process_drag() -> void:
 	#var drag := 0.5 * air_density * pow(speed, 2.0) * frontal_area * coefficient_of_drag

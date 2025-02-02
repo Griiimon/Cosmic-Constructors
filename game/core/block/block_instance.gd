@@ -26,6 +26,10 @@ func on_placed(_grid: BlockGrid, _grid_block: GridBlock):
 	pass
 
 
+func on_placed_client(_grid: BlockGrid, _grid_block: GridBlock):
+	pass
+
+
 func on_restored(grid: BlockGrid, grid_block: GridBlock, _restore_data: Dictionary):
 	on_placed(grid, grid_block)
 

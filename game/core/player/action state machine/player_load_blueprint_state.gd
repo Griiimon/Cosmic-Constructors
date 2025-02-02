@@ -31,9 +31,14 @@ func on_unhandled_input(event: InputEvent):
 	
 	if event.is_pressed() and event.is_action("place_blueprint"):
 		blueprint_data.clear()
-		
-		blueprint_data.load_blueprint(BlueprintData.get_blueprint_data_from_file(current_blueprint), false, player.world)
-		blueprint_data.place(player.get_look_ahead_pos(10), player.world)
+
+		var data: Array= BlueprintData.get_blueprint_data_from_file(current_blueprint)
+		if NetworkManager.is_client:
+			var compressed_data: PackedByteArray= Utils.compress_string(JSON.stringify(data))
+			ServerManager.spawn_blueprint.rpc_id(1, compressed_data, get_target_pos())
+		else:
+			blueprint_data.load_blueprint(data, false, player.world)
+			blueprint_data.place(get_target_pos(), player.world)
 		
 		finished.emit()
 		return
@@ -49,3 +54,7 @@ func on_load_blueprint(blueprint_name: String):
 func on_blueprint_panel_closed():
 	if is_current_state():
 		finished.emit()
+
+
+func get_target_pos()-> Vector3:
+	return player.get_look_ahead_pos(10)

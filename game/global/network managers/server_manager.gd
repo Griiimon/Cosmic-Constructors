@@ -294,5 +294,20 @@ func player_left_seat():
 	player.leave_seat()
 
 
+@rpc("any_peer", "reliable")
+func spawn_blueprint(compressed_data: PackedByteArray, position: Vector3, rotation: Vector3= Vector3.ZERO):
+	var data: Array[Dictionary]
+	var json:= JSON.new()
+	if not json.parse(Utils.decompress_string(compressed_data)) == OK:
+		push_error("Error parsing Blueprint ", json.get_error_message(), json.get_error_line())
+		return
+		
+	data.assign(json.data)
+	var world: World= Global.game.world
+	var blueprint_data:= BlueprintData.new()
+	blueprint_data.load_blueprint(data, false, world)
+	blueprint_data.place(position, world)
+
+
 func get_sender_id()-> int:
 	return NetworkManager.get_sender_id()

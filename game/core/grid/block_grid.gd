@@ -209,6 +209,7 @@ func add_sub_grid(sub_grid_pos: Vector3, sub_grid_rot: Vector3, connection_block
 
 
 func _physics_process(delta: float) -> void:
+	if not world: return
 	assert(not ( NetworkManager.is_client and not freeze ))
 
 	DebugPanel.send(self, "ID", id)

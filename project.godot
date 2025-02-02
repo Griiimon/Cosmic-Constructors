@@ -42,6 +42,14 @@ gdscript/warnings/unused_signal=0
 
 enabled=PackedStringArray("res://addons/csgtomeshinstance/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/sky_3d/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://game/core/": "red",
+"res://game/data/": "green",
+"res://game/test/": "purple"
+}
+
 [global_group]
 
 "Keep Ghost"="Don't delete this node when creating a ghost for this scene in building mode"

@@ -2,17 +2,12 @@ class_name BlueprintData
 
 var grid: BlockGrid
 var sub_grids_node: Node3D
-var position: Vector3:
-	set(p):
-		position= p
-		assert(grid)
-		grid.position= position
+var position: Vector3
 
 
 
-func place(pos: Vector3, world: World)-> Array[BlockGrid]:
+func place(world: World)-> Array[BlockGrid]:
 	var result: Array[BlockGrid]
-	position= pos
 	
 	result.append(grid)
 	

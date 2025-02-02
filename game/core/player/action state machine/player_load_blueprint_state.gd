@@ -23,7 +23,7 @@ func on_exit():
 
 func on_physics_process(_delta: float):
 	if not blueprint_data: return
-	blueprint_data.position= player.get_look_ahead_pos(10)
+	blueprint_data.grid.position= get_target_pos()
 
 
 func on_unhandled_input(event: InputEvent):
@@ -37,8 +37,9 @@ func on_unhandled_input(event: InputEvent):
 			var compressed_data: PackedByteArray= Utils.compress_string(JSON.stringify(data))
 			ServerManager.spawn_blueprint.rpc_id(1, compressed_data, get_target_pos())
 		else:
+			blueprint_data.position= get_target_pos()
 			blueprint_data.load_blueprint(data, false, player.world)
-			blueprint_data.place(get_target_pos(), player.world)
+			blueprint_data.place(player.world)
 		
 		finished.emit()
 		return

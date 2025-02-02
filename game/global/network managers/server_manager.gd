@@ -304,8 +304,9 @@ func spawn_blueprint(compressed_data: PackedByteArray, position: Vector3, rotati
 	data.assign(json.data)
 	var world: World= Global.game.world
 	var blueprint_data:= BlueprintData.new()
+	blueprint_data.position= position
 	blueprint_data.load_blueprint(data, false, world)
-	var grids: Array[BlockGrid]= blueprint_data.place(position, world)
+	var grids: Array[BlockGrid]= blueprint_data.place(world)
 
 	var grid_data: Array[Dictionary]= []
 	for grid in grids:

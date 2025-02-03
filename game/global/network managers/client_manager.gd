@@ -7,6 +7,8 @@ var ticks: int
 var peer_states: Dictionary
 var grid_states: Dictionary
 
+var sync_vars: Dictionary
+
 
 
 func _ready() -> void:
@@ -184,6 +186,13 @@ func receive_world_state(data: Dictionary):
 	for grid_state: Dictionary in new_grid_states:
 		store_grid_state(grid_state)
 
+	var new_sync_vars: Array= WorldSyncState.parse_sync_vars(data)
+	for sync_var_data in new_sync_vars:
+		var sync_var= SyncVar.deserialize(sync_var_data)
+		var hash: int= sync_var.get_hash()
+		sync_vars[hash]= sync_var
+		prints("Received SyncVar", sync_var.get_as_text())
+
 
 @rpc("any_peer", "reliable")
 func receive_grids(compressed_data: PackedByteArray): 
@@ -324,3 +333,11 @@ func interpolate_basis(basis: Basis, past_rotation: Vector3, future_rotation: Ve
 
 func get_sender_id()-> int:
 	return NetworkManager.get_sender_id()
+
+
+func has_sync_var(hash: int)-> bool:
+	return sync_vars.has(hash)
+
+
+func get_sync_var_value(hash: int)-> Variant:
+	return sync_vars[hash].get_value()

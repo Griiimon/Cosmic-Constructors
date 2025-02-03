@@ -13,6 +13,8 @@ var player_data: Dictionary
 
 var control_movement_requests: Dictionary
 
+var sync_vars: Array[SyncVar]
+
 
 
 func _ready() -> void:
@@ -42,7 +44,7 @@ func _physics_process(_delta: float) -> void:
 		var world_state: Dictionary
 		WorldSyncState.add_player_states(world_state, player_states.values())
 		WorldSyncState.add_grid_states(world_state, get_grid_states())
-		#WorldSyncState.add_sync_vars(world_state, sync_vars)
+		WorldSyncState.add_sync_vars(world_state, serialize_sync_vars())
 		
 		ClientManager.receive_world_state.rpc(world_state)
 
@@ -126,6 +128,15 @@ func get_grid_states()-> Array:
 			for grid in world.get_grids():
 				states.append(GridSyncState.build_sync_state(grid))
 	return states
+
+
+func serialize_sync_vars()-> Array[Dictionary]:
+	var result: Array[Dictionary]
+	for sync_var in sync_vars:
+		if not sync_var.requires_sync(): continue
+		sync_var.synced()
+		result.append(sync_var.serialize())
+	return result
 
 
 @rpc("any_peer", "reliable")
@@ -316,6 +327,10 @@ func spawn_blueprint(compressed_data: PackedByteArray, position: Vector3, rotati
 	
 	var compressed_grid_data: PackedByteArray= Utils.compress_string(JSON.stringify(grid_data))
 	ClientManager.receive_grids.rpc(compressed_grid_data)
+
+
+func register_sync_var(sync_var: SyncVar):
+	sync_vars.append(sync_var)
 
 
 func get_sender_id()-> int:

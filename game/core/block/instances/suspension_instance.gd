@@ -32,6 +32,9 @@ var wheel: Wheel
 @export var traction_control_max_slip := 8.0
 
 
+
+
+#region Unimplemented
 #@export_group("Motor")
 ### Maximum motor torque in NM.
 #@export var max_torque := 300.0
@@ -112,6 +115,7 @@ var wheel: Wheel
 #@export var air_density := 1.225
 ### Frontal area of the car in meters squared.
 #@export var frontal_area := 2.0
+#endregion
 
 const ANGULAR_VELOCITY_TO_RPM := 60.0 / TAU
 
@@ -149,6 +153,8 @@ var reverse: bool= false
 #var input_torque: float= 0.0
 var drive_shaft: LinkedDriveShaftGroup
 
+var sync_wheel_steer:= SyncVarFloat.new("steer")
+
 
 
 func _ready() -> void:
@@ -156,13 +162,15 @@ func _ready() -> void:
 	default_interaction_property= can_steer
 
 
-func on_placed(grid: BlockGrid, _grid_block: GridBlock):
+func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	spawn_wheel(grid)
 	wheel.initialize()
+	sync_wheel_steer.target= SyncVarTargetBlock.create(grid, grid_block)
+	
 
-
-func on_placed_client(grid: BlockGrid, _grid_block: GridBlock):
+func on_placed_client(grid: BlockGrid, grid_block: GridBlock):
 	spawn_wheel(grid)
+	sync_wheel_steer.target= SyncVarTargetBlock.create(grid, grid_block)
 
 
 func spawn_wheel(grid: BlockGrid):
@@ -227,6 +235,15 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 			drive_shaft.torque= min(drive_shaft.torque, wheel.spin / wheel.tire_radius)
 
 
+func client_physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
+	if ClientManager.has_sync_var(sync_wheel_steer.get_hash()):
+		wheel.rotation.y= ClientManager.get_sync_var_value(sync_wheel_steer.get_hash())
+
+
+func has_client_physics_tick()-> bool:
+	return true
+
+
 #func process_drag() -> void:
 	#var drag := 0.5 * air_density * pow(speed, 2.0) * frontal_area * coefficient_of_drag
 	#if drag > 0.0:
@@ -264,8 +281,11 @@ func process_steering(delta : float) -> void:
 	if invert_steer.is_true():
 		steering_amount= -steering_amount
 
-	steering_amount= lerp(steering_amount, steering_input, delta * steering_speed)
-	wheel.steer(steering_amount, max_steering_angle)
+	var new_steering: float= lerp(steering_amount, steering_input, delta * steering_speed)
+	if not is_equal_approx(steering_amount, new_steering):
+		steering_amount= new_steering
+		wheel.steer(steering_amount, max_steering_angle)
+		sync_wheel_steer.set_value(wheel.rotation.y)
 
 
 func process_throttle(delta : float) -> void:

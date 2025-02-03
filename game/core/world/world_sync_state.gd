@@ -2,6 +2,7 @@ class_name WorldSyncState
 
 const KEY_PLAYERS= "players"
 const KEY_GRIDS= "grids"
+const KEY_VARS= "vars"
 
 
 
@@ -19,6 +20,14 @@ static func add_grid_states(world_state: Dictionary, grid_states: Array):
 
 static func parse_grid_states(world_state: Dictionary)-> Array:
 	return world_state[KEY_GRIDS]
+
+
+static func add_sync_vars(world_state: Dictionary, sync_vars: Array):
+	world_state[KEY_VARS]= sync_vars
+
+
+static func parse_sync_vars(world_state: Dictionary)-> Array:
+	return world_state[KEY_VARS]
 
 
 static func build_initial_world_state(world: World)-> Dictionary:

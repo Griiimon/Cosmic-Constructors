@@ -42,6 +42,8 @@ func _physics_process(_delta: float) -> void:
 		var world_state: Dictionary
 		WorldSyncState.add_player_states(world_state, player_states.values())
 		WorldSyncState.add_grid_states(world_state, get_grid_states())
+		#WorldSyncState.add_sync_vars(world_state, sync_vars)
+		
 		ClientManager.receive_world_state.rpc(world_state)
 
 	for grid_id: int in control_movement_requests.keys():

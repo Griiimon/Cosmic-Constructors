@@ -76,23 +76,18 @@ func update_peer_node(player: BasePlayer):
 		PlayerSyncState.parse_sync_state(player, arr[0])
 		return
 	
-	var render_tick: int= ticks - INTERPOLATION_OFFSET_TICKS
-	
-	while arr.size() > 2 and PlayerSyncState.get_timestamp(arr[1]) < render_tick:
-		arr.remove_at(0)
+	var interpolation_result: Array= calculate_interpolation(arr, PlayerSyncState.get_timestamp)
+	var past_state: Dictionary= interpolation_result[0]
+	var future_state: Dictionary= interpolation_result[1]
+	var interpolation_factor: float= interpolation_result[2]
 
-	var past_state: Dictionary= arr[0]
-	var future_state: Dictionary= arr[1]
+	var smooth:= 0.5
 	
-	var interpolation_factor: float= (render_tick - PlayerSyncState.get_timestamp(past_state)) / float(PlayerSyncState.get_timestamp(future_state) - PlayerSyncState.get_timestamp(past_state))
-
-	var smooth: float= 0.5
+	player.global_position= interpolate_position(player.global_position, PlayerSyncState.get_position(past_state),\
+				PlayerSyncState.get_position(future_state), interpolation_factor, smooth)
 	
-	var new_pos: Vector3= lerp(PlayerSyncState.get_position(past_state), PlayerSyncState.get_position(future_state), interpolation_factor)
-	player.global_position= lerp(player.global_position, new_pos, 1 - smooth)
-
-	var new_basis: Basis= Basis.from_euler(PlayerSyncState.get_rotation(past_state)).slerp(Basis.from_euler(PlayerSyncState.get_rotation(future_state)), interpolation_factor)
-	player.global_basis= player.global_basis.slerp(new_basis, 1 - smooth)
+	player.global_basis= interpolate_basis(player.global_basis, PlayerSyncState.get_rotation(past_state),\
+				PlayerSyncState.get_rotation(future_state), interpolation_factor, smooth)
 
 
 func store_grid_state(grid_state: Dictionary):
@@ -120,23 +115,18 @@ func update_grid(grid: BlockGrid):
 		GridSyncState.parse_sync_state(grid, arr[0])
 		return
 	
-	var render_tick: int= ticks - INTERPOLATION_OFFSET_TICKS
-	
-	while arr.size() > 2 and GridSyncState.get_timestamp(arr[1]) < render_tick:
-		arr.remove_at(0)
+	var interpolation_result: Array= calculate_interpolation(arr, GridSyncState.get_timestamp)
+	var past_state: Dictionary= interpolation_result[0]
+	var future_state: Dictionary= interpolation_result[1]
+	var interpolation_factor: float= interpolation_result[2]
 
-	var past_state: Dictionary= arr[0]
-	var future_state: Dictionary= arr[1]
+	var smooth:= 0.1
 	
-	var interpolation_factor: float= (render_tick - GridSyncState.get_timestamp(past_state)) / float(PlayerSyncState.get_timestamp(future_state) - PlayerSyncState.get_timestamp(past_state))
-
-	var smooth: float= 0.1
+	grid.global_position= interpolate_position(grid.global_position, GridSyncState.get_position(past_state),\
+				GridSyncState.get_position(future_state), interpolation_factor, smooth)
 	
-	var new_pos: Vector3= lerp(GridSyncState.get_position(past_state), GridSyncState.get_position(future_state), interpolation_factor)
-	grid.global_position= lerp(grid.global_position, new_pos, 1 - smooth)
-
-	var new_basis: Basis= Basis.from_euler(GridSyncState.get_rotation(past_state)).slerp(Basis.from_euler(GridSyncState.get_rotation(future_state)), interpolation_factor)
-	grid.global_basis= grid.global_basis.slerp(new_basis, 1 - smooth)
+	grid.global_basis= interpolate_basis(grid.global_basis, GridSyncState.get_rotation(past_state),\
+				GridSyncState.get_rotation(future_state), interpolation_factor, smooth)
 
 
 func send_sync_event(type: int, args: Array= []):
@@ -306,6 +296,30 @@ func force_exit_seat():
 		return
 	
 	state_machine.on_left_seat()
+
+
+func calculate_interpolation(arr: Array, get_timestamp: Callable)-> Array:
+	var render_tick: int= ticks - INTERPOLATION_OFFSET_TICKS
+	
+	while arr.size() > 2 and get_timestamp.call(arr[1]) < render_tick:
+		arr.remove_at(0)
+
+	var past_state: Dictionary= arr[0]
+	var future_state: Dictionary= arr[1]
+	
+	var factor: float= (render_tick - get_timestamp.call(past_state)) / float(get_timestamp.call(future_state) - get_timestamp.call(past_state))
+	
+	return [ past_state, future_state, factor ]
+
+
+func interpolate_position(current_position: Vector3, past_position: Vector3, future_position: Vector3, factor: float, smooth: float)-> Vector3:
+	var new_pos: Vector3= lerp(past_position, future_position, factor)
+	return lerp(current_position, new_pos, 1 - smooth)
+
+
+func interpolate_basis(basis: Basis, past_rotation: Vector3, future_rotation: Vector3, factor: float, smooth: float)-> Basis:
+	var new_basis: Basis= Basis.from_euler(past_rotation).slerp(Basis.from_euler(future_rotation), factor)
+	return basis.slerp(new_basis, 1 - smooth)
 
 
 func get_sender_id()-> int:

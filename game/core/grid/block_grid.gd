@@ -66,6 +66,8 @@ var queue_blocks_forced_update: Array[GridBlock]
 
 var sub_grid_connections: Array[SubGridConnection]
 
+var client_tick_blocks: Array[GridBlock]
+
 
 
 func _ready() -> void:
@@ -162,6 +164,10 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		if block_node is BlockInstance:
 			var instance: BlockInstance= block_node
 			instance.on_placed_client(self, grid_block)
+			
+			if instance.has_client_physics_tick():
+				client_tick_blocks.append(grid_block)
+
 		return grid_block
 
 	if block_node is BlockInstance:
@@ -226,6 +232,10 @@ func _physics_process(delta: float) -> void:
 	DebugPanel.send(self, "Is Anchored", is_anchored)
 
 	if NetworkManager.is_client:
+		for grid_block in client_tick_blocks:
+			var instance: BlockInstance= grid_block.get_block_instance()
+			instance.client_physics_tick(self, grid_block, delta)
+		
 		if requires_integrity_check:
 			run_integrity_check()
 		return

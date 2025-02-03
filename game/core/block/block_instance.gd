@@ -50,6 +50,10 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 	pass
 
 
+func client_physics_tick(_grid: BlockGrid, _grid_block: GridBlock, delta: float):
+	pass
+
+
 func on_update(_grid: BlockGrid, _grid_block: GridBlock):
 	pass
 
@@ -242,6 +246,10 @@ func get_linked_block_group()-> LinkedBlockGroup:
 
 func has_property_viewer()-> bool:
 	return true
+
+
+func has_client_physics_tick()-> bool:
+	return false
 
 
 func requires_property_viewer_updates()-> bool:

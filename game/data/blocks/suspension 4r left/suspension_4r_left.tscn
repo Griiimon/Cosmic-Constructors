@@ -6,9 +6,10 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_d27qx"]
 
-[node name="Suspension 2x2" type="Node3D"]
+[node name="Suspension 4R Left" type="Node3D"]
 script = ExtResource("1_vb88p")
 is_electric = false
+is_right = false
 wheel_scene = ExtResource("2_ldj0s")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

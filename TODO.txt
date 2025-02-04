@@ -1,16 +1,24 @@
-FIX pressing ESC in block category kills build mode too.. unhandled input..
+sync wheel suspension height
 
-FIX on_grid_changed() [ REPARENT JOINT? ] in piston ( hinge, rotor, [rail?] ) recalculate limits and initial offset when changing joint node?
+initial ui vehicle parking etc update
+
+why is forklift driving backwards, is the orientation of the suspension not influencing force direction?
+
+sync drive shaft rotation
+
+sync engine animation ( only SyncVarBool on/off )
 
 
-move remove block/grid & planefill code from sandbox to build state, use input actions for legend
+implement blueprinting from inside seat
+
+basic noise terrain creator with tool script, terrain generator resource, grass/rock shader with normal
 
 network sync plane_fill ( special case? dont just sync spawning each block)
- and blueprint spawning ( send entire grid at once )
 
 test merge blocks in network
 
-basic noise terrain creator with tool script, terrain generator resource, grass/rock shader with normal
+
+implement sync var client interpolation
 
 FIX non-force-offset thrusters should apply force not at center but calculated CoM
 
@@ -19,8 +27,13 @@ suspension props
 	brakes
 	spring
 
+FIX on_grid_changed() [ REPARENT JOINT? ] in piston ( hinge, rotor, [rail?] ) recalculate limits and initial offset when changing joint node?
 thrusters particle TARGET direction seems to be in global coords
 
+
+sync fluid drops
+
+implement grid dampeners sync
 
 solid fuel thruster dynamic weight
 

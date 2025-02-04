@@ -146,8 +146,8 @@ func on_player_seated(grid: BlockGrid, _grid_block: GridBlock):
 	reverse_button.show()
 	jetpack_button.hide()
 	
-	parking_brake_button.button_pressed= grid.parking_brake
-	reverse_button.button_pressed= grid.reverse_mode
+	parking_brake_button.disabled= not grid.parking_brake
+	reverse_button.disabled= not grid.reverse_mode
 
 
 func on_player_left_seat(player: Player):

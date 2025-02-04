@@ -1,9 +1,10 @@
 class_name EventSyncState
 
-enum Type { START_PLAYER_ANIMATION, RESET_PLAYER_ANIMATION, WEAR_EQUIPMENT, CLEAR_EQUIPMENT_SLOT, EQUIP_HAND_ITEM, ADD_GRID, ADD_BLOCK, REMOVE_BLOCK, REMOVE_GRID, CHANGE_BLOCK_PROPERTY }
+enum Type { START_PLAYER_ANIMATION, RESET_PLAYER_ANIMATION, WEAR_EQUIPMENT, CLEAR_EQUIPMENT_SLOT, EQUIP_HAND_ITEM, ADD_GRID, ADD_BLOCK, REMOVE_BLOCK, REMOVE_GRID, CHANGE_BLOCK_PROPERTY, CHANGE_GRID_PROPERTY }
 
 
 
+#FIXME a lot of duplicate code shared with ServerManager.pre_process_sync_event
 static func process_event(type: Type, args: Array, peer_id: int):
 	if not Global.game: return
 	if not Global.game.world: return
@@ -66,6 +67,12 @@ static func process_event(type: Type, args: Array, peer_id: int):
 		Type.CHANGE_BLOCK_PROPERTY:
 			change_block_property(world, args)
 
+		Type.CHANGE_GRID_PROPERTY:
+			var grid_id: int= args[0]
+			var property: BlockGrid.Property= args[1]
+			var value= args[2]
+			world.get_grid(grid_id).change_property(property, value)
+
 
 static func change_block_property(world: World, args: Array):
 	var grid_id: int= args[0]
@@ -85,6 +92,6 @@ static func change_block_property(world: World, args: Array):
 
 static func can_sender_process_event(type: Type)-> bool:
 	match type:
-		Type.ADD_BLOCK, Type.REMOVE_BLOCK:
+		Type.ADD_BLOCK, Type.REMOVE_BLOCK, Type.CHANGE_GRID_PROPERTY:
 			return true
 	return false

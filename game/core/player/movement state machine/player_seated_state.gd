@@ -81,12 +81,18 @@ func on_physics_process(_delta: float):
 
 
 	if Input.is_action_just_pressed("parking_brake"):
-		get_grid().parking_brake= not get_grid().parking_brake
-		SignalManager.parking_brake_toggled.emit(get_grid().parking_brake)
+		if NetworkManager.is_single_player:
+			get_grid().parking_brake= not get_grid().parking_brake
+			SignalManager.parking_brake_toggled.emit(get_grid().parking_brake)
+		else:
+			ServerManager.receive_sync_event.rpc_id(1, EventSyncState.Type.CHANGE_GRID_PROPERTY, [ get_grid().id, BlockGrid.Property.PARKING_BRAKE, not get_grid().parking_brake ])
 
 	if Input.is_action_just_pressed("reverse"):
-		get_grid().reverse_mode= not get_grid().reverse_mode
-		SignalManager.reverse_mode_toggled.emit(get_grid().reverse_mode)
+		if NetworkManager.is_single_player:
+			get_grid().reverse_mode= not get_grid().reverse_mode
+			SignalManager.reverse_mode_toggled.emit(get_grid().reverse_mode)
+		else:
+			ServerManager.receive_sync_event.rpc_id(1, EventSyncState.Type.CHANGE_GRID_PROPERTY, [ get_grid().id, BlockGrid.Property.REVERSE_MODE, not get_grid().reverse_mode ])
 
 
 func on_input(event: InputEvent) -> void:

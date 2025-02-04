@@ -180,6 +180,7 @@ func broadcast_sync_event(type: int, args: Array, sender_id: int= 1):
 	ClientManager.receive_sync_event.rpc(type, args, sender_id)
 
 
+#FIXME a lot of duplicate code shared with EventSyncState.process_event
 func pre_process_sync_event(type: int, args: Array, sender_id: int):
 	var world: World= Global.game.world
 	
@@ -219,6 +220,13 @@ func pre_process_sync_event(type: int, args: Array, sender_id: int):
 
 		EventSyncState.Type.CHANGE_BLOCK_PROPERTY:
 			EventSyncState.change_block_property(world, args)
+
+		EventSyncState.Type.CHANGE_GRID_PROPERTY:
+			var grid_id: int= args[0]
+			var property: BlockGrid.Property= args[1]
+			var value= args[2]
+			world.get_grid(grid_id).change_property(property, value)
+
 
 
 func serialize_players()-> Array[Dictionary]:

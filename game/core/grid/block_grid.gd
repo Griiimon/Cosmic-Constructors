@@ -3,6 +3,8 @@ extends RigidBody3D
 
 signal id_assigned
 
+enum Property { PARKING_BRAKE, INERTIAL_DAMPENERS, REVERSE_MODE }
+
 class SubGridConnection:
 	var sub_grid: BlockGrid
 	var connection_block: GridBlock
@@ -642,6 +644,21 @@ func assign_hotkey(assignment: BaseHotkeyAssignment, block_pos: Vector3i= Vector
 func force_update(block: GridBlock):
 	assert(block.get_block_instance() and block.get_block_instance().get_grid() == self)
 	queue_blocks_forced_update.append(block)
+
+
+func change_property(property: Property, value: Variant):
+	match property:
+		Property.PARKING_BRAKE:
+			parking_brake= value
+			DebugHud.send("Parking", parking_brake)
+			SignalManager.parking_brake_toggled.emit(value)
+		Property.REVERSE_MODE:
+			reverse_mode= value
+			DebugHud.send("Reverse", reverse_mode)
+			SignalManager.reverse_mode_toggled.emit(value)
+		Property.INERTIAL_DAMPENERS:
+			inertial_dampeners= value
+			SignalManager.dampeners_toggled.emit(value)
 
 
 func serialize(local_sub_grid_ids: bool= false)-> Dictionary:

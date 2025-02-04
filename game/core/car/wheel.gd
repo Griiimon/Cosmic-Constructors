@@ -222,6 +222,7 @@ func process_forces(grid: BlockGrid, braking : bool, delta : float) -> float:
 			grid.apply_force(last_collision_normal * spring_force, contact)
 		else:
 			## Apply a small amount of downward force if there is no spring force
+			# TODO grid.mass / number of wheels with ground contact ?
 			grid.apply_force(-global_transform.basis.y * grid.mass, global_position - grid.global_position)
 		
 		#DebugHud.send("FVec" + name.right(3), force_vector)

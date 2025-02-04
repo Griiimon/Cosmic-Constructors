@@ -52,7 +52,6 @@ func serialize()-> Dictionary:
 static func deserialize(data: Dictionary)-> SyncVar:
 	# FIXME add support for other types
 	var var_name: String= data[KEY_NAME]
-	prints("Var name", var_name)
 	var result:= SyncVarFloat.new(var_name)
 	match data[KEY_TARGET_TYPE]:
 		BaseSyncVarTarget.Type.BLOCK:

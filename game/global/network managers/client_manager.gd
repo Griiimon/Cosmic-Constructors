@@ -191,7 +191,7 @@ func receive_world_state(data: Dictionary):
 		var sync_var= SyncVar.deserialize(sync_var_data)
 		var hash: int= sync_var.get_hash()
 		sync_vars[hash]= sync_var
-		prints("Received SyncVar", sync_var.get_as_text())
+		#prints("Received SyncVar", sync_var.get_as_text())
 
 
 @rpc("any_peer", "reliable")

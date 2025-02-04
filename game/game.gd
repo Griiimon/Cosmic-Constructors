@@ -39,7 +39,9 @@ func spawn_player():
 	player.world= $World
 	player.equipment= player_spawn.equipment
 	add_child(player)
-	move_child(player, 1)
+	
+	# to make sure player unhandled input get processed last
+	move_child(player, 0)
 
 
 func add_peer(player_state: Dictionary):

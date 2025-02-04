@@ -56,6 +56,7 @@ func put_in_seat(seat: SeatInstance):
 
 func leave_seat(grid: BlockGrid= null, exit_pos= null):
 	reparent(get_tree().current_scene)
+	get_tree().current_scene.move_child(self, 0)
 	if grid and exit_pos:
 		global_position= grid.to_global(exit_pos)
 

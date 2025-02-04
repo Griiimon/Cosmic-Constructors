@@ -154,6 +154,7 @@ var reverse: bool= false
 var drive_shaft: LinkedDriveShaftGroup
 
 var sync_wheel_steer:= SyncVarFloat.new("steer")
+var sync_wheel_spin:= SyncVarFloat.new("spin")
 
 
 
@@ -165,12 +166,16 @@ func _ready() -> void:
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	spawn_wheel(grid)
 	wheel.initialize()
-	sync_wheel_steer.target= SyncVarTargetBlock.create(grid, grid_block)
-	
+	var sync_var_target:= SyncVarTargetBlock.create(grid, grid_block)
+	sync_wheel_steer.target= sync_var_target
+	sync_wheel_spin.target= sync_var_target
+
 
 func on_placed_client(grid: BlockGrid, grid_block: GridBlock):
 	spawn_wheel(grid)
-	sync_wheel_steer.target= SyncVarTargetBlock.create(grid, grid_block)
+	var sync_var_target:= SyncVarTargetBlock.create(grid, grid_block)
+	sync_wheel_steer.target= sync_var_target
+	sync_wheel_spin.target= sync_var_target
 
 
 func spawn_wheel(grid: BlockGrid):
@@ -234,10 +239,15 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 			# TODO i dont think thats correct
 			drive_shaft.torque= min(drive_shaft.torque, wheel.spin / wheel.tire_radius)
 
+		if not is_equal_approx(wheel.spin, sync_wheel_spin.get_value()):
+			sync_wheel_spin.set_value(wheel.spin)
+
 
 func client_physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 	if ClientManager.has_sync_var(sync_wheel_steer.get_hash()):
 		wheel.rotation.y= ClientManager.get_sync_var_value(sync_wheel_steer.get_hash())
+	if ClientManager.has_sync_var(sync_wheel_spin.get_hash()):
+		wheel.spin= ClientManager.get_sync_var_value(sync_wheel_spin.get_hash())
 
 
 func has_client_physics_tick()-> bool:

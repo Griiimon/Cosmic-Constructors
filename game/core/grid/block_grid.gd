@@ -232,6 +232,7 @@ func _physics_process(delta: float) -> void:
 	DebugPanel.send(self, "Blocks", blocks.size())
 	DebugPanel.send(self, "Freeze", freeze)
 	DebugPanel.send(self, "Is Anchored", is_anchored)
+	DebugPanel.send(self, "Parking", parking_brake)
 
 	if NetworkManager.is_client:
 		for grid_block in client_tick_blocks:

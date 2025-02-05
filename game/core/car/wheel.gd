@@ -120,8 +120,8 @@ func steer(input : float, max_steering_angle : float):
 
 
 # TODO what in here currently has any impact?
-func process_torque(drive : float, reverse: bool, drive_inertia : float, brake_torque : float, brake_abs : bool, delta : float) -> float:
-	#DebugHud.send("Drive", drive)
+func process_torque(drive : float, drive_inertia : float, brake_torque : float, brake_abs : bool, delta : float) -> float:
+	#DebugHud.send("Drive" + name.right(3), drive)
 	## Add the torque the wheel produced last frame from surface friction
 	var net_torque := force_vector.y * tire_radius
 	var previous_spin := spin
@@ -163,7 +163,7 @@ func process_torque(drive : float, reverse: bool, drive_inertia : float, brake_t
 			new_spin = 0.0
 		spin = new_spin
 	
-	spin= spin * (-1 if reverse else 1)
+	#spin= spin * (-1 if ( reverse and not is_zero_approx(drive) ) else 1)
 	
 	#DebugHud.send("Spin", spin)
 	

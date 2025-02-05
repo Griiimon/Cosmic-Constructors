@@ -364,7 +364,8 @@ func process_drive(in_reverse: bool, delta : float) -> void:
 
 
 func process_axle_drive(torque : float, in_reverse: bool, drive_inertia : float, delta : float) -> void:
-	wheel.process_torque(torque, in_reverse, drive_inertia, brake_force, false, delta)
+	torque= torque * ( -1 if in_reverse else 1 )
+	wheel.process_torque(torque, drive_inertia, brake_force, false, delta)
 
 
 func process_forces(grid: BlockGrid, delta : float) -> void:

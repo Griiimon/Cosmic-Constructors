@@ -79,6 +79,10 @@ var base_rotation: float= 0
 
 
 
+func _ready() -> void:
+	previous_global_position= global_position
+
+
 func _process(delta : float) -> void:
 	model.position.y = minf(0.0, -spring_current_length) + spring_length
 	model.rotation.x -= (wrapf(spin * delta, 0, TAU))
@@ -117,7 +121,7 @@ func steer(input : float, max_steering_angle : float):
 
 # TODO what in here currently has any impact?
 func process_torque(drive : float, reverse: bool, drive_inertia : float, brake_torque : float, brake_abs : bool, delta : float) -> float:
-	DebugHud.send("Drive", drive)
+	#DebugHud.send("Drive", drive)
 	## Add the torque the wheel produced last frame from surface friction
 	var net_torque := force_vector.y * tire_radius
 	var previous_spin := spin
@@ -161,7 +165,7 @@ func process_torque(drive : float, reverse: bool, drive_inertia : float, brake_t
 	
 	spin= spin * (-1 if reverse else 1)
 	
-	DebugHud.send("Spin", spin)
+	#DebugHud.send("Spin", spin)
 	
 	## The returned value is used to track wheel speed difference
 	if is_zero_approx(drive * delta):
@@ -225,7 +229,7 @@ func process_forces(grid: BlockGrid, braking : bool, delta : float) -> float:
 			# TODO grid.mass / number of wheels with ground contact ?
 			grid.apply_force(-global_transform.basis.y * grid.mass, global_position - grid.global_position)
 		
-		#DebugHud.send("FVec" + name.right(3), force_vector)
+		#DebugHud.send("FVec" + name.right(3), Utils.get_short_vec2(force_vector))
 		
 		grid.apply_force(global_transform.basis.x * force_vector.x, contact)
 		grid.apply_force(global_transform.basis.z * force_vector.y, contact)
@@ -346,7 +350,7 @@ func process_tires(braking : bool, delta : float):
 	var cornering_stiffness := 0.5 * current_tire_stiffness * pow(contact_patch, 2.0)
 	var friction := current_cof * spring_force - (spring_force / (tire_width * contact_patch * 0.2))
 	var deflect := 1.0 / (sqrt(pow(cornering_stiffness * slip_vector.y, 2.0) + pow(cornering_stiffness * slip_vector.x, 2.0)))
-	
+
 
 	## Adds in additional longitudinal grip when braking
 	var braking_help := 1.0
@@ -362,6 +366,7 @@ func process_tires(braking : bool, delta : float):
 
 		force_vector.y = friction * current_longitudinal_grip_ratio * cornering_stiffness * slip_vector.y * brushx * braking_help * z_sign
 		force_vector.x = friction * cornering_stiffness * slip_vector.x * brushx * (absf(slip_vector.x * current_lateral_grip_assist) + 1.0)
+
 
 	if bottom_out:
 		# HACK simulate wheel locking from bottoming out

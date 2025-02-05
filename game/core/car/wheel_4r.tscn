@@ -8,7 +8,6 @@ size = Vector3(0.33, 0.22, 2.275)
 
 [node name="Wheel 4R" type="Node3D"]
 script = ExtResource("1_pno3q")
-collision_mask = 4
 tire_radius = 2.0
 tire_width = 500.0
 braking_grip_multiplier = 0.1

@@ -241,13 +241,18 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 
 		if drive_shaft:
 			# TODO i dont think thats correct
-			drive_shaft.torque= min(drive_shaft.torque, wheel.spin / wheel.tire_radius)
+			drive_shaft.limit_torque(wheel.spin / wheel.tire_radius)
 
-		if not is_equal_approx(wheel.spin, sync_wheel_spin.get_value()):
-			sync_wheel_spin.set_value(wheel.spin)
+		brake_input= 0
+		throttle_input= 0
+		steering_input= 0
 
-		if not is_equal_approx(wheel.spring_current_length, sync_spring_length.get_value()):
-			sync_spring_length.set_value(wheel.spring_current_length)
+		if NetworkManager.is_server:
+			if not is_equal_approx(wheel.spin, sync_wheel_spin.get_value()):
+				sync_wheel_spin.set_value(wheel.spin)
+
+			if not is_equal_approx(wheel.spring_current_length, sync_spring_length.get_value()):
+				sync_spring_length.set_value(wheel.spring_current_length)
 
 
 func client_physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):

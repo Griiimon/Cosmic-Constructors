@@ -1,10 +1,8 @@
 fog shader ( clouds plugin / zylann? ) weird camera angle dependent ( first / third switch to demonstrate ) fog
 
-subgrids of the forklift blueprint are frozen :(
-
 forklift wheels are fighting, some forward some back => introduce invert power for now
 
-player somehow last child again ( start through launcher )
+player somehow last child again ( starting through launcher? )
 
 wheel rotation can be 90 deg off, explains forklift driving backwards with 180 deg
 
@@ -372,7 +370,16 @@ Wave Defense:
 
 
 Artillery / Ballerburg:
-	...
+	Spawn royal chamber ( on flat terrain ), game over when destroyed, respawn point
+	blocks cost money, according to base cost
+	cannonball and powder storage, cannons need to be in range to resupply automatically
+	store block, storages need to be in range, buy from storages not at store, fluctuating prices
+	gold deposits, gold can be turned into money at mint ( like furnace but output automatically turned into coins )
+	game mode: add block_category with cannon, mint etc. ui overlay ( coins )
+	wind
+	no jetpack
+	ladders?
+	auto-save
 
 
 NEW MECHANICS

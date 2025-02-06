@@ -99,6 +99,8 @@ func open(_block: GridBlock= null, _grid: BlockGrid= null):
 func close(trigger_signal: bool= true):
 	super(trigger_signal)
 	update_interval.stop()
+	selected_row= -1
+	is_value_selected= false
 
 
 func update(_block: GridBlock, _grid: BlockGrid, player: Player):

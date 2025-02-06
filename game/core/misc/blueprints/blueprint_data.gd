@@ -43,7 +43,7 @@ func load_blueprint(data: Array, model_only: bool= false, world: World= null):
 			var grid_data_id: int= grid_data["local_id"]
 			sub_grid_id_remaps[grid_data_id]= sub_grid.id
 	
-	grid.deserialize(all_grids.pop_front(), model_only, null, sub_grids, sub_grid_id_remaps)
+	grid.deserialize(all_grids.pop_front(), model_only, null, sub_grids, sub_grid_id_remaps, false)
 
 #	if model_only:
 	if not all_grids.is_empty():
@@ -53,7 +53,8 @@ func load_blueprint(data: Array, model_only: bool= false, world: World= null):
 		
 	for i in all_grids.size():
 		var sub_grid: BlockGrid= sub_grids[i]
-		sub_grid.deserialize(all_grids[i], model_only, grid, [], sub_grid_id_remaps)
+		sub_grid.deserialize(all_grids[i], model_only, grid, [], sub_grid_id_remaps, false)
+
 		if model_only:
 			grid.add_child(sub_grid)
 		else:

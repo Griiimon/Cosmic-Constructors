@@ -733,7 +733,7 @@ static func pre_deserialize(data: Dictionary, new_world: World, default_position
 	return grid
 
 
-func deserialize(data: Dictionary, block_models_only: bool= false, main_grid: BlockGrid= null, sub_grids: Array[BlockGrid]= [], sub_grid_id_remaps: Dictionary= {}):
+func deserialize(data: Dictionary, block_models_only: bool= false, main_grid: BlockGrid= null, sub_grids: Array[BlockGrid]= [], sub_grid_id_remaps: Dictionary= {}, enable_lod_activation: bool= true):
 	linear_velocity= Utils.get_key_or_default(data, "linear_velocity", Vector3.ZERO, "Vector3")
 	angular_velocity= Utils.get_key_or_default(data, "angular_velocity", Vector3.ZERO, "Vector3")
 	parking_brake= Utils.get_key_or_default(data, "parking_brake", false)
@@ -778,7 +778,7 @@ func deserialize(data: Dictionary, block_models_only: bool= false, main_grid: Bl
 				world.get_grid(sub_grid_data["id"]),\
 				get_block_local(block_pos)))
 
-	if not NetworkManager.is_client and not is_anchored and Global.terrain:
+	if enable_lod_activation and not NetworkManager.is_client and not is_anchored and Global.terrain:
 		freeze= true
 		lod_activation= GameData.scene_library.lod_activated.instantiate()
 		add_child(lod_activation)

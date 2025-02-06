@@ -7,6 +7,8 @@ extends TubeGroupMemberInstance
 		.hidden().on_sync(on_sync_animation)
 
 @onready var model: Node3D = $Model
+@onready var model_inside: Node3D = $"Model/Model Inside"
+
 @onready var fluid_consumer: FluidConsumer = $"Fluid Consumer"
 
 var current_throttle_input: float
@@ -69,8 +71,8 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
 func start_animation():
 	if not tween or not tween.is_running():
 		tween= create_tween()
-		tween.tween_property(model, "position:y", 0.03, 0.1)
-		tween.tween_property(model, "position:y", 0.0, 0.1)
+		tween.tween_property(model_inside, "position:y", 0.03, 0.1)
+		tween.tween_property(model_inside, "position:y", 0.0, 0.1)
 		tween.set_loops()
 
 

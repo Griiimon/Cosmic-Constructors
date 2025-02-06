@@ -22,6 +22,10 @@ albedo_color = Color(0.473976, 0.473976, 0.473976, 1)
 metallic = 0.6
 roughness = 0.2
 
+[sub_resource type="BoxMesh" id="BoxMesh_d2ymb"]
+material = SubResource("StandardMaterial3D_v2hap")
+size = Vector3(0.25, 0.39, 0.75)
+
 [sub_resource type="BoxMesh" id="BoxMesh_g0qs7"]
 material = SubResource("StandardMaterial3D_v2hap")
 size = Vector3(0.435, 0.5, 0.85)
@@ -29,10 +33,6 @@ size = Vector3(0.435, 0.5, 0.85)
 [sub_resource type="BoxMesh" id="BoxMesh_f5mvd"]
 material = SubResource("StandardMaterial3D_v2hap")
 size = Vector3(0.685, 0.405, 0.95)
-
-[sub_resource type="BoxMesh" id="BoxMesh_d2ymb"]
-material = SubResource("StandardMaterial3D_v2hap")
-size = Vector3(0.25, 0.39, 0.75)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r5vw6"]
 albedo_color = Color(0.351935, 0.290596, 9.62615e-08, 1)
@@ -56,6 +56,18 @@ mesh = SubResource("BoxMesh_tr2k0")
 
 [node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 
+[node name="Model Inside" type="Node3D" parent="Model" groups=["Keep Ghost"]]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/Model Inside"]
+transform = Transform3D(0.848048, -0.529919, 0, 0.529919, 0.848048, 0, 0, 0, 1, -0.217978, 0.152591, 0)
+mesh = SubResource("BoxMesh_d2ymb")
+skeleton = NodePath("../../Base Block")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model/Model Inside"]
+transform = Transform3D(0.848048, 0.529919, 0, -0.529919, 0.848048, 0, 0, 0, 1, 0.218, 0.153, 0)
+mesh = SubResource("BoxMesh_d2ymb")
+skeleton = NodePath("../../Base Block")
+
 [node name="Base Block" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 mesh = SubResource("BoxMesh_g0qs7")
@@ -65,16 +77,6 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.035211, 0)
 mesh = SubResource("BoxMesh_f5mvd")
 skeleton = NodePath("../..")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(0.848048, -0.529919, 0, 0.529919, 0.848048, 0, 0, 0, 1, -0.217978, 0.152591, 0)
-mesh = SubResource("BoxMesh_d2ymb")
-skeleton = NodePath("../Base Block")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(0.848048, 0.529919, 0, -0.529919, 0.848048, 0, 0, 0, 1, 0.218, 0.153, 0)
-mesh = SubResource("BoxMesh_d2ymb")
-skeleton = NodePath("../Base Block")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, -0.25, 0)

@@ -13,6 +13,7 @@ var client_side: bool= false
 var is_read_only: bool= false
 var auto_sync: bool= true
 var sync_callback: Callable
+var is_hidden: bool= false
 
 
 
@@ -43,6 +44,11 @@ func sync_on_request():
 
 func on_sync(callable: Callable):
 	sync_callback= callable
+	return self
+
+
+func hidden():
+	is_hidden= true
 	return self
 
 

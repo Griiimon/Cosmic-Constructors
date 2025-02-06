@@ -152,6 +152,7 @@ func serialize()-> Dictionary:
 		if prop.class_name.begins_with("BlockProp") and prop.class_name != "BlockProperty":
 			prop_var= get(prop.name)
 			if prop_var.owner and prop_var.owner != self: continue
+			if prop_var.is_hidden: continue
 		
 		match prop.class_name:
 			"BlockPropBool":

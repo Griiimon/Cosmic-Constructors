@@ -63,6 +63,8 @@ func populate():
 			#update_interval.start()
 
 	for property in block_instance.get_properties():
+		if property.is_hidden: continue
+		
 		var row: PropertyViewerRow= add_row()
 		row.property= property
 		if property.is_read_only:

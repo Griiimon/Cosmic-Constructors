@@ -55,3 +55,4 @@ media/spawn_loop_bug.png.import
 /addons/terrain_3d
 /demo
 run_test.gd
+game/data/misc/settings/control_settings.tres

@@ -87,7 +87,10 @@ static func change_block_property(world: World, args: Array):
 	var block_instance: BlockInstance= grid_block.get_block_instance()
 	assert(block_instance)
 	assert(block_instance.property_table.has(property_name))
-	block_instance.get_property_by_display_name(property_name).set_variant(grid, grid_block, new_value, false)
+	var property: BlockProperty= block_instance.get_property_by_display_name(property_name)
+	property.set_variant(grid, grid_block, new_value, false)
+	if NetworkManager.is_client:
+		property.on_client_sync(grid, grid_block)
 
 
 static func can_sender_process_event(type: Type)-> bool:

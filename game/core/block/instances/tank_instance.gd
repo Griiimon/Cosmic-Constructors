@@ -6,7 +6,8 @@ extends TubeGroupMemberInstance
 @onready var fluid_cylinder_y_offset: float= fluid_cylinder.position.y
 
 @onready var fill_debug_action:= BlockPropAction.new("Fill", fluid_container.debug_fill)
-@onready var fluid_content: BlockPropFloat= BlockPropFloat.new("Content", 0.0).read_only().sync_on_request()
+@onready var fluid_content: BlockPropFloat= BlockPropFloat.new("Content", 0.0)\
+		.read_only().sync_on_request().on_sync(on_sync)
 
 var update_content:= true
 
@@ -19,7 +20,15 @@ func _ready() -> void:
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	super(grid, grid_block)
-	
+	init(grid_block)
+	queue_property_sync(fluid_content)
+
+
+func on_placed_client(_grid: BlockGrid, grid_block: GridBlock):
+	init(grid_block)
+
+
+func init(grid_block: GridBlock):
 	var tank_definition: TankBlock= grid_block.get_block_definition()
 	fluid_container.fluid= tank_definition.fluid
 	fluid_container.max_storage= tank_definition.capacity
@@ -45,6 +54,13 @@ func on_amount_changed(amount: float):
 	else:
 		fluid_cylinder.hide()
 	update_content= true
+
+
+func on_sync(_grid: BlockGrid, _grid_block: GridBlock):
+	var content: float= fluid_content.get_value_f()
+	#DebugHud.send("Fluid sync", content)
+	fluid_container.content= content
+	on_amount_changed(content)
 
 
 func is_input()-> bool:

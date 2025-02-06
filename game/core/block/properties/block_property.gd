@@ -12,6 +12,7 @@ var is_locked: bool= false:
 var client_side: bool= false
 var is_read_only: bool= false
 var auto_sync: bool= true
+var sync_callback: Callable
 
 
 
@@ -37,6 +38,11 @@ func read_only():
 
 func sync_on_request():
 	auto_sync= false
+	return self
+
+
+func on_sync(callable: Callable):
+	sync_callback= callable
 	return self
 
 
@@ -88,6 +94,11 @@ func do_sync(grid: BlockGrid, grid_block: GridBlock, auto: bool= true):
 
 func change_step_size():
 	pass
+
+
+func on_client_sync(grid: BlockGrid, grid_block: GridBlock):
+	if sync_callback:
+		sync_callback.call(grid, grid_block)
 
 
 func get_variant()-> Variant:

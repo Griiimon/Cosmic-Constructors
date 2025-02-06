@@ -930,6 +930,10 @@ func get_main_cockpit_recursive()-> SeatInstance:
 	return null
 
 
+func has_block(block_pos: Vector3i)-> bool:
+	return blocks.has(block_pos)
+
+
 func is_occupied(grid_pos: Vector3i)-> bool:
 	return blocks.has(grid_pos)
 

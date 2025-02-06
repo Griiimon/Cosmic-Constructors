@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://drn8bh8lij6yd"]
+[gd_scene load_steps=16 format=3 uid="uid://drn8bh8lij6yd"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/engine_instance.gd" id="1_v5cg6"]
 [ext_resource type="PackedScene" uid="uid://k7fxvysvmall" path="res://game/core/components/fluid consumer/fluid_consumer.tscn" id="2_w41ml"]
@@ -34,8 +34,15 @@ size = Vector3(0.435, 0.5, 0.85)
 material = SubResource("StandardMaterial3D_v2hap")
 size = Vector3(0.685, 0.405, 0.95)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6uvqr"]
+albedo_color = Color(0.106237, 0.106237, 0.106237, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lay2w"]
+material = SubResource("StandardMaterial3D_6uvqr")
+size = Vector3(0.58, 0.215, 0.885)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r5vw6"]
-albedo_color = Color(0.351935, 0.290596, 9.62615e-08, 1)
+albedo_color = Color(0.424876, 0.242252, 0.124266, 1)
 metallic = 0.6
 roughness = 0.2
 
@@ -78,8 +85,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.035211, 0)
 mesh = SubResource("BoxMesh_f5mvd")
 skeleton = NodePath("../..")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(0.999992, 0.00355742, -0.00164933, -0.0035592, 0.999993, -0.00107492, 0.0016455, 0.00108078, 0.999998, 0, 0.0950601, 0)
+mesh = SubResource("BoxMesh_lay2w")
+
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, -0.25, 0)
+visible = false
 mesh = SubResource("CylinderMesh_tgmwc")
 skeleton = NodePath("../Base Block")
 

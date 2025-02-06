@@ -1,31 +1,32 @@
-sync wheel suspension height
-
-initial ui vehicle parking etc update
-
 why is forklift driving backwards, is the orientation of the suspension not influencing force direction?
-
-sync drive shaft rotation
-
-sync engine animation ( only SyncVarBool on/off )
-
-
-implement blueprinting from inside seat
+	SOLVED?
 
 basic noise terrain creator with tool script, terrain generator resource, grass/rock shader with normal
 
 network sync plane_fill ( special case? dont just sync spawning each block)
 
-test merge blocks in network
-
-
-implement sync var client interpolation
-
-FIX non-force-offset thrusters should apply force not at center but calculated CoM
-
 suspension props
 	power
 	brakes
 	spring
+
+more dampening on suspension
+
+add blue print distance and rotation control
+
+property panel group system:
+	create group
+	add to last group
+	group mode toggle: every thing pressed will affect the entire group, including hotkey assignment
+
+
+implement blueprinting from inside seat
+
+test merge blocks in network
+
+implement sync var client interpolation
+
+FIX non-force-offset thrusters should apply force not at center but calculated CoM
 
 FIX on_grid_changed() [ REPARENT JOINT? ] in piston ( hinge, rotor, [rail?] ) recalculate limits and initial offset when changing joint node?
 thrusters particle TARGET direction seems to be in global coords
@@ -33,13 +34,11 @@ thrusters particle TARGET direction seems to be in global coords
 
 sync fluid drops
 
-implement grid dampeners sync
+implement grid inertial dampeners sync
 
 solid fuel thruster dynamic weight
 
 serialize hose coupling connections
-
-add blue print distance and rotation control
 
 restored WorldItemInstances need LodActivation
 
@@ -49,6 +48,12 @@ BlockInstances that spawn sub grids should override on_removed() to disconnect t
 
 player respawn ( via console )
 
+
+sync drive shaft rotation
+
+sync tube group lights
+
+drive shaft doesnt turn with no active torque
 
 dynamic desync check ( triggered by console ): hash all grid ids + blocks dict and compare to server
 
@@ -101,11 +106,6 @@ wooden workbench
 
 FIX handles hard to grab when facing slightly down
 	=> interact raycast could check if there's anything to interact with and if not run an additional 0.5 - 1m sphere check for interactables
-
-property panel group system:
-	create group
-	add to last group
-	group mode toggle: every thing pressed will affect the entire group, including hotkey assignment
 
 
 plane fill v2: flood fill plane without placing blocks ( set a max cap ) and only if contained plane is found spawn blocks
@@ -308,6 +308,8 @@ Mini Factory and logistics:
 	[fill truck gas tank with fuel canister]
 	then drive to fueling station
 
+	load ore truck at drilling station
+
 
 Survival Start:
 	collect stick and rock, craft axe
@@ -340,11 +342,11 @@ Ore Collector:
 	collect ore with sucker
 	dump ( rotate container ) at Ore Intake + conveyor
 
+
 Racing:
 	Terrain3D
 	track with waypoint lap time detection
 	build cars next to track and try to go for fastest lap
-
 
 
 Survival (and PVP):
@@ -401,6 +403,9 @@ Assemblers will not stockpile products without ability to drop product. will pro
 
 implement per axis linear damping calculated from air resistance profile
 	would work for single main grid with cached per-axis profiles updated after changes done to the grid. if it werent for sub grids that can dynamically change relative position and angles too. would lead to continuous heavy calculations 
+
+different width wheels for each radius, so a high torque axle can transfer with more friction. wheels cannot auto-spawn but have to be manually added. positive: only one suspension block for different wheels
+
 
 TECHNOLOGIES:
 ------------------------

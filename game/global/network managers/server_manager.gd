@@ -337,6 +337,21 @@ func spawn_blueprint(compressed_data: PackedByteArray, position: Vector3, rotati
 	ClientManager.receive_grids.rpc(compressed_grid_data)
 
 
+@rpc("any_peer", "reliable")
+func request_block_property(grid_id: int, block_pos: Vector3i, property_name: String):
+	var world: World= Global.game.world
+	if not world.has_grid(grid_id): return
+	var grid: BlockGrid= world.get_grid(grid_id)
+	if not grid.has_block(block_pos): return
+
+	var block_instance: BlockInstance= grid.get_block_local(block_pos).get_block_instance()
+	assert(block_instance)
+	var property: BlockProperty= block_instance.get_property_by_display_name(property_name)
+	assert(property)
+
+	ClientManager.receive_sync_event.rpc_id(get_sender_id(), EventSyncState.Type.CHANGE_BLOCK_PROPERTY, [ grid_id, block_pos, property_name, property.get_variant() ], 1)
+
+
 func register_sync_var(sync_var: SyncVar):
 	sync_vars.append(sync_var)
 

@@ -96,6 +96,11 @@ func change_step_size():
 	pass
 
 
+func sync_request(grid: BlockGrid, grid_block: GridBlock):
+	assert(NetworkManager.is_client)
+	ServerManager.request_block_property.rpc_id(1, grid.id, grid_block.local_pos, display_name)
+	
+
 func on_client_sync(grid: BlockGrid, grid_block: GridBlock):
 	if sync_callback:
 		sync_callback.call(grid, grid_block)

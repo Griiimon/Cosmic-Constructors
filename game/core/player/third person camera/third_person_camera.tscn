@@ -14,3 +14,5 @@ hit_back_faces = false
 
 [node name="Third Person Camera" type="Camera3D" parent="Pivot"]
 transform = Transform3D(1, 0, 0, 0, 0.979649, 0.200719, 0, -0.200719, 0.979649, 0, 1, 5)
+cull_mask = 1048573
+far = 8000.0

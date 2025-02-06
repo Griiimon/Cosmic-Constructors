@@ -24,8 +24,9 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	queue_property_sync(fluid_content)
 
 
-func on_placed_client(_grid: BlockGrid, grid_block: GridBlock):
+func on_placed_client(grid: BlockGrid, grid_block: GridBlock):
 	init(grid_block)
+	fluid_content.sync_request(grid, grid_block)
 
 
 func init(grid_block: GridBlock):

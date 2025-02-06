@@ -1,3 +1,13 @@
+fog shader ( clouds plugin / zylann? ) weird camera angle dependent ( first / third switch to demonstrate ) fog
+
+subgrids of the forklift blueprint are frozen :(
+
+forklift wheels are fighting, some forward some back => introduce invert power for now
+
+player somehow last child again ( start through launcher )
+
+wheel rotation can be 90 deg off, explains forklift driving backwards with 180 deg
+
 why is forklift driving backwards, is the orientation of the suspension not influencing force direction?
 	SOLVED?
 

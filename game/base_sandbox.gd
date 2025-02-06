@@ -84,7 +84,8 @@ func _input(event: InputEvent) -> void:
 				if player:
 					#player.wear_equipment(load("res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres"))
 					#player.play_animation("wave")
-					sit_in_nearest_seat()
+					get_world().freeze_grids(false)
+					#sit_in_nearest_seat()
 			elif event.keycode == KEY_F4:
 				DebugPanel.toggle()
 			elif event.keycode == KEY_F5:
@@ -94,6 +95,8 @@ func _input(event: InputEvent) -> void:
 					get_world().save_world(custom_world_name, project_folder_world)
 			elif event.keycode == KEY_F6:
 				get_tree().debug_collisions_hint= not get_tree().debug_collisions_hint
+			elif event.keycode == KEY_F7:
+				player.get_parent().move_child(player, 1)
 			elif event.keycode == KEY_F9:
 				get_tree().reload_current_scene.call_deferred()
 				return

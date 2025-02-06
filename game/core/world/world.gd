@@ -339,9 +339,10 @@ func add_projectile(projectile: ProjectileObject):
 
 
 func freeze_grids(b: bool):
-	grid_freeze_state= b
+	#grid_freeze_state= b
 	for grid: BlockGrid in grids.get_children():
-		grid.freeze= b
+		if not grid.is_anchored:
+			grid.freeze= b
 
 
 func explosion(damage: Damage, obj: CollisionObject3D):

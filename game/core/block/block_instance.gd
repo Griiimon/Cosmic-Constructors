@@ -69,7 +69,7 @@ func process_sync_queue(grid: BlockGrid, grid_block: GridBlock):
 	if property_sync_queue.has(frame):
 		var property: BlockProperty= property_sync_queue[frame]
 		assert(not property.auto_sync)
-		property.sync(grid, grid_block, false)
+		property.do_sync(grid, grid_block, false)
 		property_sync_queue.erase(frame)
 
 

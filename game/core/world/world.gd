@@ -20,6 +20,7 @@ var projectiles: Node
 var items: Node
 var peripheral_entities: Node
 var ropes: Node
+var objects: Node
 
 static var next_grid_id: int= 0
 var lookup_id_to_grid: Dictionary
@@ -39,6 +40,7 @@ func _ready() -> void:
 	items= generate_sub_node("Items")
 	peripheral_entities= generate_sub_node("Peripheral Entities")
 	ropes= generate_sub_node("Ropes")
+	objects= generate_sub_node("Objects")
 
 
 func _physics_process(_delta: float) -> void:
@@ -436,6 +438,17 @@ func spawn_serialized_item(data: Dictionary):
 
 	item_inst.linear_velocity= linear_velocity
 	item_inst.angular_velocity= angular_velocity
+
+
+func spawn_object(scene: PackedScene, pos: Vector3, rot: Vector3= Vector3.ZERO, velocity: Vector3= Vector3.ZERO)-> ObjectEntity:
+	var obj: ObjectEntity= scene.instantiate()
+	obj.position= pos
+	obj.rotation= rot
+	obj.linear_velocity= velocity
+	objects.add_child(obj)
+	return obj
+
+
 
 
 func spawn_peripheral_entity(entity: PeripheralEntity, pos: Vector3, rot: Vector3):

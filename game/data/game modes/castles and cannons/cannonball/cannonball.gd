@@ -10,5 +10,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	get_world().explosion(damage, body)
+	var dmg: Damage= Damage.create_instance(damage, global_position, linear_velocity.normalized(), Damage.SourceType.PROJECTILE)
+	get_world().damage_point(dmg, body)
 	destroy()

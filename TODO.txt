@@ -1,13 +1,16 @@
+no explosion effect from cannonball, but explosion force works??
+	decuct explosion effect from Damage type: higher scale for more damage, higher particle count for higher radius
+
+sync explosion effect, and potentially applied impulse to player!
+
+test cannon on client
+
+
+make WorldItemInstance inherit ObjectEntity?
+
 fog shader ( clouds plugin / zylann? ) weird camera angle dependent ( first / third switch to demonstrate ) fog
 
-forklift wheels are fighting, some forward some back => introduce invert power for now
-
 player somehow last child again ( starting through launcher? )
-
-wheel rotation can be 90 deg off, explains forklift driving backwards with 180 deg
-
-why is forklift driving backwards, is the orientation of the suspension not influencing force direction?
-	SOLVED?
 
 basic noise terrain creator with tool script, terrain generator resource, grass/rock shader with normal
 
@@ -20,7 +23,7 @@ suspension props
 
 more dampening on suspension
 
-add blue print distance and rotation control
+add blueprint distance and rotation control
 
 property panel group system:
 	create group
@@ -380,7 +383,8 @@ Artillery / Ballerburg:
 	no jetpack
 	ladders?
 	auto-save
-
+	factions ( one per player, grids take player faction )
+	
 
 NEW MECHANICS
 -----------------

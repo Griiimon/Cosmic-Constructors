@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://cajlhe7dya0wc"]
+
+[ext_resource type="Script" path="res://game/data/game modes/castles and cannons/cannonball/cannonball.gd" id="1_8waca"]
+[ext_resource type="Script" path="res://game/core/components/damage component/damage.gd" id="2_f4gu6"]
+
+[sub_resource type="Resource" id="Resource_3hmcm"]
+script = ExtResource("2_f4gu6")
+amount = 100
+radius = 3.0
+min_amount = 20
+position = Vector3(0, 0, 0)
+source_type = 0
+direction = Vector3(0, 0, 0)
+shape_index = -1
+
+[sub_resource type="Gradient" id="Gradient_0dwdh"]
+offsets = PackedFloat32Array(0, 0.634921, 1)
+colors = PackedColorArray(0.245984, 0.245984, 0.245984, 1, 0.255659, 0.255659, 0.255659, 1, 0.80508, 0.377639, 0.107046, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_161gh"]
+frequency = 0.1061
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wtay5"]
+width = 128
+height = 128
+seamless = true
+color_ramp = SubResource("Gradient_0dwdh")
+noise = SubResource("FastNoiseLite_161gh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bc3ie"]
+albedo_texture = SubResource("NoiseTexture2D_wtay5")
+metallic = 1.0
+roughness = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_7k6vi"]
+material = SubResource("StandardMaterial3D_bc3ie")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pab3a"]
+radius = 0.25
+
+[node name="Cannonball" type="RigidBody3D"]
+mass = 10.0
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_8waca")
+damage = SubResource("Resource_3hmcm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_7k6vi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_pab3a")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

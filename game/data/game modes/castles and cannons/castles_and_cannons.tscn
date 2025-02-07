@@ -1,0 +1,113 @@
+[gd_scene load_steps=23 format=3 uid="uid://c23e5gu6qiem2"]
+
+[ext_resource type="Script" path="res://game/data/game modes/castles and cannons/game.gd" id="1_ph1y6"]
+[ext_resource type="Script" path="res://game/base_sandbox.gd" id="2_ad4oo"]
+[ext_resource type="Script" path="res://game/player_spawn.gd" id="3_o7fhv"]
+[ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="4_bj0nc"]
+[ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="5_v7cjc"]
+[ext_resource type="Script" path="res://game/core/misc/environment space area/environment_space_area.gd" id="6_d8nfs"]
+[ext_resource type="Environment" uid="uid://dpnscmd0s8lh5" path="res://game/test/vehicle test/vehicle_test_environment.tres" id="7_ccjon"]
+[ext_resource type="Script" path="res://game/core/world/world.gd" id="8_iu1mf"]
+[ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="9_w1p21"]
+
+[sub_resource type="Resource" id="Resource_fob6d"]
+script = ExtResource("5_v7cjc")
+back_item = ExtResource("4_bj0nc")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_q3fxf"]
+radius = 10000.0
+
+[sub_resource type="Gradient" id="Gradient_0kay1"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0.443137, 0.14902, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jk1ou"]
+frequency = 0.1914
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lysp8"]
+color_ramp = SubResource("Gradient_0kay1")
+noise = SubResource("FastNoiseLite_jk1ou")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kyyuw"]
+albedo_texture = SubResource("NoiseTexture2D_lysp8")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qocan"]
+material = SubResource("StandardMaterial3D_kyyuw")
+size = Vector2(2000, 2000)
+
+[sub_resource type="Gradient" id="Gradient_hy0dr"]
+colors = PackedColorArray(0.253679, 0.530542, 0.988763, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6q5th"]
+frequency = 0.0072
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_b1h7q"]
+color_ramp = SubResource("Gradient_hy0dr")
+noise = SubResource("FastNoiseLite_6q5th")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljbpt"]
+albedo_texture = SubResource("NoiseTexture2D_b1h7q")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_370sg"]
+material = SubResource("StandardMaterial3D_ljbpt")
+size = Vector2(50000, 50000)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qq5dy"]
+size = Vector3(2000, 0.1, 2000)
+
+[node name="Castles and Cannons" type="Node3D"]
+script = ExtResource("1_ph1y6")
+
+[node name="BaseSandbox" type="Node" parent="."]
+script = ExtResource("2_ad4oo")
+load_world = true
+
+[node name="Player Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+script = ExtResource("3_o7fhv")
+equipment = SubResource("Resource_fob6d")
+
+[node name="Damping Area" type="Area3D" parent="."]
+collision_mask = 51
+linear_damp_space_override = 3
+angular_damp_space_override = 3
+angular_damp = 0.2
+script = ExtResource("6_d8nfs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Damping Area"]
+shape = SubResource("SphereShape3D_q3fxf")
+
+[node name="Gravity Area" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 691
+gravity_space_override = 3
+script = ExtResource("6_d8nfs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity Area"]
+shape = SubResource("SphereShape3D_q3fxf")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("7_ccjon")
+
+[node name="World" type="Node3D" parent="."]
+script = ExtResource("8_iu1mf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.767602, 0.640927, 0, -0.640927, -0.767602, 0, 2.22161, 0)
+
+[node name="UI" parent="." instance=ExtResource("9_w1p21")]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+collision_layer = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_qocan")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+mesh = SubResource("PlaneMesh_370sg")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+shape = SubResource("BoxShape3D_qq5dy")

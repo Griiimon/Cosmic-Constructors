@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CannonBlock" load_steps=4 format=3 uid="uid://sfwsxi2o0llp"]
+
+[ext_resource type="PackedScene" uid="uid://cm5xor4hspheq" path="res://game/data/game modes/castles and cannons/blocks/cannon/cannon.tscn" id="1_4wkih"]
+[ext_resource type="Resource" uid="uid://ca4xhk5g4mnot" path="res://game/data/game modes/castles and cannons/castles_and_cannons_block_category.tres" id="1_nbtf0"]
+[ext_resource type="Script" path="res://game/data/game modes/castles and cannons/blocks/cannon/cannon_block.gd" id="1_y6vva"]
+
+[resource]
+script = ExtResource("1_y6vva")
+recoil_impulse = 100.0
+size = Vector3i(1, 1, 2)
+mass = 200.0
+max_hitpoints = 100
+custom_collision = false
+can_tick = false
+tick_priority = 0
+can_be_built = true
+category = ExtResource("1_nbtf0")
+scene = ExtResource("1_4wkih")
+name = ""

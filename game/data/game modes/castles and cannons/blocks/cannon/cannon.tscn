@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://cm5xor4hspheq"]
+
+[ext_resource type="Script" path="res://game/data/game modes/castles and cannons/blocks/cannon/cannon.gd" id="1_wjh1b"]
+[ext_resource type="PackedScene" uid="uid://cajlhe7dya0wc" path="res://game/data/game modes/castles and cannons/cannonball/cannonball.tscn" id="2_yl1j8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5qi41"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2c01s"]
+albedo_color = Color(0.435768, 0.257355, 0.016122, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7ffag"]
+material = SubResource("StandardMaterial3D_2c01s")
+size = Vector3(1, 0.2, 1.4)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qma8k"]
+material = SubResource("StandardMaterial3D_2c01s")
+height = 0.185
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v78js"]
+albedo_color = Color(0.324203, 0.324203, 0.324203, 1)
+metallic = 1.0
+roughness = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_w15rr"]
+material = SubResource("StandardMaterial3D_v78js")
+top_radius = 0.35
+bottom_radius = 0.35
+height = 1.6
+
+[sub_resource type="SphereMesh" id="SphereMesh_e4kpo"]
+material = SubResource("StandardMaterial3D_v78js")
+radius = 0.3
+height = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_7kel6"]
+material = SubResource("StandardMaterial3D_2c01s")
+size = Vector3(0.1, 0.6, 0.1)
+
+[node name="Cannon" type="Node3D"]
+script = ExtResource("1_wjh1b")
+cannonball_scene = ExtResource("2_yl1j8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_5qi41")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.386, -0.5)
+mesh = SubResource("BoxMesh_7ffag")
+
+[node name="Rotor" type="MeshInstance3D" parent="Base"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0627745, 0.00701002)
+mesh = SubResource("CylinderMesh_qma8k")
+
+[node name="Barrel" type="MeshInstance3D" parent="Base/Rotor"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0.53972, -0.0969772)
+mesh = SubResource("CylinderMesh_w15rr")
+skeleton = NodePath("../../..")
+
+[node name="Muzzle" type="Node3D" parent="Base/Rotor/Barrel"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 1.68591, -0.216495)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Base/Rotor/Barrel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.715, 0)
+mesh = SubResource("SphereMesh_e4kpo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Base/Rotor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.25, 0.041)
+mesh = SubResource("BoxMesh_7kel6")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Base/Rotor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.25, 0.041)
+mesh = SubResource("BoxMesh_7kel6")
+skeleton = NodePath("../..")

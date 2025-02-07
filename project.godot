@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Cosmic Constructors"
-run/main_scene="res://game/test/vehicle test/vehicle_test.tscn"
+run/main_scene="res://game/launcher.tscn"
 config/features=PackedStringArray("4.3", "Double Precision", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -21,7 +21,6 @@ Global="*res://game/global/global.gd"
 CollisionLayers="*res://game/global/collision_layers.gd"
 Groups="*res://game/global/groups.gd"
 NetworkManager="*res://game/global/network managers/network_manager.gd"
-GameData="*res://game/global/game data/game_data.tscn"
 DebugSettings="*res://game/debug/debug settings/debug_settings.tscn"
 DebugHud="*res://game/global/debug hud/debug_hud.tscn"
 DebugStats="*res://game/debug/debug_stats.gd"
@@ -33,6 +32,7 @@ Effects="*res://game/global/effects/effects.tscn"
 ServerManager="*res://game/global/network managers/server_manager.gd"
 ClientManager="*res://game/global/network managers/client_manager.gd"
 DebugBlockFrame="*res://game/debug/debug block frame/debug_block_frame.tscn"
+GameData="*res://game/global/game data/game_data.tscn"
 
 [debug]
 

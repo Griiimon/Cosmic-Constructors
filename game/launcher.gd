@@ -8,6 +8,7 @@ extends Node
 
 @export var run_test_scene: PackedScene
 @export var game_scene: PackedScene
+@export var game_mode: GameMode
 
 @export var maximize_window: bool= false
 @export var fullscreen: bool= false
@@ -37,13 +38,20 @@ func _ready() -> void:
 
 	NetworkManager.is_server= dedicated_server
 	NetworkManager.is_single_player= not dedicated_server and not multiplayer_client
+
+	var scene: PackedScene= game_scene
+	if game_mode:
+		scene= game_mode.game_scene
+		Global.game_mode= game_mode
 	
 	if NetworkManager.is_single_player:
-		if run_test_scene:
-			get_tree().change_scene_to_packed.call_deferred(run_test_scene)
-			return
-			
-	NetworkManager.run(game_scene, player_name_label.text if not dedicated_server else "")
+		if not game_mode and run_test_scene:
+			scene= run_test_scene
+
+		get_tree().change_scene_to_packed.call_deferred(scene)
+		return
+	
+	NetworkManager.run(scene, player_name_label.text if not dedicated_server else "")
 
 
 func _on_server_button_pressed() -> void:

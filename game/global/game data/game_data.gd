@@ -14,7 +14,11 @@ var block_categories: Dictionary
 
 
 
-func _ready() -> void:
+func init() -> void:
+	var game_mode: GameMode= Global.game_mode
+	if game_mode:
+		block_library.blocks.append_array(game_mode.block_library.blocks)
+
 	for block in block_library.blocks:
 		block_definition_lookup[block.get_display_name()]= block
 		if not block.category: continue

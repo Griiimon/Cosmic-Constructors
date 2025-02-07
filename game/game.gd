@@ -16,6 +16,8 @@ func _init():
 
 
 func _ready() -> void:
+	GameData.init()
+	
 	peers= Node.new()
 	peers.name= "Peers"
 	add_child(peers)

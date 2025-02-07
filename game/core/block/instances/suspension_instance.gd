@@ -185,6 +185,7 @@ func init_sync_vars(grid: BlockGrid, grid_block: GridBlock):
 func spawn_wheel(grid: BlockGrid):
 	wheel= wheel_scene.instantiate()
 	wheel.position= position + basis.x * (1 if is_right else -1)
+	wheel.rotation.y= rotation.y
 	wheel.base_rotation= rotation.y
 	grid.add_child(wheel)
 

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="SpotlightBlock" load_steps=4 format=3 uid="uid://dy2nf4rufn7vt"]
+
+[ext_resource type="Resource" uid="uid://bm6ih6jhatj7i" path="res://game/data/misc/block categories/basic.tres" id="1_fj7pw"]
+[ext_resource type="Script" path="res://game/core/block/types/spotlight_block.gd" id="1_n7phb"]
+[ext_resource type="PackedScene" uid="uid://bi552uu6dp65g" path="res://game/data/blocks/spotlight/spotlight.tscn" id="2_k6d6b"]
+
+[resource]
+script = ExtResource("1_n7phb")
+size = Vector3i(1, 1, 1)
+mass = 10.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = false
+tick_priority = 0
+can_be_built = true
+category = ExtResource("1_fj7pw")
+scene = ExtResource("2_k6d6b")
+name = ""

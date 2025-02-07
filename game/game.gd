@@ -42,6 +42,12 @@ func spawn_player():
 	
 	# to make sure player unhandled input get processed last
 	move_child(player, 0)
+	
+	on_player_spawned(player)
+
+
+func on_player_spawned(player: Player):
+	pass
 
 
 func add_peer(player_state: Dictionary):

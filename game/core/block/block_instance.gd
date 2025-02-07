@@ -142,7 +142,7 @@ func remap_sub_grid_id(data: Dictionary, key: String= "sub_grid_id")-> int:
 func run_server_method(callable: Callable, grid: BlockGrid, grid_block: GridBlock, args: Array= []):
 	assert(not NetworkManager.is_server)
 	if NetworkManager.is_single_player:
-		callable.call(args)
+		callable.callv([grid, grid_block] + args)
 	else:
 		ServerManager.run_block_instance_method.rpc_id(1, str(callable.get_method()), grid.id, grid_block.local_pos, args)
 

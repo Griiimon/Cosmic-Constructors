@@ -362,7 +362,7 @@ func run_block_instance_method(method_name: String, grid_id: int, block_pos: Vec
 	var inst: BlockInstance= grid_block.get_block_instance()
 	if not inst: return
 	assert(inst.has_method(method_name))
-	inst.callv(method_name, args)
+	inst.callv(method_name, [grid, grid_block] + args)
 
 
 func register_sync_var(sync_var: SyncVar):

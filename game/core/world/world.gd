@@ -143,7 +143,7 @@ func damage_object(obj: CollisionObject3D, damage: Damage):
 
 		RaycastHelper.hit_from_inside= false
 		RaycastHelper.hit_back_faces= false
-		RaycastHelper.collision_mask= Global.PLAYER_COLLISION_LAYER + Global.GRID_COLLISION_LAYER# + Global.TERRAIN_COLLISION_LAYER
+		RaycastHelper.collision_mask= CollisionLayers.PLAYER + CollisionLayers.GRID
 
 		for coll_shape in collision_shapes:
 			var ray_origin: Vector3= coll_shape.global_position
@@ -195,7 +195,7 @@ func apply_delayed_explosive_force(force: DelayedExplosiveForce):
 
 	var query:= PhysicsShapeQueryParameters3D.new()
 	query.transform.origin= center
-	query.collision_mask= Global.PLAYER_COLLISION_LAYER + Global.GRID_COLLISION_LAYER
+	query.collision_mask= CollisionLayers.PLAYER + CollisionLayers.GRID
 	var shape:= SphereShape3D.new()
 	shape.radius= force.damage.radius
 	query.shape= shape
@@ -350,7 +350,7 @@ func freeze_grids(b: bool):
 func explosion(damage: Damage, obj: CollisionObject3D):
 	var query:= PhysicsShapeQueryParameters3D.new()
 	query.transform.origin= damage.position
-	query.collision_mask= Global.PLAYER_COLLISION_LAYER + Global.GRID_COLLISION_LAYER
+	query.collision_mask= CollisionLayers.PLAYER + CollisionLayers.GRID
 	var shape:= SphereShape3D.new()
 	shape.radius= damage.radius
 	query.shape= shape
@@ -441,6 +441,7 @@ func spawn_serialized_item(data: Dictionary):
 
 
 func spawn_object(scene: PackedScene, pos: Vector3, rot: Vector3= Vector3.ZERO, velocity: Vector3= Vector3.ZERO)-> ObjectEntity:
+	assert(scene)
 	var obj: ObjectEntity= scene.instantiate()
 	obj.position= pos
 	obj.rotation= rot

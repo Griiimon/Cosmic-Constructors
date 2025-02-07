@@ -352,6 +352,19 @@ func request_block_property(grid_id: int, block_pos: Vector3i, property_name: St
 	ClientManager.receive_sync_event.rpc_id(get_sender_id(), EventSyncState.Type.CHANGE_BLOCK_PROPERTY, [ grid_id, block_pos, property_name, property.get_variant() ], 1)
 
 
+@rpc("any_peer", "reliable")
+func run_block_instance_method(method_name: String, grid_id: int, block_pos: Vector3i, args: Array):
+	var world: World= Global.game.world
+	if not world.has_grid(grid_id): return
+	var grid: BlockGrid= world.get_grid(grid_id)
+	if not grid.has_block(block_pos): return
+	var grid_block: GridBlock= grid.get_block_local(block_pos)
+	var inst: BlockInstance= grid_block.get_block_instance()
+	if not inst: return
+	assert(inst.has_method(method_name))
+	inst.callv(method_name, args)
+
+
 func register_sync_var(sync_var: SyncVar):
 	sync_vars.append(sync_var)
 

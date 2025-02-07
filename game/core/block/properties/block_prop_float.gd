@@ -37,9 +37,6 @@ func toggle(grid: BlockGrid, grid_block: GridBlock, sync: bool= true):
 			increase(grid, grid_block, 1, sync)
 		ToggleBehavior.DECREASE:
 			decrease(grid, grid_block, 1, sync)
-	
-	if value_range:
-		f= clamp(f, (value_range as Vector2).x, (value_range as Vector2).y)
 
 
 func set_variant(grid: BlockGrid, grid_block: GridBlock, val: Variant, sync: bool= true):

@@ -3,7 +3,7 @@ extends BlockInstance
 @export var cannonball_scene: PackedScene
 
 @onready var hor_rotation: BlockPropFloat= BlockPropFloat.new("Hor. Rotation", 0.0, on_horizontal_rotation).set_range(-45, 45).client_side_callback()
-@onready var ver_rotation: BlockPropFloat= BlockPropFloat.new("Ver. Rotation", 0.0, on_vertical_rotation).set_range(-10, 85).client_side_callback()
+@onready var ver_rotation: BlockPropFloat= BlockPropFloat.new("Ver. Rotation", 30.0, on_vertical_rotation).set_range(-10, 85).client_side_callback()
 @onready var power: BlockPropFloat= BlockPropFloat.new("Power", 50.0).set_range(10, 100).set_step_size(0.5)
 
 @onready var projectiles: BlockPropInt= BlockPropInt.new("Projectiles", 5).read_only()

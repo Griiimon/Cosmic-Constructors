@@ -16,12 +16,14 @@ extends BlockInstance
 
 
 func interact(grid: BlockGrid, grid_block: GridBlock, _player: Player):
-	if projectiles.is_true() and powder.get_value_i() >= power.get_value_f():
-		run_server_method(shoot, grid, grid_block, [ (grid_block.block_definition as CannonBlock).recoil_impulse ])
+	run_server_method(shoot, grid, grid_block, [ (grid_block.block_definition as CannonBlock).recoil_impulse ])
 
 
 func shoot(grid: BlockGrid, grid_block: GridBlock, recoil: float):
 	assert(not NetworkManager.is_client)
+	if not projectiles.is_true() or powder.get_value_f() < power.get_value_f():
+		return
+
 	grid.world.spawn_object(cannonball_scene, muzzle.global_position, Vector3.ZERO, -power.get_value_f() * muzzle.global_basis.z)
 	grid.apply_impulse(global_basis.z * recoil, global_position - get_grid().global_position)
 	projectiles.set_variant(grid, grid_block, projectiles.get_value_i() - 1)

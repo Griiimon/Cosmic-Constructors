@@ -71,7 +71,7 @@ func get_variant()-> Variant:
 
 
 func is_true()-> bool:
-	return i >= 0
+	return i > 0
 
 
 func set_toggle_behavior(behavior: ToggleBehavior):

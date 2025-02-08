@@ -548,7 +548,7 @@ func raycast(from: Vector3, to: Vector3, hit_from_inside: bool= false, step_size
 	var result: Array[Vector3i]
 	
 	if not hit_from_inside:
-		var block: GridBlock= get_block_from_global_pos(from)
+		var block: BaseGridBlock= get_block_from_global_pos(from)
 		if block:
 			exceptions.append(block.local_pos)
 
@@ -556,7 +556,7 @@ func raycast(from: Vector3, to: Vector3, hit_from_inside: bool= false, step_size
 	var current_pos: Vector3= from
 
 	for i in from.distance_to(to) / step_size:
-		var block: GridBlock= get_block_from_global_pos(current_pos)
+		var block: BaseGridBlock= get_block_from_global_pos(current_pos)
 		if block:
 			if not block.local_pos in exceptions:
 				if not block.local_pos in result:

@@ -113,7 +113,8 @@ func add_custom_grid(grid: BlockGrid, pos: Vector3, rot: Vector3= Vector3.ZERO)-
 func damage_point(damage: Damage, obj: CollisionObject3D= null):
 	if damage.is_explosion():
 		explosion(damage, obj)
-		Effects.spawn_explosion(damage.position, damage.radius)
+		#Effects.spawn_explosion(damage.position, damage.radius)
+		Effects.create(ExplosionEffect.new(damage.position, damage.radius))
 	else:
 		damage_object(obj, damage)
 

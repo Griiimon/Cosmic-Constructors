@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://mjcxll012iw5"]
 
-[ext_resource type="Script" path="res://game/core/effects/explosion/explosion_effect.gd" id="1_udkyl"]
+[ext_resource type="Script" path="res://game/core/effects/explosion/explosion_effect_instance.gd" id="1_udkyl"]
 [ext_resource type="Script" path="res://game/core/effects/particle_component.gd" id="1_xie8f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8uj3f"]

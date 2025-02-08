@@ -1,6 +1,6 @@
 class_name EventSyncState
 
-enum Type { START_PLAYER_ANIMATION, RESET_PLAYER_ANIMATION, WEAR_EQUIPMENT, CLEAR_EQUIPMENT_SLOT, EQUIP_HAND_ITEM, ADD_GRID, ADD_BLOCK, REMOVE_BLOCK, REMOVE_GRID, CHANGE_BLOCK_PROPERTY, CHANGE_GRID_PROPERTY, SPAWN_OBJECT, DESTROY_OBJECT }
+enum Type { START_PLAYER_ANIMATION, RESET_PLAYER_ANIMATION, WEAR_EQUIPMENT, CLEAR_EQUIPMENT_SLOT, EQUIP_HAND_ITEM, ADD_GRID, ADD_BLOCK, REMOVE_BLOCK, REMOVE_GRID, CHANGE_BLOCK_PROPERTY, CHANGE_GRID_PROPERTY, SPAWN_OBJECT, DESTROY_OBJECT, CREATE_EFFECT }
 
 
 
@@ -87,6 +87,9 @@ static func process_event(type: Type, args: Array, peer_id: int):
 			var obj: ObjectEntity= world.get_object(id)
 			if not obj: return
 			obj.destroy()
+
+		Type.CREATE_EFFECT:
+			Effects.create(BaseEffect.from_args(args))
 
 
 static func change_block_property(world: World, args: Array):

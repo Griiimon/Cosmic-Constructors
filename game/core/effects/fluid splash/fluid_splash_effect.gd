@@ -1,31 +1,35 @@
 class_name FluidSplashEffect
-extends Node3D
+extends BaseEffect
 
-@export var particle_scene: PackedScene
-
-@export var num_particles: int= 25
-@export var spread_angle: float= 60
-
-var fluid: Fluid
 var eject_vector: Vector3
+var fluid: Fluid
 
 
 
-func start():
-	var rad_spread: float= deg_to_rad(spread_angle)
+func _init(_position: Vector3, _eject_vector: Vector3, _fluid: Fluid):
+	super(Type.FLUID_SPLASH, _position)
+	eject_vector= _eject_vector
+	fluid= _fluid
+
+
+func create()-> Node3D:
+	if not GameData.game_settings.video_settings.enable_fluid_particles:
+		return
+
+	var splash: FluidSplashEffectInstance= GameData.scene_library.fluid_splash_scene.instantiate()
+	splash.position= position
+	splash.eject_vector= eject_vector
+	splash.fluid= fluid
+	splash.start()
+	return splash
+
+
+func get_args()-> Array:
+	return super() + [ eject_vector, GameData.get_fluid_id(fluid) ]
+
+
+static func parse_args(args: Array)-> Array:
+	var fluid_id: int= args[4]
+	return args.slice(0, 3) + [ GameData.get_fluid(fluid_id) ]
+
 	
-	for i in num_particles:
-		var particle: FluidSplashParticle= particle_scene.instantiate()
-		#particle.position= position
-		add_child(particle)
-		particle.tree_exited.connect(check_particles)
-		particle.fluid= fluid
-		
-		var quat:= Quaternion.from_euler(Vector3(randf_range(-rad_spread, rad_spread), randf_range(-rad_spread, rad_spread), randf_range(-rad_spread, rad_spread)))
-		var particle_velocity: Vector3= quat * eject_vector
-		particle.linear_velocity= particle_velocity
-
-
-func check_particles():
-	if get_child_count() == 0:
-		queue_free()

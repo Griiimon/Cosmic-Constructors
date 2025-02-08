@@ -56,5 +56,13 @@ func get_fluid_definition(fluid_name: String)-> Fluid:
 	return fluid_definition_lookup[fluid_name]
 
 
+func get_fluid(id: int)-> Fluid:
+	return fluid_library.fluids[id]
+
+
+func get_fluid_id(fluid: Fluid)-> int:
+	return fluid_library.fluids.find(fluid)
+
+
 func get_mouse_sensitivity()-> float:
 	return game_settings.control_settings.mouse_sensitivity

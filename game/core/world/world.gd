@@ -453,6 +453,7 @@ func spawn_object(scene: PackedScene, pos: Vector3, rot: Vector3= Vector3.ZERO, 
 	if NetworkManager.is_server:
 		ServerManager.broadcast_sync_event(EventSyncState.Type.SPAWN_OBJECT, [scene.resource_path, obj.id, pos, rot, velocity])
 	elif NetworkManager.is_client:
+		obj.hide()
 		obj.freeze= true
 
 	return obj

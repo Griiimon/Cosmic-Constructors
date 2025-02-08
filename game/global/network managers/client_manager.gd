@@ -172,6 +172,8 @@ func update_object(object: ObjectEntity):
 	object.global_basis= interpolate_basis(object.global_basis, ObjectSyncState.get_rotation(past_state),\
 				ObjectSyncState.get_rotation(future_state), interpolation_factor, smooth)
 
+	object.show()
+
 
 func send_sync_event(type: int, args: Array= []):
 	assert(NetworkManager.is_client)

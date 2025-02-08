@@ -25,7 +25,11 @@ func _ready() -> void:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	elif maximize_window:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
-		
+
+	if game_mode:
+		game_scene= game_mode.game_scene
+		Global.game_mode= game_mode
+
 	interface_ui.visible= use_interface
 	if use_interface: 
 		if use_command_line:
@@ -39,19 +43,14 @@ func _ready() -> void:
 	NetworkManager.is_server= dedicated_server
 	NetworkManager.is_single_player= not dedicated_server and not multiplayer_client
 
-	var scene: PackedScene= game_scene
-	if game_mode:
-		scene= game_mode.game_scene
-		Global.game_mode= game_mode
-	
 	if NetworkManager.is_single_player:
 		if not game_mode and run_test_scene:
-			scene= run_test_scene
+			game_scene= run_test_scene
 
-		get_tree().change_scene_to_packed.call_deferred(scene)
+		get_tree().change_scene_to_packed.call_deferred(game_scene)
 		return
 	
-	NetworkManager.run(scene, player_name_label.text if not dedicated_server else "")
+	NetworkManager.run(game_scene, player_name_label.text if not dedicated_server else "")
 
 
 func _on_server_button_pressed() -> void:

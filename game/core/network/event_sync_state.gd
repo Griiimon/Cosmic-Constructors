@@ -1,6 +1,6 @@
 class_name EventSyncState
 
-enum Type { START_PLAYER_ANIMATION, RESET_PLAYER_ANIMATION, WEAR_EQUIPMENT, CLEAR_EQUIPMENT_SLOT, EQUIP_HAND_ITEM, ADD_GRID, ADD_BLOCK, REMOVE_BLOCK, REMOVE_GRID, CHANGE_BLOCK_PROPERTY, CHANGE_GRID_PROPERTY }
+enum Type { START_PLAYER_ANIMATION, RESET_PLAYER_ANIMATION, WEAR_EQUIPMENT, CLEAR_EQUIPMENT_SLOT, EQUIP_HAND_ITEM, ADD_GRID, ADD_BLOCK, REMOVE_BLOCK, REMOVE_GRID, CHANGE_BLOCK_PROPERTY, CHANGE_GRID_PROPERTY, SPAWN_OBJECT, DESTROY_OBJECT }
 
 
 
@@ -72,6 +72,21 @@ static func process_event(type: Type, args: Array, peer_id: int):
 			var property: BlockGrid.Property= args[1]
 			var value= args[2]
 			world.get_grid(grid_id).change_property(property, value)
+
+		Type.SPAWN_OBJECT:
+			var scene_path: String= args[0]
+			var id: int= args[1]
+			var position: Vector3= args[2]
+			var rotation: Vector3= args[3]
+			var velocity: Vector3= args[4]
+
+			world.spawn_object(load(scene_path), position, rotation, velocity, id)
+
+		Type.DESTROY_OBJECT:
+			var id: int= args[0]
+			var obj: ObjectEntity= world.get_object(id)
+			if not obj: return
+			obj.destroy()
 
 
 static func change_block_property(world: World, args: Array):

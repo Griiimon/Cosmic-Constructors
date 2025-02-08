@@ -6,7 +6,7 @@ const CONTROL_INPUTS= [ "strafe_left", "strafe_right", "sink", "rise", "move_for
 var ticks: int
 var peer_states: Dictionary
 var grid_states: Dictionary
-
+var object_states: Dictionary
 var sync_vars: Dictionary
 
 
@@ -43,6 +43,10 @@ func _physics_process(_delta: float) -> void:
 		
 			for grid: BlockGrid in Global.game.world.get_grids():
 				update_grid(grid)
+
+			for obj: ObjectEntity in Global.game.world.get_objects():
+				update_object(obj)
+				DebugHud.send("Object update", ticks)
 
 	ticks+= 1
 
@@ -131,6 +135,44 @@ func update_grid(grid: BlockGrid):
 				GridSyncState.get_rotation(future_state), interpolation_factor, smooth)
 
 
+func store_object_state(object_state: Dictionary):
+	var object_id: int= ObjectSyncState.get_object_id(object_state)
+	if not object_states.has(object_id):
+		object_states[object_id]= [object_state]
+	else:
+		var arr: Array= object_states[object_id]
+		var this_timestamp: int= ObjectSyncState.get_timestamp(object_state)
+		var last_timestamp: int= ObjectSyncState.get_timestamp(arr[-1])
+		
+		if this_timestamp > last_timestamp:
+			arr.append(object_state)
+
+
+func update_object(object: ObjectEntity):
+	var object_id: int= object.id
+	
+	if not object_states.has(object_id):
+		return
+	
+	var arr: Array= object_states[object_id]
+	if arr.size() == 1:
+		ObjectSyncState.parse_sync_state(object, arr[0])
+		return
+	
+	var interpolation_result: Array= calculate_interpolation(arr, ObjectSyncState.get_timestamp)
+	var past_state: Dictionary= interpolation_result[0]
+	var future_state: Dictionary= interpolation_result[1]
+	var interpolation_factor: float= interpolation_result[2]
+
+	var smooth:= 0.5
+	
+	object.global_position= interpolate_position(object.global_position, ObjectSyncState.get_position(past_state),\
+				ObjectSyncState.get_position(future_state), interpolation_factor, smooth)
+
+	object.global_basis= interpolate_basis(object.global_basis, ObjectSyncState.get_rotation(past_state),\
+				ObjectSyncState.get_rotation(future_state), interpolation_factor, smooth)
+
+
 func send_sync_event(type: int, args: Array= []):
 	assert(NetworkManager.is_client)
 	ServerManager.receive_sync_event.rpc_id(1, type, args)
@@ -192,6 +234,10 @@ func receive_world_state(data: Dictionary):
 		var hash: int= sync_var.get_hash()
 		sync_vars[hash]= sync_var
 		#prints("Received SyncVar", sync_var.get_as_text())
+
+	var new_object_states: Array= WorldSyncState.parse_object_states(data)
+	for object_state: Dictionary in new_object_states:
+		store_object_state(object_state)
 
 
 @rpc("any_peer", "reliable")
@@ -317,6 +363,7 @@ func calculate_interpolation(arr: Array, get_timestamp: Callable)-> Array:
 	var future_state: Dictionary= arr[1]
 	
 	var factor: float= (render_tick - get_timestamp.call(past_state)) / float(get_timestamp.call(future_state) - get_timestamp.call(past_state))
+	factor= max(factor, 0)
 	
 	return [ past_state, future_state, factor ]
 

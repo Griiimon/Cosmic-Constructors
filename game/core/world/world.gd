@@ -440,16 +440,22 @@ func spawn_serialized_item(data: Dictionary):
 	item_inst.angular_velocity= angular_velocity
 
 
-func spawn_object(scene: PackedScene, pos: Vector3, rot: Vector3= Vector3.ZERO, velocity: Vector3= Vector3.ZERO)-> ObjectEntity:
+func spawn_object(scene: PackedScene, pos: Vector3, rot: Vector3= Vector3.ZERO, velocity: Vector3= Vector3.ZERO, id: int= -1)-> ObjectEntity:
 	assert(scene)
 	var obj: ObjectEntity= scene.instantiate()
 	obj.position= pos
 	obj.rotation= rot
 	obj.linear_velocity= velocity
 	objects.add_child(obj)
+	if id > -1:
+		obj.id= id
+
+	if NetworkManager.is_server:
+		ServerManager.broadcast_sync_event(EventSyncState.Type.SPAWN_OBJECT, [scene.resource_path, obj.id, pos, rot, velocity])
+	elif NetworkManager.is_client:
+		obj.freeze= true
+
 	return obj
-
-
 
 
 func spawn_peripheral_entity(entity: PeripheralEntity, pos: Vector3, rot: Vector3):
@@ -481,5 +487,14 @@ func get_grids()-> Array[BlockGrid]:
 	return result
 
 
-#func get_grid_id(grid: BlockGrid)-> int:
-	#return lookup_grid_to_id[grid]
+func get_object(id: int)-> ObjectEntity:
+	for obj in get_objects():
+		if obj.id == id:
+			return obj
+	return null
+
+
+func get_objects()-> Array[ObjectEntity]:
+	var result: Array[ObjectEntity]
+	result.assign(objects.get_children())
+	return result

@@ -45,6 +45,7 @@ func _physics_process(_delta: float) -> void:
 		WorldSyncState.add_player_states(world_state, player_states.values())
 		WorldSyncState.add_grid_states(world_state, get_grid_states())
 		WorldSyncState.add_sync_vars(world_state, serialize_sync_vars())
+		WorldSyncState.add_objects(world_state, get_object_states())
 		
 		ClientManager.receive_world_state.rpc(world_state)
 
@@ -137,6 +138,16 @@ func serialize_sync_vars()-> Array[Dictionary]:
 		sync_var.synced()
 		result.append(sync_var.serialize())
 	return result
+
+
+func get_object_states()-> Array:
+	var states: Array= []
+	if Global.game:
+		var world: World= Global.game.world
+		if world:
+			for obj in world.get_objects():
+				states.append(ObjectSyncState.build_sync_state(obj))
+	return states
 
 
 @rpc("any_peer", "reliable")

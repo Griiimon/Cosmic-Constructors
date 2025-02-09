@@ -715,7 +715,7 @@ func serialize(local_sub_grid_ids: bool= false)-> Dictionary:
 	return data
 
 
-static func pre_deserialize(data: Dictionary, new_world: World, default_position: Vector3= Vector3.ZERO)-> BlockGrid:
+static func pre_deserialize(data: Dictionary, new_world: World, default_position: Vector3= Vector3.ZERO, default_rotation: Vector3= Vector3.ZERO)-> BlockGrid:
 	var grid:= BlockGrid.new()
 	grid.world= new_world
 	
@@ -725,7 +725,7 @@ static func pre_deserialize(data: Dictionary, new_world: World, default_position
 		new_world.next_grid_id= max(grid.id + 1, new_world.next_grid_id + 1)
 	
 	grid.position= Utils.get_key_or_default(data, "position", default_position, "Vector3")
-	grid.rotation= Utils.get_key_or_default(data, "rotation", Vector3.ZERO, "Vector3")
+	grid.rotation= Utils.get_key_or_default(data, "rotation", default_rotation, "Vector3")
 
 	if new_world:
 		new_world.grids.add_child(grid)

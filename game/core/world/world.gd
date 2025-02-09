@@ -32,6 +32,8 @@ var delayed_forces: Array[DelayedExplosiveForce]
 
 var is_loading:= false
 
+var factions: Array[Faction]
+
 
 
 func _ready() -> void:
@@ -245,11 +247,15 @@ func save_world(world_name: String= "", project_folder: bool= false):
 
 	var world_data:= {}
 	world_data["grids"]= []
+	world_data["factions"]= []
 	world_data["players"]= []
 	world_data["items"]= []
 	
 	for grid: BlockGrid in grids.get_children():
 		world_data["grids"].append(grid.serialize())
+
+	for faction in factions:
+		world_data["factions"].append(faction.serialize())
 
 	if NetworkManager.is_single_player:
 		world_data["players"].append(Global.player.serialize())
@@ -314,6 +320,10 @@ func load_world(world_data: Dictionary):
 
 	for grid: BlockGrid in grids.get_children():
 		grid.deserialize(world_grid_data[grid])
+
+	if world_data.has("factions"):
+		for faction_data: Dictionary in world_data["factions"]:
+			factions.append(Faction.deserialize(faction_data))
 
 	if not world_data["players"].is_empty():
 		var player_data_arr: Array[Dictionary]

@@ -55,10 +55,7 @@ func on_player_spawned():
 func do_load_world():
 	if load_world and not NetworkManager.is_client: #NetworkManager.is_single_player:
 		await get_tree().physics_frame
-		# TODO
-		#if Global.terrain:
-			#while not Global.terrain.is_area_meshed(..):
-				#await get_tree().physics_frame
+
 		Global.game.world.load_world_from_file(custom_world_name, project_folder_world)
 	
 

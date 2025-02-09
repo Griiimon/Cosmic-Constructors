@@ -52,6 +52,7 @@ func on_physics_process(delta: float):
 	if not ghost: return
 
 	if not align_ghost():
+		ghost.hide()
 		return
 
 	rotate_ghost(delta)

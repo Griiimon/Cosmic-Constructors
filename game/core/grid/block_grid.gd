@@ -792,10 +792,25 @@ func can_place_block_at_global(block: Block, global_pos: Vector3, block_rotation
 	if get_block_neighbors(local_pos).is_empty():
 		return false
 	
+	var query:= PhysicsShapeQueryParameters3D.new()
+	query.shape= BoxShape3D.new()
+	query.collision_mask= CollisionLayers.get_all_body_layers()
+	query.exclude= [ get_rid() ]
+	
 	if block.is_multi_block():
 		for child_block_pos in get_multi_block_positions(block, local_pos, GridBlock.rotation_to_basis(block_rotation)):
 			if is_occupied(child_block_pos):
 				return false
+
+			query.transform= Transform3D(GridBlock.rotation_to_basis(block_rotation), get_global_block_pos(child_block_pos))
+
+			if not get_world_3d().direct_space_state.intersect_shape(query).is_empty():
+				return false
+	else:
+		query.transform= Transform3D(GridBlock.rotation_to_basis(block_rotation), global_pos)
+		
+		if not get_world_3d().direct_space_state.intersect_shape(query).is_empty():
+			return false
 
 	return true
 

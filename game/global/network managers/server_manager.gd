@@ -337,6 +337,7 @@ func spawn_blueprint(compressed_data: PackedByteArray, position: Vector3, rotati
 	var world: World= Global.game.world
 	var blueprint_data:= BlueprintData.new()
 	blueprint_data.position= position
+	blueprint_data.rotation= rotation
 	blueprint_data.load_blueprint(data, false, world)
 	var grids: Array[BlockGrid]= blueprint_data.place(world)
 

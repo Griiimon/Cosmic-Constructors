@@ -1,8 +1,13 @@
 class_name PlayerLoadBlueprintState
 extends PlayerActionStateMachineState
 
+@export var initial_target_distance: float= 10
+
 var current_blueprint: String
 var blueprint_data: BlueprintData
+
+var target_distance: float
+var target_rotation: float
 
 
 
@@ -14,6 +19,8 @@ func _ready() -> void:
 
 func on_enter():
 	Global.ui.open_blueprint_menu()
+	target_distance= initial_target_distance
+	target_rotation= 0
 
 
 func on_exit():
@@ -24,25 +31,42 @@ func on_exit():
 func on_physics_process(_delta: float):
 	if not blueprint_data: return
 	blueprint_data.grid.position= get_target_pos()
+	blueprint_data.grid.rotation_degrees.y= target_rotation
 
 
 func on_unhandled_input(event: InputEvent):
 	if not blueprint_data: return
 	
-	if event.is_pressed() and event.is_action("place_blueprint"):
-		blueprint_data.clear()
+	if event.is_pressed():
+		if event.is_action("place_blueprint"):
+			place()
+			finished.emit()
+			return
+	
+		elif event.is_action("rotate_blueprint_left"):
+			target_rotation-= 10 
+		elif event.is_action("rotate_blueprint_right"):
+			target_rotation+= 10 
+		elif event.is_action("move_blueprint_forward"): 
+			target_distance+= 1
+		elif event.is_action("move_blueprint_back"): 
+			target_distance-= 1
 
-		var data: Array= BlueprintData.get_blueprint_data_from_file(current_blueprint)
-		if NetworkManager.is_client:
-			var compressed_data: PackedByteArray= Utils.compress_string(JSON.stringify(data))
-			ServerManager.spawn_blueprint.rpc_id(1, compressed_data, get_target_pos())
-		else:
-			blueprint_data.position= get_target_pos()
-			blueprint_data.load_blueprint(data, false, player.world)
-			blueprint_data.place(player.world)
-		
-		finished.emit()
-		return
+		target_distance= clamp(target_distance, 1, 25)
+
+
+func place():
+	blueprint_data.clear()
+
+	var data: Array= BlueprintData.get_blueprint_data_from_file(current_blueprint)
+	if NetworkManager.is_client:
+		var compressed_data: PackedByteArray= Utils.compress_string(JSON.stringify(data))
+		ServerManager.spawn_blueprint.rpc_id(1, compressed_data, get_target_pos(), target_rotation)
+	else:
+		blueprint_data.position= get_target_pos()
+		blueprint_data.rotation= Vector3(0, deg_to_rad(target_rotation), 0)
+		blueprint_data.load_blueprint(data, false, player.world)
+		blueprint_data.place(player.world)
 
 
 func on_load_blueprint(blueprint_name: String):
@@ -58,4 +82,4 @@ func on_blueprint_panel_closed():
 
 
 func get_target_pos()-> Vector3:
-	return player.get_look_ahead_pos(10)
+	return player.get_look_ahead_pos(target_distance)

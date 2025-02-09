@@ -3,6 +3,7 @@ class_name BlueprintData
 var grid: BlockGrid
 var sub_grids_node: Node3D
 var position: Vector3
+var rotation: Vector3
 
 
 
@@ -38,7 +39,7 @@ func load_blueprint(data: Array, model_only: bool= false, world: World= null):
 	
 	for grid_data in all_grids:
 		if not grid:
-			grid= BlockGrid.pre_deserialize(grid_data, world, position)
+			grid= BlockGrid.pre_deserialize(grid_data, world, position, rotation)
 		else:
 			var sub_grid: BlockGrid= BlockGrid.pre_deserialize(grid_data, world, position)
 			sub_grids.append(sub_grid)

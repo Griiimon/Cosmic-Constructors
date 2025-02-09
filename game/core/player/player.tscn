@@ -282,5 +282,11 @@ script = ExtResource("20_og83w")
 
 [node name="Load Blueprint" type="Node" parent="Action State Machine" index="8"]
 script = ExtResource("21_64gxf")
+input_mappings = {
+"move_blueprint_back": "Blueprint Distance -",
+"move_blueprint_forward": "Blueprint Distance +",
+"rotate_blueprint_left": "Rotate Blueprint Left",
+"rotate_blueprint_right": "Rotate Blueprint Right"
+}
 
 [node name="Damage Component" parent="." index="6" instance=ExtResource("12_goufb")]

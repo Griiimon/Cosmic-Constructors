@@ -99,6 +99,7 @@ func add_player(id: int, player_name: String):
 		
 	var player: BasePlayer= BASE_PLAYER_SCENE.instantiate()
 	player.name= str(id)
+	player.player_name= player_name
 	Global.game.peers.add_child(player, true)
 	player_instances[id]= player
 	player_connected.emit(id)

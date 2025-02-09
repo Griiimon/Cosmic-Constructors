@@ -7,13 +7,15 @@ var position: Vector3
 
 
 func place(world: World)-> Array[BlockGrid]:
+	assert(not NetworkManager.is_client)
 	var result: Array[BlockGrid]
 	
 	result.append(grid)
 	
 	if sub_grids_node:
-		for child in sub_grids_node.get_children():
+		for child: BlockGrid in sub_grids_node.get_children():
 			child.reparent(world.grids)
+			child.freeze= false
 			result.append(child)
 
 		sub_grids_node.queue_free()

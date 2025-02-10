@@ -34,7 +34,16 @@ func initialize(grid: BlockGrid, grid_block: GridBlock, restore_data= null):
 			on_restored(grid, grid_block, restore_data)
 		else:
 			on_placed(grid, grid_block)
-		
+
+	if NetworkManager.is_server: return
+	
+	for property: BlockProperty in property_table.values().map(func(x): return get(x)):
+		if property.initial_sync_callback:
+			if NetworkManager.is_single_player:
+				property.sync_callback.call_deferred(grid, grid_block)
+			else:
+				property.sync_request(grid, grid_block)
+
 
 func on_placed(_grid: BlockGrid, _grid_block: GridBlock):
 	pass

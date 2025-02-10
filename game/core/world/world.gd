@@ -33,6 +33,7 @@ var delayed_forces: Array[DelayedExplosiveForce]
 var is_loading:= false
 
 var factions: Array[Faction]
+var default_faction: Faction
 
 
 
@@ -60,10 +61,11 @@ func generate_sub_node(node_name: String)-> Node:
 	return node
 
 
-func add_grid(pos: Vector3, rot: Vector3= Vector3.ZERO)-> BlockGrid:
+func add_grid(pos: Vector3, rot: Vector3= Vector3.ZERO, _faction: Faction= null)-> BlockGrid:
 	var grid:= BlockGrid.new()
 	assign_grid_id(grid)
 	init_grid(grid, pos, rot)
+	grid.faction= _faction
 	return grid
 
 
@@ -485,6 +487,14 @@ func make_rope(from: Node3D, to: Node3D)-> Rope:
 	return rope
 
 
+func add_faction(faction: Faction):
+	faction.id= factions.size()
+	if faction.is_default:
+		assert(not default_faction)
+		default_faction= faction
+	factions.append(faction)
+
+
 func has_grid(id: int)-> bool:
 	return lookup_id_to_grid.has(id)
 
@@ -510,3 +520,9 @@ func get_objects()-> Array[ObjectEntity]:
 	var result: Array[ObjectEntity]
 	result.assign(objects.get_children())
 	return result
+
+
+func get_faction(id: int)-> Faction:
+	if id >= factions.size():
+		return null
+	return factions[id]

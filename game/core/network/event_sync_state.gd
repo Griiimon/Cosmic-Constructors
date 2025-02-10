@@ -42,7 +42,8 @@ static func process_event(type: Type, args: Array, peer_id: int):
 			var position: Vector3= args[0]
 			var rotation: Vector3= args[1]
 			var grid_id: int= args[2]
-			var grid: BlockGrid= world.add_grid(position, rotation)
+			var faction_id: int= args[3]
+			var grid: BlockGrid= world.add_grid(position, rotation, world.get_faction(faction_id))
 			world.assign_grid_id(grid, false, grid_id, false)
 			
 		Type.ADD_BLOCK:

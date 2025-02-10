@@ -144,11 +144,11 @@ func build_block():
 	var new_grid:= false
 	if not grid:
 		new_grid= true
-		grid= player.world.add_grid(ghost.position, ghost.global_rotation)
+		grid= player.world.add_grid(ghost.position, ghost.global_rotation, player.faction)
 
 		if NetworkManager.is_client:
 			ClientManager.send_sync_event(EventSyncState.Type.ADD_GRID,\
-				[ghost.position, ghost.global_rotation, grid.id])
+				[ghost.position, ghost.global_rotation, grid.id, player.faction.id])
 			grid.id_pending= true
 			
 		local_block_pos= Vector3i.ZERO

@@ -200,7 +200,8 @@ func pre_process_sync_event(type: int, args: Array, sender_id: int):
 		EventSyncState.Type.ADD_GRID:
 			var position: Vector3= args[0]
 			var rotation: Vector3= args[1]
-			var grid: BlockGrid= world.add_grid(position, rotation)
+			var faction_id: int= args[2]
+			var grid: BlockGrid= world.add_grid(position, rotation, world.get_faction(faction_id))
 			var global_grid_id: int= grid.id
 			var local_grid_id: int= args[2]
 			if global_grid_id != local_grid_id:

@@ -70,6 +70,8 @@ var sub_grid_connections: Array[SubGridConnection]
 
 var client_tick_blocks: Array[GridBlock]
 
+var faction: Faction
+
 
 
 func _ready() -> void:
@@ -209,12 +211,12 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 
 func add_sub_grid(sub_grid_pos: Vector3, sub_grid_rot: Vector3, connection_block: GridBlock, sub_grid_block: Block, grid_block_rot: Vector3i, instance_callback= null)-> BlockGrid:
-	var sub_grid: BlockGrid= world.add_grid(sub_grid_pos, sub_grid_rot)
+	var sub_grid: BlockGrid= world.add_grid(sub_grid_pos, sub_grid_rot, faction)
 	sub_grid.add_block(sub_grid_block, Vector3i.ZERO, grid_block_rot, self, null, instance_callback)
 	sub_grid_connections.append(SubGridConnection.new(sub_grid, connection_block))
 	
 	if NetworkManager.is_server:
-		ServerManager.broadcast_sync_event(EventSyncState.Type.ADD_GRID, [sub_grid_pos, sub_grid_rot, sub_grid.id])
+		ServerManager.broadcast_sync_event(EventSyncState.Type.ADD_GRID, [sub_grid_pos, sub_grid_rot, sub_grid.id, faction.id if faction else - 1])
 		ServerManager.broadcast_sync_event(EventSyncState.Type.ADD_BLOCK, [sub_grid.id, GameData.get_block_id(sub_grid_block), Vector3i.ZERO, grid_block_rot])
 	return sub_grid
 
@@ -224,6 +226,7 @@ func _physics_process(delta: float) -> void:
 	assert(not ( NetworkManager.is_client and not freeze ))
 
 	DebugPanel.send(self, "ID", id)
+	DebugPanel.send(self, "Faction", faction.name if faction else "N/A")
 	DebugPanel.send(self, "Req Movement", requested_movement)
 	#DebugPanel.send(self, "Req Rotation", requested_movement)
 	DebugPanel.send(self, "Velocity", linear_velocity.round())
@@ -422,7 +425,7 @@ func run_integrity_check():
 
 func split(split_blocks: Array[Vector3i]):
 	print("Splitting of %d Blocks" % split_blocks.size())
-	var new_grid: BlockGrid= world.add_grid(position, rotation)
+	var new_grid: BlockGrid= world.add_grid(position, rotation, faction)
 	
 	for block_pos in split_blocks:
 		var grid_block: BaseGridBlock= blocks[block_pos]
@@ -667,6 +670,7 @@ func serialize(local_sub_grid_ids: bool= false)-> Dictionary:
 	data["id"]= id
 	data["position"]= position
 	data["rotation"]= rotation
+	data["faction"]= faction.id if faction else -1
 	
 	if is_sub_grid():
 		data["main_grid_id"]= (main_grid_ref.get_ref() as BlockGrid).id
@@ -734,6 +738,10 @@ static func pre_deserialize(data: Dictionary, new_world: World, default_position
 
 
 func deserialize(data: Dictionary, block_models_only: bool= false, main_grid: BlockGrid= null, sub_grids: Array[BlockGrid]= [], sub_grid_id_remaps: Dictionary= {}, enable_lod_activation: bool= true):
+	var faction_id: int= Utils.get_key_or_default(data, "faction", -1)
+	if faction_id > -1:
+		faction= world.get_faction(faction_id)
+	
 	linear_velocity= Utils.get_key_or_default(data, "linear_velocity", Vector3.ZERO, "Vector3")
 	angular_velocity= Utils.get_key_or_default(data, "angular_velocity", Vector3.ZERO, "Vector3")
 	parking_brake= Utils.get_key_or_default(data, "parking_brake", false)

@@ -9,6 +9,8 @@ var player_name: String
 var last_position: Vector3
 var last_velocity: Vector3
 
+var faction: Faction
+
 
 
 func _ready() -> void:

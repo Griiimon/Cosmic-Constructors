@@ -167,10 +167,7 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 	if NetworkManager.is_client:
 		if block_node is BlockInstance:
 			var instance: BlockInstance= block_node
-			instance.on_placed_client(self, grid_block)
-			
-			if instance.has_client_physics_tick():
-				client_tick_blocks.append(grid_block)
+			instance.initialize(self, grid_block)
 
 		return grid_block
 
@@ -179,11 +176,8 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		if instance_callback:
 			assert(instance_callback is Callable)
 			instance_callback.call(instance)
-		
-		if restore_data != null:
-			instance.on_restored(self, grid_block, restore_data)
-		else:
-			instance.on_placed(self, grid_block)
+
+		instance.initialize(self, grid_block, restore_data)
 
 		instance.changed_mass.connect(update_properties)
 

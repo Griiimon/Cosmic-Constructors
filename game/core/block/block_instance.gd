@@ -22,6 +22,20 @@ func _ready() -> void:
 			property_table[prop_var.display_name]= prop.name
 
 
+func initialize(grid: BlockGrid, grid_block: GridBlock, restore_data= null):
+	if NetworkManager.is_client:
+		on_placed_client(grid, grid_block)
+		
+		if has_client_physics_tick():
+			grid.client_tick_blocks.append(grid_block)
+	else:
+
+		if restore_data != null:
+			on_restored(grid, grid_block, restore_data)
+		else:
+			on_placed(grid, grid_block)
+		
+
 func on_placed(_grid: BlockGrid, _grid_block: GridBlock):
 	pass
 

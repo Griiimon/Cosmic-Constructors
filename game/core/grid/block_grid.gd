@@ -351,7 +351,7 @@ func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i, model_on
 			child.set_script(null)
 			if not child is MeshInstance3D:
 				if not child.is_in_group(Groups.KEEP_GHOST_GROUP):
-					model.remove_child(child)
+					#model.remove_child(child)
 					child.queue_free()
 
 	add_child(model)

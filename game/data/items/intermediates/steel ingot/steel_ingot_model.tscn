@@ -1,9 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://dpxoeyfsdx2o0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_plo47"]
-albedo_color = Color(0.28485, 0.28485, 0.28485, 1)
-metallic = 0.7
-roughness = 0.3
+albedo_color = Color(0.791999, 0.791999, 0.791999, 1)
+metallic = 0.9
+metallic_specular = 0.8
+roughness = 0.36
 
 [sub_resource type="BoxMesh" id="BoxMesh_81m7i"]
 material = SubResource("StandardMaterial3D_plo47")

@@ -58,7 +58,7 @@ void fragment() {
 
 [sub_resource type="Gradient" id="Gradient_r8eml"]
 offsets = PackedFloat32Array(0.786325, 1)
-colors = PackedColorArray(0.107081, 0.0500937, 0, 1, 0.0962048, 0.0962047, 0.0962047, 1)
+colors = PackedColorArray(0.282644, 0.163929, 2.40654e-08, 1, 0.0962048, 0.0962047, 0.0962047, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_nhyqp"]
 frequency = 0.0664
@@ -94,8 +94,9 @@ material = SubResource("ShaderMaterial_h3gf2")
 size = Vector2(0.9, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2bd72"]
-albedo_color = Color(0, 0, 0, 1)
+albedo_color = Color(0.147672, 0.147672, 0.147672, 1)
 metallic = 0.5
+roughness = 0.22
 
 [sub_resource type="BoxMesh" id="BoxMesh_m6uo5"]
 material = SubResource("StandardMaterial3D_2bd72")

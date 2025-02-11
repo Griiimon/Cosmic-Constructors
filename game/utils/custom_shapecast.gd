@@ -1,6 +1,6 @@
 class_name CustomShapeCast
 
-const DEBUG_MODE= true
+const DEBUG_MODE= false
 
 static var grid: BlockGrid
 static var grid_block: BaseGridBlock

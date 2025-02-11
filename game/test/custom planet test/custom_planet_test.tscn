@@ -52,6 +52,7 @@ tonemap_mode = 3
 tonemap_white = 6.0
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_gpkid"]
+auto_exposure_scale = 0.2
 
 [node name="Custom Planet Test" type="Node3D"]
 script = ExtResource("1_7fydp")
@@ -98,8 +99,9 @@ terrain_properties = SubResource("Resource_75u82")
 environment = SubResource("Environment_qv4la")
 camera_attributes = SubResource("CameraAttributesPractical_gpkid")
 script = ExtResource("19_ef3m1")
+fog_enabled = false
 current_time = 10.0
-minutes_per_day = 60.0
+minutes_per_day = 180.0
 
 [node name="SunLight" type="DirectionalLight3D" parent="Sky3D"]
 transform = Transform3D(0, -0.902944, 0.429759, -0.664688, 0.321082, 0.674608, -0.747121, -0.285656, -0.600176, 0.429759, 0.674608, -0.600176)
@@ -117,7 +119,7 @@ script = ExtResource("20_dtkjo")
 update_in_editor = false
 dome_path = NodePath("../Skydome")
 system_sync = false
-total_cycle_in_minutes = 60.0
+total_cycle_in_minutes = 180.0
 total_hours = 10.0
 day = 2
 month = 1
@@ -183,7 +185,7 @@ atm_sun_mie_anisotropy = 0.8
 atm_moon_mie_tint = Color(0.137255, 0.184314, 0.292196, 1)
 atm_moon_mie_intensity = 0.7
 atm_moon_mie_anisotropy = 0.8
-fog_visible = true
+fog_visible = false
 fog_atm_level_params_offset = Vector3(0, 0, -1)
 fog_density = 0.00015
 fog_rayleigh_depth = 0.116
@@ -211,7 +213,7 @@ clouds_cumulus_thickness = 0.0243
 clouds_cumulus_coverage = 0.62
 clouds_cumulus_absorption = 2.0
 clouds_cumulus_noise_freq = 2.7
-clouds_cumulus_intensity = 1.0
+clouds_cumulus_intensity = 0.9997
 clouds_cumulus_mie_intensity = 1.0
 clouds_cumulus_mie_anisotropy = 0.206
 clouds_cumulus_size = 0.5

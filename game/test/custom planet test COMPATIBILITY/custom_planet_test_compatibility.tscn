@@ -71,3 +71,6 @@ collision_layer = 4
 run_stream_in_editor = false
 script = ExtResource("12_5vmyw")
 terrain_properties = SubResource("Resource_75u82")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0630866, 0.998008, 0, -0.998008, -0.0630866, 0, 0, 0)

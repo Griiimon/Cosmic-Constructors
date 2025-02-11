@@ -68,6 +68,8 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 	camera_logic()
 
+	DebugHud.send("From origin", int(global_position.length()))
+
 	for equipment_object in active_equipment:
 		equipment_object.tick(self, delta)
 

@@ -6,6 +6,7 @@
 visible = false
 script = ExtResource("1_crg1f")
 enabled = true
+start_hidden = false
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 1

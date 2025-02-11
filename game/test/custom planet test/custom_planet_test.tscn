@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://18lknojownsw"]
+[gd_scene load_steps=31 format=3 uid="uid://18lknojownsw"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_7fydp"]
 [ext_resource type="Script" path="res://game/test/custom planet test/custom_planet_sandbox.gd" id="2_d2xmp"]
@@ -27,7 +27,9 @@ script = ExtResource("6_yyq31")
 back_item = ExtResource("5_bbgji")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_63ws0"]
-radius = 10000.0
+radius = 100000.0
+
+[sub_resource type="VoxelStreamMemory" id="VoxelStreamMemory_n8ain"]
 
 [sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_oycf3"]
 texturing_mode = 1
@@ -60,7 +62,6 @@ script = ExtResource("1_7fydp")
 [node name="Sandbox" type="Node" parent="."]
 script = ExtResource("2_d2xmp")
 equip_item = ExtResource("3_xpo15")
-load_world = true
 
 [node name="Player Spawn" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 70, 0)
@@ -82,10 +83,11 @@ script = ExtResource("3_cfpqv")
 
 [node name="Planet" type="VoxelLodTerrain" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+stream = SubResource("VoxelStreamMemory_n8ain")
 generator = ExtResource("8_27ipv")
 mesher = SubResource("VoxelMesherTransvoxel_oycf3")
-view_distance = 4096
-voxel_bounds = AABB(-65536, -65536, -65536, 131072, 131072, 131072)
+view_distance = 2048
+voxel_bounds = AABB(-2.09715e+06, -2.09715e+06, -2.09715e+06, 4.1943e+06, 4.1943e+06, 4.1943e+06)
 lod_count = 7
 lod_distance = 24.0
 secondary_lod_distance = 24.0

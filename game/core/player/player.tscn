@@ -52,8 +52,7 @@ script = ExtResource("1_owy5q")
 equipment = null
 
 [node name="VoxelViewer" type="VoxelViewer" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84, 0)
-view_distance = 1024
+view_distance = 4096
 
 [node name="Floor Shapecast" type="ShapeCast3D" parent="." index="2"]
 shape = SubResource("CylinderShape3D_7yawy")

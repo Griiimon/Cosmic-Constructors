@@ -4,14 +4,20 @@ extends VoxelLodTerrain
 
 @export var world: World
 @export var terrain_properties: TerrainProperties
+@export var height_map_provider: HeightMapProvider
 
+#var custom_generator: CustomVoxelGenerator
 
 
 func _init():
 	Global.terrain= self
+	#set_process(false)
 
 
 func _ready() -> void:
+	if generator and generator is CustomVoxelGenerator:
+		(generator as CustomVoxelGenerator).terrain= self
+		
 	await get_parent().ready
 	if not world:
 		world= Global.game.world

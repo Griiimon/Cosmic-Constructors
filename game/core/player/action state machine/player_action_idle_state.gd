@@ -103,7 +103,7 @@ func drill():
 	if shapecast.is_colliding():
 		var terrain: MyTerrain= shapecast.get_collider(0)
 		var local_pos: Vector3i= terrain.to_local(shapecast.get_collision_point(0))
-		var radius: float= 2.0
+		var radius: float= 1.5
 		
 		terrain.mine(local_pos, radius, true, shapecast.get_collision_point(0) + shapecast.global_basis.z * 0.5, shapecast.global_basis.z)
 

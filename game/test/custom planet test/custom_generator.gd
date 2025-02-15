@@ -3,14 +3,7 @@ class_name CustomVoxelGenerator
 extends VoxelGeneratorScript
 
 
-@export var height_noise: FastNoiseLite
-@export var height_factor: float= 100.0
-
 @export var slope_stone_threshold: float= 0.8
-
-@export var mountains_noise: FastNoiseLite
-@export var mountains_threshold: float= 0.3
-@export var mountains_multiplier: float= 5.0
 
 @export var iron_noise1: FastNoiseLite
 @export var iron_noise2: FastNoiseLite
@@ -30,26 +23,8 @@ func _get_used_channels_mask( ):
 
 func _generate_block(out_buffer : VoxelBuffer, origin_in_voxels : Vector3i, lod : int) -> void:
 	var size: Vector3i= out_buffer.get_size()
-	#var height_arr= Array2D.new(size.x, size.z)
-	#var normals_arr= Array2D.new(size.x, size.z)
-	#
-	##prints(origin_in_voxels, ":", lod, size)
-	#
-	#if true: #not data.has(origin_in_voxels):
-		#for rz in size.z:
-			#for rx in size.x:
-				#var pos_world := Vector3(origin_in_voxels) + Vector3(rx << lod, 0, rz << lod)
-#
-				#var height := height_noise.get_noise_2d(pos_world.x, pos_world.z)
-				#height*= height
-				#height*= height_factor
-				#
-				#var mountains: float= mountains_noise.get_noise_2d(pos_world.x, pos_world.z)
-				#if abs(mountains) > mountains_threshold:
-					#var new_height= height * sign(mountains) * mountains_multiplier
-					#height= lerp(height, new_height, clampf((abs(mountains) - mountains_threshold) * 10.0, 0.0, 1.0))
-				#
-				#height_arr.put(rx, rz, height)
+	
+	#prints(origin_in_voxels, ":", lod, size)
 
 	#for rz in size.z:
 		#for rx in size.x:

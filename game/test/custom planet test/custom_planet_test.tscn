@@ -18,10 +18,10 @@
 [ext_resource type="Resource" uid="uid://bgnjd8cbucnn2" path="res://game/core/world/terrain/types/stone_terrain.tres" id="15_mee4x"]
 [ext_resource type="Resource" uid="uid://dn783p1l2b7nn" path="res://game/core/world/terrain/types/iron_ore_terrain.tres" id="16_62ayq"]
 [ext_resource type="Resource" uid="uid://b4r5qmp3a4uct" path="res://game/core/world/terrain/types/dirt_terrain.tres" id="18_7u07l"]
-[ext_resource type="Script" path="res://game/core/world/terrain/height_map_provider.gd" id="19_1j7xq"]
 [ext_resource type="Script" path="res://addons/sky_3d/src/Sky3D.gd" id="19_ef3m1"]
+[ext_resource type="Script" path="res://game/core/world/terrain/cached_height_map_provider.gd" id="19_myu6o"]
 [ext_resource type="Script" path="res://addons/sky_3d/src/TimeOfDay.gd" id="20_dtkjo"]
-[ext_resource type="Resource" uid="uid://0w1nfnd8uwct" path="res://game/test/custom planet test/custom_planet_terrain_generator.tres" id="20_ga087"]
+[ext_resource type="Resource" uid="uid://0w1nfnd8uwct" path="res://game/test/custom planet test/custom_planet_terrain_generator.tres" id="20_v648d"]
 [ext_resource type="Script" path="res://addons/sky_3d/src/Skydome.gd" id="21_60nqn"]
 
 [sub_resource type="Resource" id="Resource_4uqcy"]
@@ -96,14 +96,15 @@ secondary_lod_distance = 16.0
 material = ExtResource("9_l2jpv")
 collision_layer = 4
 run_stream_in_editor = false
+threaded_update_enabled = true
 streaming_system = 1
 script = ExtResource("11_bvo6j")
 terrain_properties = SubResource("Resource_75u82")
 height_map_provider = NodePath("Height Map Provider")
 
 [node name="Height Map Provider" type="Node" parent="Planet"]
-script = ExtResource("19_1j7xq")
-generator = ExtResource("20_ga087")
+script = ExtResource("19_myu6o")
+generator = ExtResource("20_v648d")
 
 [node name="Sky3D" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qv4la")

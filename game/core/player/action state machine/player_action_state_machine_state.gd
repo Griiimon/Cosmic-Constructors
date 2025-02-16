@@ -16,7 +16,7 @@ func interaction_logic():
 			var collision_pos: Vector3= shapecast.get_collision_point(0)
 			collision_pos-= shapecast.global_basis.z * 0.01
 			
-			var grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_pos)
+			var grid_block: GridBlock= grid.get_block_from_global_pos(collision_pos).get_grid_block()
 			if grid_block:
 				if grid_block.get_block_definition().can_interact() and grid_block.get_block_instance().can_interact(grid, grid_block, player):
 					grid_block.get_block_instance().interact(grid, grid_block, player)

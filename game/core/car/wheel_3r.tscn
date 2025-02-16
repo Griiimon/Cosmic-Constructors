@@ -18,5 +18,4 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
 [node name="Debug Bar" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.83789, -1.9191)
-visible = false
 mesh = SubResource("BoxMesh_indq1")

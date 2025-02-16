@@ -346,6 +346,10 @@ rotate_blueprint_right={
 3d_physics/layer_12="Pullable"
 3d_physics/layer_13="Lod Activated"
 3d_physics/layer_14="Gravity Gauge"
+3d_physics/layer_25="Game Mode Layer 1"
+3d_physics/layer_26="Game Mode Layer 2"
+3d_physics/layer_27="Game Mode Layer 3"
+3d_physics/layer_28="Game Mode Layer 4"
 
 [physics]
 

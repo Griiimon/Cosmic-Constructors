@@ -13,6 +13,11 @@ const PULLABLE= 2048
 const LOD_ACTIVATED= 4096
 const GRAVITY_GAUGE= 8192
 
+const GAME_MODE_1= 16777216
+const GAME_MODE_2= 33554432
+const GAME_MODE_3= 67108864
+const GAME_MODE_4= 134217728
+
 
 
 func get_all_body_layers()-> int:

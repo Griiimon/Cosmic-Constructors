@@ -44,7 +44,11 @@ func spawn_player():
 	
 	# to make sure player unhandled input get processed last
 	move_child(player, 0)
-	
+
+	if NetworkManager.is_single_player:
+		if world.default_faction:
+			world.default_faction.add(player)
+
 	on_player_spawned(player)
 
 

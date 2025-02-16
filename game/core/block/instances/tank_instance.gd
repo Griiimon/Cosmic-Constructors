@@ -26,7 +26,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 
 func on_placed_client(grid: BlockGrid, grid_block: GridBlock):
 	init(grid_block)
-	fluid_content.sync_request(grid, grid_block)
+	#fluid_content.sync_request(grid, grid_block)
 
 
 func init(grid_block: GridBlock):
@@ -57,9 +57,8 @@ func on_amount_changed(amount: float):
 	update_content= true
 
 
-func on_sync(_grid: BlockGrid, _grid_block: GridBlock):
+func on_sync(_grid: BlockGrid= null, _grid_block: GridBlock= null):
 	var content: float= fluid_content.get_value_f()
-	#DebugHud.send("Fluid sync", content)
 	fluid_container.content= content
 	on_amount_changed(content)
 

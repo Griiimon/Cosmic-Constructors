@@ -96,13 +96,19 @@ static func get_short_vec3(vec: Vector3)-> String:
 
 
 static func compress_string(s: String)-> PackedByteArray:
-	var peer:= StreamPeerGZIP.new()
 	var buffer: PackedByteArray= s.to_ascii_buffer()
+
+	if DebugSettings.active.disable_compression:
+		return buffer
+		
+	var peer:= StreamPeerGZIP.new()
 	assert(buffer.get_string_from_ascii() == s)
 	var buffer_size: int= buffer.size()
+	prints("Compression buffer size", buffer_size)
 
 	peer.start_compression(false)
-	peer.put_data(buffer)
+	var error= peer.put_data(buffer)
+	assert(error == OK, str(error))
 	peer.finish()
 
 	var compressed_size: int= peer.get_available_bytes()
@@ -112,6 +118,9 @@ static func compress_string(s: String)-> PackedByteArray:
 
 
 static func decompress_string(data: PackedByteArray)-> String:
+	if DebugSettings.active.disable_compression:
+		return data.get_string_from_ascii()
+
 	var peer:= StreamPeerGZIP.new()
 	peer.start_decompression(false)
 	peer.put_data(data)

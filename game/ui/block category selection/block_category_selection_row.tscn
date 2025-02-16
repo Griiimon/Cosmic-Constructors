@@ -6,5 +6,8 @@
 [node name="Block Category Selection Row" instance=ExtResource("1_g56hh")]
 script = ExtResource("2_cotcr")
 
+[node name="Label Type" parent="MarginContainer/HBoxContainer" index="0"]
+custom_minimum_size = Vector2(160, 0)
+
 [node name="Label Value" parent="MarginContainer/HBoxContainer" index="1"]
 visible = false

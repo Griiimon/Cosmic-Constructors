@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://cy1wgoj0yd7gu"]
+
+[ext_resource type="Material" uid="uid://duf303o0ryv61" path="res://game/test/custom planet test/custom_planet_material.tres" id="1_7ks2h"]
+[ext_resource type="Script" path="res://game/test/terrain editing bug/player.gd" id="1_wh4k2"]
+
+[sub_resource type="VoxelStreamMemory" id="VoxelStreamMemory_1rlcw"]
+
+[sub_resource type="VoxelGeneratorWaves" id="VoxelGeneratorWaves_4x3cj"]
+
+[sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_flb4i"]
+texturing_mode = 1
+
+[node name="TerrainEditingBug" type="Node3D"]
+
+[node name="VoxelLodTerrain" type="VoxelLodTerrain" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+stream = SubResource("VoxelStreamMemory_1rlcw")
+generator = SubResource("VoxelGeneratorWaves_4x3cj")
+mesher = SubResource("VoxelMesherTransvoxel_flb4i")
+material = ExtResource("1_7ks2h")
+streaming_system = 1
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.637357, 0.770569, 0, -0.770569, 0.637357, 0, 1.68593, 0)
+
+[node name="Player" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
+script = ExtResource("1_wh4k2")
+move_speed = 50.0
+
+[node name="VoxelViewer" type="VoxelViewer" parent="Player"]
+
+[node name="Pivot" type="Node3D" parent="Player"]
+
+[node name="Camera3D" type="Camera3D" parent="Player/Pivot"]
+
+[node name="RayCast3D" type="RayCast3D" parent="Player/Pivot/Camera3D"]
+target_position = Vector3(0, 0, -10)

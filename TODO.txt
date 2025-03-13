@@ -1,3 +1,5 @@
+6DOFJoints don't use FixedConstraint
+
 no explosion effect from cannonball, but explosion force works??
 	decuct explosion effect from Damage type: higher scale for more damage, higher particle count for higher radius
 

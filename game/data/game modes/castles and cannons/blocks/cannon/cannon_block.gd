@@ -1,4 +1,4 @@
-class_name CannonBlock
+class_name CnCCannonBlock
 extends Block
 
 @export var recoil_impulse: float= 100

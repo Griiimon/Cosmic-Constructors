@@ -13,27 +13,27 @@ source_type = 0
 direction = Vector3(0, 0, 0)
 shape_index = -1
 
-[sub_resource type="Gradient" id="Gradient_0dwdh"]
+[sub_resource type="Gradient" id="Gradient_mv66j"]
 offsets = PackedFloat32Array(0, 0.634921, 1)
 colors = PackedColorArray(0.245984, 0.245984, 0.245984, 1, 0.255659, 0.255659, 0.255659, 1, 0.80508, 0.377639, 0.107046, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_161gh"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tyb5r"]
 frequency = 0.1061
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wtay5"]
 width = 128
 height = 128
 seamless = true
-color_ramp = SubResource("Gradient_0dwdh")
-noise = SubResource("FastNoiseLite_161gh")
+color_ramp = SubResource("Gradient_mv66j")
+noise = SubResource("FastNoiseLite_tyb5r")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bc3ie"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4n8nb"]
 albedo_texture = SubResource("NoiseTexture2D_wtay5")
 metallic = 1.0
 roughness = 0.2
 
 [sub_resource type="SphereMesh" id="SphereMesh_7k6vi"]
-material = SubResource("StandardMaterial3D_bc3ie")
+material = SubResource("StandardMaterial3D_4n8nb")
 radius = 0.25
 height = 0.5
 

@@ -1,0 +1,541 @@
+[gd_scene load_steps=10 format=4 uid="uid://cvxssitisa80c"]
+
+[ext_resource type="Script" path="res://game/data/game modes/castles and cannons/blocks/projectile store/projectile_store_instance.gd" id="1_fwcby"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7w1he"]
+albedo_color = Color(0.759896, 0.487277, 0.115291, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8yxji"]
+_surfaces = [{
+"aabb": AABB(-0.5, -1, -0.5, 1, 2, 1),
+"attribute_data": PackedByteArray("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"),
+"format": 34359738391,
+"material": SubResource("StandardMaterial3D_7w1he"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 627,
+"vertex_data": PackedByteArray("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ZmbmvqCTNb4AAAC/ZmbmvlXAOj9mZua+Zmbmvi/4Rj8cPea+ZmbmvmwdLz9mZua+ZmbmvlXAOj9mZua+ZmbmvqCTNb4AAAC/ZmbmvmwdLz9mZua+ZmbmvqCTNb4AAAC/Zmbmvv0HB75mZua+ZmbmvkMfZL4AAAC/Zmbmvv0HB75mZua+ZmbmvqCTNb4AAAC/ZmbmvkdVOz8AAAA/Zmbmvtg/M75mZuY+ZmbmvkMfZL4AAAA/Zmbmvtg/M75mZuY+ZmbmvkMfZL5mZuY+ZmbmvkMfZL4AAAA/ZmbmvjW0BL5mZuY+Zmbmvtg/M75mZuY+ZmbmvkdVOz8AAAA/Zmbmvl6yLz9mZuY+ZmbmvjW0BL5mZuY+ZmbmvkdVOz8AAAA/ZmbmvkMfZL5mZua+Zmbmvv0HB75mZua+ZmbmvkMfZL4AAAC/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5//3//////AAD/f/////8AAP9//////wAA/3//////AAD/f/////8AAP9//////wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/P/9//38IAPs//3//fwgA+z//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/P/9//38CAAFA/3//fwAA/z//f/9/CAD7P/9//38CAAFA/3//fwAA/z//f/9/AAD/P/9//38IAPs//3//fwAA/z//f/9/AgABQP9//38RAPc//3//fwgA+z//f/9/AAD/P/9//38RAPc/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////9PACdA/////wAA/z//////AAD/P/////9PACdA/////wAA/z//////AAD/P/////8AAP8//////08AJ0D/////AAD/P/////8AAP8//////wAA/z//////AAD/P//////EAJ0//////wAA/z//////TwAnQP////9gJ69T/////8QAnT//////AAD/P/////9gJ69T/////wAA/z//////AAD/P/////8AAP8//////wAA/z//////AAD/P/////8AAP8//////wAA/z//////AAD/P/////8CAAFA/////wAA/z//////AgABQP////8AAP8//////wcA+z//////AAD/P/////8AAP8//////wAA/z//////AwD9P/////8HAPs//////wAA/z//////AgABQP////8DAP0//38AAAAA/v//fwAAAAD+//9/AAAAAP7//38AAAAA/v//fwAAAAD+//9/AAAAAP7//38AAAAA/v//fwAAAAD+//9/AAAAAP7//38AAP//////fwAA//////9/AAD//////38AAP7//v//fwAA/v/+//9/AAD+//7//38AAP7//v//fwAA/v/+//9/AAD+//7//38AAP///v//fwAA///+//9/AAD///7//38AAAAA/v//fwAAAAD+//9/AAAAAP7//38AAP7/////fwAA/v////9/AAD+/////38AAP///v//fwAA///+//9/AAD///7//38AAP//////fwAA//////9/AAD//////38AAP///v//fwAA//////9/AAD///7//38AAP7/AID/fwAA/v8AgP9/AAD+/wCA/38AAP//////fwAA//////9/AAD//////38AAP7/AID/fwAA/v8AgP9/AAD+/wCA/////wAA/7//////AAD/v/////8AAP+//////wAA/7//////AAD/v/////8AAP+//////wAA/7//////AAD/v/////8AAP+//////wAA/7//////AAD/v/////8AAP+//////wAA/7//////AAD/v/////8AAP+//////wAA/7//////AAD/v/////8AAP+//////wAA/7//////AAD/v/////8AAP+//////wAA/7//////AAD/v/////8AAP+//////wAA/r//////AAD+v/////8AAP6//////wAA/7//////AAD/v/////8AAP+//////wIA/r//////AAD/v/////8AAP+//////wAA/7//////AAD/v/////8AAP+//////wIA/r//////AAD/v/////8/AN+//////z8A37//////AAD/v/////8AAP+//3///wAA/v//f///AAD+//9///8AAP7//3///wAA/v//f///AAD+//9///8AAP7//3///wAA/v//f///AAD+//9///8AAP7//3///wAA/v//f///AAD+//9///8AAP7//3/+/wAAAID/f/7/AAAAgP9//v8AAACA/3///////v//f//////+//9///////7//3///////v//f//////+//9///////7//3/+//7/////f/7//v////9//v/+/////3/+/wAA/v//f/7/AAD+//9//v8AAP7//3///////v//f//////+//9///////7//3/+//7/////f/7//v////9//v/+/////3/+////////f/7///////9//v///////3///////v//f//////+//9///////7//3////7/AID/f////v8AgP9////+/wCA/3////7/AID/f////v8AgP9////+/wCA/3//////////f/////////9///8AAP7//3///wAA/v//f///AAD+//9///8AAP7//3//////////f///AAD+//9//////////3//////////f///AAD+//9///8AAP7//3///wAA/v//f///AAD+//9///8AAP7//3///wAA/v//f///AAD+//9///8AAP7//3///wAA/v//f///AAD+//9///8AAP7//3///wAA/v//f///AAD+//9///8AAP7//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+/M38pfwAAZcAzfyl/AABlwDN/KX8AAGXA/3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwIAAMD/f/9/AAD/v/9//38AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwIAAMD/f/9/AAD/v/9//38+AB7A/3//fz4AHsD/f/9/AAD/v/9//38AAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAoA/7//fwAACgD/v/9/AAAKAP+//38AAAwA/7//fwAADAD/v/9/AAAMAP+//38AAAwA/7//fwAADAD/v/9/AAAMAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9/lr4AAP9//3+WvgAA/3//f5a+AAD/f/9/mr4AAP9//3+avgAA/3//f5q+AAD/f/9/mb4AAP9//3+ZvgAA/3//f5m+/v//f/9/aEH+//9//39oQf7//3//f2hBAAD/f/9/AcAAAP9//38BwAAA/3//fwHAAAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9/+r8AAP9//3/9vwAA/3//f/+/AAD/f/9/0L8AAP9//3/6vwAA/3//f9G/AAD/f/9/+r8AAP9//3/QvwAA/3//f9C/AAD/f/9/+r8AAP9//3/QvwAA/3//f/2//v//f/9/KkD+//9//38qQP7//3//fypAAAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3/+/wAA/7//f/7/AAD/v/9//v8AAP+//3/+/wAA/7//f/7/AAD/v/9//v8AAP+//3/+/wAA/7//f/7/AAD/v/9//v8AAP+//3/+/wAA/7//f/7/AAD/v/9//v8AAP+//3/+/wAA/7//f/7/AAD/v/9//v8AAP+//3/+/wAA/7//f/7/AAD/v/9//v8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3/+/wAA/7//f/7/AAD/v/9//v8AAP+//3/+/wAA/7//f/7/AAD/v/9//v8AAP+//3/+/wAA/7//f/7/AAD/v/9//v8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3/+/wAA/7//f/7/AAD/v/9//v8AAP+//3/+/wAA/7//f/7/AAD/v/9//v8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3/+/wAA/7//f/7/AAD/v/9//v8AAP+//3/+/wAA/7//f/7/AAD/v/9//v8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+/////f/9//7////9//3//v////3//f/+/////f/9//7////9//3//v////3//f/+//v//f/9//7/+//9//3//v/7//3//f/+//v//f/9//7/+//9//3//v/7//3//f/+//v//f/9/zb/+//9//3/Nv/7//3//f82//v//f/9//7/+//9//3//v/7//3//f/+/////f/9//7////9//3//v////3//f/+/////f/9//7////9//3//v////3//f/+//v//f/9//7/+//9//3//v/7//3//f/+//v//f/9/zr/+//9//3/Ov/7//3//f86/////f/9//7////9//3//v////3//f/+//v//f/9//7/+//9//3//v/7//3//f/+/")
+}]
+
+[sub_resource type="Gradient" id="Gradient_0dwdh"]
+offsets = PackedFloat32Array(0, 0.634921, 1)
+colors = PackedColorArray(0.245984, 0.245984, 0.245984, 1, 0.255659, 0.255659, 0.255659, 1, 0.80508, 0.377639, 0.107046, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_161gh"]
+frequency = 0.1061
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3ilxa"]
+width = 128
+height = 128
+seamless = true
+color_ramp = SubResource("Gradient_0dwdh")
+noise = SubResource("FastNoiseLite_161gh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bc3ie"]
+albedo_texture = SubResource("NoiseTexture2D_3ilxa")
+metallic = 1.0
+roughness = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_cdt2o"]
+material = SubResource("StandardMaterial3D_bc3ie")
+radius = 0.15
+height = 0.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yp707"]
+radius = 25.0
+
+[node name="Projectile Store" type="Node3D"]
+script = ExtResource("1_fwcby")
+desc_text = "Buy Projectiles"
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("ArrayMesh_8yxji")
+
+[node name="Stack" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.15, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.15, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.15, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.15, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.15, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.15, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.15, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.15, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.15, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.15, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.3, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.3, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.3, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D20" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D21" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.3, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D22" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.3, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D23" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D24" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.3, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D25" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.3, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D26" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D27" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.3, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D28" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.3, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D29" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D30" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.3, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D31" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.45, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D32" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D33" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.45, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D34" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.45, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D35" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D36" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.45, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D37" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.45, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D38" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D39" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.45, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D40" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.45, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D41" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D42" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.45, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D43" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.45, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D44" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D45" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.45, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D46" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.6, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D47" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D48" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.6, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D49" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.6, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D50" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D51" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.6, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D52" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.6, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D53" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D54" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.6, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D55" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.6, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D56" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D57" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.6, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D58" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.6, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D59" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D60" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.6, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D61" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.75, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D62" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D63" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.75, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D64" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.75, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D65" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D66" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.75, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D67" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.75, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D68" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D69" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.75, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D70" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.75, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D71" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D72" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.75, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D73" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.75, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D74" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D75" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.75, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D76" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.9, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D77" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D78" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.9, 0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D79" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.9, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D80" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D81" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.9, 0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D82" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.9, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D83" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D84" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.9, 0)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D85" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.9, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D86" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D87" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.9, -0.15)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D88" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.9, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D89" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="MeshInstance3D90" type="MeshInstance3D" parent="Stack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.9, -0.3)
+visible = false
+mesh = SubResource("SphereMesh_cdt2o")
+
+[node name="Desc Labels" type="Node3D" parent="."]
+
+[node name="Label3D" type="Label3D" parent="Desc Labels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.385, 0.51)
+modulate = Color(1, 1, 0.270588, 1)
+text = "Buy ..."
+font_size = 26
+
+[node name="Label3D2" type="Label3D" parent="Desc Labels"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 1.385, -0.51)
+modulate = Color(1, 1, 0.270588, 1)
+text = "Buy ..."
+font_size = 26
+
+[node name="Label3D3" type="Label3D" parent="Desc Labels"]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0.51, 1.385, 0)
+modulate = Color(1, 1, 0.270588, 1)
+text = "Buy ..."
+font_size = 26
+
+[node name="Label3D4" type="Label3D" parent="Desc Labels"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.51, 1.385, 0)
+modulate = Color(1, 1, 0.270588, 1)
+text = "Buy ..."
+font_size = 26
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_layer = 0
+collision_mask = 16777216
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_yp707")

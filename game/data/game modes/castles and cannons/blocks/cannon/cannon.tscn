@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cm5xor4hspheq"]
+[gd_scene load_steps=12 format=3 uid="uid://cm5xor4hspheq"]
 
 [ext_resource type="Script" path="res://game/data/game modes/castles and cannons/blocks/cannon/cannon.gd" id="1_wjh1b"]
 [ext_resource type="PackedScene" uid="uid://cajlhe7dya0wc" path="res://game/data/game modes/castles and cannons/cannonball/cannonball.tscn" id="2_yl1j8"]
@@ -36,6 +36,8 @@ height = 0.6
 [sub_resource type="BoxMesh" id="BoxMesh_7kel6"]
 material = SubResource("StandardMaterial3D_2c01s")
 size = Vector3(0.1, 0.6, 0.1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fq3wb"]
 
 [node name="Cannon" type="Node3D"]
 script = ExtResource("1_wjh1b")
@@ -77,3 +79,11 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.25, 0.041)
 mesh = SubResource("BoxMesh_7kel6")
 skeleton = NodePath("../..")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 16777216
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_fq3wb")

@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="GameMode" load_steps=8 format=3 uid="uid://4ejuv7qjvlmi"]
+[gd_resource type="Resource" script_class="GameMode" load_steps=9 format=3 uid="uid://4ejuv7qjvlmi"]
 
 [ext_resource type="Script" path="res://game/core/game mode/game_mode.gd" id="1_hyxw2"]
 [ext_resource type="Script" path="res://game/core/block/block.gd" id="2_sxpe6"]
 [ext_resource type="Resource" uid="uid://b231t630sky7d" path="res://game/data/game modes/castles and cannons/blocks/throne room/throne_room_block.tres" id="3_wobs4"]
+[ext_resource type="Resource" uid="uid://c388qgnd1ttuj" path="res://game/data/game modes/castles and cannons/blocks/projectile store/projectile_store_block.tres" id="4_52r6q"]
 [ext_resource type="Resource" uid="uid://sfwsxi2o0llp" path="res://game/data/game modes/castles and cannons/blocks/cannon/cannon_block.tres" id="4_x34y3"]
 [ext_resource type="Script" path="res://game/global/game data/block_library.gd" id="5_xbaff"]
 [ext_resource type="PackedScene" uid="uid://c23e5gu6qiem2" path="res://game/data/game modes/castles and cannons/castles_and_cannons.tscn" id="7_0kxqd"]
 
 [sub_resource type="Resource" id="Resource_ym68b"]
 script = ExtResource("5_xbaff")
-blocks = Array[ExtResource("2_sxpe6")]([ExtResource("3_wobs4"), ExtResource("4_x34y3")])
+blocks = Array[ExtResource("2_sxpe6")]([ExtResource("3_wobs4"), ExtResource("4_x34y3"), ExtResource("4_52r6q")])
 
 [resource]
 script = ExtResource("1_hyxw2")

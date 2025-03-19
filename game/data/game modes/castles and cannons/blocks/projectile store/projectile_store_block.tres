@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CnCStoreBlock" load_steps=4 format=3 uid="uid://c388qgnd1ttuj"]
+
+[ext_resource type="Script" path="res://game/data/game modes/castles and cannons/blocks/projectile store/projectile_store_block.gd" id="1_cduqj"]
+[ext_resource type="Resource" uid="uid://ca4xhk5g4mnot" path="res://game/data/game modes/castles and cannons/castles_and_cannons_block_category.tres" id="1_rtau3"]
+[ext_resource type="PackedScene" uid="uid://cvxssitisa80c" path="res://game/data/game modes/castles and cannons/blocks/projectile store/projectile_store.tscn" id="2_pro4q"]
+
+[resource]
+script = ExtResource("1_cduqj")
+size = Vector3i(1, 2, 1)
+mass = 10.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = false
+tick_priority = 0
+can_be_built = true
+category = ExtResource("1_rtau3")
+scene = ExtResource("2_pro4q")
+name = ""

@@ -1,3 +1,4 @@
+class_name CnCCannonInstance
 extends BlockInstance
 
 @export var cannonball_scene: PackedScene
@@ -6,8 +7,8 @@ extends BlockInstance
 @onready var ver_rotation: BlockPropFloat= BlockPropFloat.new("Ver. Rotation", 30.0, on_vertical_rotation).set_range(-10, 85).client_side_callback()
 @onready var power: BlockPropFloat= BlockPropFloat.new("Power", 50.0).set_range(10, 100).set_step_size(0.5)
 
-@onready var projectiles: BlockPropInt= BlockPropInt.new("Projectiles", 5).read_only()
-@onready var powder: BlockPropInt= BlockPropInt.new("Powder", 1000).read_only()
+@onready var projectiles: BlockPropInt= BlockPropInt.new("Projectiles", 0).set_range(0, 10).read_only()
+@onready var powder: BlockPropInt= BlockPropInt.new("Powder", 0).set_range(0, 1000).read_only()
 
 @onready var rotor: MeshInstance3D = %Rotor
 @onready var barrel: MeshInstance3D = %Barrel
@@ -16,7 +17,7 @@ extends BlockInstance
 
 
 func interact(grid: BlockGrid, grid_block: GridBlock, _player: Player):
-	run_server_method(shoot, grid, grid_block, [ (grid_block.block_definition as CannonBlock).recoil_impulse ])
+	run_server_method(shoot, grid, grid_block, [ (grid_block.block_definition as CnCCannonBlock).recoil_impulse ])
 
 
 func shoot(grid: BlockGrid, grid_block: GridBlock, recoil: float):

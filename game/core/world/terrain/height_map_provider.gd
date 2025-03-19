@@ -15,7 +15,7 @@ func _ready():
 
 
 func get_height(x: float, z: float)-> float:
-	return 0
+	return generator.get_height(x, z)
 
 
 func get_normal(x: float, z: float)-> Vector3:

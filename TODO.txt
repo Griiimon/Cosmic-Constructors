@@ -1,14 +1,18 @@
-6DOFJoints don't use FixedConstraint
+WARNING Jolt 6DOFJoints don't use FixedConstraint
 
 no explosion effect from cannonball, but explosion force works??
-	decuct explosion effect from Damage type: higher scale for more damage, higher particle count for higher radius
+	deduce explosion effect from Damage type: higher scale for more damage, higher particle count for higher radius
 
-sync explosion effect, and potentially applied impulse to player!
+how does tank syncing between client and single player work??
 
-test cannon on client
+Faction popup BEFORE player spawns in multiplayer, if world is new or not member of a faction
+
+deduce explosion effect size from Damage type: higher scale for more damage, higher particle count for higher radius
+
+apply impulse to player from explosion in multiplayer
 
 
-make WorldItemInstance inherit ObjectEntity?
+make WorldItemInstance inherit ObjectEntity, sync_on_connect() [ not all Objects need to be synced on connect, temporary ones like fluid drops or cannonballs that disappear after a few seconds.. ]
 
 fog shader ( clouds plugin / zylann? ) weird camera angle dependent ( first / third switch to demonstrate ) fog
 
@@ -24,8 +28,6 @@ suspension props
 	spring
 
 more dampening on suspension
-
-add blueprint distance and rotation control
 
 property panel group system:
 	create group

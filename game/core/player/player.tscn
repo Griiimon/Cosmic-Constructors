@@ -53,6 +53,7 @@ equipment = null
 
 [node name="VoxelViewer" type="VoxelViewer" parent="." index="1"]
 view_distance = 4096
+view_distance_vertical_ratio = 0.1
 
 [node name="Floor Shapecast" type="ShapeCast3D" parent="." index="2"]
 shape = SubResource("CylinderShape3D_7yawy")

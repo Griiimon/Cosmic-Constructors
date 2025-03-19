@@ -18,38 +18,38 @@ back_item = ExtResource("6_s17hf")
 [sub_resource type="SphereShape3D" id="SphereShape3D_fbd3y"]
 radius = 10000.0
 
-[sub_resource type="Gradient" id="Gradient_0kay1"]
+[sub_resource type="Gradient" id="Gradient_t4wps"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0.443137, 0.14902, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_jk1ou"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ic1sw"]
 frequency = 0.1914
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_21sxj"]
-color_ramp = SubResource("Gradient_0kay1")
-noise = SubResource("FastNoiseLite_jk1ou")
+color_ramp = SubResource("Gradient_t4wps")
+noise = SubResource("FastNoiseLite_ic1sw")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kyyuw"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h5j8k"]
 albedo_texture = SubResource("NoiseTexture2D_21sxj")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wfm8q"]
-material = SubResource("StandardMaterial3D_kyyuw")
+material = SubResource("StandardMaterial3D_h5j8k")
 size = Vector2(2000, 2000)
 
-[sub_resource type="Gradient" id="Gradient_hy0dr"]
+[sub_resource type="Gradient" id="Gradient_rf6a7"]
 colors = PackedColorArray(0.253679, 0.530542, 0.988763, 1, 0, 0, 0, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_6q5th"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kun2b"]
 frequency = 0.0072
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_grcks"]
-color_ramp = SubResource("Gradient_hy0dr")
-noise = SubResource("FastNoiseLite_6q5th")
+color_ramp = SubResource("Gradient_rf6a7")
+noise = SubResource("FastNoiseLite_kun2b")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljbpt"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owys0"]
 albedo_texture = SubResource("NoiseTexture2D_grcks")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wu0sy"]
-material = SubResource("StandardMaterial3D_ljbpt")
+material = SubResource("StandardMaterial3D_owys0")
 size = Vector2(50000, 50000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s3jxp"]

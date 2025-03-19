@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TerrainProperties" load_steps=7 format=3 uid="uid://cgspa8xqyxj4b"]
+
+[ext_resource type="Script" path="res://game/core/world/terrain/terrain_properties.gd" id="1_os0ph"]
+[ext_resource type="Script" path="res://game/core/world/terrain/terrain_type_properties.gd" id="2_en77k"]
+[ext_resource type="Resource" uid="uid://dthyojrp18xoy" path="res://game/core/world/terrain/types/grass_terrain.tres" id="3_mw0ij"]
+[ext_resource type="Resource" uid="uid://bgnjd8cbucnn2" path="res://game/core/world/terrain/types/stone_terrain.tres" id="4_idh60"]
+[ext_resource type="Resource" uid="uid://dn783p1l2b7nn" path="res://game/core/world/terrain/types/iron_ore_terrain.tres" id="5_x4tby"]
+[ext_resource type="Resource" uid="uid://b4r5qmp3a4uct" path="res://game/core/world/terrain/types/dirt_terrain.tres" id="6_5cj6c"]
+
+[resource]
+script = ExtResource("1_os0ph")
+types = Array[ExtResource("2_en77k")]([ExtResource("3_mw0ij"), ExtResource("4_idh60"), ExtResource("5_x4tby"), ExtResource("6_5cj6c")])

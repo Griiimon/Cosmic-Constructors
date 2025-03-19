@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="9_0ojwa"]
 [ext_resource type="VoxelGeneratorScript" uid="uid://bnl8b7ei7tc3n" path="res://game/test/lod terrain test/my_generator.tres" id="9_4h1e5"]
 [ext_resource type="Material" uid="uid://duf303o0ryv61" path="res://game/test/custom planet test/custom_planet_material.tres" id="11_1hnsn"]
-[ext_resource type="Script" path="res://game/core/world/terrain/my_terrain.gd" id="12_tq0qy"]
+[ext_resource type="Script" path="res://game/core/components/my terrain/my_terrain.gd" id="12_tq0qy"]
 [ext_resource type="Script" path="res://game/core/world/terrain/terrain_properties.gd" id="13_rnmk7"]
 [ext_resource type="Script" path="res://game/core/world/terrain/terrain_type_properties.gd" id="14_eu8ey"]
 [ext_resource type="Resource" uid="uid://dthyojrp18xoy" path="res://game/core/world/terrain/types/grass_terrain.tres" id="15_jh8dp"]

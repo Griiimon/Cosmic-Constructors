@@ -1,6 +1,7 @@
 class_name CachedHeightMapProvider
 extends HeightMapProvider
 
+@export var radius: float= 1024
 @export var normals_resolution: int= 4
 
 
@@ -13,7 +14,7 @@ func _ready():
 	terrain= get_parent()
 	terrain_scale= terrain.scale.x
 	assert(terrain)
-	pre_generate(1024)
+	pre_generate(radius)
 
 
 func get_height(x: float, z: float)-> float:

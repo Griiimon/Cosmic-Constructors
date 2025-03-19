@@ -291,8 +291,15 @@ func update_grid_id(global_grid_id: int, local_grid_id: int):
 @rpc("any_peer", "reliable")
 func receive_initial_world(compressed_json: PackedByteArray):
 	var json_str: String= Utils.decompress_string(compressed_json)
-	var world_data: Dictionary= JSON.parse_string(json_str)
+	var json:= JSON.new()
+	if json.parse(json_str) != OK:
+		push_error("Can't parse JSON string ", json_str)
+		breakpoint 
+		return 
+		
+	var world_data: Dictionary= json.data
 	prints("Client received world data", world_data)
+
 	while not Global.game or not Global.game.world:
 		await get_tree().process_frame
 	

@@ -3,7 +3,7 @@ extends Node
 
 @export var generator: TerrainGenerator
 
-var terrain: MyTerrain
+var terrain: Node3D
 var terrain_scale: float
 
 

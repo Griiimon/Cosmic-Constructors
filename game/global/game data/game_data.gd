@@ -1,6 +1,7 @@
 extends Node
 
 @export var block_library: BlockLibrary
+@export var voxel_terrain_block_library: VoxelTerrainBlockLibrary
 @export var scene_library: SceneLibrary
 @export var fluid_library: FluidLibrary
 @export var item_library: ItemLibrary
@@ -45,6 +46,10 @@ func get_block(id: int)-> Block:
 func get_block_id(block: Block)-> int:
 	return block_library.blocks.find(block)
 
+
+func get_voxel_terrain_block_id(block: BaseVoxelTerrainBlock)-> int:
+	return voxel_terrain_block_library.blocks.find(block)
+	
 
 func get_item_definition(item_name: String)-> Item:
 	assert(item_definition_lookup.has(item_name))

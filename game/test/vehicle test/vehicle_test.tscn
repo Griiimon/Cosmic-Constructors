@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://carygqfay7enj" path="res://game/core/components/my terrain/my_terrain.tscn" id="10_fufi8"]
 [ext_resource type="Script" path="res://game/core/world/terrain/terrain_properties.gd" id="11_4a8xv"]
 [ext_resource type="Script" path="res://game/core/world/terrain/terrain_type_properties.gd" id="12_4iqil"]
-[ext_resource type="Resource" uid="uid://dthyojrp18xoy" path="res://game/core/world/terrain/types/grass_terrain.tres" id="13_hhwcu"]
+[ext_resource type="Resource" uid="uid://dthyojrp18xoy" path="res://game/data/terrain types/grass_terrain.tres" id="13_hhwcu"]
 
 [sub_resource type="Resource" id="Resource_ic37o"]
 script = ExtResource("7_hpj7a")

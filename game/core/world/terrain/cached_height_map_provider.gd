@@ -33,6 +33,7 @@ func get_normal(x: float, z: float)-> Vector3:
 
 
 func pre_generate(radius: int, origin: Vector2i= Vector2i.ZERO):
+	print("Pre-caching heightmap")
 	var timer:= Stopwatch.new()
 	for x in range(origin.x - radius, origin.x + radius):
 		for z in range(origin.y - radius, origin.y + radius):

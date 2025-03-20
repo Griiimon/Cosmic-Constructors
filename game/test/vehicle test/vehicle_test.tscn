@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://d4blx7p2hp5bc"]
+[gd_scene load_steps=35 format=3 uid="uid://d4blx7p2hp5bc"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_6i4dd"]
 [ext_resource type="Script" path="res://game/test/vehicle test/vehicle_sandbox.gd" id="2_8kc7o"]
@@ -10,6 +10,10 @@
 [ext_resource type="Script" path="res://game/core/misc/environment space area/environment_space_area.gd" id="7_0xvln"]
 [ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="7_hpj7a"]
 [ext_resource type="PackedScene" uid="uid://ced1k5g1mhrng" path="res://game/data/object entities/wooden_pallet.tscn" id="10_e437v"]
+[ext_resource type="PackedScene" uid="uid://carygqfay7enj" path="res://game/core/components/my terrain/my_terrain.tscn" id="10_fufi8"]
+[ext_resource type="Script" path="res://game/core/world/terrain/terrain_properties.gd" id="11_4a8xv"]
+[ext_resource type="Script" path="res://game/core/world/terrain/terrain_type_properties.gd" id="12_4iqil"]
+[ext_resource type="Resource" uid="uid://dthyojrp18xoy" path="res://game/data/terrain types/grass_terrain.tres" id="13_hhwcu"]
 
 [sub_resource type="Resource" id="Resource_ic37o"]
 script = ExtResource("7_hpj7a")
@@ -17,6 +21,10 @@ back_item = ExtResource("6_s17hf")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fbd3y"]
 radius = 10000.0
+
+[sub_resource type="Resource" id="Resource_jd2gc"]
+script = ExtResource("11_4a8xv")
+types = Array[ExtResource("12_4iqil")]([ExtResource("13_hhwcu")])
 
 [sub_resource type="Gradient" id="Gradient_t4wps"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0.443137, 0.14902, 1)
@@ -118,6 +126,10 @@ transform = Transform3D(1, 0, 0, 0, -0.767602, 0.640927, 0, -0.640927, -0.767602
 
 [node name="Floor" type="StaticBody3D" parent="."]
 collision_layer = 4
+
+[node name="Terrain" parent="Floor" node_paths=PackedStringArray("world") instance=ExtResource("10_fufi8")]
+world = NodePath("../../World")
+terrain_properties = SubResource("Resource_jd2gc")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("PlaneMesh_wfm8q")

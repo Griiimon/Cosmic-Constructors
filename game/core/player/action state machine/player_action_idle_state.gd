@@ -101,8 +101,8 @@ func force_unequip_item():
 func drill():
 	var shapecast: ShapeCast3D= player.drill_shapecast
 	if shapecast.is_colliding():
-		var terrain: MyTerrain= shapecast.get_collider(0)
-		var local_pos: Vector3i= terrain.to_local(shapecast.get_collision_point(0))
+		var terrain: MyTerrain= MyTerrain.get_terrain(shapecast.get_collider(0))
+		var local_pos: Vector3i= terrain.terrain_node.to_local(shapecast.get_collision_point(0))
 		var radius: float= 1.5
 		
 		terrain.mine(local_pos, radius, true, shapecast.get_collision_point(0) + shapecast.global_basis.z * 0.5, shapecast.global_basis.z)

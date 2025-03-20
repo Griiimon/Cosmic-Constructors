@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1t7jldxqn7jl"]
+
+[ext_resource type="VoxelGeneratorScript" path="res://blocky_game/generator/world_generator.tres" id="1_i3dpq"]
+[ext_resource type="VoxelMesherBlocky" uid="uid://c6l3pdnhmvhqp" path="res://blocky_game/blocks/mesher.tres" id="2_a2lmy"]
+
+[sub_resource type="VoxelStreamRegionFiles" id="3"]
+directory = "res://blocky_game/save"
+
+[node name="VoxelTerrain" type="VoxelTerrain"]
+stream = SubResource("3")
+generator = ExtResource("1_i3dpq")
+mesher = ExtResource("2_a2lmy")
+gi_mode = 1
+bounds = AABB(-5.36871e+08, -5.36871e+08, -5.36871e+08, 1.07374e+09, 1.07374e+09, 1.07374e+09)
+generate_collisions = false
+run_stream_in_editor = false

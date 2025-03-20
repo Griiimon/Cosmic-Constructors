@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cymutykgvddtc"]
+[gd_scene load_steps=19 format=3 uid="uid://cymutykgvddtc"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_mpx04"]
 [ext_resource type="Script" path="res://game/test/custom planet test/custom_planet_sandbox.gd" id="2_asvss"]
@@ -11,13 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="9_gw85w"]
 [ext_resource type="VoxelGeneratorScript" uid="uid://b26ajmch67psy" path="res://game/test/custom planet test/custom_voxel_generator.tres" id="10_bimkj"]
 [ext_resource type="Material" uid="uid://duf303o0ryv61" path="res://game/test/custom planet test/custom_planet_material.tres" id="11_ebh0y"]
-[ext_resource type="Script" path="res://game/core/world/terrain/my_terrain.gd" id="12_5vmyw"]
-[ext_resource type="Script" path="res://game/core/world/terrain/terrain_properties.gd" id="13_uufpt"]
-[ext_resource type="Script" path="res://game/core/world/terrain/terrain_type_properties.gd" id="14_u0360"]
-[ext_resource type="Resource" uid="uid://dthyojrp18xoy" path="res://game/core/world/terrain/types/grass_terrain.tres" id="15_4ti4d"]
-[ext_resource type="Resource" uid="uid://bgnjd8cbucnn2" path="res://game/core/world/terrain/types/stone_terrain.tres" id="16_q4bwy"]
-[ext_resource type="Resource" uid="uid://dn783p1l2b7nn" path="res://game/core/world/terrain/types/iron_ore_terrain.tres" id="17_hx7ko"]
-[ext_resource type="Resource" uid="uid://b4r5qmp3a4uct" path="res://game/core/world/terrain/types/dirt_terrain.tres" id="18_6au0g"]
+[ext_resource type="PackedScene" uid="uid://carygqfay7enj" path="res://game/core/components/my terrain/my_terrain.tscn" id="12_j4jw0"]
 [ext_resource type="Script" path="res://game/core/world/terrain/cached_height_map_provider.gd" id="19_02dmq"]
 [ext_resource type="Resource" uid="uid://0w1nfnd8uwct" path="res://game/test/custom planet test/custom_planet_terrain_generator.tres" id="20_ru8ac"]
 
@@ -32,10 +26,6 @@ radius = 10000.0
 
 [sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_oycf3"]
 texturing_mode = 1
-
-[sub_resource type="Resource" id="Resource_75u82"]
-script = ExtResource("13_uufpt")
-types = Array[ExtResource("14_u0360")]([ExtResource("15_4ti4d"), ExtResource("16_q4bwy"), ExtResource("17_hx7ko"), ExtResource("18_6au0g")])
 
 [node name="Custom Planet Test" type="Node3D"]
 script = ExtResource("1_mpx04")
@@ -62,7 +52,7 @@ script = ExtResource("8_b1lw5")
 
 [node name="UI" parent="." instance=ExtResource("9_gw85w")]
 
-[node name="Planet" type="VoxelLodTerrain" parent="." node_paths=PackedStringArray("height_map_provider")]
+[node name="Planet" type="VoxelLodTerrain" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 stream = SubResource("VoxelStreamMemory_75nbs")
 generator = ExtResource("10_bimkj")
@@ -77,9 +67,8 @@ collision_layer = 4
 run_stream_in_editor = false
 threaded_update_enabled = true
 streaming_system = 1
-script = ExtResource("12_5vmyw")
-terrain_properties = SubResource("Resource_75u82")
-height_map_provider = NodePath("HeightMapProvider")
+
+[node name="Terrain" parent="Planet" instance=ExtResource("12_j4jw0")]
 
 [node name="HeightMapProvider" type="Node" parent="Planet"]
 script = ExtResource("19_02dmq")

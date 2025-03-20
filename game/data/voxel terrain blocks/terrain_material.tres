@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://emsuhdmw1ipp"]
+
+[ext_resource type="Texture2D" uid="uid://qw23jod5vvmw" path="res://game/data/voxel terrain blocks/terrain.png" id="1_wfchl"]
+
+[resource]
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_wfchl")
+metallic_specular = 0.0
+texture_filter = 0

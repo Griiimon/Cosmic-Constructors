@@ -30,6 +30,7 @@ material = SubResource("StandardMaterial3D_7y52u")
 size = Vector3(0.2, 0.8, 0.3)
 
 [sub_resource type="BoxMesh" id="BoxMesh_8bu3p"]
+resource_local_to_scene = true
 material = ExtResource("2_uslcb")
 size = Vector3(0.275, 0.035, 0.52)
 

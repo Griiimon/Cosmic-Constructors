@@ -41,7 +41,7 @@ func _ready() -> void:
 	assert(world != null)
 
 
-func mine(local_pos: Vector3i, radius: float, spawn_items: bool= false, material_spawn_pos: Vector3= Vector3.ZERO, item_impulse: Vector3= Vector3.ZERO)-> Dictionary:
+func mine(local_pos: Vector3, radius: float, origin_point= null, spawn_items: bool= false, material_spawn_pos: Vector3= Vector3.ZERO, item_impulse: Vector3= Vector3.ZERO)-> Dictionary:
 	if terrain_node is VoxelLodTerrain:
 		var lod_terrain: VoxelLodTerrain= terrain_node
 
@@ -75,13 +75,21 @@ func mine(local_pos: Vector3i, radius: float, spawn_items: bool= false, material
 
 	elif terrain_node is VoxelTerrain:
 		var tool: VoxelTool = terrain_node.get_voxel_tool()
-		#tool.channel = VoxelBuffer.CHANNEL_TYPE
-		#tool.value= 0
-		#tool.do_sphere(local_pos, radius)
-		#tool.do_sphere(local_pos, 1.5)
-		#tool.do_point(local_pos)
-		tool.set_voxel(local_pos, 0)
-		prints("Mine voxel", local_pos)
+		if origin_point:
+			assert(origin_point is Vector3)
+			var vec: Vector3= local_pos - origin_point
+			var hit: VoxelRaycastResult= tool.raycast(origin_point, vec.normalized(), vec.length() + 1)
+			if hit:
+				local_pos= hit.position
+
+		if is_equal_approx(radius, 1.0):
+			tool.set_voxel(local_pos, 0)
+			prints("Mine voxel", local_pos)
+		else:
+			tool.channel = VoxelBuffer.CHANNEL_TYPE
+			tool.value= 0
+			tool.do_sphere(local_pos, radius)
+			prints("Mine voxel radius", local_pos, radius)
 
 		DebugBlockFrame.place_global(Transform3D(Basis.IDENTITY, local_pos))
 		

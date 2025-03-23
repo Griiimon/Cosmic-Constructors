@@ -48,7 +48,7 @@ func on_physics_process(_delta: float):
 												 else block_instance.alternative_interaction_property
 
 					if property:
-						property.toggle(grid, grid_block)
+						property.toggle(grid, grid_block.get_grid_block())
 						SignalManager.block_property_changed.emit(property)
 						return
 
@@ -105,7 +105,7 @@ func drill():
 		var local_pos: Vector3i= terrain.terrain_node.to_local(shapecast.get_collision_point(0))
 		var radius: float= 1.5
 		
-		terrain.mine(local_pos, radius, true, shapecast.get_collision_point(0) + shapecast.global_basis.z * 0.5, shapecast.global_basis.z)
+		terrain.mine(local_pos, radius, shapecast.global_position, true, shapecast.get_collision_point(0) + shapecast.global_basis.z * 0.5, shapecast.global_basis.z)
 
 
 func interactive_block_shapecast_filter()-> bool:

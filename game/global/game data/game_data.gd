@@ -27,6 +27,21 @@ func init() -> void:
 			block_categories[block.category]= []
 		block_categories[block.category].append(block)
 
+	for voxel_block in voxel_terrain_block_library.blocks:
+		if voxel_block.can_turn_into_grid_block():
+			var block: Block= voxel_block.turn_into_grid_block
+			if not block.get_model():
+				var block_model:= MeshInstance3D.new()
+				var voxel_model: VoxelBlockyModel= voxel_block.get_model()
+				assert(voxel_model is VoxelBlockyModelMesh, "only VoxelBlockyModelMesh is supported")
+				block_model.mesh= (voxel_model as VoxelBlockyModelMesh).mesh.duplicate()
+				# FIXME isnt working, cubes have a plain white texture
+				block_model.mesh.surface_set_material(0, (voxel_model as VoxelBlockyModelMesh).get_material_override(0))
+				var block_scene:= PackedScene.new()
+				assert(block_scene.pack(block_model) == OK)
+				block.scene= block_scene
+
+
 	for fluid in fluid_library.fluids:
 		fluid_definition_lookup[fluid.get_display_name()]= fluid
 
@@ -67,6 +82,10 @@ func get_fluid(id: int)-> Fluid:
 
 func get_fluid_id(fluid: Fluid)-> int:
 	return fluid_library.fluids.find(fluid)
+
+
+func get_voxel_terrain_block(id: int)-> BaseVoxelTerrainBlock:
+	return voxel_terrain_block_library.blocks[id]
 
 
 func get_mouse_sensitivity()-> float:

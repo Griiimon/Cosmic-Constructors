@@ -56,3 +56,4 @@ media/spawn_loop_bug.png.import
 /demo
 run_test.gd
 game/data/misc/settings/control_settings.tres
+/game/test/blocky terrain test/save

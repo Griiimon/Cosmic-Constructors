@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="7_2gven"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="8_n8li3"]
 [ext_resource type="PackedScene" uid="uid://carygqfay7enj" path="res://game/core/components/my terrain/my_terrain.tscn" id="9_2p8qx"]
-[ext_resource type="VoxelGeneratorScript" uid="uid://bnahldi02rd0d" path="res://game/test/blocky terrain test/world_generator.tres" id="9_5sb0m"]
+[ext_resource type="VoxelGeneratorScript" uid="uid://bnahldi02rd0d" path="res://game/test/blocky terrain test/blocky_world_generator.tres" id="9_5sb0m"]
 [ext_resource type="VoxelBlockyLibrary" uid="uid://dqn3qktu5jwry" path="res://game/test/blocky terrain test/voxel_blocky_library.tres" id="10_hlkyv"]
 [ext_resource type="Script" path="res://game/core/world/terrain/blocky terrain/blocky_library_initializer.gd" id="12_qinuc"]
 

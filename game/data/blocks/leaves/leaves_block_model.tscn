@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=4 uid="uid://jlur1ly3wo2l"]
+
+[ext_resource type="Material" uid="uid://bidlhtlvrhq3o" path="res://game/data/voxel terrain blocks/terrain_material_transparent.tres" id="1_xg2m1"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lu4nc"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 1, 1, 1),
+"attribute_data": PackedByteArray("/w//LwAA/y//D/8fAAD/H/8P/x//D/8vAAD/HwAA/y//D/8f/w//LwAA/x8AAP8v/w//LwAA/y//D/8fAAD/H/8P/x//D/8vAAD/HwAA/y//D/8f/w//LwAA/x8AAP8v"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgABAAMABAAFAAYABgAFAAcACAAJAAoACgAJAAsADAANAA4ADgANAA8AEAARABIAEgARABMAFAAVABYAFgAVABcA"),
+"material": ExtResource("1_xg2m1"),
+"name": "Leaves_Cube.029",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAAVNX///////9U1QAA//8AAFTVAAD/////VNUAAP//////vwAAAAD///+/AAD//wAA/78AAAAAAAD/vwAA//8AAP//AAAAAAAA////////AAD/////AAAAAP////8AAP//VNX//wAAAABU1QAAAAD//1TVAAAAAAAAVNX///////8AgP//AAD//wCAAAD/////AIAAAAAA//8AgP////8AAP+///8AAAAA/7//////////v///AAD///+/VNWqKlTVqipU1aoqVNWqKv9/////f////3////9/////f////3////9/////f///qipU1aoqVNWqKlTVqipU1f9/////f////3////9/////fwAA/38AAP9/AAD/fwAA")
+}]
+blend_shape_mode = 0
+
+[node name="LeavesBlockModel" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, -0.5)
+mesh = SubResource("ArrayMesh_lu4nc")

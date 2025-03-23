@@ -113,7 +113,7 @@ func _unhandled_input(event: InputEvent) -> void:
 						change_row(-1)
 					MOUSE_BUTTON_WHEEL_DOWN:
 						change_row(1)
-		get_viewport().set_input_as_handled()
+			get_viewport().set_input_as_handled()
 	elif event is InputEventKey:
 		if event.pressed:
 			match event.keycode:

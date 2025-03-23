@@ -63,6 +63,7 @@ func get_block_id(block: Block)-> int:
 
 
 func get_voxel_terrain_block_id(block: BaseVoxelTerrainBlock)-> int:
+	assert(voxel_terrain_block_library.blocks.has(block))
 	return voxel_terrain_block_library.blocks.find(block)
 	
 
@@ -85,6 +86,7 @@ func get_fluid_id(fluid: Fluid)-> int:
 
 
 func get_voxel_terrain_block(id: int)-> BaseVoxelTerrainBlock:
+	assert(id >= 0 and id < voxel_terrain_block_library.blocks.size())
 	return voxel_terrain_block_library.blocks[id]
 
 

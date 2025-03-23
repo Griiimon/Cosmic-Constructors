@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://bor84d4h8pc3x"]
+
+[ext_resource type="Resource" uid="uid://c5q88ycw3p1u5" path="res://game/data/misc/block categories/voxel_blocks.tres" id="1_uhffq"]
+[ext_resource type="PackedScene" uid="uid://dlsir5vnkodk2" path="res://game/data/blocks/log/log_block_model.tscn" id="2_devw4"]
+[ext_resource type="Script" path="res://game/core/block/block.gd" id="2_yvtjf"]
+
+[resource]
+script = ExtResource("2_yvtjf")
+size = Vector3i(1, 1, 1)
+mass = 10.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = false
+tick_priority = 0
+can_be_built = false
+category = ExtResource("1_uhffq")
+scene = ExtResource("2_devw4")
+name = ""

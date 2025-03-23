@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=4 uid="uid://dlsir5vnkodk2"]
+
+[ext_resource type="Material" uid="uid://emsuhdmw1ipp" path="res://game/data/voxel terrain blocks/terrain_material.tres" id="1_08a7y"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o1q1r"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 1, 1, 1),
+"attribute_data": PackedByteArray("/z//D/8v/w//PwAA/y8AAP8vAAD/L/8P/x8AAP8f/w//LwAA/y//D/8fAAD/H/8P/z//D/8v/w//PwAA/y8AAP8vAAD/L/8P/x8AAP8f/w//LwAA/y//D/8fAAD/H/8P"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgABAAMABAAFAAYABgAFAAcACAAJAAoACgAJAAsADAANAA4ADgANAA8AEAARABIAEgARABMAFAAVABYAFgAVABcA"),
+"material": ExtResource("1_08a7y"),
+"name": "Log_Y_Cube",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAAVNX///////9U1QAA//8AAFTVAAD/////VNUAAP//////vwAAAAD///+/AAD//wAA/78AAAAAAAD/vwAA//8AAP//AAAAAAAA////////AAD/////AAAAAP////8AAP//VNX//wAAAABU1QAAAAD//1TVAAAAAAAAVNX///////8AgP//AAD//wCAAAD/////AIAAAAAA//8AgP////8AAP+///8AAAAA/7//////////v///AAD///+/VNWqKlTVqipU1aoqVNWqKv9/////f////3////9/////f////3////9/////f///qipU1aoqVNWqKlTVqipU1f9/////f////3////9/////fwAA/38AAP9/AAD/fwAA")
+}]
+blend_shape_mode = 0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="LogBlockModel" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, -0.5)
+mesh = SubResource("ArrayMesh_o1q1r")

@@ -17,22 +17,11 @@ extends VoxelGeneratorScript
 		heightmap_curve.bake()
 
 
-
 @export var air_block: BaseVoxelTerrainBlock
 @export var grass_block: BaseVoxelTerrainBlock
 @export var dirt_block: BaseVoxelTerrainBlock
+@export var log_block: BaseVoxelTerrainBlock
 
-# TODO Don't hardcode, get by name from library somehow
-#const AIR = 0
-#const DIRT = 1
-#const GRASS = 2
-#const WATER_FULL = 14
-#const WATER_TOP = 13
-#const LOG = 4
-#const LEAVES = 25
-#const TALL_GRASS = 8
-#const DEAD_SHRUB = 26
-#const STONE = 8
 
 const _CHANNEL = VoxelBuffer.CHANNEL_TYPE
 
@@ -50,12 +39,12 @@ const _moore_dirs = [
 
 var _tree_structures := []
 
-#var _heightmap_min_y := int(heightmap_curve.min_value)
-#var _heightmap_max_y := int(heightmap_curve.max_value)
 var _heightmap_min_y : int
 var _heightmap_max_y : int
 var _heightmap_range := 0
 var _heightmap_noise := FastNoiseLite.new()
+
+var tree_noise := FastNoiseLite.new()
 var _trees_min_y := 0
 var _trees_max_y := 0
 
@@ -80,6 +69,9 @@ func _init():
 	#_heightmap_noise.seed = 131183
 	_heightmap_noise.frequency = 1.0 / 128.0
 	_heightmap_noise.fractal_octaves = 4
+	
+	tree_noise.frequency= 50.0
+
 
 
 func _get_used_channels_mask() -> int:
@@ -140,6 +132,12 @@ func _generate_block(buffer: VoxelBuffer, origin_in_voxels: Vector3i, lod: int):
 								#foliage = DEAD_SHRUB
 							#buffer.set_voxel(foliage, x, relative_height, z, _CHANNEL)
 				
+				if has_tree_at(gx, gz):
+					var tree_height: int= get_tree_height_at(gx, gz)
+					if relative_height > 0 and relative_height < block_size: #tree_height < relative_height:
+						for y in tree_height: 
+							buffer.set_voxel(GameData.get_voxel_terrain_block_id(log_block), x, y, z, _CHANNEL)
+			
 				## Water
 				#if height < 0 and oy < 0:
 					#var start_relative_height := 0
@@ -152,9 +150,9 @@ func _generate_block(buffer: VoxelBuffer, origin_in_voxels: Vector3i, lod: int):
 						## Surface block
 						#buffer.set_voxel(WATER_TOP, x, block_size - 1, z, _CHANNEL)
 						#
-				#gx += 1
+				gx += 1
 #
-			#gz += 1
+			gz += 1
 #
 	## Trees
 #
@@ -215,3 +213,11 @@ static func _get_chunk_seed_2d(cpos: Vector3) -> int:
 func _get_height_at(x: int, z: int) -> int:
 	var t = 0.5 + 0.5 * _heightmap_noise.get_noise_2d(x, z)
 	return int(heightmap_curve.sample_baked(t))
+
+
+func has_tree_at(x: int, z: int)-> bool:
+	return tree_noise.get_noise_2d(x,z) > 0.5
+
+
+func get_tree_height_at(x: int, z: int)-> int:
+	return wrapi(tree_noise.get_noise_2d(x,z) * 100, 6, 12)

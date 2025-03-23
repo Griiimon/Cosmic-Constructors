@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dgqbqckmsjjuc"
+path="res://.godot/imported/log_y.obj-75065b0994e98d948d5973808722a719.mesh"
+
+[deps]
+
+files=["res://.godot/imported/log_y.obj-75065b0994e98d948d5973808722a719.mesh"]
+
+source_file="res://game/data/voxel terrain blocks/log/log_y.obj"
+dest_files=["res://.godot/imported/log_y.obj-75065b0994e98d948d5973808722a719.mesh", "res://.godot/imported/log_y.obj-75065b0994e98d948d5973808722a719.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

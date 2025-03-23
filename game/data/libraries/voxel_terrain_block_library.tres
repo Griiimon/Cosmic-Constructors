@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="VoxelTerrainBlockLibrary" load_steps=6 format=3 uid="uid://b8rnhwbudhl00"]
+[gd_resource type="Resource" script_class="VoxelTerrainBlockLibrary" load_steps=7 format=3 uid="uid://b8rnhwbudhl00"]
 
 [ext_resource type="Script" path="res://game/core/world/terrain/blocky terrain/base_voxel_terrain_block.gd" id="1_ksp7v"]
 [ext_resource type="Script" path="res://game/global/game data/voxel_terrain_block_library.gd" id="2_06347"]
 [ext_resource type="Resource" uid="uid://ddsqfxd3i2wy4" path="res://game/data/voxel terrain blocks/air/air_block.tres" id="2_rnlub"]
-[ext_resource type="Resource" uid="uid://uprwhmk5txy1" path="res://game/data/voxel terrain blocks/dirt/dirt_block.tres" id="3_1pwpq"]
-[ext_resource type="Resource" uid="uid://bexo7qailorxl" path="res://game/data/voxel terrain blocks/grass/grass_block.tres" id="4_4ppni"]
+[ext_resource type="Resource" uid="uid://uprwhmk5txy1" path="res://game/data/voxel terrain blocks/dirt/dirt_voxel_block.tres" id="3_1pwpq"]
+[ext_resource type="Resource" uid="uid://bexo7qailorxl" path="res://game/data/voxel terrain blocks/grass/grass_voxel_block.tres" id="4_4ppni"]
+[ext_resource type="Resource" uid="uid://b71ajb4s8jswg" path="res://game/data/voxel terrain blocks/log/log_voxel_block.tres" id="5_0no1a"]
 
 [resource]
 script = ExtResource("2_06347")
-blocks = Array[ExtResource("1_ksp7v")]([ExtResource("2_rnlub"), ExtResource("3_1pwpq"), ExtResource("4_4ppni")])
+blocks = Array[ExtResource("1_ksp7v")]([ExtResource("2_rnlub"), ExtResource("3_1pwpq"), ExtResource("4_4ppni"), ExtResource("5_0no1a")])

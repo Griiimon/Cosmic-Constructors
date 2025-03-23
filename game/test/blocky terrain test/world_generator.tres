@@ -1,10 +1,11 @@
-[gd_resource type="VoxelGeneratorScript" load_steps=6 format=3 uid="uid://bnahldi02rd0d"]
+[gd_resource type="VoxelGeneratorScript" load_steps=7 format=3 uid="uid://bnahldi02rd0d"]
 
 [ext_resource type="Curve" uid="uid://b3p535p3jv8bg" path="res://game/test/blocky terrain test/heightmap_curve.tres" id="1_ee8ec"]
 [ext_resource type="Resource" uid="uid://ddsqfxd3i2wy4" path="res://game/data/voxel terrain blocks/air/air_block.tres" id="1_h2qkn"]
 [ext_resource type="Script" path="res://game/test/blocky terrain test/blocky_terrain_generator.gd" id="2_dweva"]
-[ext_resource type="Resource" uid="uid://uprwhmk5txy1" path="res://game/data/voxel terrain blocks/dirt/dirt_block.tres" id="2_tmya7"]
-[ext_resource type="Resource" uid="uid://bexo7qailorxl" path="res://game/data/voxel terrain blocks/grass/grass_block.tres" id="3_p58m8"]
+[ext_resource type="Resource" uid="uid://uprwhmk5txy1" path="res://game/data/voxel terrain blocks/dirt/dirt_voxel_block.tres" id="2_tmya7"]
+[ext_resource type="Resource" uid="uid://bexo7qailorxl" path="res://game/data/voxel terrain blocks/grass/grass_voxel_block.tres" id="3_p58m8"]
+[ext_resource type="Resource" uid="uid://b71ajb4s8jswg" path="res://game/data/voxel terrain blocks/log/log_voxel_block.tres" id="5_624nj"]
 
 [resource]
 script = ExtResource("2_dweva")
@@ -12,3 +13,4 @@ heightmap_curve = ExtResource("1_ee8ec")
 air_block = ExtResource("1_h2qkn")
 grass_block = ExtResource("3_p58m8")
 dirt_block = ExtResource("2_tmya7")
+log_block = ExtResource("5_624nj")

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="VoxelTerrainBlockMesh" load_steps=6 format=3 uid="uid://b71ajb4s8jswg"]
+
+[ext_resource type="Material" uid="uid://emsuhdmw1ipp" path="res://game/data/voxel terrain blocks/terrain_material.tres" id="1_uowg0"]
+[ext_resource type="ArrayMesh" uid="uid://dgqbqckmsjjuc" path="res://game/data/voxel terrain blocks/log/log_y.obj" id="2_0j1ox"]
+[ext_resource type="Script" path="res://game/core/world/terrain/blocky terrain/voxel_terrain_block_mesh.gd" id="3_ccakf"]
+[ext_resource type="Resource" uid="uid://bor84d4h8pc3x" path="res://game/data/blocks/log/log_block.tres" id="4_wxrxm"]
+
+[sub_resource type="VoxelBlockyModelMesh" id="VoxelBlockyModelMesh_hn43g"]
+collision_aabbs = Array[AABB]([AABB(0, 0, 0, 1, 1, 1)])
+material_override_0 = ExtResource("1_uowg0")
+collision_enabled_0 = true
+mesh = ExtResource("2_0j1ox")
+
+[resource]
+script = ExtResource("3_ccakf")
+model = SubResource("VoxelBlockyModelMesh_hn43g")
+turn_into_grid_block = ExtResource("4_wxrxm")
+name = ""

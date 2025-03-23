@@ -1,4 +1,17 @@
+implement save/load on blocky terrain
+
+build category menu can still get messed up and clicks drop blocks instead of select category
+
+player RB while jumping can start to rotate if hits something
+
+add turn_into_blocks to block library at runtime
+
+
+
+test blocky terrain multiplayer
+
 WARNING Jolt 6DOFJoints don't use FixedConstraint
+WARNING VoxelLodTerrain has no multiplayer??
 
 no explosion effect from cannonball, but explosion force works??
 	deduce explosion effect from Damage type: higher scale for more damage, higher particle count for higher radius

@@ -102,56 +102,62 @@ target_position = Vector3(0, 0, 0)
 collision_mask = 2
 hit_back_faces = false
 
-[node name="Build Peripheral Entity Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="3"]
+[node name="Terrain Raycast" type="RayCast3D" parent="Head/Pivot" index="3"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -4)
+collision_mask = 4
+hit_back_faces = false
+
+[node name="Build Peripheral Entity Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="4"]
 unique_name_in_owner = true
 enabled = false
 target_position = Vector3(0, 0, -5)
 max_results = 1
 collision_mask = 118
 
-[node name="Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="4"]
+[node name="Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="5"]
 unique_name_in_owner = true
 shape = SubResource("SphereShape3D_ly8po")
 target_position = Vector3(0, 0, -2.5)
 collision_mask = 2
 
-[node name="Block Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="5"]
+[node name="Block Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="6"]
 unique_name_in_owner = true
 shape = SubResource("SphereShape3D_4pkix")
 target_position = Vector3(0, 0, -4)
 max_results = 1
 collision_mask = 2
 
-[node name="Item Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="6"]
+[node name="Item Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="7"]
 unique_name_in_owner = true
 shape = SubResource("SphereShape3D_47njt")
 target_position = Vector3(0, 0, -2.5)
 max_results = 1
 collision_mask = 1088
 
-[node name="Pull Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="7"]
+[node name="Pull Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="8"]
 unique_name_in_owner = true
 shape = SubResource("SphereShape3D_47njt")
 target_position = Vector3(0, 0, -3.5)
 max_results = 1
 collision_mask = 2048
 
-[node name="Drill Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="8"]
+[node name="Drill Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="9"]
 unique_name_in_owner = true
 enabled = false
 shape = SubResource("SphereShape3D_iybuy")
 target_position = Vector3(0, 0, -2)
 collision_mask = 4
 
-[node name="Misc Item Holder" type="Node3D" parent="Head/Pivot" index="10"]
+[node name="Misc Item Holder" type="Node3D" parent="Head/Pivot" index="11"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, -0.9)
 
-[node name="Handle Grabber" type="Node3D" parent="Head/Pivot" index="11"]
+[node name="Handle Grabber" type="Node3D" parent="Head/Pivot" index="12"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 
-[node name="FPS arms" type="Node3D" parent="Head/Pivot" index="12"]
+[node name="FPS arms" type="Node3D" parent="Head/Pivot" index="13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.489999, 0)
 visible = false
 

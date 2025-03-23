@@ -5,6 +5,7 @@ extends BasePlayer
 @export var equipment: PlayerEquipment
 
 @onready var build_raycast: RayCast3D = %"Build Raycast"
+@onready var terrain_raycast: RayCast3D = %"Terrain Raycast"
 @onready var build_peripheral_entity_shapecast: ShapeCast3D = %"Build Peripheral Entity Shapecast"
 
 @onready var interact_shapecast: ShapeCast3D = %"Interact Shapecast"

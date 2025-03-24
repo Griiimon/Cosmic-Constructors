@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TerrainTypeProperties" load_steps=3 format=3 uid="uid://1t5o40dv0rv1"]
+
+[ext_resource type="Resource" uid="uid://d258am43f7jcp" path="res://game/data/items/raw materials/stone/stone.tres" id="1_ynvuv"]
+[ext_resource type="Script" path="res://game/core/world/terrain/terrain_type_properties.gd" id="2_o5nem"]
+
+[resource]
+script = ExtResource("2_o5nem")
+raw_material = ExtResource("1_ynvuv")
+name = ""

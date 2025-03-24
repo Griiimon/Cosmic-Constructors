@@ -1,0 +1,26 @@
+[remap]
+
+importer="2d_array_texture"
+type="CompressedTexture2DArray"
+uid="uid://c4q2dqi0txuk"
+path="res://.godot/imported/terrain_texture_array_128.png-61e4dce4ad00475d7c8a757c0fb362ab.ctexarray"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://game/test/moon_test/terrain_texture_array_128.png"
+dest_files=["res://.godot/imported/terrain_texture_array_128.png-61e4dce4ad00475d7c8a757c0fb362ab.ctexarray"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=4
+slices/vertical=4

@@ -119,7 +119,7 @@ var wheel: Wheel
 
 const ANGULAR_VELOCITY_TO_RPM := 60.0 / TAU
 
-@onready var slider_joint: JoltSliderJoint3D = $JoltSliderJoint3D
+@onready var joint: JoltGeneric6DOFJoint3D = $"Suspension Joint"
 
 
 ## Controller Inputs: An external script should set these values
@@ -167,8 +167,9 @@ func _ready() -> void:
 
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
+	await get_tree().physics_frame
 	spawn_wheel(grid)
-	wheel.initialize(grid)
+	wheel.initialize(grid, self)
 	init_sync_vars(grid, grid_block)
 
 
@@ -192,9 +193,9 @@ func spawn_wheel(grid: BlockGrid):
 	
 	#grid.add_child(wheel)
 	grid.world.add_child(wheel)
-	slider_joint.reparent(grid)
-	slider_joint.node_a= slider_joint.get_path_to(grid)
-	slider_joint.node_b= slider_joint.get_path_to(wheel)
+	joint.reparent(grid)
+	joint.node_a= joint.get_path_to(grid)
+	joint.node_b= joint.get_path_to(wheel)
 
 
 func on_destroy(grid: BlockGrid, grid_block: GridBlock):
@@ -310,14 +311,22 @@ func process_braking(grid: BlockGrid, delta : float) -> void:
 
 
 func process_steering(delta : float) -> void:
+	steering_amount= steering_input
 	if invert_steer.is_true():
 		steering_amount= -steering_amount
 
-	var new_steering: float= lerp(steering_amount, steering_input, delta * steering_speed)
-	if not is_equal_approx(steering_amount, new_steering):
-		steering_amount= new_steering
-		wheel.steer(steering_amount, max_steering_angle)
+	#var new_steering: float= lerp(steering_amount, steering_input, delta * steering_speed)
+	#if not is_equal_approx(steering_amount, new_steering):
+	if not is_zero_approx(steering_amount):
+		#steering_amount= new_steering
+		joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_ANGULAR_MOTOR, true)
+		joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_ANGULAR_MOTOR_TARGET_VELOCITY, -steering_amount)
+		#wheel.steer(steering_amount, max_steering_angle)
 		sync_wheel_steer.set_value(wheel.rotation.y)
+
+	else:
+		joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_ANGULAR_MOTOR, false)
+		joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_ANGULAR_MOTOR_TARGET_VELOCITY, 0)
 
 
 func process_throttle(delta : float) -> void:
@@ -402,3 +411,11 @@ func calculate_average_tire_friction(weight : float, surface : String) -> float:
 	##max_brake_force = ((friction * braking_grip_multiplier) * average_drive_wheel_radius) / wheel_array.size()
 	#max_brake_force = ((friction * wheel.braking_grip_multiplier) * wheel.tire_radius)
 	##max_handbrake_force = ((friction * braking_grip_multiplier * 0.05) / average_drive_wheel_radius)
+
+
+func get_spring_length()-> float:
+	return joint.get_param_y(JoltGeneric6DOFJoint3D.PARAM_LINEAR_LIMIT_UPPER) - joint.get_param_y(JoltGeneric6DOFJoint3D.PARAM_LINEAR_LIMIT_LOWER)
+
+
+func get_spring_rate()-> float:
+	return joint.get_param_y(JoltGeneric6DOFJoint3D.PARAM_LINEAR_SPRING_FREQUENCY)

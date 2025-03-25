@@ -1,6 +1,11 @@
+Blower hand item ( pushes light blocks / world items )
+
+command seat: send "signals" that can be picked up by any block in grid/subgrid. add rotor signal "signal_name": turn_right
+
 implement save/load on blocky terrain
 
 build category menu can still get messed up and clicks drop blocks instead of select category
+	=> Player node sometimes randomly get pushed down in tree
 
 player RB while jumping can start to rotate if hits something
 

@@ -119,6 +119,8 @@ var wheel: Wheel
 
 const ANGULAR_VELOCITY_TO_RPM := 60.0 / TAU
 
+@onready var slider_joint: JoltSliderJoint3D = $JoltSliderJoint3D
+
 
 ## Controller Inputs: An external script should set these values
 var throttle_input := 0.0
@@ -166,7 +168,7 @@ func _ready() -> void:
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	spawn_wheel(grid)
-	wheel.initialize()
+	wheel.initialize(grid)
 	init_sync_vars(grid, grid_block)
 
 
@@ -184,10 +186,15 @@ func init_sync_vars(grid: BlockGrid, grid_block: GridBlock):
 
 func spawn_wheel(grid: BlockGrid):
 	wheel= wheel_scene.instantiate()
-	wheel.position= position + basis.x * (1 if is_right else -1)
-	wheel.rotation.y= rotation.y
-	wheel.base_rotation= rotation.y
-	grid.add_child(wheel)
+	wheel.position= global_position + global_basis.x * (1 if is_right else -1)
+	wheel.rotation.y= global_rotation.y
+	wheel.base_rotation= global_rotation.y
+	
+	#grid.add_child(wheel)
+	grid.world.add_child(wheel)
+	slider_joint.reparent(grid)
+	slider_joint.node_a= slider_joint.get_path_to(grid)
+	slider_joint.node_b= slider_joint.get_path_to(wheel)
 
 
 func on_destroy(grid: BlockGrid, grid_block: GridBlock):
@@ -196,8 +203,8 @@ func on_destroy(grid: BlockGrid, grid_block: GridBlock):
 
 
 func on_grid_changed():
-	if get_parent() != wheel.get_parent():
-		wheel.reparent(get_parent())
+	#if get_parent() != wheel.get_parent():
+		#wheel.reparent(get_parent())
 
 	wheel.query.exclude= [ get_grid().get_rid() ]
 	wheel.rest_query.exclude= [ get_grid().get_rid() ]

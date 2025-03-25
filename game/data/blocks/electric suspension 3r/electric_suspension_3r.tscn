@@ -19,4 +19,10 @@ mesh = SubResource("BoxMesh_d27qx")
 [node name="Frontplate" parent="Suspension Model" index="5"]
 visible = false
 
+[node name="JoltSliderJoint3D" type="JoltSliderJoint3D" parent="."]
+limit_enabled = true
+limit_upper = 0.5
+limit_lower = -0.5
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 1.25, 0, 0)
+
 [editable path="Suspension Model"]

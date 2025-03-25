@@ -84,16 +84,15 @@ func _ready() -> void:
 
 
 func _process(delta : float) -> void:
-	model.position.y = minf(0.0, -spring_current_length) + spring_length
+	#model.position.y = minf(0.0, -spring_current_length) + spring_length
 	model.rotation.x -= (wrapf(spin * delta, 0, TAU))
 
 
-func initialize() -> void:
+func initialize(grid: BlockGrid) -> void:
 	model.rotation_order = EULER_ORDER_ZXY
 	wheel_moment = 0.5 * wheel_mass * pow(tire_radius, 2)
 
 	collision_mask= CollisionLayers.GRID + CollisionLayers.TERRAIN
-	var grid: BlockGrid= get_parent()
 	
 	query.collision_mask= collision_mask
 	var sphere:= SphereShape3D.new()
@@ -116,7 +115,10 @@ func initialize() -> void:
 func steer(input : float, max_steering_angle : float):
 	#input *= steering_ratio
 	#rotation.y = (max_steering_angle * (input + (1 - cos(input * 0.5 * PI)) * ackermann)) + toe
-	rotation.y = max_steering_angle * input + base_rotation
+	
+	#FIXME add back
+	#rotation.y = max_steering_angle * input + base_rotation
+	pass
 
 
 # TODO what in here currently has any impact?

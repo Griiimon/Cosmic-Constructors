@@ -7,7 +7,7 @@
 # https://lupine-vidya.itch.io/gdsim/devlog/677572/series-driving-simulator-workshop-mirror
 
 class_name Wheel
-extends Node3D
+extends RigidBody3D
 
 @onready var model: Node3D = $Model
 
@@ -26,20 +26,23 @@ var rolling_resistance := { "Road" : 1.0, "Dirt" : 2.0, "Grass" : 4.0 }
 var lateral_grip_assist := { "Road" : 0.05, "Dirt" : 0.0, "Grass" : 0.0}
 var longitudinal_grip_ratio := { "Road" : 0.5, "Dirt": 0.5, "Grass" : 0.5}
 
-@export var spring_length := 1
-@export var spring_rate := 5
-@export var slow_bump := 0.1
-@export var fast_bump := 1.0
-@export var slow_rebound := 0.1
-@export var fast_rebound := 1.0
-@export var fast_damp_threshold := 12700.0
-@export var antiroll := 0.0
-@export var toe := 0.0
-@export var bump_stop_multiplier := 1.0
+#@export var spring_length := 1
+#@export var spring_rate := 5
+#@export var slow_bump := 0.1
+#@export var fast_bump := 1.0
+#@export var slow_rebound := 0.1
+#@export var fast_rebound := 1.0
+#@export var fast_damp_threshold := 12700.0
+#@export var antiroll := 0.0
+#@export var toe := 0.0
+#@export var bump_stop_multiplier := 1.0
 @export var wheel_to_body_torque_multiplier := 0.0
 @export var mass_over_wheel := 1.0
 
-var collision_mask: int
+var suspension: SuspensionInstance
+
+var spring_length: float
+var spring_rate: float
 
 var wheel_moment := 0.0
 var spin := 0.0
@@ -70,12 +73,8 @@ var abs_pulse_time := 0.3
 var abs_spin_difference_threshold := -12.0
 var limit_spin := false
 
-var query:= PhysicsShapeQueryParameters3D.new()
-var rest_query:= PhysicsShapeQueryParameters3D.new()
-
 var grounded:= false
 var bottom_out := false
-var base_rotation: float= 0
 
 
 
@@ -84,26 +83,16 @@ func _ready() -> void:
 
 
 func _process(delta : float) -> void:
-	model.position.y = minf(0.0, -spring_current_length) + spring_length
 	model.rotation.x -= (wrapf(spin * delta, 0, TAU))
 
 
-func initialize() -> void:
+func initialize(grid: BlockGrid, _suspension: SuspensionInstance) -> void:
+	suspension= _suspension
+	spring_length= suspension.spring_length
+	spring_rate= suspension.get_spring_rate()
+	
 	model.rotation_order = EULER_ORDER_ZXY
 	wheel_moment = 0.5 * wheel_mass * pow(tire_radius, 2)
-
-	collision_mask= CollisionLayers.GRID + CollisionLayers.TERRAIN
-	var grid: BlockGrid= get_parent()
-	
-	query.collision_mask= collision_mask
-	var sphere:= SphereShape3D.new()
-	sphere.radius= tire_radius
-	query.shape= sphere
-	query.exclude= [ grid.get_rid() ]
-
-	rest_query.collision_mask= collision_mask
-	rest_query.shape= sphere
-	rest_query.exclude= query.exclude
 
 	max_spring_length = spring_length
 	current_cof = coefficient_of_friction[surface_type]
@@ -113,10 +102,15 @@ func initialize() -> void:
 	current_tire_stiffness = 1000000.0 + 8000000.0 * tire_stiffnesses[surface_type]
 
 
-func steer(input : float, max_steering_angle : float):
-	#input *= steering_ratio
-	#rotation.y = (max_steering_angle * (input + (1 - cos(input * 0.5 * PI)) * ackermann)) + toe
-	rotation.y = max_steering_angle * input + base_rotation
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	if state.get_contact_count() > 0:
+		grounded= true
+		last_collider= state.get_contact_collider_object(0)
+		last_collision_point= state.get_contact_collider_position(0)
+		last_collision_normal= state.get_contact_local_normal(0)
+	else:
+		grounded= false
+		last_collider= null
 
 
 # TODO what in here currently has any impact?
@@ -175,35 +169,12 @@ func process_torque(drive : float, drive_inertia : float, brake_torque : float, 
 
 
 func process_forces(grid: BlockGrid, braking : bool, delta : float) -> float:
-	query.transform.origin= global_position + global_basis.y * tire_radius
-	query.motion= -global_basis.y * (spring_length + tire_radius)
-
-	#query.transform.origin= global_position
-	var cast_result: PackedFloat64Array= get_world_3d().direct_space_state.cast_motion(query)
-	
 	previous_velocity = local_velocity
 	local_velocity = (global_position - previous_global_position) / delta * global_transform.basis
 	previous_global_position = global_position
 	
-	grounded= false
-	if cast_result[0] < 1.0:
-		rest_query.transform.origin= query.transform.origin + query.motion * cast_result[1]
-		
-		var rest_result: Dictionary= get_world_3d().direct_space_state.get_rest_info(rest_query)
-
-		# TODO why is it possible for rest_result to fail with valid cast_result?
-		#assert(rest_result)
-		if rest_result:
-			grounded= true
-
-			# FIXME get last collider via rest_result.rid / id
-			last_collider = get_tree().current_scene
-			last_collision_point = query.transform.origin + query.motion * cast_result[0]
-			last_collision_normal= Vector3.ZERO
-			last_collision_normal= rest_result.normal
-
-			# TODO implement surface types
-			
+	# TODO implement surface types
+	#if grounded:
 			#var surface_groups : Array[StringName] = last_collider.get_groups()
 			#if surface_groups.size() > 0:
 				#if surface_type != surface_groups[0]:
@@ -213,23 +184,16 @@ func process_forces(grid: BlockGrid, braking : bool, delta : float) -> float:
 					#current_lateral_grip_assist = lateral_grip_assist[surface_type]
 					#current_longitudinal_grip_ratio = longitudinal_grip_ratio[surface_type]
 					#current_tire_stiffness = 1000000.0 + 8000000.0 * tire_stiffnesses[surface_type]
-	else:
-		last_collider = null
 	
 	var compression := process_suspension(grid, delta)
 	
 	if grounded and last_collider:
 		process_tires(braking, delta)
 		var contact := last_collision_point - grid.global_position
-		if spring_force > 0.0:
-			#DebugHud.send("Sus" + name.right(3), last_collision_normal * spring_force)
-			grid.apply_force(last_collision_normal * spring_force, contact)
-		else:
-			## Apply a small amount of downward force if there is no spring force
-			# TODO grid.mass / number of wheels with ground contact ?
-			grid.apply_force(-global_transform.basis.y * grid.mass, global_position - grid.global_position)
-		
-		#DebugHud.send("FVec" + name.right(3), Utils.get_short_vec2(force_vector))
+
+		#DebugHud.send("Spring" + name.right(3), spring_force)
+		#DebugHud.send("Spring length" + name.right(3), spring_current_length)
+		DebugHud.send("FVec" + name.right(3), Utils.get_short_vec2(force_vector))
 		
 		grid.apply_force(global_transform.basis.x * force_vector.x, contact)
 		grid.apply_force(global_transform.basis.z * force_vector.y, contact)
@@ -252,21 +216,17 @@ func process_forces(grid: BlockGrid, braking : bool, delta : float) -> float:
 
 func process_suspension(grid: BlockGrid, delta : float) -> float:
 	if grounded and last_collider:
-		spring_current_length = last_collision_point.distance_to(query.transform.origin) - tire_radius
+		#spring_current_length = last_collision_point.distance_to(query.transform.origin) - tire_radius
+		spring_current_length = -suspension.to_local(global_position).y + spring_length / 2.0
 	else:
 		spring_current_length = spring_length
 	
+
 	var no_contact := false
 	if spring_current_length > max_spring_length:
 		spring_current_length = max_spring_length
 		no_contact = true
-	
-	bottom_out= false
-	var bottom_out_length: float= 0.0
-	if spring_current_length < 0.0:
-		bottom_out_length= abs(spring_current_length)
-		spring_current_length = 0.0
-		bottom_out = true
+
 	
 	var compression := (spring_length - spring_current_length) * 1000.0
 	
@@ -275,39 +235,7 @@ func process_suspension(grid: BlockGrid, delta : float) -> float:
 	
 	spring_force = compression * spring_rate
 	
-	## If the suspension is bottomed out, apply some additional forces to help keep the vehicle body
-	## from colliding with the surface.
-	var bottom_out_damping := 0.0
-	var bottom_out_damping_fast := 0.0
-	var bottom_out_force := 0.0
-	if bottom_out:
-		var gravity_on_spring := clampf(global_transform.basis.y.dot(-grid.get_gravity().normalized()), 0.0, 1.0)
-		bottom_out_force = (((mass_over_wheel * clampf(spring_speed_mm_per_seconds * 0.001, 0.0, 5.0)) / delta) + (mass_over_wheel * grid.get_gravity().length() * gravity_on_spring)) * bump_stop_multiplier
-		var bottom_out_force_multiplier: float= clampf(pow(1 + bottom_out_length, 8), 0, 100)
-		
-		#DebugStats.log_max("bottom_out_force_multiplier", bottom_out_force_multiplier)
-		#DebugHud.send("Bottom out max", "%.2f" % DebugStats.get_value("bottom_out_force_multiplier"))
-		
-		bottom_out_force*= bottom_out_force_multiplier
-		bottom_out_damping = -slow_bump
-		bottom_out_damping_fast = -fast_bump
 	
-	if spring_speed_mm_per_seconds >= 0:
-		if spring_speed_mm_per_seconds > fast_damp_threshold:
-			damping_force = spring_speed_mm_per_seconds * (fast_bump + bottom_out_damping_fast)
-		else:
-			damping_force = spring_speed_mm_per_seconds * (slow_bump + bottom_out_damping)
-	else :
-		if spring_speed_mm_per_seconds < -fast_damp_threshold:
-			damping_force = spring_speed_mm_per_seconds * fast_rebound
-		else:
-			damping_force = spring_speed_mm_per_seconds * slow_rebound
-		
-	spring_force += damping_force
-	
-	spring_force = maxf(0, spring_force + bottom_out_force)
-	
-	max_spring_length = clampf((((spring_force / wheel_mass) - spring_speed_mm_per_seconds) * delta * 0.001) + spring_current_length, 0.0, spring_length)
 
 	if no_contact:
 		spring_force = 0.0
@@ -368,10 +296,7 @@ func process_tires(braking : bool, delta : float):
 		force_vector.x = friction * cornering_stiffness * slip_vector.x * brushx * (absf(slip_vector.x * current_lateral_grip_assist) + 1.0)
 
 
-	if bottom_out:
-		# HACK simulate wheel locking from bottoming out
-		force_vector.y= signf(-local_velocity.z) * 1
-	elif absf(force_vector.y) > absf(max_y_force):
+	if absf(force_vector.y) > absf(max_y_force):
 		force_vector.y = max_y_force * signf(force_vector.y)
 		limit_spin = true
 	else:

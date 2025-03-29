@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmke87yp674fn"]
+[gd_scene load_steps=6 format=3 uid="uid://dmke87yp674fn"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/suspension_instance.gd" id="1_muni6"]
 [ext_resource type="PackedScene" uid="uid://c42hpkx3axitr" path="res://game/core/car/wheel_4r.tscn" id="2_omrvh"]
 [ext_resource type="PackedScene" uid="uid://dkckf5tosfa32" path="res://game/core/car/suspension_model.tscn" id="3_exgfr"]
+[ext_resource type="PackedScene" uid="uid://bqsifkitwd33n" path="res://game/core/car/suspension_joint.tscn" id="4_pw7d7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_d27qx"]
 
@@ -20,5 +21,8 @@ transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 
 
 [node name="Backplate" parent="Suspension Model" index="4"]
 visible = false
+
+[node name="Suspension Joint" parent="." instance=ExtResource("4_pw7d7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, 0)
 
 [editable path="Suspension Model"]

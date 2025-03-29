@@ -1,15 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://c42hpkx3axitr"]
+[gd_scene load_steps=6 format=3 uid="uid://c42hpkx3axitr"]
 
 [ext_resource type="Script" path="res://game/core/car/wheel.gd" id="1_pno3q"]
 [ext_resource type="PackedScene" uid="uid://bwv7mbohgftby" path="res://game/core/car/wheel_model.tscn" id="2_2bxus"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fr1ph"]
+friction = 0.0
+
 [sub_resource type="BoxMesh" id="BoxMesh_indq1"]
 size = Vector3(0.33, 0.22, 2.275)
 
-[node name="Wheel 4R" type="Node3D"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1gw54"]
+height = 0.25
+radius = 2.0
+
+[node name="Wheel 4R" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 30
+physics_material_override = SubResource("PhysicsMaterial_fr1ph")
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
+linear_damp_mode = 1
+angular_damp_mode = 1
 script = ExtResource("1_pno3q")
 tire_radius = 2.0
-tire_width = 500.0
+tire_width = 400.0
+contact_patch = 0.3
 braking_grip_multiplier = 0.1
 mass_over_wheel = 100.0
 
@@ -20,3 +37,8 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.83789, -1.9191)
 visible = false
 mesh = SubResource("BoxMesh_indq1")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_1gw54")

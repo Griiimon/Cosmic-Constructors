@@ -6,15 +6,23 @@ extends BlockInstance
 @export var is_right: bool= true
 @export var wheel_scene: PackedScene
 
-var can_steer:= BlockPropBool.new("Steering", true)
+var can_steer:= BlockPropBool.new("Steering", true, on_can_steer_changed)
 var invert_steer:= BlockPropBool.new("Invert Steering", false)
+var max_steering_angle: BlockPropFloat= BlockPropFloat.new("Steering Angle", 30.0, update_steering_angle).set_range(1, 80).set_step_size(1).disable_toggle()
+var spring_frequency: BlockPropFloat= BlockPropFloat.new("Spring Frequency", 10.0, update_spring_frequency).set_range(1, 100).set_step_size(1).disable_toggle()
+var spring_force: BlockPropFloat= BlockPropFloat.new("Spring Force", 10000.0, update_spring_force).set_range(10, 100000).set_step_size(1000).disable_toggle()
+
 
 var wheel: Wheel
 
+@export_group("Spring")
+
+@export var spring_length: float= 1.0
+
 @export_group("Steering")
 
-@export var steering_speed: float= 1.0
-@export var max_steering_angle: float= 0.7
+@export var steering_velocity: float= 3.0
+
 
 @export_group("Throttle and Braking")
 ## The rate the throttle input changes to smooth input.
@@ -119,6 +127,8 @@ var wheel: Wheel
 
 const ANGULAR_VELOCITY_TO_RPM := 60.0 / TAU
 
+@onready var joint: JoltGeneric6DOFJoint3D = $"Suspension Joint"
+
 
 ## Controller Inputs: An external script should set these values
 var throttle_input := 0.0
@@ -165,13 +175,14 @@ func _ready() -> void:
 
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
-	spawn_wheel(grid)
-	wheel.initialize()
+	await get_tree().physics_frame
+	spawn_wheel(grid, false)
+	wheel.initialize(grid, self)
 	init_sync_vars(grid, grid_block)
 
 
 func on_placed_client(grid: BlockGrid, grid_block: GridBlock):
-	spawn_wheel(grid)
+	spawn_wheel(grid, true)
 	init_sync_vars(grid, grid_block)
 
 
@@ -182,12 +193,20 @@ func init_sync_vars(grid: BlockGrid, grid_block: GridBlock):
 	sync_spring_length.target= sync_var_target
 
 
-func spawn_wheel(grid: BlockGrid):
+func spawn_wheel(grid: BlockGrid, on_client: bool):
 	wheel= wheel_scene.instantiate()
-	wheel.position= position + basis.x * (1 if is_right else -1)
-	wheel.rotation.y= rotation.y
-	wheel.base_rotation= rotation.y
-	grid.add_child(wheel)
+	wheel.position= to_local(joint.global_position)
+	
+	add_child(wheel)
+	if on_client:
+		wheel.freeze= true
+		joint.queue_free()
+		return
+	
+	wheel.top_level= true
+	joint.reparent(grid)
+	joint.node_a= joint.get_path_to(grid)
+	joint.node_b= joint.get_path_to(wheel)
 
 
 func on_destroy(grid: BlockGrid, grid_block: GridBlock):
@@ -198,9 +217,6 @@ func on_destroy(grid: BlockGrid, grid_block: GridBlock):
 func on_grid_changed():
 	if get_parent() != wheel.get_parent():
 		wheel.reparent(get_parent())
-
-	wheel.query.exclude= [ get_grid().get_rid() ]
-	wheel.rest_query.exclude= [ get_grid().get_rid() ]
 
 
 func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
@@ -262,7 +278,7 @@ func client_physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 	if ClientManager.has_sync_var(sync_wheel_spin.get_hash()):
 		wheel.spin= ClientManager.get_sync_var_value(sync_wheel_spin.get_hash())
 	if ClientManager.has_sync_var(sync_spring_length.get_hash()):
-		wheel.spring_current_length= ClientManager.get_sync_var_value(sync_spring_length.get_hash())
+		wheel.position.y= spring_length / 2.0 - ClientManager.get_sync_var_value(sync_spring_length.get_hash())
 
 
 func has_client_physics_tick()-> bool:
@@ -303,14 +319,20 @@ func process_braking(grid: BlockGrid, delta : float) -> void:
 
 
 func process_steering(delta : float) -> void:
+	steering_amount= steering_input
 	if invert_steer.is_true():
 		steering_amount= -steering_amount
 
-	var new_steering: float= lerp(steering_amount, steering_input, delta * steering_speed)
-	if not is_equal_approx(steering_amount, new_steering):
-		steering_amount= new_steering
-		wheel.steer(steering_amount, max_steering_angle)
-		sync_wheel_steer.set_value(wheel.rotation.y)
+	if not is_zero_approx(steering_amount):
+		joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_ANGULAR_MOTOR, true)
+		joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_ANGULAR_MOTOR_TARGET_VELOCITY, -steering_amount)
+	else:
+		joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_ANGULAR_MOTOR, false)
+		joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_ANGULAR_MOTOR_TARGET_VELOCITY, 0)
+
+	var local_wheel_rotation: float= wrapf(wheel.global_rotation.y - global_rotation.y, -PI, PI)
+	if not is_equal_approx(local_wheel_rotation, sync_wheel_steer.get_value()):
+		sync_wheel_steer.set_value(local_wheel_rotation)
 
 
 func process_throttle(delta : float) -> void:
@@ -395,3 +417,25 @@ func calculate_average_tire_friction(weight : float, surface : String) -> float:
 	##max_brake_force = ((friction * braking_grip_multiplier) * average_drive_wheel_radius) / wheel_array.size()
 	#max_brake_force = ((friction * wheel.braking_grip_multiplier) * wheel.tire_radius)
 	##max_handbrake_force = ((friction * braking_grip_multiplier * 0.05) / average_drive_wheel_radius)
+
+
+func get_spring_rate()-> float:
+	return joint.get_param_y(JoltGeneric6DOFJoint3D.PARAM_LINEAR_SPRING_FREQUENCY)
+
+
+func update_spring_frequency():
+	joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_LINEAR_SPRING_FREQUENCY, spring_frequency.get_value_f())
+
+
+func update_spring_force():
+	joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_LINEAR_SPRING_MAX_FORCE, spring_force.get_value_f())
+	
+
+func on_can_steer_changed():
+	joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_ANGULAR_MOTOR, can_steer.is_true())
+	joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_ANGULAR_SPRING, can_steer.is_true())
+
+
+func update_steering_angle():
+	joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_ANGULAR_LIMIT_LOWER, -deg_to_rad(max_steering_angle.get_value_f()) if can_steer.is_true() else 0)
+	joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_ANGULAR_LIMIT_UPPER, deg_to_rad(max_steering_angle.get_value_f()) if can_steer.is_true() else 0)

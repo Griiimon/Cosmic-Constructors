@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bqsifkitwd33n"]
+
+[node name="Suspension Joint" type="JoltGeneric6DOFJoint3D"]
+linear_limit_y/upper = 0.5
+linear_limit_y/lower = -0.5
+linear_spring_y/enabled = true
+linear_spring_y/frequency = 10.0
+linear_spring_y/damping = 1.0
+linear_spring_y/max_force = 10000.0
+angular_limit_y/upper = 0.523599
+angular_limit_y/lower = -0.523599
+angular_motor_y/enabled = true
+angular_motor_y/max_torque = 1000.0
+angular_spring_y/enabled = true
+angular_spring_y/frequency = 100.0
+angular_spring_y/damping = 10.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 0, 0)

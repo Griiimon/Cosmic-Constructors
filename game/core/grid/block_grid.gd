@@ -780,7 +780,7 @@ func deserialize(data: Dictionary, block_models_only: bool= false, main_grid: Bl
 				world.get_grid(sub_grid_data["id"]),\
 				get_block_local(block_pos)))
 
-	if enable_lod_activation and not NetworkManager.is_client and not is_anchored and Global.terrain:
+	if enable_lod_activation and not NetworkManager.is_client and not is_anchored and Global.terrain.has_lod_activation():
 		freeze= true
 		lod_activation= GameData.scene_library.lod_activated.instantiate()
 		add_child(lod_activation)

@@ -176,6 +176,10 @@ func get_neighbor_voxel_terrain_blocks(center: Vector3i)-> Array[VoxelDetail]:
 	return result
 
 
+func has_lod_activation()-> bool:
+	return terrain_node is VoxelNode
+
+
 static func get_terrain(parent_node: Node3D)-> MyTerrain:
 	var terrain: MyTerrain= parent_node.get_node_or_null(NODE_NAME)
 	assert(terrain != null, "Node %s doesn't have a child node %s of type MyTerrain" % [ parent_node.name, NODE_NAME ])

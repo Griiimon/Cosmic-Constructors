@@ -1,3 +1,5 @@
+implement LodActivation for blocky voxel terrain
+
 Blower hand item ( pushes light blocks / world items )
 
 command seat: send "signals" that can be picked up by any block in grid/subgrid. add rotor signal "signal_name": turn_right

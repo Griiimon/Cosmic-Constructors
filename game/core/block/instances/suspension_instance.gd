@@ -215,11 +215,8 @@ func on_destroy(grid: BlockGrid, grid_block: GridBlock):
 
 
 func on_grid_changed():
-	#if get_parent() != wheel.get_parent():
-		#wheel.reparent(get_parent())
-
-	wheel.query.exclude= [ get_grid().get_rid() ]
-	wheel.rest_query.exclude= [ get_grid().get_rid() ]
+	if get_parent() != wheel.get_parent():
+		wheel.reparent(get_parent())
 
 
 func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
@@ -420,10 +417,6 @@ func calculate_average_tire_friction(weight : float, surface : String) -> float:
 	##max_brake_force = ((friction * braking_grip_multiplier) * average_drive_wheel_radius) / wheel_array.size()
 	#max_brake_force = ((friction * wheel.braking_grip_multiplier) * wheel.tire_radius)
 	##max_handbrake_force = ((friction * braking_grip_multiplier * 0.05) / average_drive_wheel_radius)
-
-
-#func get_spring_length()-> float:
-	#return joint.get_param_y(JoltGeneric6DOFJoint3D.PARAM_LINEAR_LIMIT_UPPER) - joint.get_param_y(JoltGeneric6DOFJoint3D.PARAM_LINEAR_LIMIT_LOWER)
 
 
 func get_spring_rate()-> float:

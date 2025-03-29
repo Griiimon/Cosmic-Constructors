@@ -195,19 +195,15 @@ func init_sync_vars(grid: BlockGrid, grid_block: GridBlock):
 
 func spawn_wheel(grid: BlockGrid, on_client: bool):
 	wheel= wheel_scene.instantiate()
-	if on_client:
-		wheel.position= basis.x * (1 if is_right else -1)
-	else:
-		wheel.position= global_position + global_basis.x * (1 if is_right else -1)
-	wheel.rotation.y= global_rotation.y
+	wheel.position= to_local(joint.global_position)
 	
+	add_child(wheel)
 	if on_client:
 		wheel.freeze= true
-		add_child(wheel)
 		joint.queue_free()
 		return
-		
-	grid.world.add_child(wheel)
+	
+	wheel.top_level= true
 	joint.reparent(grid)
 	joint.node_a= joint.get_path_to(grid)
 	joint.node_b= joint.get_path_to(wheel)

@@ -78,7 +78,6 @@ var limit_spin := false
 
 var grounded:= false
 var bottom_out := false
-var base_rotation: float= 0
 
 
 
@@ -93,7 +92,7 @@ func _process(delta : float) -> void:
 
 func initialize(grid: BlockGrid, _suspension: SuspensionInstance) -> void:
 	suspension= _suspension
-	spring_length= suspension.get_spring_length()
+	spring_length= suspension.spring_length
 	spring_rate= suspension.get_spring_rate()
 	
 	model.rotation_order = EULER_ORDER_ZXY
@@ -115,14 +114,6 @@ func initialize(grid: BlockGrid, _suspension: SuspensionInstance) -> void:
 	current_lateral_grip_assist = lateral_grip_assist[surface_type]
 	current_longitudinal_grip_ratio = longitudinal_grip_ratio[surface_type]
 	current_tire_stiffness = 1000000.0 + 8000000.0 * tire_stiffnesses[surface_type]
-
-
-func steer(input : float, max_steering_angle : float):
-	#input *= steering_ratio
-	#rotation.y = (max_steering_angle * (input + (1 - cos(input * 0.5 * PI)) * ackermann)) + toe
-	
-	#rotation.y = max_steering_angle * input + base_rotation
-	pass
 
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:

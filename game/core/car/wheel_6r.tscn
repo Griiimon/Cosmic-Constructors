@@ -1,13 +1,34 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3tx7ikwat0o"]
+[gd_scene load_steps=5 format=3 uid="uid://d3tx7ikwat0o"]
 
 [ext_resource type="Script" path="res://game/core/car/wheel.gd" id="1_3m7ns"]
 [ext_resource type="PackedScene" uid="uid://bwv7mbohgftby" path="res://game/core/car/wheel_model.tscn" id="2_2tjxg"]
 
-[node name="Wheel 6r" type="Node3D"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fr1ph"]
+friction = 0.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_homas"]
+height = 0.25
+radius = 3.0
+
+[node name="Wheel 6R" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 30
+physics_material_override = SubResource("PhysicsMaterial_fr1ph")
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
+linear_damp_mode = 1
+angular_damp_mode = 1
 script = ExtResource("1_3m7ns")
 tire_width = 500.0
+contact_patch = 0.4
 braking_grip_multiplier = 0.1
 mass_over_wheel = 100.0
 
 [node name="Model" parent="." instance=ExtResource("2_2tjxg")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_homas")

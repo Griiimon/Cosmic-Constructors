@@ -9,7 +9,7 @@ friction = 0.0
 [sub_resource type="BoxMesh" id="BoxMesh_indq1"]
 size = Vector3(0.33, 0.22, 2.275)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_c03rt"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_12vbk"]
 height = 0.25
 radius = 1.5
 
@@ -39,4 +39,4 @@ mesh = SubResource("BoxMesh_indq1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("CylinderShape3D_c03rt")
+shape = SubResource("CylinderShape3D_12vbk")

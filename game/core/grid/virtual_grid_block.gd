@@ -5,8 +5,8 @@ var parent: MultiGridBlock
 
 
 
-func take_damage(damage: int, grid: BlockGrid)-> int:
-	return parent.take_damage(damage, grid)
+func take_damage(damage: int, grid: BlockGrid, type: Damage.SourceType= Damage.SourceType.UNKNOWN)-> int:
+	return parent.take_damage(damage, grid, type)
 
 
 func absorb_damage(damage: int)-> int:

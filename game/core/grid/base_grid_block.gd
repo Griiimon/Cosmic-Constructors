@@ -9,7 +9,7 @@ func _init(_local_pos: Vector3i):
 
 
 # returns true if destroyed
-func take_damage(_damage: int, _grid: BlockGrid)-> int:
+func take_damage(_damage: int, _grid: BlockGrid, type: Damage.SourceType= Damage.SourceType.UNKNOWN)-> int:
 	assert(false, "Abstract class")
 	return 0
 

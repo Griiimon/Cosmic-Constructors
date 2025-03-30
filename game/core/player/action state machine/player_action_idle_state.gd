@@ -122,7 +122,7 @@ func grind():
 				var grid: BlockGrid= shapecast.get_collider(0)
 				var grid_block: BaseGridBlock= grid.get_block_from_global_pos(Utils.get_shapecast_inside_collision_point(shapecast))
 				assert(grid_block)
-				grid_block.take_damage(100, grid)
+				grid_block.take_damage(100, grid, Damage.SourceType.GRINDER)
 
 
 func interactive_block_shapecast_filter()-> bool:

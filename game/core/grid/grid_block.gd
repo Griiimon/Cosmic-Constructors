@@ -18,10 +18,16 @@ func _init(_block: Block, _local_pos: Vector3i, _rotation: Vector3i= Vector3i.ZE
 
 
 # returns overflow damage
-func take_damage(damage: int, grid: BlockGrid)-> int:
+func take_damage(damage: int, grid: BlockGrid, type: Damage.SourceType= Damage.SourceType.UNKNOWN)-> int:
+	assert(hitpoints > 0)
 	hitpoints-= damage
 	if hitpoints <= 0:
 		destroy(grid)
+		match type:
+			Damage.SourceType.GRINDER:
+				if block_definition.grind_drop:
+					var item: InventoryItem= block_definition.grind_drop.get_drop_inv_item()
+					grid.world.spawn_inventory_item(item, grid.get_global_block_pos(local_pos))
 		return abs(hitpoints)
 	return 0
 

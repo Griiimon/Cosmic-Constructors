@@ -112,6 +112,10 @@ func grind(local_pos: Vector3, origin_point= null, spawn_items: bool= false, mat
 				assert(block)
 				if block.can_grind():
 					tool.set_voxel(hit.position, 0)
+					var drop: InventoryItem= block.get_grind_drop()
+					if drop:
+						world.spawn_inventory_item(drop, hit.position)
+
 					DebugBlockFrame.place_global(Transform3D(Basis.IDENTITY, hit.position))
 					update_neighbor_voxels(hit.position)
 

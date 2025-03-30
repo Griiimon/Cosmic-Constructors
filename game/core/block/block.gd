@@ -13,6 +13,7 @@ extends NamedResource
 @export var material: StandardMaterial3D
 @export var scene: PackedScene
 @export var placement_conditions: BlockPlacementConditions
+@export var grind_drop: BlockGrindDrop
 
 
 

@@ -10,6 +10,11 @@ func get_model()-> VoxelBlockyModel:
 	return null
 
 
+func get_grind_drop()-> InventoryItem:
+	if can_turn_into_grid_block():
+		return turn_into_grid_block.grind_drop.get_drop_inv_item()
+	return null
+
 func can_turn_into_grid_block()-> bool:
 	return turn_into_grid_block != null
 

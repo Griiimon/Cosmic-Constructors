@@ -4,6 +4,7 @@ extends BlockInstance
 
 @onready var item_start_pos: Marker3D = $"Item Start Pos"
 @onready var item_end_pos: Marker3D = $"Item End Pos"
+@onready var item_catcher: ItemCatcher = $"Item Catcher"
 @onready var item_ejector: ItemEjector = $"Item Ejector"
 
 var item_instance: WorldItemInstance
@@ -12,6 +13,12 @@ var world: World
 
 var progress: float
 
+
+
+func _ready() -> void:
+	super()
+	item_catcher.caught_item.connect(on_item_catcher_caught_item)
+	item_catcher.can_catch_callable= can_catch_item
 
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
@@ -50,7 +57,7 @@ func on_neighbor_placed(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_blo
 			target= conveyor_target
 
 
-func _on_item_catcher_caught_item(inv_item: InventoryItem) -> void:
+func on_item_catcher_caught_item(inv_item: InventoryItem) -> void:
 	item_instance= world.spawn_inventory_item(inv_item, get_item_start_pos(), global_rotation, true)
 
 
@@ -64,7 +71,7 @@ func can_conveyor_target_take_item(inv_item: InventoryItem)-> bool:
 	return item_instance == null
 
 
-func can_item_catcher_catch_item(inv_item: InventoryItem)-> bool:
+func can_catch_item(inv_item: InventoryItem)-> bool:
 	return can_conveyor_target_take_item(inv_item)
 		
 

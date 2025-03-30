@@ -4,10 +4,10 @@ extends BaseBlockComponent
 signal caught_item(inv_item: InventoryItem)
 
 const NODE_NAME= "Item Catcher"
-# TODO ..or let the parent register a function?
-const CAN_CATCH_FUNCTION_NAME= "can_item_catcher_catch_item"
 
 @export var active_area: Area3D
+
+var can_catch_callable: Callable
 
 
 
@@ -19,8 +19,11 @@ func _ready() -> void:
 
 
 func can_catch_item(inv_item: InventoryItem= null)-> bool:
-	assert(get_parent().has_method(CAN_CATCH_FUNCTION_NAME))
-	return get_parent().call(CAN_CATCH_FUNCTION_NAME, inv_item)
+	#assert(get_parent().has_method(CAN_CATCH_FUNCTION_NAME))
+	#return get_parent().call(CAN_CATCH_FUNCTION_NAME, inv_item)
+	if can_catch_callable == null:
+		return true
+	return can_catch_callable.call(inv_item)
 
 
 func catch(inv_item: InventoryItem):
@@ -39,4 +42,5 @@ func on_body_entered(body: Node3D):
 	var item_instance: WorldItemInstance= body
 	assert(can_catch_item(item_instance.inv_item))
 	catch(item_instance.inv_item)
+	# TODO use world.destroy_item()
 	item_instance.queue_free()

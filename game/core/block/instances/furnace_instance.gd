@@ -14,7 +14,8 @@ var storage: Inventory= Inventory.new()
 func _ready() -> void:
 	super()
 	item_catcher.caught_item.connect(on_add_ingredient)
-	
+	item_catcher.can_catch_callable= can_catch_item
+
 	
 func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 	if progress < 1:
@@ -39,5 +40,5 @@ func on_add_ingredient(inv_item: InventoryItem):
 	storage.add_item(inv_item)
 
 
-func can_item_catcher_catch_item(inv_item: InventoryItem)-> bool:
+func can_catch_item(inv_item: InventoryItem)-> bool:
 	return true

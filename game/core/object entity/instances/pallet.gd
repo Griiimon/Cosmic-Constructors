@@ -3,16 +3,24 @@ extends ObjectEntity
 
 const STACK_SIZE= 10
 
+@onready var item_catcher: ItemCatcher = $"Item Catcher"
+
 var stored_item: Item
 var count: int
 
 
 
-func can_item_catcher_catch_item(inv_item: InventoryItem)-> bool:
+func _ready():
+	super()
+	item_catcher.caught_item.connect(on_item_catcher_caught_item)
+	item_catcher.can_catch_callable= can_catch_item
+
+
+func can_catch_item(inv_item: InventoryItem)-> bool:
 	return stored_item == null or ( inv_item.item == stored_item and find_tile_with_space() )
 
 
-func _on_item_catcher_caught_item(inv_item: InventoryItem) -> void:
+func on_item_catcher_caught_item(inv_item: InventoryItem) -> void:
 	stored_item= inv_item.item
 	var tile: Marker3D= find_tile_with_space()
 	assert(tile)

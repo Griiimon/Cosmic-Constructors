@@ -8,6 +8,7 @@ extends BlockInstance
 func _ready() -> void:
 	super()
 	item_catcher.caught_item.connect(on_item_caught)
+	item_catcher.can_catch_callable= can_catch_item
 
 
 func get_dynamic_mass(grid_block: GridBlock)-> int:
@@ -23,5 +24,5 @@ func _on_ore_pile_updated() -> void:
 	change_mass()
 
 
-func can_item_catcher_catch_item(inv_item: InventoryItem)-> bool:
+func can_catch_item(inv_item: InventoryItem)-> bool:
 	return inv_item.item is RawMaterialItem and not ore_pile.is_full()

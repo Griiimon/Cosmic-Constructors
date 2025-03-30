@@ -68,7 +68,9 @@ run_stream_in_editor = false
 threaded_update_enabled = true
 streaming_system = 1
 
-[node name="Terrain" parent="Planet" instance=ExtResource("12_j4jw0")]
+[node name="Terrain" parent="Planet" node_paths=PackedStringArray("world", "height_map_provider") instance=ExtResource("12_j4jw0")]
+world = NodePath("../../World")
+height_map_provider = NodePath("../HeightMapProvider")
 
 [node name="HeightMapProvider" type="Node" parent="Planet"]
 script = ExtResource("19_02dmq")

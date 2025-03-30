@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://vlxgr08x41up"]
+
+[ext_resource type="Script" path="res://game/core/player/hand items/hand_object_grinder.gd" id="1_t752g"]
+[ext_resource type="PackedScene" uid="uid://c4pqn4hdf3vc4" path="res://game/data/hand items/tools/hand grinder/hand_grinder_model.tscn" id="2_ynnfx"]
+
+[node name="Hand Grinder" type="Node3D" node_paths=PackedStringArray("model_script")]
+script = ExtResource("1_t752g")
+model_script = NodePath("Model")
+
+[node name="Model" parent="." instance=ExtResource("2_ynnfx")]

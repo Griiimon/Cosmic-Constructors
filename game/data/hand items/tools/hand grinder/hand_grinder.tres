@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HandItem" load_steps=4 format=3 uid="uid://bebhjdvvwc1b6"]
+
+[ext_resource type="PackedScene" uid="uid://c4pqn4hdf3vc4" path="res://game/data/hand items/tools/hand grinder/hand_grinder_model.tscn" id="1_1kj8n"]
+[ext_resource type="PackedScene" uid="uid://vlxgr08x41up" path="res://game/data/hand items/tools/hand grinder/hand_grinder.tscn" id="2_mmyf2"]
+[ext_resource type="Script" path="res://game/core/player/hand items/hand_item.gd" id="3_3s18o"]
+
+[resource]
+script = ExtResource("3_3s18o")
+scene = ExtResource("2_mmyf2")
+model = ExtResource("1_1kj8n")
+can_use = true
+primary_use_continuous = true
+secondary_use_continuous = true
+name = ""

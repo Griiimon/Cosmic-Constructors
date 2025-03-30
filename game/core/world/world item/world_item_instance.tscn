@@ -5,6 +5,7 @@
 [node name="WorldItemInstance" type="RigidBody3D"]
 collision_layer = 64
 collision_mask = 1142
+continuous_cd = true
 script = ExtResource("1_tp043")
 
 [node name="VoxelViewer" type="VoxelViewer" parent="."]

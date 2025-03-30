@@ -12,7 +12,7 @@ signal updated
 @export var base_noise: FastNoiseLite
 @export var texture_size: int= 128
 
-@export var materials: Array[RawItem]
+@export var materials: Array[RawMaterialItem]
 @export var amounts: Array[float]
 
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
@@ -158,7 +158,7 @@ func update_collision():
 	static_capsule_collision_shape.position.y= get_mesh_height() * 0.55
 
 
-func add_raw_item(item: RawItem, amount: int):
+func add_raw_item(item: RawMaterialItem, amount: int):
 	if item in materials:
 		amounts[materials.find(item)]+= amount
 	else:
@@ -179,7 +179,7 @@ func add_inv_item(inv_item: InventoryItem):
 	add_raw_item(inv_item.item, inv_item.count)
 
 
-func sub_raw_item(material: RawItem)-> int:
+func sub_raw_item(material: RawMaterialItem)-> int:
 	var count: int= min(get_amount(material), material.get_max_unit_size())
 	var idx: int= materials.find(material)
 	amounts[idx]-= count
@@ -197,7 +197,7 @@ func sub_raw_item(material: RawItem)-> int:
 
 
 func drop_item(world: World)-> WorldItemInstance:
-	var pile_material: RawItem= get_dominant_material()
+	var pile_material: RawMaterialItem= get_dominant_material()
 	var inv_item:= InventoryItem.new(pile_material, sub_raw_item(pile_material))
 	var spawn_pos: Vector3= global_position + global_basis.y * (get_mesh_height() + 0.5)
 	return world.spawn_inventory_item(inv_item, spawn_pos)
@@ -206,7 +206,7 @@ func drop_item(world: World)-> WorldItemInstance:
 func _on_catch_area_body_entered(body: Node3D) -> void:
 	assert(body is WorldItemInstance)
 	var item_inst: WorldItemInstance= body
-	if item_inst.inv_item.item as RawItem and not is_flipped():
+	if item_inst.inv_item.item as RawMaterialItem and not is_flipped():
 		add_inv_item(item_inst.inv_item)
 		item_inst.queue_free()
 
@@ -215,15 +215,15 @@ func get_mesh_height()-> float:
 	return max(total_amount * 0.001 * volume_factor, 0.01)
 
 
-func get_dominant_material()-> RawItem:
-	var dominant_material: RawItem= null
+func get_dominant_material()-> RawMaterialItem:
+	var dominant_material: RawMaterialItem= null
 	for material in materials:
 		if dominant_material == null or get_amount(dominant_material) < get_amount(material):
 			dominant_material= material
 	return dominant_material
 
 
-func get_amount(material: RawItem)-> int:
+func get_amount(material: RawMaterialItem)-> int:
 	return int(amounts[materials.find(material)])
 
 

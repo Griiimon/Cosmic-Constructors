@@ -1,4 +1,4 @@
 class_name TerrainTypeProperties
 extends NamedResource
 
-@export var raw_material: RawItem
+@export var raw_material: RawMaterialItem

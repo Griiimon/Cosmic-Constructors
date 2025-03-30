@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="RawItem" load_steps=4 format=3 uid="uid://b4vqkgbwnwt0n"]
+[gd_resource type="Resource" script_class="RawMaterialItem" load_steps=4 format=3 uid="uid://b4vqkgbwnwt0n"]
 
 [ext_resource type="PackedScene" uid="uid://1kbcvka36lou" path="res://game/data/items/raw materials/dirt/dirt_model.tscn" id="1_3brmx"]
 [ext_resource type="Material" uid="uid://ge7mnmragg1s" path="res://game/data/items/raw materials/dirt/dirt_material.tres" id="1_4a1xb"]
-[ext_resource type="Script" path="res://game/core/item/item_raw.gd" id="2_2ndst"]
+[ext_resource type="Script" path="res://game/core/item/item_raw_material.gd" id="3_iw7t8"]
 
 [resource]
-script = ExtResource("2_2ndst")
+script = ExtResource("3_iw7t8")
 material = ExtResource("1_4a1xb")
 model = ExtResource("1_3brmx")
 storage_size = 1
+base_mass = 0.5
+mass_per_item = 0.0
+name = ""

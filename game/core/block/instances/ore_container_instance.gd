@@ -15,7 +15,7 @@ func get_dynamic_mass(grid_block: GridBlock)-> int:
 
 
 func on_item_caught(inv_item: InventoryItem):
-	assert(inv_item.item is RawItem)
+	assert(inv_item.item is RawMaterialItem)
 	ore_pile.add_inv_item(inv_item)
 
 
@@ -24,4 +24,4 @@ func _on_ore_pile_updated() -> void:
 
 
 func can_item_catcher_catch_item(inv_item: InventoryItem)-> bool:
-	return inv_item.item is RawItem and not ore_pile.is_full()
+	return inv_item.item is RawMaterialItem and not ore_pile.is_full()

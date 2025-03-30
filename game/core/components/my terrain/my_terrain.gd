@@ -57,7 +57,7 @@ func mine(local_pos: Vector3, radius: float, origin_point= null, spawn_items: bo
 		var collected_resources: Dictionary
 		
 		for key in new_resources.keys():
-			var raw_item: RawItem= terrain_properties.types[key].raw_material
+			var raw_item: RawMaterialItem= terrain_properties.types[key].raw_material
 			if collected_resources.has(raw_item):
 				collected_resources[raw_item]+= new_resources[key]
 			else:
@@ -66,7 +66,7 @@ func mine(local_pos: Vector3, radius: float, origin_point= null, spawn_items: bo
 		#prints("New ress", new_resources)
 		#prints("Coll ress", collected_resources)
 
-		for raw_item: RawItem in collected_resources.keys():
+		for raw_item: RawMaterialItem in collected_resources.keys():
 			if spawn_items:
 				var item_instance: WorldItemInstance= world.spawn_item(raw_item, material_spawn_pos, Vector3.ZERO, collected_resources[raw_item] * 200)
 				item_instance.linear_velocity= item_impulse

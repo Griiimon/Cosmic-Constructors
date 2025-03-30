@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="RawItem" load_steps=4 format=3 uid="uid://d258am43f7jcp"]
+[gd_resource type="Resource" script_class="RawMaterialItem" load_steps=4 format=3 uid="uid://d258am43f7jcp"]
 
 [ext_resource type="PackedScene" uid="uid://dxv2ry6awyvjv" path="res://game/data/items/raw materials/stone/stone_model.tscn" id="1_b7265"]
 [ext_resource type="Material" uid="uid://dykd75twpcvhd" path="res://game/data/items/raw materials/stone/stone_material.tres" id="1_qf4ke"]
-[ext_resource type="Script" path="res://game/core/item/item_raw.gd" id="2_sv57u"]
+[ext_resource type="Script" path="res://game/core/item/item_raw_material.gd" id="3_r8giv"]
 
 [resource]
-script = ExtResource("2_sv57u")
+script = ExtResource("3_r8giv")
 material = ExtResource("1_qf4ke")
 model = ExtResource("1_b7265")
 storage_size = 1
+base_mass = 0.5
+mass_per_item = 0.0
+name = ""

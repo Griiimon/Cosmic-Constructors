@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://xgkn2mkwvwmq"]
+[gd_scene load_steps=31 format=3 uid="uid://xgkn2mkwvwmq"]
 
 [ext_resource type="PackedScene" uid="uid://slyw4y7qi46y" path="res://game/core/player/base_player.tscn" id="1_kthjw"]
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
@@ -41,6 +41,9 @@ radius = 1.0
 radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_iybuy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dppuk"]
+radius = 0.2
 
 [sub_resource type="BoxMesh" id="BoxMesh_nkkr1"]
 size = Vector3(0.1, 0.1, 0.8)
@@ -149,15 +152,22 @@ shape = SubResource("SphereShape3D_iybuy")
 target_position = Vector3(0, 0, -2)
 collision_mask = 4
 
-[node name="Misc Item Holder" type="Node3D" parent="Head/Pivot" index="11"]
+[node name="Grind Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="10"]
+unique_name_in_owner = true
+enabled = false
+shape = SubResource("SphereShape3D_dppuk")
+target_position = Vector3(0, 0, -1.5)
+collision_mask = 6
+
+[node name="Misc Item Holder" type="Node3D" parent="Head/Pivot" index="12"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, -0.9)
 
-[node name="Handle Grabber" type="Node3D" parent="Head/Pivot" index="12"]
+[node name="Handle Grabber" type="Node3D" parent="Head/Pivot" index="13"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 
-[node name="FPS arms" type="Node3D" parent="Head/Pivot" index="13"]
+[node name="FPS arms" type="Node3D" parent="Head/Pivot" index="14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.489999, 0)
 visible = false
 

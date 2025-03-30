@@ -12,3 +12,7 @@ func get_model()-> VoxelBlockyModel:
 
 func can_turn_into_grid_block()-> bool:
 	return turn_into_grid_block != null
+
+
+func can_grind()-> bool:
+	return can_turn_into_grid_block()

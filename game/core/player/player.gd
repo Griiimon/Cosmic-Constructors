@@ -26,6 +26,8 @@ extends BasePlayer
 @onready var item_viewport_container: SubViewportContainer = %"Item Viewport Container"
 @onready var hand_item_container: Node3D = %"Hand Item Container"
 @onready var drill_shapecast: ShapeCast3D = %"Drill Shapecast"
+@onready var grind_shapecast: ShapeCast3D = %"Grind Shapecast"
+
 
 @onready var item_camera: Camera3D = %"Item Camera"
 
@@ -127,6 +129,10 @@ func equip_hand_item(hand_item: HandItem):
 
 func drill():
 	action_state_machine.idle_state.drill()
+
+
+func grind():
+	action_state_machine.idle_state.grind()
 
 
 func attach_rope(from: Node3D)-> Rope:

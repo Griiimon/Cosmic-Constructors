@@ -108,5 +108,22 @@ func drill():
 		terrain.mine(local_pos, radius, shapecast.global_position, true, shapecast.get_collision_point(0) + shapecast.global_basis.z * 0.5, shapecast.global_basis.z)
 
 
+func grind():
+	var shapecast: ShapeCast3D= player.grind_shapecast
+	if shapecast.is_colliding():
+		var collision_layer: int= shapecast.get_collider(0).collision_layer
+		
+		match collision_layer:
+			CollisionLayers.TERRAIN:
+				var terrain: MyTerrain= MyTerrain.get_terrain(shapecast.get_collider(0))
+				var local_pos: Vector3i= terrain.terrain_node.to_local(shapecast.get_collision_point(0))
+				terrain.grind(local_pos, shapecast.global_position, true, shapecast.get_collision_point(0) + shapecast.global_basis.z * 0.5, shapecast.global_basis.z)
+			CollisionLayers.GRID:
+				var grid: BlockGrid= shapecast.get_collider(0)
+				var grid_block: BaseGridBlock= grid.get_block_from_global_pos(Utils.get_shapecast_inside_collision_point(shapecast))
+				assert(grid_block)
+				grid_block.take_damage(100, grid)
+
+
 func interactive_block_shapecast_filter()-> bool:
 	return not CustomShapeCast.grid_block.get_block_instance() or not CustomShapeCast.grid_block.get_block_instance().has_property_viewer()

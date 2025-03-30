@@ -99,6 +99,23 @@ func mine(local_pos: Vector3, radius: float, origin_point= null, spawn_items: bo
 	return {}
 
 
+func grind(local_pos: Vector3, origin_point= null, spawn_items: bool= false, material_spawn_pos: Vector3= Vector3.ZERO, item_impulse: Vector3= Vector3.ZERO):
+	if terrain_node is VoxelTerrain:
+		var tool: VoxelTool = terrain_node.get_voxel_tool()
+		if origin_point:
+			assert(origin_point is Vector3)
+			var vec: Vector3= local_pos - origin_point
+			var hit: VoxelRaycastResult= tool.raycast(origin_point, vec.normalized(), vec.length() + 1)
+			if hit:
+				var block_id: int= tool.get_voxel(hit.position)
+				var block: BaseVoxelTerrainBlock= GameData.get_voxel_terrain_block(block_id)
+				assert(block)
+				if block.can_grind():
+					tool.set_voxel(hit.position, 0)
+					DebugBlockFrame.place_global(Transform3D(Basis.IDENTITY, hit.position))
+					update_neighbor_voxels(hit.position)
+
+
 func update_neighbor_voxels(center: Vector3i):
 	var exclusion_list: Array[Vector3i]
 	for neighbor_voxel in get_neighbor_voxel_terrain_blocks(center):

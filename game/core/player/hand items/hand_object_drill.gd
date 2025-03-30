@@ -1,30 +1,28 @@
 extends HandObject
 
-var drill_interval: Timer
+var drill_cooldown: Timer
 
 
 func _ready():
 	super()
 	
-	drill_interval= Timer.new()
-	drill_interval.autostart= false
-	drill_interval.timeout.connect(do_drill)
-	add_child(drill_interval)
+	drill_cooldown= Timer.new()
+	drill_cooldown.autostart= false
+	drill_cooldown.timeout.connect(do_drill)
+	add_child(drill_cooldown)
 
 
 func start_using():
-	if animation_player:
-		animation_player.play("use")
+	super()
 	player.drill_shapecast.enabled= true
-	drill_interval.start()
+	drill_cooldown.start()
 
 
 
 func stop_using():
-	if animation_player:
-		animation_player.play("RESET")
+	super()
 	player.drill_shapecast.enabled= false
-	drill_interval.stop()
+	drill_cooldown.stop()
 
 
 func do_drill():

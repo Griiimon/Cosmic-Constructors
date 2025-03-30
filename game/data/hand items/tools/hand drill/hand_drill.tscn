@@ -41,8 +41,9 @@ _data = {
 "use": SubResource("Animation_bitdy")
 }
 
-[node name="Hand Drill" type="Node3D"]
+[node name="Hand Drill" type="Node3D" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_a8qiu")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="Model" parent="." instance=ExtResource("1_v8rik")]
 

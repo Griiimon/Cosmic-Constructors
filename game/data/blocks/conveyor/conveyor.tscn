@@ -161,4 +161,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.5)
 
 [connection signal="took_item" from="Conveyor Target" to="." method="_on_conveyor_target_took_item"]
-[connection signal="caught_item" from="Item Catcher" to="." method="_on_item_catcher_caught_item"]

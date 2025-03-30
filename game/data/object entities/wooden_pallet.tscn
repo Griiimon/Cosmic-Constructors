@@ -190,5 +190,3 @@ gizmo_extents = 0.1
 [node name="Tile 4" type="Marker3D" parent="Tiny Item Grid/Grid 4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0.25)
 gizmo_extents = 0.1
-
-[connection signal="caught_item" from="Item Catcher" to="." method="_on_item_catcher_caught_item"]

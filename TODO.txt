@@ -1,17 +1,29 @@
+water + boat
+
 implement LodActivation for blocky voxel terrain
+
+FIX VoxelViewer blocky full update when reparent
+
+VoxelTerrainRaycast a bit buggy
+
+FIX try_to_separate_grid() grid_voxels can contain air block
+
+player RB while jumping can start to rotate if hits something
+
+add turn_into_blocks to block library at runtime
+
+
+
+ItemEjectorComponent needs to be serialized, now that it has a queue
 
 Blower hand item ( pushes light blocks / world items )
 
 command seat: send "signals" that can be picked up by any block in grid/subgrid. add rotor signal "signal_name": turn_right
 
-implement save/load on blocky terrain
-
 build category menu can still get messed up and clicks drop blocks instead of select category
 	=> Player node sometimes randomly get pushed down in tree
 
-player RB while jumping can start to rotate if hits something
 
-add turn_into_blocks to block library at runtime
 
 
 
@@ -325,7 +337,9 @@ is there suspension resistance in up direction? if car gets weighed down in the 
 
 build mode for periperal entities: auto-snap to empty peripheral connectors?
 
-handle grabbing with joint and motor instead of velocity and torque?
+handle object grabbing with joint and motor instead of velocity and torque?
+
+use joint for item pickup: linear and angular spring to try and center it. drop if it gets yanked too far away. advantage: automatic collision shape extension for RB and CB player, mass + CoM for RB 
 
 
 SCENARIOS

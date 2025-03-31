@@ -171,11 +171,17 @@ func try_to_separate_grid(origin: Vector3i, exclusion_list: Array[Vector3i]):
 	for voxel_detail in grid_voxels:
 		var block_pos: Vector3i= voxel_detail.pos - origin
 		print(block_pos)
+		assert(voxel_detail.terrain_block != GameData.get_voxel_terrain_air_block())
 		grid.add_block(voxel_detail.terrain_block.turn_into_grid_block, block_pos)
 
 
 	grid.is_anchored= false
 	grid.freeze= false
+
+
+func save():
+	if terrain_node is VoxelTerrain:
+		terrain_node.save_modified_blocks()
 
 
 func get_neighbor_voxel_terrain_blocks(center: Vector3i)-> Array[VoxelDetail]:

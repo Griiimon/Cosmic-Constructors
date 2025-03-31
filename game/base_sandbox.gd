@@ -90,6 +90,7 @@ func _input(event: InputEvent) -> void:
 					ServerManager.request_save.rpc_id(1, custom_world_name, project_folder_world)
 				else:
 					get_world().save_world(custom_world_name, project_folder_world)
+					Global.terrain.save()
 			elif event.keycode == KEY_F6:
 				get_tree().debug_collisions_hint= not get_tree().debug_collisions_hint
 			elif event.keycode == KEY_F7:

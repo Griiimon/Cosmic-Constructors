@@ -4,17 +4,17 @@
 [ext_resource type="Script" path="res://game/debug/debug settings/debug_settings_resource.gd" id="2_8ih3d"]
 [ext_resource type="Resource" uid="uid://sueib6rdbmc0" path="res://game/data/blocks/light structure/light_structure_block.tres" id="2_lpgs8"]
 [ext_resource type="Resource" uid="uid://k2s38yf1cnl4" path="res://game/data/blocks/pilot seat/pilot_seat_block.tres" id="3_jcges"]
-[ext_resource type="Resource" uid="uid://cdya74n2owfo0" path="res://game/data/blocks/conveyor/conveyor_block.tres" id="4_qqqrs"]
+[ext_resource type="Resource" uid="uid://b6adhur0i2vps" path="res://game/data/blocks/heavy structure/heavy_structure_block.tres" id="4_kjkgf"]
 [ext_resource type="Resource" uid="uid://cd6vpdqpygghf" path="res://game/data/blocks/furnace/furnace_block.tres" id="5_t4gv4"]
+[ext_resource type="Resource" uid="uid://d2qgv1f2a61r8" path="res://game/data/blocks/drill/drill_block.tres" id="5_w7j6s"]
 [ext_resource type="Resource" uid="uid://bl80cxbq8b7qh" path="res://game/data/blocks/ore container 1x1/ore_container_1x1_block.tres" id="6_1d6xa"]
 [ext_resource type="Resource" uid="uid://gp46n88pa5t8" path="res://game/data/blocks/handles/handles_block.tres" id="7_1hbk8"]
 [ext_resource type="Resource" uid="uid://42u532qfwaji" path="res://game/data/blocks/electric suspension 3r/electric_suspension_3r_block.tres" id="8_aplcq"]
-[ext_resource type="Resource" uid="uid://c388qgnd1ttuj" path="res://game/data/game modes/castles and cannons/blocks/projectile store/projectile_store_block.tres" id="9_xlath"]
-[ext_resource type="Resource" uid="uid://sfwsxi2o0llp" path="res://game/data/game modes/castles and cannons/blocks/cannon/cannon_block.tres" id="10_nn6ed"]
+[ext_resource type="Resource" uid="uid://dpvs5ub2e5ne6" path="res://game/data/blocks/electric suspension 3r left/electric_suspension_3r_left_block.tres" id="10_o4ic8"]
 
 [resource]
 script = ExtResource("2_8ih3d")
-default_build_hotbar_layout = Array[ExtResource("1_o1lrl")]([ExtResource("2_lpgs8"), ExtResource("3_jcges"), ExtResource("4_qqqrs"), ExtResource("5_t4gv4"), ExtResource("6_1d6xa"), ExtResource("7_1hbk8"), ExtResource("8_aplcq"), ExtResource("9_xlath"), ExtResource("10_nn6ed")])
+default_build_hotbar_layout = Array[ExtResource("1_o1lrl")]([ExtResource("2_lpgs8"), ExtResource("3_jcges"), ExtResource("4_kjkgf"), ExtResource("5_w7j6s"), ExtResource("5_t4gv4"), ExtResource("6_1d6xa"), ExtResource("7_1hbk8"), ExtResource("8_aplcq"), ExtResource("10_o4ic8")])
 infinite_furnace_ingredients = false
 force_freeze_status = false
 disable_compression = true

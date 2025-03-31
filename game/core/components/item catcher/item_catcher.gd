@@ -19,8 +19,6 @@ func _ready() -> void:
 
 
 func can_catch_item(inv_item: InventoryItem= null)-> bool:
-	#assert(get_parent().has_method(CAN_CATCH_FUNCTION_NAME))
-	#return get_parent().call(CAN_CATCH_FUNCTION_NAME, inv_item)
 	if can_catch_callable == null:
 		return true
 	return can_catch_callable.call(inv_item)
@@ -40,7 +38,7 @@ func on_body_entered(body: Node3D):
 	assert(body is WorldItemInstance)
 
 	var item_instance: WorldItemInstance= body
-	assert(can_catch_item(item_instance.inv_item))
-	catch(item_instance.inv_item)
-	# TODO use world.destroy_item()
-	item_instance.queue_free()
+	if can_catch_item(item_instance.inv_item):
+		catch(item_instance.inv_item)
+		# TODO use world.destroy_item()
+		item_instance.queue_free()

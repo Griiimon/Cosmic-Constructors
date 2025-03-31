@@ -90,5 +90,9 @@ func get_voxel_terrain_block(id: int)-> BaseVoxelTerrainBlock:
 	return voxel_terrain_block_library.blocks[id]
 
 
+func get_voxel_terrain_air_block()-> BaseVoxelTerrainBlock:
+	return voxel_terrain_block_library.blocks[0]
+
+
 func get_mouse_sensitivity()-> float:
 	return game_settings.control_settings.mouse_sensitivity

@@ -19,3 +19,7 @@ static func deserialize(data: Dictionary)-> InventoryItem:
 	var item_definition: Item= GameData.get_item_definition(data["item"])
 	var count: int= data["count"]
 	return InventoryItem.new(item_definition, count)
+
+
+static func copy(original: InventoryItem)-> InventoryItem:
+	return InventoryItem.new(original.item, original.count)

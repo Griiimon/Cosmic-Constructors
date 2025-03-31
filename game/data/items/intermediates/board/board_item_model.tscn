@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://jxv7vhxu4fgy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wwblx"]
+albedo_color = Color(0.695653, 0.542317, 0.320541, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_klxxg"]
+material = SubResource("StandardMaterial3D_wwblx")
+size = Vector3(0.2, 0.05, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hrl60"]
+size = Vector3(0.2, 0.05, 1)
+
+[node name="Board Item Model" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_klxxg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_hrl60")

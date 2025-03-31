@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemLibrary" load_steps=7 format=3 uid="uid://qma4f3x33f4d"]
+[gd_resource type="Resource" script_class="ItemLibrary" load_steps=9 format=3 uid="uid://qma4f3x33f4d"]
 
 [ext_resource type="Script" path="res://game/core/item/item.gd" id="1_jijht"]
 [ext_resource type="Resource" uid="uid://b4vqkgbwnwt0n" path="res://game/data/items/raw materials/dirt/dirt.tres" id="2_p5f7q"]
@@ -6,7 +6,9 @@
 [ext_resource type="Resource" uid="uid://bvo12g5be7j4u" path="res://game/data/items/raw materials/iron ore/iron_ore.tres" id="3_s77n4"]
 [ext_resource type="Resource" uid="uid://d258am43f7jcp" path="res://game/data/items/raw materials/stone/stone.tres" id="4_i6tyf"]
 [ext_resource type="Resource" uid="uid://b5j26qxxk25de" path="res://game/data/items/intermediates/steel ingot/steel_ingot.tres" id="5_s66ew"]
+[ext_resource type="Resource" uid="uid://cp77p20cdjmsx" path="res://game/data/items/raw/log/log_item.tres" id="6_vb0p8"]
+[ext_resource type="Resource" uid="uid://dnkrghuseprk1" path="res://game/data/items/intermediates/board/board_item.tres" id="7_yb5op"]
 
 [resource]
 script = ExtResource("2_wiwwp")
-items = Array[ExtResource("1_jijht")]([ExtResource("2_p5f7q"), ExtResource("3_s77n4"), ExtResource("4_i6tyf"), ExtResource("5_s66ew")])
+items = Array[ExtResource("1_jijht")]([ExtResource("2_p5f7q"), ExtResource("3_s77n4"), ExtResource("4_i6tyf"), ExtResource("5_s66ew"), ExtResource("6_vb0p8"), ExtResource("7_yb5op")])

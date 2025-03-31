@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://6hxssjnl6s8k"]
+
+[ext_resource type="Resource" uid="uid://cxs5vv3urkfhr" path="res://game/data/misc/block categories/production.tres" id="1_8b3vu"]
+[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_wn8vl"]
+[ext_resource type="PackedScene" uid="uid://eitshgl75kf2" path="res://game/data/blocks/table saw/table_saw.tscn" id="2_jqwb4"]
+
+[resource]
+script = ExtResource("1_wn8vl")
+size = Vector3i(2, 1, 1)
+mass = 30.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = false
+tick_priority = 0
+can_be_built = true
+category = ExtResource("1_8b3vu")
+scene = ExtResource("2_jqwb4")
+name = ""

@@ -1,0 +1,79 @@
+[gd_scene load_steps=13 format=3 uid="uid://eitshgl75kf2"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/table_saw_instance.gd" id="1_ss6fv"]
+[ext_resource type="Resource" uid="uid://dnkrghuseprk1" path="res://game/data/items/intermediates/board/board_item.tres" id="2_8vjo2"]
+[ext_resource type="PackedScene" uid="uid://4lrcbiiff8n2" path="res://game/core/components/item catcher/item_catcher.tscn" id="2_sj1m4"]
+[ext_resource type="Resource" uid="uid://cp77p20cdjmsx" path="res://game/data/items/raw/log/log_item.tres" id="3_86aj6"]
+[ext_resource type="PackedScene" uid="uid://iixyhw4jvjeq" path="res://game/core/components/item ejector/item_ejector.tscn" id="3_q264r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r652n"]
+albedo_color = Color(0.407041, 0.22927, 0.0982475, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7ibvn"]
+material = SubResource("StandardMaterial3D_r652n")
+size = Vector3(2, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wml4e"]
+albedo_color = Color(0.407041, 0.22927, 0.0982475, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nqc7l"]
+material = SubResource("StandardMaterial3D_wml4e")
+size = Vector3(0.1, 0.75, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8tt44"]
+albedo_color = Color(0.577008, 0.577008, 0.577008, 1)
+metallic = 1.0
+roughness = 0.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_m6a1t"]
+material = SubResource("StandardMaterial3D_8tt44")
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.02
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lighi"]
+size = Vector3(2, 1, 1)
+
+[node name="Table Saw" type="Node3D"]
+script = ExtResource("1_ss6fv")
+board_item = ExtResource("2_8vjo2")
+log_item = ExtResource("3_86aj6")
+
+[node name="Table" type="Node3D" parent="." groups=["Keep Ghost"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0.3, 0)
+mesh = SubResource("BoxMesh_7ibvn")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0, 0.45)
+mesh = SubResource("BoxMesh_nqc7l")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0, -0.45)
+mesh = SubResource("BoxMesh_nqc7l")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35, 0, 0.45)
+mesh = SubResource("BoxMesh_nqc7l")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35, 0, -0.45)
+mesh = SubResource("BoxMesh_nqc7l")
+
+[node name="Blade" type="MeshInstance3D" parent="Table"]
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("CylinderMesh_m6a1t")
+
+[node name="Item Catcher" parent="." node_paths=PackedStringArray("active_area") instance=ExtResource("2_sj1m4")]
+active_area = NodePath("../Catch Area")
+
+[node name="Catch Area" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Catch Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0.45, 0)
+shape = SubResource("BoxShape3D_lighi")
+
+[node name="Item Ejector" parent="." instance=ExtResource("3_q264r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0.45, 0)
+only_with_valid_target = false

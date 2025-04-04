@@ -13,15 +13,18 @@ func interaction_logic():
 		if shapecast.is_colliding():
 			var grid: BlockGrid= shapecast.get_collider(0)
 			assert(grid)
-			var collision_pos: Vector3= shapecast.get_collision_point(0)
-			collision_pos-= shapecast.global_basis.z * 0.01
+			var collision_pos: Vector3= Utils.get_shapecast_inside_collision_point(shapecast)
 			
-			var grid_block: GridBlock= grid.get_block_from_global_pos(collision_pos).get_grid_block()
-			if grid_block:
-				if grid_block.get_block_definition().can_interact() and grid_block.get_block_instance().can_interact(grid, grid_block, player):
-					grid_block.get_block_instance().interact(grid, grid_block, player)
-					return
-	
+			var base_block: BaseGridBlock= grid.get_block_from_global_pos(collision_pos)
+			if base_block:
+				var grid_block: GridBlock= base_block.get_grid_block()
+				if grid_block:
+					if grid_block.get_block_definition().can_interact() and grid_block.get_block_instance().can_interact(grid, grid_block, player):
+						grid_block.get_block_instance().interact(grid, grid_block, player)
+						return
+			else:
+				push_warning("block interact shapecast collided but no block found")
+
 	if Input.is_action_just_pressed("item_interact"):
 		var shapecast: ShapeCast3D= player.item_interact_shapecast
 		if shapecast.is_colliding():

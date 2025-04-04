@@ -1,5 +1,3 @@
-water + boat
-
 implement LodActivation for blocky voxel terrain
 
 FIX VoxelViewer blocky full update when reparent

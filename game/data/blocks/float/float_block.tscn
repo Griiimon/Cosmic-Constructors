@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://chmjg3remp3hd"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/float_instance.gd" id="1_lfa06"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xjsm2"]
+albedo_color = Color(0.87451, 0.423529, 0.00784314, 1)
+roughness = 0.33
+
+[sub_resource type="BoxMesh" id="BoxMesh_2l5ut"]
+material = SubResource("StandardMaterial3D_xjsm2")
+
+[node name="Float Block" type="Node3D" node_paths=PackedStringArray("water_detection_points")]
+script = ExtResource("1_lfa06")
+water_detection_points = NodePath("Water Points")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_2l5ut")
+
+[node name="Water Points" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="Water Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.25)
+
+[node name="Marker3D2" type="Marker3D" parent="Water Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0.25)
+
+[node name="Marker3D3" type="Marker3D" parent="Water Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, -0.25)
+
+[node name="Marker3D4" type="Marker3D" parent="Water Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, -0.25)
+
+[node name="Marker3D5" type="Marker3D" parent="Water Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.25, 0.25)
+
+[node name="Marker3D6" type="Marker3D" parent="Water Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0.25, 0.25)
+
+[node name="Marker3D7" type="Marker3D" parent="Water Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.25, -0.25)
+
+[node name="Marker3D8" type="Marker3D" parent="Water Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0.25, -0.25)
+
+[node name="Marker3D9" type="Marker3D" parent="Water Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.25, 0.25)
+
+[node name="Marker3D10" type="Marker3D" parent="Water Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -0.25, 0.25)
+
+[node name="Marker3D11" type="Marker3D" parent="Water Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.25, -0.25)
+
+[node name="Marker3D12" type="Marker3D" parent="Water Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -0.25, -0.25)

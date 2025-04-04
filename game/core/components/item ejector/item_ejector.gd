@@ -33,9 +33,10 @@ func eject_item(inv_item: InventoryItem, world: World, from_queue: bool= false)-
 		inv_item= InventoryItem.copy(original_item)
 		inv_item.count= max_unit_size
 	
-	if only_with_valid_target:
-		var catcher: ItemCatcher= get_item_catcher()
-		if catcher and catcher.can_catch_item(inv_item):
+	var catcher: ItemCatcher= get_item_catcher()
+	var can_catch: bool= catcher and catcher.can_catch_item(inv_item)
+	if only_with_valid_target or can_catch:
+		if can_catch:
 			catcher.catch(inv_item)
 			success= true
 	else:

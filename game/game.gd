@@ -37,9 +37,8 @@ func spawn_player():
 	assert(player_spawn)
 	
 	player= PLAYER_SCENE.instantiate()
-	player.position= player_spawn.position
-	player.world= $World
-	player.equipment= player_spawn.equipment
+	player.world= world
+	player_spawn.initialize_player(player)
 	add_child(player)
 	
 	# to make sure player unhandled input get processed last

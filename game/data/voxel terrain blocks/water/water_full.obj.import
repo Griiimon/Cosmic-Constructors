@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bhj4vvjiyrkpq"
+path="res://.godot/imported/water_full.obj-27d3395d977e5dd4aa4d1f256bbddaec.mesh"
+
+[deps]
+
+files=["res://.godot/imported/water_full.obj-27d3395d977e5dd4aa4d1f256bbddaec.mesh"]
+
+source_file="res://game/data/voxel terrain blocks/water/water_full.obj"
+dest_files=["res://.godot/imported/water_full.obj-27d3395d977e5dd4aa4d1f256bbddaec.mesh", "res://.godot/imported/water_full.obj-27d3395d977e5dd4aa4d1f256bbddaec.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

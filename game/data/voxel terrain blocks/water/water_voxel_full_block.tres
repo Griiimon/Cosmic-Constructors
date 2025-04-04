@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="VoxelTerrainBlockMesh" load_steps=5 format=3 uid="uid://c14s1lmlcyqn2"]
+
+[ext_resource type="Script" path="res://game/core/world/terrain/blocky terrain/voxel_terrain_block_mesh.gd" id="1_5tlvg"]
+[ext_resource type="Material" uid="uid://bidlhtlvrhq3o" path="res://game/data/voxel terrain blocks/terrain_material_transparent.tres" id="1_lwt3d"]
+[ext_resource type="ArrayMesh" uid="uid://bhj4vvjiyrkpq" path="res://game/data/voxel terrain blocks/water/water_full.obj" id="2_kp1pk"]
+
+[sub_resource type="VoxelBlockyModelMesh" id="VoxelBlockyModelMesh_hd11t"]
+transparency_index = 1
+collision_mask = 0
+material_override_0 = ExtResource("1_lwt3d")
+collision_enabled_0 = false
+mesh = ExtResource("2_kp1pk")
+
+[resource]
+script = ExtResource("1_5tlvg")
+model = SubResource("VoxelBlockyModelMesh_hd11t")
+is_water = true
+name = ""

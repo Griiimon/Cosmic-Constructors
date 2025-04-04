@@ -19,7 +19,8 @@ const _moore_dirs = [
 @export var dirt_block: BaseVoxelTerrainBlock
 @export var log_block: BaseVoxelTerrainBlock
 @export var leaves_block: BaseVoxelTerrainBlock
-@export var water_block: BaseVoxelTerrainBlock
+@export var water_top_block: BaseVoxelTerrainBlock
+@export var water_full_block: BaseVoxelTerrainBlock
 
 @export var heightmap_curve: Curve:
 	set(h):
@@ -139,22 +140,16 @@ func _generate_block(buffer: VoxelBuffer, origin_in_voxels: Vector3i, lod: int):
 								#foliage = DEAD_SHRUB
 							#buffer.set_voxel(foliage, x, relative_height, z, _CHANNEL)
 				
-				#if has_tree_at(gx, gz):
-					#var tree_height: int= get_tree_height_at(gx, gz)
-					#if relative_height > 0 and relative_height < block_size: #tree_height < relative_height:
-						#for y in tree_height: 
-							#buffer.set_voxel(GameData.get_voxel_terrain_block_id(log_block), x, y, z, _CHANNEL)
-			
 				## Water
 				if enable_water and height < 0 and oy < 0:
 					var start_relative_height := 0
 					if relative_height > 0:
 						start_relative_height = relative_height
-					buffer.fill_area(GameData.get_voxel_terrain_block_id(water_block),\
+					buffer.fill_area(GameData.get_voxel_terrain_block_id(water_full_block),\
 							Vector3(x, start_relative_height, z), Vector3(x + 1, block_size, z + 1), _CHANNEL)
-					#if oy + block_size == 0:
-						## Surface block
-						#buffer.set_voxel(WATER_TOP, x, block_size - 1, z, _CHANNEL)
+					if oy + block_size == 0:
+						# Surface block
+						buffer.set_voxel(GameData.get_voxel_terrain_block_id(water_top_block), x, block_size - 1, z, _CHANNEL)
 						
 				gx += 1
 #

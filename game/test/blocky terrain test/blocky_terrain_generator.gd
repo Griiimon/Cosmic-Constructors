@@ -19,6 +19,7 @@ const _moore_dirs = [
 @export var dirt_block: BaseVoxelTerrainBlock
 @export var log_block: BaseVoxelTerrainBlock
 @export var leaves_block: BaseVoxelTerrainBlock
+@export var water_block: BaseVoxelTerrainBlock
 
 @export var heightmap_curve: Curve:
 	set(h):
@@ -31,6 +32,8 @@ const _moore_dirs = [
 		# If we don't do this `Curve` could bake itself when interpolated,
 		# and this causes crashes when used in multiple threads
 		heightmap_curve.bake()
+
+@export var enable_water: bool= true
 
 @export var tree_generator: BlockyTreeGenerator:
 	set(t):
@@ -143,17 +146,16 @@ func _generate_block(buffer: VoxelBuffer, origin_in_voxels: Vector3i, lod: int):
 							#buffer.set_voxel(GameData.get_voxel_terrain_block_id(log_block), x, y, z, _CHANNEL)
 			
 				## Water
-				#if height < 0 and oy < 0:
-					#var start_relative_height := 0
-					#if relative_height > 0:
-						#start_relative_height = relative_height
-					#buffer.fill_area(WATER_FULL,
-						#Vector3(x, start_relative_height, z), 
-						#Vector3(x + 1, block_size, z + 1), _CHANNEL)
+				if enable_water and height < 0 and oy < 0:
+					var start_relative_height := 0
+					if relative_height > 0:
+						start_relative_height = relative_height
+					buffer.fill_area(GameData.get_voxel_terrain_block_id(water_block),\
+							Vector3(x, start_relative_height, z), Vector3(x + 1, block_size, z + 1), _CHANNEL)
 					#if oy + block_size == 0:
 						## Surface block
 						#buffer.set_voxel(WATER_TOP, x, block_size - 1, z, _CHANNEL)
-						#
+						
 				gx += 1
 #
 			gz += 1

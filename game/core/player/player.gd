@@ -36,6 +36,7 @@ extends BasePlayer
 
 @onready var fps_arms: Node3D = $"Head/Pivot/FPS arms"
 
+var settings: PlayerEntitySettings
 
 var hand_object: HandObject
 var active_equipment: Array[PlayerEquipmentObject]

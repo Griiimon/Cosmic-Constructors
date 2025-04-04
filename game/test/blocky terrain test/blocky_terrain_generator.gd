@@ -190,6 +190,9 @@ func _generate_block(buffer: VoxelBuffer, origin_in_voxels: Vector3i, lod: int):
 
 	buffer.compress_uniform_channels()
 
+	# TODO use terrain_node.to_global(origin...) 
+	TerrainGenerator.activate_chunk.call_deferred(origin_in_voxels + buffer.get_size() / 2, buffer.get_size())
+
 
 func _get_tree_instances_in_chunk(
 	cpos: Vector3, offset: Vector3, chunk_size: int, tree_instances: Array):

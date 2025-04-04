@@ -6,7 +6,8 @@
 [resource]
 script = ExtResource("1_hf24n")
 model = ExtResource("1_snukr")
-storage_size = 2
+storage_size = 1
+is_long = true
 base_mass = 5.0
 mass_per_item = 0.0
 name = ""

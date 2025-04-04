@@ -5,6 +5,7 @@ enum StorageSize { TINY, SMALL, LARGE, HUGE}
 
 @export var model: PackedScene
 @export var storage_size: StorageSize= StorageSize.SMALL
+@export var is_long: bool= false
 @export var base_mass: float= 0.5
 @export var mass_per_item: float= 0.0
 

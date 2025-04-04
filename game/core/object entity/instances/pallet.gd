@@ -36,7 +36,10 @@ func find_tile_with_space()-> Marker3D:
 		Item.StorageSize.TINY:
 			grid= %"Tiny Item Grid"
 		Item.StorageSize.SMALL:
-			grid= %"Small Item Grid"
+			if stored_item.is_long:
+				grid= %"Small Long Item Grid"
+			else:
+				grid= %"Small Item Grid"
 		Item.StorageSize.LARGE:
 			grid= %"Large Grid"
 	

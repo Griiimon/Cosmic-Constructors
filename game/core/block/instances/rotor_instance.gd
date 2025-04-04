@@ -7,6 +7,7 @@ extends BlockInstanceOnOff
 @onready var joint: JoltGeneric6DOFJoint3D = $JoltGeneric6DOFJoint3D
 
 @onready var rotation_speed:= BlockPropFloat.new("Rotation Speed", 1.0, change_speed)
+@onready var lock_rotation:= BlockPropBool.new("Lock Rotation", true)
 
 var sub_grid: BlockGrid
 
@@ -61,9 +62,6 @@ func on_set_active():
 	if active.is_true():
 		joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_ANGULAR_MOTOR, true)
 		joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_ANGULAR_LIMIT, false)
-
-		#joint.limit_lower= deg_to_rad(-90) - initial_angle
-		#joint.limit_upper= deg_to_rad(90) - initial_angle
 	else:
 		while not joint.node_a:
 			await get_tree().physics_frame
@@ -71,9 +69,10 @@ func on_set_active():
 
 		var angle: float= get_joint_angle()
 
-		joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_ANGULAR_LIMIT, true)
-		joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_ANGULAR_LIMIT_LOWER, angle - initial_angle) 
-		joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_ANGULAR_LIMIT_UPPER, angle - initial_angle) 
+		joint.set_flag_y(JoltGeneric6DOFJoint3D.FLAG_ENABLE_ANGULAR_LIMIT, lock_rotation.is_true())
+		if lock_rotation.is_true():
+			joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_ANGULAR_LIMIT_LOWER, angle - initial_angle) 
+			joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_ANGULAR_LIMIT_UPPER, angle - initial_angle) 
 
 
 func serialize()-> Dictionary:

@@ -13,5 +13,6 @@ mesh = ExtResource("2_e8njv")
 [resource]
 script = ExtResource("3_kwwjc")
 model = SubResource("VoxelBlockyModelMesh_rjxhb")
+is_water = false
 turn_into_grid_block = ExtResource("4_fygng")
 name = ""

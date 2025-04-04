@@ -13,4 +13,5 @@ mesh = ExtResource("2_ikgqe")
 [resource]
 script = ExtResource("1_aim1y")
 model = SubResource("VoxelBlockyModelMesh_4xxr2")
+is_water = false
 name = ""

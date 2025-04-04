@@ -207,6 +207,15 @@ func has_lod_activation()-> bool:
 	return terrain_node is VoxelNode
 
 
+func is_point_under_water(point: Vector3)-> bool:
+	if terrain_node is VoxelTerrain:
+		var voxel_id: int= (terrain_node as VoxelTerrain).get_voxel_tool().get_voxel(terrain_node.to_local(point - Vector3.ONE * 0.5))
+		var voxel_block: BaseVoxelTerrainBlock= GameData.get_voxel_terrain_block(voxel_id)
+		if voxel_block.is_water:
+			return true
+	return false
+
+
 static func get_terrain(parent_node: Node3D)-> MyTerrain:
 	var terrain: MyTerrain= parent_node.get_node_or_null(NODE_NAME)
 	assert(terrain != null, "Node %s doesn't have a child node %s of type MyTerrain" % [ parent_node.name, NODE_NAME ])

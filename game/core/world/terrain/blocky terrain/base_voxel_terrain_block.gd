@@ -1,6 +1,7 @@
 class_name BaseVoxelTerrainBlock
 extends NamedResource
 
+@export var is_water: bool= false
 @export var turn_into_grid_block: Block
 
 

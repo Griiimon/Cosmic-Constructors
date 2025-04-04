@@ -526,3 +526,11 @@ func get_faction(id: int)-> Faction:
 	if id >= factions.size():
 		return null
 	return factions[id]
+
+
+func is_point_under_water(point: Vector3)-> bool:
+	var terrain: MyTerrain= Global.terrain
+	if terrain:
+		return terrain.is_point_under_water(point)
+	return false
+		

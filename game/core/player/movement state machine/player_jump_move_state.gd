@@ -8,14 +8,19 @@ signal landed
 
 
 func on_enter():
-	player.play_animation("jump")
 	assert(not player.freeze)
-
+	player.play_animation("jump")
+	player.lock_rotation= player.settings.jump_lock_rotation
+	
 
 func on_always_physics_process(_delta: float):
 	if player.floor_shapecast.is_colliding() and can_land():
 		landed.emit()
 		return
+
+
+func on_exit():
+	player.lock_rotation= false
 
 
 func on_physics_process(_delta: float):

@@ -231,6 +231,9 @@ func _physics_process(delta: float) -> void:
 	DebugPanel.send(self, "Is Anchored", is_anchored)
 	DebugPanel.send(self, "Parking", parking_brake)
 
+	linear_damp= 0
+	angular_damp= 0
+
 	if NetworkManager.is_client:
 		for grid_block in client_tick_blocks:
 			var instance: BlockInstance= grid_block.get_block_instance()
@@ -899,6 +902,10 @@ func get_local_grid_pos(global_pos: Vector3)-> Vector3i:
 	
 func get_global_block_pos(block_pos: Vector3i)-> Vector3:
 	return to_global(block_pos)
+
+
+func get_block_force_offset(block: GridBlock)-> Vector3:
+	return get_global_block_pos(block.local_pos) - global_position
 
 
 func get_block_local(grid_pos: Vector3i)-> BaseGridBlock:

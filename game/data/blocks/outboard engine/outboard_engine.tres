@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://dm1lusvlgnset"]
+
+[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_ajf6t"]
+[ext_resource type="Resource" uid="uid://jqjluu1sfgbm" path="res://game/data/misc/block categories/physics.tres" id="1_syief"]
+[ext_resource type="PackedScene" uid="uid://bk3vl66rvtnc6" path="res://game/data/blocks/outboard engine/outboard_engine.tscn" id="2_y7wg0"]
+
+[resource]
+script = ExtResource("1_ajf6t")
+size = Vector3i(1, 2, 1)
+mass = 10.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = true
+tick_priority = 0
+can_be_built = true
+category = ExtResource("1_syief")
+scene = ExtResource("2_y7wg0")
+name = ""

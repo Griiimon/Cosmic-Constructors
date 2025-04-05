@@ -75,7 +75,7 @@ func populate():
 			if selected_row == -1:
 				selected_row= rows.size() - 1
 
-	if stored_row > -1:
+	if stored_row > -1 and stored_row < rows.size():
 		selected_row= stored_row
 		is_value_selected= stored_value_selected
 

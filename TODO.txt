@@ -1,4 +1,20 @@
-implement LodActivation for blocky voxel terrain
+SubGridConnection needs to be informed of connected grid removal and be destroyed
+
+FIX rotor joint, make test scene to find out why its so buggy
+
+DONT allow grabbing handles ( or moving grabbed grids ) that player is standing on ( including sub grids / parent grids )
+
+FIX build outboard engine from below not working
+	debug display while building with 
+
+FIX (active) joints seemingly having issues with LODActivation?
+	or is this only the new rotor with closer head
+	
+make hinge head closer to base.  piston, slider too?
+
+add cone motor block with JoltConeTwistJoint?
+
+PlayerEntitySettings.can_swim to activate WaterVoxelDetectors ( and swim movement state )
 
 FIX VoxelViewer blocky full update when reparent
 
@@ -23,7 +39,9 @@ build category menu can still get messed up and clicks drop blocks instead of se
 
 
 
+proper chunk activation should take grids AABB into account and only unfreeze it if all chunks inside that AABB report generated
 
+add chunk activation to custom lod generators
 
 test blocky terrain multiplayer
 

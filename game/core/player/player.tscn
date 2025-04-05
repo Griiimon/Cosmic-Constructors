@@ -306,3 +306,7 @@ input_mappings = {
 }
 
 [node name="Damage Component" parent="." index="6" instance=ExtResource("12_goufb")]
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="." index="7"]
+update_rotation = false
+update_scale = false

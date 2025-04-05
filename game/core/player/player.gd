@@ -35,6 +35,9 @@ extends BasePlayer
 @onready var handle_grabber: Node3D = %"Handle Grabber"
 
 @onready var fps_arms: Node3D = $"Head/Pivot/FPS arms"
+@onready var voxel_viewer: VoxelViewer = $VoxelViewer
+@onready var voxel_viewer_remote_transform: RemoteTransform3D = $RemoteTransform3D
+
 
 var settings: PlayerEntitySettings
 
@@ -56,7 +59,17 @@ func _ready() -> void:
 	
 	Input.mouse_mode= Input.MOUSE_MODE_CAPTURED
 
+	voxel_viewer.reparent(get_tree().current_scene)
+	voxel_viewer_remote_transform.remote_path= voxel_viewer_remote_transform.get_path_to(voxel_viewer)
+
 	SignalManager.player_spawned.emit()
+
+
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_PREDELETE:
+			if voxel_viewer and is_instance_valid(voxel_viewer):
+				voxel_viewer.queue_free()
 
 
 func sit(seat_block: GridBlock):

@@ -4,7 +4,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2440"]
 albedo_color = Color(0.466181, 0.466181, 0.466181, 1)
-metallic = 1.0
+metallic = 0.8
 roughness = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_axbu4"]

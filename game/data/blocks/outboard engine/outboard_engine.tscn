@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk3vl66rvtnc6"]
+[gd_scene load_steps=5 format=3 uid="uid://bk3vl66rvtnc6"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/outboard_engine_instance.gd" id="1_d2ddc"]
 
@@ -15,22 +15,20 @@ size = Vector3(0.8, 0.7, 1)
 material = SubResource("StandardMaterial3D_a2440")
 size = Vector3(0.2, 1.8, 0.3)
 
-[sub_resource type="BoxMesh" id="BoxMesh_upl8i"]
-
 [node name="Outboard Engine" type="Node3D"]
 script = ExtResource("1_d2ddc")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_axbu4")
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+mesh = SubResource("BoxMesh_axbu4")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.740495, -0.272965)
 mesh = SubResource("BoxMesh_y2wsc")
+skeleton = NodePath("../..")
 
-[node name="Propeller" type="Node3D" parent="."]
+[node name="Propeller" type="Node3D" parent="Model"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5512, -0.258245)
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("BoxMesh_upl8i")

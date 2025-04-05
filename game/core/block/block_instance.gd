@@ -304,3 +304,7 @@ func get_property_by_display_name(display_name: String)-> BlockProperty:
 
 func get_grid()-> BlockGrid:
 	return get_parent()
+
+
+func get_grid_block()-> GridBlock:
+	return get_grid().get_block_from_global_pos(global_position).get_grid_block()

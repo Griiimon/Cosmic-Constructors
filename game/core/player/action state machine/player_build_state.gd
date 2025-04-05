@@ -193,7 +193,7 @@ func pick_block():
 		grid= raycast.get_collider()
 		assert(grid != null)
 		
-		var picked_grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_pos)
+		var picked_grid_block: GridBlock= grid.get_block_from_global_pos(collision_pos).get_grid_block()
 		if picked_grid_block:
 			current_block= picked_grid_block.get_block_definition()
 			block_rotation= picked_grid_block.get_local_block_rotation()

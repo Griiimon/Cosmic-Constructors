@@ -20,3 +20,7 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
 	grid.apply_force(buoyancy_force * Vector3.UP, grid.get_block_force_offset(grid_block))
 	grid.add_effect(BlockGridLinearDampEffect.new(depth * linear_damp_factor))
 	grid.add_effect(BlockGridAngularDampEffect.new(depth * angular_damp_factor))
+
+
+func has_property_viewer()-> bool:
+	return false

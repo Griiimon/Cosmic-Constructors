@@ -56,3 +56,7 @@ func get_grid()-> BlockGrid:
 	if not joint.node_a:
 		return null
 	return joint.get_node(joint.node_a)
+
+
+func has_property_viewer()-> bool:
+	return false

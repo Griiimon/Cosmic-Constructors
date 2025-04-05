@@ -1,4 +1,4 @@
-[gd_resource type="VoxelGeneratorScript" load_steps=11 format=3 uid="uid://bnahldi02rd0d"]
+[gd_resource type="VoxelGeneratorScript" load_steps=12 format=3 uid="uid://bnahldi02rd0d"]
 
 [ext_resource type="Curve" uid="uid://b3p535p3jv8bg" path="res://game/test/blocky terrain test/heightmap_curve.tres" id="1_ee8ec"]
 [ext_resource type="Resource" uid="uid://ddsqfxd3i2wy4" path="res://game/data/voxel terrain blocks/air/air_block.tres" id="1_h2qkn"]
@@ -8,7 +8,8 @@
 [ext_resource type="Resource" uid="uid://b71ajb4s8jswg" path="res://game/data/voxel terrain blocks/log/log_voxel_block.tres" id="5_624nj"]
 [ext_resource type="Resource" uid="uid://od75ko4gdydi" path="res://game/data/voxel terrain blocks/leaves/leaves_voxel_block.tres" id="5_sfwvb"]
 [ext_resource type="Script" path="res://game/test/blocky terrain test/blocky_tree_generator.gd" id="8_rly5w"]
-[ext_resource type="Resource" uid="uid://c05en4ge0l5j8" path="res://game/data/voxel terrain blocks/water/water_voxel_block.tres" id="9_kwyxy"]
+[ext_resource type="Resource" uid="uid://c05en4ge0l5j8" path="res://game/data/voxel terrain blocks/water/water_voxel_top_block.tres" id="9_82grt"]
+[ext_resource type="Resource" uid="uid://c14s1lmlcyqn2" path="res://game/data/voxel terrain blocks/water/water_voxel_full_block.tres" id="9_v5ig5"]
 
 [sub_resource type="Resource" id="Resource_htx5u"]
 script = ExtResource("8_rly5w")
@@ -22,7 +23,9 @@ grass_block = ExtResource("3_p58m8")
 dirt_block = ExtResource("2_tmya7")
 log_block = ExtResource("5_624nj")
 leaves_block = ExtResource("5_sfwvb")
-water_block = ExtResource("9_kwyxy")
+water_top_block = ExtResource("9_82grt")
+water_full_block = ExtResource("9_v5ig5")
 heightmap_curve = ExtResource("1_ee8ec")
+enable_water = true
 tree_generator = SubResource("Resource_htx5u")
 max_trees_per_chunk = 1

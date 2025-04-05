@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://buk2n3jx256cy"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/construction_anchor_instance.gd" id="1_7id1x"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_o3s3v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_po66p"]
+albedo_color = Color(0.226686, 0.222744, 0.201827, 1)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_v388x"]
+material = SubResource("StandardMaterial3D_po66p")
+size = Vector3(0.5, 0.8, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yg8po"]
+albedo_color = Color(0.701961, 0.223529, 0.470588, 1)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_modqo"]
+material = SubResource("StandardMaterial3D_yg8po")
+top_radius = 0.1
+bottom_radius = 0.375
+height = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cdssx"]
+size = Vector3(7, 7, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vg6y3"]
+transparency = 1
+vertex_color_use_as_albedo = true
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_rad7k"]
+material = SubResource("StandardMaterial3D_vg6y3")
+size = Vector2(0.05, 0.05)
+
+[sub_resource type="Gradient" id="Gradient_d5soj"]
+offsets = PackedFloat32Array(0.0165746, 0.524862, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0.301961, 0.992157, 0.486275, 1, 1, 1, 0)
+
+[node name="Construction Anchor Block" type="Node3D"]
+script = ExtResource("1_7id1x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_o3s3v")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("BoxMesh_v388x")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.37493, -0.927053, 0, 0.927053, -0.37493, 0, 0.0703156, -0.107955)
+mesh = SubResource("CylinderMesh_modqo")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MeshInstance3D3"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, -0.344, 0.025)
+light_color = Color(1, 0.152941, 1, 1)
+light_energy = 0.25
+spot_range = 30.0
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.83519, -5.97469)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_cdssx")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Area3D"]
+amount = 100
+lifetime = 3.0
+mesh = SubResource("QuadMesh_rad7k")
+emission_shape = 3
+emission_box_extents = Vector3(3.5, 3.5, 5)
+gravity = Vector3(0, -0.1, 0)
+color_ramp = SubResource("Gradient_d5soj")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_body_exited"]

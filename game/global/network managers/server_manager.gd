@@ -200,10 +200,11 @@ func pre_process_sync_event(type: int, args: Array, sender_id: int):
 		EventSyncState.Type.ADD_GRID:
 			var position: Vector3= args[0]
 			var rotation: Vector3= args[1]
-			var faction_id: int= args[2]
-			var grid: BlockGrid= world.add_grid(position, rotation, world.get_faction(faction_id))
+			var block_size: float= args[2]
+			var faction_id: int= args[4]
+			var grid: BlockGrid= world.add_grid(position, rotation, block_size, world.get_faction(faction_id))
 			var global_grid_id: int= grid.id
-			var local_grid_id: int= args[2]
+			var local_grid_id: int= args[3]
 			if global_grid_id != local_grid_id:
 				print("Mapping local grid id %d from peer %d to %d" % [local_grid_id, sender_id, global_grid_id]) 
 				args[2]= global_grid_id

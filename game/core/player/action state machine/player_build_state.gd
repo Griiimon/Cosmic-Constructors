@@ -15,6 +15,8 @@ var block_list: Array[Block]
 var block_index: int
 
 var grid: BlockGrid
+var block_size: float= 1.0
+
 var local_block_pos: Vector3i
 var block_rotation: Vector3i
 var hotbar_layout:= HotbarLayout.new()
@@ -144,7 +146,7 @@ func build_block():
 	var new_grid:= false
 	if not grid:
 		new_grid= true
-		grid= player.world.add_grid(ghost.position, ghost.global_rotation, player.faction)
+		grid= player.world.add_grid(ghost.position, ghost.global_rotation, block_size, player.faction)
 
 		if NetworkManager.is_client:
 			ClientManager.send_sync_event(EventSyncState.Type.ADD_GRID,\

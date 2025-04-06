@@ -22,6 +22,7 @@ var block_types: Dictionary
 
 var collision_shapes: Array[CollisionShape3D]
 
+var block_size: float= 1.0
 
 var main_grid_ref: WeakRef
 var main_grid_connection: GridBlock
@@ -72,6 +73,10 @@ var client_tick_blocks: Array[GridBlock]
 
 var faction: Faction
 
+
+
+func _init(_block_size: float= 1.0):
+	block_size= _block_size
 
 
 func _ready() -> void:
@@ -131,18 +136,18 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		coll_shape.owner= self
 	else:
 		var shape:= BoxShape3D.new()
-		shape.size= block.size
+		shape.size= block.size * block_size
 		coll_shape.shape= shape
 
 		var grid_block_basis: Basis= grid_block.get_local_basis()
 		coll_shape.basis= grid_block_basis
-		coll_shape.position= pos
+		coll_shape.position= pos * block_size
 
 		# move the collision shape center if model doesnt have a proper center block
 		if Utils.is_even(int(shape.size.z)):
-			coll_shape.position-= grid_block_basis.z * 0.5
+			coll_shape.position-= grid_block_basis.z * 0.5 * block_size
 		if Utils.is_even(int(shape.size.y)):
-			coll_shape.position+= grid_block_basis.y * 0.5
+			coll_shape.position+= grid_block_basis.y * 0.5 * block_size
 
 		add_child(coll_shape)
 
@@ -205,12 +210,12 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 
 
 func add_sub_grid(sub_grid_pos: Vector3, sub_grid_rot: Vector3, connection_block: GridBlock, sub_grid_block: Block, grid_block_rot: Vector3i, instance_callback= null)-> BlockGrid:
-	var sub_grid: BlockGrid= world.add_grid(sub_grid_pos, sub_grid_rot, faction)
+	var sub_grid: BlockGrid= world.add_grid(sub_grid_pos, sub_grid_rot, block_size, faction)
 	sub_grid.add_block(sub_grid_block, Vector3i.ZERO, grid_block_rot, self, null, instance_callback)
 	sub_grid_connections.append(SubGridConnection.new(sub_grid, connection_block))
 	
 	if NetworkManager.is_server:
-		ServerManager.broadcast_sync_event(EventSyncState.Type.ADD_GRID, [sub_grid_pos, sub_grid_rot, sub_grid.id, faction.id if faction else - 1])
+		ServerManager.broadcast_sync_event(EventSyncState.Type.ADD_GRID, [sub_grid_pos, sub_grid_rot, block_size, sub_grid.id, faction.id if faction else - 1])
 		ServerManager.broadcast_sync_event(EventSyncState.Type.ADD_BLOCK, [sub_grid.id, GameData.get_block_id(sub_grid_block), Vector3i.ZERO, grid_block_rot])
 	return sub_grid
 
@@ -422,7 +427,7 @@ func run_integrity_check():
 
 func split(split_blocks: Array[Vector3i]):
 	print("Splitting of %d Blocks" % split_blocks.size())
-	var new_grid: BlockGrid= world.add_grid(position, rotation, faction)
+	var new_grid: BlockGrid= world.add_grid(position, rotation, block_size, faction)
 	
 	for block_pos in split_blocks:
 		var grid_block: BaseGridBlock= blocks[block_pos]
@@ -667,6 +672,7 @@ func serialize(local_sub_grid_ids: bool= false)-> Dictionary:
 	data["id"]= id
 	data["position"]= position
 	data["rotation"]= rotation
+	data["block_size"]= block_size
 	data["faction"]= faction.id if faction else -1
 	
 	if is_sub_grid():
@@ -717,7 +723,7 @@ func serialize(local_sub_grid_ids: bool= false)-> Dictionary:
 
 
 static func pre_deserialize(data: Dictionary, new_world: World, default_position: Vector3= Vector3.ZERO, default_rotation: Vector3= Vector3.ZERO)-> BlockGrid:
-	var grid:= BlockGrid.new()
+	var grid:= BlockGrid.new(Utils.get_key_or_default(data, "block_size", 1.0))
 	grid.world= new_world
 	
 	if new_world:
@@ -798,7 +804,9 @@ func can_place_block_at_global(block: Block, global_pos: Vector3, block_rotation
 		return false
 	
 	var query:= PhysicsShapeQueryParameters3D.new()
-	query.shape= BoxShape3D.new()
+	var box_shape:= BoxShape3D.new()
+	box_shape.size*= block_size
+	query.shape= box_shape
 	query.collision_mask= CollisionLayers.get_all_body_layers()
 	query.exclude= [ get_rid() ]
 	
@@ -897,11 +905,11 @@ func get_block_from_global_pos(global_pos: Vector3)-> BaseGridBlock:
 
 
 func get_local_grid_pos(global_pos: Vector3)-> Vector3i:
-	return to_local(global_pos).round()
+	return to_local(global_pos / block_size).round()
 
 	
 func get_global_block_pos(block_pos: Vector3i)-> Vector3:
-	return to_global(block_pos)
+	return to_global(block_pos * block_size)
 
 
 func get_block_force_offset(block: GridBlock)-> Vector3:

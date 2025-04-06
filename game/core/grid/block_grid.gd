@@ -144,9 +144,9 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		coll_shape.position= pos * block_size
 
 		# move the collision shape center if model doesnt have a proper center block
-		if Utils.is_even(int(shape.size.z)):
+		if Utils.is_even(int(block.size.z)):
 			coll_shape.position-= grid_block_basis.z * 0.5 * block_size
-		if Utils.is_even(int(shape.size.y)):
+		if Utils.is_even(int(block.size.y)):
 			coll_shape.position+= grid_block_basis.y * 0.5 * block_size
 
 		add_child(coll_shape)
@@ -216,7 +216,7 @@ func add_sub_grid(sub_grid_pos: Vector3, sub_grid_rot: Vector3, connection_block
 	
 	if NetworkManager.is_server:
 		ServerManager.broadcast_sync_event(EventSyncState.Type.ADD_GRID, [sub_grid_pos, sub_grid_rot, block_size, sub_grid.id, faction.id if faction else - 1])
-		ServerManager.broadcast_sync_event(EventSyncState.Type.ADD_BLOCK, [sub_grid.id, GameData.get_block_id(sub_grid_block), Vector3i.ZERO, grid_block_rot])
+		ServerManager.broadcast_sync_event(EventSyncState.Type.ADD_BLOCK, [sub_grid.id, GameData.get_block_id(sub_grid_block, block_size), Vector3i.ZERO, grid_block_rot])
 	return sub_grid
 
 
@@ -349,7 +349,7 @@ func apply_effects():
 func spawn_block(block: Block, pos: Vector3i, block_rotation: Vector3i, model_only: bool= false):
 	var model: Node3D= block.get_model()
 	
-	model.position= pos
+	model.position= pos * block_size
 	model.basis= Basis.from_euler(block_rotation * deg_to_rad(90))
 
 	if model_only:
@@ -468,7 +468,7 @@ func update_properties():
 	for grid_block: BaseGridBlock in blocks.values():
 		if grid_block is VirtualGridBlock: continue
 		var block_mass: int= int(grid_block.get_mass())
-		new_center_of_mass= lerp(new_center_of_mass, Vector3(grid_block.local_pos), block_mass / float(new_mass + block_mass)) 
+		new_center_of_mass= lerp(new_center_of_mass, Vector3(grid_block.local_pos * block_size), block_mass / float(new_mass + block_mass)) 
 		new_mass+= block_mass
 	
 	# to avoid 0 mass
@@ -905,7 +905,7 @@ func get_block_from_global_pos(global_pos: Vector3)-> BaseGridBlock:
 
 
 func get_local_grid_pos(global_pos: Vector3)-> Vector3i:
-	return to_local(global_pos / block_size).round()
+	return (to_local(global_pos) / block_size).round()
 
 	
 func get_global_block_pos(block_pos: Vector3i)-> Vector3:

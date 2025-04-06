@@ -8,17 +8,17 @@ var hotbar_layout:= HotbarLayout.new()
 
 
 
-func on_placed(grid: BlockGrid, _grid_block: GridBlock):
+func on_placed(grid: BaseBlockGrid, _grid_block: GridBlock):
 	hotbar_layout.grid= grid
 
 
-func on_restored(grid: BlockGrid, _grid_block: GridBlock, restore_data: Dictionary):
+func on_restored(grid: BaseBlockGrid, _grid_block: GridBlock, restore_data: Dictionary):
 	hotbar_layout.grid= grid
 	if restore_data.has("hotbar"):
 		hotbar_layout.deserialize(restore_data["hotbar"], grid.world)
 
 
-func interact(grid: BlockGrid, grid_block: GridBlock, player: Player):
+func interact(grid: BaseBlockGrid, grid_block: GridBlock, player: Player):
 	if not entity:
 		player.sit(grid_block)
 		SignalManager.player_seated.emit(grid, grid_block)

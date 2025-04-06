@@ -2,7 +2,7 @@ class_name PlayerGridMoveState
 extends PlayerMovementStateMachineState
 
 
-var grid: BlockGrid
+var grid: BaseBlockGrid
 
 
 

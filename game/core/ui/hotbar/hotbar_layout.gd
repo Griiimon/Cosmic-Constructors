@@ -2,7 +2,7 @@ class_name HotbarLayout
 
 var slots: Array[BaseHotkeyAssignment]
 # TODO if this is a seats grid, if grid is split this var may require updating 
-var grid: BlockGrid
+var grid: BaseBlockGrid
 
 
 

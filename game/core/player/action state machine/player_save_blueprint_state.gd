@@ -1,7 +1,7 @@
 class_name PlayerSaveBlueprintState
 extends PlayerActionStateMachineState
 
-var grid: BlockGrid
+var grid: BaseBlockGrid
 
 
 
@@ -41,8 +41,8 @@ func create_blueprint(blueprint_name: String):
 	all_grids.append(grid_data)
 
 	for i in grid.sub_grid_connections.size():
-		var sub_grid_connection: BlockGrid.SubGridConnection= grid.sub_grid_connections[i]
-		var sub_grid: BlockGrid= sub_grid_connection.sub_grid
+		var sub_grid_connection: BaseBlockGrid.SubGridConnection= grid.sub_grid_connections[i]
+		var sub_grid: BaseBlockGrid= sub_grid_connection.sub_grid
 		grid_data= sub_grid.serialize()
 		grid_data["position"]= sub_grid.global_position - grid.global_position
 		var a_to_b: Transform3D= grid.transform.affine_inverse() * sub_grid.transform

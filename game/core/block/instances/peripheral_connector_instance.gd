@@ -25,12 +25,12 @@ func _ready() -> void:
 	default_interaction_property= locked
 
 
-func on_placed(grid: BlockGrid, _grid_block: GridBlock):
+func on_placed(grid: BaseBlockGrid, _grid_block: GridBlock):
 	joint.node_a= joint.get_path_to(grid)
 	joint.enabled= false
 
 
-func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
+func physics_tick(_grid: BaseBlockGrid, _grid_block: GridBlock, _delta: float):
 	if state != State.CONNECTED:
 		if pull_area.has_overlapping_areas():
 			var counter_part: PeripheralConnectorCounterpart= pull_area.get_overlapping_areas()[0]

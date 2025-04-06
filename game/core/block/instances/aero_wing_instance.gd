@@ -14,7 +14,7 @@ func _ready() -> void:
 	default_interaction_property= wing_angle
 
 
-func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
+func physics_tick(grid: BaseBlockGrid, grid_block: GridBlock, _delta: float):
 	var downforce: float= pow(max(-grid.get_local_velocity().z, 0.0), 2) * wing_angle.get_value_f() * downforce_factor
 	DebugHud.send("Downforce", "%.1f" % downforce)
 	grid.apply_force(-grid.global_basis.y * downforce, grid.get_global_block_pos(grid_block.local_pos) - grid.global_position)

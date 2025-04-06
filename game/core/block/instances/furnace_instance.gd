@@ -17,7 +17,7 @@ func _ready() -> void:
 	item_catcher.can_catch_callable= can_catch_item
 
 	
-func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
+func physics_tick(grid: BaseBlockGrid, _grid_block: GridBlock, delta: float):
 	if progress < 1:
 		if storage.has_ingredients(recipe.ingredients) or DebugSettings.active.infinite_furnace_ingredients:
 			progress+= delta

@@ -14,7 +14,7 @@ extends PlayerActionStateMachineState
 var block_list: Array[Block]
 var block_index: int
 
-var grid: BlockGrid
+var grid: BaseBlockGrid
 var local_block_pos: Vector3i
 var block_rotation: Vector3i
 var hotbar_layout:= HotbarLayout.new()
@@ -109,7 +109,7 @@ func align_ghost():
 	if raycast.is_colliding():
 		var collision_pos: Vector3= Utils.get_raycast_outside_collision_point(raycast)
 		
-		var old_grid: BlockGrid= grid
+		var old_grid: BaseBlockGrid= grid
 		grid= raycast.get_collider()
 		assert(grid != null)
 
@@ -156,7 +156,7 @@ func build_block():
 	var grid_block_rotation: Vector3i= Vector3i.ZERO if new_grid else block_rotation
 	
 	if NetworkManager.is_client:
-		var stored_grid: BlockGrid= grid
+		var stored_grid: BaseBlockGrid= grid
 		
 		if grid.id_pending:
 			await grid.id_assigned
@@ -287,7 +287,7 @@ func remove_block():
 	var result= player.get_world_3d().direct_space_state.intersect_ray(query)
 	
 	if result and result.collider.collision_layer == CollisionLayers.GRID:
-		var grid: BlockGrid= result.collider
+		var grid: BaseBlockGrid= result.collider
 		var collision_point: Vector3= Utils.get_raycast_inside_collision_point(player.build_raycast)
 		#var collision_point: Vector3= result.position
 		#collision_point+= -player.build_raycast.global_basis.z * 0.05
@@ -309,7 +309,7 @@ func remove_grid():
 	query.hit_from_inside= false
 	var result= player.get_world_3d().direct_space_state.intersect_ray(query)
 	if result and (result.collider as CollisionObject3D).collision_layer == CollisionLayers.GRID:
-		var grid: BlockGrid= result.collider
+		var grid: BaseBlockGrid= result.collider
 		grid.world.remove_grid(grid)
 		if NetworkManager.is_client:
 			ClientManager.send_sync_event(EventSyncState.Type.REMOVE_GRID, [grid.id])

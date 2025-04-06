@@ -22,7 +22,7 @@ func _ready() -> void:
 			property_table[prop_var.display_name]= prop.name
 
 
-func initialize(grid: BlockGrid, grid_block: GridBlock, restore_data= null):
+func initialize(grid: BaseBlockGrid, grid_block: GridBlock, restore_data= null):
 	if NetworkManager.is_client:
 		on_placed_client(grid, grid_block)
 		
@@ -45,23 +45,23 @@ func initialize(grid: BlockGrid, grid_block: GridBlock, restore_data= null):
 				property.sync_request(grid, grid_block)
 
 
-func on_placed(_grid: BlockGrid, _grid_block: GridBlock):
+func on_placed(_grid: BaseBlockGrid, _grid_block: GridBlock):
 	pass
 
 
-func on_placed_client(_grid: BlockGrid, _grid_block: GridBlock):
+func on_placed_client(_grid: BaseBlockGrid, _grid_block: GridBlock):
 	pass
 
 
-func on_restored(grid: BlockGrid, grid_block: GridBlock, _restore_data: Dictionary):
+func on_restored(grid: BaseBlockGrid, grid_block: GridBlock, _restore_data: Dictionary):
 	on_placed(grid, grid_block)
 
 
-func on_neighbor_placed(_grid: BlockGrid, _grid_block: BaseGridBlock, _neighbor_block_pos: Vector3i):
+func on_neighbor_placed(_grid: BaseBlockGrid, _grid_block: BaseGridBlock, _neighbor_block_pos: Vector3i):
 	pass
 
 
-func on_neighbor_removed(_grid: BlockGrid, _grid_block: BaseGridBlock, _neighbor_block_pos: Vector3i):
+func on_neighbor_removed(_grid: BaseBlockGrid, _grid_block: BaseGridBlock, _neighbor_block_pos: Vector3i):
 	pass
 
 
@@ -69,23 +69,23 @@ func on_grid_changed():
 	pass
 
 
-func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
+func physics_tick(_grid: BaseBlockGrid, _grid_block: GridBlock, _delta: float):
 	pass
 
 
-func client_physics_tick(_grid: BlockGrid, _grid_block: GridBlock, delta: float):
+func client_physics_tick(_grid: BaseBlockGrid, _grid_block: GridBlock, delta: float):
 	pass
 
 
-func on_update(_grid: BlockGrid, _grid_block: GridBlock):
+func on_update(_grid: BaseBlockGrid, _grid_block: GridBlock):
 	pass
 
 
-func on_destroy(_grid: BlockGrid, _grid_block: GridBlock):
+func on_destroy(_grid: BaseBlockGrid, _grid_block: GridBlock):
 	queue_free()
 
 
-func process_sync_queue(grid: BlockGrid, grid_block: GridBlock):
+func process_sync_queue(grid: BaseBlockGrid, grid_block: GridBlock):
 	if property_sync_queue.is_empty(): return
 	
 	var frame: int= Engine.get_physics_frames()
@@ -96,7 +96,7 @@ func process_sync_queue(grid: BlockGrid, grid_block: GridBlock):
 		property_sync_queue.erase(frame)
 
 
-func interact(_grid: BlockGrid, _grid_block: GridBlock, _player: Player):
+func interact(_grid: BaseBlockGrid, _grid_block: GridBlock, _player: Player):
 	pass
 
 
@@ -108,7 +108,7 @@ func change_mass():
 	changed_mass.emit()
 
 
-func find_linked_block_group(grid: BlockGrid, grid_block: GridBlock, filter= null)-> LinkedBlockGroup:
+func find_linked_block_group(grid: BaseBlockGrid, grid_block: GridBlock, filter= null)-> LinkedBlockGroup:
 	var neighbors: Array[Vector3i]= get_same_neighbors_positions(grid, grid_block.local_pos)
 	var group: LinkedBlockGroup= null
 	for neighbor in neighbors:
@@ -126,7 +126,7 @@ func find_linked_block_group(grid: BlockGrid, grid_block: GridBlock, filter= nul
 	return group
 
 
-func find_or_make_linked_block_group(grid: BlockGrid, grid_block: GridBlock, create_virtual: bool= false, filter= null)-> LinkedBlockGroup:
+func find_or_make_linked_block_group(grid: BaseBlockGrid, grid_block: GridBlock, create_virtual: bool= false, filter= null)-> LinkedBlockGroup:
 	var group: LinkedBlockGroup= find_linked_block_group(grid, grid_block, filter)
 
 	if not group:
@@ -162,7 +162,7 @@ func remap_sub_grid_id(data: Dictionary, key: String= "sub_grid_id")-> int:
 	return id
 
 
-func run_server_method(callable: Callable, grid: BlockGrid, grid_block: GridBlock, args: Array= []):
+func run_server_method(callable: Callable, grid: BaseBlockGrid, grid_block: GridBlock, args: Array= []):
 	assert(not NetworkManager.is_server)
 	if NetworkManager.is_single_player:
 		callable.callv([grid, grid_block] + args)
@@ -231,11 +231,11 @@ func get_properties()-> Array[BlockProperty]:
 	return result
 
 
-func get_same_neighbors(grid: BlockGrid, block_pos: Vector3i)-> Array[BlockInstance]:
+func get_same_neighbors(grid: BaseBlockGrid, block_pos: Vector3i)-> Array[BlockInstance]:
 	return get_same_neighbors_positions(grid, block_pos).map(func(x): return grid.get_block_instance_at(x))
 
 
-func get_same_neighbors_positions(grid: BlockGrid, block_pos: Vector3i)-> Array[Vector3i]:
+func get_same_neighbors_positions(grid: BaseBlockGrid, block_pos: Vector3i)-> Array[Vector3i]:
 	var result: Array[Vector3i]= []
 	
 	var neighbors: Array[Vector3i]= grid.get_block_neighbors(block_pos)
@@ -247,7 +247,7 @@ func get_same_neighbors_positions(grid: BlockGrid, block_pos: Vector3i)-> Array[
 	return result
 
 
-static func get_neighbor_class_instances(grid: BlockGrid, grid_block: BaseGridBlock, global_class_name: String, neighbor_block_pos= null, allow_multiple: bool= true)-> Array[BlockInstance]:
+static func get_neighbor_class_instances(grid: BaseBlockGrid, grid_block: BaseGridBlock, global_class_name: String, neighbor_block_pos= null, allow_multiple: bool= true)-> Array[BlockInstance]:
 	var result: Array[BlockInstance]= []
 	
 	var neighbor_instance: BlockInstance
@@ -290,7 +290,7 @@ func requires_property_viewer_updates()-> bool:
 	return false
 
 
-func can_interact(_grid: BlockGrid, _grid_block: GridBlock, _player: Player)-> bool:
+func can_interact(_grid: BaseBlockGrid, _grid_block: GridBlock, _player: Player)-> bool:
 	return true
 
 
@@ -302,7 +302,7 @@ func get_property_by_display_name(display_name: String)-> BlockProperty:
 	return get(property_table[display_name])
 
 
-func get_grid()-> BlockGrid:
+func get_grid()-> BaseBlockGrid:
 	return get_parent()
 
 

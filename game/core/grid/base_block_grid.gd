@@ -1,4 +1,4 @@
-class_name BlockGrid
+class_name BaseBlockGrid
 extends RigidBody3D
 
 signal id_assigned
@@ -6,10 +6,10 @@ signal id_assigned
 enum Property { PARKING_BRAKE, INERTIAL_DAMPENERS, REVERSE_MODE }
 
 class SubGridConnection:
-	var sub_grid: BlockGrid
+	var sub_grid: BaseBlockGrid
 	var connection_block: GridBlock
 
-	func _init(_sub_grid: BlockGrid, _connection_block: GridBlock):
+	func _init(_sub_grid: BaseBlockGrid, _connection_block: GridBlock):
 		sub_grid= _sub_grid
 		connection_block= _connection_block
 
@@ -22,6 +22,7 @@ var block_types: Dictionary
 
 var collision_shapes: Array[CollisionShape3D]
 
+var block_size: float= 1.0
 
 var main_grid_ref: WeakRef
 var main_grid_connection: GridBlock
@@ -74,6 +75,10 @@ var faction: Faction
 
 
 
+func _init(_block_size: float= 1.0):
+	block_size= _block_size
+
+
 func _ready() -> void:
 	collision_layer= CollisionLayers.GRID
 	collision_mask= CollisionLayers.PLAYER + CollisionLayers.GRID + CollisionLayers.TERRAIN
@@ -106,7 +111,7 @@ func init_mass_indicator():
 	mass_indicator.hide()
 
 
-func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO, connects_to_main_grid: BlockGrid= null, restore_data= null, instance_callback= null, model_only: bool= false)-> BaseGridBlock:
+func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.ZERO, connects_to_main_grid: BaseBlockGrid= null, restore_data= null, instance_callback= null, model_only: bool= false)-> BaseGridBlock:
 	var block_node= spawn_block(block, pos, block_rotation, model_only)
 
 	if model_only: return
@@ -131,18 +136,18 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 		coll_shape.owner= self
 	else:
 		var shape:= BoxShape3D.new()
-		shape.size= block.size
+		shape.size= block.size * block_size
 		coll_shape.shape= shape
 
 		var grid_block_basis: Basis= grid_block.get_local_basis()
 		coll_shape.basis= grid_block_basis
-		coll_shape.position= pos
+		coll_shape.position= pos * block_size
 
 		# move the collision shape center if model doesnt have a proper center block
 		if Utils.is_even(int(shape.size.z)):
-			coll_shape.position-= grid_block_basis.z * 0.5
+			coll_shape.position-= grid_block_basis.z * 0.5 * block_size
 		if Utils.is_even(int(shape.size.y)):
-			coll_shape.position+= grid_block_basis.y * 0.5
+			coll_shape.position+= grid_block_basis.y * 0.5 * block_size
 
 		add_child(coll_shape)
 
@@ -204,8 +209,8 @@ func add_block(block: Block, pos: Vector3i, block_rotation: Vector3i= Vector3i.Z
 	return grid_block
 
 
-func add_sub_grid(sub_grid_pos: Vector3, sub_grid_rot: Vector3, connection_block: GridBlock, sub_grid_block: Block, grid_block_rot: Vector3i, instance_callback= null)-> BlockGrid:
-	var sub_grid: BlockGrid= world.add_grid(sub_grid_pos, sub_grid_rot, faction)
+func add_sub_grid(sub_grid_pos: Vector3, sub_grid_rot: Vector3, connection_block: GridBlock, sub_grid_block: Block, grid_block_rot: Vector3i, instance_callback= null)-> BaseBlockGrid:
+	var sub_grid: BaseBlockGrid= world.add_grid(sub_grid_pos, sub_grid_rot, faction)
 	sub_grid.add_block(sub_grid_block, Vector3i.ZERO, grid_block_rot, self, null, instance_callback)
 	sub_grid_connections.append(SubGridConnection.new(sub_grid, connection_block))
 	
@@ -422,7 +427,7 @@ func run_integrity_check():
 
 func split(split_blocks: Array[Vector3i]):
 	print("Splitting of %d Blocks" % split_blocks.size())
-	var new_grid: BlockGrid= world.add_grid(position, rotation, faction)
+	var new_grid: BaseBlockGrid= world.add_grid(position, rotation, faction)
 	
 	for block_pos in split_blocks:
 		var grid_block: BaseGridBlock= blocks[block_pos]
@@ -667,10 +672,11 @@ func serialize(local_sub_grid_ids: bool= false)-> Dictionary:
 	data["id"]= id
 	data["position"]= position
 	data["rotation"]= rotation
+	data["block_size"]= block_size
 	data["faction"]= faction.id if faction else -1
 	
 	if is_sub_grid():
-		data["main_grid_id"]= (main_grid_ref.get_ref() as BlockGrid).id
+		data["main_grid_id"]= (main_grid_ref.get_ref() as BaseBlockGrid).id
 		data["main_grid_connection"]= main_grid_connection.local_pos
 
 	data["linear_velocity"]= linear_velocity
@@ -716,8 +722,8 @@ func serialize(local_sub_grid_ids: bool= false)-> Dictionary:
 	return data
 
 
-static func pre_deserialize(data: Dictionary, new_world: World, default_position: Vector3= Vector3.ZERO, default_rotation: Vector3= Vector3.ZERO)-> BlockGrid:
-	var grid:= BlockGrid.new()
+static func pre_deserialize(data: Dictionary, new_world: World, default_position: Vector3= Vector3.ZERO, default_rotation: Vector3= Vector3.ZERO)-> BaseBlockGrid:
+	var grid:= BaseBlockGrid.new(Utils.get_key_or_default(data, "block_size", 1.0))
 	grid.world= new_world
 	
 	if new_world:
@@ -734,7 +740,7 @@ static func pre_deserialize(data: Dictionary, new_world: World, default_position
 	return grid
 
 
-func deserialize(data: Dictionary, block_models_only: bool= false, main_grid: BlockGrid= null, sub_grids: Array[BlockGrid]= [], sub_grid_id_remaps: Dictionary= {}, enable_lod_activation: bool= true):
+func deserialize(data: Dictionary, block_models_only: bool= false, main_grid: BaseBlockGrid= null, sub_grids: Array[BaseBlockGrid]= [], sub_grid_id_remaps: Dictionary= {}, enable_lod_activation: bool= true):
 	var faction_id: int= Utils.get_key_or_default(data, "faction", -1)
 	if faction_id > -1:
 		faction= world.get_faction(faction_id)
@@ -798,7 +804,9 @@ func can_place_block_at_global(block: Block, global_pos: Vector3, block_rotation
 		return false
 	
 	var query:= PhysicsShapeQueryParameters3D.new()
-	query.shape= BoxShape3D.new()
+	var box_shape:= BoxShape3D.new()
+	box_shape.size*= block_size
+	query.shape= box_shape
 	query.collision_mask= CollisionLayers.get_all_body_layers()
 	query.exclude= [ get_rid() ]
 	
@@ -897,11 +905,11 @@ func get_block_from_global_pos(global_pos: Vector3)-> BaseGridBlock:
 
 
 func get_local_grid_pos(global_pos: Vector3)-> Vector3i:
-	return to_local(global_pos).round()
+	return to_local(global_pos / block_size).round()
 
 	
 func get_global_block_pos(block_pos: Vector3i)-> Vector3:
-	return to_global(block_pos)
+	return to_global(block_pos * block_size)
 
 
 func get_block_force_offset(block: GridBlock)-> Vector3:
@@ -950,7 +958,7 @@ func get_block_positions_without(filter_arr: Array[Vector3i])-> Array[Vector3i]:
 func get_main_cockpit_recursive()-> SeatInstance:
 	if main_cockpit: return main_cockpit
 	if is_sub_grid():
-		return (main_grid_ref.get_ref() as BlockGrid).get_main_cockpit_recursive()
+		return (main_grid_ref.get_ref() as BaseBlockGrid).get_main_cockpit_recursive()
 	return null
 
 

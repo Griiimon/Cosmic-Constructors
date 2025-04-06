@@ -7,7 +7,7 @@ extends BaseSandbox
 
 
 func on_start():
-	for grid: BlockGrid in player.world.grids.get_children():
+	for grid: BaseBlockGrid in player.world.grids.get_children():
 		grid.current_gravity= Vector3(0, -10, 0)
 
 	if spawn_ore:

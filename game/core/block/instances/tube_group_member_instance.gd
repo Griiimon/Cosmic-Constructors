@@ -23,7 +23,7 @@ var linked_system: LinkedTubeGroup
 
 
 
-func on_placed(grid: BlockGrid, grid_block: GridBlock):
+func on_placed(grid: BaseBlockGrid, grid_block: GridBlock):
 	var block_pos: Vector3i= grid_block.local_pos
 	var neighbors: Array[Vector3i]= grid.get_block_neighbors(block_pos, false, false, grid_block is MultiGridBlock)
 	var groups: Array[LinkedBlockGroup]
@@ -54,7 +54,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 		linked_system.add_block(grid_block)
 
 
-func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
+func on_restored(grid: BaseBlockGrid, grid_block: GridBlock, restore_data: Dictionary):
 	if is_input():
 		if restore_data.has("fluid_content"):
 			var fluid_container: FluidContainer= BaseBlockComponent3D.get_from_node(self, FluidContainer.NODE_NAME) as FluidContainer
@@ -64,7 +64,7 @@ func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionar
 	on_placed(grid, grid_block)
 
 
-func on_destroy(grid: BlockGrid, grid_block: GridBlock):
+func on_destroy(grid: BaseBlockGrid, grid_block: GridBlock):
 	if is_input():
 		linked_system.remove_input(BaseBlockComponent3D.get_from_block(grid_block, FluidContainer.NODE_NAME))
 	elif is_output():

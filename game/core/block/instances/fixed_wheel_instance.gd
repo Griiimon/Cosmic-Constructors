@@ -6,7 +6,7 @@ extends BlockInstance
 
 
 
-func on_placed(grid: BlockGrid, _grid_block: GridBlock):
+func on_placed(grid: BaseBlockGrid, _grid_block: GridBlock):
 	var wheel: RigidBody3D= wheel_scene.instantiate()
 	joint.add_child(wheel)
 	wheel.top_level= true

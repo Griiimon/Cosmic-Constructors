@@ -7,19 +7,19 @@ func _init(_name: String, _callback):
 	super(_name, _callback, false)
 
 
-func toggle(_grid: BlockGrid, _grid_block: GridBlock, _sync: bool= true):
+func toggle(_grid: BaseBlockGrid, _grid_block: GridBlock, _sync: bool= true):
 	do_callback()
 
 
-func increase(grid: BlockGrid, grid_block: GridBlock, _modifier: int, sync: bool= true):
+func increase(grid: BaseBlockGrid, grid_block: GridBlock, _modifier: int, sync: bool= true):
 	toggle(grid, grid_block, sync)
 
 
-func decrease(grid: BlockGrid, grid_block: GridBlock, _modifier: int, sync: bool= true):
+func decrease(grid: BaseBlockGrid, grid_block: GridBlock, _modifier: int, sync: bool= true):
 	toggle(grid, grid_block, sync)
 
 
-func change_value(grid: BlockGrid, grid_block: GridBlock, _modifier: int, _delta: int, sync: bool= true):
+func change_value(grid: BaseBlockGrid, grid_block: GridBlock, _modifier: int, _delta: int, sync: bool= true):
 	toggle(grid, grid_block, sync)
 
 

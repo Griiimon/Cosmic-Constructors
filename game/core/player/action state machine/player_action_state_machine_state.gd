@@ -11,7 +11,7 @@ func interaction_logic():
 	if Input.is_action_just_pressed("block_interact"):
 		var shapecast: ShapeCast3D= player.interact_shapecast
 		if shapecast.is_colliding():
-			var grid: BlockGrid= shapecast.get_collider(0)
+			var grid: BaseBlockGrid= shapecast.get_collider(0)
 			assert(grid)
 			var collision_pos: Vector3= Utils.get_shapecast_inside_collision_point(shapecast)
 			

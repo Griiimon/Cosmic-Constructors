@@ -7,7 +7,7 @@ var property: BlockProperty:
 		if not property: return
 		update()
 
-var grid: BlockGrid
+var grid: BaseBlockGrid
 var grid_block: GridBlock
 
 

@@ -61,15 +61,15 @@ func generate_sub_node(node_name: String)-> Node:
 	return node
 
 
-func add_grid(pos: Vector3, rot: Vector3= Vector3.ZERO, _faction: Faction= null)-> BlockGrid:
-	var grid:= BlockGrid.new()
+func add_grid(pos: Vector3, rot: Vector3= Vector3.ZERO, _faction: Faction= null)-> BaseBlockGrid:
+	var grid:= BaseBlockGrid.new()
 	assign_grid_id(grid)
 	init_grid(grid, pos, rot)
 	grid.faction= _faction
 	return grid
 
 
-func assign_grid_id(grid: BlockGrid, new_id: bool= true, custom_id: int= -1, reassign: bool= true):
+func assign_grid_id(grid: BaseBlockGrid, new_id: bool= true, custom_id: int= -1, reassign: bool= true):
 	var new_grid_id: int
 	if new_id:
 		new_grid_id= next_grid_id
@@ -87,7 +87,7 @@ func assign_grid_id(grid: BlockGrid, new_id: bool= true, custom_id: int= -1, rea
 	lookup_id_to_grid[new_grid_id]= grid
 
 
-func init_grid(grid: BlockGrid, pos: Vector3, rot: Vector3):
+func init_grid(grid: BaseBlockGrid, pos: Vector3, rot: Vector3):
 	grid.position= pos
 	grid.rotation= rot
 	grid.world= self
@@ -101,7 +101,7 @@ func init_grid(grid: BlockGrid, pos: Vector3, rot: Vector3):
 		grid.freeze= true
 
 
-func remove_grid(grid: BlockGrid):
+func remove_grid(grid: BaseBlockGrid):
 	lookup_id_to_grid.erase(grid.id)
 	#lookup_grid_to_id.erase(grid)
 	grids.remove_child(grid)
@@ -109,7 +109,7 @@ func remove_grid(grid: BlockGrid):
 
 
 # not used
-func add_custom_grid(grid: BlockGrid, pos: Vector3, rot: Vector3= Vector3.ZERO)-> BlockGrid:
+func add_custom_grid(grid: BaseBlockGrid, pos: Vector3, rot: Vector3= Vector3.ZERO)-> BaseBlockGrid:
 	init_grid(grid, pos, rot)
 	return grid
 
@@ -162,8 +162,8 @@ func damage_object(obj: CollisionObject3D, damage: Damage):
 				for pierce_item in result.items:
 					var collider: Node3D= pierce_item.object
 					if collider.is_in_group(DamageComponent.GROUP_NAME):
-						if collider is BlockGrid:
-							var grid: BlockGrid= collider
+						if collider is BaseBlockGrid:
+							var grid: BaseBlockGrid= collider
 							var pierced_blocks: Array[Vector3i]= grid.raycast(ray_origin, ray_target)
 							pierced_blocks.reverse()
 							for block_pos in pierced_blocks:
@@ -211,7 +211,7 @@ func apply_delayed_explosive_force(force: DelayedExplosiveForce):
 		var rid_closes_point: Dictionary
 		for item: Dictionary in result:
 			var collider: CollisionObject3D= item.collider
-			if collider is not BlockGrid: continue
+			if collider is not BaseBlockGrid: continue
 			
 			var rid: RID= collider.get_rid() 
 		
@@ -253,7 +253,7 @@ func save_world(world_name: String= "", project_folder: bool= false):
 	world_data["players"]= []
 	world_data["items"]= []
 	
-	for grid: BlockGrid in grids.get_children():
+	for grid: BaseBlockGrid in grids.get_children():
 		world_data["grids"].append(grid.serialize())
 
 	for faction in factions:
@@ -315,12 +315,12 @@ func load_world(world_data: Dictionary):
 	var world_grid_data: Dictionary
 
 	for grid_data: Dictionary in world_data["grids"]:
-		var grid: BlockGrid= BlockGrid.pre_deserialize(grid_data, self)
+		var grid: BaseBlockGrid= BaseBlockGrid.pre_deserialize(grid_data, self)
 		world_grid_data[grid]= grid_data
 		if NetworkManager.is_client:
 			grid.freeze= true
 
-	for grid: BlockGrid in grids.get_children():
+	for grid: BaseBlockGrid in grids.get_children():
 		grid.deserialize(world_grid_data[grid])
 
 	if world_data.has("factions"):
@@ -355,7 +355,7 @@ func add_projectile(projectile: ProjectileObject):
 
 func freeze_grids(b: bool):
 	#grid_freeze_state= b
-	for grid: BlockGrid in grids.get_children():
+	for grid: BaseBlockGrid in grids.get_children():
 		if not grid.is_anchored:
 			grid.freeze= b
 
@@ -400,7 +400,7 @@ func explosion(damage: Damage, obj: CollisionObject3D):
 				assert(damage_at_point >= 0, "radius %f vs distance %f" % [damage.radius, damage.position.distance_to(point)])
 				
 				if damage_at_point > 0:
-					if collider is BlockGrid:
+					if collider is BaseBlockGrid:
 						pass
 					elif collider is RigidBody3D:
 						(collider as RigidBody3D).apply_impulse(damage.get_explosion_impulse_at(point), point - collider.global_position)
@@ -499,12 +499,12 @@ func has_grid(id: int)-> bool:
 	return lookup_id_to_grid.has(id)
 
 
-func get_grid(id: int)-> BlockGrid:
+func get_grid(id: int)-> BaseBlockGrid:
 	return lookup_id_to_grid[id]
 
 
-func get_grids()-> Array[BlockGrid]:
-	var result: Array[BlockGrid]
+func get_grids()-> Array[BaseBlockGrid]:
+	var result: Array[BaseBlockGrid]
 	result.assign(grids.get_children())
 	return result
 

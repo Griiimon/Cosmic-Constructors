@@ -7,7 +7,7 @@ extends BlockInstance
 
 
 
-func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
+func physics_tick(grid: BaseBlockGrid, grid_block: GridBlock, _delta: float):
 	var depth: float= 0
 	for point in water_detection_points.get_children():
 		if grid.world.is_point_under_water(point.global_position):

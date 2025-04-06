@@ -13,7 +13,7 @@ extends ScrollSelectionPanel
 		#return ("%.4f" % value) if value is float else value
 
 
-var grid: BlockGrid
+var grid: BaseBlockGrid
 var block: GridBlock
 var block_instance: BlockInstance
 var initial_player_look: Vector3
@@ -84,7 +84,7 @@ func populate():
 			update_interval.start()
 
 
-func open(_block: GridBlock= null, _grid: BlockGrid= null):
+func open(_block: GridBlock= null, _grid: BaseBlockGrid= null):
 	assert(_grid and _block)
 	grid= _grid
 	block= _block
@@ -103,7 +103,7 @@ func close(trigger_signal: bool= true):
 	is_value_selected= false
 
 
-func update(_block: GridBlock, _grid: BlockGrid, player: Player):
+func update(_block: GridBlock, _grid: BaseBlockGrid, player: Player):
 	if not _block: 
 		close()
 		return

@@ -21,14 +21,14 @@ func _ready() -> void:
 	item_catcher.can_catch_callable= can_catch_item
 
 
-func on_placed(grid: BlockGrid, grid_block: GridBlock):
+func on_placed(grid: BaseBlockGrid, grid_block: GridBlock):
 	world= grid.world
 	
 	for neighbor_pos in grid.get_block_neighbors(grid_block.local_pos):
 		on_neighbor_placed(grid, grid_block, neighbor_pos)
 
 
-func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, delta: float):
+func physics_tick(_grid: BaseBlockGrid, _grid_block: GridBlock, delta: float):
 	if item_instance:
 		if progress < 1:
 			progress= clampf(progress + delta, 0, 1)
@@ -48,7 +48,7 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, delta: float):
 					item_instance= null
 
 
-func on_neighbor_placed(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
+func on_neighbor_placed(grid: BaseBlockGrid, grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
 	if grid_block.to_global(Vector3i.FORWARD) == neighbor_block_pos:
 		assert(neighbor_block_pos != grid_block.local_pos)
 		var conveyor_target: ConveyorTarget= BaseBlockComponent.get_from_block_pos(grid, neighbor_block_pos, ConveyorTarget.NODE_NAME)

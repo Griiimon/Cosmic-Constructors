@@ -12,7 +12,7 @@ func _ready() -> void:
 	active.client_side_callback()
 
 
-func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
+func physics_tick(grid: BaseBlockGrid, grid_block: GridBlock, delta: float):
 	if not active.is_true(): return
 
 	var thruster_block: SolidFuelThrusterBlock= grid_block.block_definition

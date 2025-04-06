@@ -1,7 +1,7 @@
 class_name LinkedRailGroup
 extends LinkedBlockGroup
 
-var sub_grid: BlockGrid
+var sub_grid: BaseBlockGrid
 var global_transform: Transform3D
 
 var joint: JoltSliderJoint3D
@@ -14,7 +14,7 @@ var stored_limits: Vector2
 
 
 
-func _init(_grid: BlockGrid, virtual: bool= false):
+func _init(_grid: BaseBlockGrid, virtual: bool= false):
 	super(_grid, virtual)
 
 

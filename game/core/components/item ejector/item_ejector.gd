@@ -61,8 +61,8 @@ func get_item_catcher()-> ItemCatcher:
 	
 	if raycast.is_colliding():
 		var collider: CollisionObject3D= raycast.get_collider()
-		if collider is BlockGrid:
-			var grid: BlockGrid= collider
+		if collider is BaseBlockGrid:
+			var grid: BaseBlockGrid= collider
 			assert(grid)
 			var collision_pos: Vector3= Utils.get_raycast_inside_collision_point(raycast)
 			var grid_block: BaseGridBlock= grid.get_block_from_global_pos(collision_pos)

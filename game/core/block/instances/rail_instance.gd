@@ -14,11 +14,11 @@ var rail: LinkedRailGroup
 
 
 
-func on_placed(grid: BlockGrid, grid_block: GridBlock):
+func on_placed(grid: BaseBlockGrid, grid_block: GridBlock):
 	init(grid, grid_block)
 	
 
-func init(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary= {}):
+func init(grid: BaseBlockGrid, grid_block: GridBlock, restore_data: Dictionary= {}):
 	var group= find_linked_block_group(grid, grid_block, block_group_filter)
 
 	if not group:
@@ -70,11 +70,11 @@ func init(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary= {}):
 	rail.add_block(grid_block)
 
 
-func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
+func on_restored(grid: BaseBlockGrid, grid_block: GridBlock, restore_data: Dictionary):
 	init(grid, grid_block, restore_data)
 
 
-func on_destroy(grid: BlockGrid, grid_block: GridBlock):
+func on_destroy(grid: BaseBlockGrid, grid_block: GridBlock):
 	super(grid, grid_block)
 
 
@@ -110,7 +110,7 @@ func serialize()-> Dictionary:
 	return data
 
 
-func block_group_filter(_grid: BlockGrid, grid_block: GridBlock, neighbor_pos: Vector3i)-> bool:
+func block_group_filter(_grid: BaseBlockGrid, grid_block: GridBlock, neighbor_pos: Vector3i)-> bool:
 	return grid_block.to_global(Vector3i.FORWARD) == neighbor_pos or grid_block.to_global(Vector3i.BACK) == neighbor_pos
 
 

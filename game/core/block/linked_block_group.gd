@@ -3,12 +3,12 @@ class_name LinkedBlockGroup
 static var NEXT_ID: int= 0
 
 var id: int
-var grid: BlockGrid
+var grid: BaseBlockGrid
 var blocks: Dictionary
 
 
 
-func _init(_grid: BlockGrid, virtual: bool= false):
+func _init(_grid: BaseBlockGrid, virtual: bool= false):
 	grid= _grid
 	id= NEXT_ID
 	NEXT_ID+= 1

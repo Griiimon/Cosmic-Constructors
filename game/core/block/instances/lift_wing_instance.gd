@@ -12,7 +12,7 @@ var elevator: float= 0.0
 #var roll: float= 0.0
 
 
-func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
+func physics_tick(grid: BaseBlockGrid, grid_block: GridBlock, _delta: float):
 	elevator+= grid.requested_rotation.x * elevator_sensitivity
 	var roll: float= grid.requested_rotation.z
 	

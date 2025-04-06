@@ -2,7 +2,7 @@ class_name BlockGridBaseEffect
 
 
 
-func apply(_grid: BlockGrid):
+func apply(_grid: BaseBlockGrid):
 	pass
 
 

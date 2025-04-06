@@ -44,7 +44,7 @@ static func build_initial_world_state(world: World)-> Dictionary:
 	result["grids"]= []
 	result["players"]= []
 
-	for grid: BlockGrid in world.get_grids():
+	for grid: BaseBlockGrid in world.get_grids():
 		result["grids"].append(grid.serialize())
 	
 	return result

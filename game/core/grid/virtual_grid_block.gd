@@ -5,7 +5,7 @@ var parent: MultiGridBlock
 
 
 
-func take_damage(damage: int, grid: BlockGrid, type: Damage.SourceType= Damage.SourceType.UNKNOWN)-> int:
+func take_damage(damage: int, grid: BaseBlockGrid, type: Damage.SourceType= Damage.SourceType.UNKNOWN)-> int:
 	return parent.take_damage(damage, grid, type)
 
 
@@ -13,7 +13,7 @@ func absorb_damage(damage: int)-> int:
 	return parent.absorb_damage(damage)
 
 
-func destroy(grid: BlockGrid):
+func destroy(grid: BaseBlockGrid):
 	parent.destroy(grid)
 
 
@@ -33,5 +33,5 @@ func get_local_basis()-> Basis:
 	return parent.get_local_basis()
 
 
-func get_global_basis(grid: BlockGrid)-> Basis:
+func get_global_basis(grid: BaseBlockGrid)-> Basis:
 	return parent.get_global_basis(grid)

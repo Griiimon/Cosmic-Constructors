@@ -8,13 +8,13 @@ extends TubeGroupMemberInstance
 
 
 
-func on_placed(grid: BlockGrid, grid_block: GridBlock):
+func on_placed(grid: BaseBlockGrid, grid_block: GridBlock):
 	super(grid, grid_block)
 	
 	update_light()
 
 
-func on_neighbor_placed(_grid: BlockGrid, _grid_block: BaseGridBlock, _neighbor_block_pos: Vector3i):
+func on_neighbor_placed(_grid: BaseBlockGrid, _grid_block: BaseGridBlock, _neighbor_block_pos: Vector3i):
 	update_light()
 
 

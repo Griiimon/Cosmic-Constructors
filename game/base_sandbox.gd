@@ -101,7 +101,7 @@ func _input(event: InputEvent) -> void:
 
 
 func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
-	var grid: BlockGrid= Global.game.world.add_grid(pos)
+	var grid: BaseBlockGrid= Global.game.world.add_grid(pos)
 	
 	for x in size.x:
 		for z in size.y:
@@ -111,7 +111,7 @@ func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
 
 func sit_in_nearest_seat():
 	if not player: return
-	for grid: BlockGrid in player.world.grids.get_children():
+	for grid: BaseBlockGrid in player.world.grids.get_children():
 		for block: BaseGridBlock in grid.get_blocks():
 			if block.get_block_definition() is SeatBlock:
 				player.sit(block.get_grid_block())

@@ -25,17 +25,17 @@ func _ready() -> void:
 	fluid_consumer.variable_consumption= func(): return current_throttle_input * max_fuel_consumption
 
 
-func on_placed(grid: BlockGrid, grid_block: GridBlock):
+func on_placed(grid: BaseBlockGrid, grid_block: GridBlock):
 	super(grid, grid_block)
 	search_for_drive_shaft(grid, grid_block)
 
 
-func on_neighbor_placed(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
+func on_neighbor_placed(grid: BaseBlockGrid, grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
 	super(grid, grid_block, neighbor_block_pos)
 	search_for_drive_shaft(grid, grid_block, grid.get_block_local(neighbor_block_pos))
 
 
-func search_for_drive_shaft(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_block: BaseGridBlock= null):
+func search_for_drive_shaft(grid: BaseBlockGrid, grid_block: BaseGridBlock, neighbor_block: BaseGridBlock= null):
 	var neighbor_blocks: Array[BaseGridBlock]= []
 	if not neighbor_block:
 		neighbor_blocks.append_array(grid.get_block_neighbor_blocks(grid_block.local_pos))
@@ -50,7 +50,7 @@ func search_for_drive_shaft(grid: BlockGrid, grid_block: BaseGridBlock, neighbor
 				drive_shafts.append(drive_shaft_group)
 
 
-func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
+func physics_tick(grid: BaseBlockGrid, grid_block: GridBlock, _delta: float):
 	var torque_output: float= 0.0
 	current_throttle_input= 0
 	if active.is_true():
@@ -81,7 +81,7 @@ func stop_animation():
 			tween.kill()
 
 
-func on_sync_animation(_grid: BlockGrid, _grid_block: GridBlock):
+func on_sync_animation(_grid: BaseBlockGrid, _grid_block: GridBlock):
 	if animation_running.is_true():
 		start_animation()
 	else:

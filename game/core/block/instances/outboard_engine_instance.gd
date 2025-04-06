@@ -18,7 +18,7 @@ func _ready() -> void:
 	alternative_interaction_property= reverse
 
 
-func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
+func physics_tick(grid: BaseBlockGrid, grid_block: GridBlock, _delta: float):
 	if active.is_true():
 		if grid.world.is_point_under_water(propeller.global_position):
 			var final_force: Vector3

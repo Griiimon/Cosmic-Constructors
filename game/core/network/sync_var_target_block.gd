@@ -15,12 +15,12 @@ func _init(_grid_id: int, _block_pos: Vector3i):
 	block_pos= _block_pos
 
 
-static func create(grid: BlockGrid, grid_block: GridBlock)-> SyncVarTargetBlock:
+static func create(grid: BaseBlockGrid, grid_block: GridBlock)-> SyncVarTargetBlock:
 	return SyncVarTargetBlock.new(grid.id, grid_block.local_pos)
 
 
 func get_block_instance(world: World)-> BlockInstance:
-	var grid: BlockGrid= world.get_grid(grid_id)
+	var grid: BaseBlockGrid= world.get_grid(grid_id)
 	var block: GridBlock= grid.get_block_local(block_pos)
 	return block.get_block_instance()
 

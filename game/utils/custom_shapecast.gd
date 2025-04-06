@@ -2,7 +2,7 @@ class_name CustomShapeCast
 
 const DEBUG_MODE= false
 
-static var grid: BlockGrid
+static var grid: BaseBlockGrid
 static var grid_block: BaseGridBlock
 
 
@@ -48,7 +48,7 @@ static func pierce_blocks(shapecast: ShapeCast3D, filter: Callable, step_size: f
 		if result:
 			var first_result: Dictionary= result[0]
 			var collider: CollisionObject3D= first_result.collider
-			if collider is BlockGrid:
+			if collider is BaseBlockGrid:
 				grid= collider
 				#var shape_trans: Transform3D= grid.shape_owner_get_transform(first_result.shape)
 				

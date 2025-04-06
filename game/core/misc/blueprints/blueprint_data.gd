@@ -1,20 +1,20 @@
 class_name BlueprintData
 
-var grid: BlockGrid
+var grid: BaseBlockGrid
 var sub_grids_node: Node3D
 var position: Vector3
 var rotation: Vector3
 
 
 
-func place(world: World)-> Array[BlockGrid]:
+func place(world: World)-> Array[BaseBlockGrid]:
 	assert(not NetworkManager.is_client)
-	var result: Array[BlockGrid]
+	var result: Array[BaseBlockGrid]
 	
 	result.append(grid)
 	
 	if sub_grids_node:
-		for child: BlockGrid in sub_grids_node.get_children():
+		for child: BaseBlockGrid in sub_grids_node.get_children():
 			child.reparent(world.grids)
 			child.freeze= false
 			result.append(child)
@@ -34,14 +34,14 @@ func load_blueprint(data: Array, model_only: bool= false, world: World= null):
 	#if not model_only:
 		#world= player.world
 	
-	var sub_grids: Array[BlockGrid]
+	var sub_grids: Array[BaseBlockGrid]
 	var sub_grid_id_remaps: Dictionary
 	
 	for grid_data in all_grids:
 		if not grid:
-			grid= BlockGrid.pre_deserialize(grid_data, world, position, rotation)
+			grid= BaseBlockGrid.pre_deserialize(grid_data, world, position, rotation)
 		else:
-			var sub_grid: BlockGrid= BlockGrid.pre_deserialize(grid_data, world, position)
+			var sub_grid: BaseBlockGrid= BaseBlockGrid.pre_deserialize(grid_data, world, position)
 			sub_grids.append(sub_grid)
 			var grid_data_id: int= grid_data["local_id"]
 			sub_grid_id_remaps[grid_data_id]= sub_grid.id
@@ -55,7 +55,7 @@ func load_blueprint(data: Array, model_only: bool= false, world: World= null):
 		grid.add_child(sub_grids_node)
 		
 	for i in all_grids.size():
-		var sub_grid: BlockGrid= sub_grids[i]
+		var sub_grid: BaseBlockGrid= sub_grids[i]
 		sub_grid.deserialize(all_grids[i], model_only, grid, [], sub_grid_id_remaps, false)
 
 		if model_only:

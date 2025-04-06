@@ -86,7 +86,7 @@ func _process(delta : float) -> void:
 	model.rotation.x -= (wrapf(spin * delta, 0, TAU))
 
 
-func initialize(grid: BlockGrid, _suspension: SuspensionInstance) -> void:
+func initialize(grid: BaseBlockGrid, _suspension: SuspensionInstance) -> void:
 	suspension= _suspension
 	spring_length= suspension.spring_length
 	spring_rate= suspension.get_spring_rate()
@@ -168,7 +168,7 @@ func process_torque(drive : float, drive_inertia : float, brake_torque : float, 
 		return (spin - previous_spin) * (wheel_moment + drive_inertia) / (drive * delta)
 
 
-func process_forces(grid: BlockGrid, braking : bool, delta : float) -> float:
+func process_forces(grid: BaseBlockGrid, braking : bool, delta : float) -> float:
 	previous_velocity = local_velocity
 	local_velocity = (global_position - previous_global_position) / delta * global_transform.basis
 	previous_global_position = global_position
@@ -214,7 +214,7 @@ func process_forces(grid: BlockGrid, braking : bool, delta : float) -> float:
 		return 0.0
 
 
-func process_suspension(grid: BlockGrid, delta : float) -> float:
+func process_suspension(grid: BaseBlockGrid, delta : float) -> float:
 	if grounded and last_collider:
 		#spring_current_length = last_collision_point.distance_to(query.transform.origin) - tire_radius
 		spring_current_length = -suspension.to_local(global_position).y + spring_length / 2.0

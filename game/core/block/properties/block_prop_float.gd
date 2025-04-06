@@ -24,7 +24,7 @@ func get_value_i()-> int:
 	return round(f)
 
 
-func toggle(grid: BlockGrid, grid_block: GridBlock, sync: bool= true):
+func toggle(grid: BaseBlockGrid, grid_block: GridBlock, sync: bool= true):
 	if is_locked: return
 	if not can_toggle: return
 	
@@ -39,23 +39,23 @@ func toggle(grid: BlockGrid, grid_block: GridBlock, sync: bool= true):
 			decrease(grid, grid_block, 1, sync)
 
 
-func set_variant(grid: BlockGrid, grid_block: GridBlock, val: Variant, sync: bool= true):
+func set_variant(grid: BaseBlockGrid, grid_block: GridBlock, val: Variant, sync: bool= true):
 	f= val
 	do_clamp()
 	super(grid, grid_block, val, sync)
 
 
-func increase(grid: BlockGrid, grid_block: GridBlock, modifier: int, sync: bool= true):
+func increase(grid: BaseBlockGrid, grid_block: GridBlock, modifier: int, sync: bool= true):
 	if is_locked: return
 	change_value(grid, grid_block, modifier, 1, sync)
 
 
-func decrease(grid: BlockGrid, grid_block: GridBlock, modifier: int, sync: bool= true):
+func decrease(grid: BaseBlockGrid, grid_block: GridBlock, modifier: int, sync: bool= true):
 	if is_locked: return
 	change_value(grid, grid_block, modifier, -1, sync)
 
 
-func change_value(grid: BlockGrid, grid_block: GridBlock, modifier: int, delta: int, sync: bool= true):
+func change_value(grid: BaseBlockGrid, grid_block: GridBlock, modifier: int, delta: int, sync: bool= true):
 	if is_locked: return
 	f+= step_size * modifier * delta
 	do_clamp()

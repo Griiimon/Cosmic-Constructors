@@ -21,13 +21,13 @@ func _ready() -> void:
 		label.text= desc_text
 
 
-func interact(grid: BlockGrid, grid_block: GridBlock, player: Player):
+func interact(grid: BaseBlockGrid, grid_block: GridBlock, player: Player):
 	if player.faction != grid.faction: return
 	run_server_method(buy, grid, grid_block, [ grid.faction.id if grid.faction else -1])
 
 
 # TODO get faction from grid
-func buy(grid: BlockGrid, grid_block: GridBlock, faction_id: int):
+func buy(grid: BaseBlockGrid, grid_block: GridBlock, faction_id: int):
 	if offered_item_count.get_value_i() >= max_count: return
 	var game: CastlesAndCannonsGame= Global.game
 	var faction: Faction= game.world.get_faction(faction_id)
@@ -39,7 +39,7 @@ func buy(grid: BlockGrid, grid_block: GridBlock, faction_id: int):
 	fill_cannons(grid, grid_block)
 
 
-func fill_cannons(grid: BlockGrid, grid_block: GridBlock):
+func fill_cannons(grid: BaseBlockGrid, grid_block: GridBlock):
 	var faction: Faction= get_grid().faction
 	var cannons: Array[CnCCannonInstance]
 	
@@ -57,7 +57,7 @@ func fill_cannons(grid: BlockGrid, grid_block: GridBlock):
 	while total_items > 0:
 		for cannon in cannons:
 			if cannon.projectiles.get_value_i() < cannon.projectiles.get_max_value():
-				var cannon_grid: BlockGrid= cannon.get_grid()
+				var cannon_grid: BaseBlockGrid= cannon.get_grid()
 				var cannon_block: GridBlock= cannon_grid.get_block_from_global_pos(cannon.global_position)
 				cannon.projectiles.set_variant(cannon_grid, cannon_block, cannon.projectiles.get_value_i() + 1)
 				total_items-= 1
@@ -67,7 +67,7 @@ func fill_cannons(grid: BlockGrid, grid_block: GridBlock):
 	offered_item_count.set_variant_conditionally(grid, grid_block, total_items)
 
 
-func on_count_changed(_grid: BlockGrid= null, _grid_block: GridBlock= null):
+func on_count_changed(_grid: BaseBlockGrid= null, _grid_block: GridBlock= null):
 	var comp: int= offered_item_count.get_value_i()
 	for i in stack.get_child_count():
 		var item: Node3D= stack.get_child(i)

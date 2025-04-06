@@ -122,11 +122,11 @@ func update_temporary_info_label(s: String):
 	temporary_info_label_cooldown.start()
 
 
-func on_interact_with_block(grid_block: GridBlock, grid: BlockGrid, player: Player):
+func on_interact_with_block(grid_block: GridBlock, grid: BaseBlockGrid, player: Player):
 	property_viewer_panel.update(grid_block, grid, player)
 
 
-func on_hotkey_assigned(assignment: BaseHotkeyAssignment, grid: BlockGrid):
+func on_hotkey_assigned(assignment: BaseHotkeyAssignment, grid: BaseBlockGrid):
 	update_temporary_info_label(str("Hotkey ", assignment.key, " assigned to ", assignment.get_as_text(grid)))
 
 
@@ -141,7 +141,7 @@ func on_block_category_selected(category: BlockCategory):
 	SignalManager.selected_block_category.emit(category)
 
 
-func on_player_seated(grid: BlockGrid, _grid_block: GridBlock):
+func on_player_seated(grid: BaseBlockGrid, _grid_block: GridBlock):
 	parking_brake_button.show()
 	reverse_button.show()
 	jetpack_button.hide()

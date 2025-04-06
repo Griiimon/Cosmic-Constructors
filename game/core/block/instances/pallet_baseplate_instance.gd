@@ -14,7 +14,7 @@ func _ready() -> void:
 	default_interaction_property= active
 
 
-func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
+func physics_tick(_grid: BaseBlockGrid, _grid_block: GridBlock, _delta: float):
 	if not active.is_true(): return
 	
 	for body: ObjectEntity in area.get_overlapping_bodies():

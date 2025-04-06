@@ -3,7 +3,7 @@ extends BaseComponent
 
 
 
-static func get_from_block_pos(grid: BlockGrid, block_pos: Vector3i, node_name: String)-> BaseBlockComponent:
+static func get_from_block_pos(grid: BaseBlockGrid, block_pos: Vector3i, node_name: String)-> BaseBlockComponent:
 	var block: BaseGridBlock= grid.get_block_local(block_pos)
 	if block:
 		return get_from_block(block, node_name)

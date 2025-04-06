@@ -167,7 +167,7 @@ func try_to_separate_grid(origin: Vector3i, exclusion_list: Array[Vector3i]):
 
 	await get_tree().create_timer(1).timeout
 
-	var grid: BlockGrid= world.add_grid(Vector3(origin) + Vector3.ONE * 0.5)
+	var grid: BaseBlockGrid= world.add_grid(Vector3(origin) + Vector3.ONE * 0.5)
 	for voxel_detail in grid_voxels:
 		var block_pos: Vector3i= voxel_detail.pos - origin
 		print(block_pos)

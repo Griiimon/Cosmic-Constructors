@@ -67,30 +67,30 @@ func get_value_i()-> int:
 	return 0
 
 
-func toggle(grid: BlockGrid, grid_block: GridBlock, sync: bool= true):
+func toggle(grid: BaseBlockGrid, grid_block: GridBlock, sync: bool= true):
 	if sync: do_sync(grid, grid_block)
 	do_callback()
 
 
-func increase(_grid: BlockGrid, _grid_block: GridBlock, _modifier: int, _sync: bool= true):
+func increase(_grid: BaseBlockGrid, _grid_block: GridBlock, _modifier: int, _sync: bool= true):
 	do_callback()
 
 
-func decrease(_grid: BlockGrid, _grid_block: GridBlock, _modifier: int, _sync: bool= true):
+func decrease(_grid: BaseBlockGrid, _grid_block: GridBlock, _modifier: int, _sync: bool= true):
 	do_callback()
 
 
-func change_value(grid: BlockGrid, grid_block: GridBlock, _modifier: int, _delta: int, sync: bool= true):
+func change_value(grid: BaseBlockGrid, grid_block: GridBlock, _modifier: int, _delta: int, sync: bool= true):
 	if sync: do_sync(grid, grid_block)
 	do_callback()
 
 
-func set_variant(grid: BlockGrid, grid_block: GridBlock, _val: Variant, sync: bool= true):
+func set_variant(grid: BaseBlockGrid, grid_block: GridBlock, _val: Variant, sync: bool= true):
 	if sync: do_sync(grid, grid_block)
 	do_callback()
 
 
-func do_sync(grid: BlockGrid, grid_block: GridBlock, auto: bool= true):
+func do_sync(grid: BaseBlockGrid, grid_block: GridBlock, auto: bool= true):
 	if auto and not auto_sync: return
 
 	if NetworkManager.is_single_player: 
@@ -108,12 +108,12 @@ func change_step_size():
 	pass
 
 
-func sync_request(grid: BlockGrid, grid_block: GridBlock):
+func sync_request(grid: BaseBlockGrid, grid_block: GridBlock):
 	assert(NetworkManager.is_client)
 	ServerManager.request_block_property.rpc_id(1, grid.id, grid_block.local_pos, display_name)
 	
 
-func on_client_sync(grid: BlockGrid, grid_block: GridBlock):
+func on_client_sync(grid: BaseBlockGrid, grid_block: GridBlock):
 	if sync_callback:
 		sync_callback.call(grid, grid_block)
 

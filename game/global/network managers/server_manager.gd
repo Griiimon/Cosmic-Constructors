@@ -52,7 +52,7 @@ func _physics_process(_delta: float) -> void:
 	for grid_id: int in control_movement_requests.keys():
 		if not world.has_grid(grid_id): continue
 		var request: Dictionary= control_movement_requests[grid_id]
-		var grid: BlockGrid= world.get_grid(grid_id)
+		var grid: BaseBlockGrid= world.get_grid(grid_id)
 		var seat_block: GridBlock= grid.get_block_local(request["seat"])
 		if not seat_block: continue
 		var seat: SeatInstance= seat_block.get_block_instance()
@@ -70,7 +70,7 @@ func _physics_process(_delta: float) -> void:
 
 		grid.request_movement(grid_move_vec, global_grid_move_vec)
 
-	for grid: BlockGrid in Global.game.world.get_grids():
+	for grid: BaseBlockGrid in Global.game.world.get_grids():
 		DebugHud.send(grid.name, Utils.get_short_vec3(grid.global_position))
 
 	ticks+= 1
@@ -201,7 +201,7 @@ func pre_process_sync_event(type: int, args: Array, sender_id: int):
 			var position: Vector3= args[0]
 			var rotation: Vector3= args[1]
 			var faction_id: int= args[2]
-			var grid: BlockGrid= world.add_grid(position, rotation, world.get_faction(faction_id))
+			var grid: BaseBlockGrid= world.add_grid(position, rotation, world.get_faction(faction_id))
 			var global_grid_id: int= grid.id
 			var local_grid_id: int= args[2]
 			if global_grid_id != local_grid_id:
@@ -212,7 +212,7 @@ func pre_process_sync_event(type: int, args: Array, sender_id: int):
 		EventSyncState.Type.ADD_BLOCK:
 			assert(NetworkManager.is_server)
 			var grid_id: int= args[0]
-			var grid: BlockGrid= Global.game.world.get_grid(grid_id)
+			var grid: BaseBlockGrid= Global.game.world.get_grid(grid_id)
 			var block_id: int= args[1]
 			var block: Block= GameData.get_block(block_id)
 			var local_pos: Vector3i= args[2]
@@ -222,7 +222,7 @@ func pre_process_sync_event(type: int, args: Array, sender_id: int):
 		EventSyncState.Type.REMOVE_BLOCK:
 			assert(NetworkManager.is_server)
 			var grid_id: int= args[0]
-			var grid: BlockGrid= Global.game.world.get_grid(grid_id)
+			var grid: BaseBlockGrid= Global.game.world.get_grid(grid_id)
 			var local_pos: Vector3i= args[1]
 			var block: GridBlock= grid.get_block_local(local_pos).get_grid_block()
 			block.destroy(grid)
@@ -236,7 +236,7 @@ func pre_process_sync_event(type: int, args: Array, sender_id: int):
 
 		EventSyncState.Type.CHANGE_GRID_PROPERTY:
 			var grid_id: int= args[0]
-			var property: BlockGrid.Property= args[1]
+			var property: BaseBlockGrid.Property= args[1]
 			var value= args[2]
 			world.get_grid(grid_id).change_property(property, value)
 
@@ -267,7 +267,7 @@ func request_save(custom_world_name: String, project_folder_world: bool):
 
 
 @rpc("any_peer", "reliable")
-func sync_grid_anchored_state(grid: BlockGrid):
+func sync_grid_anchored_state(grid: BaseBlockGrid):
 	# DESYNC
 	# FIXME send with timestamp: if multiple for same grid are send in short succession.. bad
 	ClientManager.receive_grid_anchored_state.rpc(grid.id, grid.is_anchored)
@@ -341,7 +341,7 @@ func spawn_blueprint(compressed_data: PackedByteArray, position: Vector3, rotati
 	blueprint_data.position= position
 	blueprint_data.rotation= rotation
 	blueprint_data.load_blueprint(data, false, world)
-	var grids: Array[BlockGrid]= blueprint_data.place(world)
+	var grids: Array[BaseBlockGrid]= blueprint_data.place(world)
 
 	var grid_data: Array[Dictionary]= []
 	for grid in grids:
@@ -355,7 +355,7 @@ func spawn_blueprint(compressed_data: PackedByteArray, position: Vector3, rotati
 func request_block_property(grid_id: int, block_pos: Vector3i, property_name: String):
 	var world: World= Global.game.world
 	if not world.has_grid(grid_id): return
-	var grid: BlockGrid= world.get_grid(grid_id)
+	var grid: BaseBlockGrid= world.get_grid(grid_id)
 	if not grid.has_block(block_pos): return
 
 	var block_instance: BlockInstance= grid.get_block_local(block_pos).get_block_instance()
@@ -370,7 +370,7 @@ func request_block_property(grid_id: int, block_pos: Vector3i, property_name: St
 func run_block_instance_method(method_name: String, grid_id: int, block_pos: Vector3i, args: Array):
 	var world: World= Global.game.world
 	if not world.has_grid(grid_id): return
-	var grid: BlockGrid= world.get_grid(grid_id)
+	var grid: BaseBlockGrid= world.get_grid(grid_id)
 	if not grid.has_block(block_pos): return
 	var grid_block: GridBlock= grid.get_block_local(block_pos)
 	var inst: BlockInstance= grid_block.get_block_instance()

@@ -18,5 +18,5 @@ static func deserialize(_key: int, data: Dictionary)-> HotkeyAssignmentBuildBloc
 	return HotkeyAssignmentBuildBlock.new(_key, GameData.get_block_definition(data["block"]))
 	
 
-func get_as_text(_grid: BlockGrid= null)-> String:
+func get_as_text(_grid: BaseBlockGrid= null)-> String:
 	return str(block_definition.get_display_name())

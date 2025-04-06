@@ -16,11 +16,11 @@ extends BlockInstance
 
 
 
-func interact(grid: BlockGrid, grid_block: GridBlock, _player: Player):
+func interact(grid: BaseBlockGrid, grid_block: GridBlock, _player: Player):
 	run_server_method(shoot, grid, grid_block, [ (grid_block.block_definition as CnCCannonBlock).recoil_impulse ])
 
 
-func shoot(grid: BlockGrid, grid_block: GridBlock, recoil: float):
+func shoot(grid: BaseBlockGrid, grid_block: GridBlock, recoil: float):
 	assert(not NetworkManager.is_client)
 	if not projectiles.is_true() or powder.get_value_f() < power.get_value_f():
 		return

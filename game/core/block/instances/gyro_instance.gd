@@ -3,7 +3,7 @@ extends BlockInstance
 
 
 
-func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
+func physics_tick(grid: BaseBlockGrid, grid_block: GridBlock, _delta: float):
 	var gyro_block: GyroBlock= grid_block.block_definition
 	
 	grid.total_gyro_strength+= gyro_block.strength

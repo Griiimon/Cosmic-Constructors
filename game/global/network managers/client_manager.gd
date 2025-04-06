@@ -41,7 +41,7 @@ func _physics_process(_delta: float) -> void:
 			for peer: BasePlayer in Global.game.peers.get_children():
 				update_peer_node(peer)
 		
-			for grid: BlockGrid in Global.game.world.get_grids():
+			for grid: BaseBlockGrid in Global.game.world.get_grids():
 				update_grid(grid)
 
 			for obj: ObjectEntity in Global.game.world.get_objects():
@@ -109,7 +109,7 @@ func store_grid_state(grid_state: Dictionary):
 			arr.append(grid_state)
 
 
-func update_grid(grid: BlockGrid):
+func update_grid(grid: BaseBlockGrid):
 	var grid_id: int= grid.id
 	if grid.id_pending: return
 	
@@ -255,11 +255,11 @@ func receive_grids(compressed_data: PackedByteArray):
 	var world_grid_data: Dictionary
 	
 	for grid_data: Dictionary in json.data:
-		var grid: BlockGrid= BlockGrid.pre_deserialize(grid_data, Global.game.world)
+		var grid: BaseBlockGrid= BaseBlockGrid.pre_deserialize(grid_data, Global.game.world)
 		world_grid_data[grid]= grid_data
 		grid.freeze= true
 
-	for grid: BlockGrid in world_grid_data.keys():
+	for grid: BaseBlockGrid in world_grid_data.keys():
 		grid.deserialize(world_grid_data[grid])
 
 
@@ -277,7 +277,7 @@ func request_full_peer_sync():
 func update_grid_id(global_grid_id: int, local_grid_id: int):
 	var world: World= Global.game.world
 	assert(world)
-	var grid: BlockGrid= world.get_grid(local_grid_id)
+	var grid: BaseBlockGrid= world.get_grid(local_grid_id)
 	assert(grid)
 
 	if global_grid_id != local_grid_id:

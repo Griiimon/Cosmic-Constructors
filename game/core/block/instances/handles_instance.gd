@@ -11,13 +11,13 @@ var rigidbody: RigidBody3D
 
 
 
-func interact(grid: BlockGrid, _grid_block: GridBlock, player: Player):
+func interact(grid: BaseBlockGrid, _grid_block: GridBlock, player: Player):
 	player.grab_handles(self)
 	grabbed_by_player= player
 	update_joint(grid, player)
 
 
-func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
+func physics_tick(_grid: BaseBlockGrid, _grid_block: GridBlock, _delta: float):
 	if grabbed_by_player:
 		if rigidbody:
 			var hold_position: Vector3= grabbed_by_player.handle_grabber.global_position
@@ -29,7 +29,7 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 			rigidbody.apply_torque(Utils.calc_angular_velocity(rigidbody.global_basis, grabbed_by_player.handle_grabber.global_basis) * alignment_factor * strength)
 
 
-func update_joint(grid: BlockGrid, player: Player):
+func update_joint(grid: BaseBlockGrid, player: Player):
 	# TODO if this grid gets split it's possible these paths become invalid (?)
 	joint.node_a= joint.get_path_to(grid)
 	if player.is_rigidbody():
@@ -52,7 +52,7 @@ func disconnect_joint():
 		rigidbody= null
 
 
-func get_grid()-> BlockGrid:
+func get_grid()-> BaseBlockGrid:
 	if not joint.node_a:
 		return null
 	return joint.get_node(joint.node_a)

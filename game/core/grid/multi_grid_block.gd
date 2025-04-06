@@ -10,7 +10,7 @@ func absorb_damage(_damage: int)-> int:
 	return hitpoints / children.size()
 
 
-func destroy(grid: BlockGrid):
+func destroy(grid: BaseBlockGrid):
 	super(grid)
 	for child in children:
 		grid.remove_block(child)

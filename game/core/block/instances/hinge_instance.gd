@@ -7,7 +7,7 @@ extends BlockInstanceOnOff
 
 @onready var rotation_speed:= BlockPropFloat.new("Rotation Speed", 0.2, change_speed)
 
-var sub_grid: BlockGrid
+var sub_grid: BaseBlockGrid
 
 var initial_angle: float
 
@@ -20,7 +20,7 @@ func _ready() -> void:
 	on_set_active.call_deferred()
 
 
-func on_placed(grid: BlockGrid, grid_block: GridBlock):
+func on_placed(grid: BaseBlockGrid, grid_block: GridBlock):
 	var sub_grid_pos: Vector3= grid.get_global_block_pos(grid_block.local_pos) + global_basis.y
 	sub_grid= grid.add_sub_grid(sub_grid_pos, grid.rotation, grid_block, hinge_head_block, grid_block.rotation)
 	
@@ -28,7 +28,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	joint.node_b= joint.get_path_to(sub_grid)
 
 
-func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
+func on_restored(grid: BaseBlockGrid, grid_block: GridBlock, restore_data: Dictionary):
 	var sub_grid_id: int= remap_sub_grid_id(restore_data)
 	if sub_grid_id > -1:
 		restore_grid_connection.call_deferred(grid, grid_block, sub_grid_id)
@@ -38,7 +38,7 @@ func on_grid_changed():
 	joint.node_a= joint.get_path_to(get_parent())
 
 
-func restore_grid_connection(grid: BlockGrid, _grid_block: GridBlock, sub_grid_id: int):
+func restore_grid_connection(grid: BaseBlockGrid, _grid_block: GridBlock, sub_grid_id: int):
 	sub_grid= grid.world.get_grid(sub_grid_id)
 	
 	joint.node_a= joint.get_path_to(grid)
@@ -80,5 +80,5 @@ func serialize()-> Dictionary:
 
 
 func get_joint_angle():
-	var grid: BlockGrid= joint.get_node(joint.node_a)
+	var grid: BaseBlockGrid= joint.get_node(joint.node_a)
 	return -grid.global_basis.z.signed_angle_to(sub_grid.global_basis.z, grid.global_basis.x)

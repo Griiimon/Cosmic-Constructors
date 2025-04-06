@@ -43,12 +43,12 @@ static func process_event(type: Type, args: Array, peer_id: int):
 			var rotation: Vector3= args[1]
 			var grid_id: int= args[2]
 			var faction_id: int= args[3]
-			var grid: BlockGrid= world.add_grid(position, rotation, world.get_faction(faction_id))
+			var grid: BaseBlockGrid= world.add_grid(position, rotation, world.get_faction(faction_id))
 			world.assign_grid_id(grid, false, grid_id, false)
 			
 		Type.ADD_BLOCK:
 			var grid_id: int= args[0]
-			var grid: BlockGrid= Global.game.world.get_grid(grid_id)
+			var grid: BaseBlockGrid= Global.game.world.get_grid(grid_id)
 			var block_id: int= args[1]
 			var block: Block= GameData.get_block(block_id)
 			var local_pos: Vector3i= args[2]
@@ -57,7 +57,7 @@ static func process_event(type: Type, args: Array, peer_id: int):
 
 		Type.REMOVE_BLOCK:
 			var grid_id: int= args[0]
-			var grid: BlockGrid= Global.game.world.get_grid(grid_id)
+			var grid: BaseBlockGrid= Global.game.world.get_grid(grid_id)
 			var local_pos: Vector3i= args[1]
 			grid.get_block_local(local_pos).destroy(grid)
 
@@ -70,7 +70,7 @@ static func process_event(type: Type, args: Array, peer_id: int):
 
 		Type.CHANGE_GRID_PROPERTY:
 			var grid_id: int= args[0]
-			var property: BlockGrid.Property= args[1]
+			var property: BaseBlockGrid.Property= args[1]
 			var value= args[2]
 			world.get_grid(grid_id).change_property(property, value)
 
@@ -100,7 +100,7 @@ static func change_block_property(world: World, args: Array):
 	var new_value= args[3]
 
 	if not world.has_grid(grid_id): return
-	var grid: BlockGrid= world.get_grid(grid_id)
+	var grid: BaseBlockGrid= world.get_grid(grid_id)
 	var grid_block: GridBlock= grid.get_block_local(local_pos)
 	if not grid_block: return
 	var block_instance: BlockInstance= grid_block.get_block_instance()

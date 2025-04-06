@@ -15,7 +15,7 @@ func _init(_min_velocity: float= 0, _impulse_normal: Vector3= Vector3.ZERO, _dir
 	impulse_normal= _impulse_normal
 	
 
-func apply(grid: BlockGrid):
+func apply(grid: BaseBlockGrid):
 	#var local_velocity = grid.linear_velocity * grid.global_basis.inverse()
 	var local_velocity = grid.linear_velocity * grid.global_basis.inverse()
 	if local_velocity.y < 0 and direction == Directions.ONLY_POSITIVE:

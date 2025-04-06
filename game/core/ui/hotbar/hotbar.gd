@@ -42,14 +42,14 @@ func _unhandled_input(event: InputEvent) -> void:
 				mouse_texture.anchor_left= mouse_pos_x
 				mouse_texture.anchor_right= mouse_pos_x
 				
-				var grid: BlockGrid= mouse_control_assignment.get_grid(Global.world)
+				var grid: BaseBlockGrid= mouse_control_assignment.get_grid(Global.world)
 				var grid_block: GridBlock= grid.get_block_local(mouse_control_assignment.block_pos)
 				mouse_control_assignment.property.set_variant(grid, grid_block, pow((mouse_pos_x * 2 - 1) * 3, 3))
 				get_viewport().set_input_as_handled()
 		elif event is InputEventMouseButton:
 			if event.pressed:
 				if event.button_index == MOUSE_BUTTON_RIGHT:
-					var grid: BlockGrid= mouse_control_assignment.get_grid(Global.world)
+					var grid: BaseBlockGrid= mouse_control_assignment.get_grid(Global.world)
 					var grid_block: GridBlock= grid.get_block_local(mouse_control_assignment.block_pos)
 					mouse_control_assignment.property.set_variant(grid, grid_block, 0.0)
 
@@ -64,7 +64,7 @@ func select_slot(idx: int):
 	slot.select(self)
 
 
-#func populate_slots_from_seat(grid: BlockGrid, grid_block: GridBlock):
+#func populate_slots_from_seat(grid: BaseBlockGrid, grid_block: GridBlock):
 	#var seat: SeatInstance= grid_block.get_block_instance()
 	#
 	#for i in 9:
@@ -75,7 +75,7 @@ func select_slot(idx: int):
 	#clear()
 
 
-func populate_slot(idx: int, assignment: BaseHotkeyAssignment, grid: BlockGrid):
+func populate_slot(idx: int, assignment: BaseHotkeyAssignment, grid: BaseBlockGrid):
 	slots[idx].assign(assignment, null, grid)
 
 

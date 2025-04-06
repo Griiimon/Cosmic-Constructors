@@ -16,7 +16,7 @@ func _ready() -> void:
 	active.set_true(null, null, false)
 
 
-func physics_tick(grid: BlockGrid, _grid_block: GridBlock, _delta: float):
+func physics_tick(grid: BaseBlockGrid, _grid_block: GridBlock, _delta: float):
 	if active.is_true():
 		if area.has_overlapping_bodies():
 			grid.freeze= true

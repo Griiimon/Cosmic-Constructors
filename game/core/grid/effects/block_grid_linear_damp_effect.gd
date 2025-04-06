@@ -9,7 +9,7 @@ func _init(_factor: float):
 	factor= _factor
 
 
-func apply(grid: BlockGrid):
+func apply(grid: BaseBlockGrid):
 	grid.linear_damp= factor
 
 

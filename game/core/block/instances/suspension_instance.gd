@@ -174,26 +174,26 @@ func _ready() -> void:
 	default_interaction_property= can_steer
 
 
-func on_placed(grid: BlockGrid, grid_block: GridBlock):
+func on_placed(grid: BaseBlockGrid, grid_block: GridBlock):
 	await get_tree().physics_frame
 	spawn_wheel(grid, false)
 	wheel.initialize(grid, self)
 	init_sync_vars(grid, grid_block)
 
 
-func on_placed_client(grid: BlockGrid, grid_block: GridBlock):
+func on_placed_client(grid: BaseBlockGrid, grid_block: GridBlock):
 	spawn_wheel(grid, true)
 	init_sync_vars(grid, grid_block)
 
 
-func init_sync_vars(grid: BlockGrid, grid_block: GridBlock):
+func init_sync_vars(grid: BaseBlockGrid, grid_block: GridBlock):
 	var sync_var_target:= SyncVarTargetBlock.create(grid, grid_block)
 	sync_wheel_steer.target= sync_var_target
 	sync_wheel_spin.target= sync_var_target
 	sync_spring_length.target= sync_var_target
 
 
-func spawn_wheel(grid: BlockGrid, on_client: bool):
+func spawn_wheel(grid: BaseBlockGrid, on_client: bool):
 	wheel= wheel_scene.instantiate()
 	wheel.position= to_local(joint.global_position)
 	
@@ -209,7 +209,7 @@ func spawn_wheel(grid: BlockGrid, on_client: bool):
 	joint.node_b= joint.get_path_to(wheel)
 
 
-func on_destroy(grid: BlockGrid, grid_block: GridBlock):
+func on_destroy(grid: BaseBlockGrid, grid_block: GridBlock):
 	wheel.queue_free()
 	super(grid, grid_block)
 
@@ -219,7 +219,7 @@ func on_grid_changed():
 		wheel.reparent(get_parent())
 
 
-func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
+func physics_tick(grid: BaseBlockGrid, _grid_block: GridBlock, delta: float):
 	if is_electric:
 		throttle_input= round(max(0, -grid.requested_local_movement.z))
 		brake_input= round(max(0, grid.requested_local_movement.z))
@@ -272,7 +272,7 @@ func physics_tick(grid: BlockGrid, _grid_block: GridBlock, delta: float):
 				sync_spring_length.set_value(wheel.spring_current_length)
 
 
-func client_physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
+func client_physics_tick(grid: BaseBlockGrid, grid_block: GridBlock, delta: float):
 	if ClientManager.has_sync_var(sync_wheel_steer.get_hash()):
 		wheel.rotation.y= ClientManager.get_sync_var_value(sync_wheel_steer.get_hash())
 	if ClientManager.has_sync_var(sync_wheel_spin.get_hash()):
@@ -291,7 +291,7 @@ func has_client_physics_tick()-> bool:
 		#apply_central_force(-local_velocity.normalized() * drag)
 
 
-func process_braking(grid: BlockGrid, delta : float) -> void:
+func process_braking(grid: BaseBlockGrid, delta : float) -> void:
 	if (brake_input < brake_amount):
 		brake_amount -= braking_speed * delta
 		if (brake_input > brake_amount):
@@ -391,7 +391,7 @@ func process_axle_drive(torque : float, in_reverse: bool, drive_inertia : float,
 	wheel.process_torque(torque, drive_inertia, brake_force, false, delta)
 
 
-func process_forces(grid: BlockGrid, delta : float) -> void:
+func process_forces(grid: BaseBlockGrid, delta : float) -> void:
 	wheel.process_forces(grid, is_braking, delta)
 
 
@@ -411,7 +411,7 @@ func calculate_average_tire_friction(weight : float, surface : String) -> float:
 	return wheel.get_friction(weight)
 
 
-#func calculate_brake_force(grid: BlockGrid) -> void:
+#func calculate_brake_force(grid: BaseBlockGrid) -> void:
 	##var friction := calculate_average_tire_friction(vehicle_mass * 9.8, "Road")
 	#var friction := calculate_average_tire_friction(grid.mass * grid.current_gravity.dot(-global_basis.y), "Road")
 	##max_brake_force = ((friction * braking_grip_multiplier) * average_drive_wheel_radius) / wheel_array.size()

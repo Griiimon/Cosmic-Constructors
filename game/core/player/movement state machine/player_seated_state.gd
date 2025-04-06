@@ -85,14 +85,14 @@ func on_physics_process(_delta: float):
 			get_grid().parking_brake= not get_grid().parking_brake
 			SignalManager.parking_brake_toggled.emit(get_grid().parking_brake)
 		else:
-			ServerManager.receive_sync_event.rpc_id(1, EventSyncState.Type.CHANGE_GRID_PROPERTY, [ get_grid().id, BlockGrid.Property.PARKING_BRAKE, not get_grid().parking_brake ])
+			ServerManager.receive_sync_event.rpc_id(1, EventSyncState.Type.CHANGE_GRID_PROPERTY, [ get_grid().id, BaseBlockGrid.Property.PARKING_BRAKE, not get_grid().parking_brake ])
 
 	if Input.is_action_just_pressed("reverse"):
 		if NetworkManager.is_single_player:
 			get_grid().reverse_mode= not get_grid().reverse_mode
 			SignalManager.reverse_mode_toggled.emit(get_grid().reverse_mode)
 		else:
-			ServerManager.receive_sync_event.rpc_id(1, EventSyncState.Type.CHANGE_GRID_PROPERTY, [ get_grid().id, BlockGrid.Property.REVERSE_MODE, not get_grid().reverse_mode ])
+			ServerManager.receive_sync_event.rpc_id(1, EventSyncState.Type.CHANGE_GRID_PROPERTY, [ get_grid().id, BaseBlockGrid.Property.REVERSE_MODE, not get_grid().reverse_mode ])
 
 
 func on_input(event: InputEvent) -> void:
@@ -105,5 +105,5 @@ func on_input(event: InputEvent) -> void:
 			ServerManager.grid_control_rotation_request.rpc_id(1, get_grid().id, rot_vec)
 
 
-func get_grid()-> BlockGrid:
+func get_grid()-> BaseBlockGrid:
 	return seat.get_parent()

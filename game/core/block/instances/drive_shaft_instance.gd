@@ -7,7 +7,7 @@ var shaft_group: LinkedDriveShaftGroup
 
 
 
-func on_placed(grid: BlockGrid, grid_block: GridBlock):
+func on_placed(grid: BaseBlockGrid, grid_block: GridBlock):
 	connect_to_neighbor(grid, grid_block)
 
 	if not shaft_group:
@@ -16,25 +16,25 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	shaft_group.add_block(grid_block)
 
 
-func on_restored(grid: BlockGrid, grid_block: GridBlock, _restore_data: Dictionary):
+func on_restored(grid: BaseBlockGrid, grid_block: GridBlock, _restore_data: Dictionary):
 	on_placed(grid, grid_block)
 
 
-func on_neighbor_placed(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
+func on_neighbor_placed(grid: BaseBlockGrid, grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
 	connect_to_neighbor(grid, grid_block, grid.get_block_local(neighbor_block_pos))
 	
 
-func on_neighbor_removed(grid: BlockGrid, _grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
+func on_neighbor_removed(grid: BaseBlockGrid, _grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
 	var inst: BlockInstance= grid.get_block_local(neighbor_block_pos).get_block_instance()
 	if inst and inst is SuspensionInstance:
 		shaft_group.remove_suspension(inst)
 
 
-func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
+func physics_tick(_grid: BaseBlockGrid, _grid_block: GridBlock, _delta: float):
 	model.rotate_x(-shaft_group.torque / 1000.0)
 
 
-func connect_to_neighbor(grid: BlockGrid, grid_block: GridBlock, neighbor_block: BaseGridBlock= null):
+func connect_to_neighbor(grid: BaseBlockGrid, grid_block: GridBlock, neighbor_block: BaseGridBlock= null):
 	if not neighbor_block:
 		for neighbor_pos in grid.get_block_neighbors(grid_block.local_pos):
 			neighbor_block= grid.get_block_local(neighbor_pos)

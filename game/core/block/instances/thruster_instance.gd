@@ -31,7 +31,7 @@ func on_set_active():
 		particle_stop_delay.start()
 	
 
-func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
+func physics_tick(grid: BaseBlockGrid, grid_block: GridBlock, delta: float):
 	var tmp_active:= false
 	if not active.is_true():
 		if not grid.requested_movement.is_zero_approx():

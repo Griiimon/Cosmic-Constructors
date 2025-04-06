@@ -20,10 +20,10 @@ func _ready() -> void:
 	default_interaction_property= active
 
 
-func on_placed(grid: BlockGrid, grid_block: GridBlock):
+func on_placed(grid: BaseBlockGrid, grid_block: GridBlock):
 	if counter_part: return
 	is_original= true
-	var counter_part_grid: BlockGrid= grid.add_sub_grid(global_position + global_basis.y, global_rotation,\
+	var counter_part_grid: BaseBlockGrid= grid.add_sub_grid(global_position + global_basis.y, global_rotation,\
 				grid_block, grid_block.get_block_definition(), Vector3i(2, 0, 0), func(inst): (inst as MergeBlockInstance).counter_part= self)
 	counter_part_block_pos= Vector3i.ZERO
 	counter_part= counter_part_grid.get_block_local(counter_part_block_pos).get_block_instance()
@@ -35,15 +35,15 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	connect_joint(grid, grid_block)
 
 
-func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
+func on_restored(grid: BaseBlockGrid, grid_block: GridBlock, restore_data: Dictionary):
 	if restore_data.has("counter_part_grid_id"):
 		is_original= true
-		var counter_part_grid: BlockGrid= grid.world.get_grid(remap_sub_grid_id(restore_data, "counter_part_grid_id"))
+		var counter_part_grid: BaseBlockGrid= grid.world.get_grid(remap_sub_grid_id(restore_data, "counter_part_grid_id"))
 		counter_part_block_pos= Utils.get_key_or_default(restore_data, "counter_part_block_pos", Vector3i.ZERO, "Vector3i")
 		delayed_restore.call_deferred(grid, grid_block, counter_part_grid)
 	
 
-func delayed_restore(grid: BlockGrid, grid_block: GridBlock, counter_part_grid: BlockGrid):
+func delayed_restore(grid: BaseBlockGrid, grid_block: GridBlock, counter_part_grid: BaseBlockGrid):
 	counter_part= counter_part_grid.get_block_local(counter_part_block_pos).get_block_instance()
 	assert(counter_part)
 	
@@ -53,14 +53,14 @@ func delayed_restore(grid: BlockGrid, grid_block: GridBlock, counter_part_grid: 
 	connect_joint(grid, grid_block)
 
 
-func connect_joint(grid: BlockGrid, grid_block: GridBlock):
+func connect_joint(grid: BaseBlockGrid, grid_block: GridBlock):
 	joint.node_a= joint.get_path_to(grid)
 	joint.node_b= joint.get_path_to(counter_part.get_grid())
 
 	active.set_true(grid, grid_block)
 
 
-func on_update(grid: BlockGrid, grid_block: GridBlock):
+func on_update(grid: BaseBlockGrid, grid_block: GridBlock):
 	active.set_false(grid, grid_block)
 	is_original= true
 

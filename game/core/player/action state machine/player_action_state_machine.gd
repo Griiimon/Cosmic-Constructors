@@ -65,7 +65,7 @@ func pull(pullable: PullableComponent):
 	change_state(pull_state)
 
 
-func save_blueprint(grid: BlockGrid):
+func save_blueprint(grid: BaseBlockGrid):
 	save_blueprint_state.grid= grid
 	change_state(save_blueprint_state)
 

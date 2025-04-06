@@ -18,7 +18,7 @@ func _init(_block: Block, _local_pos: Vector3i, _rotation: Vector3i= Vector3i.ZE
 
 
 # returns overflow damage
-func take_damage(damage: int, grid: BlockGrid, type: Damage.SourceType= Damage.SourceType.UNKNOWN)-> int:
+func take_damage(damage: int, grid: BaseBlockGrid, type: Damage.SourceType= Damage.SourceType.UNKNOWN)-> int:
 	assert(hitpoints > 0)
 	hitpoints-= damage
 	if hitpoints <= 0:
@@ -36,7 +36,7 @@ func absorb_damage(damage: int)-> int:
 	return max(damage - hitpoints, 0)
 
 
-func destroy(grid: BlockGrid):
+func destroy(grid: BaseBlockGrid):
 	var block_instance: BlockInstance= get_block_instance()
 	if block_instance:
 		block_instance.on_destroy(grid, self)
@@ -65,7 +65,7 @@ func get_local_block_rotation()-> Vector3i:
 	return get_local_basis().get_euler() / deg_to_rad(90)
 
 
-func get_global_basis(grid: BlockGrid)-> Basis:
+func get_global_basis(grid: BaseBlockGrid)-> Basis:
 	#FIXME this is wrong!?
 	return get_local_basis() * grid.global_basis
 
@@ -75,7 +75,7 @@ func to_global(offset: Vector3i)-> Vector3i:
 	return vec.round()
 
 
-func get_name(grid: BlockGrid)-> String:
+func get_name(grid: BaseBlockGrid)-> String:
 	if not name.is_empty():
 		return name
 	return grid.generate_block_name(self)

@@ -15,7 +15,7 @@ enum State { IDLE, MOVE }
 @onready var velocity:= BlockPropFloat.new("Velocity", 1.0, change_velocity)
 
 
-var sub_grid: BlockGrid
+var sub_grid: BaseBlockGrid
 
 var state: State= State.MOVE
 var segments: Array[Node3D]
@@ -47,7 +47,7 @@ func _ready() -> void:
 	joint.set_param_y(JoltGeneric6DOFJoint3D.PARAM_LINEAR_LIMIT_UPPER, max_distance)
 
 
-func on_placed(grid: BlockGrid, grid_block: GridBlock):
+func on_placed(grid: BaseBlockGrid, grid_block: GridBlock):
 	var sub_grid_pos: Vector3= grid.get_global_block_pos(grid_block.local_pos) + global_basis.y
 	sub_grid= grid.add_sub_grid(sub_grid_pos, grid.rotation, grid_block, piston_head_block, grid_block.rotation)
 	
@@ -55,7 +55,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	joint.node_b= joint.get_path_to(sub_grid)
 
 
-func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
+func physics_tick(_grid: BaseBlockGrid, _grid_block: GridBlock, _delta: float):
 	if not sub_grid: return
 	
 	var extension: float= get_joint_distance()
@@ -65,7 +65,7 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 		segments[i].position.y= lerp(0.0, float(i + 1), extension / max_distance)
 
 
-func on_restored(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary):
+func on_restored(grid: BaseBlockGrid, grid_block: GridBlock, restore_data: Dictionary):
 	var sub_grid_id: int= remap_sub_grid_id(restore_data)
 	if sub_grid_id > -1:
 		restore_grid_connection.call_deferred(grid, grid_block, sub_grid_id)
@@ -76,7 +76,7 @@ func on_grid_changed():
 	restore_grid_connection(get_parent(), null, sub_grid.id, true)
 
 	
-func restore_grid_connection(grid: BlockGrid, _grid_block: GridBlock, sub_grid_id: int, reset_joint: bool= false):
+func restore_grid_connection(grid: BaseBlockGrid, _grid_block: GridBlock, sub_grid_id: int, reset_joint: bool= false):
 	sub_grid= grid.world.get_grid(sub_grid_id)
 	prints("Grid", grid.id)
 	prints("Sub grid", sub_grid.id)

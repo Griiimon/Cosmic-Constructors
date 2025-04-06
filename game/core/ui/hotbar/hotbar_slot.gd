@@ -8,7 +8,7 @@ var tween: Tween
 
 
 
-func assign(_assignment: BaseHotkeyAssignment, hotbar: Hotbar, grid: BlockGrid= null):
+func assign(_assignment: BaseHotkeyAssignment, hotbar: Hotbar, grid: BaseBlockGrid= null):
 	assignment= _assignment
 	if hotbar:
 		hotbar.current_layout.assign(assignment)
@@ -30,7 +30,7 @@ func select(hotbar: Hotbar):
 		if assignment is HotkeyAssignmentBlockProperty:
 			var block_property_assignment: HotkeyAssignmentBlockProperty= assignment
 
-			var grid: BlockGrid= block_property_assignment.get_grid(hotbar.current_layout.grid.world)
+			var grid: BaseBlockGrid= block_property_assignment.get_grid(hotbar.current_layout.grid.world)
 			var grid_block: GridBlock= grid.get_block_local(block_property_assignment.block_pos)
 			#var property: BlockProperty= block_property_assignment.get_property(hotbar.current_layout.grid)
 			var property: BlockProperty= block_property_assignment.get_property(grid)

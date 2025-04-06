@@ -6,7 +6,7 @@ var linked_container: ItemContainer
 
 
 
-func on_placed(grid: BlockGrid, grid_block: GridBlock):
+func on_placed(grid: BaseBlockGrid, grid_block: GridBlock):
 	#var linked_block: GridBlock= grid.get_block_local(Vector3i((Vector3(grid_block.local_pos) + grid_block.get_local_basis().z).floor()))
 	var linked_block: BaseGridBlock= grid.get_block_local_direction(grid_block.local_pos, grid_block.get_local_basis().z)
 	if linked_block:
@@ -15,7 +15,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 			linked_container= container
 
 
-func physics_tick(grid: BlockGrid, _grid_block: GridBlock, _delta: float):
+func physics_tick(grid: BaseBlockGrid, _grid_block: GridBlock, _delta: float):
 	if not linked_container: return
 	if linked_container.is_empty(): return
 	

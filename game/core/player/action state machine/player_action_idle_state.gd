@@ -30,7 +30,7 @@ func on_physics_process(_delta: float):
 	
 	CustomShapeCast.pierce_blocks(block_interact_shapecast, interactive_block_shapecast_filter)
 
-	var grid: BlockGrid= CustomShapeCast.grid
+	var grid: BaseBlockGrid= CustomShapeCast.grid
 	var grid_block: BaseGridBlock= CustomShapeCast.grid_block
 	
 	if block_interact_shapecast.is_colliding():
@@ -119,7 +119,7 @@ func grind():
 				var local_pos: Vector3i= terrain.terrain_node.to_local(shapecast.get_collision_point(0))
 				terrain.grind(local_pos, shapecast.global_position, true, shapecast.get_collision_point(0) + shapecast.global_basis.z * 0.5, shapecast.global_basis.z)
 			CollisionLayers.GRID:
-				var grid: BlockGrid= shapecast.get_collider(0)
+				var grid: BaseBlockGrid= shapecast.get_collider(0)
 				var grid_block: BaseGridBlock= grid.get_block_from_global_pos(Utils.get_shapecast_inside_collision_point(shapecast))
 				assert(grid_block)
 				grid_block.take_damage(100, grid, Damage.SourceType.GRINDER)

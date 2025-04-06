@@ -5,7 +5,7 @@ extends BlockInstance
 
 
 
-func on_destroy(grid: BlockGrid, grid_block: GridBlock):
+func on_destroy(grid: BaseBlockGrid, grid_block: GridBlock):
 	var area: ScaffoldingArea= area_scene.instantiate()
 	area.position= global_position
 	area.rotation= global_rotation
@@ -24,12 +24,12 @@ func on_destroy(grid: BlockGrid, grid_block: GridBlock):
 	queue_free()
 
 
-#func on_neighbor_removed(grid: BlockGrid, grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
+#func on_neighbor_removed(grid: BaseBlockGrid, grid_block: BaseGridBlock, neighbor_block_pos: Vector3i):
 	#var neighbor_block: BaseGridBlock= grid.get_block_local(neighbor_block_pos)
 	#if neighbor_block.get_block_instance() and neighbor_block.get_block_instance() is ScaffoldingInstance:
 		#grid_block.destroy(grid)
 
 
-func flood_fill_filter(grid: BlockGrid, block_pos: Vector3i)-> bool:
+func flood_fill_filter(grid: BaseBlockGrid, block_pos: Vector3i)-> bool:
 	var block: BaseGridBlock= grid.get_block_local(block_pos)
 	return block.get_block_instance() and block.get_block_instance() is ScaffoldingInstance

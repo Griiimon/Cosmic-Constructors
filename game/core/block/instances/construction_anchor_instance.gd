@@ -8,7 +8,7 @@ extends BlockInstance
 
 @onready var area: Area3D = $Area3D
 
-var grid: BlockGrid
+var grid: BaseBlockGrid
 var original_offset: Vector3
 
 
@@ -17,11 +17,11 @@ func _ready() -> void:
 	default_interaction_property= release
 
 
-func on_placed_client(_grid: BlockGrid, _grid_block: GridBlock):
+func on_placed_client(_grid: BaseBlockGrid, _grid_block: GridBlock):
 	area.queue_free()
 
 
-func on_update(grid: BlockGrid, grid_block: GridBlock):
+func on_update(grid: BaseBlockGrid, grid_block: GridBlock):
 	assert(not NetworkManager.is_client)
 	reset(grid, grid_block)
 
@@ -34,7 +34,7 @@ func on_offset_changed():
 	grid.position= original_offset + new_offset
 
 
-func reset(grid: BlockGrid, grid_block: GridBlock):
+func reset(grid: BaseBlockGrid, grid_block: GridBlock):
 	horizontal_offset.set_variant(grid, grid_block, 0.0)
 	vertical_offset.set_variant(grid, grid_block, 0.0)
 	depth_offset.set_variant(grid, grid_block, 0.0)
@@ -42,7 +42,7 @@ func reset(grid: BlockGrid, grid_block: GridBlock):
 
 func _on_area_body_entered(body: Node3D) -> void:
 	assert(not NetworkManager.is_client)
-	assert(body is BlockGrid)
+	assert(body is BaseBlockGrid)
 	
 	if grid: return
 	

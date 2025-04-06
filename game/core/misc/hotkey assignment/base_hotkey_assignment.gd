@@ -13,5 +13,5 @@ func serialize()-> Dictionary:
 	return {}
 
 
-func get_as_text(_grid: BlockGrid= null)-> String:
+func get_as_text(_grid: BaseBlockGrid= null)-> String:
 	return ""

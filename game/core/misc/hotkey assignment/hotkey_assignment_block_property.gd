@@ -7,7 +7,7 @@ var grid_id: int
 
 
 
-func _init(_key: int, block: GridBlock= null, property: BlockProperty= null, grid: BlockGrid= null):
+func _init(_key: int, block: GridBlock= null, property: BlockProperty= null, grid: BaseBlockGrid= null):
 	assert((block and property and grid) or (not block and not property and not grid))
 	super(_key)
 	if block:
@@ -33,22 +33,22 @@ static func deserialize(_key: int, data: Dictionary)-> HotkeyAssignmentBlockProp
 	return inst
 
 
-func get_block(caller_grid: BlockGrid)-> GridBlock:
+func get_block(caller_grid: BaseBlockGrid)-> GridBlock:
 	return get_grid(caller_grid.world).get_block_local(block_pos)
 
 
-func get_property(caller_grid: BlockGrid)-> BlockProperty:
+func get_property(caller_grid: BaseBlockGrid)-> BlockProperty:
 	var block: GridBlock= get_block(get_grid(caller_grid.world))
 	if not block: return null
 	return block.get_block_instance().get_property_by_display_name(property_name)
 	
 
-func get_as_text(caller_grid: BlockGrid= null)-> String:
-	var grid: BlockGrid= get_grid(caller_grid.world)
+func get_as_text(caller_grid: BaseBlockGrid= null)-> String:
+	var grid: BaseBlockGrid= get_grid(caller_grid.world)
 	var block: GridBlock= get_block(grid)
 	if not block: return ""
 	return str(block.get_name(grid), "\n", property_name)
 
 
-func get_grid(world: World)-> BlockGrid:
+func get_grid(world: World)-> BaseBlockGrid:
 	return world.get_grid(grid_id)

@@ -18,13 +18,13 @@ func _ready() -> void:
 	fluid_container.amount_changed.connect(on_amount_changed)
 
 
-func on_placed(grid: BlockGrid, grid_block: GridBlock):
+func on_placed(grid: BaseBlockGrid, grid_block: GridBlock):
 	super(grid, grid_block)
 	init(grid_block)
 	queue_property_sync(fluid_content)
 
 
-func on_placed_client(grid: BlockGrid, grid_block: GridBlock):
+func on_placed_client(grid: BaseBlockGrid, grid_block: GridBlock):
 	init(grid_block)
 	#fluid_content.sync_request(grid, grid_block)
 
@@ -38,7 +38,7 @@ func init(grid_block: GridBlock):
 	on_amount_changed(fluid_container.content)
 
 
-func physics_tick(grid: BlockGrid, grid_block: GridBlock, _delta: float):
+func physics_tick(grid: BaseBlockGrid, grid_block: GridBlock, _delta: float):
 	if update_content:
 		fluid_content.set_variant(grid, grid_block, fluid_container.content)
 		queue_property_sync(fluid_content)
@@ -57,7 +57,7 @@ func on_amount_changed(amount: float):
 	update_content= true
 
 
-func on_sync(_grid: BlockGrid= null, _grid_block: GridBlock= null):
+func on_sync(_grid: BaseBlockGrid= null, _grid_block: GridBlock= null):
 	var content: float= fluid_content.get_value_f()
 	fluid_container.content= content
 	on_amount_changed(content)

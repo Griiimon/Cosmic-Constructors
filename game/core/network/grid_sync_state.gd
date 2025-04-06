@@ -7,7 +7,7 @@ const KEY_TIMESTAMP = "time"
 
 
 
-static func build_sync_state(grid: BlockGrid)-> Dictionary:
+static func build_sync_state(grid: BaseBlockGrid)-> Dictionary:
 	var data: Dictionary
 	data[KEY_ID]= grid.id
 	data[KEY_POSITION]= grid.global_position
@@ -16,7 +16,7 @@ static func build_sync_state(grid: BlockGrid)-> Dictionary:
 	return data
 
 
-static func parse_sync_state(grid: BlockGrid, data: Dictionary):
+static func parse_sync_state(grid: BaseBlockGrid, data: Dictionary):
 	grid.global_position= data[KEY_POSITION]
 	grid.global_rotation= data[KEY_ROTATION]
 

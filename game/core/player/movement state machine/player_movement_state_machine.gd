@@ -38,7 +38,7 @@ func sit(seat_block: GridBlock):
 func landed():
 	var collider: Node3D= player.floor_shapecast.get_collider(0)
 	
-	if collider is BlockGrid:
+	if collider is BaseBlockGrid:
 		grid_state.grid= collider
 		change_state(grid_state)
 	else:

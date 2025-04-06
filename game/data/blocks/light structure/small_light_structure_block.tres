@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Block" load_steps=5 format=3 uid="uid://cs3rrum74wfe1"]
+
+[ext_resource type="Resource" uid="uid://bm6ih6jhatj7i" path="res://game/data/misc/block categories/basic.tres" id="1_jn501"]
+[ext_resource type="Script" path="res://game/core/block/block.gd" id="2_ccqp1"]
+[ext_resource type="Texture2D" uid="uid://p4rsdrs15mfs" path="res://game/data/blocks/light structure/metal_plates_texture.png" id="3_ilhj4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cel1q"]
+metallic = 0.8
+roughness = 0.3
+
+[resource]
+script = ExtResource("2_ccqp1")
+grid_size = 1
+size = Vector3i(1, 1, 1)
+mass = 3.0
+max_hitpoints = 2
+custom_collision = false
+can_tick = false
+tick_priority = 0
+can_be_built = true
+category = ExtResource("1_jn501")
+texture = ExtResource("3_ilhj4")
+material = SubResource("StandardMaterial3D_cel1q")
+name = ""

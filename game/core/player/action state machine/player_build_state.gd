@@ -11,11 +11,16 @@ extends PlayerActionStateMachineState
 		if current_block:
 			init_ghost(current_block.get_model())
 
+@onready var grid_size: Block.GridSize= Block.GridSize.LARGE:
+	set(s):
+		grid_size= s
+		block_size= Block.get_grid_size(grid_size)
+
 var block_list: Array[Block]
 var block_index: int
 
 var grid: BlockGrid
-var block_size: float= 1.0
+var block_size: float
 
 var local_block_pos: Vector3i
 var block_rotation: Vector3i
@@ -32,7 +37,7 @@ func _ready() -> void:
 
 func on_enter():
 	player.build_raycast.enabled= true
-	player.build_raycast.target_position.z= -build_range
+	update_build_raycast_target_position()
 	
 	if current_block:
 		init_ghost(current_block.get_model())
@@ -94,7 +99,8 @@ func on_unhandled_input(event: InputEvent):
 		elif event.is_action_pressed("align_block"):
 			gravity_align_ghost()
 		elif event.is_action_pressed("toggle_block_size"):
-			block_size= 1.0 if is_equal_approx(block_size, 0.5) else 0.5
+			grid_size= Block.GridSize.LARGE if grid_size == Block.GridSize.SMALL else Block.GridSize.SMALL
+			update_build_raycast_target_position()
 			on_block_category_selected(null)
 		else:
 			return
@@ -119,7 +125,7 @@ func align_ghost():
 		var old_grid: BlockGrid= grid
 		grid= raycast.get_collider()
 		
-		if not is_equal_approx(grid.block_size, block_size): return
+		if not is_equal_approx(grid.block_size, Block.get_grid_size(grid_size)): return
 		
 		assert(grid != null)
 
@@ -261,7 +267,8 @@ func plane_fill(block_pos: Vector3i, grid_block_rotation: Vector3i, ignore_axis:
 
 
 func switch_block(delta: int):
-	block_index= block_list.find(current_block)
+	if delta != 0:
+		block_index= block_list.find(current_block)
 	block_index= wrapi(block_index + delta, 0, block_list.size())
 	current_block= block_list[block_index]
 
@@ -287,11 +294,8 @@ func gravity_align_ghost():
 
 
 func set_full_block_list():
-	if is_equal_approx(block_size, 1.0):
-		block_list= GameData.large_block_library.blocks.duplicate()
-	else:
-		block_list= GameData.small_block_library.blocks.duplicate()
-		
+	block_list= GameData.get_block_library(grid_size).blocks.duplicate()
+
 
 func remove_block():
 	var query:= PhysicsRayQueryParameters3D.create(player.head.global_position, player.build_raycast.to_global(player.build_raycast.target_position))#, Global.GRID_COLLISION_LAYER)
@@ -326,6 +330,10 @@ func remove_grid():
 		grid.world.remove_grid(grid)
 		if NetworkManager.is_client:
 			ClientManager.send_sync_event(EventSyncState.Type.REMOVE_GRID, [grid.id])
+
+
+func update_build_raycast_target_position():
+	player.build_raycast.target_position.z= -build_range * block_size
 
 
 func on_block_category_selected(category: BlockCategory):

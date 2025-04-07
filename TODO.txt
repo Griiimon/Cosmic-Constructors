@@ -1,3 +1,7 @@
+Why is the FluidConsumer a ToolScript?
+
+Finish 6r Suspension
+
 SubGridConnection needs to be informed of connected grid removal and be destroyed
 
 FIX rotor joint, make test scene to find out why its so buggy

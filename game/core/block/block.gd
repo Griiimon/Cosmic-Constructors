@@ -1,7 +1,7 @@
 class_name Block
 extends NamedResource
 
-enum GridSize { LARGE, SMALL }
+enum GridSize { LARGE, SMALL, VOXEL }
 
 @export var grid_size: GridSize= GridSize.LARGE
 @export var size: Vector3i= Vector3i.ONE
@@ -79,6 +79,7 @@ static func get_grid_size(size: GridSize)-> float:
 	match size:
 		GridSize.SMALL:
 			return 0.5
-		_:
+		GridSize.LARGE:
 			return 2.5
-	
+		_:
+			return 1.0

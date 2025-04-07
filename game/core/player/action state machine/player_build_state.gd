@@ -11,16 +11,16 @@ extends PlayerActionStateMachineState
 		if current_block:
 			init_ghost(current_block.get_model())
 
-@onready var grid_size: Block.GridSize= Block.GridSize.LARGE:
-	set(s):
-		grid_size= s
-		block_size= Block.get_grid_size(grid_size)
 
 var block_list: Array[Block]
 var block_index: int
 
 var grid: BlockGrid
 var block_size: float
+var grid_size: Block.GridSize:
+	set(s):
+		grid_size= s
+		block_size= Block.get_grid_size(grid_size)
 
 var local_block_pos: Vector3i
 var block_rotation: Vector3i
@@ -32,6 +32,7 @@ func _ready() -> void:
 	super()
 	SignalManager.selected_block_category.connect(on_block_category_selected)
 
+	grid_size= Block.GridSize.LARGE
 	set_full_block_list()
 
 

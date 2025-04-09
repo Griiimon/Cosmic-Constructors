@@ -52,8 +52,8 @@ skeleton = NodePath("../..")
 
 [node name="JoltSliderJoint3D" type="JoltSliderJoint3D" parent="."]
 limit_enabled = true
-limit_upper = 0.5
-limit_lower = -0.5
+limit_upper = 1.25
+limit_lower = -1.25
 motor_enabled = true
 motor_max_force = 100000.0
 transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, 0)

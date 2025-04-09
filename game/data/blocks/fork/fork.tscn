@@ -15,18 +15,18 @@ size = Vector3(0.25, 0.1, 2)
 [node name="Fork" type="Node3D"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, -1.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.15, -1.25)
 shape = SubResource("BoxShape3D_t3el8")
 
 [node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, -0.45, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, -1.15, -0.5)
 mesh = SubResource("BoxMesh_lxv2g")
 skeleton = NodePath("../../CollisionShape3D")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, -0.45, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, -1.15, -0.5)
 mesh = SubResource("BoxMesh_lxv2g")
 skeleton = NodePath("../../CollisionShape3D")

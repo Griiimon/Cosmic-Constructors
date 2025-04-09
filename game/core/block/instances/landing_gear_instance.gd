@@ -1,12 +1,13 @@
 class_name LandingGearInstance
 extends BlockInstanceOnOff
 
+@export var light: MeshInstance3D
+
 @export var enabled_material: StandardMaterial3D
 @export var locked_material: StandardMaterial3D
 @export var disabled_material: StandardMaterial3D
 
 @onready var area: Area3D = $Area3D
-@onready var light: MeshInstance3D = $Light
 
 
 

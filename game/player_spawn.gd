@@ -6,6 +6,11 @@ extends Marker3D
 
 
 
+func _ready() -> void:
+	if not player_entity_settings:
+		player_entity_settings= PlayerEntitySettings.new()
+
+
 func initialize_player(player: Player):
 	player.position= position
 	player.settings= player_entity_settings

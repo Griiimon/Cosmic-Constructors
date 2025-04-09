@@ -11,6 +11,7 @@ uv1_triplanar = true
 
 [resource]
 script = ExtResource("2_7df43")
+grid_size = 0
 size = Vector3i(1, 1, 1)
 mass = 50.0
 max_hitpoints = 100

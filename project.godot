@@ -358,15 +358,15 @@ toggle_block_size={
 
 [physics]
 
-3d/physics_engine="JoltPhysics3D"
+3d/physics_engine="Jolt Physics (Extension)"
 3d/default_gravity=0.0
 3d/default_gravity_vector=Vector3(0, 0, 0)
 3d/default_linear_damp=0.0
 3d/default_angular_damp=0.0
-jolt_3d/collisions/use_enhanced_internal_edge_removal=false
-jolt_3d/collisions/areas_detect_static_bodies=true
-jolt_3d/solver/velocity_iterations=100
-jolt_3d/solver/position_iterations=10
+jolt_physics_extension_3d/collisions/use_enhanced_internal_edge_removal=false
+jolt_physics_extension_3d/collisions/areas_detect_static_bodies=true
+jolt_physics_extension_3d/solver/velocity_iterations=100
+jolt_physics_extension_3d/solver/position_iterations=10
 
 [rendering]
 

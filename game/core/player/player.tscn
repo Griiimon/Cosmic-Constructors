@@ -127,7 +127,7 @@ collision_mask = 2
 [node name="Block Interact Shapecast" type="ShapeCast3D" parent="Head/Pivot" index="6"]
 unique_name_in_owner = true
 shape = SubResource("SphereShape3D_4pkix")
-target_position = Vector3(0, 0, -4)
+target_position = Vector3(0, 0, -5)
 max_results = 1
 collision_mask = 2
 

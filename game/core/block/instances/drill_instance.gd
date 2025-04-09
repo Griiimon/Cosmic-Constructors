@@ -1,9 +1,9 @@
 extends BlockInstanceOnOff
 
 @export var rotation_speed: float= 5.0
+@export var drill_head: MeshInstance3D
+@export var terrain_shapecast: ShapeCast3D
 
-@onready var terrain_shapecast: ShapeCast3D = $"Terrain ShapeCast"
-@onready var drill_head: MeshInstance3D = $"Drill Head"
 @onready var item_container: ItemContainer = $"Item Container"
 
 var cooldown: Timer

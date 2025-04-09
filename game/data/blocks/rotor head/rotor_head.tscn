@@ -23,22 +23,28 @@ material = SubResource("StandardMaterial3D_fdlr8")
 size = Vector3(1, 0.2, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dtcuq"]
-size = Vector3(1, 0.2, 1)
+size = Vector3(2.5, 0.5, 2.5)
 
 [node name="Rotor Head" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 visible = false
 mesh = SubResource("BoxMesh_0j1js")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 mesh = SubResource("CylinderMesh_hf56f")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393836, 0)
 mesh = SubResource("BoxMesh_vvkag")
+skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.398805, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_dtcuq")

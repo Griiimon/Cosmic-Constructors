@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://b7b26sso6p11j" path="res://game/data/blocks/rotor head/rotor_head_block.tres" id="2_p46ke"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_opg02"]
-size = Vector3(1, 0.5, 1)
+size = Vector3(2.5, 1.5, 2.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_upqdt"]
 
@@ -33,19 +33,25 @@ script = ExtResource("1_pcbeu")
 rotor_head_block = ExtResource("2_p46ke")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_opg02")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 visible = false
 mesh = SubResource("BoxMesh_upqdt")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
 mesh = SubResource("BoxMesh_us0db")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("CylinderMesh_1jtn4")
+skeleton = NodePath("../..")
 
 [node name="JoltGeneric6DOFJoint3D" type="JoltGeneric6DOFJoint3D" parent="."]
 angular_limit_y/enabled = false

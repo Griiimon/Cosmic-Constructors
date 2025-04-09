@@ -111,7 +111,7 @@ material = SubResource("StandardMaterial3D_2bd72")
 size = Vector3(0.8, 0.05, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1db4g"]
-size = Vector3(1, 0.5, 1)
+size = Vector3(2.5, 0.5, 2.5)
 
 [node name="Conveyor" type="Node3D"]
 script = ExtResource("1_2cr6b")
@@ -119,25 +119,33 @@ script = ExtResource("1_2cr6b")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_sln4j")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00360684, -0.00390415, 0.000388505)
 mesh = SubResource("PlaneMesh_uo32g")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0, 0)
 mesh = SubResource("BoxMesh_m6uo5")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0, 0)
 mesh = SubResource("BoxMesh_m6uo5")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.984174, 0.177205, 0, -0.177205, 0.984174, 0, -0.145901, 0)
 mesh = SubResource("BoxMesh_gouso")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0345539, 0)
 mesh = SubResource("BoxMesh_jxi6p")
+skeleton = NodePath("../..")
 
 [node name="Conveyor Target" parent="." instance=ExtResource("2_43hh3")]
 
@@ -151,13 +159,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("BoxShape3D_1db4g")
 
 [node name="Item Ejector" parent="." instance=ExtResource("4_47sw3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6)
-only_with_valid_target = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.4)
 
 [node name="Item Start Pos" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 1.25)
 
 [node name="Item End Pos" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -1.25)
 
 [connection signal="took_item" from="Conveyor Target" to="." method="_on_conveyor_target_took_item"]

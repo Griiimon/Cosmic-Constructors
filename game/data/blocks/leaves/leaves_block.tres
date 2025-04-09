@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_7ikta")
-grid_size = 2
+grid_size = 0
 size = Vector3i(1, 1, 1)
 mass = 1.0
 max_hitpoints = 1

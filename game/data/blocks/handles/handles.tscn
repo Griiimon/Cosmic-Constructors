@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bpre06n0qaygh" path="res://game/data/blocks/handles/handles_rigidbody.tscn" id="2_ij6g1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4eghd"]
-size = Vector3(0.6, 0.4, 0.25)
+size = Vector3(1.5, 1, 0.625)
 
 [sub_resource type="BoxMesh" id="BoxMesh_8sdug"]
 
@@ -31,49 +31,55 @@ handles_rigidbody_scene = ExtResource("2_ij6g1")
 alignment_factor = 10000.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.369486)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9)
 shape = SubResource("BoxShape3D_4eghd")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 visible = false
 mesh = SubResource("BoxMesh_8sdug")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, -0.27)
 mesh = SubResource("BoxMesh_b3p15")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D2"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model/MeshInstance3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.165, -0.125)
 mesh = SubResource("BoxMesh_40ik4")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="MeshInstance3D2"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model/MeshInstance3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.165, -0.125)
 mesh = SubResource("BoxMesh_40ik4")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="MeshInstance3D2"]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Model/MeshInstance3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.165, 0.0113537)
 mesh = SubResource("BoxMesh_upa71")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.27)
 mesh = SubResource("BoxMesh_b3p15")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D3"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model/MeshInstance3D3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.165, -0.125)
 mesh = SubResource("BoxMesh_40ik4")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="MeshInstance3D3"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model/MeshInstance3D3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.165, -0.125)
 mesh = SubResource("BoxMesh_40ik4")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="MeshInstance3D3"]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Model/MeshInstance3D3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.165, 0.0113537)
 mesh = SubResource("BoxMesh_upa71")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
 [node name="JoltGeneric6DOFJoint3D" type="JoltGeneric6DOFJoint3D" parent="."]

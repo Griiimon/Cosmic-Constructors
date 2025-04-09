@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ceeyi3dwtmdfv"]
+[gd_scene load_steps=11 format=3 uid="uid://ceeyi3dwtmdfv"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_0j1js"]
 
@@ -30,27 +30,52 @@ top_radius = 0.55
 bottom_radius = 0.55
 height = 0.2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_abi0j"]
+albedo_color = Color(0.440336, 0.440336, 0.440336, 1)
+metallic = 1.0
+roughness = 0.69
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8ko5i"]
+material = SubResource("StandardMaterial3D_abi0j")
+height = 0.1
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_152rd"]
-size = Vector3(1, 0.5, 1)
+size = Vector3(2.5, 1.5, 2.5)
 
 [node name="Hinge Head" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 visible = false
 mesh = SubResource("BoxMesh_0j1js")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 mesh = SubResource("BoxMesh_idk8x")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(-1, -1.22465e-16, 0, 1.22465e-16, -1, 0, 0, 0, 1, 0, 0.00462979, 0)
+visible = false
 mesh = SubResource("SphereMesh_l7rsm")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(-0.0194417, 0.999811, 0, -0.999811, -0.0194417, 0, 0, 0, 1, 0, -0.0547084, 0)
 mesh = SubResource("CylinderMesh_isyjc")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0.432, 0, 0)
+mesh = SubResource("CylinderMesh_8ko5i")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, -0.432, 0, 0)
+mesh = SubResource("CylinderMesh_8ko5i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_152rd")

@@ -1,8 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://suf83sg8b2yp"]
+[gd_scene load_steps=7 format=3 uid="uid://suf83sg8b2yp"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/brakes_instance.gd" id="1_sttqn"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_ajeps"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7jhn"]
 albedo_color = Color(0.389287, 0.389287, 0.389287, 1)
@@ -35,18 +33,19 @@ size = Vector3(0.245, 0.545, 0.195)
 [node name="Brakes" type="Node3D"]
 script = ExtResource("1_sttqn")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("BoxMesh_ajeps")
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_xq81s")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="MeshInstance3D2"]
-mesh = SubResource("CylinderMesh_4wekm")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model/MeshInstance3D2"]
+mesh = SubResource("CylinderMesh_4wekm")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.31887)
 mesh = SubResource("BoxMesh_k4537")
+skeleton = NodePath("../..")

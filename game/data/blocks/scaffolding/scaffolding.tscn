@@ -20,13 +20,19 @@ size = Vector3(1, 0.1, 1)
 script = ExtResource("1_iqtq5")
 area_scene = ExtResource("2_gbx7u")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 visible = false
 mesh = SubResource("BoxMesh_m60ik")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("BoxMesh_ufe3t")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
 mesh = SubResource("BoxMesh_u4tly")
+skeleton = NodePath("../..")

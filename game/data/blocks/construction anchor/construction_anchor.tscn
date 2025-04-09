@@ -43,19 +43,25 @@ colors = PackedColorArray(0, 0, 0, 0, 1, 0.301961, 0.992157, 0.486275, 1, 1, 1, 
 [node name="Construction Anchor Block" type="Node3D"]
 script = ExtResource("1_7id1x")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 visible = false
 mesh = SubResource("BoxMesh_o3s3v")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 mesh = SubResource("BoxMesh_v388x")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, -0.37493, -0.927053, 0, 0.927053, -0.37493, 0, 0.0703156, -0.107955)
 mesh = SubResource("CylinderMesh_modqo")
+skeleton = NodePath("../..")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="MeshInstance3D3"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Model/MeshInstance3D3"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, -0.344, 0.025)
 light_color = Color(1, 0.152941, 1, 1)
 light_energy = 0.25

@@ -31,18 +31,24 @@ size = Vector3(0.1, 0.2, 1)
 script = ExtResource("1_ilahg")
 carriage_block = ExtResource("2_uvmrm")
 
-[node name="CSGBox3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_mthe4")
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="CSGBox3D" type="MeshInstance3D" parent="Model"]
+mesh = SubResource("ArrayMesh_mthe4")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.075, 0.372979, -0.1)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_p4jl6")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.075, 0.372979, -0.1)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_p4jl6")
+skeleton = NodePath("../..")
 
 [node name="JoltSliderJoint3D" type="JoltSliderJoint3D" parent="."]
 limit_enabled = true

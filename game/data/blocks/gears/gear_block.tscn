@@ -34,21 +34,29 @@ rings = 2
 
 [node name="Gear Block" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 visible = false
 mesh = SubResource("BoxMesh_qwjnr")
+skeleton = NodePath("../..")
 
-[node name="Gear" type="MeshInstance3D" parent="."]
+[node name="Gear" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.841666, 0, 0.318744, 0, 0.9, 0, -0.318744, 0, 0.841666, 0, 0, 0)
 mesh = SubResource("ArrayMesh_52xb1")
+skeleton = NodePath("../..")
 
-[node name="Gear2" type="MeshInstance3D" parent="."]
+[node name="Gear2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.3, 0)
 mesh = SubResource("ArrayMesh_52xb1")
+skeleton = NodePath("../..")
 
-[node name="Gear3" type="MeshInstance3D" parent="."]
+[node name="Gear3" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, -0.3, 0)
 mesh = SubResource("ArrayMesh_52xb1")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("CylinderMesh_tru6g")
+skeleton = NodePath("../..")

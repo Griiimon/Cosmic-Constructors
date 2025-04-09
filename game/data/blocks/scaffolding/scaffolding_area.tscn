@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://game/data/blocks/scaffolding/scaffolding_area.gd" id="1_se6wh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yjqbu"]
+size = Vector3(2.5, 2.5, 2.5)
 
 [node name="Area3D" type="Area3D"]
 collision_layer = 0

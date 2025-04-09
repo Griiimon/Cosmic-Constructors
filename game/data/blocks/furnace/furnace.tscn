@@ -35,7 +35,7 @@ vertex_color_use_as_albedo = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_u48cc"]
 material = SubResource("StandardMaterial3D_wo78j")
-size = Vector3(0.2, 0.2, 0.2)
+size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="Curve" id="Curve_gttbf"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99026, 0.0641509), 0.0, 0.0, 0, 0]
@@ -46,30 +46,37 @@ offsets = PackedFloat32Array(0, 0.444444, 0.82963)
 colors = PackedColorArray(0.937255, 0.101961, 0, 1, 0.878431, 0.380392, 0, 1, 0, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f6sd2"]
-size = Vector3(1, 0.25, 1)
+size = Vector3(2.5, 0.25, 2.5)
 
 [node name="Furnace" type="Node3D"]
 script = ExtResource("1_ixfdn")
 recipe = ExtResource("2_88d31")
 
-[node name="Model" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="Model" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("ArrayMesh_dsv37")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.840008, -0.542573, 0, 0.542573, 0.840008, 0, 0.238672, 0.523342)
 mesh = SubResource("BoxMesh_3mq5x")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.379382, 0)
 mesh = SubResource("BoxMesh_xl0ar")
+skeleton = NodePath("../..")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 emitting = false
 amount = 50
 mesh = SubResource("BoxMesh_u48cc")
 emission_shape = 3
-emission_box_extents = Vector3(0.2, 0.2, 0.2)
+emission_box_extents = Vector3(0.5, 0.4, 0.5)
 direction = Vector3(0, 1, 0)
 spread = 30.0
 gravity = Vector3(0, 0, 0)
@@ -81,14 +88,13 @@ scale_amount_curve = SubResource("Curve_gttbf")
 color_ramp = SubResource("Gradient_igkyk")
 
 [node name="Item Ejector" parent="." instance=ExtResource("2_d85vm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
-only_with_valid_target = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2)
 
 [node name="Item Catcher" parent="." node_paths=PackedStringArray("active_area") instance=ExtResource("5_xyna7")]
 active_area = NodePath("../Catch Area")
 
 [node name="Catch Area" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6332, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.72486, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Catch Area"]
 shape = SubResource("BoxShape3D_f6sd2")

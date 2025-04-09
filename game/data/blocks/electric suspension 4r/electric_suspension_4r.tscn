@@ -16,10 +16,12 @@ visible = false
 mesh = SubResource("BoxMesh_d27qx")
 
 [node name="Suspension Model" parent="." instance=ExtResource("3_einmk")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="Frontplate" parent="Suspension Model" index="5"]
 visible = false
 
 [node name="Suspension Joint" parent="." instance=ExtResource("4_mcglv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 0, 0)
 
 [editable path="Suspension Model"]

@@ -12,7 +12,7 @@ roughness = 0.4
 
 [sub_resource type="BoxMesh" id="BoxMesh_g4emb"]
 material = SubResource("StandardMaterial3D_0jk70")
-size = Vector3(2, 0.05, 2)
+size = Vector3(2.5, 0.05, 2.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cmigh"]
 albedo_color = Color(0.2906, 0.171934, 0.040337, 1)
@@ -28,23 +28,23 @@ size = Vector3(0.5, 0.49, 0.5)
 script = ExtResource("1_gkbhk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.475, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.187, 0)
 shape = SubResource("BoxShape3D_u67g7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.475, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.187, 0)
 mesh = SubResource("BoxMesh_g4emb")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.413, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.187, 0)
 mesh = SubResource("BoxMesh_g1u8g")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, -0.413, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.187, 0)
 mesh = SubResource("BoxMesh_g1u8g")
 
 [node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.197297, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.901055, 0)
 collision_layer = 0
 collision_mask = 16
 monitorable = false

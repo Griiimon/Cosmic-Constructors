@@ -34,30 +34,35 @@ script = ExtResource("1_2v5pu")
 green_light = ExtResource("2_ayq7k")
 red_light = ExtResource("3_7d3ol")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 visible = false
 mesh = SubResource("BoxMesh_alf2v")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("BoxMesh_jatpl")
+skeleton = NodePath("../..")
 
-[node name="Light" type="MeshInstance3D" parent="MeshInstance3D2"]
+[node name="Light" type="MeshInstance3D" parent="Model/MeshInstance3D2"]
 unique_name_in_owner = true
 mesh = SubResource("CylinderMesh_xtopn")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D2"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/MeshInstance3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.5, 0)
 mesh = SubResource("BoxMesh_ai4gu")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D2"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model/MeshInstance3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0.5, 0)
 mesh = SubResource("BoxMesh_ai4gu")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="MeshInstance3D2"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model/MeshInstance3D2"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 1.53081e-17, 0.5, 0.25)
 mesh = SubResource("BoxMesh_ai4gu")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="MeshInstance3D2"]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Model/MeshInstance3D2"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -1.53081e-17, 0.5, -0.25)
 mesh = SubResource("BoxMesh_ai4gu")
 

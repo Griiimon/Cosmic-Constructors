@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://b16qov36da0gj" path="res://game/data/blocks/piston head/piston_head_block.tres" id="2_68rko"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_frrn6"]
-size = Vector3(1, 0.5, 1)
+size = Vector3(2.5, 1.5, 2.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckk81"]
 albedo_color = Color(0.349065, 0.349065, 0.349065, 1)
@@ -41,25 +41,32 @@ top_radius = 0.35
 bottom_radius = 0.35
 height = 1.0
 
-[node name="Piston" type="Node3D"]
+[node name="Piston" type="Node3D" node_paths=PackedStringArray("segments_node", "orig_segment")]
 script = ExtResource("1_jtvf3")
 piston_head_block = ExtResource("2_68rko")
+segments_node = NodePath("Model/Segments")
+orig_segment = NodePath("Model/Segments/Segment")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_frrn6")
 
-[node name="Base" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="Base" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 mesh = SubResource("CylinderMesh_xjrup")
+skeleton = NodePath("../..")
 
-[node name="Base2" type="MeshInstance3D" parent="."]
+[node name="Base2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.450852, 0)
 mesh = SubResource("CylinderMesh_er0tb")
+skeleton = NodePath("../..")
 
-[node name="Segments" type="Node3D" parent="."]
+[node name="Segments" type="Node3D" parent="Model"]
 
-[node name="Segment" type="MeshInstance3D" parent="Segments"]
+[node name="Segment" type="MeshInstance3D" parent="Model/Segments"]
 mesh = SubResource("CylinderMesh_nv7gb")
 
 [node name="JoltGeneric6DOFJoint3D" type="JoltGeneric6DOFJoint3D" parent="."]

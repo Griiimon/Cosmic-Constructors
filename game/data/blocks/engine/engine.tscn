@@ -28,7 +28,7 @@ size = Vector3(0.25, 0.39, 0.75)
 
 [sub_resource type="BoxMesh" id="BoxMesh_g0qs7"]
 material = SubResource("StandardMaterial3D_v2hap")
-size = Vector3(0.435, 0.5, 0.85)
+size = Vector3(0.435, 0.5, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_f5mvd"]
 material = SubResource("StandardMaterial3D_v2hap")
@@ -57,11 +57,13 @@ script = ExtResource("1_v5cg6")
 max_fuel_consumption = 0.1
 connectors = Array[ExtResource("3_54fld")]([SubResource("Resource_g8tj4"), SubResource("Resource_7iy1q")])
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 visible = false
 mesh = SubResource("BoxMesh_tr2k0")
-
-[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
+skeleton = NodePath("../..")
 
 [node name="Model Inside" type="Node3D" parent="Model" groups=["Keep Ghost"]]
 
@@ -95,10 +97,10 @@ visible = false
 mesh = SubResource("CylinderMesh_tgmwc")
 skeleton = NodePath("../Base Block")
 
-[node name="Fluid Connector 1" parent="Model" instance=ExtResource("4_qprth")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+[node name="Fluid Connector 1" parent="." instance=ExtResource("4_qprth")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.25)
 
-[node name="Fluid Connector 2" parent="Model" instance=ExtResource("4_qprth")]
-transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0.5)
+[node name="Fluid Connector 2" parent="." instance=ExtResource("4_qprth")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 1.25)
 
 [node name="Fluid Consumer" parent="." instance=ExtResource("2_w41ml")]

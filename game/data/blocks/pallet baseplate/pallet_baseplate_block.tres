@@ -6,7 +6,8 @@
 
 [resource]
 script = ExtResource("1_p1c38")
-size = Vector3i(2, 1, 2)
+grid_size = 0
+size = Vector3i(1, 1, 1)
 mass = 10.0
 max_hitpoints = 10
 custom_collision = true

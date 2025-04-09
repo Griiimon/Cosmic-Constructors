@@ -1,6 +1,5 @@
-[gd_scene load_steps=15 format=3 uid="uid://br6liai788ug6"]
+[gd_scene load_steps=14 format=3 uid="uid://br6liai788ug6"]
 
-[ext_resource type="PackedScene" uid="uid://dxobr26jfvcqg" path="res://game/core/components/fluid container/fluid_connector_model.tscn" id="1_5rj0m"]
 [ext_resource type="Script" path="res://game/core/block/instances/tank_instance.gd" id="1_l75wk"]
 [ext_resource type="PackedScene" uid="uid://s5pod3jqq31o" path="res://game/core/components/fluid container/fluid_container.tscn" id="1_pmcxv"]
 [ext_resource type="Script" path="res://game/core/components/fluid container/fluid_connector.gd" id="2_tssye"]
@@ -53,15 +52,17 @@ material = SubResource("StandardMaterial3D_8ry56")
 size = Vector3(0.9, 0.05, 0.9)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_jj33w"]
-top_radius = 0.43
-bottom_radius = 0.43
+top_radius = 1.075
+bottom_radius = 1.075
 height = 0.001
 
-[node name="Small Fuel Tank" type="Node3D"]
+[node name="Small Fuel Tank" type="Node3D" node_paths=PackedStringArray("model_node") groups=["Keep Ghost"]]
 script = ExtResource("1_l75wk")
 connectors = Array[ExtResource("2_tssye")]([SubResource("Resource_ekvm1"), SubResource("Resource_phvbk")])
+model_node = NodePath("Model")
 
 [node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 visible = false
@@ -86,15 +87,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
 mesh = SubResource("CylinderMesh_biind")
 skeleton = NodePath("../..")
 
-[node name="Fluid Connector 1" parent="Model" instance=ExtResource("1_5rj0m")]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0.5, 0)
-
-[node name="Fluid Connector 2" parent="Model" instance=ExtResource("1_5rj0m")]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, -0.5, 0)
-
 [node name="Fluid Cylinder" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.993881, 0)
 mesh = SubResource("CylinderMesh_jj33w")
 
 [node name="Fluid Container" parent="." instance=ExtResource("1_pmcxv")]

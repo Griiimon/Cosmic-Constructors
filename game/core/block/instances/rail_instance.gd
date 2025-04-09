@@ -33,7 +33,7 @@ func init(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary= {}):
 			if sub_grid_id > -1:
 				rail.sub_grid= grid.world.get_grid(sub_grid_id)
 		else:
-			rail.sub_grid= grid.add_sub_grid(global_position + global_basis.y, global_rotation, grid_block, carriage_block, Vector3i.ZERO)
+			rail.sub_grid= grid.add_sub_grid(global_position + global_basis.y * grid.block_size, global_rotation, grid_block, carriage_block, Vector3i.ZERO)
 
 		rail.motor_enabled= motor_enabled
 		rail.motor_velocity= motor_velocity
@@ -43,7 +43,7 @@ func init(grid: BlockGrid, grid_block: GridBlock, restore_data: Dictionary= {}):
 		rail.joint= slider_joint
 		
 		if restore_data and rail.sub_grid:
-			slider_joint.global_position= rail.sub_grid.global_position - rail.sub_grid.global_basis.y
+			slider_joint.global_position= rail.sub_grid.global_position - rail.sub_grid.global_basis.y * grid.block_size
 			var offset: Vector3= to_local(slider_joint.global_position)
 			#DebugHud.send("Carriage offset", offset.z)
 			
@@ -86,7 +86,7 @@ func on_set_motor_active():
 			rail.joint.motor_enabled= false
 			rail.store_limits()
 	 
-			var vec: Vector3= rail.sub_grid.global_position - ( rail.joint.global_transform.origin + rail.joint.global_basis.y )
+			var vec: Vector3= rail.sub_grid.global_position - ( rail.joint.global_transform.origin + rail.joint.global_basis.y * rail.grid.block_size )
 			var dot_factor: float= round(rail.joint.global_basis.x.dot(vec.normalized()))
 
 			rail.joint.limit_lower= vec.length() * dot_factor

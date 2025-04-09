@@ -1,16 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://bfgykumivext4"]
 
-[ext_resource type="Material" uid="uid://brp35pocipa26" path="res://game/data/blocks/fixed wheel/tire_material.tres" id="1_p2rds"]
+[ext_resource type="Material" uid="uid://brp35pocipa26" path="res://game/data/blocks/fixed wheel/tire_material.tres" id="1_vk8je"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_80a8l"]
 friction = 0.9
 bounce = 0.1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_glqlq"]
-radius = 0.35
+radius = 0.875
 
 [sub_resource type="TorusMesh" id="TorusMesh_rbq7j"]
-material = ExtResource("1_p2rds")
+material = ExtResource("1_vk8je")
 inner_radius = 0.2
 outer_radius = 0.35
 
@@ -29,5 +29,5 @@ transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("SphereShape3D_glqlq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(6.12323e-17, -2, 0, 1, 1.22465e-16, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1.53081e-16, -5, 0, 2.5, 3.06162e-16, 0, 0, 0, 2.5, 0, 0, 0)
 mesh = SubResource("TorusMesh_rbq7j")

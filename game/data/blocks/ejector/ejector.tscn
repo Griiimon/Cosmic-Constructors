@@ -29,39 +29,49 @@ roughness = 0.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_4xl51"]
 material = SubResource("StandardMaterial3D_48bu5")
-size = Vector3(0.7, 0.05, 0.7)
+size = Vector3(0.68, 0.05, 0.68)
 
 [node name="Ejector" type="Node3D"]
 script = ExtResource("1_878b2")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, -0.0303339, -0.0303339)
 visible = false
 mesh = SubResource("BoxMesh_4wxlk")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, -0.0303339, 0.219666)
 mesh = SubResource("BoxMesh_4ahov")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0.319666, -0.0303339)
 mesh = SubResource("BoxMesh_vc18y")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 0, -0.380334, -0.0303339)
 mesh = SubResource("BoxMesh_vc18y")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(6.12323e-17, -0.5, -0.866025, 1, 8.36449e-17, 2.24126e-17, 6.12323e-17, -0.866025, 0.5, -0.35, -0.0303339, -0.0303339)
 mesh = SubResource("BoxMesh_vc18y")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(6.12323e-17, 0.5, -0.866025, 1, 2.24125e-17, 8.3645e-17, 6.12323e-17, -0.866025, -0.5, 0.35, -0.0303339, -0.0303339)
 mesh = SubResource("BoxMesh_vc18y")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, -0.0303339, -0.0376625)
 mesh = SubResource("BoxMesh_4xl51")
+skeleton = NodePath("../..")
 
 [node name="Item Ejector" parent="." instance=ExtResource("2_ms6yb")]
 transform = Transform3D(1, 0, 0, 0, 6.12327e-17, -1, 0, 1, 6.12327e-17, 0, -0.0303339, -0.0303339)

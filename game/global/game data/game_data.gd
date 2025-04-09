@@ -1,6 +1,8 @@
 extends Node
 
-@export var block_library: BlockLibrary
+@export var large_block_library: BlockLibrary
+@export var small_block_library: BlockLibrary
+
 @export var voxel_terrain_block_library: VoxelTerrainBlockLibrary
 @export var scene_library: SceneLibrary
 @export var fluid_library: FluidLibrary
@@ -18,14 +20,17 @@ var block_categories: Dictionary
 func init() -> void:
 	var game_mode: GameMode= Global.game_mode
 	if game_mode:
-		block_library.blocks.append_array(game_mode.block_library.blocks)
+		large_block_library.blocks.append_array(game_mode.large_block_library.blocks)
+		small_block_library.blocks.append_array(game_mode.small_block_library.blocks)
 
-	for block in block_library.blocks:
+	for block in large_block_library.blocks:
 		block_definition_lookup[block.get_display_name()]= block
 		if not block.category: continue
 		if not block_categories.has(block.category):
-			block_categories[block.category]= []
-		block_categories[block.category].append(block)
+			block_categories[block.category]= {}
+		if not block_categories[block.category].has(block.grid_size):
+			block_categories[block.category][block.grid_size]= []
+		block_categories[block.category][block.grid_size].append(block)
 
 	for voxel_block in voxel_terrain_block_library.blocks:
 		if voxel_block.can_turn_into_grid_block():
@@ -49,17 +54,31 @@ func init() -> void:
 		item_definition_lookup[item.get_display_name()]= item
 
 
+func get_block_library(grid_size: Block.GridSize)-> BlockLibrary:
+	match grid_size:
+		Block.GridSize.LARGE:
+			return large_block_library
+		_:
+			return small_block_library
+
+
 func get_block_definition(block_name: String)-> Block:
 	assert(block_definition_lookup.has(block_name))
 	return block_definition_lookup[block_name]
 
 
-func get_block(id: int)-> Block:
-	return block_library.blocks[id]
+func get_block(id: int, block_size: float)-> Block:
+	if is_equal_approx(block_size, 1.0):
+		return large_block_library.blocks[id]
+	else:
+		return small_block_library.blocks[id]
 
 
-func get_block_id(block: Block)-> int:
-	return block_library.blocks.find(block)
+func get_block_id(block: Block, block_size: float)-> int:
+	if is_equal_approx(block_size, 1.0):
+		return large_block_library.blocks.find(block)
+	else:
+		return small_block_library.blocks.find(block)
 
 
 func get_voxel_terrain_block_id(block: BaseVoxelTerrainBlock)-> int:

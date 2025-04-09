@@ -14,9 +14,11 @@ script = ExtResource("1_lfa06")
 water_detection_points = NodePath("Water Points")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 mesh = SubResource("BoxMesh_2l5ut")
 
 [node name="Water Points" type="Node3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="Marker3D" type="Marker3D" parent="Water Points"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.25)

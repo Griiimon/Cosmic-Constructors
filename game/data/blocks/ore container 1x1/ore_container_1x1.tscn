@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://4lrcbiiff8n2" path="res://game/core/components/item catcher/item_catcher.tscn" id="4_asj0l"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iuobd"]
-size = Vector3(1, 0.9, 1)
+size = Vector3(2.5, 2.4, 2.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qn08"]
 albedo_color = Color(0.776471, 0.690196, 0, 1)
@@ -42,12 +42,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 shape = SubResource("BoxShape3D_iuobd")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 mesh = SubResource("ArrayMesh_gg6n5")
 
 [node name="Ore Pile" parent="." instance=ExtResource("1_ggh7r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
-mesh_size = Vector2(0.95, 0.95)
+mesh_size = Vector2(2.45, 2.45)
 volume_factor = 0.02
+max_height = 2.5
 orig_shader_material = SubResource("ShaderMaterial_oi8vb")
 
 [node name="Item Catcher" parent="." instance=ExtResource("4_asj0l")]

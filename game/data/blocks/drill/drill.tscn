@@ -37,40 +37,49 @@ material = SubResource("StandardMaterial3D_msbjy")
 size = Vector3(0.1, 0.2, 0.1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8qi1u"]
-radius = 1.0
+radius = 1.5
 
-[node name="Drill" type="Node3D"]
+[node name="Drill" type="Node3D" node_paths=PackedStringArray("drill_head", "terrain_shapecast")]
 script = ExtResource("1_svn4w")
+drill_head = NodePath("Model/Drill Head")
+terrain_shapecast = NodePath("Terrain ShapeCast")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 visible = false
 mesh = SubResource("BoxMesh_k74eo")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0.1)
 mesh = SubResource("CylinderMesh_r8j0e")
+skeleton = NodePath("../..")
 
-[node name="Drill Head" type="MeshInstance3D" parent="."]
+[node name="Drill Head" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, -0.236059)
 mesh = SubResource("CylinderMesh_rwhca")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Drill Head"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/Drill Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.141, 0.5)
 mesh = SubResource("BoxMesh_qtaf8")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Drill Head"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/Drill Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.141, -0.5)
 mesh = SubResource("BoxMesh_qtaf8")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Drill Head"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model/Drill Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.141, 0)
 mesh = SubResource("BoxMesh_qtaf8")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Drill Head"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model/Drill Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.141, 0)
 mesh = SubResource("BoxMesh_qtaf8")
 
 [node name="Terrain ShapeCast" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.960543)
 shape = SubResource("SphereShape3D_8qi1u")
 target_position = Vector3(0, 0, -1)
 collision_mask = 4

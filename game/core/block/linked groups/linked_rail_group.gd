@@ -27,9 +27,9 @@ func add_block(grid_block: GridBlock, value: Variant= 0):
 	
 	var dir_to_block: Vector3= ( joint.global_transform.origin).direction_to(grid.get_global_block_pos(grid_block.local_pos))
 	if joint.global_basis.x.dot(dir_to_block) > 0:
-		joint.limit_upper+= 1
+		joint.limit_upper+= grid.block_size
 	else:
-		joint.limit_lower-= 1
+		joint.limit_lower-= grid.block_size
 
 	#DebugHud.send("Joint limits", "%d - %d" % [ joint.limit_lower, joint.limit_upper] )
 

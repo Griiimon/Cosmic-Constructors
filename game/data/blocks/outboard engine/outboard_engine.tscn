@@ -19,6 +19,7 @@ size = Vector3(0.2, 1.8, 0.3)
 script = ExtResource("1_d2ddc")
 
 [node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("BoxMesh_axbu4")

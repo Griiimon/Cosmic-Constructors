@@ -53,32 +53,42 @@ script = ExtResource("1_l7y3g")
 green_light = ExtResource("2_7q7ie")
 yellow_light = ExtResource("3_3ymt1")
 red_light = ExtResource("4_uthmv")
-lights = [NodePath("Light")]
+lights = [NodePath("Model/Light")]
 connectors = Array[ExtResource("5_r5res")]([SubResource("Resource_qlgli"), SubResource("Resource_51ueu")])
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, -0.25)
 mesh = SubResource("CylinderMesh_354xm")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, -0.25)
 mesh = SubResource("CylinderMesh_n671n")
+skeleton = NodePath("../..")
 
-[node name="Light" type="MeshInstance3D" parent="."]
+[node name="Light" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
 mesh = SubResource("BoxMesh_c6iyy")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 3.99574e-23, 0, -3.99574e-23, 1, 0, 0.25, 0)
 mesh = SubResource("CylinderMesh_354xm")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 3.99574e-23, 0, -3.99574e-23, 1, 0, 0.25, 0)
 mesh = SubResource("CylinderMesh_n671n")
+skeleton = NodePath("../..")
 
-[node name="Light2" type="MeshInstance3D" parent="."]
+[node name="Light2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0.25, 0)
 mesh = SubResource("BoxMesh_c6iyy")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("SphereMesh_bif0a")
+skeleton = NodePath("../..")

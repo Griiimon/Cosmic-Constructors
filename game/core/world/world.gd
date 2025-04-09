@@ -61,8 +61,8 @@ func generate_sub_node(node_name: String)-> Node:
 	return node
 
 
-func add_grid(pos: Vector3, rot: Vector3= Vector3.ZERO, _faction: Faction= null)-> BlockGrid:
-	var grid:= BlockGrid.new()
+func add_grid(pos: Vector3, rot: Vector3= Vector3.ZERO, block_size: float= 1.0, _faction: Faction= null)-> BlockGrid:
+	var grid:= BlockGrid.new(block_size)
 	assign_grid_id(grid)
 	init_grid(grid, pos, rot)
 	grid.faction= _faction

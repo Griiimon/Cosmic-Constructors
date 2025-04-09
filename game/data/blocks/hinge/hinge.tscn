@@ -1,7 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://mlr7bkamt0ux"]
+[gd_scene load_steps=12 format=3 uid="uid://mlr7bkamt0ux"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/hinge_instance.gd" id="1_5coxj"]
 [ext_resource type="Resource" uid="uid://b678we7hljnwt" path="res://game/data/blocks/hinge head/hinge_head_block.tres" id="2_h4ws0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v3mxd"]
+size = Vector3(2.5, 1.25, 2.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_eb3b1"]
 
@@ -12,6 +15,8 @@ roughness = 0.69
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_j0glr"]
 material = SubResource("StandardMaterial3D_abi0j")
+top_radius = 0.49
+bottom_radius = 0.49
 height = 0.5
 
 [sub_resource type="SphereMesh" id="SphereMesh_uw3vi"]
@@ -29,28 +34,57 @@ top_radius = 0.3
 bottom_radius = 0.3
 height = 0.1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_v3mxd"]
-size = Vector3(1, 0.5, 1)
+[sub_resource type="CylinderMesh" id="CylinderMesh_qe33g"]
+material = SubResource("StandardMaterial3D_abi0j")
+height = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_f85uu"]
+material = SubResource("StandardMaterial3D_abi0j")
+size = Vector3(1, 0.395, 1)
 
 [node name="Hinge" type="Node3D"]
 script = ExtResource("1_5coxj")
 hinge_head_block = ExtResource("2_h4ws0")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.605, 0)
+shape = SubResource("BoxShape3D_v3mxd")
+
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 visible = false
 mesh = SubResource("BoxMesh_eb3b1")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.242529, 0)
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.229206, 0)
 mesh = SubResource("CylinderMesh_j0glr")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.162491, 0)
+visible = false
 mesh = SubResource("SphereMesh_uw3vi")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1.465, 0, 0.0964232, 0)
 mesh = SubResource("CylinderMesh_dpk3c")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, -0.43249, 0, 0)
+mesh = SubResource("CylinderMesh_qe33g")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0.432, 0, 0)
+mesh = SubResource("CylinderMesh_qe33g")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.296175, 0)
+mesh = SubResource("BoxMesh_f85uu")
 
 [node name="JoltHingeJoint3D" type="JoltHingeJoint3D" parent="."]
 limit_enabled = true
@@ -60,7 +94,3 @@ motor_enabled = true
 motor_max_torque = 100000.0
 exclude_nodes_from_collision = false
 transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-shape = SubResource("BoxShape3D_v3mxd")

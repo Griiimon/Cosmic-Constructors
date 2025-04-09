@@ -46,20 +46,28 @@ height = 0.1
 [node name="Gyro" type="Node3D"]
 script = ExtResource("1_6h7un")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
 mesh = SubResource("BoxMesh_hdlyv")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("SphereMesh_mvw7v")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("CylinderMesh_6k5ga")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_6lwr0")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(3.7494e-33, -6.12323e-17, 1, 1, 6.12323e-17, 0, -6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
 mesh = SubResource("CylinderMesh_4ibu8")
+skeleton = NodePath("../..")

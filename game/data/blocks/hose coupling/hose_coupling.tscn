@@ -45,11 +45,13 @@ hose_material = ExtResource("2_ayop6")
 connectors = Array[ExtResource("2_lxtni")]([SubResource("Resource_8sphv")])
 model_node = NodePath("Model")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 visible = false
 mesh = SubResource("BoxMesh_nixcm")
-
-[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
+skeleton = NodePath("../..")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, -0.25)
@@ -76,5 +78,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0283195, 1.73407e-18)
 mesh = SubResource("CylinderMesh_gljwx")
 skeleton = NodePath("../..")
 
-[node name="Fluid Connector 1" parent="Model" instance=ExtResource("3_a5ne4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+[node name="Fluid Connector 1" parent="." instance=ExtResource("3_a5ne4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.3)

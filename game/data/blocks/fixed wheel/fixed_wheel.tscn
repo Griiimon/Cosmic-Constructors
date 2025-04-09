@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://c3xrsv653th1c"]
 
 [ext_resource type="Script" path="res://game/core/block/instances/fixed_wheel_instance.gd" id="1_25tpm"]
-[ext_resource type="PackedScene" uid="uid://bfgykumivext4" path="res://game/data/blocks/fixed wheel/small_fixed_wheel_body.tscn" id="2_xp0fd"]
+[ext_resource type="PackedScene" uid="uid://bfgykumivext4" path="res://game/data/blocks/fixed wheel/large_small_fixed_wheel_body.tscn" id="2_xp0fd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jbifn"]
-size = Vector3(1, 0.5, 1)
+size = Vector3(2.5, 1.25, 2.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_btu2r"]
 
@@ -42,26 +42,32 @@ script = ExtResource("1_25tpm")
 wheel_scene = ExtResource("2_xp0fd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
 shape = SubResource("BoxShape3D_jbifn")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 visible = false
 mesh = SubResource("BoxMesh_btu2r")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 mesh = SubResource("BoxMesh_piqrm")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.825646, -0.564189, 0, 0.564189, 0.825646, 0.397407, -0.164871, 0.151251)
 mesh = SubResource("BoxMesh_klwb4")
+skeleton = NodePath("../..")
 
-[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
-angular_limit_x/enabled = false
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Generic6DOFJoint3D"]
-transform = Transform3D(-0.0117632, -0.999931, 0, 0.999931, -0.0117632, 0, 0, 0, 1, 0.164042, 0, 0)
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(6.12324e-17, -1, 0, 1, 6.12324e-17, 0, 0, 0, 1, 0.164042, -0.4, 0)
 mesh = SubResource("CylinderMesh_lw0n5")
 skeleton = NodePath("../..")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="."]
+transform = Transform3D(1, -1.2326e-32, 0, 1.2326e-32, 1, 0, 0, 0, 1, 0, -1, 0)
+angular_limit_x/enabled = false

@@ -6,8 +6,8 @@ enum State { IDLE, MOVE }
 @export var num_segments: int= 5
 @export var piston_head_block: Block
 
-@onready var segments_node: Node3D = $Segments
-@onready var orig_segment: MeshInstance3D = $Segments/Segment
+@export var segments_node: Node3D
+@export var orig_segment: MeshInstance3D
 
 @onready var joint: JoltGeneric6DOFJoint3D = $JoltGeneric6DOFJoint3D
 @onready var orig_joint= joint.duplicate()
@@ -48,6 +48,7 @@ func _ready() -> void:
 
 
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
+	max_distance*= grid.block_size
 	var sub_grid_pos: Vector3= grid.get_global_block_pos(grid_block.local_pos) + global_basis.y
 	sub_grid= grid.add_sub_grid(sub_grid_pos, grid.rotation, grid_block, piston_head_block, grid_block.rotation)
 	
@@ -55,7 +56,7 @@ func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	joint.node_b= joint.get_path_to(sub_grid)
 
 
-func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
+func physics_tick(grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 	if not sub_grid: return
 	
 	var extension: float= get_joint_distance()

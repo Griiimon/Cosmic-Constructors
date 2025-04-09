@@ -23,7 +23,7 @@ func _ready() -> void:
 func on_placed(grid: BlockGrid, grid_block: GridBlock):
 	if counter_part: return
 	is_original= true
-	var counter_part_grid: BlockGrid= grid.add_sub_grid(global_position + global_basis.y, global_rotation,\
+	var counter_part_grid: BlockGrid= grid.add_sub_grid(global_position + global_basis.y * grid.block_size, global_rotation,\
 				grid_block, grid_block.get_block_definition(), Vector3i(2, 0, 0), func(inst): (inst as MergeBlockInstance).counter_part= self)
 	counter_part_block_pos= Vector3i.ZERO
 	counter_part= counter_part_grid.get_block_local(counter_part_block_pos).get_block_instance()

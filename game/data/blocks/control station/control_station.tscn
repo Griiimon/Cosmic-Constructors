@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://game/core/block/instances/seat_instance.gd" id="1_m4ay8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_n7qdn"]
+size = Vector3(2.5, 2.5, 2.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rhwlw"]
 albedo_color = Color(0.394353, 0.394353, 0.394353, 1)
@@ -35,11 +36,12 @@ script = ExtResource("1_m4ay8")
 player_position = NodePath("Player Position")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 visible = false
 mesh = SubResource("BoxMesh_n7qdn")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.797268, -0.603626, 0, 0.603626, 0.797268, 0, 0.281761, -0.290815)
+transform = Transform3D(2.5, 0, 0, 0, 1.99317, -1.50907, 0, 1.50907, 1.99317, 0, -1.13923, -1.38046)
 mesh = SubResource("BoxMesh_k2hos")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="MeshInstance3D2"]
@@ -61,12 +63,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.124246, 0.0050716)
 mesh = SubResource("BoxMesh_uatrk")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37, -0.1, -0.289035)
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -0.925, -2.09364, -1.37601)
 mesh = SubResource("BoxMesh_2ujkb")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, -0.1, -0.289035)
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0.925, -2.09364, -1.37601)
 mesh = SubResource("BoxMesh_2ujkb")
 
 [node name="Player Position" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.44364, -0.403427)

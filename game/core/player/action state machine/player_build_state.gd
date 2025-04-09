@@ -11,10 +11,17 @@ extends PlayerActionStateMachineState
 		if current_block:
 			init_ghost(current_block.get_model())
 
+
 var block_list: Array[Block]
 var block_index: int
 
 var grid: BlockGrid
+var block_size: float
+var grid_size: Block.GridSize:
+	set(s):
+		grid_size= s
+		block_size= Block.get_grid_size(grid_size)
+
 var local_block_pos: Vector3i
 var block_rotation: Vector3i
 var hotbar_layout:= HotbarLayout.new()
@@ -25,12 +32,13 @@ func _ready() -> void:
 	super()
 	SignalManager.selected_block_category.connect(on_block_category_selected)
 
+	grid_size= Block.GridSize.LARGE
 	set_full_block_list()
 
 
 func on_enter():
 	player.build_raycast.enabled= true
-	player.build_raycast.target_position.z= -build_range
+	update_build_raycast_target_position()
 	
 	if current_block:
 		init_ghost(current_block.get_model())
@@ -48,7 +56,7 @@ func on_physics_process(delta: float):
 	if Input.is_action_just_pressed("build"):
 		finished.emit()
 		return
-	
+
 	if not ghost: return
 
 	if not align_ghost():
@@ -71,7 +79,7 @@ func on_physics_process(delta: float):
 
 func on_unhandled_input(event: InputEvent):
 	if event.is_action_pressed("build_block"):
-		if ghost:
+		if ghost and ghost.visible:
 			build_block()
 			get_viewport().set_input_as_handled()
 			return
@@ -91,9 +99,15 @@ func on_unhandled_input(event: InputEvent):
 			pick_block()
 		elif event.is_action_pressed("align_block"):
 			gravity_align_ghost()
+		elif event.is_action_pressed("toggle_block_size"):
+			grid_size= Block.GridSize.LARGE if grid_size == Block.GridSize.SMALL else Block.GridSize.SMALL
+			update_build_raycast_target_position()
+			on_block_category_selected(null)
 		else:
 			return
 		get_viewport().set_input_as_handled()
+	
+	
 	if event is InputEventMouseButton:
 		if event.pressed:
 			match event.button_index:
@@ -111,6 +125,9 @@ func align_ghost():
 		
 		var old_grid: BlockGrid= grid
 		grid= raycast.get_collider()
+		
+		if not is_equal_approx(grid.block_size, Block.get_grid_size(grid_size)): return
+		
 		assert(grid != null)
 
 		var can_place:= false
@@ -120,7 +137,7 @@ func align_ghost():
 				can_place= true
 				break
 				
-			collision_pos+= raycast.global_basis.z
+			collision_pos+= raycast.global_basis.z * block_size
 
 		if not can_place:
 			if old_grid != grid:
@@ -144,7 +161,7 @@ func build_block():
 	var new_grid:= false
 	if not grid:
 		new_grid= true
-		grid= player.world.add_grid(ghost.position, ghost.global_rotation, player.faction)
+		grid= player.world.add_grid(ghost.position, ghost.global_rotation, block_size, player.faction)
 
 		if NetworkManager.is_client:
 			ClientManager.send_sync_event(EventSyncState.Type.ADD_GRID,\
@@ -165,7 +182,7 @@ func build_block():
 		assert(grid)
 
 		ClientManager.send_sync_event(EventSyncState.Type.ADD_BLOCK,\
-		 [grid.id, GameData.get_block_id(current_block),\
+		 [grid.id, GameData.get_block_id(current_block, block_size),\
 			local_block_pos, grid_block_rotation])
 	else:
 		grid.add_block(current_block, local_block_pos, grid_block_rotation)
@@ -251,7 +268,8 @@ func plane_fill(block_pos: Vector3i, grid_block_rotation: Vector3i, ignore_axis:
 
 
 func switch_block(delta: int):
-	block_index= block_list.find(current_block)
+	if delta != 0:
+		block_index= block_list.find(current_block)
 	block_index= wrapi(block_index + delta, 0, block_list.size())
 	current_block= block_list[block_index]
 
@@ -277,7 +295,7 @@ func gravity_align_ghost():
 
 
 func set_full_block_list():
-	block_list= GameData.block_library.blocks.duplicate()
+	block_list= GameData.get_block_library(grid_size).blocks.duplicate()
 
 
 func remove_block():
@@ -315,11 +333,15 @@ func remove_grid():
 			ClientManager.send_sync_event(EventSyncState.Type.REMOVE_GRID, [grid.id])
 
 
+func update_build_raycast_target_position():
+	player.build_raycast.target_position.z= -build_range * block_size
+
+
 func on_block_category_selected(category: BlockCategory):
-	if is_current_state():
-		if category:
-			block_list.assign(GameData.block_categories[category])
-		else:
-			set_full_block_list()
+	assert(is_current_state())
+	if category:
+		block_list.assign(GameData.block_categories[category][grid_size])
+	else:
+		set_full_block_list()
 	block_index= 0
 	switch_block(0)

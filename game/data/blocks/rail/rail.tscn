@@ -31,23 +31,29 @@ size = Vector3(0.1, 0.2, 1)
 script = ExtResource("1_ilahg")
 carriage_block = ExtResource("2_uvmrm")
 
-[node name="CSGBox3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_mthe4")
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="CSGBox3D" type="MeshInstance3D" parent="Model"]
+mesh = SubResource("ArrayMesh_mthe4")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.075, 0.372979, -0.1)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_p4jl6")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.075, 0.372979, -0.1)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_p4jl6")
+skeleton = NodePath("../..")
 
 [node name="JoltSliderJoint3D" type="JoltSliderJoint3D" parent="."]
 limit_enabled = true
-limit_upper = 0.5
-limit_lower = -0.5
+limit_upper = 1.25
+limit_lower = -1.25
 motor_enabled = true
 motor_max_force = 100000.0
 transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, 0)

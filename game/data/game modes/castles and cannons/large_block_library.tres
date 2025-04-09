@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BlockLibrary" load_steps=6 format=3 uid="uid://b7u61ochakrdd"]
+
+[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_i2p55"]
+[ext_resource type="Script" path="res://game/global/game data/block_library.gd" id="2_j8w2k"]
+[ext_resource type="Resource" uid="uid://sfwsxi2o0llp" path="res://game/data/game modes/castles and cannons/blocks/cannon/cannon_block.tres" id="2_shlwh"]
+[ext_resource type="Resource" uid="uid://c388qgnd1ttuj" path="res://game/data/game modes/castles and cannons/blocks/projectile store/projectile_store_block.tres" id="3_rc0tc"]
+[ext_resource type="Resource" uid="uid://b231t630sky7d" path="res://game/data/game modes/castles and cannons/blocks/throne room/throne_room_block.tres" id="4_hoyn7"]
+
+[resource]
+script = ExtResource("2_j8w2k")
+blocks = Array[ExtResource("1_i2p55")]([ExtResource("2_shlwh"), ExtResource("3_rc0tc"), ExtResource("4_hoyn7")])

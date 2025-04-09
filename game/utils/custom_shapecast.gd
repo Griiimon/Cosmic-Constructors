@@ -1,9 +1,9 @@
 class_name CustomShapeCast
 
-const DEBUG_MODE= false
+const DEBUG_MODE= true
 
 static var grid: BlockGrid
-static var grid_block: BaseGridBlock
+static var grid_block: GridBlock
 
 
 
@@ -46,34 +46,38 @@ static func pierce_blocks(shapecast: ShapeCast3D, filter: Callable, step_size: f
 		query.transform.origin= pos
 		var result: Array[Dictionary]= space_state.intersect_shape(query)
 		if result:
-			var first_result: Dictionary= result[0]
-			var collider: CollisionObject3D= first_result.collider
-			if collider is BlockGrid:
-				grid= collider
-				#var shape_trans: Transform3D= grid.shape_owner_get_transform(first_result.shape)
-				
-				#FIXME this is probably bad performance-wise, but cant make finding shapes via owner work
-				var coll_children: Array[Node]= grid.find_children("", "CollisionShape3D", false, false)
-				var shape_trans: Transform3D= coll_children[first_result.shape].transform
-				
-				# TODO following line may fail to produce correct result?
-				#		.. with multi blocks at least? 
-				grid_block= grid.get_block_local(round(shape_trans.origin))
+			for j in result.size():
+				var single_result: Dictionary= result[j]
+				var collider: CollisionObject3D= single_result.collider
+				if collider is BlockGrid:
+					grid= collider
+					#var shape_trans: Transform3D= grid.shape_owner_get_transform(first_result.shape)
+					
+					#FIXME this is probably bad performance-wise, but cant make finding shapes via owner work
+					var coll_children: Array[Node]= grid.find_children("", "CollisionShape3D", false, false)
+					var shape_trans: Transform3D= coll_children[single_result.shape].global_transform
+					
+					# TODO following line may fail to produce correct result?
+					#		only with multi blocks? 
+					#grid_block= grid.get_block_local(round(shape_trans.origin))
+					var base_block: BaseGridBlock= grid.get_block_from_global_pos(shape_trans.origin)
+					if not grid_block:
+						# TODO is this happening because of previously deleted shapes, or moving grids, or custom collision shapes?
+						push_warning("Custom Shapecast: no grid block")
+						continue
 
-				if not grid_block:
-					# TODO is this happening because of previously deleted shapes, or moving grids, or custom collision shapes?
-					push_warning("Custom Shapecast: no grid block")
-					continue
-				
-				#var tmp_debug: BaseGridBlock= grid_block
-				if not filter.call():
-					break
-				reset()
+					grid_block= base_block.get_grid_block()
+
+					
+					#var tmp_debug: BaseGridBlock= grid_block
+					if not filter.call():
+						break
+					reset()
 
 
 	if DEBUG_MODE and grid_block:
 		DebugBlockFrame.place_global(grid_block.get_block_instance().global_transform)
-		
+
 
 static func reset():
 	grid= null

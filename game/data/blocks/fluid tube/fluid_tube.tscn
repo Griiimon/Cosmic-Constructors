@@ -51,7 +51,7 @@ red_light = ExtResource("4_gs2x5")
 lights = [NodePath("Model/Light")]
 connectors = Array[ExtResource("5_4n5d1")]([SubResource("Resource_6oln0"), SubResource("Resource_gr81s")])
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]

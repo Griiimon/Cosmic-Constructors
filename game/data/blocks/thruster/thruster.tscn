@@ -33,7 +33,7 @@ colors = PackedColorArray(0.676492, 0.667585, 0.101887, 1, 0.739234, 0.196967, 0
 [node name="Thruster" type="Node3D"]
 script = ExtResource("1_rlpb6")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]

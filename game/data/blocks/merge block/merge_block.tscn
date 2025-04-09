@@ -34,7 +34,7 @@ script = ExtResource("1_2v5pu")
 green_light = ExtResource("2_ayq7k")
 red_light = ExtResource("3_7d3ol")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]

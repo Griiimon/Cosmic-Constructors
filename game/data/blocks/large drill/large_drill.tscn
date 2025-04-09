@@ -50,7 +50,7 @@ script = ExtResource("1_womo2")
 drill_head = NodePath("Model/Drill Head")
 terrain_shapecast = NodePath("Terrain ShapeCast")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]

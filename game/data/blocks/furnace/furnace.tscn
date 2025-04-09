@@ -52,7 +52,7 @@ size = Vector3(2.5, 0.25, 2.5)
 script = ExtResource("1_ixfdn")
 recipe = ExtResource("2_88d31")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="Model" type="MeshInstance3D" parent="Model"]

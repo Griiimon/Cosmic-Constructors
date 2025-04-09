@@ -46,7 +46,7 @@ height = 0.1
 [node name="Gyro" type="Node3D"]
 script = ExtResource("1_6h7un")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]

@@ -20,7 +20,7 @@ size = Vector3(1, 0.1, 1)
 script = ExtResource("1_iqtq5")
 area_scene = ExtResource("2_gbx7u")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]

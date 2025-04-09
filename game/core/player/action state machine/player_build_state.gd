@@ -340,7 +340,7 @@ func update_build_raycast_target_position():
 func on_block_category_selected(category: BlockCategory):
 	assert(is_current_state())
 	if category:
-		block_list.assign(GameData.block_categories[category][block_size])
+		block_list.assign(GameData.block_categories[category][grid_size])
 	else:
 		set_full_block_list()
 	block_index= 0

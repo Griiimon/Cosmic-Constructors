@@ -44,7 +44,7 @@ enabled_material = SubResource("StandardMaterial3D_xxuts")
 locked_material = ExtResource("2_uslcb")
 disabled_material = ExtResource("3_ijmug")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]

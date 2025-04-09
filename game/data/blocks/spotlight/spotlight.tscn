@@ -34,7 +34,7 @@ size = Vector3(0.8, 0.1, 0.85)
 [node name="Spotlight" type="Node3D"]
 script = ExtResource("1_c7dor")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]

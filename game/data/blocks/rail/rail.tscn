@@ -31,7 +31,7 @@ size = Vector3(0.1, 0.2, 1)
 script = ExtResource("1_ilahg")
 carriage_block = ExtResource("2_uvmrm")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="CSGBox3D" type="MeshInstance3D" parent="Model"]

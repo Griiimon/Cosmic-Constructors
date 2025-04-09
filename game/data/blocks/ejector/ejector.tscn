@@ -34,7 +34,7 @@ size = Vector3(0.68, 0.05, 0.68)
 [node name="Ejector" type="Node3D"]
 script = ExtResource("1_878b2")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]

@@ -33,7 +33,7 @@ size = Vector3(0.245, 0.545, 0.195)
 [node name="Brakes" type="Node3D"]
 script = ExtResource("1_sttqn")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]

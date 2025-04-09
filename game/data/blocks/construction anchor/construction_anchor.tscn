@@ -43,7 +43,7 @@ colors = PackedColorArray(0, 0, 0, 0, 1, 0.301961, 0.992157, 0.486275, 1, 1, 1, 
 [node name="Construction Anchor Block" type="Node3D"]
 script = ExtResource("1_7id1x")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]

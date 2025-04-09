@@ -44,7 +44,7 @@ script = ExtResource("1_svn4w")
 drill_head = NodePath("Model/Drill Head")
 terrain_shapecast = NodePath("Terrain ShapeCast")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]

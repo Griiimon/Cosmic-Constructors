@@ -72,7 +72,7 @@ yellow_light = ExtResource("3_hegm7")
 red_light = ExtResource("4_20eo6")
 connectors = Array[ExtResource("5_6rdtr")]([SubResource("Resource_e162o"), SubResource("Resource_m7x7m"), SubResource("Resource_bma08"), SubResource("Resource_0slxs")])
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." groups=["Keep Ghost"]]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]

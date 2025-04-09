@@ -1,3 +1,9 @@
+FuelTank doesnt have fluid connector instances anymore
+
+TubeGroupMemberInstance @tool script add_connectors_to_model: bool not working
+
+MergeBlock should use HingeJoint to lock
+
 Why is the FluidConsumer a ToolScript?
 
 Finish 6r Suspension

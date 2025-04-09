@@ -1,6 +1,6 @@
 class_name CustomShapeCast
 
-const DEBUG_MODE= true
+const DEBUG_MODE= false
 
 static var grid: BlockGrid
 static var grid_block: GridBlock
@@ -38,7 +38,6 @@ static func pierce_blocks(shapecast: ShapeCast3D, filter: Callable, step_size: f
 
 	var space_state: PhysicsDirectSpaceState3D= shapecast.get_world_3d().direct_space_state
 	var pos: Vector3= shapecast.global_position
-	#var dir: Vector3= (shapecast.target_position * shapecast.global_transform.inverse()).normalized()
 	var dir: Vector3= shapecast.global_position.direction_to(shapecast.to_global(shapecast.target_position))
 	
 	for i in shapecast.target_position.length() / step_size:
@@ -51,25 +50,20 @@ static func pierce_blocks(shapecast: ShapeCast3D, filter: Callable, step_size: f
 				var collider: CollisionObject3D= single_result.collider
 				if collider is BlockGrid:
 					grid= collider
+
 					#var shape_trans: Transform3D= grid.shape_owner_get_transform(first_result.shape)
-					
 					#FIXME this is probably bad performance-wise, but cant make finding shapes via owner work
 					var coll_children: Array[Node]= grid.find_children("", "CollisionShape3D", false, false)
 					var shape_trans: Transform3D= coll_children[single_result.shape].global_transform
 					
-					# TODO following line may fail to produce correct result?
-					#		only with multi blocks? 
-					#grid_block= grid.get_block_local(round(shape_trans.origin))
 					var base_block: BaseGridBlock= grid.get_block_from_global_pos(shape_trans.origin)
-					if not grid_block:
+					if not base_block:
 						# TODO is this happening because of previously deleted shapes, or moving grids, or custom collision shapes?
 						push_warning("Custom Shapecast: no grid block")
 						continue
 
 					grid_block= base_block.get_grid_block()
 
-					
-					#var tmp_debug: BaseGridBlock= grid_block
 					if not filter.call():
 						break
 					reset()

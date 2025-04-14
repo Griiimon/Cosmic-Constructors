@@ -23,7 +23,11 @@ func init() -> void:
 		large_block_library.blocks.append_array(game_mode.large_block_library.blocks)
 		small_block_library.blocks.append_array(game_mode.small_block_library.blocks)
 
-	for block in large_block_library.blocks:
+	var all_blocks: Array[Block]= []
+	all_blocks.append_array(large_block_library.blocks)
+	all_blocks.append_array(small_block_library.blocks)
+
+	for block in all_blocks:
 		block_definition_lookup[block.get_display_name()]= block
 		if not block.category: continue
 		if not block_categories.has(block.category):

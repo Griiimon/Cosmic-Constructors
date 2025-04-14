@@ -1,5 +1,8 @@
-# Cosmic Constructors
+# 
+
 **A Space Engineers Clone / 3D Physics + Voxel Sandbox made in Godot**
+
+ 
 
 
 
@@ -12,7 +15,10 @@
 [Sky3D Addon](https://github.com/TokisanGames/Sky3D)
 
 
+
 **Optional Addons** (not required to run, but are included in my project and may produce warnings/errors on startup when not installed):
+
+
 
 CSGToMeshInstance
 

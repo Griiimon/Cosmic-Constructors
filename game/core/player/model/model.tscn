@@ -345,10 +345,12 @@ mesh = SubResource("BoxMesh_6i52k")
 
 [node name="Bottle Left" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.999998, 0.000544391, 0.00191851, -0.000537358, 0.999993, -0.00366425, -0.0019205, 0.00366321, 0.999991, -0.0823519, -0.284411, 0.319864)
+visible = false
 mesh = SubResource("CapsuleMesh_uufhi")
 
 [node name="Bottle Right" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0860146, -0.282102, 0.320211)
+visible = false
 mesh = SubResource("CapsuleMesh_uufhi")
 
 [node name="AnimationPlayer Arms" type="AnimationPlayer" parent="."]

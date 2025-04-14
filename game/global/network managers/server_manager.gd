@@ -53,10 +53,15 @@ func _physics_process(_delta: float) -> void:
 		if not world.has_grid(grid_id): continue
 		var request: Dictionary= control_movement_requests[grid_id]
 		var grid: BlockGrid= world.get_grid(grid_id)
-		var seat_block: GridBlock= grid.get_block_local(request["seat"])
-		if not seat_block: continue
-		var seat: SeatInstance= seat_block.get_block_instance()
-		
+
+		var rotation_axis: Vector3= Vector3.UP
+		var rotation_angle: float= 0
+		var control_block: GridBlock= grid.get_block_local(request["control_block"])
+		assert(control_block)
+		var control_block_instance: BlockInstance= control_block.get_block_instance()
+		rotation_axis= control_block_instance.basis.y
+		rotation_angle= -control_block_instance.global_basis.z.angle_to(grid.basis.z)
+	
 		var arr: Array[int]= request["input"]
 		var grid_move_vec:= Vector3(arr[1] - arr[0], arr[3] - arr[2], arr[5] - arr[4])
 		
@@ -64,7 +69,7 @@ func _physics_process(_delta: float) -> void:
 
 		# TODO account for seat pitch, roll
 		# yaw
-		var global_grid_move_vec: Vector3= grid_move_vec.rotated(seat.basis.y, -seat.global_basis.z.angle_to(grid.basis.z))
+		var global_grid_move_vec: Vector3= grid_move_vec.rotated(rotation_axis, rotation_angle)
 
 		DebugHud.send("Grid Move Vec", global_grid_move_vec)
 
@@ -275,7 +280,7 @@ func sync_grid_anchored_state(grid: BlockGrid):
 
 
 @rpc("any_peer", "reliable")
-func grid_control_movement_request(grid_id: int, seat_pos: Vector3i, input_vec: Array[int]):
+func grid_control_movement_request(grid_id: int, control_block_pos: Vector3i, input_vec: Array[int]):
 	var world: World= Global.game.world
 	if not world.has_grid(grid_id): return
 	var has_pressed_keys: bool= input_vec.any(func(x): return x == 1)
@@ -283,7 +288,7 @@ func grid_control_movement_request(grid_id: int, seat_pos: Vector3i, input_vec: 
 	if not control_movement_requests.has(grid_id):
 		if not has_pressed_keys: return
 		control_movement_requests[grid_id]= {}
-		control_movement_requests[grid_id]["seat"]= seat_pos
+		control_movement_requests[grid_id]["control_block"]= control_block_pos
 		control_movement_requests[grid_id]["input"]= input_vec
 	else:
 		for i in ClientManager.CONTROL_INPUTS.size():

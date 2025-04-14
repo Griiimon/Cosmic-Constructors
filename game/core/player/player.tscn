@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://xgkn2mkwvwmq"]
+[gd_scene load_steps=36 format=3 uid="uid://xgkn2mkwvwmq"]
 
 [ext_resource type="PackedScene" uid="uid://slyw4y7qi46y" path="res://game/core/player/base_player.tscn" id="1_kthjw"]
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://game/core/player/movement state machine/player_grid_move_state.gd" id="5_ri51i"]
 [ext_resource type="Script" path="res://game/core/player/action state machine/player_action_idle_state.gd" id="6_3y3c5"]
 [ext_resource type="Script" path="res://game/core/player/movement state machine/player_terrain_move_state.gd" id="6_cr6m7"]
+[ext_resource type="Script" path="res://game/core/player/movement state machine/player_grid_control_state.gd" id="7_6tpc0"]
 [ext_resource type="Script" path="res://game/core/player/movement state machine/player_jump_move_state.gd" id="8_s2hhl"]
 [ext_resource type="Resource" uid="uid://sueib6rdbmc0" path="res://game/data/blocks/light structure/light_structure_block.tres" id="11_2od4b"]
 [ext_resource type="PackedScene" uid="uid://djg68ac2wsojx" path="res://game/core/components/damage component/damage_component.tscn" id="12_goufb"]
@@ -47,6 +48,21 @@ radius = 0.2
 
 [sub_resource type="BoxMesh" id="BoxMesh_nkkr1"]
 size = Vector3(0.1, 0.1, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6fnin"]
+albedo_color = Color(0.116127, 0.116127, 0.116127, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_frv0y"]
+material = SubResource("StandardMaterial3D_6fnin")
+top_radius = 0.15
+bottom_radius = 0.1
+height = 0.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2vtlc"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jr5bl"]
+size = Vector3(0.1, 0.1, 0.1)
 
 [node name="Player" instance=ExtResource("1_kthjw")]
 collision_mask = 55
@@ -191,6 +207,32 @@ visible = false
 [node name="Third Person Camera" parent="Head" index="2" instance=ExtResource("3_2hljo")]
 unique_name_in_owner = true
 
+[node name="Equipment Port Body" type="CharacterBody3D" parent="Head" index="3"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.567806, 0.394708)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/Equipment Port Body" index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.0037699, -0.999993, 0, 0.999993, -0.0037699, 0, 0, -0.102219)
+mesh = SubResource("CylinderMesh_frv0y")
+
+[node name="Equipment Port Area" type="Area3D" parent="Head/Equipment Port Body" index="1"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 16384
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Equipment Port Body/Equipment Port Area" index="0"]
+shape = SubResource("BoxShape3D_2vtlc")
+
+[node name="Equipment JoltHingeJoint3D" type="JoltHingeJoint3D" parent="Head/Equipment Port Body/Equipment Port Area" index="1"]
+limit_enabled = true
+enabled = false
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Equipment Port Body" index="2"]
+shape = SubResource("BoxShape3D_jr5bl")
+disabled = true
+
 [node name="Movement State Machine" type="Node" parent="." index="4" node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_615c1")
 jump_impulse = 250.0
@@ -210,17 +252,20 @@ metadata/_edit_pinned_properties_ = [&"jetpack_active", &"dampeners_active"]
 [node name="Seated" type="Node" parent="Movement State Machine" index="1"]
 script = ExtResource("4_aaxal")
 
-[node name="Grid" type="Node" parent="Movement State Machine" index="2"]
+[node name="Grid Control" type="Node" parent="Movement State Machine" index="2"]
+script = ExtResource("7_6tpc0")
+
+[node name="Grid" type="Node" parent="Movement State Machine" index="3"]
 script = ExtResource("5_ri51i")
 jump_impulse = 150.0
 
-[node name="Terrain" type="Node" parent="Movement State Machine" index="3"]
+[node name="Terrain" type="Node" parent="Movement State Machine" index="4"]
 script = ExtResource("6_cr6m7")
 strafe_speed = 3.0
 jump_impulse = 250.0
 snap_factor = 1.0
 
-[node name="Jump" type="Node" parent="Movement State Machine" index="4"]
+[node name="Jump" type="Node" parent="Movement State Machine" index="5"]
 script = ExtResource("8_s2hhl")
 
 [node name="Land Cooldown" type="Timer" parent="Movement State Machine/Jump" index="0"]
@@ -241,7 +286,9 @@ input_mappings = {
 "open_block_property_panel": "Block Property Panel",
 "pull": "Pull Object",
 "toggle_block_alt_property": "Toggle secondary Block Property",
-"toggle_block_property": "Toggle default Block Property"
+"toggle_block_property": "Toggle default Block Property",
+"toggle_equipment": "Toggle Equipment",
+"toggle_equipment_port": "Toggle Equipment Port"
 }
 
 [node name="Build" type="Node" parent="Action State Machine" index="1"]

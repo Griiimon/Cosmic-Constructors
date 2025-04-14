@@ -5,6 +5,7 @@ extends FiniteStateMachine
 
 @onready var eva_state: PlayerEvaState = $EVA
 @onready var seated_state: PlayerSeatedState = $Seated
+@onready var grid_control_state: PlayerGridControlState = $"Grid Control"
 @onready var grid_state: PlayerGridMoveState = $Grid
 @onready var terrain_state: PlayerTerrainMoveState = $Terrain
 @onready var jump_state: PlayerJumpMoveState = $Jump
@@ -18,6 +19,7 @@ func _ready() -> void:
 	
 	eva_state.landed.connect(landed)
 	seated_state.finished.connect(on_left_seat)
+	grid_control_state.finished.connect(init_eva)
 	
 	grid_state.jetpack_enabled.connect(init_eva)
 	grid_state.jumped.connect(jump)
@@ -59,6 +61,13 @@ func jump(impulse: bool= true):
 	if impulse:
 		player.apply_central_impulse(player.global_basis.y * jump_impulse)
 		jump_state.land_cooldown.start()
+
+
+func control_grid(grid: BlockGrid, control_instance: BlockInstance, control_block: GridBlock):
+	grid_control_state.controlled_grid= grid
+	grid_control_state.control_instance= control_instance
+	grid_control_state.control_block= control_block
+	change_state(grid_control_state)
 
 
 func on_left_seat():

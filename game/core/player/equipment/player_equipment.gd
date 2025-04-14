@@ -3,6 +3,7 @@ extends Resource
 
 
 @export var back_item: PlayerEquipmentItemBack
+@export var has_equipment_port: bool= false
 
 
 

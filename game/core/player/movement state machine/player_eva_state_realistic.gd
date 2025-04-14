@@ -5,12 +5,15 @@ signal landed
 
 @export var jetpack_active: bool= true:
 	set(b):
-		jetpack_active= b
 		if not player:
 			await SignalManager.player_spawned
+		if not player.has_jetpack():
+			jetpack_active= false
+		else:
+			jetpack_active= b
 		SignalManager.jetpack_toggled.emit(jetpack_active)
 		update_gravity()
-		
+
 @export var dampeners_active: bool= true:
 	set(b):
 		dampeners_active= b
@@ -91,7 +94,7 @@ func on_always_physics_process(delta: float):
 
 func on_physics_process(delta: float):
 
-	if Input.is_action_just_pressed("jetpack"):
+	if Input.is_action_just_pressed("jetpack") and player.has_jetpack():
 		jetpack_active= not jetpack_active
 		return
 

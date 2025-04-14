@@ -334,6 +334,16 @@ toggle_block_size={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"location":0,"echo":false,"script":null)
 ]
 }
+toggle_equipment={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":88,"key_label":0,"unicode":120,"location":0,"echo":false,"script":null)
+]
+}
+toggle_equipment_port={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":72,"key_label":0,"unicode":104,"location":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -351,6 +361,7 @@ toggle_block_size={
 3d_physics/layer_12="Pullable"
 3d_physics/layer_13="Lod Activated"
 3d_physics/layer_14="Gravity Gauge"
+3d_physics/layer_15="Equipment Port"
 3d_physics/layer_25="Game Mode Layer 1"
 3d_physics/layer_26="Game Mode Layer 2"
 3d_physics/layer_27="Game Mode Layer 3"

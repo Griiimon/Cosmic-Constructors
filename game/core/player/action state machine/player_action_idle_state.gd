@@ -74,6 +74,7 @@ func on_unhandled_input(event: InputEvent):
 				return
 	
 	if event.is_action_pressed("blueprint"):
+		get_viewport().set_input_as_handled()
 		var ray_query:= PhysicsRayQueryParameters3D.create(player.head.global_position,\
 		 	player.head.global_position + player.get_look_vec() * 20, CollisionLayers.GRID)
 		var result: Dictionary= player.get_world_3d().direct_space_state.intersect_ray(ray_query)
@@ -82,7 +83,17 @@ func on_unhandled_input(event: InputEvent):
 			player.action_state_machine.save_blueprint(result.collider)
 		else:
 			player.action_state_machine.load_blueprint()
+		return
+		
+	if event.is_action_pressed("toggle_equipment_port"):
+		get_viewport().set_input_as_handled()
+		player.toggle_equipment_port()
+		return
 
+	if event.is_action_pressed("toggle_equipment"):
+		get_viewport().set_input_as_handled()
+		player.toggle_equipment()
+		return
 
 func equip_hand_item(hand_item: HandItem):
 	force_unequip_item()

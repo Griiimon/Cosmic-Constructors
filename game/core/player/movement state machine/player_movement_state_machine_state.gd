@@ -32,12 +32,12 @@ var is_walking: bool:
 
 func on_enter():
 	is_walking= false
-	player.freeze= true
+	player.make_kinematic()
 	initial_align()
 
 
 func on_exit():
-	player.freeze= false
+	player.make_rigid()
 	
 
 func on_physics_process(delta: float):

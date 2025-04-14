@@ -1,4 +1,4 @@
 class_name PlayerEntitySettings
 extends Resource
 
-@export var jump_lock_rotation: bool= false
+@export var jump_lock_rotation: bool= true

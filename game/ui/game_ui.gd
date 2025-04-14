@@ -10,6 +10,8 @@ extends CanvasLayer
 @onready var dampeners_button: Button = %"Dampeners Button"
 @onready var parking_brake_button: Button = %"Parking Brake Button"
 @onready var reverse_button: Button = %"Reverse Button"
+@onready var equipment_grid_button: Button = %"Equipment Grid Button"
+@onready var equipment_port_button: Button = %"Equipment Port Button"
 
 @onready var velocity_label: Label = %"Velocity Label"
 @onready var gravity_label: Label = %"Gravity Label"
@@ -54,7 +56,13 @@ func _ready():
 	SignalManager.interact_with_block.connect(on_interact_with_block)
 	SignalManager.hotkey_assigned.connect(on_hotkey_assigned)
 	SignalManager.toggle_block_category_panel.connect(on_toggle_block_category_panel)
-		
+	
+	SignalManager.player_spawned.connect(on_player_spawned)
+	SignalManager.player_equipment_port_connected.connect(on_player_port_toggled.bind(true))
+	SignalManager.player_equipment_port_disconnected.connect(on_player_port_toggled.bind(false))
+	SignalManager.player_equipment_port_connection_available.connect(on_player_port_connection_available)
+	SignalManager.player_use_equipment.connect(on_player_use_equipment)
+	
 	temporary_info_label_cooldown.timeout.connect(func(): temporary_info_label.hide())
 	block_category_selection_panel.category_selected.connect(on_block_category_selected)
 
@@ -156,3 +164,29 @@ func on_player_left_seat(player: Player):
 	jetpack_button.show()
 	
 	jetpack_button.button_pressed= player.is_jetpack_active()
+
+
+func on_player_spawned(player: Player):
+	jetpack_button.visible= player.has_jetpack()
+	equipment_port_button.visible= player.has_equipment_port()
+	equipment_port_button.disabled= true
+	equipment_grid_button.visible= false
+	equipment_grid_button.disabled= true
+
+
+func on_player_port_toggled(b: bool):
+	prints("port toggled", b)
+	equipment_port_button.button_pressed= b
+	equipment_grid_button.visible= b
+	equipment_grid_button.disabled= true
+
+
+func on_player_port_connection_available(b: bool):
+	prints("connection available", b)
+	equipment_port_button.disabled= not b
+	equipment_port_button.visible= true
+
+
+func on_player_use_equipment(b: bool):
+	prints("use equipment", b)
+	equipment_grid_button.disabled= not b

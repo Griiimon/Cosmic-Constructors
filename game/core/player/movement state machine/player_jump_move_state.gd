@@ -11,7 +11,11 @@ func on_enter():
 	assert(not player.freeze)
 	player.play_animation("jump")
 	player.lock_rotation= player.settings.jump_lock_rotation
-	
+
+
+func on_exit():
+	player.lock_rotation= false
+
 
 func on_always_physics_process(_delta: float):
 	if player.floor_shapecast.is_colliding() and can_land():
@@ -19,19 +23,18 @@ func on_always_physics_process(_delta: float):
 		return
 
 
-func on_exit():
-	player.lock_rotation= false
-
-
 func on_physics_process(_delta: float):
 	if player.floor_shapecast.is_colliding() and can_land():
 		landed.emit()
 		return
 
-	if Input.is_action_just_pressed("jetpack"):
+	if player.has_jetpack() and Input.is_action_just_pressed("jetpack"):
 		jetpack_enabled.emit()
 		return
 
+
+func on_input(event: InputEvent):
+	return
 
 func can_land()-> bool:
 	return land_cooldown.is_stopped()

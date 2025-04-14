@@ -38,12 +38,19 @@ extends BasePlayer
 @onready var voxel_viewer: VoxelViewer = $VoxelViewer
 @onready var voxel_viewer_remote_transform: RemoteTransform3D = $RemoteTransform3D
 
+@onready var equipment_port_area: Area3D = %"Equipment Port Area"
+@onready var equipment_joint: JoltHingeJoint3D = %"Equipment JoltHingeJoint3D"
+@onready var equipment_port_body: CharacterBody3D = %"Equipment Port Body"
+
 
 var settings: PlayerEntitySettings
 
 var hand_object: HandObject
 var active_equipment: Array[PlayerEquipmentObject]
 var tool_hotbar:= HotbarLayout.new()
+
+var equipment_grid: BlockGrid
+var connected_port_block_instance: GridControlInstance
 
 
 
@@ -59,10 +66,15 @@ func _ready() -> void:
 	
 	Input.mouse_mode= Input.MOUSE_MODE_CAPTURED
 
+	# TODO not necessary anymore when this is implemented
+	# https://github.com/Zylann/godot_voxel/commit/c4cc6ef4add7754215bf854aa496b6ebe9228c7d
 	voxel_viewer.reparent(get_tree().current_scene)
 	voxel_viewer_remote_transform.remote_path= voxel_viewer_remote_transform.get_path_to(voxel_viewer)
 
-	SignalManager.player_spawned.emit()
+	equipment_port_area.area_entered.connect(on_equipment_port_entered)
+	equipment_port_area.area_exited.connect(on_equipment_port_exited)
+
+	SignalManager.player_spawned.emit(self)
 
 
 func _notification(what: int) -> void:
@@ -89,6 +101,9 @@ func _physics_process(delta: float) -> void:
 
 	for equipment_object in active_equipment:
 		equipment_object.tick(self, delta)
+
+	if not is_rigidbody() and is_equipment_port_active():
+		DebugHud.send("Port force", equipment_joint.get_applied_force())
 
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
@@ -178,6 +193,69 @@ func grab_handles(handles: HandlesInstance):
 	action_state_machine.grab_handles(handles)
 
 
+func toggle_equipment_port():
+	if equipment_joint.enabled:
+		if is_using_equipment():
+			SignalManager.player_use_equipment.emit(false)
+			
+		equipment_joint.enabled= false
+		connected_port_block_instance= null
+
+		remove_collision_exception_with(equipment_grid)
+		equipment_grid.remove_collision_exception_with(self)
+
+		equipment_grid= null
+
+		SignalManager.player_equipment_port_disconnected.emit()
+		SignalManager.player_equipment_port_connection_available.emit(true)
+	elif equipment_port_area.has_overlapping_areas():
+		var area: Area3D= equipment_port_area.get_overlapping_areas()[0]
+		connected_port_block_instance= area.owner
+		assert(connected_port_block_instance)
+
+		equipment_grid= connected_port_block_instance.get_grid()
+		equipment_joint.enabled= true
+		equipment_joint.node_a= equipment_joint.get_path_to(equipment_joint.get_parent().get_parent())
+		equipment_joint.node_b= equipment_joint.get_path_to(equipment_grid)
+
+		add_collision_exception_with(equipment_grid)
+		equipment_grid.add_collision_exception_with(self)
+
+		SignalManager.player_equipment_port_connected.emit()
+
+
+func toggle_equipment():
+	if not equipment_grid: return
+	assert(not is_using_equipment())
+
+	movement_state_machine.control_grid(equipment_grid, connected_port_block_instance,\
+			equipment_grid.get_block_from_global_pos(connected_port_block_instance.global_position))
+	SignalManager.player_use_equipment.emit(true)
+
+
+func make_rigid():
+	equipment_joint.node_a= ""
+	global_rotation.y= head.global_rotation.y
+	head.rotation.y= 0
+	freeze= false
+	equipment_joint.node_a= equipment_joint.get_path_to(self)
+
+
+func make_kinematic():
+	freeze= true
+	equipment_joint.node_a= equipment_joint.get_path_to(equipment_port_body)
+
+
+func on_equipment_port_entered(area: Area3D):
+	if equipment_joint.enabled: return
+	SignalManager.player_equipment_port_connection_available.emit(true)
+
+
+func on_equipment_port_exited(area: Area3D):
+	if equipment_joint.enabled: return
+	SignalManager.player_equipment_port_connection_available.emit(false)
+
+
 func serialize()-> Dictionary:
 	var data:= {}
 	data["name"]= NetworkManager.player_name
@@ -190,7 +268,7 @@ func deserialize(data: Dictionary):
 	tool_hotbar.deserialize(data["tool_hotbar"], world)
 	action_state_machine.build_state.hotbar_layout.deserialize(data["build_hotbar"], world)
 	Global.ui.switch_hotbar(tool_hotbar)
-	
+
 
 func get_look_vec()-> Vector3:
 	return -first_person_camera.global_basis.z
@@ -208,6 +286,20 @@ func get_seat()-> SeatInstance:
 	return movement_state_machine.seated_state.seat
 
 
+func has_jetpack()-> bool:
+	if equipment.back_item and equipment.back_item is JetpackEquipmentItem:
+		return true
+	return false
+
+
+func has_equipment_port()-> bool:
+	return equipment.has_equipment_port
+
+
+func is_using_equipment()-> bool:
+	return movement_state_machine.grid_control_state.is_current_state()
+
+
 func is_seated()-> bool:
 	return movement_state_machine.seated_state.is_current_state()
 
@@ -222,3 +314,7 @@ func is_in_third_person()-> bool:
 
 func is_jetpack_active()-> bool:
 	return movement_state_machine.eva_state.is_current_state() and movement_state_machine.eva_state.jetpack_enabled
+
+
+func is_equipment_port_active()-> bool:
+	return equipment_grid != null

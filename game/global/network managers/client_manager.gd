@@ -335,7 +335,7 @@ func receive_grid_anchored_state(grid_id: int, anchored: bool):
 	Global.game.world.get_grid(grid_id).is_anchored= anchored
 
 
-func collect_grid_control_inputs(grid_id: int, seat_pos: Vector3i):
+func collect_grid_control_inputs(grid_id: int, control_block_pos: Vector3i):
 	var input_vec: Array[int]
 	var requires_sync:= false
 	
@@ -350,7 +350,7 @@ func collect_grid_control_inputs(grid_id: int, seat_pos: Vector3i):
 			input_vec.append(0)
 
 	if requires_sync:
-		ServerManager.grid_control_movement_request.rpc_id(1, grid_id, seat_pos, input_vec)
+		ServerManager.grid_control_movement_request.rpc_id(1, grid_id, control_block_pos, input_vec)
 
 
 func force_exit_seat():

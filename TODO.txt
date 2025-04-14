@@ -1,3 +1,23 @@
+add blueprint support for different grid sizes
+
+disconnect equipment grid from high joint force/torque
+
+add small gyro for port jetpack
+
+change ui buttons to be toggled when active, disabled when unavailable
+
+when stepping from grid onto terrain ( maybe only via ramp? ) player is stuck in grid movement state
+
+when grid is removed and player is moving on it ( child ) reparent player first
+
+when eva without jetpack and lying on the floor ( with gravity ) slowly rotate so feet make contact
+
+leaving seat makes jetpack button appear even when no jetpack in equipment
+
+make sure to floor() Vector3s when converting to Vector3i voxel positions
+
+Rotor needs 6DOFJoint motor on X-axis
+
 FuelTank doesnt have fluid connector instances anymore
 
 TubeGroupMemberInstance @tool script add_connectors_to_model: bool not working

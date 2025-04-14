@@ -53,6 +53,7 @@ skeleton = NodePath("../..")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.49251)
+emitting = false
 amount = 80
 lifetime = 0.1
 lifetime_randomness = 0.16

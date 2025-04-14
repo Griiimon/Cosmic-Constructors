@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ThrusterBlock" load_steps=4 format=3 uid="uid://bua75odesxtkw"]
+
+[ext_resource type="Resource" uid="uid://ckiejbyle02pl" path="res://game/data/misc/block categories/spaceship.tres" id="1_23rkp"]
+[ext_resource type="PackedScene" uid="uid://bequ1b6ty4iay" path="res://game/data/blocks/thruster/small_thruster.tscn" id="2_c4qwt"]
+[ext_resource type="Script" path="res://game/core/block/types/thruster_block.gd" id="3_mtqvd"]
+
+[resource]
+script = ExtResource("3_mtqvd")
+thrust = 10000.0
+force_offset = false
+grid_size = 1
+size = Vector3i(1, 1, 1)
+mass = 2.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = true
+tick_priority = 0
+can_be_built = true
+category = ExtResource("1_23rkp")
+scene = ExtResource("2_c4qwt")
+name = ""

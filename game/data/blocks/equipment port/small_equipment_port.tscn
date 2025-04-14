@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4gpx2yuqw73y"]
+
+[ext_resource type="Script" path="res://game/core/block/instances/equipment_port_instance.gd" id="1_juiih"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gaa7"]
+albedo_color = Color(0.827451, 0.262745, 0.2, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_41i2g"]
+material = SubResource("StandardMaterial3D_6gaa7")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppjjc"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_n6ssd"]
+material = SubResource("StandardMaterial3D_ppjjc")
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ft3pg"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="Equipment Port" type="Node3D"]
+script = ExtResource("1_juiih")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_41i2g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0.225783)
+mesh = SubResource("CylinderMesh_n6ssd")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 16384
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.305726)
+shape = SubResource("BoxShape3D_ft3pg")

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EquipmentPortBlock" load_steps=4 format=3 uid="uid://pej20fha75jd"]
+
+[ext_resource type="Script" path="res://game/core/block/types/equipment_port_block.gd" id="1_osatm"]
+[ext_resource type="Resource" uid="uid://dcy4qhvd08cbt" path="res://game/data/misc/block categories/misc.tres" id="1_wjfyk"]
+[ext_resource type="PackedScene" uid="uid://c4gpx2yuqw73y" path="res://game/data/blocks/equipment port/small_equipment_port.tscn" id="2_k804b"]
+
+[resource]
+script = ExtResource("1_osatm")
+grid_size = 1
+size = Vector3i(1, 1, 1)
+mass = 1.0
+max_hitpoints = 10
+custom_collision = false
+can_tick = false
+tick_priority = 0
+can_be_built = true
+category = ExtResource("1_wjfyk")
+scene = ExtResource("2_k804b")
+name = ""

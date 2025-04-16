@@ -31,14 +31,13 @@ func _ready() -> void:
 		do_load_world()
 	else:
 		if game.player:
-			on_player_spawned()
+			on_player_spawned(game.player)
 		else:
 			SignalManager.player_spawned.connect(on_player_spawned)
 
 
-func on_player_spawned():
-	player= game.player
-
+func on_player_spawned(_player: Player):
+	player= _player
 	default_block= load("res://game/data/blocks/light structure/light_structure_block.tres")
 	
 	if equip_item:

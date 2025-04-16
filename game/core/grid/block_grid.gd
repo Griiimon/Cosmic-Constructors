@@ -723,7 +723,7 @@ func serialize(local_sub_grid_ids: bool= false)-> Dictionary:
 
 
 static func pre_deserialize(data: Dictionary, new_world: World, default_position: Vector3= Vector3.ZERO, default_rotation: Vector3= Vector3.ZERO)-> BlockGrid:
-	var grid:= BlockGrid.new(Utils.get_key_or_default(data, "block_size", 1.0))
+	var grid:= BlockGrid.new(Utils.get_key_or_default(data, "block_size", Block.get_grid_size(Block.GridSize.LARGE)))
 	grid.world= new_world
 	
 	if new_world:

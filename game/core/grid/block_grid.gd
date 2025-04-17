@@ -73,6 +73,8 @@ var client_tick_blocks: Array[GridBlock]
 
 var faction: Faction
 
+var is_equipment_grid: bool= false
+
 
 
 func _init(_block_size: float= 1.0):
@@ -255,7 +257,6 @@ func _physics_process(delta: float) -> void:
 		run_dampeners(delta)
 	
 	total_gyro_strength= 0
-	angular_damp= 0
 	
 	tick_blocks(delta)
 	
@@ -263,7 +264,7 @@ func _physics_process(delta: float) -> void:
 	if rot_vec:
 		apply_torque_impulse(rot_vec * total_gyro_strength)
 	else:
-		angular_damp= total_gyro_strength * 0.01
+		add_effect(BlockGridAngularDampEffect.new(total_gyro_strength / mass))
 
 	apply_effects()
 
@@ -273,6 +274,11 @@ func _physics_process(delta: float) -> void:
 
 	if requires_integrity_check:
 		run_integrity_check()
+
+	# Grid Cluster CoM Debug
+	#DebugHud.send("Cluster CoM", get_grid_cluster_center_of_mass())
+	#DebugMesh.clear()
+	#DebugMesh.create(to_global(get_grid_cluster_center_of_mass()), 1.0)
 
 
 func tick_blocks(delta: float):
@@ -960,6 +966,20 @@ func get_main_cockpit_recursive()-> SeatInstance:
 	if is_sub_grid():
 		return (main_grid_ref.get_ref() as BlockGrid).get_main_cockpit_recursive()
 	return null
+
+
+func get_grid_cluster_center_of_mass()-> Vector3:
+	var com: Vector3= PhysicsServer3D.body_get_param(get_rid(), PhysicsServer3D.BODY_PARAM_CENTER_OF_MASS)
+
+	var result: Vector3= com
+	
+	if is_equipment_grid:
+		assert(NetworkManager.is_single_player)
+		assert(not is_sub_grid())
+		assert(not has_sub_grids())
+		result= lerp(result, to_local(Global.player.global_position), Global.player.mass / (Global.player.mass + mass) * 0.5)
+
+	return result
 
 
 func has_block(block_pos: Vector3i)-> bool:

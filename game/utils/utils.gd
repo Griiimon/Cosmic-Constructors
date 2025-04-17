@@ -194,3 +194,7 @@ static func add_label(parent_control: Control, text: String)-> Label:
 	label.text= text
 	parent_control.add_child(label)
 	return label
+
+
+static func not_implemented(condition: bool= true):
+	assert(not condition, "This feature hasn't been implemented yet")

@@ -974,9 +974,9 @@ func get_grid_cluster_center_of_mass()-> Vector3:
 	var result: Vector3= com
 	
 	if is_equipment_grid:
-		assert(NetworkManager.is_single_player)
-		assert(not is_sub_grid())
-		assert(not has_sub_grids())
+		Utils.not_implemented(not NetworkManager.is_single_player)
+		Utils.not_implemented(is_sub_grid())
+		Utils.not_implemented(has_sub_grids())
 		result= lerp(result, to_local(Global.player.global_position), Global.player.mass / (Global.player.mass + mass) * 0.5)
 
 	return result

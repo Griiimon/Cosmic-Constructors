@@ -986,6 +986,10 @@ func has_block(block_pos: Vector3i)-> bool:
 	return blocks.has(block_pos)
 
 
+func has_sub_grids()-> bool:
+	return not sub_grid_connections.is_empty()
+
+
 func is_occupied(grid_pos: Vector3i)-> bool:
 	return blocks.has(grid_pos)
 

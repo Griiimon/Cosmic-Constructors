@@ -48,7 +48,8 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 		var total_thrust: float= thruster_block.thrust * power.get_value_f() / 100.0
 		#grid.apply_central_force(-global_basis.z * total_thrust * delta)
 		grid.apply_force(-global_basis.z * total_thrust * delta, to_global(grid.get_grid_cluster_center_of_mass()) - grid.global_position)
-	
+	else:
+		Utils.not_implemented()
 
 	if tmp_active:
 		active.set_false(grid, grid_block)

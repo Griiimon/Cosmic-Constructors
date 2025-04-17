@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="BlockLibrary" load_steps=6 format=3 uid="uid://dj56vf5joc0g4"]
+[gd_resource type="Resource" script_class="BlockLibrary" load_steps=7 format=3 uid="uid://dj56vf5joc0g4"]
 
 [ext_resource type="Script" path="res://game/core/block/block.gd" id="1_nvu3j"]
 [ext_resource type="Resource" uid="uid://cs3rrum74wfe1" path="res://game/data/blocks/light structure/small_light_structure_block.tres" id="2_2kria"]
 [ext_resource type="Script" path="res://game/global/game data/block_library.gd" id="2_tuhkl"]
 [ext_resource type="Resource" uid="uid://pej20fha75jd" path="res://game/data/blocks/equipment port/small_equipment_port_block.tres" id="3_aivkq"]
 [ext_resource type="Resource" uid="uid://bua75odesxtkw" path="res://game/data/blocks/thruster/small_thruster_block.tres" id="4_e2bd2"]
+[ext_resource type="Resource" uid="uid://cyjaokbfugdky" path="res://game/data/blocks/gyro/small_gyro_block.tres" id="5_0wxvv"]
 
 [resource]
 script = ExtResource("2_tuhkl")
-blocks = Array[ExtResource("1_nvu3j")]([ExtResource("2_2kria"), ExtResource("3_aivkq"), ExtResource("4_e2bd2")])
+blocks = Array[ExtResource("1_nvu3j")]([ExtResource("2_2kria"), ExtResource("3_aivkq"), ExtResource("4_e2bd2"), ExtResource("5_0wxvv")])

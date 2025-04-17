@@ -46,7 +46,9 @@ func physics_tick(grid: BlockGrid, grid_block: GridBlock, delta: float):
 	if not thruster_block.force_offset:
 		#grid.apply_central_force(-grid_block.get_global_basis(grid).z * thruster_block.thrust * delta)
 		var total_thrust: float= thruster_block.thrust * power.get_value_f() / 100.0
-		grid.apply_central_force(-global_basis.z * total_thrust * delta)
+		#grid.apply_central_force(-global_basis.z * total_thrust * delta)
+		grid.apply_force(-global_basis.z * total_thrust * delta, to_global(grid.get_grid_cluster_center_of_mass()) - grid.global_position)
+	
 
 	if tmp_active:
 		active.set_false(grid, grid_block)

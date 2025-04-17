@@ -203,7 +203,7 @@ func toggle_equipment_port():
 
 		remove_collision_exception_with(equipment_grid)
 		equipment_grid.remove_collision_exception_with(self)
-
+		equipment_grid.is_equipment_grid= false
 		equipment_grid= null
 
 		SignalManager.player_equipment_port_disconnected.emit()
@@ -214,6 +214,7 @@ func toggle_equipment_port():
 		assert(connected_port_block_instance)
 
 		equipment_grid= connected_port_block_instance.get_grid()
+		equipment_grid.is_equipment_grid= true
 		equipment_joint.enabled= true
 		equipment_joint.node_a= equipment_joint.get_path_to(equipment_joint.get_parent().get_parent())
 		equipment_joint.node_b= equipment_joint.get_path_to(equipment_grid)

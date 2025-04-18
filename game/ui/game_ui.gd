@@ -175,18 +175,15 @@ func on_player_spawned(player: Player):
 
 
 func on_player_port_toggled(b: bool):
-	prints("port toggled", b)
 	equipment_port_button.button_pressed= b
 	equipment_grid_button.visible= b
 	equipment_grid_button.disabled= true
 
 
 func on_player_port_connection_available(b: bool):
-	prints("connection available", b)
 	equipment_port_button.disabled= not b
 	equipment_port_button.visible= true
 
 
 func on_player_use_equipment(b: bool):
-	prints("use equipment", b)
 	equipment_grid_button.disabled= not b

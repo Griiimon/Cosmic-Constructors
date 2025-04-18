@@ -32,7 +32,8 @@ var is_walking: bool:
 
 func on_enter():
 	is_walking= false
-	player.make_kinematic()
+	if player.is_rigidbody():
+		player.make_kinematic()
 	initial_align()
 
 

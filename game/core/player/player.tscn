@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://xgkn2mkwvwmq"]
+[gd_scene load_steps=35 format=3 uid="uid://xgkn2mkwvwmq"]
 
 [ext_resource type="PackedScene" uid="uid://slyw4y7qi46y" path="res://game/core/player/base_player.tscn" id="1_kthjw"]
 [ext_resource type="Script" path="res://game/core/player/player.gd" id="1_owy5q"]
@@ -59,10 +59,7 @@ bottom_radius = 0.1
 height = 0.2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2vtlc"]
-size = Vector3(0.1, 0.1, 0.1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_jr5bl"]
-size = Vector3(0.1, 0.1, 0.1)
+size = Vector3(0.1, 0.1, 0.2)
 
 [node name="Player" instance=ExtResource("1_kthjw")]
 collision_mask = 55
@@ -207,31 +204,25 @@ visible = false
 [node name="Third Person Camera" parent="Head" index="2" instance=ExtResource("3_2hljo")]
 unique_name_in_owner = true
 
-[node name="Equipment Port Body" type="CharacterBody3D" parent="Head" index="3"]
+[node name="Equipment Port Area" type="Area3D" parent="Head" index="3"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.567806, 0.394708)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/Equipment Port Body" index="0"]
-transform = Transform3D(1, 0, 0, 0, -0.0037699, -0.999993, 0, 0.999993, -0.0037699, 0, 0, -0.102219)
-mesh = SubResource("CylinderMesh_frv0y")
-
-[node name="Equipment Port Area" type="Area3D" parent="Head/Equipment Port Body" index="1"]
-unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.567806, 0.565715)
 collision_layer = 0
 collision_mask = 16384
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Equipment Port Body/Equipment Port Area" index="0"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/Equipment Port Area" index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.0037699, -0.999993, 0, 0.999993, -0.0037699, 0, 0, -0.273226)
+mesh = SubResource("CylinderMesh_frv0y")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Equipment Port Area" index="1"]
 shape = SubResource("BoxShape3D_2vtlc")
 
-[node name="Equipment JoltHingeJoint3D" type="JoltHingeJoint3D" parent="Head/Equipment Port Body/Equipment Port Area" index="1"]
+[node name="Equipment JoltHingeJoint3D" type="JoltHingeJoint3D" parent="Head/Equipment Port Area" index="2"]
 limit_enabled = true
 enabled = false
 unique_name_in_owner = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Equipment Port Body" index="2"]
-shape = SubResource("BoxShape3D_jr5bl")
-disabled = true
 
 [node name="Movement State Machine" type="Node" parent="." index="4" node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_615c1")

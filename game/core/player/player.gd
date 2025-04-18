@@ -40,8 +40,6 @@ extends BasePlayer
 
 @onready var equipment_port_area: Area3D = %"Equipment Port Area"
 @onready var equipment_joint: JoltHingeJoint3D = %"Equipment JoltHingeJoint3D"
-@onready var equipment_port_body: CharacterBody3D = %"Equipment Port Body"
-
 
 var settings: PlayerEntitySettings
 
@@ -51,6 +49,7 @@ var tool_hotbar:= HotbarLayout.new()
 
 var equipment_grid: BlockGrid
 var connected_port_block_instance: GridControlInstance
+var equipment_port_body: CharacterBody3D
 
 
 
@@ -200,7 +199,8 @@ func toggle_equipment_port():
 			
 		equipment_joint.enabled= false
 		connected_port_block_instance= null
-
+		equipment_port_body.queue_free()
+		
 		remove_collision_exception_with(equipment_grid)
 		equipment_grid.remove_collision_exception_with(self)
 		equipment_grid.is_equipment_grid= false
@@ -215,12 +215,20 @@ func toggle_equipment_port():
 
 		equipment_grid= connected_port_block_instance.get_grid()
 		equipment_grid.is_equipment_grid= true
-		equipment_joint.enabled= true
-		equipment_joint.node_a= equipment_joint.get_path_to(equipment_joint.get_parent().get_parent())
-		equipment_joint.node_b= equipment_joint.get_path_to(equipment_grid)
 
 		add_collision_exception_with(equipment_grid)
 		equipment_grid.add_collision_exception_with(self)
+
+		Utils.not_implemented(is_rigidbody())
+		head.global_rotation.y= connected_port_block_instance.global_rotation.y + PI
+		global_position= area.global_position + (global_position - equipment_port_area.global_position)
+		
+		equipment_port_body= CharacterBody3D.new()
+		equipment_port_area.add_child(equipment_port_body)
+
+		equipment_joint.node_a= equipment_joint.get_path_to(equipment_port_body)
+		equipment_joint.node_b= equipment_joint.get_path_to(equipment_grid)
+		equipment_joint.enabled= true
 
 		SignalManager.player_equipment_port_connected.emit()
 
@@ -235,6 +243,7 @@ func toggle_equipment():
 
 
 func make_rigid():
+	assert(freeze)
 	equipment_joint.node_a= ""
 	global_rotation.y= head.global_rotation.y
 	head.rotation.y= 0
@@ -243,8 +252,17 @@ func make_rigid():
 
 
 func make_kinematic():
+	assert(not freeze)
 	freeze= true
-	equipment_joint.node_a= equipment_joint.get_path_to(equipment_port_body)
+
+	if is_equipment_port_active():
+		equipment_joint.enabled= false
+		equipment_joint.node_a= ""
+		await get_tree().physics_frame
+		equipment_joint.enabled= true
+	
+	if is_equipment_port_active():
+		equipment_joint.node_a= equipment_joint.get_path_to(equipment_port_body)
 
 
 func on_equipment_port_entered(area: Area3D):
@@ -318,4 +336,5 @@ func is_jetpack_active()-> bool:
 
 
 func is_equipment_port_active()-> bool:
-	return equipment_grid != null
+	return equipment_joint.enabled
+	#return equipment_grid != null

@@ -7,17 +7,18 @@
 [ext_resource type="Resource" uid="uid://bexo7qailorxl" path="res://game/data/voxel terrain blocks/grass/grass_voxel_block.tres" id="3_p58m8"]
 [ext_resource type="Resource" uid="uid://b71ajb4s8jswg" path="res://game/data/voxel terrain blocks/log/log_voxel_block.tres" id="5_624nj"]
 [ext_resource type="Resource" uid="uid://od75ko4gdydi" path="res://game/data/voxel terrain blocks/leaves/leaves_voxel_block.tres" id="5_sfwvb"]
-[ext_resource type="Script" path="res://game/test/blocky terrain test/blocky_tree_generator.gd" id="8_rly5w"]
+[ext_resource type="Resource" uid="uid://83led0cvff14" path="res://game/test/blocky terrain test/blocky_tree_generator.tres" id="8_kd38f"]
 [ext_resource type="Resource" uid="uid://c05en4ge0l5j8" path="res://game/data/voxel terrain blocks/water/water_voxel_top_block.tres" id="9_82grt"]
 [ext_resource type="Resource" uid="uid://c14s1lmlcyqn2" path="res://game/data/voxel terrain blocks/water/water_voxel_full_block.tres" id="9_v5ig5"]
 
-[sub_resource type="Resource" id="Resource_htx5u"]
-script = ExtResource("8_rly5w")
-world_seed = 0
-tree_variants = 4
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xx6u7"]
+frequency = 0.03
+fractal_octaves = 2
+fractal_lacunarity = 0.43
 
 [resource]
 script = ExtResource("2_dweva")
+terrain_scale = 512.0
 air_block = ExtResource("1_h2qkn")
 grass_block = ExtResource("3_p58m8")
 dirt_block = ExtResource("2_tmya7")
@@ -26,6 +27,6 @@ leaves_block = ExtResource("5_sfwvb")
 water_top_block = ExtResource("9_82grt")
 water_full_block = ExtResource("9_v5ig5")
 heightmap_curve = ExtResource("1_ee8ec")
-enable_water = true
-tree_generator = SubResource("Resource_htx5u")
-max_trees_per_chunk = 1
+enable_water = false
+tree_generator = ExtResource("8_kd38f")
+tree_noise = SubResource("FastNoiseLite_xx6u7")

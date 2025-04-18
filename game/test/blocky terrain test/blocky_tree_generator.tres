@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockyTreeGenerator" load_steps=2 format=3 uid="uid://83led0cvff14"]
+
+[ext_resource type="Script" path="res://game/test/blocky terrain test/blocky_tree_generator.gd" id="1_p88ju"]
+
+[resource]
+script = ExtResource("1_p88ju")
+world_seed = 0
+tree_variants = 8
+trunk_len_min = 8
+trunk_len_max = 32

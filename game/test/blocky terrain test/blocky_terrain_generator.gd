@@ -14,6 +14,12 @@ const _moore_dirs = [
 	Vector3(1, 0, 1)
 ]
 
+@export var terrain_scale: float= 128:
+	set(f):
+		terrain_scale= f
+		_heightmap_noise.frequency = 1.0 / terrain_scale
+
+
 @export var air_block: BaseVoxelTerrainBlock
 @export var grass_block: BaseVoxelTerrainBlock
 @export var dirt_block: BaseVoxelTerrainBlock
@@ -45,7 +51,7 @@ const _moore_dirs = [
 		tree_generator.leaves_type = GameData.get_voxel_terrain_block_id(leaves_block)
 		
 		for i in tree_generator.tree_variants:
-			var s = tree_generator.generate()
+			var s = tree_generator.generate(i)
 			_tree_structures.append(s)
 
 		var tallest_tree_height = 0
@@ -56,8 +62,7 @@ const _moore_dirs = [
 		_trees_min_y = _heightmap_min_y
 		_trees_max_y = _heightmap_max_y + tallest_tree_height
 
-@export var max_trees_per_chunk: int= 2
-		
+@export var tree_noise: FastNoiseLite
 
 
 var _tree_structures := []
@@ -70,16 +75,10 @@ var _heightmap_noise := FastNoiseLite.new()
 var _trees_min_y := 0
 var _trees_max_y := 0
 
-#var tree_noise := FastNoiseLite.new()
-#tree_noise.frequency= 1.0
-
 
 
 func _init():
-	#_heightmap_noise.seed = 131183
-	_heightmap_noise.frequency = 1.0 / 128.0
 	_heightmap_noise.fractal_octaves = 4
-
 
 
 func _get_used_channels_mask() -> int:
@@ -152,11 +151,9 @@ func _generate_block(buffer: VoxelBuffer, origin_in_voxels: Vector3i, lod: int):
 						buffer.set_voxel(GameData.get_voxel_terrain_block_id(water_top_block), x, block_size - 1, z, _CHANNEL)
 						
 				gx += 1
-#
 			gz += 1
-#
 	## Trees
-#
+
 	if origin_in_voxels.y <= _trees_max_y and origin_in_voxels.y + block_size >= _trees_min_y:
 		var voxel_tool := buffer.get_voxel_tool()
 		var structure_instances := []
@@ -171,7 +168,7 @@ func _generate_block(buffer: VoxelBuffer, origin_in_voxels: Vector3i, lod: int):
 			_get_tree_instances_in_chunk(ncpos, origin_in_voxels, block_size, structure_instances)
 
 		for structure_instance in structure_instances:
-			var pos : Vector3 = structure_instance[0]
+			var pos : Vector3i = structure_instance[0]
 			var structure : BlockyTerrainStructure = structure_instance[1]
 			var lower_corner_pos := pos - structure.offset
 			var aabb := AABB(lower_corner_pos, structure.voxels.get_size() + Vector3i(1, 1, 1))
@@ -195,7 +192,7 @@ func _get_tree_instances_in_chunk(
 	var rng := RandomNumberGenerator.new()
 	rng.seed = _get_chunk_seed_2d(cpos)
 
-	for i in max_trees_per_chunk:
+	for i in maxi(0, tree_noise.get_noise_2dv(Vector2(cpos.x, cpos.z)) * 3):
 		var pos := Vector3(rng.randi() % chunk_size, 0, rng.randi() % chunk_size)
 		pos += cpos * chunk_size
 		pos.y = _get_height_at(pos.x, pos.z)
@@ -207,10 +204,6 @@ func _get_tree_instances_in_chunk(
 			tree_instances.append([pos.round(), structure])
 
 
-#static func get_chunk_seed(cpos: Vector3) -> int:
-#	return cpos.x ^ (13 * int(cpos.y)) ^ (31 * int(cpos.z))
-
-
 static func _get_chunk_seed_2d(cpos: Vector3) -> int:
 	return int(cpos.x) ^ (31 * int(cpos.z))
 
@@ -218,11 +211,3 @@ static func _get_chunk_seed_2d(cpos: Vector3) -> int:
 func _get_height_at(x: int, z: int) -> int:
 	var t = 0.5 + 0.5 * _heightmap_noise.get_noise_2d(x, z)
 	return int(heightmap_curve.sample_baked(t))
-
-
-#func has_tree_at(x: int, z: int)-> bool:
-	#return tree_noise.get_noise_2d(x,z) > 0.5
-#
-#
-#func get_tree_height_at(x: int, z: int)-> int:
-	#return wrapi(tree_noise.get_noise_2d(x,z) * 100, 6, 12)

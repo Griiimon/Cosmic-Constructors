@@ -1,8 +1,10 @@
-add blueprint support for different grid sizes
+make player white head piece round, slightly elliptical
+
+FIX equipment port player rigid to kinematic transition
+
+sync equipment grids in multiplayer
 
 disconnect equipment grid from high joint force/torque
-
-add small gyro for port jetpack
 
 change ui buttons to be toggled when active, disabled when unavailable
 

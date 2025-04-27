@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TerrainProperties" load_steps=4 format=3 uid="uid://ggy0mn6yfnhl"]
+
+[ext_resource type="Script" path="res://game/core/world/terrain/terrain_properties.gd" id="1_orj6m"]
+[ext_resource type="Script" path="res://game/core/world/terrain/terrain_type_properties.gd" id="2_ebb8n"]
+[ext_resource type="Resource" uid="uid://dthyojrp18xoy" path="res://game/data/terrain types/grass_terrain.tres" id="3_8rkqa"]
+
+[resource]
+script = ExtResource("1_orj6m")
+types = Array[ExtResource("2_ebb8n")]([ExtResource("3_8rkqa")])

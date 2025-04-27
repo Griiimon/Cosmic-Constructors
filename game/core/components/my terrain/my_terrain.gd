@@ -162,10 +162,21 @@ func try_to_separate_grid(origin: Vector3i, exclusion_list: Array[Vector3i]):
 
 	for voxel_detail in grid_voxels:
 		tool.set_voxel(voxel_detail.pos, 0)
-		prints(" Remove voxel", voxel_detail.pos)
-		
+		#prints(" Remove voxel", voxel_detail.pos)
 
-	await get_tree().create_timer(1).timeout
+	#var query:= PhysicsShapeQueryParameters3D.new()
+	#query.collision_mask= CollisionLayers.TERRAIN
+	#var query_shape:= BoxShape3D.new()
+	#query_shape.size= Vector3.ONE * 0.1
+	#query.shape= query_shape
+	#query.transform= Transform3D(Basis.IDENTITY, Vector3(grid_voxels[0].pos) + Vector3.ONE * 0.5)
+#
+	#while true:
+		#var query_result= terrain_node.get_world_3d().direct_space_state.intersect_shape(query)
+		#if not query_result:
+			#break
+		#await get_tree().physics_frame
+		#print(" wait for physics frame")
 
 	var grid: BlockGrid= world.add_grid(Vector3(origin) + Vector3.ONE * 0.5)
 	for voxel_detail in grid_voxels:

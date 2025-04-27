@@ -1,0 +1,10 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdvrishrg32lq"]
+
+[ext_resource type="Script" path="res://game/test/functional tests/run_all_test_scenes.gd" id="1_fcnr1"]
+[ext_resource type="PackedScene" uid="uid://dyl06ajmueugd" path="res://game/test/blocky terrain test/blocky_terrain_test.tscn" id="2_vd7wd"]
+[ext_resource type="PackedScene" uid="uid://cymutykgvddtc" path="res://game/test/custom planet test COMPATIBILITY/custom_planet_test_compatibility.tscn" id="3_mfaqb"]
+[ext_resource type="PackedScene" uid="uid://d4blx7p2hp5bc" path="res://game/test/vehicle test/vehicle_test.tscn" id="4_7w1xp"]
+
+[node name="Run Al lTest Scenes" type="Node"]
+script = ExtResource("1_fcnr1")
+scenes = Array[PackedScene]([ExtResource("4_7w1xp"), ExtResource("2_vd7wd"), ExtResource("3_mfaqb")])

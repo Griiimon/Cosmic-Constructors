@@ -29,7 +29,7 @@ func physics_tick(_grid: BlockGrid, _grid_block: GridBlock, _delta: float):
 	if active.is_true():
 		if cooldown.is_stopped():
 			if terrain_shapecast.is_colliding():
-				var terrain: MyTerrain= MyTerrain.get_terrain(terrain_shapecast.get_collider(0))
+				var terrain: BaseTerrainComponent= BaseTerrainComponent.get_terrain(terrain_shapecast.get_collider(0))
 				var local_pos: Vector3= terrain.terrain_node.to_local(terrain_shapecast.get_collision_point(0))
 				var radius: float= (terrain_shapecast.shape as SphereShape3D).radius
 				var resources: Dictionary= terrain.mine(local_pos, radius, global_position)

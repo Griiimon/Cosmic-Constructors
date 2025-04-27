@@ -1,10 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://carygqfay7enj"]
 
-[ext_resource type="Script" path="res://game/core/components/my terrain/my_terrain.gd" id="1_uy135"]
+[ext_resource type="Script" path="res://game/core/components/terrain component/base_terrain_component.gd" id="1_uy135"]
 [ext_resource type="Resource" uid="uid://cgspa8xqyxj4b" path="res://game/test/custom planet test/custom_planet_terrain_properties.tres" id="2_u7tjd"]
 
-[node name="Terrain" type="Node" node_paths=PackedStringArray("world", "height_map_provider")]
+[node name="Terrain" type="Node"]
 script = ExtResource("1_uy135")
-world = NodePath("")
 terrain_properties = ExtResource("2_u7tjd")
-height_map_provider = NodePath("")

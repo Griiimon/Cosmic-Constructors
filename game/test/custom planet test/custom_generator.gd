@@ -13,7 +13,7 @@ extends VoxelGeneratorScript
 # Change channel to SDF
 const channel : int = VoxelBuffer.CHANNEL_SDF
 
-var terrain: MyTerrain
+var terrain_component: SmoothVoxelTerrainComponent
 
 
 
@@ -50,10 +50,10 @@ func _generate_block(out_buffer : VoxelBuffer, origin_in_voxels : Vector3i, lod 
 			#var mountains: float= mountains_noise.get_noise_2d(pos_world.x, pos_world.z)
 			
 			#var height: float= height_arr.read(rx, rz)
-			var height: float= terrain.height_map_provider.get_height(pos_world.x, pos_world.z)
+			var height: float= terrain_component.height_map_provider.get_height(pos_world.x, pos_world.z)
 
 			#var slope: float= Vector3.UP.dot(normals_arr.read(rx, rz))
-			var slope: float= Vector3.UP.dot(terrain.height_map_provider.get_normal(pos_world.x, pos_world.z))
+			var slope: float= Vector3.UP.dot(terrain_component.height_map_provider.get_normal(pos_world.x, pos_world.z))
 
 			for ry in out_buffer.get_size().y:
 				pos_world.y = origin_in_voxels.y + (ry << lod)

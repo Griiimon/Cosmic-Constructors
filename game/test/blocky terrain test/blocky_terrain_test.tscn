@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dyl06ajmueugd"]
+[gd_scene load_steps=22 format=3 uid="uid://dyl06ajmueugd"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_0tpih"]
 [ext_resource type="Script" path="res://game/test/blocky terrain test/blocky_terrain_sandbox.gd" id="2_b56el"]
@@ -11,10 +11,11 @@
 [ext_resource type="Environment" uid="uid://dpnscmd0s8lh5" path="res://game/test/vehicle test/vehicle_test_environment.tres" id="6_legmu"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="7_2gven"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="8_n8li3"]
-[ext_resource type="PackedScene" uid="uid://carygqfay7enj" path="res://game/core/components/my terrain/my_terrain.tscn" id="9_2p8qx"]
 [ext_resource type="VoxelGeneratorScript" uid="uid://bnahldi02rd0d" path="res://game/test/blocky terrain test/blocky_world_generator.tres" id="9_5sb0m"]
 [ext_resource type="VoxelBlockyLibrary" uid="uid://dqn3qktu5jwry" path="res://game/test/blocky terrain test/voxel_blocky_library.tres" id="10_hlkyv"]
 [ext_resource type="Script" path="res://game/core/world/terrain/blocky terrain/blocky_library_initializer.gd" id="12_qinuc"]
+[ext_resource type="Script" path="res://game/core/components/terrain component/blocky_voxel_terrain_component.gd" id="13_8oftv"]
+[ext_resource type="Resource" uid="uid://cgspa8xqyxj4b" path="res://game/test/custom planet test/custom_planet_terrain_properties.tres" id="14_6w0nl"]
 
 [sub_resource type="Resource" id="Resource_3rmh6"]
 script = ExtResource("5_ouelq")
@@ -85,8 +86,10 @@ bounds = AABB(-5.36871e+08, -5.36871e+08, -5.36871e+08, 1.07374e+09, 1.07374e+09
 collision_layer = 4
 run_stream_in_editor = false
 
-[node name="Terrain" parent="VoxelTerrain" node_paths=PackedStringArray("world") instance=ExtResource("9_2p8qx")]
+[node name="BlockyVoxelTerrainComponent" type="Node" parent="VoxelTerrain" node_paths=PackedStringArray("world")]
+script = ExtResource("13_8oftv")
 world = NodePath("../../World")
+terrain_properties = ExtResource("14_6w0nl")
 
 [node name="Blocky Library Initializer" type="Node" parent="VoxelTerrain"]
 script = ExtResource("12_qinuc")

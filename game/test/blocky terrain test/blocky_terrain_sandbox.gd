@@ -8,7 +8,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if event.button_index == MOUSE_BUTTON_RIGHT:
 				#var collider= player.terrain_raycast.get_collider()
 				#if collider:
-					#var terrain: MyTerrain= MyTerrain.get_terrain(collider)
+					#var terrain: BaseTerrainComponent= BaseTerrainComponent.get_terrain(collider)
 					#if terrain:
 						#terrain.mine(player.terrain_raycast.get_collision_point() + player.get_look_vec() * 0.1, 1)
 						#DebugHud.send("Terrain ray collision", player.terrain_raycast.get_collision_point())

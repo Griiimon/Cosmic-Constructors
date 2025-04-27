@@ -529,7 +529,7 @@ func get_faction(id: int)-> Faction:
 
 
 func is_point_under_water(point: Vector3)-> bool:
-	var terrain: MyTerrain= Global.terrain
+	var terrain: BaseTerrainComponent= Global.terrain
 	if terrain:
 		return terrain.is_point_under_water(point)
 	return false

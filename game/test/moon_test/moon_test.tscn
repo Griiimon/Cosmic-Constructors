@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://rvroy1e0byrg"]
+[gd_scene load_steps=25 format=3 uid="uid://rvroy1e0byrg"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_2tfve"]
 [ext_resource type="Script" path="res://game/test/moon_test/moon_sandbox.gd" id="1_ekqcu"]
@@ -9,18 +9,16 @@
 [ext_resource type="Script" path="res://game/core/misc/environment space area/environment_space_area.gd" id="5_uff7u"]
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="6_lu4vl"]
 [ext_resource type="Shader" path="res://addons/zylann.voxel/smooth_texture_array_shader.gdshader" id="9_fwnrd"]
-[ext_resource type="PackedScene" uid="uid://carygqfay7enj" path="res://game/core/components/my terrain/my_terrain.tscn" id="9_ok4gh"]
 [ext_resource type="CompressedTexture2DArray" uid="uid://c4q2dqi0txuk" path="res://game/test/moon_test/terrain_texture_array_128.png" id="10_3r634"]
-[ext_resource type="Script" path="res://game/core/world/terrain/terrain_properties.gd" id="10_lb2fd"]
-[ext_resource type="Script" path="res://game/core/world/terrain/terrain_type_properties.gd" id="11_7xgm8"]
+[ext_resource type="Script" path="res://game/core/components/terrain component/smooth_voxel_terrain_component.gd" id="11_c046c"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="12_esrci"]
-[ext_resource type="Resource" uid="uid://1t5o40dv0rv1" path="res://game/data/terrain types/moon_rock_terrain.tres" id="14_qenbn"]
-[ext_resource type="Resource" uid="uid://dn783p1l2b7nn" path="res://game/data/terrain types/iron_ore_terrain.tres" id="15_06yxn"]
+[ext_resource type="Resource" uid="uid://bn8t0ih7yn4nq" path="res://game/test/moon_test/terrain_properties.tres" id="12_osqrh"]
 [ext_resource type="Texture2D" uid="uid://delri5lula0h8" path="res://game/test/moon_test/panorama_image.png" id="16_najjc"]
 
 [sub_resource type="Resource" id="Resource_5k3ql"]
 script = ExtResource("4_up7jj")
 back_item = ExtResource("3_h8ab2")
+has_equipment_port = false
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_t0ugr"]
 radius = 100000.0
@@ -37,7 +35,7 @@ period = 64.0001
 
 [sub_resource type="VoxelGeneratorGraph" id="VoxelGeneratorGraph_hxnsk"]
 graph_data = {
-"connections": [[17, 0, 13, 1], [1, 0, 12, 0], [1, 0, 23, 0], [20, 0, 14, 0], [12, 0, 20, 0], [13, 0, 4, 0], [14, 0, 17, 0], [2, 0, 12, 1], [2, 0, 23, 1], [23, 0, 28, 2], [3, 0, 12, 2], [3, 0, 23, 2], [9, 0, 13, 0], [28, 0, 24, 0], [28, 0, 30, 2], [28, 0, 32, 0], [30, 0, 25, 0], [30, 0, 31, 0]],
+"connections": [[17, 0, 13, 1], [1, 0, 12, 0], [1, 0, 23, 0], [20, 0, 14, 0], [12, 0, 20, 0], [13, 0, 4, 0], [14, 0, 17, 0], [2, 0, 12, 1], [2, 0, 23, 1], [23, 0, 28, 2], [28, 0, 24, 0], [28, 0, 30, 2], [28, 0, 32, 0], [3, 0, 12, 2], [3, 0, 23, 2], [30, 0, 25, 0], [30, 0, 31, 0], [9, 0, 13, 0]],
 "nodes": {
 "1": {
 "gui_position": Vector2(240, 53.3333),
@@ -165,10 +163,6 @@ shader = ExtResource("9_fwnrd")
 shader_parameter/u_transition_mask = null
 shader_parameter/u_albedo_array = ExtResource("10_3r634")
 
-[sub_resource type="Resource" id="Resource_1dtqv"]
-script = ExtResource("10_lb2fd")
-types = Array[ExtResource("11_7xgm8")]([ExtResource("14_qenbn"), ExtResource("15_06yxn")])
-
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ypafg"]
 panorama = ExtResource("16_najjc")
 
@@ -216,9 +210,10 @@ material = SubResource("ShaderMaterial_6de3u")
 collision_layer = 4
 streaming_system = 1
 
-[node name="Terrain" parent="VoxelLodTerrain" node_paths=PackedStringArray("world") instance=ExtResource("9_ok4gh")]
+[node name="SmoothVoxelTerrainComponent" type="Node" parent="VoxelLodTerrain" node_paths=PackedStringArray("world")]
+script = ExtResource("11_c046c")
 world = NodePath("../../World")
-terrain_properties = SubResource("Resource_1dtqv")
+terrain_properties = ExtResource("12_osqrh")
 
 [node name="UI" parent="." instance=ExtResource("12_esrci")]
 

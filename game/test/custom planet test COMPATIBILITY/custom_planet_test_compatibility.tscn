@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cymutykgvddtc"]
+[gd_scene load_steps=20 format=3 uid="uid://cymutykgvddtc"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_mpx04"]
 [ext_resource type="Script" path="res://game/test/custom planet test/custom_planet_sandbox.gd" id="2_asvss"]
@@ -11,13 +11,15 @@
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="9_gw85w"]
 [ext_resource type="VoxelGeneratorScript" uid="uid://b26ajmch67psy" path="res://game/test/custom planet test/custom_voxel_generator.tres" id="10_bimkj"]
 [ext_resource type="Material" uid="uid://duf303o0ryv61" path="res://game/test/custom planet test/custom_planet_material.tres" id="11_ebh0y"]
-[ext_resource type="PackedScene" uid="uid://carygqfay7enj" path="res://game/core/components/my terrain/my_terrain.tscn" id="12_j4jw0"]
+[ext_resource type="Script" path="res://game/core/components/terrain component/smooth_voxel_terrain_component.gd" id="12_7hefi"]
+[ext_resource type="Resource" uid="uid://cgspa8xqyxj4b" path="res://game/test/custom planet test/custom_planet_terrain_properties.tres" id="13_1edv7"]
 [ext_resource type="Script" path="res://game/core/world/terrain/cached_height_map_provider.gd" id="19_02dmq"]
 [ext_resource type="Resource" uid="uid://0w1nfnd8uwct" path="res://game/test/custom planet test/custom_planet_terrain_generator.tres" id="20_ru8ac"]
 
 [sub_resource type="Resource" id="Resource_4uqcy"]
 script = ExtResource("6_0eowt")
 back_item = ExtResource("5_2tyah")
+has_equipment_port = false
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_63ws0"]
 radius = 10000.0
@@ -68,8 +70,10 @@ run_stream_in_editor = false
 threaded_update_enabled = true
 streaming_system = 1
 
-[node name="Terrain" parent="Planet" node_paths=PackedStringArray("world", "height_map_provider") instance=ExtResource("12_j4jw0")]
+[node name="SmoothVoxelTerrainComponent" type="Node" parent="Planet" node_paths=PackedStringArray("world", "height_map_provider")]
+script = ExtResource("12_7hefi")
 world = NodePath("../../World")
+terrain_properties = ExtResource("13_1edv7")
 height_map_provider = NodePath("../HeightMapProvider")
 
 [node name="HeightMapProvider" type="Node" parent="Planet"]

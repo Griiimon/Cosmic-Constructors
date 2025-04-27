@@ -112,7 +112,7 @@ func force_unequip_item():
 func drill():
 	var shapecast: ShapeCast3D= player.drill_shapecast
 	if shapecast.is_colliding():
-		var terrain: MyTerrain= MyTerrain.get_terrain(shapecast.get_collider(0))
+		var terrain: BaseTerrainComponent= BaseTerrainComponent.get_terrain(shapecast.get_collider(0))
 		var local_pos: Vector3i= terrain.terrain_node.to_local(shapecast.get_collision_point(0))
 		var radius: float= 1.5
 		
@@ -126,7 +126,7 @@ func grind():
 		
 		match collision_layer:
 			CollisionLayers.TERRAIN:
-				var terrain: MyTerrain= MyTerrain.get_terrain(shapecast.get_collider(0))
+				var terrain: BaseTerrainComponent= BaseTerrainComponent.get_terrain(shapecast.get_collider(0))
 				var local_pos: Vector3= terrain.terrain_node.to_local(shapecast.get_collision_point(0))
 				terrain.grind(local_pos, shapecast.global_position, true, shapecast.get_collision_point(0) + shapecast.global_basis.z * 0.5, shapecast.global_basis.z)
 			CollisionLayers.GRID:

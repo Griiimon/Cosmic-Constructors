@@ -158,11 +158,9 @@ func try_to_separate_grid(origin: Vector3i, exclusion_list: Array[Vector3i]):
 	
 	print("Separate %d blocks grid from Voxel Terrain" % grid_voxels.size())
 
-	#await get_tree().physics_frame
 
 	for voxel_detail in grid_voxels:
 		tool.set_voxel(voxel_detail.pos, 0)
-		#prints(" Remove voxel", voxel_detail.pos)
 
 	#var query:= PhysicsShapeQueryParameters3D.new()
 	#query.collision_mask= CollisionLayers.TERRAIN

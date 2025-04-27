@@ -7,4 +7,4 @@ script = ExtResource("1_p88ju")
 world_seed = 0
 tree_variants = 8
 trunk_len_min = 8
-trunk_len_max = 32
+trunk_len_max = 16

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://byk1t3sx0j4l6"]
+[gd_scene load_steps=28 format=3 uid="uid://byk1t3sx0j4l6"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_w0grr"]
 [ext_resource type="Script" path="res://game/base_sandbox.gd" id="2_36jur"]
@@ -10,7 +10,8 @@
 [ext_resource type="Script" path="res://game/core/world/world.gd" id="8_gdgfu"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="9_w2yhh"]
 [ext_resource type="VoxelGeneratorGraph" uid="uid://cgv1qyrmcfjnp" path="res://game/test/asteroid field test/asteroid_field_generator2.tres" id="10_y0hst"]
-[ext_resource type="Material" uid="uid://duf303o0ryv61" path="res://game/test/custom planet test/custom_planet_material.tres" id="11_4axbf"]
+[ext_resource type="Shader" path="res://addons/zylann.voxel/smooth_texture_array_shader.gdshader" id="11_nejwd"]
+[ext_resource type="CompressedTexture2DArray" uid="uid://og4lu6oss02s" path="res://game/test/asteroid field test/terrain_texture_array_128.png" id="12_3e4jy"]
 [ext_resource type="Script" path="res://game/core/components/terrain component/smooth_voxel_terrain_component.gd" id="12_ds2kv"]
 [ext_resource type="Script" path="res://game/core/world/terrain/terrain_properties.gd" id="13_ggmbf"]
 [ext_resource type="Script" path="res://game/core/world/terrain/terrain_type_properties.gd" id="14_d0je7"]
@@ -30,6 +31,12 @@ radius = 10000.0
 
 [sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_oycf3"]
 texturing_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xi1c8"]
+render_priority = 0
+shader = ExtResource("11_nejwd")
+shader_parameter/u_transition_mask = null
+shader_parameter/u_albedo_array = ExtResource("12_3e4jy")
 
 [sub_resource type="Resource" id="Resource_dtfpr"]
 script = ExtResource("13_ggmbf")
@@ -84,7 +91,7 @@ voxel_bounds = AABB(-65536, -65536, -65536, 131072, 131072, 131072)
 lod_count = 8
 lod_distance = 16.0
 secondary_lod_distance = 32.0
-material = ExtResource("11_4axbf")
+material = SubResource("ShaderMaterial_xi1c8")
 collision_layer = 4
 threaded_update_enabled = true
 streaming_system = 1
@@ -96,6 +103,7 @@ terrain_properties = SubResource("Resource_dtfpr")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.0630866, 0.998008, 0, -0.998008, -0.0630866, 0, 0, 0)
+visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_88tku")

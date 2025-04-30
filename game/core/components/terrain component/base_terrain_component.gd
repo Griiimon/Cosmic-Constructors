@@ -15,7 +15,6 @@ const NODE_NAME= "Terrain Component"
 
 @export var world: World
 @export var terrain_properties: TerrainProperties
-@export var height_map_provider: HeightMapProvider
 
 @onready var terrain_node: Node3D= get_parent()
 

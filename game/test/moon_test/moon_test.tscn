@@ -166,12 +166,12 @@ shader_parameter/u_albedo_array = ExtResource("10_3r634")
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ypafg"]
 panorama = ExtResource("16_najjc")
 
-[sub_resource type="Sky" id="Sky_dffc2"]
+[sub_resource type="Sky" id="Sky_nskns"]
 sky_material = SubResource("PanoramaSkyMaterial_ypafg")
 
 [sub_resource type="Environment" id="Environment_ji0q7"]
 background_mode = 2
-sky = SubResource("Sky_dffc2")
+sky = SubResource("Sky_nskns")
 sky_rotation = Vector3(0.322886, 0, 3.22711)
 
 [node name="Moon Test" type="Node3D"]

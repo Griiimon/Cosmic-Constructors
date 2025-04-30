@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://18lknojownsw"]
+[gd_scene load_steps=25 format=3 uid="uid://18lknojownsw"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_7fydp"]
 [ext_resource type="Script" path="res://game/test/custom planet test/custom_planet_sandbox.gd" id="2_d2xmp"]
@@ -14,14 +14,13 @@
 [ext_resource type="Script" path="res://game/core/components/terrain component/base_terrain_component.gd" id="11_bvo6j"]
 [ext_resource type="Resource" uid="uid://cgspa8xqyxj4b" path="res://game/test/custom planet test/custom_planet_terrain_properties.tres" id="13_5fsrn"]
 [ext_resource type="Script" path="res://addons/sky_3d/src/Sky3D.gd" id="19_ef3m1"]
-[ext_resource type="Script" path="res://game/core/world/terrain/cached_height_map_provider.gd" id="19_myu6o"]
 [ext_resource type="Script" path="res://addons/sky_3d/src/TimeOfDay.gd" id="20_dtkjo"]
-[ext_resource type="Resource" uid="uid://0w1nfnd8uwct" path="res://game/test/custom planet test/custom_planet_terrain_generator.tres" id="20_v648d"]
 [ext_resource type="Script" path="res://addons/sky_3d/src/Skydome.gd" id="21_60nqn"]
 
 [sub_resource type="Resource" id="Resource_4uqcy"]
 script = ExtResource("6_yyq31")
 back_item = ExtResource("5_bbgji")
+has_equipment_port = false
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_63ws0"]
 radius = 100000.0
@@ -90,16 +89,10 @@ run_stream_in_editor = false
 threaded_update_enabled = true
 streaming_system = 1
 
-[node name="Terrain" type="Node" parent="Planet" node_paths=PackedStringArray("world", "height_map_provider")]
+[node name="Terrain" type="Node" parent="Planet" node_paths=PackedStringArray("world")]
 script = ExtResource("11_bvo6j")
 world = NodePath("../../World")
 terrain_properties = ExtResource("13_5fsrn")
-height_map_provider = NodePath("../Height Map Provider")
-
-[node name="Height Map Provider" type="Node" parent="Planet"]
-script = ExtResource("19_myu6o")
-radius = 512.0
-generator = ExtResource("20_v648d")
 
 [node name="Sky3D" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qv4la")

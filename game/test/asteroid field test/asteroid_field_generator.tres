@@ -1,0 +1,146 @@
+[gd_resource type="VoxelGeneratorGraph" load_steps=3 format=3 uid="uid://dg37rnpn54p1c"]
+
+[sub_resource type="FastNoise2" id="FastNoise2_q1pol"]
+period = 100.0
+fractal_octaves = 2
+
+[sub_resource type="FastNoise2" id="FastNoise2_5isg2"]
+period = 64.0001
+
+[resource]
+graph_data = {
+"connections": [[1, 0, 12, 0], [1, 0, 23, 0], [20, 0, 14, 0], [12, 0, 34, 0], [14, 0, 13, 1], [2, 0, 12, 1], [2, 0, 23, 1], [23, 0, 28, 2], [28, 0, 24, 0], [28, 0, 30, 2], [28, 0, 32, 0], [3, 0, 12, 2], [3, 0, 23, 2], [30, 0, 25, 0], [30, 0, 31, 0], [33, 0, 36, 0], [34, 0, 4, 0], [36, 0, 37, 0], [37, 0, 38, 0], [38, 0, 34, 1]],
+"nodes": {
+"1": {
+"gui_position": Vector2(240, 53.3333),
+"type": "InputX"
+},
+"12": {
+"auto_connect": true,
+"gui_position": Vector2(400, 160),
+"noise": SubResource("FastNoise2_q1pol"),
+"type": "FastNoise2_3D"
+},
+"13": {
+"a": 0.0,
+"gui_position": Vector2(773.333, -26.6667),
+"type": "Add"
+},
+"14": {
+"b": 500.0,
+"gui_position": Vector2(880, 160),
+"type": "Multiply"
+},
+"2": {
+"gui_position": Vector2(240, 160),
+"type": "InputY"
+},
+"20": {
+"a": 0.0,
+"b": 0.5,
+"gui_position": Vector2(720, 133.333),
+"type": "Max"
+},
+"23": {
+"auto_connect": true,
+"gui_position": Vector2(346.667, 1013.33),
+"noise": SubResource("FastNoise2_5isg2"),
+"type": "FastNoise2_3D"
+},
+"24": {
+"gui_position": Vector2(906.667, 960),
+"layer": 0,
+"type": "OutputWeight"
+},
+"25": {
+"gui_position": Vector2(906.667, 1066.67),
+"layer": 2,
+"type": "OutputWeight"
+},
+"28": {
+"a": 1.0,
+"b": 0.0,
+"gui_position": Vector2(533.333, 1013.33),
+"threshold": 0.97,
+"type": "Select"
+},
+"29": {
+"gui_position": Vector2(693.333, 960),
+"type": "Constant",
+"value": 0.0
+},
+"3": {
+"gui_position": Vector2(240, 240),
+"type": "InputZ"
+},
+"30": {
+"a": 1.0,
+"b": 0.0,
+"gui_position": Vector2(720, 1093.33),
+"threshold": 0.5,
+"type": "Select"
+},
+"31": {
+"fraction_period": 10.0,
+"gui_position": Vector2(1066.67, 1226.67),
+"max_value": 1.0,
+"min_value": -1.0,
+"mode": 0,
+"type": "SdfPreview"
+},
+"32": {
+"fraction_period": 10.0,
+"gui_position": Vector2(1066.67, 960),
+"max_value": 1.0,
+"min_value": -1.0,
+"mode": 0,
+"type": "SdfPreview"
+},
+"33": {
+"auto_connect": true,
+"gui_position": Vector2(346.667, 373.333),
+"type": "Distance3D",
+"x0": 0.0,
+"x1": 0.0,
+"y0": 0.0,
+"y1": 0.0,
+"z0": 0.0,
+"z1": 0.0
+},
+"34": {
+"gui_position": Vector2(1040, 320),
+"type": "Multiply"
+},
+"36": {
+"b": -1.0,
+"gui_position": Vector2(506.667, 373.333),
+"type": "Multiply"
+},
+"37": {
+"b": 100.0,
+"gui_position": Vector2(726.488, 484.326),
+"type": "Add"
+},
+"38": {
+"gui_position": Vector2(906.667, 506.667),
+"max": 1.0,
+"min": 0.0,
+"type": "Clamp"
+},
+"4": {
+"auto_connect": true,
+"gui_position": Vector2(1200, 373.333),
+"type": "OutputSDF"
+},
+"9": {
+"auto_connect": true,
+"gui_position": Vector2(480, -80),
+"radius": 10.0,
+"type": "SdfSphere",
+"x": 0.0,
+"y": 0.0,
+"z": 0.0
+}
+},
+"version": 2
+}

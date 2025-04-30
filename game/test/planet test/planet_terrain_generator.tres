@@ -1,0 +1,116 @@
+[gd_resource type="VoxelGeneratorGraph" load_steps=3 format=3 uid="uid://df6s08fb43xq4"]
+
+[sub_resource type="FastNoise2" id="FastNoise2_q1pol"]
+period = 52.0001
+fractal_octaves = 2
+cellular_distance_function = 3
+cellular_jitter = 0.43
+remap_output_min = 0.8
+
+[sub_resource type="FastNoise2" id="FastNoise2_5isg2"]
+period = 64.0001
+
+[resource]
+graph_data = {
+"connections": [[1, 0, 12, 0], [1, 0, 23, 0], [20, 0, 14, 0], [12, 0, 20, 0], [13, 0, 4, 0], [14, 0, 13, 1], [2, 0, 12, 1], [2, 0, 23, 1], [23, 0, 28, 2], [28, 0, 24, 0], [28, 0, 30, 2], [28, 0, 32, 0], [3, 0, 12, 2], [3, 0, 23, 2], [30, 0, 25, 0], [30, 0, 31, 0], [9, 0, 13, 0]],
+"nodes": {
+"1": {
+"gui_position": Vector2(240, 53.3333),
+"type": "InputX"
+},
+"12": {
+"auto_connect": true,
+"gui_position": Vector2(400, 160),
+"noise": SubResource("FastNoise2_q1pol"),
+"type": "FastNoise2_3D"
+},
+"13": {
+"gui_position": Vector2(880, 0),
+"type": "Add"
+},
+"14": {
+"b": -500.0,
+"gui_position": Vector2(880, 160),
+"type": "Multiply"
+},
+"2": {
+"gui_position": Vector2(240, 160),
+"type": "InputY"
+},
+"20": {
+"b": 0.5,
+"gui_position": Vector2(613.333, 186.667),
+"type": "Max"
+},
+"23": {
+"auto_connect": true,
+"gui_position": Vector2(346.667, 1013.33),
+"noise": SubResource("FastNoise2_5isg2"),
+"type": "FastNoise2_3D"
+},
+"24": {
+"gui_position": Vector2(906.667, 960),
+"layer": 0,
+"type": "OutputWeight"
+},
+"25": {
+"gui_position": Vector2(906.667, 1066.67),
+"layer": 2,
+"type": "OutputWeight"
+},
+"28": {
+"a": 1.0,
+"b": 0.0,
+"gui_position": Vector2(533.333, 1013.33),
+"threshold": 0.97,
+"type": "Select"
+},
+"29": {
+"gui_position": Vector2(693.333, 960),
+"type": "Constant",
+"value": 0.0
+},
+"3": {
+"gui_position": Vector2(240, 240),
+"type": "InputZ"
+},
+"30": {
+"a": 1.0,
+"b": 0.0,
+"gui_position": Vector2(720, 1093.33),
+"threshold": 0.5,
+"type": "Select"
+},
+"31": {
+"fraction_period": 10.0,
+"gui_position": Vector2(1066.67, 1226.67),
+"max_value": 1.0,
+"min_value": -1.0,
+"mode": 0,
+"type": "SdfPreview"
+},
+"32": {
+"fraction_period": 10.0,
+"gui_position": Vector2(1066.67, 960),
+"max_value": 1.0,
+"min_value": -1.0,
+"mode": 0,
+"type": "SdfPreview"
+},
+"4": {
+"auto_connect": true,
+"gui_position": Vector2(1040, 26.6667),
+"type": "OutputSDF"
+},
+"9": {
+"auto_connect": true,
+"gui_position": Vector2(586.667, -80),
+"radius": 2000.0,
+"type": "SdfSphere",
+"x": 0.0,
+"y": 0.0,
+"z": 0.0
+}
+},
+"version": 2
+}

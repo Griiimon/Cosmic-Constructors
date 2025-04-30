@@ -54,6 +54,6 @@ static func get_resources_in_radius(terrain: VoxelLodTerrain, local_pos: Vector3
 
 				for i in 4:
 					var idx: int= indices[i]
-					resources[idx]= (resources[idx] if resources.has(indices[idx]) else 0) + weights[i]
+					resources[idx]= (resources[idx] if resources.has(idx) else 0) + weights[i]
 	
 	return resources

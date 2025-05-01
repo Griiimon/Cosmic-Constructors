@@ -1,3 +1,5 @@
+make ore RBs collide with player ( and vice versa? )
+
 make player white head piece round, slightly elliptical
 
 FIX equipment port player rigid to kinematic transition

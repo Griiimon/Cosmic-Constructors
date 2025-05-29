@@ -8,7 +8,7 @@
 
 # How to run
 
-[Zylann's Voxel Addon v4.3 Double-Precision Development Build](https://github.com/Zylann/godot_voxel/actions/runs/13609155398/artifacts/2676060999)
+[Zylann's Voxel Addon v4.4 Double-Precision Development Build](https://github.com/Zylann/godot_voxel/actions/runs/15170538550/artifacts/3171535204)
 
 [Jolt Extension Double-Precision Build](https://github.com/godot-jolt/godot-jolt/releases/download/v0.15.0-stable/godot-jolt_v0.15.0-stable_double.zip)
 

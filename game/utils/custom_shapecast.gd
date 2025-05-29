@@ -65,7 +65,7 @@ static func pierce_blocks(shapecast: ShapeCast3D, filter: Callable, step_size: f
 					grid_block= base_block.get_grid_block()
 
 					if not filter.call():
-						break
+						return
 					reset()
 
 

@@ -140,4 +140,8 @@ func grind():
 
 
 func interactive_block_shapecast_filter()-> bool:
-	return not CustomShapeCast.grid_block.get_block_instance() or not CustomShapeCast.grid_block.get_block_instance().has_property_viewer()
+	var has_instance: bool= CustomShapeCast.grid_block.get_block_instance() != null
+	if not has_instance:
+		return true
+	var has_property_viewer: bool= CustomShapeCast.grid_block.get_block_instance().has_property_viewer()
+	return not has_property_viewer

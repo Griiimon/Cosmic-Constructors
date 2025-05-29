@@ -1,7 +1,7 @@
 class_name Damage
 extends Resource
 
-enum SourceType { UNKNOWN, PROJECTILE, LASER, MELEE, DRILL, GRINDER }
+enum SourceType { UNKNOWN, PROJECTILE, LASER, MELEE, DRILL, GRINDER, COLLISION }
 
 @export var amount: int= 1
 @export var radius: float= 0.0

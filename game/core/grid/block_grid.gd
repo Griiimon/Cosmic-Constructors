@@ -88,6 +88,8 @@ func _ready() -> void:
 	can_sleep= false
 	continuous_cd= true
 	center_of_mass_mode= CenterOfMassMode.CENTER_OF_MASS_MODE_CUSTOM
+	contact_monitor= true
+	max_contacts_reported= 3
 	
 	physics_material_override= PhysicsMaterial.new()
 	#physics_material_override.absorbent= true
@@ -281,6 +283,24 @@ func _physics_process(delta: float) -> void:
 	#DebugMesh.create(to_global(get_grid_cluster_center_of_mass()), 1.0)
 
 
+func _integrate_forces(state: PhysicsDirectBodyState3D):
+	for i in state.get_contact_count():
+		var impulse: Vector3= state.get_contact_impulse(i)
+		if impulse.length() > 10:
+			DebugHud.send("Cont Impulse", impulse.length())
+			prints("Contact impulse", impulse.length())
+			apply_collision_damage(impulse.length(), state.get_contact_collider_position(i))
+
+
+func apply_collision_damage(impulse: float, position: Vector3):
+	var damage:= Damage.new()
+	damage.source_type= Damage.SourceType.COLLISION
+	damage.amount= impulse / 20.0
+	damage.radius= sqrt(impulse)
+	damage.position= position
+	world.damage_object(self, damage)
+	
+	
 func tick_blocks(delta: float):
 	while not queue_blocks_changed_grid.is_empty():
 		var block_inst: BlockInstance= queue_blocks_changed_grid.pop_front()

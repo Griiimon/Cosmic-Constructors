@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c3ey6ccw7jiim"]
 
-[ext_resource type="Script" path="res://game/core/peripheral entity/peripheral_entity_model.gd" id="1_mt8oh"]
+[ext_resource type="Script" uid="uid://cg2l7eg5e38u6" path="res://game/core/peripheral entity/peripheral_entity_model.gd" id="1_mt8oh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_87yam"]
 size = Vector3(3, 1.7, 1.4)

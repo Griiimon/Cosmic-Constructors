@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="GyroBlock" load_steps=4 format=3 uid="uid://cyjaokbfugdky"]
 
 [ext_resource type="Resource" uid="uid://ckiejbyle02pl" path="res://game/data/misc/block categories/spaceship.tres" id="1_c4cdq"]
-[ext_resource type="Script" path="res://game/core/block/types/gyro_block.gd" id="1_d1aw2"]
+[ext_resource type="Script" uid="uid://duu277f3x8hbu" path="res://game/core/block/types/gyro_block.gd" id="1_d1aw2"]
 [ext_resource type="PackedScene" uid="uid://bg80uy1cgh1rr" path="res://game/data/blocks/gyro/small_gyro.tscn" id="2_i7wsh"]
 
 [resource]

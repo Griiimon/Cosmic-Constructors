@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://p4haqu00eb6j"]
 
-[ext_resource type="Script" path="res://game/data/peripheral entities/open top container/open_top_container.gd" id="1_nhyn7"]
+[ext_resource type="Script" uid="uid://bhlycjp6o418y" path="res://game/data/peripheral entities/open top container/open_top_container.gd" id="1_nhyn7"]
 [ext_resource type="PackedScene" uid="uid://w4lrpx60npks" path="res://game/data/peripheral entities/open top container/open_top_container_model.tscn" id="1_wr83l"]
 [ext_resource type="PackedScene" uid="uid://cthorbl78mho6" path="res://game/core/misc/peripheral connector counterpart/peripheral_connector_counterpart.tscn" id="2_1yrlm"]
 

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="TerrainProperties" load_steps=7 format=3 uid="uid://cgspa8xqyxj4b"]
 
-[ext_resource type="Script" path="res://game/core/world/terrain/terrain_properties.gd" id="1_os0ph"]
-[ext_resource type="Script" path="res://game/core/world/terrain/terrain_type_properties.gd" id="2_en77k"]
+[ext_resource type="Script" uid="uid://bq3r5pteaumc3" path="res://game/core/world/terrain/terrain_properties.gd" id="1_os0ph"]
+[ext_resource type="Script" uid="uid://ccwdu0a62qo4i" path="res://game/core/world/terrain/terrain_type_properties.gd" id="2_en77k"]
 [ext_resource type="Resource" uid="uid://dthyojrp18xoy" path="res://game/data/terrain types/grass_terrain.tres" id="3_mw0ij"]
 [ext_resource type="Resource" uid="uid://bgnjd8cbucnn2" path="res://game/data/terrain types/stone_terrain.tres" id="4_idh60"]
 [ext_resource type="Resource" uid="uid://dn783p1l2b7nn" path="res://game/data/terrain types/iron_ore_terrain.tres" id="5_x4tby"]

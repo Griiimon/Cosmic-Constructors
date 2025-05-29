@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="VoxelTerrainBlockMesh" load_steps=5 format=3 uid="uid://bexo7qailorxl"]
 
-[ext_resource type="Script" path="res://game/core/world/terrain/blocky terrain/voxel_terrain_block_mesh.gd" id="1_aim1y"]
+[ext_resource type="Script" uid="uid://ejpfdofo1qgb" path="res://game/core/world/terrain/blocky terrain/voxel_terrain_block_mesh.gd" id="1_aim1y"]
 [ext_resource type="Material" uid="uid://emsuhdmw1ipp" path="res://game/data/voxel terrain blocks/terrain_material.tres" id="1_girci"]
 [ext_resource type="ArrayMesh" uid="uid://db5turfil1fvb" path="res://game/data/voxel terrain blocks/grass/grass.obj" id="2_ikgqe"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://4lrcbiiff8n2"]
 
-[ext_resource type="Script" path="res://game/core/components/item catcher/item_catcher.gd" id="1_7x4nj"]
+[ext_resource type="Script" uid="uid://co2khl3nsvr6t" path="res://game/core/components/item catcher/item_catcher.gd" id="1_7x4nj"]
 
 [node name="Item Catcher" type="Node"]
 script = ExtResource("1_7x4nj")

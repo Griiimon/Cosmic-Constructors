@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cm5xor4hspheq"]
 
-[ext_resource type="Script" path="res://game/data/game modes/castles and cannons/blocks/cannon/cannon.gd" id="1_wjh1b"]
+[ext_resource type="Script" uid="uid://bnglpsgjrjliy" path="res://game/data/game modes/castles and cannons/blocks/cannon/cannon.gd" id="1_wjh1b"]
 [ext_resource type="PackedScene" uid="uid://cajlhe7dya0wc" path="res://game/data/game modes/castles and cannons/cannonball/cannonball.tscn" id="2_yl1j8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_5qi41"]

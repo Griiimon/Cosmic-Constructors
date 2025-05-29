@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://0e4n38fliap8"]
 
 [ext_resource type="Material" uid="uid://b824lkgishwsd" path="res://game/data/blocks/peripheral connector/peripheral_connector_connected_material.tres" id="1_5rgwc"]
-[ext_resource type="Script" path="res://game/core/block/instances/peripheral_connector_instance.gd" id="1_bu7fi"]
+[ext_resource type="Script" uid="uid://d04jx5ndtyghq" path="res://game/core/block/instances/peripheral_connector_instance.gd" id="1_bu7fi"]
 [ext_resource type="Material" uid="uid://cob7u37hdm61" path="res://game/data/blocks/peripheral connector/peripheral_connector_disabled_material.tres" id="2_80du7"]
 [ext_resource type="Material" uid="uid://b4uo20ehto5wu" path="res://game/data/blocks/peripheral connector/peripheral_connector_ready_material.tres" id="3_4jqfr"]
 

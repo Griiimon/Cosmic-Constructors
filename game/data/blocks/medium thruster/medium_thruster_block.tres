@@ -2,12 +2,13 @@
 
 [ext_resource type="Resource" uid="uid://ckiejbyle02pl" path="res://game/data/misc/block categories/spaceship.tres" id="1_obx6y"]
 [ext_resource type="PackedScene" uid="uid://cs424ivnm8bso" path="res://game/data/blocks/medium thruster/medium_thruster.tscn" id="1_tdtm4"]
-[ext_resource type="Script" path="res://game/core/block/types/thruster_block.gd" id="2_qjk6j"]
+[ext_resource type="Script" uid="uid://vqm7e652sky0" path="res://game/core/block/types/thruster_block.gd" id="2_qjk6j"]
 
 [resource]
 script = ExtResource("2_qjk6j")
 thrust = 100000.0
 force_offset = false
+grid_size = 0
 size = Vector3i(1, 1, 2)
 mass = 40.0
 max_hitpoints = 10

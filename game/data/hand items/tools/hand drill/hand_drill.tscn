@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cs62b6xiexrlu"]
 
-[ext_resource type="Script" path="res://game/core/player/hand items/hand_object_drill.gd" id="1_a8qiu"]
+[ext_resource type="Script" uid="uid://bfsg4nprb6fk0" path="res://game/core/player/hand items/hand_object_drill.gd" id="1_a8qiu"]
 [ext_resource type="PackedScene" uid="uid://c4veigcf3ruh" path="res://game/data/hand items/tools/hand drill/hand_drill_model.tscn" id="1_v8rik"]
 
 [sub_resource type="Animation" id="Animation_1bb0u"]
@@ -37,8 +37,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d7waw"]
 _data = {
-"RESET": SubResource("Animation_1bb0u"),
-"use": SubResource("Animation_bitdy")
+&"RESET": SubResource("Animation_1bb0u"),
+&"use": SubResource("Animation_bitdy")
 }
 
 [node name="Hand Drill" type="Node3D" node_paths=PackedStringArray("animation_player")]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cr5xheqrbf6gc"]
 
-[ext_resource type="Script" path="res://game/core/world/world item/world_item_instance.gd" id="1_tp043"]
+[ext_resource type="Script" uid="uid://okvly62shbij" path="res://game/core/world/world item/world_item_instance.gd" id="1_tp043"]
 
 [node name="WorldItemInstance" type="RigidBody3D"]
 collision_layer = 64

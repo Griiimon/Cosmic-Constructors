@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cvsy1fdxoas6f"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/drive_shaft_instance.gd" id="1_mlhpw"]
+[ext_resource type="Script" uid="uid://dnh2tuaxli2rv" path="res://game/core/block/instances/drive_shaft_instance.gd" id="1_mlhpw"]
 
 [sub_resource type="Gradient" id="Gradient_n2f3a"]
 offsets = PackedFloat32Array(0, 0.777778)

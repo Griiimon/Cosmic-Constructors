@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="TerrainTypeProperties" load_steps=3 format=3 uid="uid://bgnjd8cbucnn2"]
 
 [ext_resource type="Resource" uid="uid://d258am43f7jcp" path="res://game/data/items/raw materials/stone/stone.tres" id="1_2ujjs"]
-[ext_resource type="Script" path="res://game/core/world/terrain/terrain_type_properties.gd" id="1_55vi3"]
+[ext_resource type="Script" uid="uid://ccwdu0a62qo4i" path="res://game/core/world/terrain/terrain_type_properties.gd" id="1_55vi3"]
 
 [resource]
 script = ExtResource("1_55vi3")

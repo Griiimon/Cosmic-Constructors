@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bjixfd2upo2t8"]
 
-[ext_resource type="Script" path="res://game/core/fluid/fluid_drop.gd" id="1_3gbg4"]
+[ext_resource type="Script" uid="uid://d108frsvwlwj2" path="res://game/core/fluid/fluid_drop.gd" id="1_3gbg4"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7mn2x"]
 radius = 0.05

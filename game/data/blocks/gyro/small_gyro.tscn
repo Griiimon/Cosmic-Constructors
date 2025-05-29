@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://bg80uy1cgh1rr"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/gyro_instance.gd" id="1_qmdem"]
+[ext_resource type="Script" uid="uid://bb0rpndpm73lu" path="res://game/core/block/instances/gyro_instance.gd" id="1_qmdem"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g1t1l"]
 albedo_color = Color(0.212305, 0.212305, 0.212305, 1)

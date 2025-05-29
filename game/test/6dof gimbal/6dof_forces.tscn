@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://u2kwa4nevanw"]
 
-[ext_resource type="Script" path="res://game/test/6dof gimbal/6_dof_forces.gd" id="1_23tyv"]
+[ext_resource type="Script" uid="uid://bdu2b21e34idl" path="res://game/test/6dof gimbal/6_dof_forces.gd" id="1_23tyv"]
 
 [sub_resource type="Environment" id="Environment_y4kqx"]
 ambient_light_source = 2

@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=4 uid="uid://d22kh1takp8dx"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/funnel_instance.gd" id="1_kp7s0"]
+[ext_resource type="Script" uid="uid://bsjee0d5b7k3" path="res://game/core/block/instances/funnel_instance.gd" id="1_kp7s0"]
 [ext_resource type="PackedScene" uid="uid://dxobr26jfvcqg" path="res://game/core/components/fluid container/fluid_connector_model.tscn" id="2_t0fo6"]
 [ext_resource type="PackedScene" uid="uid://s5pod3jqq31o" path="res://game/core/components/fluid container/fluid_container.tscn" id="3_vlnbn"]
-[ext_resource type="Script" path="res://game/core/components/fluid container/fluid_connector.gd" id="4_l814p"]
+[ext_resource type="Script" uid="uid://brsg7h33g62v" path="res://game/core/components/fluid container/fluid_connector.gd" id="4_l814p"]
 
 [sub_resource type="Resource" id="Resource_8qxxh"]
 script = ExtResource("4_l814p")

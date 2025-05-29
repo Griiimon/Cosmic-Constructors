@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://eitshgl75kf2"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/table_saw_instance.gd" id="1_ss6fv"]
+[ext_resource type="Script" uid="uid://b6lq6j4ihf4hw" path="res://game/core/block/instances/table_saw_instance.gd" id="1_ss6fv"]
 [ext_resource type="Resource" uid="uid://dnkrghuseprk1" path="res://game/data/items/intermediates/board/board_item.tres" id="2_8vjo2"]
 [ext_resource type="PackedScene" uid="uid://4lrcbiiff8n2" path="res://game/core/components/item catcher/item_catcher.tscn" id="2_sj1m4"]
 [ext_resource type="Resource" uid="uid://cp77p20cdjmsx" path="res://game/data/items/raw/log/log_item.tres" id="3_86aj6"]

@@ -2,10 +2,11 @@
 
 [ext_resource type="Resource" uid="uid://bqyj0esctqhyl" path="res://game/data/misc/block categories/control.tres" id="1_144ip"]
 [ext_resource type="PackedScene" uid="uid://ds38tol4xc2ls" path="res://game/data/blocks/pilot seat/pilot_seat.tscn" id="1_b40p7"]
-[ext_resource type="Script" path="res://game/core/block/types/seat_block.gd" id="2_mjpwg"]
+[ext_resource type="Script" uid="uid://cm3bh6ob6dday" path="res://game/core/block/types/seat_block.gd" id="2_mjpwg"]
 
 [resource]
 script = ExtResource("2_mjpwg")
+grid_size = 0
 size = Vector3i(1, 1, 1)
 mass = 10.0
 max_hitpoints = 10

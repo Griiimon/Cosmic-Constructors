@@ -2,10 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://suf83sg8b2yp" path="res://game/data/blocks/brakes/brakes.tscn" id="1_gqehq"]
 [ext_resource type="Resource" uid="uid://cunos21ar0qix" path="res://game/data/misc/block categories/car.tres" id="1_xymiw"]
-[ext_resource type="Script" path="res://game/core/block/types/brakes_block.gd" id="2_c12va"]
+[ext_resource type="Script" uid="uid://c3vu4sebvgjqi" path="res://game/core/block/types/brakes_block.gd" id="2_c12va"]
 
 [resource]
 script = ExtResource("2_c12va")
+grid_size = 0
 size = Vector3i(1, 1, 1)
 mass = 10.0
 max_hitpoints = 10

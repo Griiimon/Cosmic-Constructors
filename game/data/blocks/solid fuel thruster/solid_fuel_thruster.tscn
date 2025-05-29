@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cuwcwrs2vl3gv"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/solid_fuel_thruster_instance.gd" id="1_3s738"]
+[ext_resource type="Script" uid="uid://c72hiju6u0dn6" path="res://game/core/block/instances/solid_fuel_thruster_instance.gd" id="1_3s738"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ptd7a"]
 

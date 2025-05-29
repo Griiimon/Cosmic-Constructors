@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="TerrainTypeProperties" load_steps=3 format=3 uid="uid://b4r5qmp3a4uct"]
 
 [ext_resource type="Resource" uid="uid://b4vqkgbwnwt0n" path="res://game/data/items/raw materials/dirt/dirt.tres" id="1_rph0x"]
-[ext_resource type="Script" path="res://game/core/world/terrain/terrain_type_properties.gd" id="2_p0bb4"]
+[ext_resource type="Script" uid="uid://ccwdu0a62qo4i" path="res://game/core/world/terrain/terrain_type_properties.gd" id="2_p0bb4"]
 
 [resource]
 script = ExtResource("2_p0bb4")

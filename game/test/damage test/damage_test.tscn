@@ -1,21 +1,20 @@
-[gd_scene load_steps=20 format=3 uid="uid://bws4nr4sjg6bt"]
+[gd_scene load_steps=19 format=3 uid="uid://bws4nr4sjg6bt"]
 
-[ext_resource type="Script" path="res://game/game.gd" id="1_hy62o"]
-[ext_resource type="Script" path="res://game/test/damage test/damage_sandbox.gd" id="2_wkbyi"]
+[ext_resource type="Script" uid="uid://c2wn2082tvspq" path="res://game/game.gd" id="1_hy62o"]
+[ext_resource type="Script" uid="uid://dtitxke8nk52b" path="res://game/test/damage test/damage_sandbox.gd" id="2_wkbyi"]
 [ext_resource type="Resource" uid="uid://jxoc0g7ajehb" path="res://game/data/hand items/weapons/rocket launcher/rocket_launcher.tres" id="3_e07li"]
-[ext_resource type="Texture2D" path="res://skybox/proc_stars.dds" id="3_o606f"]
-[ext_resource type="Script" path="res://game/core/world/world.gd" id="4_8hosm"]
-[ext_resource type="Script" path="res://game/player_spawn.gd" id="4_ocvhk"]
+[ext_resource type="Script" uid="uid://dik56tay37ghp" path="res://game/core/world/world.gd" id="4_8hosm"]
+[ext_resource type="Script" uid="uid://bx4645ay547aj" path="res://game/player_spawn.gd" id="4_ocvhk"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="6_pnchb"]
 [ext_resource type="Resource" uid="uid://6jymoqkdm6kr" path="res://game/data/equipment/back/jetpack/space_jetpack.tres" id="7_eq7l4"]
-[ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="8_fpw3d"]
+[ext_resource type="Script" uid="uid://dlolp06i050sx" path="res://game/core/player/equipment/player_equipment.gd" id="8_fpw3d"]
 
 [sub_resource type="Resource" id="Resource_rlnpc"]
 script = ExtResource("8_fpw3d")
 back_item = ExtResource("7_eq7l4")
+has_equipment_port = false
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0ujoa"]
-panorama = ExtResource("3_o606f")
 
 [sub_resource type="Sky" id="Sky_nbk3e"]
 sky_material = SubResource("PanoramaSkyMaterial_0ujoa")

@@ -1,10 +1,11 @@
 [gd_resource type="Resource" script_class="DebugSettingsResource" load_steps=3 format=3 uid="uid://632v86u5psq3"]
 
-[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_1pjci"]
-[ext_resource type="Script" path="res://game/debug/debug settings/debug_settings_resource.gd" id="2_wwtsu"]
+[ext_resource type="Script" uid="uid://d3ggl6vpouab1" path="res://game/core/block/block.gd" id="1_1pjci"]
+[ext_resource type="Script" uid="uid://cupwcfctb3pi2" path="res://game/debug/debug settings/debug_settings_resource.gd" id="2_wwtsu"]
 
 [resource]
 script = ExtResource("2_wwtsu")
 default_build_hotbar_layout = Array[ExtResource("1_1pjci")]([])
 infinite_furnace_ingredients = false
 force_freeze_status = false
+disable_compression = false

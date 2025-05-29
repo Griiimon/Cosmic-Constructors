@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://slyw4y7qi46y"]
 
-[ext_resource type="Script" path="res://game/core/player/base_player.gd" id="1_77i27"]
+[ext_resource type="Script" uid="uid://b5e5klwqxp051" path="res://game/core/player/base_player.gd" id="1_77i27"]
 [ext_resource type="PackedScene" uid="uid://bnhyptcsxakf2" path="res://game/core/player/model/model.tscn" id="2_d3djl"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bbcsg"]

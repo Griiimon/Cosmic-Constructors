@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockLibrary" load_steps=63 format=3 uid="uid://qj17gtekw1sc"]
 
-[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_q4eul"]
+[ext_resource type="Script" uid="uid://d3ggl6vpouab1" path="res://game/core/block/block.gd" id="1_q4eul"]
 [ext_resource type="Resource" uid="uid://sueib6rdbmc0" path="res://game/data/blocks/light structure/light_structure_block.tres" id="2_fovyn"]
 [ext_resource type="Resource" uid="uid://k2s38yf1cnl4" path="res://game/data/blocks/pilot seat/pilot_seat_block.tres" id="3_apy44"]
 [ext_resource type="Resource" uid="uid://8q22was2s7fl" path="res://game/data/blocks/thruster/thruster_block.tres" id="4_cmq41"]
@@ -61,7 +61,7 @@
 [ext_resource type="Resource" uid="uid://bco0sq04bbd4p" path="res://game/data/blocks/float/float_block.tres" id="59_kqspt"]
 [ext_resource type="Resource" uid="uid://dm1lusvlgnset" path="res://game/data/blocks/outboard engine/outboard_engine_block.tres" id="60_dyums"]
 [ext_resource type="Resource" uid="uid://pxtv4wvf43pe" path="res://game/data/blocks/construction anchor/construction_anchor_block.tres" id="61_vd3sk"]
-[ext_resource type="Script" path="res://game/global/game data/block_library.gd" id="62_601gl"]
+[ext_resource type="Script" uid="uid://jidqxyot2sup" path="res://game/global/game data/block_library.gd" id="62_601gl"]
 
 [resource]
 script = ExtResource("62_601gl")

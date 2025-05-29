@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="RawItem" load_steps=3 format=3 uid="uid://cp77p20cdjmsx"]
 
 [ext_resource type="PackedScene" uid="uid://cr5urudx1nu0n" path="res://game/data/items/raw/log/log_item_model.tscn" id="1_kbvya"]
-[ext_resource type="Script" path="res://game/core/item/item_raw.gd" id="1_ydjdf"]
+[ext_resource type="Script" uid="uid://4ajvmfws8lu7" path="res://game/core/item/item_raw.gd" id="1_ydjdf"]
 
 [resource]
 script = ExtResource("1_ydjdf")
 model = ExtResource("1_kbvya")
 storage_size = 2
+is_long = false
 base_mass = 10.0
 mass_per_item = 0.0
 name = ""

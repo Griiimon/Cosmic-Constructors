@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cuqhcx4p5hgca"]
 
-[ext_resource type="Script" path="res://game/core/asteroid/asteroid.gd" id="1_i3wkf"]
+[ext_resource type="Script" uid="uid://da8y31rg315xx" path="res://game/core/asteroid/asteroid.gd" id="1_i3wkf"]
 [ext_resource type="Material" uid="uid://c4l4ukvg5rpk8" path="res://game/textures/terrain_material.tres" id="1_i754l"]
 
 [sub_resource type="VoxelStreamMemory" id="VoxelStreamMemory_x7jsn"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://0td1dfglmvte"]
 
-[ext_resource type="Script" path="res://game/ui/line edit popup/line_edit_popup.gd" id="1_12bce"]
+[ext_resource type="Script" uid="uid://7v8niyfeeytn" path="res://game/ui/line edit popup/line_edit_popup.gd" id="1_12bce"]
 
 [node name="Line Edit Popup" type="PopupPanel"]
 auto_translate_mode = 1

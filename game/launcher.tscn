@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c4sn7mi6fgdo2"]
 
-[ext_resource type="Script" path="res://game/launcher.gd" id="1_rwhuf"]
+[ext_resource type="Script" uid="uid://bek5c5ybwtgvs" path="res://game/launcher.gd" id="1_rwhuf"]
 [ext_resource type="PackedScene" uid="uid://d4blx7p2hp5bc" path="res://game/test/vehicle test/vehicle_test.tscn" id="3_nay8q"]
 
 [node name="Launcher" type="Node"]

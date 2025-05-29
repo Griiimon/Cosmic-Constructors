@@ -2,10 +2,11 @@
 
 [ext_resource type="Resource" uid="uid://cunos21ar0qix" path="res://game/data/misc/block categories/car.tres" id="1_ief30"]
 [ext_resource type="PackedScene" uid="uid://dmke87yp674fn" path="res://game/data/blocks/electric suspension 4r left/electric_suspension_4r_left.tscn" id="1_pgj74"]
-[ext_resource type="Script" path="res://game/core/block/types/suspension_block.gd" id="2_bctde"]
+[ext_resource type="Script" uid="uid://c1exudcegpi14" path="res://game/core/block/types/suspension_block.gd" id="2_bctde"]
 
 [resource]
 script = ExtResource("2_bctde")
+grid_size = 0
 size = Vector3i(1, 1, 1)
 mass = 10.0
 max_hitpoints = 10

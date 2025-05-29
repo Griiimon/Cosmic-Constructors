@@ -56,6 +56,7 @@ player RB while jumping can start to rotate if hits something
 
 add turn_into_blocks to block library at runtime
 
+when grid connections on main or subgrid break, decouple the grids
 
 
 ItemEjectorComponent needs to be serialized, now that it has a queue

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://curl07agyocno"]
 
 [ext_resource type="PackedScene" uid="uid://rbb1n5pfdkqs" path="res://game/core/misc/rope/rope.tscn" id="1_irgv1"]
-[ext_resource type="Script" path="res://game/test/rope test/rope_test.gd" id="1_tysk4"]
+[ext_resource type="Script" uid="uid://bho6g8be8uuln" path="res://game/test/rope test/rope_test.gd" id="1_tysk4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uj5eq"]
 size = Vector3(100, 100, 100)

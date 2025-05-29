@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockCategory" load_steps=2 format=3 uid="uid://cxs5vv3urkfhr"]
 
-[ext_resource type="Script" path="res://game/core/block/block_category.gd" id="1_jaho1"]
+[ext_resource type="Script" uid="uid://drqdjqbk048q2" path="res://game/core/block/block_category.gd" id="1_jaho1"]
 
 [resource]
 script = ExtResource("1_jaho1")

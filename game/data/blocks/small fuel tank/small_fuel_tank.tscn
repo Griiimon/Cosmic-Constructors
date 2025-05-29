@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://br6liai788ug6"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/tank_instance.gd" id="1_l75wk"]
+[ext_resource type="Script" uid="uid://yo1wkkol427y" path="res://game/core/block/instances/tank_instance.gd" id="1_l75wk"]
 [ext_resource type="PackedScene" uid="uid://s5pod3jqq31o" path="res://game/core/components/fluid container/fluid_container.tscn" id="1_pmcxv"]
-[ext_resource type="Script" path="res://game/core/components/fluid container/fluid_connector.gd" id="2_tssye"]
+[ext_resource type="Script" uid="uid://brsg7h33g62v" path="res://game/core/components/fluid container/fluid_connector.gd" id="2_tssye"]
 
 [sub_resource type="Resource" id="Resource_ekvm1"]
 script = ExtResource("2_tssye")

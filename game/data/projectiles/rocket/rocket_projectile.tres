@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Projectile" load_steps=5 format=3 uid="uid://bfkthr77jd63g"]
 
-[ext_resource type="Script" path="res://game/core/components/damage component/damage.gd" id="1_s38ko"]
+[ext_resource type="Script" uid="uid://bgtcvmem8qj4m" path="res://game/core/components/damage component/damage.gd" id="1_s38ko"]
 [ext_resource type="PackedScene" uid="uid://cwo0gup2wubsi" path="res://game/data/projectiles/rocket/rocket_projectile.tscn" id="2_u0216"]
-[ext_resource type="Script" path="res://game/core/misc/projectile.gd" id="3_uxe2k"]
+[ext_resource type="Script" uid="uid://bo3kh7w8g0blp" path="res://game/core/misc/projectile.gd" id="3_uxe2k"]
 
 [sub_resource type="Resource" id="Resource_stps2"]
 script = ExtResource("1_s38ko")

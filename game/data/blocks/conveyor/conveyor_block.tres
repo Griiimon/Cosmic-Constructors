@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://cdya74n2owfo0"]
 
 [ext_resource type="Resource" uid="uid://d4f2nvlgovoej" path="res://game/data/misc/block categories/logistics.tres" id="1_cw1y3"]
-[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_g5rud"]
+[ext_resource type="Script" uid="uid://d3ggl6vpouab1" path="res://game/core/block/block.gd" id="1_g5rud"]
 [ext_resource type="PackedScene" uid="uid://clfksjpvg60v8" path="res://game/data/blocks/conveyor/conveyor.tscn" id="1_qbj0q"]
 
 [resource]
 script = ExtResource("1_g5rud")
+grid_size = 0
 size = Vector3i(1, 1, 1)
 mass = 10.0
 max_hitpoints = 10

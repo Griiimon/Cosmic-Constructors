@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://6hxssjnl6s8k"]
 
 [ext_resource type="Resource" uid="uid://cxs5vv3urkfhr" path="res://game/data/misc/block categories/production.tres" id="1_8b3vu"]
-[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_wn8vl"]
+[ext_resource type="Script" uid="uid://d3ggl6vpouab1" path="res://game/core/block/block.gd" id="1_wn8vl"]
 [ext_resource type="PackedScene" uid="uid://eitshgl75kf2" path="res://game/data/blocks/table saw/table_saw.tscn" id="2_jqwb4"]
 
 [resource]

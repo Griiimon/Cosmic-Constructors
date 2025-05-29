@@ -3,8 +3,8 @@
 [ext_resource type="Resource" uid="uid://c5q88ycw3p1u5" path="res://game/data/misc/block categories/voxel_blocks.tres" id="1_uhffq"]
 [ext_resource type="Resource" uid="uid://cp77p20cdjmsx" path="res://game/data/items/raw/log/log_item.tres" id="1_wb0fp"]
 [ext_resource type="PackedScene" uid="uid://dlsir5vnkodk2" path="res://game/data/blocks/log/log_block_model.tscn" id="2_devw4"]
-[ext_resource type="Script" path="res://game/core/block/drops/block_grind_drop.gd" id="2_ebvr6"]
-[ext_resource type="Script" path="res://game/core/block/block.gd" id="2_yvtjf"]
+[ext_resource type="Script" uid="uid://dc2ve40v86dyh" path="res://game/core/block/drops/block_grind_drop.gd" id="2_ebvr6"]
+[ext_resource type="Script" uid="uid://d3ggl6vpouab1" path="res://game/core/block/block.gd" id="2_yvtjf"]
 
 [sub_resource type="Resource" id="Resource_iivh5"]
 script = ExtResource("2_ebvr6")

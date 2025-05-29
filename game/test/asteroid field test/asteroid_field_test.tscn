@@ -1,20 +1,20 @@
 [gd_scene load_steps=28 format=3 uid="uid://byk1t3sx0j4l6"]
 
-[ext_resource type="Script" path="res://game/game.gd" id="1_w0grr"]
-[ext_resource type="Script" path="res://game/base_sandbox.gd" id="2_36jur"]
+[ext_resource type="Script" uid="uid://c2wn2082tvspq" path="res://game/game.gd" id="1_w0grr"]
+[ext_resource type="Script" uid="uid://cey6wdpo80l5j" path="res://game/base_sandbox.gd" id="2_36jur"]
 [ext_resource type="Resource" uid="uid://y0452womu354" path="res://game/data/hand items/tools/hand drill/hand_drill.tres" id="3_ou1vc"]
-[ext_resource type="Script" path="res://game/player_spawn.gd" id="4_vvm0n"]
+[ext_resource type="Script" uid="uid://bx4645ay547aj" path="res://game/player_spawn.gd" id="4_vvm0n"]
 [ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="5_vihsx"]
-[ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="6_2loa5"]
-[ext_resource type="Script" path="res://game/core/misc/environment space area/environment_space_area.gd" id="7_6b1xx"]
-[ext_resource type="Script" path="res://game/core/world/world.gd" id="8_gdgfu"]
+[ext_resource type="Script" uid="uid://dlolp06i050sx" path="res://game/core/player/equipment/player_equipment.gd" id="6_2loa5"]
+[ext_resource type="Script" uid="uid://bj4ggeydu66vo" path="res://game/core/misc/environment space area/environment_space_area.gd" id="7_6b1xx"]
+[ext_resource type="Script" uid="uid://dik56tay37ghp" path="res://game/core/world/world.gd" id="8_gdgfu"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="9_w2yhh"]
 [ext_resource type="VoxelGeneratorGraph" uid="uid://cgv1qyrmcfjnp" path="res://game/test/asteroid field test/asteroid_field_generator2.tres" id="10_y0hst"]
-[ext_resource type="Shader" path="res://addons/zylann.voxel/smooth_texture_array_shader.gdshader" id="11_nejwd"]
+[ext_resource type="Shader" uid="uid://civf5b0gmpmt" path="res://addons/zylann.voxel/smooth_texture_array_shader.gdshader" id="11_nejwd"]
 [ext_resource type="CompressedTexture2DArray" uid="uid://og4lu6oss02s" path="res://game/test/asteroid field test/terrain_texture_array_128.png" id="12_3e4jy"]
-[ext_resource type="Script" path="res://game/core/components/terrain component/smooth_voxel_terrain_component.gd" id="12_ds2kv"]
-[ext_resource type="Script" path="res://game/core/world/terrain/terrain_properties.gd" id="13_ggmbf"]
-[ext_resource type="Script" path="res://game/core/world/terrain/terrain_type_properties.gd" id="14_d0je7"]
+[ext_resource type="Script" uid="uid://g0vy5162br6m" path="res://game/core/components/terrain component/smooth_voxel_terrain_component.gd" id="12_ds2kv"]
+[ext_resource type="Script" uid="uid://bq3r5pteaumc3" path="res://game/core/world/terrain/terrain_properties.gd" id="13_ggmbf"]
+[ext_resource type="Script" uid="uid://ccwdu0a62qo4i" path="res://game/core/world/terrain/terrain_type_properties.gd" id="14_d0je7"]
 [ext_resource type="Resource" uid="uid://bgnjd8cbucnn2" path="res://game/data/terrain types/stone_terrain.tres" id="15_6njx6"]
 [ext_resource type="Resource" uid="uid://dn783p1l2b7nn" path="res://game/data/terrain types/iron_ore_terrain.tres" id="16_ns0xd"]
 [ext_resource type="Texture2D" uid="uid://delri5lula0h8" path="res://game/test/moon_test/panorama_image.png" id="17_33etg"]
@@ -35,7 +35,7 @@ texturing_mode = 1
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xi1c8"]
 render_priority = 0
 shader = ExtResource("11_nejwd")
-shader_parameter/u_transition_mask = null
+shader_parameter/u_transition_mask = 0
 shader_parameter/u_albedo_array = ExtResource("12_3e4jy")
 
 [sub_resource type="Resource" id="Resource_dtfpr"]

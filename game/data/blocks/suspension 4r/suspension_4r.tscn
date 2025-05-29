@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c76d6bdkhai3w"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/suspension_instance.gd" id="1_i53y5"]
+[ext_resource type="Script" uid="uid://ba3ysdorv62ny" path="res://game/core/block/instances/suspension_instance.gd" id="1_i53y5"]
 [ext_resource type="PackedScene" uid="uid://c42hpkx3axitr" path="res://game/core/car/wheel_4r.tscn" id="2_snum0"]
 [ext_resource type="PackedScene" uid="uid://dkckf5tosfa32" path="res://game/core/car/suspension_model.tscn" id="3_76878"]
 [ext_resource type="PackedScene" uid="uid://bqsifkitwd33n" path="res://game/core/car/suspension_joint.tscn" id="4_2hjxn"]

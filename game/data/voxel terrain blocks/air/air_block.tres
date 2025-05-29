@@ -1,7 +1,8 @@
 [gd_resource type="Resource" script_class="VoxelTerrainBlockEmpty" load_steps=2 format=3 uid="uid://ddsqfxd3i2wy4"]
 
-[ext_resource type="Script" path="res://game/core/world/terrain/blocky terrain/voxel_terrain_block_empty.gd" id="1_8xqcj"]
+[ext_resource type="Script" uid="uid://kv8718ld5moq" path="res://game/core/world/terrain/blocky terrain/voxel_terrain_block_empty.gd" id="1_8xqcj"]
 
 [resource]
 script = ExtResource("1_8xqcj")
+is_water = false
 name = ""

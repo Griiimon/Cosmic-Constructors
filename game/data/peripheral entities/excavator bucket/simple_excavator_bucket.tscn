@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://w6iv7medt6r7"]
 
-[ext_resource type="Script" path="res://game/data/peripheral entities/excavator bucket/excavator_bucket.gd" id="1_f3mok"]
+[ext_resource type="Script" uid="uid://bdafqex5hyms5" path="res://game/data/peripheral entities/excavator bucket/excavator_bucket.gd" id="1_f3mok"]
 [ext_resource type="PackedScene" uid="uid://cthorbl78mho6" path="res://game/core/misc/peripheral connector counterpart/peripheral_connector_counterpart.tscn" id="1_uq3ae"]
 [ext_resource type="PackedScene" uid="uid://c3ey6ccw7jiim" path="res://game/data/peripheral entities/excavator bucket/excavator_bucket_model.tscn" id="2_k2trx"]
 

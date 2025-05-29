@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ctdtmf0rnptdc"]
 
-[ext_resource type="Script" path="res://game/core/player/third person camera/third_person_camera.gd" id="1_fmph5"]
+[ext_resource type="Script" uid="uid://bnmygdvvl2j52" path="res://game/core/player/third person camera/third_person_camera.gd" id="1_fmph5"]
 
 [node name="Third Person Camera" type="Node3D"]
 script = ExtResource("1_fmph5")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=4 uid="uid://cgg6tb8y1qi3m"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/furnace_instance.gd" id="1_ixfdn"]
+[ext_resource type="Script" uid="uid://crjkt8dbxkkcb" path="res://game/core/block/instances/furnace_instance.gd" id="1_ixfdn"]
 [ext_resource type="Resource" uid="uid://d2tb2pfogfi1f" path="res://game/data/recipe/furnace recipes/steel_ingot_recipe.tres" id="2_88d31"]
 [ext_resource type="PackedScene" uid="uid://iixyhw4jvjeq" path="res://game/core/components/item ejector/item_ejector.tscn" id="2_d85vm"]
 [ext_resource type="PackedScene" uid="uid://4lrcbiiff8n2" path="res://game/core/components/item catcher/item_catcher.tscn" id="5_xyna7"]

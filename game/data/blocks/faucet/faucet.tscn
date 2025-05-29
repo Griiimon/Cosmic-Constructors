@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://dqc2w8evbpc7x"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/faucet_instance.gd" id="1_87el2"]
-[ext_resource type="Script" path="res://game/core/components/fluid container/fluid_connector.gd" id="2_ctdq0"]
+[ext_resource type="Script" uid="uid://dllf58cc5502i" path="res://game/core/block/instances/faucet_instance.gd" id="1_87el2"]
+[ext_resource type="Script" uid="uid://brsg7h33g62v" path="res://game/core/components/fluid container/fluid_connector.gd" id="2_ctdq0"]
 [ext_resource type="PackedScene" uid="uid://cwjpaeql42esi" path="res://game/core/fluid/fluid spawner/fluid_spawner.tscn" id="3_ynhs8"]
 [ext_resource type="PackedScene" uid="uid://k7fxvysvmall" path="res://game/core/components/fluid consumer/fluid_consumer.tscn" id="4_ngm5s"]
 

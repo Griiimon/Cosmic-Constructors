@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5f12rr7oiqem"]
 
 [ext_resource type="PackedScene" uid="uid://cjgnwhuf4jta4" path="res://game/ui/scroll selection panel/scroll_selection_row.tscn" id="1_i2v4c"]
-[ext_resource type="Script" path="res://game/ui/property viewer/property_viewer_row.gd" id="2_6vm53"]
+[ext_resource type="Script" uid="uid://dxp7w0q2jri2o" path="res://game/ui/property viewer/property_viewer_row.gd" id="2_6vm53"]
 
 [node name="Property Viewer Row" instance=ExtResource("1_i2v4c")]
 script = ExtResource("2_6vm53")

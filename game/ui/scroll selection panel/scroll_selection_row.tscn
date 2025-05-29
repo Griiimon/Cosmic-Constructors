@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cjgnwhuf4jta4"]
 
-[ext_resource type="Script" path="res://game/ui/scroll selection panel/scroll_selection_row.gd" id="1_nxwbd"]
+[ext_resource type="Script" uid="uid://cxwkke1t2jepe" path="res://game/ui/scroll selection panel/scroll_selection_row.gd" id="1_nxwbd"]
 [ext_resource type="StyleBox" uid="uid://g8ibp8ymnjgx" path="res://game/ui/scroll selection panel/selection_style_box.tres" id="2_0bnh6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xmhy5"]

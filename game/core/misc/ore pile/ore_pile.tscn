@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dfyvgxovt2bui"]
 
-[ext_resource type="Script" path="res://game/core/misc/ore pile/ore_pile.gd" id="1_tt2w2"]
+[ext_resource type="Script" uid="uid://bekycopfelrtq" path="res://game/core/misc/ore pile/ore_pile.gd" id="1_tt2w2"]
 [ext_resource type="Material" uid="uid://ig8oh1gcrbjw" path="res://game/core/misc/ore pile/ore_pile_material.tres" id="2_73o02"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wq8qq"]

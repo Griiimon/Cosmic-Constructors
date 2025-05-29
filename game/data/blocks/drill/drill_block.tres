@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="DrillBlock" load_steps=4 format=3 uid="uid://d2qgv1f2a61r8"]
 
 [ext_resource type="Resource" uid="uid://bm6ih6jhatj7i" path="res://game/data/misc/block categories/basic.tres" id="1_8842l"]
-[ext_resource type="Script" path="res://game/core/block/types/drill_block.gd" id="1_aa8wn"]
+[ext_resource type="Script" uid="uid://daxdjvtw3aar0" path="res://game/core/block/types/drill_block.gd" id="1_aa8wn"]
 [ext_resource type="PackedScene" uid="uid://cle0bbw0jem2y" path="res://game/data/blocks/drill/drill.tscn" id="1_cmxl2"]
 
 [resource]
 script = ExtResource("1_aa8wn")
+grid_size = 0
 size = Vector3i(1, 1, 1)
 mass = 25.0
 max_hitpoints = 10

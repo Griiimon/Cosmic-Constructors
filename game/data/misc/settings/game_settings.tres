@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="GameSettings" load_steps=7 format=3 uid="uid://bsrlmhm5h1y3x"]
 
 [ext_resource type="Resource" uid="uid://bc3l8x7ck8dw3" path="res://game/data/misc/settings/control_settings.tres" id="1_h8d7a"]
-[ext_resource type="Script" path="res://game/global/game data/misc_settings.gd" id="1_j7j4q"]
-[ext_resource type="Script" path="res://game/global/game data/game_settings.gd" id="2_yv7n2"]
-[ext_resource type="Script" path="res://game/global/game data/video_settings.gd" id="3_4l33n"]
+[ext_resource type="Script" uid="uid://cvs6bcynawms" path="res://game/global/game data/misc_settings.gd" id="1_j7j4q"]
+[ext_resource type="Script" uid="uid://e3km7eqlb1o2" path="res://game/global/game data/game_settings.gd" id="2_yv7n2"]
+[ext_resource type="Script" uid="uid://c2cp4usm125n4" path="res://game/global/game data/video_settings.gd" id="3_4l33n"]
 
 [sub_resource type="Resource" id="Resource_bycy5"]
 script = ExtResource("1_j7j4q")

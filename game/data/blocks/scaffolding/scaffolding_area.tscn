@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://csujbe1ddlwu"]
 
-[ext_resource type="Script" path="res://game/data/blocks/scaffolding/scaffolding_area.gd" id="1_se6wh"]
+[ext_resource type="Script" uid="uid://cjegpyflx7aus" path="res://game/data/blocks/scaffolding/scaffolding_area.gd" id="1_se6wh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yjqbu"]
 size = Vector3(2.5, 2.5, 2.5)

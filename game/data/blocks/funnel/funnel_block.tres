@@ -2,10 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://d22kh1takp8dx" path="res://game/data/blocks/funnel/funnel.tscn" id="1_4ketm"]
 [ext_resource type="Resource" uid="uid://djokjcgat6uj4" path="res://game/data/misc/block categories/automation.tres" id="1_ck0bd"]
-[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_gxqp5"]
+[ext_resource type="Script" uid="uid://d3ggl6vpouab1" path="res://game/core/block/block.gd" id="1_gxqp5"]
 
 [resource]
 script = ExtResource("1_gxqp5")
+grid_size = 0
 size = Vector3i(1, 1, 1)
 mass = 10.0
 max_hitpoints = 10

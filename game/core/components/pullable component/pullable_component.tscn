@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://2q4u62poidg1"]
 
-[ext_resource type="Script" path="res://game/core/components/pullable component/pullable_component.gd" id="1_2hrui"]
+[ext_resource type="Script" uid="uid://dudhv4lm2lby6" path="res://game/core/components/pullable component/pullable_component.gd" id="1_2hrui"]
 
 [node name="Pullable" type="Node"]
 script = ExtResource("1_2hrui")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dcpr43xo3hndp"]
 
-[ext_resource type="Script" path="res://game/data/equipment/back/jetpack/jetpack_thruster.gd" id="1_vvp2s"]
+[ext_resource type="Script" uid="uid://cpwfaix21sd6o" path="res://game/data/equipment/back/jetpack/jetpack_thruster.gd" id="1_vvp2s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_44cva"]
 albedo_color = Color(0.197937, 0.197937, 0.197937, 1)

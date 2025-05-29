@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ds38tol4xc2ls"]
 
-[ext_resource type="Script" path="res://game/data/blocks/pilot seat/pilot_seat.gd" id="1_qxi2j"]
+[ext_resource type="Script" uid="uid://bw875i2y7hvba" path="res://game/data/blocks/pilot seat/pilot_seat.gd" id="1_qxi2j"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ohgao"]
 size = Vector3(2.5, 2.5, 2.5)

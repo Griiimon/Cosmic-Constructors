@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cs424ivnm8bso"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/thruster_instance.gd" id="1_idgei"]
+[ext_resource type="Script" uid="uid://h2k66p0dtu1n" path="res://game/core/block/instances/thruster_instance.gd" id="1_idgei"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmbc1"]
 albedo_color = Color(0.344076, 0.344076, 0.344076, 1)

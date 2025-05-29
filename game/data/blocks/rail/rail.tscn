@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://bbvijfgtf4888"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/rail_instance.gd" id="1_ilahg"]
+[ext_resource type="Script" uid="uid://cqpe0fw4ljhaw" path="res://game/core/block/instances/rail_instance.gd" id="1_ilahg"]
 [ext_resource type="Resource" uid="uid://b7hams0h0w1tk" path="res://game/data/blocks/carriage/carriage_block.tres" id="2_uvmrm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w52hb"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://clyvgxp3kcd52"]
 
-[ext_resource type="Script" path="res://game/global/game data/game_data.gd" id="1_rttg5"]
+[ext_resource type="Script" uid="uid://cekvbwlp0udx7" path="res://game/global/game data/game_data.gd" id="1_rttg5"]
 [ext_resource type="Resource" uid="uid://qj17gtekw1sc" path="res://game/data/libraries/large_block_library.tres" id="2_fw7wj"]
 [ext_resource type="Resource" uid="uid://bpfu46bd6dwi8" path="res://game/data/libraries/scene_library.tres" id="3_5djl7"]
 [ext_resource type="Resource" uid="uid://bsrlmhm5h1y3x" path="res://game/data/misc/settings/game_settings.tres" id="3_dfk4b"]

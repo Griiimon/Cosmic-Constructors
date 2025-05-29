@@ -1,16 +1,16 @@
 [gd_scene load_steps=25 format=3 uid="uid://rvroy1e0byrg"]
 
-[ext_resource type="Script" path="res://game/game.gd" id="1_2tfve"]
-[ext_resource type="Script" path="res://game/test/moon_test/moon_sandbox.gd" id="1_ekqcu"]
-[ext_resource type="Script" path="res://game/player_spawn.gd" id="2_ha6a4"]
+[ext_resource type="Script" uid="uid://c2wn2082tvspq" path="res://game/game.gd" id="1_2tfve"]
+[ext_resource type="Script" uid="uid://h8lw62dopm0t" path="res://game/test/moon_test/moon_sandbox.gd" id="1_ekqcu"]
+[ext_resource type="Script" uid="uid://bx4645ay547aj" path="res://game/player_spawn.gd" id="2_ha6a4"]
 [ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="3_h8ab2"]
 [ext_resource type="Resource" uid="uid://y0452womu354" path="res://game/data/hand items/tools/hand drill/hand_drill.tres" id="3_hbpsw"]
-[ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="4_up7jj"]
-[ext_resource type="Script" path="res://game/core/misc/environment space area/environment_space_area.gd" id="5_uff7u"]
-[ext_resource type="Script" path="res://game/core/world/world.gd" id="6_lu4vl"]
-[ext_resource type="Shader" path="res://addons/zylann.voxel/smooth_texture_array_shader.gdshader" id="9_fwnrd"]
+[ext_resource type="Script" uid="uid://dlolp06i050sx" path="res://game/core/player/equipment/player_equipment.gd" id="4_up7jj"]
+[ext_resource type="Script" uid="uid://bj4ggeydu66vo" path="res://game/core/misc/environment space area/environment_space_area.gd" id="5_uff7u"]
+[ext_resource type="Script" uid="uid://dik56tay37ghp" path="res://game/core/world/world.gd" id="6_lu4vl"]
+[ext_resource type="Shader" uid="uid://civf5b0gmpmt" path="res://addons/zylann.voxel/smooth_texture_array_shader.gdshader" id="9_fwnrd"]
 [ext_resource type="CompressedTexture2DArray" uid="uid://c4q2dqi0txuk" path="res://game/test/moon_test/terrain_texture_array_128.png" id="10_3r634"]
-[ext_resource type="Script" path="res://game/core/components/terrain component/smooth_voxel_terrain_component.gd" id="11_c046c"]
+[ext_resource type="Script" uid="uid://g0vy5162br6m" path="res://game/core/components/terrain component/smooth_voxel_terrain_component.gd" id="11_c046c"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="12_esrci"]
 [ext_resource type="Resource" uid="uid://bn8t0ih7yn4nq" path="res://game/test/moon_test/terrain_properties.tres" id="12_osqrh"]
 [ext_resource type="Texture2D" uid="uid://delri5lula0h8" path="res://game/test/moon_test/panorama_image.png" id="16_najjc"]
@@ -160,7 +160,7 @@ texturing_mode = 1
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6de3u"]
 render_priority = 0
 shader = ExtResource("9_fwnrd")
-shader_parameter/u_transition_mask = null
+shader_parameter/u_transition_mask = 0
 shader_parameter/u_albedo_array = ExtResource("10_3r634")
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ypafg"]

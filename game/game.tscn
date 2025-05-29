@@ -1,24 +1,25 @@
 [gd_scene load_steps=22 format=3 uid="uid://cpytc7ebulm55"]
 
-[ext_resource type="Script" path="res://game/game.gd" id="1_dxwo3"]
+[ext_resource type="Script" uid="uid://c2wn2082tvspq" path="res://game/game.gd" id="1_dxwo3"]
 [ext_resource type="PackedScene" uid="uid://qr0bko2hsrbk" path="res://game/debug/space grid/debug_space_grid.tscn" id="1_ek1sn"]
-[ext_resource type="Script" path="res://game/base_sandbox.gd" id="1_o5dc5"]
+[ext_resource type="Script" uid="uid://cey6wdpo80l5j" path="res://game/base_sandbox.gd" id="1_o5dc5"]
 [ext_resource type="Resource" uid="uid://y0452womu354" path="res://game/data/hand items/tools/hand drill/hand_drill.tres" id="3_l58sr"]
-[ext_resource type="Script" path="res://game/player_spawn.gd" id="3_qnlsh"]
+[ext_resource type="Script" uid="uid://bx4645ay547aj" path="res://game/player_spawn.gd" id="3_qnlsh"]
 [ext_resource type="Resource" uid="uid://b3j0r3l7nan0i" path="res://game/data/equipment/back/jetpack/atmospheric_jetpack.tres" id="4_jpp4l"]
 [ext_resource type="Environment" uid="uid://bpv3denmg1fpo" path="res://game/test/planet test/planet_test_environment_2.tres" id="7_6sqh0"]
-[ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="7_8lulh"]
-[ext_resource type="Script" path="res://game/core/world/world.gd" id="7_gmk88"]
+[ext_resource type="Script" uid="uid://dlolp06i050sx" path="res://game/core/player/equipment/player_equipment.gd" id="7_8lulh"]
+[ext_resource type="Script" uid="uid://dik56tay37ghp" path="res://game/core/world/world.gd" id="7_gmk88"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="8_hutpu"]
 [ext_resource type="VoxelGeneratorGraph" uid="uid://b4umpxnew5cgx" path="res://game/solar system/voxel_graph_planet_v4.tres" id="9_81qsx"]
 [ext_resource type="Material" uid="uid://cp754ky7maqj2" path="res://game/solar system/materials/planet_material_grassy.tres" id="10_a0khk"]
 [ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="11_avb6o"]
-[ext_resource type="Shader" path="res://addons/zylann.atmosphere/shaders/planet_atmosphere_clouds.gdshader" id="12_5sqjb"]
+[ext_resource type="Shader" uid="uid://cahifm7fttc1m" path="res://addons/zylann.atmosphere/shaders/planet_atmosphere_clouds.gdshader" id="12_5sqjb"]
 [ext_resource type="Material" uid="uid://c4l4ukvg5rpk8" path="res://game/textures/terrain_material.tres" id="12_m5q1e"]
 
 [sub_resource type="Resource" id="Resource_wndb7"]
 script = ExtResource("7_8lulh")
 back_item = ExtResource("4_jpp4l")
+has_equipment_port = false
 
 [sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_0ig6r"]
 

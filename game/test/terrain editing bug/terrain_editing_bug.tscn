@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cy1wgoj0yd7gu"]
 
 [ext_resource type="Material" uid="uid://duf303o0ryv61" path="res://game/test/custom planet test/custom_planet_material.tres" id="1_7ks2h"]
-[ext_resource type="Script" path="res://game/test/terrain editing bug/player.gd" id="1_wh4k2"]
+[ext_resource type="Script" uid="uid://ct3nw5kwulupm" path="res://game/test/terrain editing bug/player.gd" id="1_wh4k2"]
 
 [sub_resource type="VoxelStreamMemory" id="VoxelStreamMemory_1rlcw"]
 

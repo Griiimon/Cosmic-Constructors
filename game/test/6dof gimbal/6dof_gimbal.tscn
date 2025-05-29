@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://c5ftudo0t5pke"]
 
-[ext_resource type="Script" path="res://game/test/6dof gimbal/6_dof_gimbal.gd" id="1_asdsq"]
-[ext_resource type="Script" path="res://game/test/6dof gimbal/local_axis_locked_rigidbody.gd" id="2_csan7"]
+[ext_resource type="Script" uid="uid://dgf52fkhndtjf" path="res://game/test/6dof gimbal/6_dof_gimbal.gd" id="1_asdsq"]
+[ext_resource type="Script" uid="uid://g8mpcymu18r4" path="res://game/test/6dof gimbal/local_axis_locked_rigidbody.gd" id="2_csan7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dn7iw"]
 

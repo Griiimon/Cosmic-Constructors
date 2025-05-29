@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://clfksjpvg60v8"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/conveyor_instance.gd" id="1_2cr6b"]
+[ext_resource type="Script" uid="uid://cmqyx4p5jqsjm" path="res://game/core/block/instances/conveyor_instance.gd" id="1_2cr6b"]
 [ext_resource type="PackedScene" uid="uid://d1yd7cvio7mxv" path="res://game/core/components/conveyor target/conveyor_target.tscn" id="2_43hh3"]
 [ext_resource type="PackedScene" uid="uid://4lrcbiiff8n2" path="res://game/core/components/item catcher/item_catcher.tscn" id="3_ow3od"]
 [ext_resource type="PackedScene" uid="uid://iixyhw4jvjeq" path="res://game/core/components/item ejector/item_ejector.tscn" id="4_47sw3"]
@@ -75,9 +75,10 @@ noise = SubResource("FastNoiseLite_nhyqp")
 render_priority = 0
 shader = SubResource("Shader_m03vn")
 shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = SubResource("NoiseTexture2D_0u76f")
 shader_parameter/point_size = 0.1
 shader_parameter/roughness = 0.797
-shader_parameter/metallic_texture_channel = null
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
 shader_parameter/specular = 0.46
 shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
@@ -87,7 +88,6 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/motion = Vector3(0, 0, 1)
 shader_parameter/scale = 1.0
 shader_parameter/offset = Vector3(0, 0, 0)
-shader_parameter/texture_albedo = SubResource("NoiseTexture2D_0u76f")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_uo32g"]
 material = SubResource("ShaderMaterial_h3gf2")

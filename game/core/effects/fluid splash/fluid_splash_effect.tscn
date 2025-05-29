@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://jj7twbuvfyol"]
 
-[ext_resource type="Script" path="res://game/core/effects/fluid splash/fluid_splash_effect_instance.gd" id="1_73tx0"]
+[ext_resource type="Script" uid="uid://b2k6eg7or61fu" path="res://game/core/effects/fluid splash/fluid_splash_effect_instance.gd" id="1_73tx0"]
 [ext_resource type="PackedScene" uid="uid://cxy43ubiu5xkd" path="res://game/core/effects/fluid splash/fluid_splash_particle.tscn" id="2_dhojp"]
 
 [node name="Fluid Splash Effect" type="Node3D"]

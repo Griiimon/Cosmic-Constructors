@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="TerrainTypeProperties" load_steps=3 format=3 uid="uid://dn783p1l2b7nn"]
 
 [ext_resource type="Resource" uid="uid://bvo12g5be7j4u" path="res://game/data/items/raw materials/iron ore/iron_ore.tres" id="1_8j48v"]
-[ext_resource type="Script" path="res://game/core/world/terrain/terrain_type_properties.gd" id="1_f6kjc"]
+[ext_resource type="Script" uid="uid://ccwdu0a62qo4i" path="res://game/core/world/terrain/terrain_type_properties.gd" id="1_f6kjc"]
 
 [resource]
 script = ExtResource("1_f6kjc")

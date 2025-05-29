@@ -2,10 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://ccn6pur0skbbj" path="res://game/data/blocks/fluid 4way tube/fluid_4way_tube.tscn" id="1_epf3w"]
 [ext_resource type="Resource" uid="uid://d4f2nvlgovoej" path="res://game/data/misc/block categories/logistics.tres" id="1_smulx"]
-[ext_resource type="Script" path="res://game/core/block/types/tube_block.gd" id="2_n3six"]
+[ext_resource type="Script" uid="uid://cg0ujwc48fmn3" path="res://game/core/block/types/tube_block.gd" id="2_n3six"]
 
 [resource]
 script = ExtResource("2_n3six")
+grid_size = 0
 size = Vector3i(1, 1, 1)
 mass = 10.0
 max_hitpoints = 2

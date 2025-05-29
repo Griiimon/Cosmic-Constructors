@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Block" load_steps=5 format=3 uid="uid://b6adhur0i2vps"]
 
 [ext_resource type="Resource" uid="uid://bm6ih6jhatj7i" path="res://game/data/misc/block categories/basic.tres" id="1_mf2my"]
-[ext_resource type="Script" path="res://game/core/block/block.gd" id="2_7df43"]
+[ext_resource type="Script" uid="uid://d3ggl6vpouab1" path="res://game/core/block/block.gd" id="2_7df43"]
 [ext_resource type="Texture2D" uid="uid://mncyxbpmfvhw" path="res://game/data/blocks/heavy structure/heavy_structure_texture.png" id="3_r48vg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_74aku"]

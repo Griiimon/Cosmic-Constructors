@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dwn143y4fs1j7"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/lift_wing_instance.gd" id="1_wy7kn"]
+[ext_resource type="Script" uid="uid://dfpy1us1nbkes" path="res://game/core/block/instances/lift_wing_instance.gd" id="1_wy7kn"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_asiml"]
 

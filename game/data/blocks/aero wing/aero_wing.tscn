@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://paxcew8y4vyx"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/aero_wing_instance.gd" id="1_auvud"]
+[ext_resource type="Script" uid="uid://v1gr0pl772tu" path="res://game/core/block/instances/aero_wing_instance.gd" id="1_auvud"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8m01p"]
 

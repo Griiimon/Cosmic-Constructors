@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dn030uowqra0g"]
 
 [ext_resource type="Texture2D" uid="uid://ddsso6kfs5r8l" path="res://game/textures/misc/white_frame.png" id="1_7trfa"]
-[ext_resource type="Script" path="res://game/debug/debug block frame/debug_block_frame.gd" id="1_wqupu"]
+[ext_resource type="Script" uid="uid://c42dhqt071pvt" path="res://game/debug/debug block frame/debug_block_frame.gd" id="1_wqupu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nhvjp"]
 transparency = 1

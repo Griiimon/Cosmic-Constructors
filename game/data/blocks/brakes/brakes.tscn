@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://suf83sg8b2yp"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/brakes_instance.gd" id="1_sttqn"]
+[ext_resource type="Script" uid="uid://rmxfkbp53jns" path="res://game/core/block/instances/brakes_instance.gd" id="1_sttqn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7jhn"]
 albedo_color = Color(0.389287, 0.389287, 0.389287, 1)

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CustomPlanetTerrainGenerator" load_steps=6 format=3 uid="uid://0w1nfnd8uwct"]
 
-[ext_resource type="Script" path="res://game/test/custom planet test/custom_planet_terrain_generator.gd" id="1_tnq33"]
+[ext_resource type="Script" uid="uid://c4pig67w0ievt" path="res://game/test/custom planet test/custom_planet_terrain_generator.gd" id="1_tnq33"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_boxw1"]
 frequency = 0.0006

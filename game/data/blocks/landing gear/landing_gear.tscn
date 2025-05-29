@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cb4306bwmd33y"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/landing_gear_instance.gd" id="1_oqs0f"]
+[ext_resource type="Script" uid="uid://cgmibtyevtb8e" path="res://game/core/block/instances/landing_gear_instance.gd" id="1_oqs0f"]
 [ext_resource type="Material" uid="uid://fu4wa3ud33iy" path="res://game/data/blocks/landing gear/landing_gear_locked_material.tres" id="2_uslcb"]
 [ext_resource type="Material" uid="uid://crtxmgn2lergo" path="res://game/data/blocks/landing gear/landing_gear_disabled_material.tres" id="3_ijmug"]
 

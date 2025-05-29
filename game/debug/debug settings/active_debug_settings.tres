@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="DebugSettingsResource" load_steps=12 format=3 uid="uid://c6n34fkqwwpqh"]
 
-[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_o1lrl"]
-[ext_resource type="Script" path="res://game/debug/debug settings/debug_settings_resource.gd" id="2_8ih3d"]
+[ext_resource type="Script" uid="uid://d3ggl6vpouab1" path="res://game/core/block/block.gd" id="1_o1lrl"]
+[ext_resource type="Script" uid="uid://cupwcfctb3pi2" path="res://game/debug/debug settings/debug_settings_resource.gd" id="2_8ih3d"]
 [ext_resource type="Resource" uid="uid://sueib6rdbmc0" path="res://game/data/blocks/light structure/light_structure_block.tres" id="2_lpgs8"]
 [ext_resource type="Resource" uid="uid://k2s38yf1cnl4" path="res://game/data/blocks/pilot seat/pilot_seat_block.tres" id="3_jcges"]
 [ext_resource type="Resource" uid="uid://b6adhur0i2vps" path="res://game/data/blocks/heavy structure/heavy_structure_block.tres" id="4_kjkgf"]

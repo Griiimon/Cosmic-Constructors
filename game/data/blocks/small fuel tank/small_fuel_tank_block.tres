@@ -3,12 +3,13 @@
 [ext_resource type="Resource" uid="uid://biexi21n3yo8" path="res://game/data/misc/block categories/storage.tres" id="1_5ep41"]
 [ext_resource type="PackedScene" uid="uid://br6liai788ug6" path="res://game/data/blocks/small fuel tank/small_fuel_tank.tscn" id="1_6l12e"]
 [ext_resource type="Resource" uid="uid://dqigc04c411p" path="res://game/data/fluids/fuel.tres" id="1_8dct0"]
-[ext_resource type="Script" path="res://game/core/block/types/tank_block.gd" id="1_cs4ek"]
+[ext_resource type="Script" uid="uid://c0wbdiixxaxds" path="res://game/core/block/types/tank_block.gd" id="1_cs4ek"]
 
 [resource]
 script = ExtResource("1_cs4ek")
 fluid = ExtResource("1_8dct0")
 capacity = 1000.0
+grid_size = 0
 size = Vector3i(1, 1, 1)
 mass = 20.0
 max_hitpoints = 10

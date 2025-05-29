@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://buk2n3jx256cy"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/construction_anchor_instance.gd" id="1_7id1x"]
+[ext_resource type="Script" uid="uid://b4he4i7fceocu" path="res://game/core/block/instances/construction_anchor_instance.gd" id="1_7id1x"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_o3s3v"]
 

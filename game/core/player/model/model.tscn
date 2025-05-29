@@ -1,7 +1,7 @@
 [gd_scene load_steps=27 format=3 uid="uid://bnhyptcsxakf2"]
 
 [ext_resource type="Material" uid="uid://koo0qls452x2" path="res://game/core/player/model/suit_material.tres" id="1_mladw"]
-[ext_resource type="Script" path="res://game/core/player/model/player_model.gd" id="1_pnfv0"]
+[ext_resource type="Script" uid="uid://bc81iabnnpwqp" path="res://game/core/player/model/player_model.gd" id="1_pnfv0"]
 [ext_resource type="Material" uid="uid://t707x1seiw6m" path="res://game/core/player/model/bottle_material.tres" id="2_x1o5c"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mhret"]
@@ -165,10 +165,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5lb0e"]
 _data = {
-"RESET": SubResource("Animation_y6cye"),
-"jump": SubResource("Animation_35h6h"),
-"steer": SubResource("Animation_uxfsy"),
-"wave": SubResource("Animation_vn6ep")
+&"RESET": SubResource("Animation_y6cye"),
+&"jump": SubResource("Animation_35h6h"),
+&"steer": SubResource("Animation_uxfsy"),
+&"wave": SubResource("Animation_vn6ep")
 }
 
 [sub_resource type="Animation" id="Animation_llaqv"]
@@ -258,9 +258,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g5m2i"]
 _data = {
-"RESET": SubResource("Animation_llaqv"),
-"sit": SubResource("Animation_8rtpl"),
-"walk": SubResource("Animation_wjj32")
+&"RESET": SubResource("Animation_llaqv"),
+&"sit": SubResource("Animation_8rtpl"),
+&"walk": SubResource("Animation_wjj32")
 }
 
 [node name="Model" type="Node3D"]

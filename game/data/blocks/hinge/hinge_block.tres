@@ -2,10 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://mlr7bkamt0ux" path="res://game/data/blocks/hinge/hinge.tscn" id="1_cgnmf"]
 [ext_resource type="Resource" uid="uid://jqjluu1sfgbm" path="res://game/data/misc/block categories/physics.tres" id="1_rfojc"]
-[ext_resource type="Script" path="res://game/core/block/types/hinge_block.gd" id="1_sfvix"]
+[ext_resource type="Script" uid="uid://btfhr2ouwfpnu" path="res://game/core/block/types/hinge_block.gd" id="1_sfvix"]
 
 [resource]
 script = ExtResource("1_sfvix")
+grid_size = 0
 size = Vector3i(1, 1, 1)
 mass = 10.0
 max_hitpoints = 10

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="IntermediateItem" load_steps=3 format=3 uid="uid://dnkrghuseprk1"]
 
-[ext_resource type="Script" path="res://game/core/item/item_intermediate.gd" id="1_hf24n"]
+[ext_resource type="Script" uid="uid://b3m0ndudacag" path="res://game/core/item/item_intermediate.gd" id="1_hf24n"]
 [ext_resource type="PackedScene" uid="uid://jxv7vhxu4fgy" path="res://game/data/items/intermediates/board/board_item_model.tscn" id="1_snukr"]
 
 [resource]

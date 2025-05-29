@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c6ye43hpjckha"]
 
 [ext_resource type="PackedScene" uid="uid://bmpjev3uj24g4" path="res://game/ui/scroll selection panel/scroll_selection_panel.tscn" id="1_ifctd"]
-[ext_resource type="Script" path="res://game/ui/block category selection/block_category_selection_panel.gd" id="2_nkoeq"]
+[ext_resource type="Script" uid="uid://ch5kx5opwwuw" path="res://game/ui/block category selection/block_category_selection_panel.gd" id="2_nkoeq"]
 [ext_resource type="PackedScene" uid="uid://bnd4v55rgccs" path="res://game/ui/block category selection/block_category_selection_row.tscn" id="3_jt0p2"]
 
 [node name="Block Category Selection Panel" instance=ExtResource("1_ifctd")]

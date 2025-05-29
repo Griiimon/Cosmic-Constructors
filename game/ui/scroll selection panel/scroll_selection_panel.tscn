@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bmpjev3uj24g4"]
 
-[ext_resource type="Script" path="res://game/ui/scroll selection panel/scroll_selection_panel.gd" id="1_s3gh1"]
+[ext_resource type="Script" uid="uid://bw15rkomygm3n" path="res://game/ui/scroll selection panel/scroll_selection_panel.gd" id="1_s3gh1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hec14"]
 font_size = 24

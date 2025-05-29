@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://ced1k5g1mhrng"]
 
-[ext_resource type="Script" path="res://game/core/object entity/instances/pallet.gd" id="1_u58sg"]
+[ext_resource type="Script" uid="uid://b462nykotylch" path="res://game/core/object entity/instances/pallet.gd" id="1_u58sg"]
 [ext_resource type="PackedScene" uid="uid://4lrcbiiff8n2" path="res://game/core/components/item catcher/item_catcher.tscn" id="2_gp6o0"]
 [ext_resource type="PackedScene" uid="uid://2q4u62poidg1" path="res://game/core/components/pullable component/pullable_component.tscn" id="3_e84f0"]
 

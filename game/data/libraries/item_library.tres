@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemLibrary" load_steps=9 format=3 uid="uid://qma4f3x33f4d"]
 
-[ext_resource type="Script" path="res://game/core/item/item.gd" id="1_jijht"]
+[ext_resource type="Script" uid="uid://bl61dxsljn3q6" path="res://game/core/item/item.gd" id="1_jijht"]
 [ext_resource type="Resource" uid="uid://b4vqkgbwnwt0n" path="res://game/data/items/raw materials/dirt/dirt.tres" id="2_p5f7q"]
-[ext_resource type="Script" path="res://game/global/game data/item_library.gd" id="2_wiwwp"]
+[ext_resource type="Script" uid="uid://daqy58fn2mymt" path="res://game/global/game data/item_library.gd" id="2_wiwwp"]
 [ext_resource type="Resource" uid="uid://bvo12g5be7j4u" path="res://game/data/items/raw materials/iron ore/iron_ore.tres" id="3_s77n4"]
 [ext_resource type="Resource" uid="uid://d258am43f7jcp" path="res://game/data/items/raw materials/stone/stone.tres" id="4_i6tyf"]
 [ext_resource type="Resource" uid="uid://b5j26qxxk25de" path="res://game/data/items/intermediates/steel ingot/steel_ingot.tres" id="5_s66ew"]

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Fluid" load_steps=3 format=3 uid="uid://dqigc04c411p"]
 
-[ext_resource type="Script" path="res://game/core/fluid/fluid.gd" id="1_fmvvy"]
+[ext_resource type="Script" uid="uid://ba51eilxmwkv7" path="res://game/core/fluid/fluid.gd" id="1_fmvvy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_doihs"]
 transparency = 1

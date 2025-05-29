@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bxsph1bkcnesp"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/merge_block_instance.gd" id="1_2v5pu"]
+[ext_resource type="Script" uid="uid://57m22nk3io54" path="res://game/core/block/instances/merge_block_instance.gd" id="1_2v5pu"]
 [ext_resource type="Material" uid="uid://bnlxy83nnlr2n" path="res://game/data/blocks/merge block/green_light.tres" id="2_ayq7k"]
 [ext_resource type="Material" uid="uid://bvhpcpujdfi8d" path="res://game/data/blocks/merge block/red_light.tres" id="3_7d3ol"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dygjlclq8nxvm"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/scaffolding_instance.gd" id="1_iqtq5"]
+[ext_resource type="Script" uid="uid://drb8x3ovgdopd" path="res://game/core/block/instances/scaffolding_instance.gd" id="1_iqtq5"]
 [ext_resource type="PackedScene" uid="uid://csujbe1ddlwu" path="res://game/data/blocks/scaffolding/scaffolding_area.tscn" id="2_gbx7u"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_m60ik"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://qr0bko2hsrbk"]
 
-[ext_resource type="Script" path="res://game/debug/space grid/debug_space_grid.gd" id="1_qtu52"]
+[ext_resource type="Script" uid="uid://dn650lnhxp1dh" path="res://game/debug/space grid/debug_space_grid.gd" id="1_qtu52"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_purpv"]
 

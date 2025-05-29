@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cthorbl78mho6"]
 
-[ext_resource type="Script" path="res://game/core/misc/peripheral connector counterpart/peripheral_connector_counterpart.gd" id="1_lu3q6"]
+[ext_resource type="Script" uid="uid://cr3jwc5we028t" path="res://game/core/misc/peripheral connector counterpart/peripheral_connector_counterpart.gd" id="1_lu3q6"]
 [ext_resource type="BoxMesh" uid="uid://dm3mkbijnp5hb" path="res://game/core/misc/peripheral connector counterpart/peripheral connector tooth mesh.tres" id="2_3eqcw"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cyvci"]

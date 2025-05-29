@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://bidlhtlvrhq3o" path="res://game/data/voxel terrain blocks/terrain_material_transparent.tres" id="1_2g3bq"]
 [ext_resource type="ArrayMesh" uid="uid://de5sitpcla76q" path="res://game/data/voxel terrain blocks/water/water_top.obj" id="2_l8lmq"]
-[ext_resource type="Script" path="res://game/core/world/terrain/blocky terrain/voxel_terrain_block_mesh.gd" id="3_y06cy"]
+[ext_resource type="Script" uid="uid://ejpfdofo1qgb" path="res://game/core/world/terrain/blocky terrain/voxel_terrain_block_mesh.gd" id="3_y06cy"]
 
 [sub_resource type="VoxelBlockyModelMesh" id="VoxelBlockyModelMesh_poqna"]
 transparency_index = 1

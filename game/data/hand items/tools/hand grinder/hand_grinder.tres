@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c4pqn4hdf3vc4" path="res://game/data/hand items/tools/hand grinder/hand_grinder_model.tscn" id="1_1kj8n"]
 [ext_resource type="PackedScene" uid="uid://vlxgr08x41up" path="res://game/data/hand items/tools/hand grinder/hand_grinder.tscn" id="2_mmyf2"]
-[ext_resource type="Script" path="res://game/core/player/hand items/hand_item.gd" id="3_3s18o"]
+[ext_resource type="Script" uid="uid://ckgdrq3ehb0o8" path="res://game/core/player/hand items/hand_item.gd" id="3_3s18o"]
 
 [resource]
 script = ExtResource("3_3s18o")

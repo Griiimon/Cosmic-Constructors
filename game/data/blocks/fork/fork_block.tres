@@ -2,10 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://crlemuuvl30mi" path="res://game/data/blocks/fork/fork.tscn" id="1_b4sfi"]
 [ext_resource type="Resource" uid="uid://jqjluu1sfgbm" path="res://game/data/misc/block categories/physics.tres" id="1_lrw2h"]
-[ext_resource type="Script" path="res://game/core/block/block.gd" id="2_hj4qt"]
+[ext_resource type="Script" uid="uid://d3ggl6vpouab1" path="res://game/core/block/block.gd" id="2_hj4qt"]
 
 [resource]
 script = ExtResource("2_hj4qt")
+grid_size = 0
 size = Vector3i(1, 1, 2)
 mass = 5.0
 max_hitpoints = 10

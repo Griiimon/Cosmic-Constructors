@@ -1,9 +1,6 @@
-[gd_resource type="Environment" load_steps=4 format=3 uid="uid://dpnscmd0s8lh5"]
-
-[ext_resource type="Texture2D" path="res://skybox/proc_stars.dds" id="1_70ull"]
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://dpnscmd0s8lh5"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0ujoa"]
-panorama = ExtResource("1_70ull")
 
 [sub_resource type="Sky" id="Sky_nbk3e"]
 sky_material = SubResource("PanoramaSkyMaterial_0ujoa")

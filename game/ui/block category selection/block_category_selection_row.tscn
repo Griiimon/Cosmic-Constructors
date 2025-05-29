@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bnd4v55rgccs"]
 
 [ext_resource type="PackedScene" uid="uid://cjgnwhuf4jta4" path="res://game/ui/scroll selection panel/scroll_selection_row.tscn" id="1_g56hh"]
-[ext_resource type="Script" path="res://game/ui/block category selection/block_category_selection_row.gd" id="2_cotcr"]
+[ext_resource type="Script" uid="uid://ckc04uxy7gxvh" path="res://game/ui/block category selection/block_category_selection_row.gd" id="2_cotcr"]
 
 [node name="Block Category Selection Row" instance=ExtResource("1_g56hh")]
 script = ExtResource("2_cotcr")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://c3xrsv653th1c"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/fixed_wheel_instance.gd" id="1_25tpm"]
+[ext_resource type="Script" uid="uid://c7jhl7a1vay58" path="res://game/core/block/instances/fixed_wheel_instance.gd" id="1_25tpm"]
 [ext_resource type="PackedScene" uid="uid://bfgykumivext4" path="res://game/data/blocks/fixed wheel/large_small_fixed_wheel_body.tscn" id="2_xp0fd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jbifn"]

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EquipmentPortBlock" load_steps=4 format=3 uid="uid://pej20fha75jd"]
 
-[ext_resource type="Script" path="res://game/core/block/types/equipment_port_block.gd" id="1_osatm"]
+[ext_resource type="Script" uid="uid://dnlj6625e8ii" path="res://game/core/block/types/equipment_port_block.gd" id="1_osatm"]
 [ext_resource type="Resource" uid="uid://dcy4qhvd08cbt" path="res://game/data/misc/block categories/misc.tres" id="1_wjfyk"]
 [ext_resource type="PackedScene" uid="uid://c4gpx2yuqw73y" path="res://game/data/blocks/equipment port/small_equipment_port.tscn" id="2_k804b"]
 

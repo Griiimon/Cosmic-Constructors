@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://1qbch2876yu8"]
 
 [ext_resource type="Resource" uid="uid://bm6ih6jhatj7i" path="res://game/data/misc/block categories/basic.tres" id="1_d4fig"]
-[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_efetx"]
+[ext_resource type="Script" uid="uid://d3ggl6vpouab1" path="res://game/core/block/block.gd" id="1_efetx"]
 [ext_resource type="PackedScene" uid="uid://chme3uak87wt7" path="res://game/data/blocks/ramp/ramp.tscn" id="1_gnnom"]
 
 [resource]
 script = ExtResource("1_efetx")
+grid_size = 0
 size = Vector3i(1, 1, 1)
 mass = 10.0
 max_hitpoints = 10

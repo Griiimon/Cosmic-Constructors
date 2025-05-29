@@ -2,10 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://bvucsloy2pswr" path="res://game/data/blocks/ore container 1x1/ore_container_1x1.tscn" id="1_11m7k"]
 [ext_resource type="Resource" uid="uid://biexi21n3yo8" path="res://game/data/misc/block categories/storage.tres" id="1_db2m8"]
-[ext_resource type="Script" path="res://game/core/block/types/ore_container_block.gd" id="1_qthyk"]
+[ext_resource type="Script" uid="uid://c0r1vs5wls8wq" path="res://game/core/block/types/ore_container_block.gd" id="1_qthyk"]
 
 [resource]
 script = ExtResource("1_qthyk")
+grid_size = 0
 size = Vector3i(1, 1, 1)
 mass = 25.0
 max_hitpoints = 10

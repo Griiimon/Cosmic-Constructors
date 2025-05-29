@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://d34fumc1c8e0e"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/rotor_instance.gd" id="1_pcbeu"]
+[ext_resource type="Script" uid="uid://du803n2j5iyqr" path="res://game/core/block/instances/rotor_instance.gd" id="1_pcbeu"]
 [ext_resource type="Resource" uid="uid://b7b26sso6p11j" path="res://game/data/blocks/rotor head/rotor_head_block.tres" id="2_p46ke"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_opg02"]

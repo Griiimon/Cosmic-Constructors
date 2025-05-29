@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cajlhe7dya0wc"]
 
-[ext_resource type="Script" path="res://game/data/game modes/castles and cannons/cannonball/cannonball.gd" id="1_8waca"]
-[ext_resource type="Script" path="res://game/core/components/damage component/damage.gd" id="2_f4gu6"]
+[ext_resource type="Script" uid="uid://bxs2rjqpay600" path="res://game/data/game modes/castles and cannons/cannonball/cannonball.gd" id="1_8waca"]
+[ext_resource type="Script" uid="uid://bgtcvmem8qj4m" path="res://game/core/components/damage component/damage.gd" id="2_f4gu6"]
 
 [sub_resource type="Resource" id="Resource_3hmcm"]
 script = ExtResource("2_f4gu6")

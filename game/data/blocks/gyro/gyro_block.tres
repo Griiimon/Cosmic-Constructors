@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="GyroBlock" load_steps=4 format=3 uid="uid://ce7orofkp4b3r"]
 
-[ext_resource type="Script" path="res://game/core/block/types/gyro_block.gd" id="1_g5skc"]
+[ext_resource type="Script" uid="uid://duu277f3x8hbu" path="res://game/core/block/types/gyro_block.gd" id="1_g5skc"]
 [ext_resource type="Resource" uid="uid://ckiejbyle02pl" path="res://game/data/misc/block categories/spaceship.tres" id="1_ghm8k"]
 [ext_resource type="PackedScene" uid="uid://dv2v7phsvgckn" path="res://game/data/blocks/gyro/gyro.tscn" id="1_o3pbw"]
 
 [resource]
 script = ExtResource("1_g5skc")
 strength = 100.0
+grid_size = 0
 size = Vector3i(1, 1, 1)
 mass = 50.0
 max_hitpoints = 10

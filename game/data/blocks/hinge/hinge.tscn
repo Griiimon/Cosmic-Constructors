@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://mlr7bkamt0ux"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/hinge_instance.gd" id="1_5coxj"]
+[ext_resource type="Script" uid="uid://cha0hxamxutyg" path="res://game/core/block/instances/hinge_instance.gd" id="1_5coxj"]
 [ext_resource type="Resource" uid="uid://b678we7hljnwt" path="res://game/data/blocks/hinge head/hinge_head_block.tres" id="2_h4ws0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v3mxd"]

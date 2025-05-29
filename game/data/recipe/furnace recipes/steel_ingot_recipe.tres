@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="FurnaceRecipe" load_steps=8 format=3 uid="uid://d2tb2pfogfi1f"]
 
-[ext_resource type="Script" path="res://game/core/recipes/ingredient_item.gd" id="1_aya0f"]
+[ext_resource type="Script" uid="uid://cfobt3huoqijf" path="res://game/core/recipes/ingredient_item.gd" id="1_aya0f"]
 [ext_resource type="Resource" uid="uid://bvo12g5be7j4u" path="res://game/data/items/raw materials/iron ore/iron_ore.tres" id="2_wiyln"]
-[ext_resource type="Script" path="res://game/core/recipes/recipe_ingredients.gd" id="3_qmyig"]
+[ext_resource type="Script" uid="uid://byle80jrp6ir4" path="res://game/core/recipes/recipe_ingredients.gd" id="3_qmyig"]
 [ext_resource type="Resource" uid="uid://b5j26qxxk25de" path="res://game/data/items/intermediates/steel ingot/steel_ingot.tres" id="4_5qq00"]
-[ext_resource type="Script" path="res://game/core/recipes/furnace_recipe.gd" id="5_cnuvk"]
+[ext_resource type="Script" uid="uid://bo7qndmbcsl0d" path="res://game/core/recipes/furnace_recipe.gd" id="5_cnuvk"]
 
 [sub_resource type="Resource" id="Resource_7uyie"]
 script = ExtResource("1_aya0f")

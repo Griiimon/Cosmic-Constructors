@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cyqk6bx0sio80"]
 
-[ext_resource type="Script" path="res://game/core/ui/hotbar/hotbar.gd" id="1_ks8i2"]
+[ext_resource type="Script" uid="uid://bdlnksnmajlf" path="res://game/core/ui/hotbar/hotbar.gd" id="1_ks8i2"]
 [ext_resource type="PackedScene" uid="uid://bqge1mnwhg1y4" path="res://game/core/ui/hotbar/hotbar_slot.tscn" id="2_5nq3p"]
 [ext_resource type="Texture2D" uid="uid://ditka6wlxosfv" path="res://game/textures/ui/hotbar/mouse.192x256.png" id="2_kqiot"]
 

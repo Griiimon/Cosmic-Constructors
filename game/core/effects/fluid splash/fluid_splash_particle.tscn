@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cxy43ubiu5xkd"]
 
-[ext_resource type="Script" path="res://game/core/effects/fluid splash/fluid_splash_particle.gd" id="1_xp8bm"]
+[ext_resource type="Script" uid="uid://buwhckridsdkd" path="res://game/core/effects/fluid splash/fluid_splash_particle.gd" id="1_xp8bm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_78jry"]
 friction = 0.0

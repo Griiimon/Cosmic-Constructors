@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bk3vl66rvtnc6"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/outboard_engine_instance.gd" id="1_d2ddc"]
+[ext_resource type="Script" uid="uid://bqvmovjrxxfmi" path="res://game/core/block/instances/outboard_engine_instance.gd" id="1_d2ddc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2440"]
 albedo_color = Color(0.466181, 0.466181, 0.466181, 1)

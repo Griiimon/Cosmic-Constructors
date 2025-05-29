@@ -1,17 +1,18 @@
 [gd_scene load_steps=10 format=3 uid="uid://cd45r4ydi70p"]
 
-[ext_resource type="Script" path="res://game/base_sandbox.gd" id="1_fd624"]
-[ext_resource type="Script" path="res://game/game.gd" id="1_o413o"]
-[ext_resource type="Script" path="res://game/player_spawn.gd" id="4_okbv6"]
+[ext_resource type="Script" uid="uid://cey6wdpo80l5j" path="res://game/base_sandbox.gd" id="1_fd624"]
+[ext_resource type="Script" uid="uid://c2wn2082tvspq" path="res://game/game.gd" id="1_o413o"]
+[ext_resource type="Script" uid="uid://bx4645ay547aj" path="res://game/player_spawn.gd" id="4_okbv6"]
 [ext_resource type="Resource" uid="uid://6jymoqkdm6kr" path="res://game/data/equipment/back/jetpack/space_jetpack.tres" id="5_lx1rr"]
-[ext_resource type="Script" path="res://game/core/player/equipment/player_equipment.gd" id="6_p41q0"]
+[ext_resource type="Script" uid="uid://dlolp06i050sx" path="res://game/core/player/equipment/player_equipment.gd" id="6_p41q0"]
 [ext_resource type="Environment" uid="uid://g0ausvm6rdth" path="res://game/misc/environments/space_environment.tres" id="7_tc6bj"]
-[ext_resource type="Script" path="res://game/core/world/world.gd" id="8_04hle"]
+[ext_resource type="Script" uid="uid://dik56tay37ghp" path="res://game/core/world/world.gd" id="8_04hle"]
 [ext_resource type="PackedScene" uid="uid://cn7c8npnm1ukd" path="res://game/ui/game_ui.tscn" id="9_wxb1d"]
 
 [sub_resource type="Resource" id="Resource_rlnpc"]
 script = ExtResource("6_p41q0")
 back_item = ExtResource("5_lx1rr")
+has_equipment_port = false
 
 [node name="Empty Test" type="Node3D"]
 script = ExtResource("1_o413o")

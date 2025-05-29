@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=4 uid="uid://bvucsloy2pswr"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/ore_container_instance.gd" id="1_c7i30"]
+[ext_resource type="Script" uid="uid://kmbkgyb3k07x" path="res://game/core/block/instances/ore_container_instance.gd" id="1_c7i30"]
 [ext_resource type="PackedScene" uid="uid://dfyvgxovt2bui" path="res://game/core/misc/ore pile/ore_pile.tscn" id="1_ggh7r"]
-[ext_resource type="Shader" path="res://game/core/misc/ore pile/ore_pile.gdshader" id="2_s85p2"]
+[ext_resource type="Shader" uid="uid://c7f47sjooche6" path="res://game/core/misc/ore pile/ore_pile.gdshader" id="2_s85p2"]
 [ext_resource type="PackedScene" uid="uid://4lrcbiiff8n2" path="res://game/core/components/item catcher/item_catcher.tscn" id="4_asj0l"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iuobd"]
@@ -29,10 +29,10 @@ _surfaces = [{
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_s85p2")
-shader_parameter/metallicArr = null
-shader_parameter/specularArr = null
-shader_parameter/roughnessArr = null
-shader_parameter/normalScaleArr = null
+shader_parameter/metallicArr = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specularArr = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/roughnessArr = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/normalScaleArr = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="Ore Container 1x1" type="Node3D"]
 script = ExtResource("1_c7i30")

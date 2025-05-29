@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://iixyhw4jvjeq"]
 
-[ext_resource type="Script" path="res://game/core/components/item ejector/item_ejector.gd" id="1_8jy0q"]
+[ext_resource type="Script" uid="uid://bcpmtu567c3sk" path="res://game/core/components/item ejector/item_ejector.gd" id="1_8jy0q"]
 
 [node name="Item Ejector" type="Node3D"]
 script = ExtResource("1_8jy0q")

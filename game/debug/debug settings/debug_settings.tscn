@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d0l66srtretwy"]
 
-[ext_resource type="Script" path="res://game/debug/debug settings/debug_settings.gd" id="1_is5ng"]
+[ext_resource type="Script" uid="uid://bkqak23moriew" path="res://game/debug/debug settings/debug_settings.gd" id="1_is5ng"]
 [ext_resource type="Resource" uid="uid://c6n34fkqwwpqh" path="res://game/debug/debug settings/active_debug_settings.tres" id="2_xocne"]
 [ext_resource type="Resource" uid="uid://632v86u5psq3" path="res://game/debug/debug settings/default_debug_settings.tres" id="3_hyw5w"]
 

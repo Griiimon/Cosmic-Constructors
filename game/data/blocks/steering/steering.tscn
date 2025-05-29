@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://boi480axvobwy"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/steering_instance.gd" id="1_rwgu8"]
+[ext_resource type="Script" uid="uid://6vu8r88fchsx" path="res://game/core/block/instances/steering_instance.gd" id="1_rwgu8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ajeps"]
 

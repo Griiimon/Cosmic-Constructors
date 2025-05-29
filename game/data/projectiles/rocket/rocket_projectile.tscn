@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cwo0gup2wubsi"]
 
-[ext_resource type="Script" path="res://game/core/misc/projectile_object.gd" id="1_4x220"]
+[ext_resource type="Script" uid="uid://bdxyvv4abctbj" path="res://game/core/misc/projectile_object.gd" id="1_4x220"]
 [ext_resource type="PackedScene" uid="uid://dsun3ooab4dfq" path="res://game/data/projectiles/rocket/rocket_projectile_model.tscn" id="2_tu6b2"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ndrlb"]

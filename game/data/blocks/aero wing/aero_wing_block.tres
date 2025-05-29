@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://cspra5gn43obb"]
 
-[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_8oprq"]
+[ext_resource type="Script" uid="uid://d3ggl6vpouab1" path="res://game/core/block/block.gd" id="1_8oprq"]
 [ext_resource type="PackedScene" uid="uid://paxcew8y4vyx" path="res://game/data/blocks/aero wing/aero_wing.tscn" id="1_canlk"]
 [ext_resource type="Resource" uid="uid://cv5uooety4fpg" path="res://game/data/misc/block categories/airplane.tres" id="1_v3m1a"]
 
 [resource]
 script = ExtResource("1_8oprq")
+grid_size = 0
 size = Vector3i(3, 1, 1)
 mass = 10.0
 max_hitpoints = 10

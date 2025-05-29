@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dcqoyepwwljd4"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/pallet_baseplate_instance.gd" id="1_gkbhk"]
+[ext_resource type="Script" uid="uid://bulbiti64hv6b" path="res://game/core/block/instances/pallet_baseplate_instance.gd" id="1_gkbhk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u67g7"]
 size = Vector3(2, 0.05, 2)

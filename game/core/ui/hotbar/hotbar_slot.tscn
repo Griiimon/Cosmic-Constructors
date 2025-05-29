@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bqge1mnwhg1y4"]
 
-[ext_resource type="Script" path="res://game/core/ui/hotbar/hotbar_slot.gd" id="1_ju2q1"]
+[ext_resource type="Script" uid="uid://di4ylwjdymb1a" path="res://game/core/ui/hotbar/hotbar_slot.gd" id="1_ju2q1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7k7lg"]
 

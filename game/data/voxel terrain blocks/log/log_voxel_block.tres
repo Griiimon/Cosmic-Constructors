@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://emsuhdmw1ipp" path="res://game/data/voxel terrain blocks/terrain_material.tres" id="1_uowg0"]
 [ext_resource type="ArrayMesh" uid="uid://dgqbqckmsjjuc" path="res://game/data/voxel terrain blocks/log/log_y.obj" id="2_0j1ox"]
-[ext_resource type="Script" path="res://game/core/world/terrain/blocky terrain/voxel_terrain_block_mesh.gd" id="3_ccakf"]
+[ext_resource type="Script" uid="uid://ejpfdofo1qgb" path="res://game/core/world/terrain/blocky terrain/voxel_terrain_block_mesh.gd" id="3_ccakf"]
 [ext_resource type="Resource" uid="uid://bor84d4h8pc3x" path="res://game/data/blocks/log/log_block.tres" id="4_wxrxm"]
 
 [sub_resource type="VoxelBlockyModelMesh" id="VoxelBlockyModelMesh_hn43g"]

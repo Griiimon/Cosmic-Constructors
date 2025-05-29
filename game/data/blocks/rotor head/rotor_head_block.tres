@@ -1,15 +1,17 @@
 [gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://b7b26sso6p11j"]
 
-[ext_resource type="Script" path="res://game/core/block/block.gd" id="1_ocwwn"]
+[ext_resource type="Script" uid="uid://d3ggl6vpouab1" path="res://game/core/block/block.gd" id="1_ocwwn"]
 [ext_resource type="PackedScene" uid="uid://cxn4ub3us4trm" path="res://game/data/blocks/rotor head/rotor_head.tscn" id="1_q7067"]
 
 [resource]
 script = ExtResource("1_ocwwn")
+grid_size = 0
 size = Vector3i(1, 1, 1)
-weight = 10.0
+mass = 10.0
 max_hitpoints = 10
 custom_collision = true
 can_tick = false
+tick_priority = 0
 can_be_built = false
 scene = ExtResource("1_q7067")
 name = ""

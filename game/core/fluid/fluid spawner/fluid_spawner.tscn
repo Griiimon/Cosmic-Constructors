@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cwjpaeql42esi"]
 
-[ext_resource type="Script" path="res://game/core/fluid/fluid spawner/fluid_spawner.gd" id="1_f5b57"]
+[ext_resource type="Script" uid="uid://2g710w33dvm0" path="res://game/core/fluid/fluid spawner/fluid_spawner.gd" id="1_f5b57"]
 [ext_resource type="Resource" uid="uid://dqigc04c411p" path="res://game/data/fluids/fuel.tres" id="2_ubnhd"]
 [ext_resource type="PackedScene" uid="uid://bjixfd2upo2t8" path="res://game/core/fluid/fluid drop/fluid_drop.tscn" id="3_c3ark"]
 

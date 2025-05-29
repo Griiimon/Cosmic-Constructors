@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cq0q4gaujs7r4"]
 
-[ext_resource type="Script" path="res://game/data/equipment/back/jetpack/jetpack.gd" id="1_8m8xx"]
+[ext_resource type="Script" uid="uid://cu7nhifhaeq6" path="res://game/data/equipment/back/jetpack/jetpack.gd" id="1_8m8xx"]
 [ext_resource type="PackedScene" uid="uid://dcpr43xo3hndp" path="res://game/data/equipment/back/jetpack/jetpack_thruster.tscn" id="1_11c17"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8f5p6"]

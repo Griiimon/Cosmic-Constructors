@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dweomn8gah72l"]
 
-[ext_resource type="Script" path="res://game/core/block/instances/handles_instance.gd" id="1_ysxxn"]
+[ext_resource type="Script" uid="uid://cna5fcn8b485v" path="res://game/core/block/instances/handles_instance.gd" id="1_ysxxn"]
 [ext_resource type="PackedScene" uid="uid://bpre06n0qaygh" path="res://game/data/blocks/handles/handles_rigidbody.tscn" id="2_ij6g1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4eghd"]

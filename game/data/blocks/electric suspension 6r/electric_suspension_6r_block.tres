@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="SuspensionBlock" load_steps=4 format=3 uid="uid://y6qet5tihtpj"]
 
 [ext_resource type="Resource" uid="uid://cunos21ar0qix" path="res://game/data/misc/block categories/car.tres" id="1_0irsd"]
-[ext_resource type="Script" path="res://game/core/block/types/suspension_block.gd" id="1_nc4vv"]
+[ext_resource type="Script" uid="uid://c1exudcegpi14" path="res://game/core/block/types/suspension_block.gd" id="1_nc4vv"]
 [ext_resource type="PackedScene" uid="uid://cawliegrpmkhl" path="res://game/data/blocks/electric suspension 6r/electric_suspension_6r.tscn" id="1_wnxta"]
 
 [resource]
 script = ExtResource("1_nc4vv")
+grid_size = 0
 size = Vector3i(1, 1, 1)
 mass = 10.0
 max_hitpoints = 10

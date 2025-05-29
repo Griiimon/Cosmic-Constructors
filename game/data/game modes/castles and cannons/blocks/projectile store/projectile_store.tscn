@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=4 uid="uid://cvxssitisa80c"]
 
-[ext_resource type="Script" path="res://game/data/game modes/castles and cannons/blocks/projectile store/projectile_store_instance.gd" id="1_fwcby"]
+[ext_resource type="Script" uid="uid://dyc5g6t5jwdse" path="res://game/data/game modes/castles and cannons/blocks/projectile store/projectile_store_instance.gd" id="1_fwcby"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7w1he"]
 albedo_color = Color(0.759896, 0.487277, 0.115291, 1)

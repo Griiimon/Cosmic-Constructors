@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://ckiejbyle02pl" path="res://game/data/misc/block categories/spaceship.tres" id="1_23rkp"]
 [ext_resource type="PackedScene" uid="uid://bequ1b6ty4iay" path="res://game/data/blocks/thruster/small_thruster.tscn" id="2_c4qwt"]
-[ext_resource type="Script" path="res://game/core/block/types/thruster_block.gd" id="3_mtqvd"]
+[ext_resource type="Script" uid="uid://vqm7e652sky0" path="res://game/core/block/types/thruster_block.gd" id="3_mtqvd"]
 
 [resource]
 script = ExtResource("3_mtqvd")

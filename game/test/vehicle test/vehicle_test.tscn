@@ -92,6 +92,7 @@ equipment = SubResource("Resource_ic37o")
 [node name="Damping Area" type="Area3D" parent="."]
 collision_mask = 51
 linear_damp_space_override = 3
+linear_damp = 0.05
 angular_damp_space_override = 3
 angular_damp = 0.2
 script = ExtResource("7_0xvln")

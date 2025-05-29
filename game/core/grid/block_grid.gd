@@ -288,9 +288,15 @@ func _integrate_forces(state: PhysicsDirectBodyState3D):
 		var impulse: Vector3= state.get_contact_impulse(i)
 		if impulse.length() > 10:
 			DebugHud.send("Cont Impulse", impulse.length())
-			prints("Contact impulse", impulse.length())
+			#prints("Contact impulse", impulse.length())
 			apply_collision_damage(impulse.length(), state.get_contact_collider_position(i))
-
+			var other_collider: Node3D= state.get_contact_collider_object(i)
+			
+			# TODO only if other grid is currently sleeping?
+			if other_collider is BlockGrid:
+				var other_grid: BlockGrid= other_collider
+				other_grid.apply_collision_damage(impulse.length(), state.get_contact_collider_position(i))
+				
 
 func apply_collision_damage(impulse: float, position: Vector3):
 	var damage:= Damage.new()

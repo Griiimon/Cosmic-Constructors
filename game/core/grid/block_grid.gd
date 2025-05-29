@@ -85,7 +85,7 @@ func _ready() -> void:
 	collision_layer= CollisionLayers.GRID
 	collision_mask= CollisionLayers.PLAYER + CollisionLayers.GRID + CollisionLayers.TERRAIN
 	
-	can_sleep= false
+	can_sleep= true
 	continuous_cd= true
 	center_of_mass_mode= CenterOfMassMode.CENTER_OF_MASS_MODE_CUSTOM
 	contact_monitor= true

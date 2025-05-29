@@ -1,3 +1,5 @@
+create DamageInstance on top of Damage resource
+
 make ore RBs collide with player ( and vice versa? )
 
 make player white head piece round, slightly elliptical
@@ -20,21 +22,15 @@ leaving seat makes jetpack button appear even when no jetpack in equipment
 
 make sure to floor() Vector3s when converting to Vector3i voxel positions
 
-Rotor needs 6DOFJoint motor on X-axis
-
-FuelTank doesnt have fluid connector instances anymore
-
-TubeGroupMemberInstance @tool script add_connectors_to_model: bool not working
-
 MergeBlock should use HingeJoint to lock
 
-Why is the FluidConsumer a ToolScript?
+FIX TubeGroupMemberInstance @tool script add_connectors_to_model: bool not working
+FuelTank doesnt have fluid connector instances anymore
+Why is the FluidConsumer a ToolScript? => for adding connection models to directions?
 
 Finish 6r Suspension
 
 SubGridConnection needs to be informed of connected grid removal and be destroyed
-
-FIX rotor joint, make test scene to find out why its so buggy
 
 DONT allow grabbing handles ( or moving grabbed grids ) that player is standing on ( including sub grids / parent grids )
 

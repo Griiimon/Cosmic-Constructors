@@ -4,8 +4,6 @@ change ui buttons to be toggled when active, disabled when unavailable
 
 when stepping from grid onto terrain ( maybe only via ramp? ) player is stuck in grid movement state
 
-when grid is removed and player is moving on it ( child ) reparent player first
-
 when eva without jetpack and lying on the floor ( with gravity ) slowly rotate so feet make contact
 
 leaving seat makes jetpack button appear even when no jetpack in equipment

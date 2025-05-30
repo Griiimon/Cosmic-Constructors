@@ -23,6 +23,7 @@ func _ready() -> void:
 	
 	grid_state.jetpack_enabled.connect(init_eva)
 	grid_state.jumped.connect(jump)
+	grid_state.block_removed.connect(init_eva)
 	
 	terrain_state.jetpack_enabled.connect(init_eva)
 	terrain_state.jumped.connect(jump)

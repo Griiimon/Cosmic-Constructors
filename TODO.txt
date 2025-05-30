@@ -1,13 +1,5 @@
 create DamageInstance on top of Damage resource
 
-make ore RBs collide with player ( and vice versa? )
-
-FIX equipment port player rigid to kinematic transition
-
-sync equipment grids in multiplayer
-
-disconnect equipment grid from high joint force/torque
-
 change ui buttons to be toggled when active, disabled when unavailable
 
 when stepping from grid onto terrain ( maybe only via ramp? ) player is stuck in grid movement state
@@ -323,6 +315,14 @@ build ghost: just make all materials white, no transparency and remove any textu
 grid angular dampeners
 
 save player only in cryo pod, otherwise use default spawn points or medbay
+
+Equipment port:
+	render equipment grid independent of physics
+		so player turning response will be instant, especially in multiplayer
+	FIX equipment port player rigid to kinematic transition
+	sync equipment grids in multiplayer
+	disconnect equipment grid from high joint force/torque
+	
 
 FIX landing walking on grid triggers left_ground continuously!?
 FIX getting stuck in terrain when going EVA ( will intersect_shape work against terrain? because Area didnt seem to => JOLT OPT-IN )

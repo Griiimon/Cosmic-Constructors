@@ -16,3 +16,7 @@ func has_dynamic_scale()-> bool:
 
 func get_scale(count: int)-> float:
 	return lerp(1, 4, count / float(get_max_unit_size()))
+
+
+func collides_with_player()-> bool:
+	return true

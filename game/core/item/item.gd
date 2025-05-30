@@ -33,3 +33,7 @@ func get_scale(_count: int)-> float:
 
 func get_mass(count: int)-> float:
 	return base_mass + mass_per_item * count
+
+
+func collides_with_player()-> bool:
+	return false

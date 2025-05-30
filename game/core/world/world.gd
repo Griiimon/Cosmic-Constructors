@@ -102,6 +102,7 @@ func init_grid(grid: BlockGrid, pos: Vector3, rot: Vector3):
 
 
 func remove_grid(grid: BlockGrid):
+	grid.removed.emit()
 	lookup_id_to_grid.erase(grid.id)
 	#lookup_grid_to_id.erase(grid)
 	grids.remove_child(grid)

@@ -2,6 +2,7 @@ class_name BlockGrid
 extends RigidBody3D
 
 signal id_assigned
+signal removed
 
 enum Property { PARKING_BRAKE, INERTIAL_DAMPENERS, REVERSE_MODE }
 

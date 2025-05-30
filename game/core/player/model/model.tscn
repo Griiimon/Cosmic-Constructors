@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bnhyptcsxakf2"]
+[gd_scene load_steps=29 format=3 uid="uid://bnhyptcsxakf2"]
 
 [ext_resource type="Material" uid="uid://koo0qls452x2" path="res://game/core/player/model/suit_material.tres" id="1_mladw"]
 [ext_resource type="Script" uid="uid://bc81iabnnpwqp" path="res://game/core/player/model/player_model.gd" id="1_pnfv0"]
@@ -8,9 +8,10 @@
 material = ExtResource("1_mladw")
 size = Vector3(0.595, 1.015, 0.405)
 
-[sub_resource type="BoxMesh" id="BoxMesh_a2i8n"]
+[sub_resource type="SphereMesh" id="SphereMesh_f3ja3"]
 material = ExtResource("1_mladw")
-size = Vector3(0.4, 0.415, 0.265)
+radius = 0.2
+height = 0.58
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w7my8"]
 albedo_color = Color(0.882271, 0.44331, 0.494134, 1)
@@ -27,6 +28,14 @@ material = SubResource("StandardMaterial3D_a88mj")
 radius = 0.02
 height = 0.055
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yg080"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_e81ta"]
+material = SubResource("StandardMaterial3D_yg080")
+radius = 0.01
+height = 0.034
+
 [sub_resource type="SphereMesh" id="SphereMesh_6wi4g"]
 material = SubResource("StandardMaterial3D_w7my8")
 radius = 0.06
@@ -38,8 +47,8 @@ albedo_color = Color(0, 0.796078, 0.803922, 0.47451)
 
 [sub_resource type="SphereMesh" id="SphereMesh_4uad6"]
 material = SubResource("StandardMaterial3D_wxuxe")
-radius = 0.2
-height = 0.4
+radius = 0.28
+height = 0.56
 
 [sub_resource type="BoxMesh" id="BoxMesh_me6vd"]
 material = ExtResource("1_mladw")
@@ -273,11 +282,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.614659, 0)
 mesh = SubResource("BoxMesh_mhret")
 
 [node name="Head" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.972297, 0.233751, 0, -0.233751, 0.972297, 0, 0.0565833, 0.138101)
-mesh = SubResource("BoxMesh_a2i8n")
+transform = Transform3D(1, 0, 0, 0, 0.972297, 0.233751, 0, -0.233751, 0.972297, 0, 0.00329717, 0.0362524)
+mesh = SubResource("SphereMesh_f3ja3")
 
 [node name="Face" type="MeshInstance3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 8.32667e-17, 0, -8.32667e-17, 1, 0, 0.0296684, -0.123407)
+transform = Transform3D(1, 0, 0, 0, 1, 1.38778e-16, 0, -1.38778e-16, 1, 0, 0.102906, -0.0577711)
 mesh = SubResource("SphereMesh_ql2cl")
 
 [node name="Eye" type="MeshInstance3D" parent="Head/Face"]
@@ -285,10 +294,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 5.55112e-17, 0, -5.55112e-17, 1, 0.052514
 mesh = SubResource("SphereMesh_ucplg")
 skeleton = NodePath("../..")
 
+[node name="Pupil" type="MeshInstance3D" parent="Head/Face/Eye"]
+transform = Transform3D(1, 0, 0, 0, 1, 8.32667e-17, 0, -8.32667e-17, 1, 0.00238178, 0.00563957, -0.011628)
+mesh = SubResource("SphereMesh_e81ta")
+
 [node name="Eye2" type="MeshInstance3D" parent="Head/Face"]
 transform = Transform3D(1, 0, 0, 0, 1, 5.55112e-17, 0, -5.55112e-17, 1, -0.053, 0.107108, -0.107345)
 mesh = SubResource("SphereMesh_ucplg")
 skeleton = NodePath("../..")
+
+[node name="Pupil" type="MeshInstance3D" parent="Head/Face/Eye2"]
+transform = Transform3D(1, 0, 0, 0, 1, 8.32667e-17, 0, -8.32667e-17, 1, 0.00238178, 0.00563957, -0.011628)
+mesh = SubResource("SphereMesh_e81ta")
 
 [node name="Nose" type="MeshInstance3D" parent="Head/Face"]
 transform = Transform3D(1, 0, 0, 0, 1, 5.55112e-17, 0, -5.55112e-17, 1, 0, 0.0350253, -0.145689)
@@ -296,7 +313,7 @@ mesh = SubResource("SphereMesh_6wi4g")
 skeleton = NodePath("../..")
 
 [node name="Glass" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0592666, -0.0413829)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0362069, -0.0166604)
 mesh = SubResource("SphereMesh_4uad6")
 
 [node name="Right Shoulder" type="Node3D" parent="."]
@@ -355,10 +372,10 @@ mesh = SubResource("CapsuleMesh_uufhi")
 
 [node name="AnimationPlayer Arms" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_5lb0e")
+&"": SubResource("AnimationLibrary_5lb0e")
 }
 
 [node name="AnimationPlayer Legs" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_g5m2i")
+&"": SubResource("AnimationLibrary_g5m2i")
 }

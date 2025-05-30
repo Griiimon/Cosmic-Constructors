@@ -2,8 +2,6 @@ create DamageInstance on top of Damage resource
 
 make ore RBs collide with player ( and vice versa? )
 
-make player white head piece round, slightly elliptical
-
 FIX equipment port player rigid to kinematic transition
 
 sync equipment grids in multiplayer

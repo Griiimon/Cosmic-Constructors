@@ -304,8 +304,9 @@ func apply_collision_damage(impulse: float, position: Vector3):
 	damage.source_type= Damage.SourceType.COLLISION
 	damage.amount= impulse / 20.0
 	damage.radius= sqrt(impulse)
-	damage.position= position
-	world.damage_object(self, damage)
+	
+	var damage_instance:= DamageInstance.new(damage, position)
+	world.damage_object(self, damage_instance)
 	
 	
 func tick_blocks(delta: float):
@@ -563,12 +564,12 @@ func search_for_new_main_cockpit(exlude_list: Array[GridBlock]= []):
 	main_cockpit= new_main_cockpit
 
 
-func take_damage(damage: Damage, coll_shape: CollisionShape3D):
+func take_damage(damage_instance: DamageInstance, coll_shape: CollisionShape3D):
 	var block: BaseGridBlock= get_block_from_global_pos(coll_shape.global_position)
 	# TODO investigate how block == null could happen
 	#assert(block)
 	if block:
-		block.take_damage(damage.amount, self)
+		block.take_damage(damage_instance.get_amount(), self)
 
 
 func absorb_damage(damage: int, coll_shape: CollisionShape3D)-> int:

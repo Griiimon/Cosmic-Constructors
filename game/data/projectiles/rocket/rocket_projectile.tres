@@ -7,12 +7,9 @@
 [sub_resource type="Resource" id="Resource_stps2"]
 script = ExtResource("1_s38ko")
 amount = 20
+source_type = 1
 radius = 4.0
 min_amount = 5
-position = Vector3(0, 0, 0)
-source_type = 0
-direction = Vector3(0, 0, 0)
-shape_index = -1
 
 [resource]
 script = ExtResource("3_uxe2k")

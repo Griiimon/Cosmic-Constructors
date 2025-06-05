@@ -12,9 +12,9 @@ func _ready() -> void:
 	get_parent().add_to_group(GROUP_NAME)
 
 
-func take_damage(damage: Damage, coll_shape: CollisionShape3D= null):
+func take_damage(damage_instance: DamageInstance, coll_shape: CollisionShape3D= null):
 	if get_parent().has_method(TAKE_DAMAGE_FUNCTION_NAME):
-		get_parent().call(TAKE_DAMAGE_FUNCTION_NAME, damage, coll_shape) 
+		get_parent().call(TAKE_DAMAGE_FUNCTION_NAME, damage_instance, coll_shape) 
 
 
 func absorb_damage(damage: int, coll_shape: CollisionShape3D= null)-> int:

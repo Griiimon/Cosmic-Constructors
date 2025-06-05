@@ -100,7 +100,7 @@ func _input(event: InputEvent) -> void:
 
 
 func spawn_plain_grid(pos: Vector3, size: Vector2i, centered: bool= true):
-	var grid: BlockGrid= Global.game.world.add_grid(pos)
+	var grid: BlockGrid= Global.game.world.add_grid(pos, Vector3.ZERO, Block.get_grid_size(Block.GridSize.LARGE))
 	
 	for x in size.x:
 		for z in size.y:
